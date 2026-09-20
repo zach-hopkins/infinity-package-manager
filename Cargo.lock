@@ -619,6 +619,7 @@ dependencies = [
  "iepm-core",
  "reqwest",
  "sha2",
+ "walkdir",
  "zip",
 ]
 

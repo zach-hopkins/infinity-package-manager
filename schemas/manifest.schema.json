@@ -1,20 +1,15 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://iepm.dev/schemas/manifest.schema.json",
-  "title": "IEPM manifest",
+  "title": "IEPM schema-2 manifest",
   "type": "object",
-  "required": ["schema", "game", "mods"],
+  "required": ["schema", "environments", "mods"],
   "properties": {
-    "schema": { "const": 1 },
-    "game": {
+    "schema": { "const": 2 },
+    "environments": {
       "type": "object",
-      "required": ["target"],
-      "properties": {
-        "target": { "enum": ["bgee", "bg2ee", "eet"] },
-        "version": { "type": "string" },
-        "fingerprint": { "type": "string" }
-      },
-      "additionalProperties": false
+      "minProperties": 1,
+      "additionalProperties": { "$ref": "#/$defs/environment" }
     },
     "mods": {
       "type": "array",
@@ -26,13 +21,36 @@
             "required": ["package"],
             "properties": {
               "package": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
-              "version": { "type": "string", "description": "A SemVer version requirement, for example >=8.0, <9.0" },
-              "components": { "type": "array", "items": { "type": "string" }, "uniqueItems": true }
+              "version": { "type": "string", "description": "Exact opaque release ID/version, id:<release-id>, or an explicit SemVer range" },
+              "components": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+              "environment": { "type": "string" },
+              "language": { "type": "string" },
+              "installer_inputs": { "type": "object", "additionalProperties": { "type": "string" } }
             },
             "additionalProperties": false
           }
         ]
       }
+    }
+  },
+  "$defs": {
+    "environment": {
+      "type": "object",
+      "required": ["target"],
+      "properties": {
+        "target": { "enum": ["bgee", "bg2ee", "eet"] },
+        "version": { "type": "string" },
+        "fingerprint": {
+          "type": "object",
+          "required": ["profile", "value"],
+          "properties": { "profile": { "type": "string" }, "value": { "type": "string" } },
+          "additionalProperties": false
+        },
+        "platform": { "enum": ["windows", "linux", "macos"] },
+        "store": { "type": "string" },
+        "language": { "type": "string" }
+      },
+      "additionalProperties": false
     }
   },
   "additionalProperties": false

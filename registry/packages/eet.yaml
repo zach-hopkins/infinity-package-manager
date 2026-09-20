@@ -1,13 +1,21 @@
-schema: 1
+schema: 2
 package: eet
 releases:
   - version: "14.1"
+    release_id: "legacy-14.1"
     compatibility:
       games: [eet]
     install:
       phase: eet-import
       after: [dlc-merger]
     provenance: unverified
-    dependencies:
-      - package: dlc-merger
+    relationships:
+      - kind: requires
+        package: dlc-merger
+        environment: bgee-source
+    installers:
+      - tp2: EET/EET.tp2
+        inputs:
+          - name: source-environment
+            required: true
     components: []

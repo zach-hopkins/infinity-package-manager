@@ -1,18 +1,40 @@
-schema: 1
+schema: 2
 
-game:
-  target: eet
-  version: "2.6.6"
+# EET is a transformation between two distinct game environments. IEPM does
+# not infer filesystem locations; A5 will bind these names to disposable build
+# workspaces and record their profiled fingerprints.
+environments:
+  bgee-source:
+    target: bgee
+    version: "2.6.6"
+    platform: windows
+  eet-target:
+    target: eet
+    version: "2.6.6"
+    platform: windows
+    language: English
 
 # This is an intentionally conservative resolver fixture. Versions, artifacts,
 # and selected WeiDU components need verified registry evidence before install.
 mods:
-  - ascension
-  - tweaks-anthology
-  - eeex
-  - infinity-ui-plus-plus
-  - bubbs-spell-menu
-  - hidden-gameplay-options
-  - eet-end
+  - package: ascension
+    environment: eet-target
+  - package: tweaks-anthology
+    environment: eet-target
+  - package: eeex
+    environment: eet-target
+  - package: infinity-ui-plus-plus
+    environment: eet-target
+  - package: bubbs-spell-menu
+    environment: eet-target
+  - package: hidden-gameplay-options
+    environment: eet-target
+  - package: eet-end
+    environment: eet-target
   - package: tactics-remix
+    environment: eet-target
     components: [tactical-encounters]
+  - package: eet
+    environment: eet-target
+    installer_inputs:
+      source-environment: bgee-source

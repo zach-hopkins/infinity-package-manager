@@ -1,9 +1,10 @@
-schema: 1
+schema: 2
 package: dlc-merger
 releases:
   - version: "1.3"
+    release_id: "legacy-1.3"
     compatibility:
-      games: [eet]
+      games: [bgee]
     install:
       phase: preprocess
     provenance: unverified

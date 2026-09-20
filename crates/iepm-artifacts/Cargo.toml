@@ -11,3 +11,4 @@ iepm-core = { path = "../iepm-core" }
 reqwest.workspace = true
 sha2.workspace = true
 zip.workspace = true
+walkdir.workspace = true

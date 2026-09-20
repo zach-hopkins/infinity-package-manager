@@ -1,55 +1,61 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://iepm.dev/schemas/package.schema.json",
-  "title": "IEPM registry package",
+  "title": "IEPM schema-2 registry package",
   "type": "object",
   "required": ["schema", "package", "releases"],
   "properties": {
-    "schema": { "const": 1 },
-    "package": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
-    "releases": {
-      "type": "array",
-      "minItems": 1,
-      "items": {
-        "type": "object",
-        "required": ["version", "compatibility", "install", "provenance"],
-        "properties": {
-          "version": { "type": "string" },
-          "artifact": { "type": "object", "required": ["url", "sha256"], "properties": { "url": { "type": "string", "format": "uri" }, "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }, "format": { "enum": ["zip"], "default": "zip" }, "platforms": { "type": "array", "items": { "enum": ["windows", "linux", "macos"] }, "uniqueItems": true } }, "additionalProperties": false },
-          "compatibility": { "type": "object", "required": ["games"], "properties": { "games": { "type": "array", "items": { "enum": ["bgee", "bg2ee", "eet"] } } } },
-          "install": { "type": "object", "required": ["phase"], "properties": { "phase": { "enum": ["preprocess", "bgee", "eet-import", "eet", "eet-end", "post-eet-end"] }, "before": { "type": "array", "items": { "type": "string" } }, "after": { "type": "array", "items": { "type": "string" } } } },
-          "provenance": { "enum": ["declared", "derived", "verified", "community", "unverified"] },
-          "dependencies": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "required": ["package"],
-              "properties": { "package": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" }, "version": { "type": "string", "description": "A SemVer version requirement" }, "components": { "type": "array", "items": { "type": "string" }, "uniqueItems": true } },
-              "additionalProperties": false
-            }
-          },
-          "components": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "required": ["id"],
-              "properties": {
-                "id": { "type": "string" },
-                "provides": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "required": ["name"],
-                    "properties": { "name": { "type": "string" }, "exclusive": { "type": "boolean" } },
-                    "additionalProperties": false
-                  }
-                }
-              },
-              "additionalProperties": false
-            }
-          }
-        }
-      }
+    "schema": { "const": 2 },
+    "package": { "$ref": "#/$defs/package-id" },
+    "aliases": { "type": "array", "items": { "$ref": "#/$defs/package-id" }, "uniqueItems": true },
+    "lineage": { "type": "array", "items": { "type": "object", "required": ["package", "relation"], "properties": { "package": { "$ref": "#/$defs/package-id" }, "relation": { "enum": ["predecessor", "fork", "continuation"] } }, "additionalProperties": false } },
+    "releases": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/release" } }
+  },
+  "$defs": {
+    "package-id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "provenance": { "enum": ["declared", "derived", "verified", "community", "unverified"] },
+    "artifact": {
+      "type": "object", "required": ["url", "sha256"],
+      "properties": {
+        "url": { "type": "string", "format": "uri" },
+        "mirrors": { "type": "array", "items": { "type": "string", "format": "uri" }, "uniqueItems": true },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "format": { "enum": ["zip"] },
+        "platforms": { "type": "array", "items": { "enum": ["windows", "linux", "macos"] }, "uniqueItems": true },
+        "architectures": { "type": "array", "items": { "enum": ["x86", "x86-64", "aarch64"] }, "uniqueItems": true }
+      }, "additionalProperties": false
+    },
+    "component": {
+      "type": "object", "required": ["id"],
+      "properties": {
+        "id": { "type": "string" }, "default_selected": { "type": "boolean" },
+        "weidu": { "type": "object", "required": ["tp2"], "properties": { "tp2": { "type": "string" }, "label": { "type": "string" }, "number": { "type": "integer", "minimum": 0 }, "subcomponent": { "type": "string" } }, "additionalProperties": false },
+        "provides": { "type": "array", "items": { "type": "object", "required": ["name"], "properties": { "name": { "type": "string" }, "exclusive": { "type": "boolean" } }, "additionalProperties": false } }
+      }, "additionalProperties": false
+    },
+    "relationship": {
+      "type": "object", "required": ["kind", "package"],
+      "properties": {
+        "kind": { "enum": ["requires", "optional", "recommends", "conflicts", "before", "after"] },
+        "package": { "$ref": "#/$defs/package-id" }, "environment": { "type": "string" }, "version": { "type": "string" },
+        "components": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "when": { "type": "object", "properties": { "games": { "type": "array", "items": { "enum": ["bgee", "bg2ee", "eet"] }, "uniqueItems": true } }, "additionalProperties": false }
+      }, "additionalProperties": false
+    },
+    "release": {
+      "type": "object", "required": ["release_id", "version", "compatibility", "install", "provenance"],
+      "properties": {
+        "release_id": { "type": "string" }, "version": { "type": "string" }, "semver": { "type": "string" },
+        "artifacts": { "type": "array", "items": { "$ref": "#/$defs/artifact" }, "minItems": 1 },
+        "materialization": { "type": "object", "properties": { "source_root": { "type": "string" }, "include": { "type": "array", "items": { "type": "string" } } }, "additionalProperties": false },
+        "compatibility": { "type": "object", "required": ["games"], "properties": { "games": { "type": "array", "items": { "enum": ["bgee", "bg2ee", "eet"] }, "minItems": 1 } }, "additionalProperties": false },
+        "install": { "type": "object", "required": ["phase"], "properties": { "phase": { "enum": ["preprocess", "bgee", "eet-import", "eet", "eet-end", "post-eet-end"] }, "before": { "type": "array", "items": { "$ref": "#/$defs/package-id" } }, "after": { "type": "array", "items": { "$ref": "#/$defs/package-id" } } }, "additionalProperties": false },
+        "provenance": { "$ref": "#/$defs/provenance" },
+        "claims": { "type": "array", "items": { "type": "object", "required": ["claim", "provenance"], "properties": { "claim": { "type": "string" }, "provenance": { "$ref": "#/$defs/provenance" }, "evidence": { "type": "array", "items": { "type": "string", "format": "uri" } } }, "additionalProperties": false } },
+        "relationships": { "type": "array", "items": { "$ref": "#/$defs/relationship" } },
+        "components": { "type": "array", "items": { "$ref": "#/$defs/component" } },
+        "installers": { "type": "array", "items": { "type": "object", "required": ["tp2"], "properties": { "tp2": { "type": "string" }, "inputs": { "type": "array", "items": { "type": "object", "required": ["name"], "properties": { "name": { "type": "string" }, "required": { "type": "boolean" } }, "additionalProperties": false } } }, "additionalProperties": false } }
+      }, "additionalProperties": false
     }
   },
   "additionalProperties": false
