@@ -24,7 +24,7 @@
             "items": {
               "type": "object",
               "required": ["package"],
-              "properties": { "package": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" } },
+              "properties": { "package": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" }, "version": { "type": "string", "description": "A SemVer version requirement" }, "components": { "type": "array", "items": { "type": "string" }, "uniqueItems": true } },
               "additionalProperties": false
             }
           },

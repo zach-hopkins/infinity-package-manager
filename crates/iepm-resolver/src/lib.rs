@@ -1,4 +1,5 @@
 use iepm_core::{Component, LockedPackage, Lockfile, Manifest, PackageRecord, Registry, Release};
+use semver::{Version, VersionReq};
 use std::collections::{BTreeMap, BTreeSet};
 use thiserror::Error;
 
@@ -10,6 +11,19 @@ pub enum ResolveError {
     MissingPackage(String),
     #[error("package `{package}` has no release compatible with `{game}`")]
     Incompatible { package: String, game: String },
+    #[error("package `{package}` has no release for `{game}` that matches {requirements}")]
+    NoMatchingVersion {
+        package: String,
+        game: String,
+        requirements: String,
+    },
+    #[error("package `{package}` has invalid version requirement `{requirement}`")]
+    InvalidVersionRequirement {
+        package: String,
+        requirement: String,
+    },
+    #[error("package `{package}` has invalid release version `{version}`")]
+    InvalidReleaseVersion { package: String, version: String },
     #[error("package `{package}` requests unknown component `{component}`")]
     MissingComponent { package: String, component: String },
     #[error("exclusive capability `{capability}` is provided by both `{first}` and `{second}`")]
@@ -28,6 +42,23 @@ struct Selection<'a> {
     components: Vec<String>,
 }
 
+#[derive(Default)]
+struct Request {
+    requirements: BTreeSet<String>,
+    components: BTreeSet<String>,
+}
+
+impl Request {
+    fn merge(&mut self, version: Option<&str>, components: &[String]) -> bool {
+        let before = (self.requirements.len(), self.components.len());
+        if let Some(version) = version {
+            self.requirements.insert(version.to_owned());
+        }
+        self.components.extend(components.iter().cloned());
+        before != (self.requirements.len(), self.components.len())
+    }
+}
+
 pub fn resolve(
     manifest: &Manifest,
     registry: &Registry,
@@ -36,49 +67,48 @@ pub fn resolve(
     if manifest.schema != 1 {
         return Err(ResolveError::Schema(manifest.schema));
     }
-    let mut requested = BTreeMap::<String, Vec<String>>::new();
+    let mut requested = BTreeMap::<String, Request>::new();
     for requested_mod in &manifest.mods {
-        requested.insert(
-            requested_mod.package().to_owned(),
-            requested_mod.components().to_vec(),
-        );
+        requested
+            .entry(requested_mod.package().to_owned())
+            .or_default()
+            .merge(requested_mod.version(), requested_mod.components());
     }
 
     let mut pending = requested.keys().cloned().collect::<Vec<_>>();
-    let mut expanded = BTreeSet::new();
     while let Some(package) = pending.pop() {
-        if !expanded.insert(package.clone()) {
-            continue;
-        }
         let record = registry
             .get(&package)
             .ok_or_else(|| ResolveError::MissingPackage(package.clone()))?;
-        let release = compatible_release(record, &manifest.game.target).ok_or_else(|| {
-            ResolveError::Incompatible {
-                package: package.clone(),
-                game: manifest.game.target.clone(),
-            }
-        })?;
+        let release = select_release(
+            record,
+            &manifest.game.target,
+            &requested[&package].requirements,
+        )?;
         for dependency in &release.dependencies {
-            if !requested.contains_key(&dependency.package) {
-                requested.insert(dependency.package.clone(), Vec::new());
+            let is_new = !requested.contains_key(&dependency.package);
+            let changed = requested
+                .entry(dependency.package.clone())
+                .or_default()
+                .merge(dependency.version.as_deref(), &dependency.components);
+            if is_new || changed {
                 pending.push(dependency.package.clone());
             }
         }
     }
 
     let mut selections = Vec::new();
-    for (package, components) in &requested {
+    for (package, request) in &requested {
         let record = registry
             .get(package)
             .expect("all requested packages were checked");
-        let release =
-            compatible_release(record, &manifest.game.target).expect("compatibility checked");
-        validate_components(package, release, components)?;
+        let release = select_release(record, &manifest.game.target, &request.requirements)?;
+        let components = request.components.iter().cloned().collect::<Vec<_>>();
+        validate_components(package, release, &components)?;
         selections.push(Selection {
             package,
             release,
-            components: components.clone(),
+            components,
         });
     }
     validate_capabilities(&selections)?;
@@ -109,13 +139,81 @@ pub fn resolve(
     })
 }
 
-fn compatible_release<'a>(record: &'a PackageRecord, game: &str) -> Option<&'a Release> {
-    record.releases.iter().find(|release| {
-        release
+fn select_release<'a>(
+    record: &'a PackageRecord,
+    game: &str,
+    requirements: &BTreeSet<String>,
+) -> Result<&'a Release, ResolveError> {
+    let requirements = requirements
+        .iter()
+        .map(|requirement| {
+            VersionReq::parse(requirement).map_err(|_| ResolveError::InvalidVersionRequirement {
+                package: record.package.clone(),
+                requirement: requirement.clone(),
+            })
+        })
+        .collect::<Result<Vec<_>, _>>()?;
+
+    let mut has_compatible_release = false;
+    let mut selected = None;
+    for release in &record.releases {
+        let version = parse_release_version(&record.package, &release.version)?;
+        if !release
             .compatibility
             .games
             .iter()
             .any(|candidate| candidate == game)
+        {
+            continue;
+        }
+        has_compatible_release = true;
+        if requirements
+            .iter()
+            .all(|requirement| requirement.matches(&version))
+            && selected
+                .as_ref()
+                .is_none_or(|(_, current)| version > *current)
+        {
+            selected = Some((release, version));
+        }
+    }
+    selected.map(|(release, _)| release).ok_or_else(|| {
+        if has_compatible_release {
+            ResolveError::NoMatchingVersion {
+                package: record.package.clone(),
+                game: game.to_owned(),
+                requirements: if requirements.is_empty() {
+                    "any version".to_owned()
+                } else {
+                    requirements
+                        .iter()
+                        .map(ToString::to_string)
+                        .collect::<Vec<_>>()
+                        .join(", ")
+                },
+            }
+        } else {
+            ResolveError::Incompatible {
+                package: record.package.clone(),
+                game: game.to_owned(),
+            }
+        }
+    })
+}
+
+fn parse_release_version(package: &str, raw: &str) -> Result<Version, ResolveError> {
+    let raw = raw.trim().strip_prefix('v').unwrap_or(raw.trim());
+    let suffix_index = raw.find(['-', '+']).unwrap_or(raw.len());
+    let (core, suffix) = raw.split_at(suffix_index);
+    let parts = core.split('.').count();
+    let normalized = match parts {
+        1 => format!("{core}.0.0{suffix}"),
+        2 => format!("{core}.0{suffix}"),
+        _ => raw.to_owned(),
+    };
+    Version::parse(&normalized).map_err(|_| ResolveError::InvalidReleaseVersion {
+        package: package.to_owned(),
+        version: raw.to_owned(),
     })
 }
 
@@ -230,7 +328,7 @@ fn order(selections: &[Selection<'_>]) -> Result<Vec<String>, ResolveError> {
 mod tests {
     use super::*;
     use iepm_core::{
-        Compatibility, GameTarget, Install, Manifest, PackageRecord, Phase, Provenance,
+        Compatibility, Dependency, GameTarget, Install, Manifest, PackageRecord, Phase, Provenance,
         RequestedMod,
     };
     use std::path::PathBuf;
@@ -239,21 +337,25 @@ mod tests {
         PackageRecord {
             schema: 1,
             package: id.to_owned(),
-            releases: vec![Release {
-                version: "1".to_owned(),
-                artifact: None,
-                compatibility: Compatibility {
-                    games: vec!["eet".to_owned()],
-                },
-                install: Install {
-                    phase,
-                    before: vec![],
-                    after: vec![],
-                },
-                provenance: Provenance::Verified,
-                dependencies: vec![],
-                components: vec![],
-            }],
+            releases: vec![release("1", phase)],
+        }
+    }
+
+    fn release(version: &str, phase: Phase) -> Release {
+        Release {
+            version: version.to_owned(),
+            artifact: None,
+            compatibility: Compatibility {
+                games: vec!["eet".to_owned()],
+            },
+            install: Install {
+                phase,
+                before: vec![],
+                after: vec![],
+            },
+            provenance: Provenance::Verified,
+            dependencies: vec![],
+            components: vec![],
         }
     }
 
@@ -303,6 +405,89 @@ mod tests {
                 "eet-end",
                 "tactics-remix",
             ]
+        );
+    }
+
+    #[test]
+    fn chooses_the_highest_release_matching_a_manifest_requirement() {
+        let mut registry = Registry::new();
+        let mut package = record("package", Phase::Eet);
+        package.releases = vec![release("1.4", Phase::Eet), release("2.0", Phase::Eet)];
+        registry.insert("package".to_owned(), package);
+        let manifest = Manifest {
+            schema: 1,
+            game: GameTarget {
+                target: "eet".to_owned(),
+                version: None,
+                fingerprint: None,
+            },
+            mods: vec![RequestedMod::Selection {
+                package: "package".to_owned(),
+                version: Some(">=1.0, <2.0".to_owned()),
+                components: vec![],
+            }],
+        };
+
+        let lockfile = resolve(&manifest, &registry, "test").unwrap();
+        assert_eq!(lockfile.packages[0].version, "1.4");
+    }
+
+    #[test]
+    fn dependency_requirements_choose_a_compatible_transitive_release() {
+        let mut registry = Registry::new();
+        let mut package = record("package", Phase::Eet);
+        package.releases[0].dependencies = vec![Dependency {
+            package: "support".to_owned(),
+            version: Some(">=2.0".to_owned()),
+            components: vec![],
+        }];
+        let mut support = record("support", Phase::Eet);
+        support.releases = vec![release("1.0", Phase::Eet), release("2.1", Phase::Eet)];
+        registry.insert("package".to_owned(), package);
+        registry.insert("support".to_owned(), support);
+        let manifest = Manifest {
+            schema: 1,
+            game: GameTarget {
+                target: "eet".to_owned(),
+                version: None,
+                fingerprint: None,
+            },
+            mods: vec![RequestedMod::Package("package".to_owned())],
+        };
+
+        let lockfile = resolve(&manifest, &registry, "test").unwrap();
+        assert!(
+            lockfile
+                .packages
+                .iter()
+                .any(|package| package.package == "support" && package.version == "2.1")
+        );
+    }
+
+    #[test]
+    fn rejects_an_invalid_version_requirement() {
+        let mut registry = Registry::new();
+        registry.insert("package".to_owned(), record("package", Phase::Eet));
+        let manifest = Manifest {
+            schema: 1,
+            game: GameTarget {
+                target: "eet".to_owned(),
+                version: None,
+                fingerprint: None,
+            },
+            mods: vec![RequestedMod::Selection {
+                package: "package".to_owned(),
+                version: Some("not-a-requirement".to_owned()),
+                components: vec![],
+            }],
+        };
+
+        assert_eq!(
+            resolve(&manifest, &registry, "test").unwrap_err(),
+            ResolveError::InvalidVersionRequirement {
+                package: "package".to_owned(),
+                requirement: "not-a-requirement".to_owned(),
+            }
         );
     }
 }

@@ -7,6 +7,7 @@ rust-version.workspace = true
 
 [dependencies]
 iepm-core = { path = "../iepm-core" }
+semver.workspace = true
 thiserror.workspace = true
 
 [dev-dependencies]

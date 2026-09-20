@@ -32,9 +32,21 @@ The repository contains the Product A foundation:
 - dependency, exclusive-capability, phase, and `before`/`after` validation
 - a fixture for the planned conservative EET stack
 
-The next milestones are richer version constraints and component selection,
-then artifact verification and WeiDU execution. No GUI or semantic compiler is
-in scope yet.
+The resolver supports SemVer requirements for package releases and stable,
+symbolic component selection. It always records the exact selected release in
+the lockfile. The next milestones are complete lockfile provenance, artifact
+verification, and WeiDU execution. No GUI or semantic compiler is in scope yet.
+
+For example, a manifest can select a version range and symbolic component IDs:
+
+```yaml
+mods:
+  - package: tactics-remix
+    version: ">=8.0, <9.0"
+    components: [tactical-encounters]
+```
+
+The optional `version` field uses [SemVer requirement syntax](https://docs.rs/semver/latest/semver/struct.VersionReq.html). Use `=8.2` for an exact release.
 
 ## Try it
 

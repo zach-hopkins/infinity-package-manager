@@ -23,6 +23,8 @@ pub enum RequestedMod {
     Package(String),
     Selection {
         package: String,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        version: Option<String>,
         #[serde(default)]
         components: Vec<String>,
     },
@@ -40,6 +42,13 @@ impl RequestedMod {
         match self {
             Self::Package(_) => &[],
             Self::Selection { components, .. } => components,
+        }
+    }
+
+    pub fn version(&self) -> Option<&str> {
+        match self {
+            Self::Package(_) => None,
+            Self::Selection { version, .. } => version.as_deref(),
         }
     }
 }
@@ -99,6 +108,10 @@ pub enum Phase {
 #[derive(Debug, Clone, Deserialize)]
 pub struct Dependency {
     pub package: String,
+    #[serde(default)]
+    pub version: Option<String>,
+    #[serde(default)]
+    pub components: Vec<String>,
 }
 
 #[derive(Debug, Clone, Deserialize)]

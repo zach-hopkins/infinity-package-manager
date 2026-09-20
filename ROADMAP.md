@@ -5,7 +5,7 @@
 - [x] A0: schemas, stable-ID rules, phase vocabulary, and provenance model
 - [x] A1: static registry reader and package query surface
 - [x] A2 (initial): deterministic graph validation and ordering
-- [ ] A2: release-specific version constraints and symbolic component selection
+- [x] A2: release-specific version constraints and symbolic component selection
 - [ ] A3: complete lockfile provenance, toolchain, and fingerprints
 - [ ] A4: artifact download, cache, extraction, and SHA-256 verification
 - [ ] A5: ordered WeiDU execution with EET platform phases
