@@ -1,11 +1,11 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://iepm.dev/schemas/lockfile.schema.json",
-  "title": "IEPM schema-2 lockfile",
+  "title": "IEPM schema-3 lockfile",
   "type": "object",
   "required": ["schema", "environments", "registry_revision", "toolchain", "packages", "execution", "execution_readiness"],
   "properties": {
-    "schema": { "const": 2 },
+    "schema": { "const": 3 },
     "environments": { "type": "object", "minProperties": 1, "additionalProperties": { "$ref": "#/$defs/environment" } },
     "registry_revision": { "type": "string" },
     "toolchain": { "type": "object", "required": ["iepm"], "properties": { "iepm": { "type": "string" }, "weidu": { "type": "string" } }, "additionalProperties": false },
@@ -29,6 +29,7 @@
       "properties": {
         "package": { "type": "string" }, "release_id": { "type": "string" }, "version": { "type": "string" }, "environment": { "type": "string" }, "phase": { "type": "string" }, "artifact": { "$ref": "#/$defs/artifact" },
         "materialization": { "type": "object", "properties": { "source_root": { "type": "string" }, "include": { "type": "array", "items": { "type": "string" } } }, "additionalProperties": false },
+        "installers": { "type": "array", "items": { "type": "object", "required": ["tp2"], "properties": { "tp2": { "type": "string" }, "program": { "type": "string" }, "languages": { "type": "array", "items": { "type": "object", "required": ["id", "name"], "properties": { "id": { "type": "integer", "minimum": 0 }, "name": { "type": "string" } }, "additionalProperties": false } }, "inputs": { "type": "array", "items": { "type": "object", "required": ["name"], "properties": { "name": { "type": "string" }, "required": { "type": "boolean" } }, "additionalProperties": false } } }, "additionalProperties": false } },
         "components": { "type": "array", "items": { "type": "object", "required": ["id"], "properties": { "id": { "type": "string" }, "weidu": { "type": "object", "required": ["tp2"], "properties": { "tp2": { "type": "string" }, "label": { "type": "string" }, "number": { "type": "integer" }, "subcomponent": { "type": "string" } }, "additionalProperties": false } }, "additionalProperties": false } },
         "language": { "type": "string" }, "installer_inputs": { "type": "object", "additionalProperties": { "type": "string" } }, "dependencies": { "type": "array" }, "provenance": { "enum": ["declared", "derived", "verified", "community", "unverified"] }
       }, "additionalProperties": false

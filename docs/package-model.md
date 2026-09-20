@@ -22,7 +22,8 @@ Manifests contain intent. Lockfiles contain the resolver's exact choice:
 - IEPM version and, when selected, WeiDU version
 - exact opaque release IDs, display versions, selected archive content, and
   release-specific WeiDU component selectors
-- language, typed installer inputs, and materialization choices
+- installer program, release-specific language index, typed installer inputs,
+  and materialization choices
 - environment-aware dependency edges and the resolved execution-node graph
 - `execution_readiness` and causal blocking reasons when the graph is useful
   for analysis but not eligible for execution

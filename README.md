@@ -38,11 +38,12 @@ The repository contains the Product A foundation:
 - environment-aware dependency, exclusive-capability, phase, and `before`/`after` validation
 - a fixture for the planned conservative EET stack
 
-Schema 2 is the current public contract. It describes named game environments,
-opaque release IDs, release-specific WeiDU component selectors, installer
-language/inputs, materialization metadata, and an explicit execution graph.
+Manifest/package records use schema 2; replayable lockfiles use schema 3. The
+current contracts describe named game environments, opaque release IDs,
+release-specific WeiDU component selectors, installer language/inputs,
+materialization metadata, explicit execution graphs, and A5 readiness.
 The resolver reads legacy schema-1 manifests and registry records as a
-migration convenience, but always emits schema-2 lockfiles.
+migration convenience, but always emits schema-3 lockfiles.
 
 Release text is not assumed to be SemVer. A plain value is an exact release
 ID/display-version match; `id:<release-id>` is an explicit opaque ID; and a
@@ -55,6 +56,16 @@ cache, verifies SHA-256 values, tries declared mirrors, bounds downloads, and
 safely extracts them. Extraction rejects unsafe, duplicate, and
 case-colliding paths and revalidates cached extracted content. The next
 milestone is still WeiDU execution; no GUI or semantic compiler is in scope.
+
+The first A5 slice is available as a non-mutating preflight:
+
+```text
+cargo run -p iepm -- plan --lockfile modpack.lock.json
+```
+
+It accepts only schema-3 `executable` lockfiles and renders the intended
+materialization and WeiDU actions. It never fetches, starts a process, or
+changes a game tree.
 
 For example, a manifest can select a version range and symbolic component IDs:
 

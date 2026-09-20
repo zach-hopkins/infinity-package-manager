@@ -37,8 +37,9 @@ code; favor small additions that preserve old lockfile meaning.
   are intentionally the small initial vocabulary.
 - Preserve the distinction between artifact acquisition and package
   materialization. A4 prepares verified content; A5 owns game-tree mutation.
-- A5 begins with non-mutating plan/preflight output against disposable build
-  workspaces. Do not execute against a user's only game installation.
+- A5 planning/preflight is non-mutating. Do not add real execution until a
+  trusted fixture validates the plan against a manual install, and never
+  execute against a user's only game installation.
 
 Read [LIVING_CONTEXT.md](LIVING_CONTEXT.md) before changing schemas, resolver
 behavior, registry semantics, artifact handling, or the A5 execution boundary.

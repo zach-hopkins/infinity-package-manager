@@ -142,7 +142,7 @@ struct Solution {
 }
 
 /// Resolve human intent into an environment-aware execution plan. Schema-1
-/// manifests remain readable, but all produced lockfiles use schema 2.
+/// manifests remain readable, but all produced lockfiles use schema 3.
 pub fn resolve(
     manifest: &Manifest,
     registry: &Registry,
@@ -200,6 +200,10 @@ pub fn resolve(
             let request = &solution.requests[key];
             let release = release(registry, key, *index);
             validate_installer_inputs(&key.package, release, request)?;
+            let language = request
+                .language
+                .clone()
+                .or_else(|| environments[&key.environment].language.clone());
             let selected_components = selected_components(&key.package, release, request)?;
             let components = selected_components
                 .iter()
@@ -215,6 +219,16 @@ pub fn resolve(
                             key.node_id(),
                             component.id
                         ));
+                    } else if component
+                        .weidu
+                        .as_ref()
+                        .is_some_and(|selector| selector.number.is_none())
+                    {
+                        blocking_reasons.insert(format!(
+                            "{} selects component {} without a numeric WeiDU invocation",
+                            key.node_id(),
+                            component.id
+                        ));
                     }
                     Ok(LockedComponent {
                         id: component.id.clone(),
@@ -227,11 +241,66 @@ pub fn resolve(
                 warnings.insert(format!("{} has no verified artifact", key.node_id()));
                 blocking_reasons.insert(format!("{} has no verified artifact", key.node_id()));
             }
-            if selected_components.is_empty() && release.installers.is_empty() {
+            if release.installers.is_empty() {
                 blocking_reasons.insert(format!(
                     "{} has no installer specification for A5 execution",
                     key.node_id()
                 ));
+            }
+            if selected_components.is_empty() {
+                blocking_reasons.insert(format!(
+                    "{} has no selected executable WeiDU component",
+                    key.node_id()
+                ));
+            }
+            for component in &selected_components {
+                if let Some(selector) = &component.weidu {
+                    match release
+                        .installers
+                        .iter()
+                        .find(|installer| installer.tp2 == selector.tp2)
+                    {
+                        None => {
+                            blocking_reasons.insert(format!(
+                                "{} maps component {} to undeclared installer {}",
+                                key.node_id(),
+                                component.id,
+                                selector.tp2
+                            ));
+                        }
+                        Some(installer) => {
+                            if installer.program.is_none() {
+                                blocking_reasons.insert(format!(
+                                    "{} installer {} has no executable program",
+                                    key.node_id(),
+                                    installer.tp2
+                                ));
+                            }
+                            match language.as_deref() {
+                                None => {
+                                    blocking_reasons.insert(format!(
+                                        "{} has no locked WeiDU language",
+                                        key.node_id()
+                                    ));
+                                }
+                                Some(language)
+                                    if !installer
+                                        .languages
+                                        .iter()
+                                        .any(|candidate| candidate.name == language) =>
+                                {
+                                    blocking_reasons.insert(format!(
+                                        "{} installer {} has no language mapping for {}",
+                                        key.node_id(),
+                                        installer.tp2,
+                                        language
+                                    ));
+                                }
+                                Some(_) => {}
+                            }
+                        }
+                    };
+                }
             }
             if release.provenance == Provenance::Unverified {
                 warnings.insert(format!("{} is unverified", key.node_id()));
@@ -244,11 +313,9 @@ pub fn resolve(
                 phase: release.install.phase,
                 artifact,
                 materialization: release.materialization.clone(),
+                installers: release.installers.clone(),
                 components,
-                language: request
-                    .language
-                    .clone()
-                    .or_else(|| environments[&key.environment].language.clone()),
+                language,
                 installer_inputs: request.installer_inputs.clone(),
                 dependencies: required_dependencies(release, &environments[&key.environment]),
                 provenance: release.provenance,
@@ -261,8 +328,11 @@ pub fn resolve(
             warnings.insert(format!("environment `{name}` has no fingerprint"));
         }
     }
+    if toolchain.weidu.is_none() {
+        blocking_reasons.insert("lockfile has no exact WeiDU toolchain version".to_owned());
+    }
     Ok(Lockfile {
-        schema: 2,
+        schema: 3,
         environments,
         registry_revision: registry_revision.to_owned(),
         toolchain,
@@ -953,7 +1023,7 @@ mod tests {
             toolchain(),
         )
         .unwrap();
-        assert_eq!(lock.schema, 2);
+        assert_eq!(lock.schema, 3);
         assert_eq!(lock.execution[0].id, "target::package");
         assert_eq!(lock.packages[0].release_id, "upstream-2026-09-20");
         assert_eq!(lock.packages[0].language.as_deref(), Some("French"));
@@ -1021,6 +1091,8 @@ mod tests {
         let mut package = release("1", Phase::Eet);
         package.installers.push(iepm_core::Installer {
             tp2: "setup-package.tp2".to_owned(),
+            program: Some("setup-package.exe".to_owned()),
+            languages: vec![],
             inputs: vec![iepm_core::InstallerInput {
                 name: "source-environment".to_owned(),
                 required: true,
@@ -1036,6 +1108,54 @@ mod tests {
             ),
             Err(ResolveError::MissingInstallerInput { .. })
         ));
+    }
+
+    #[test]
+    fn marks_a_fully_described_weidu_route_executable() {
+        let mut registry = Registry::new();
+        let mut package = release("1", Phase::Eet);
+        package.artifact = Some(Artifact {
+            url: "https://example.invalid/package.zip".to_owned(),
+            sha256: "a".repeat(64),
+            mirrors: vec![],
+            format: Default::default(),
+            platforms: vec![],
+            architectures: vec![],
+        });
+        package.installers.push(iepm_core::Installer {
+            tp2: "mod/setup-package.tp2".to_owned(),
+            program: Some("setup-package.exe".to_owned()),
+            languages: vec![iepm_core::InstallerLanguage {
+                id: 0,
+                name: "English".to_owned(),
+            }],
+            inputs: vec![],
+        });
+        package.components.push(iepm_core::Component {
+            id: "main".to_owned(),
+            default_selected: true,
+            weidu: Some(iepm_core::WeiDUComponent {
+                tp2: "mod/setup-package.tp2".to_owned(),
+                label: Some("main".to_owned()),
+                number: Some(0),
+                subcomponent: None,
+            }),
+            provides: vec![],
+        });
+        registry.insert("package".to_owned(), record("package", vec![package]));
+        let lock = resolve(
+            &manifest(vec![RequestedMod::Package("package".to_owned())]),
+            &registry,
+            "test",
+            toolchain(),
+        )
+        .unwrap();
+        assert_eq!(lock.execution_readiness, ExecutionReadiness::Executable);
+        assert!(lock.blocking_reasons.is_empty());
+        assert_eq!(
+            lock.packages[0].installers[0].program.as_deref(),
+            Some("setup-package.exe")
+        );
     }
 
     #[test]

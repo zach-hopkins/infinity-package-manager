@@ -332,14 +332,26 @@ pub struct WeiDUComponent {
     pub subcomponent: Option<String>,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct Installer {
     pub tp2: String,
+    /// Relative launcher path inside the materialized package, such as
+    /// `setup-example.exe`. It is required for an executable A5 plan.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub program: Option<String>,
+    #[serde(default)]
+    pub languages: Vec<InstallerLanguage>,
     #[serde(default)]
     pub inputs: Vec<InstallerInput>,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct InstallerLanguage {
+    pub id: u32,
+    pub name: String,
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct InstallerInput {
     pub name: String,
     #[serde(default)]
@@ -379,6 +391,7 @@ pub struct Lockfile {
     pub toolchain: Toolchain,
     pub packages: Vec<LockedPackage>,
     pub execution: Vec<ExecutionNode>,
+    #[serde(default)]
     pub execution_readiness: ExecutionReadiness,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub blocking_reasons: Vec<String>,
@@ -388,10 +401,11 @@ pub struct Lockfile {
 
 /// `analysis-only` lockfiles are useful for review and diagnostics but are not
 /// eligible for A5 execution.
-#[derive(Debug, Clone, Copy, Deserialize, Serialize, PartialEq, Eq)]
+#[derive(Debug, Clone, Copy, Default, Deserialize, Serialize, PartialEq, Eq)]
 #[serde(rename_all = "kebab-case")]
 pub enum ExecutionReadiness {
     Executable,
+    #[default]
     AnalysisOnly,
 }
 
@@ -413,6 +427,8 @@ pub struct LockedPackage {
     pub artifact: Option<Artifact>,
     #[serde(default, skip_serializing_if = "is_default_materialization")]
     pub materialization: Materialization,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub installers: Vec<Installer>,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub components: Vec<LockedComponent>,
     #[serde(default, skip_serializing_if = "Option::is_none")]

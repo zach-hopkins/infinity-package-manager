@@ -30,6 +30,11 @@ enum Command {
         #[arg(long, default_value = ".iepm-cache")]
         cache: PathBuf,
     },
+    /// Render a non-mutating A5 execution preflight from an executable lockfile.
+    Plan {
+        #[arg(long, default_value = "modpack.lock.json")]
+        lockfile: PathBuf,
+    },
 }
 
 fn main() -> Result<()> {
@@ -80,6 +85,13 @@ fn main() -> Result<()> {
                 );
             }
             println!("prepared {} artifact(s)", prepared.len());
+        }
+        Command::Plan { lockfile } => {
+            let lockfile_text = std::fs::read_to_string(&lockfile)
+                .with_context(|| format!("could not read {}", lockfile.display()))?;
+            let lockfile: iepm_core::Lockfile = serde_json::from_str(&lockfile_text)
+                .with_context(|| format!("could not parse {}", lockfile.display()))?;
+            print!("{}", iepm::render_plan(&lockfile)?);
         }
     }
     Ok(())

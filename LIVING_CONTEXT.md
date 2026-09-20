@@ -12,12 +12,13 @@
 
 IEPM is a Rust package-management control plane above WeiDU. Product A's A0–A4
 foundation has completed a hostile pre-A5 review and subsequent remediation.
-The project is **yellow-green for constrained A5**: the next deliverable is a
-non-mutating `iepm plan`/preflight, not a real game installation.
+The project is **yellow-green for constrained A5**. The non-mutating `iepm
+plan`/preflight exists; the next work is to validate its output against a real,
+fully described EET stack before allowing any game installation.
 
-Schema 2 is the current contract. The resolver still reads legacy schema-1
-manifests and registry records as a migration convenience, but emits schema-2
-lockfiles. Registry coverage is deliberately incomplete and largely
+Manifest/package records use schema 2 and replayable lockfiles use schema 3.
+The resolver still reads legacy schema-1 manifests and registry records as a
+migration convenience. Registry coverage is deliberately incomplete and largely
 unverified; that must remain explicit rather than silently blocking analysis or
 claiming installability.
 
@@ -135,9 +136,9 @@ reason to build a general content-addressed filesystem.
 ### Portable reproducibility and execution readiness
 
 A lockfile captures canonical identities, selected artifact content,
-materialization metadata, component selectors, language, portable installer
-inputs, toolchain, environment fingerprints, registry revision, and execution
-graph.
+materialization metadata, component selectors, installer program and
+release-specific language-index mapping, portable installer inputs, toolchain,
+environment fingerprints, registry revision, and execution graph.
 
 Environment names are portable; local paths are machine configuration. Never
 store absolute local game paths, user-profile paths, or secrets in a manifest
@@ -148,8 +149,9 @@ Resolution and execution are separate states:
 
 - `analysis-only`: useful resolved graph, but one or more execution facts are
   missing. It must not mutate a game tree.
-- `executable`: artifact, installer route, selected-component mapping, portable
-  required inputs, and execution plan are all present. A5 may preflight it.
+- `executable`: artifact, installer program, selected numeric WeiDU component
+  mapping, release-specific language-index mapping, portable required inputs,
+  and execution plan are all present. A5 may preflight it.
 
 Every `analysis-only` result must carry causal blocking reasons. Do not defer a
 missing selector or artifact discovery to the middle of installation.
@@ -176,7 +178,8 @@ manifest → registry → resolver → lockfile → verified artifacts
 
 - **A0–A4:** v2 schemas, registry loading/validation, complete resolution,
   replayable lockfile, and verified artifact preparation.
-- **A5:** non-mutating plan/preflight first; then disposable-workspace WeiDU
+- **A5:** non-mutating `iepm plan`/preflight is complete; next are trusted
+  registry fixtures, manual-plan comparison, disposable-workspace WeiDU
   execution, process supervision, logs, cancellation/failure behavior, and
   EET multi-root workflow.
 - **A6:** TP2-assisted registry ingestion, release drift review, and

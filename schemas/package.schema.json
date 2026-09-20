@@ -54,7 +54,7 @@
         "claims": { "type": "array", "items": { "type": "object", "required": ["claim", "provenance"], "properties": { "claim": { "type": "string" }, "provenance": { "$ref": "#/$defs/provenance" }, "evidence": { "type": "array", "items": { "type": "string", "format": "uri" } } }, "additionalProperties": false } },
         "relationships": { "type": "array", "items": { "$ref": "#/$defs/relationship" } },
         "components": { "type": "array", "items": { "$ref": "#/$defs/component" } },
-        "installers": { "type": "array", "items": { "type": "object", "required": ["tp2"], "properties": { "tp2": { "type": "string" }, "inputs": { "type": "array", "items": { "type": "object", "required": ["name"], "properties": { "name": { "type": "string" }, "required": { "type": "boolean" } }, "additionalProperties": false } } }, "additionalProperties": false } }
+        "installers": { "type": "array", "items": { "type": "object", "required": ["tp2"], "properties": { "tp2": { "type": "string" }, "program": { "type": "string" }, "languages": { "type": "array", "items": { "type": "object", "required": ["id", "name"], "properties": { "id": { "type": "integer", "minimum": 0 }, "name": { "type": "string" } }, "additionalProperties": false } }, "inputs": { "type": "array", "items": { "type": "object", "required": ["name"], "properties": { "name": { "type": "string" }, "required": { "type": "boolean" } }, "additionalProperties": false } } }, "additionalProperties": false } }
       }, "additionalProperties": false
     }
   },
