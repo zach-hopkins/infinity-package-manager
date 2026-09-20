@@ -14,3 +14,4 @@ iepm-resolver = { path = "../iepm-resolver" }
 iepm-artifacts = { path = "../iepm-artifacts" }
 serde_json.workspace = true
 serde_yaml.workspace = true
+walkdir.workspace = true

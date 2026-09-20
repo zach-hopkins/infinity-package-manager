@@ -609,6 +609,7 @@ dependencies = [
  "iepm-resolver",
  "serde_json",
  "serde_yaml",
+ "walkdir",
 ]
 
 [[package]]

@@ -16,6 +16,9 @@ releases:
       phase: eet-end
       after: [eet]
     provenance: derived
+    claims:
+      - claim: Standard component 0 completed after the minimal EET import in a disposable A5 workspace. Its package logic reported an embedded EET WeiDU 24900 invocation despite IEPM launching the route with shared WeiDU 251.
+        provenance: verified
     dependencies:
       - package: eet
     installers:

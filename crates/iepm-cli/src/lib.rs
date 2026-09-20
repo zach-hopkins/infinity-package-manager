@@ -1,9 +1,488 @@
 use anyhow::{Result, bail};
+use iepm_artifacts::ArtifactStore;
 use iepm_core::{
     ExecutionReadiness, Installer, InstallerArgument, InstallerLauncher, LockedPackage, Lockfile,
     WeiDUComponent,
 };
 use std::collections::{BTreeMap, BTreeSet};
+use std::fs;
+use std::path::{Component, Path, PathBuf};
+use std::process::{Command, Stdio};
+use walkdir::WalkDir;
+
+/// Machine-local bindings and explicit authority required for A5 mutation.
+/// They are intentionally not stored in the portable lockfile.
+pub struct ExecuteOptions {
+    pub cache: PathBuf,
+    pub weidu: PathBuf,
+    pub workspaces: BTreeMap<String, PathBuf>,
+    pub log_dir: PathBuf,
+    pub confirm_disposable: bool,
+    pub allow_weidu_warnings: bool,
+}
+
+pub struct ExecutionReport {
+    pub actions: usize,
+    pub log_dir: PathBuf,
+}
+
+/// Parse repeated `environment=path` CLI values without allowing an implicit
+/// environment-name convention or a machine path in the lockfile.
+pub fn parse_workspace_bindings(values: &[String]) -> Result<BTreeMap<String, PathBuf>> {
+    let mut bindings = BTreeMap::new();
+    for value in values {
+        let (name, path) = value
+            .split_once('=')
+            .ok_or_else(|| anyhow::anyhow!("workspace binding must be NAME=PATH: {value}"))?;
+        if name.is_empty() || path.is_empty() {
+            bail!("workspace binding must have both NAME and PATH: {value}");
+        }
+        if bindings
+            .insert(name.to_owned(), PathBuf::from(path))
+            .is_some()
+        {
+            bail!("workspace environment was bound more than once: {name}");
+        }
+    }
+    Ok(bindings)
+}
+
+/// Execute a schema-3, executable lockfile only when the caller explicitly
+/// confirms every binding is a disposable workspace. This performs the narrow
+/// first A5 path: verified artifact preparation, safe materialization, and
+/// supervised WeiDU processes with retained stdout/stderr logs.
+pub fn execute(lockfile: &Lockfile, options: &ExecuteOptions) -> Result<ExecutionReport> {
+    ensure_executable(lockfile)?;
+    if !options.confirm_disposable {
+        bail!(
+            "refusing to mutate game workspaces without --confirm-disposable; use only fresh copies"
+        );
+    }
+    if !options.weidu.is_file() {
+        bail!(
+            "shared WeiDU executable does not exist: {}",
+            options.weidu.display()
+        );
+    }
+    validate_workspace_bindings(lockfile, &options.workspaces)?;
+    for (name, environment) in &lockfile.environments {
+        if !environment.baseline.is_empty() {
+            bail!(
+                "{} declares a baseline; A5 execution cannot verify pre-existing components yet",
+                name
+            );
+        }
+    }
+
+    fs::create_dir_all(&options.log_dir).map_err(|error| {
+        anyhow::anyhow!("could not create {}: {error}", options.log_dir.display())
+    })?;
+    let store = ArtifactStore::new(&options.cache)?;
+    let prepared = store.prepare_lockfile(lockfile)?;
+    let artifacts = prepared
+        .into_iter()
+        .map(|artifact| {
+            (
+                artifact
+                    .archive
+                    .file_stem()
+                    .unwrap()
+                    .to_string_lossy()
+                    .to_string(),
+                artifact.extracted,
+            )
+        })
+        .collect::<BTreeMap<_, _>>();
+    let packages = lockfile
+        .packages
+        .iter()
+        .map(|package| {
+            (
+                (package.environment.as_str(), package.package.as_str()),
+                package,
+            )
+        })
+        .collect::<BTreeMap<_, _>>();
+
+    let mut actions = 0_usize;
+    for node in &lockfile.execution {
+        let package = packages
+            .get(&(node.environment.as_str(), node.package.as_str()))
+            .ok_or_else(|| anyhow::anyhow!("execution node {} has no locked package", node.id))?;
+        let workspace = &options.workspaces[&node.environment];
+        let artifact = package
+            .artifact
+            .as_ref()
+            .ok_or_else(|| anyhow::anyhow!("{} has no locked artifact", node.id))?;
+        let extracted = artifacts
+            .get(&artifact.sha256)
+            .ok_or_else(|| anyhow::anyhow!("{} was not prepared in the artifact cache", node.id))?;
+        materialize(package, extracted, workspace)?;
+
+        let environment = &lockfile.environments[&node.environment];
+        let language = package
+            .language
+            .as_deref()
+            .or(environment.language.as_deref())
+            .ok_or_else(|| anyhow::anyhow!("{} has no locked WeiDU language", node.id))?;
+        for (tp2, components) in components_by_tp2(package)? {
+            let installer = package
+                .installers
+                .iter()
+                .find(|installer| installer.tp2 == tp2)
+                .expect("executable lockfile was preflighted");
+            let language_id = installer
+                .languages
+                .iter()
+                .find(|candidate| candidate.name == language)
+                .map(|candidate| candidate.id)
+                .ok_or_else(|| anyhow::anyhow!("{tp2} has no language mapping for {language}"))?;
+            let component_numbers = components
+                .iter()
+                .map(|component| {
+                    component
+                        .number
+                        .expect("executable lockfile was preflighted")
+                        .to_string()
+                })
+                .collect::<Vec<_>>();
+            actions += 1;
+            run_weidu(
+                installer,
+                package,
+                lockfile,
+                &options.workspaces,
+                workspace,
+                &options.weidu,
+                language_id,
+                &component_numbers,
+                actions,
+                &options.log_dir,
+                options.allow_weidu_warnings,
+            )?;
+        }
+    }
+    Ok(ExecutionReport {
+        actions,
+        log_dir: options.log_dir.clone(),
+    })
+}
+
+fn ensure_executable(lockfile: &Lockfile) -> Result<()> {
+    if lockfile.schema != 3 {
+        bail!(
+            "lockfile schema {} cannot enter A5 execution",
+            lockfile.schema
+        );
+    }
+    if lockfile.execution_readiness != ExecutionReadiness::Executable {
+        bail!("cannot execute an analysis-only lockfile");
+    }
+    if lockfile.toolchain.weidu.is_none() {
+        bail!("executable lockfile has no WeiDU toolchain version");
+    }
+    Ok(())
+}
+
+fn validate_workspace_bindings(
+    lockfile: &Lockfile,
+    workspaces: &BTreeMap<String, PathBuf>,
+) -> Result<()> {
+    if workspaces.len() != lockfile.environments.len()
+        || !workspaces.keys().eq(lockfile.environments.keys())
+    {
+        bail!("workspace bindings must name every and only every lockfile environment");
+    }
+    let mut canonical = Vec::new();
+    for (name, workspace) in workspaces {
+        if !workspace.is_dir() {
+            bail!(
+                "workspace for {name} is not an existing directory: {}",
+                workspace.display()
+            );
+        }
+        if !workspace.join("chitin.key").is_file() {
+            bail!(
+                "workspace for {name} has no chitin.key: {}",
+                workspace.display()
+            );
+        }
+        let path = workspace.canonicalize().map_err(|error| {
+            anyhow::anyhow!("could not canonicalize {}: {error}", workspace.display())
+        })?;
+        canonical.push((name, path));
+    }
+    for (index, (left_name, left)) in canonical.iter().enumerate() {
+        for (right_name, right) in canonical.iter().skip(index + 1) {
+            if left == right || left.starts_with(right) || right.starts_with(left) {
+                bail!(
+                    "workspaces {left_name} and {right_name} must be distinct, non-nested directories"
+                );
+            }
+        }
+    }
+    Ok(())
+}
+
+fn materialize(package: &LockedPackage, extracted: &Path, workspace: &Path) -> Result<()> {
+    let source = match package.materialization.source_root.as_deref() {
+        Some(root) => extracted.join(safe_relative(root)?),
+        None => extracted.to_owned(),
+    };
+    if !source.is_dir() {
+        bail!(
+            "{} materialization root is not a directory: {}",
+            package.package,
+            source.display()
+        );
+    }
+    if package.materialization.include.is_empty() {
+        if package.materialization.source_root.is_some() {
+            let name = source.file_name().ok_or_else(|| {
+                anyhow::anyhow!("{} materialization root has no name", package.package)
+            })?;
+            copy_tree(&source, &workspace.join(name))?;
+        } else {
+            copy_contents(&source, workspace)?;
+        }
+    } else {
+        for include in &package.materialization.include {
+            let relative = safe_relative(include)?;
+            let selected = source.join(relative);
+            if selected.is_dir() {
+                copy_tree(&selected, &workspace.join(relative))?;
+            } else if selected.is_file() {
+                copy_file(&selected, &workspace.join(relative))?;
+            } else {
+                bail!(
+                    "{} materialization include does not exist: {}",
+                    package.package,
+                    selected.display()
+                );
+            }
+        }
+    }
+    Ok(())
+}
+
+fn safe_relative(value: &str) -> Result<&Path> {
+    let path = Path::new(value);
+    if path.as_os_str().is_empty()
+        || path
+            .components()
+            .any(|component| !matches!(component, Component::Normal(_)))
+    {
+        bail!("materialization path must be a non-empty relative path: {value}");
+    }
+    Ok(path)
+}
+
+fn copy_contents(source: &Path, destination: &Path) -> Result<()> {
+    for entry in fs::read_dir(source)? {
+        let entry = entry?;
+        if entry.file_name() == ".iepm-complete" {
+            continue;
+        }
+        let output = destination.join(entry.file_name());
+        if entry.file_type()?.is_dir() {
+            copy_tree(&entry.path(), &output)?;
+        } else {
+            copy_file(&entry.path(), &output)?;
+        }
+    }
+    Ok(())
+}
+
+fn copy_tree(source: &Path, destination: &Path) -> Result<()> {
+    if destination.exists() {
+        bail!(
+            "refusing to overwrite materialized path: {}",
+            destination.display()
+        );
+    }
+    for entry in WalkDir::new(source) {
+        let entry = entry?;
+        if entry.file_type().is_symlink() {
+            bail!(
+                "refusing symbolic link during materialization: {}",
+                entry.path().display()
+            );
+        }
+        let relative = entry
+            .path()
+            .strip_prefix(source)
+            .expect("walk starts at source");
+        let output = destination.join(relative);
+        if entry.file_type().is_dir() {
+            fs::create_dir_all(output)?;
+        } else {
+            copy_file(entry.path(), &output)?;
+        }
+    }
+    Ok(())
+}
+
+fn copy_file(source: &Path, destination: &Path) -> Result<()> {
+    if destination.exists() {
+        bail!(
+            "refusing to overwrite materialized file: {}",
+            destination.display()
+        );
+    }
+    let parent = destination
+        .parent()
+        .ok_or_else(|| anyhow::anyhow!("materialization destination has no parent"))?;
+    fs::create_dir_all(parent)?;
+    fs::copy(source, destination)?;
+    Ok(())
+}
+
+#[allow(clippy::too_many_arguments)]
+fn run_weidu(
+    installer: &Installer,
+    package: &LockedPackage,
+    lockfile: &Lockfile,
+    workspaces: &BTreeMap<String, PathBuf>,
+    workspace: &Path,
+    weidu: &Path,
+    language_id: u32,
+    components: &[String],
+    action: usize,
+    log_dir: &Path,
+    allow_weidu_warnings: bool,
+) -> Result<()> {
+    let program = match installer.launcher {
+        InstallerLauncher::Bundled => {
+            workspace.join(safe_relative(installer.program.as_deref().ok_or_else(
+                || anyhow::anyhow!("{} has no executable program", installer.tp2),
+            )?)?)
+        }
+        InstallerLauncher::Toolchain => weidu.to_owned(),
+    };
+    let mut args = Vec::new();
+    match installer.launcher {
+        InstallerLauncher::Bundled => {
+            for component in components {
+                args.extend(["--force-install".to_owned(), component.clone()]);
+            }
+            args.extend(["--language".to_owned(), language_id.to_string()]);
+        }
+        InstallerLauncher::Toolchain => {
+            let locale = lockfile.environments[&package.environment]
+                .locale
+                .as_deref()
+                .ok_or_else(|| {
+                    anyhow::anyhow!(
+                        "{} has no game locale for shared WeiDU",
+                        package.environment
+                    )
+                })?;
+            args.extend([
+                installer.tp2.clone(),
+                "--game".to_owned(),
+                workspace.display().to_string(),
+                "--language".to_owned(),
+                language_id.to_string(),
+                "--use-lang".to_owned(),
+                locale.to_owned(),
+                "--skip-at-view".to_owned(),
+                "--no-exit-pause".to_owned(),
+                "--noautoupdate".to_owned(),
+            ]);
+            for component in components {
+                args.extend(["--force-install".to_owned(), component.clone()]);
+            }
+        }
+    }
+    for argument in &installer.arguments {
+        match argument {
+            InstallerArgument::Literal { value } => args.push(value.clone()),
+            InstallerArgument::EnvironmentInput { input } => {
+                let environment = package.installer_inputs.get(input).ok_or_else(|| {
+                    anyhow::anyhow!("{} requires installer input {input}", package.package)
+                })?;
+                if !lockfile.environments.contains_key(environment) {
+                    bail!(
+                        "{} binds {input} to unknown environment {environment}",
+                        package.package
+                    );
+                }
+                let path = workspaces.get(environment).ok_or_else(|| {
+                    anyhow::anyhow!(
+                        "{} has no local workspace binding for {environment}",
+                        package.package
+                    )
+                })?;
+                args.push(path.display().to_string());
+            }
+        }
+    }
+    let stem = format!("{action:02}-{}", package.package.replace(['/', '\\'], "_"));
+    let stdout_path = log_dir.join(format!("{stem}.stdout.log"));
+    let stderr_path = log_dir.join(format!("{stem}.stderr.log"));
+    let command_path = log_dir.join(format!("{stem}.command.txt"));
+    fs::write(
+        &command_path,
+        format!("{}\n{}\n", program.display(), args.join("\n")),
+    )?;
+    let output = Command::new(&program)
+        .args(&args)
+        .current_dir(workspace)
+        .stdin(Stdio::null())
+        .stdout(Stdio::piped())
+        .stderr(Stdio::piped())
+        .output()
+        .map_err(|error| anyhow::anyhow!("could not start {}: {error}", program.display()))?;
+    fs::write(&stdout_path, &output.stdout)?;
+    fs::write(&stderr_path, &output.stderr)?;
+    if !output.status.success() {
+        let stdout = String::from_utf8_lossy(&output.stdout);
+        if allow_weidu_warnings
+            && output.status.code() == Some(3)
+            && stdout.contains("INSTALLED WITH WARNINGS")
+            && installed_components_are_logged(workspace, &installer.tp2, language_id, components)?
+        {
+            let warnings = stdout
+                .lines()
+                .filter(|line| line.contains("WARNING") || line.contains("INSTALLED WITH WARNINGS"))
+                .collect::<Vec<_>>()
+                .join("\n");
+            fs::write(
+                log_dir.join(format!("{stem}.warnings.log")),
+                format!("{warnings}\n"),
+            )?;
+            return Ok(());
+        }
+        bail!(
+            "WeiDU action {action} for {} failed with {}; see {} and {}{}",
+            package.package,
+            output.status,
+            stdout_path.display(),
+            stderr_path.display(),
+            if output.status.code() == Some(3) && stdout.contains("INSTALLED WITH WARNINGS") {
+                "; re-run with --allow-weidu-warnings only if the warning receipt is acceptable"
+            } else {
+                ""
+            }
+        );
+    }
+    Ok(())
+}
+
+fn installed_components_are_logged(
+    workspace: &Path,
+    tp2: &str,
+    language_id: u32,
+    components: &[String],
+) -> Result<bool> {
+    let log = fs::read_to_string(workspace.join("WeiDU.log"))?;
+    let tp2 = tp2.replace('/', "\\").to_ascii_uppercase();
+    Ok(components.iter().all(|component| {
+        let expected = format!("~{tp2}~ #{language_id} #{component}");
+        log.lines()
+            .any(|line| line.to_ascii_uppercase().contains(&expected))
+    }))
+}
 
 /// Render the first A5 deliverable: a non-mutating, auditable execution plan.
 /// It never fetches, materializes, starts a process, or touches a game tree.
@@ -289,6 +768,44 @@ fn components_by_tp2(package: &LockedPackage) -> Result<BTreeMap<&str, Vec<&WeiD
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn parses_explicit_workspace_bindings_without_duplicates() {
+        let bindings = parse_workspace_bindings(&[
+            "bgee-source=C:\\games\\bgee".to_owned(),
+            "eet-target=C:\\games\\bg2ee".to_owned(),
+        ])
+        .unwrap();
+        assert_eq!(bindings["bgee-source"], PathBuf::from("C:\\games\\bgee"));
+        assert!(
+            parse_workspace_bindings(&[
+                "bgee-source=C:\\games\\one".to_owned(),
+                "bgee-source=C:\\games\\two".to_owned(),
+            ])
+            .is_err()
+        );
+    }
+
+    #[test]
+    fn accepts_a_warning_only_when_the_requested_component_is_logged() {
+        let workspace =
+            std::env::temp_dir().join(format!("iepm-weidu-log-test-{}", std::process::id()));
+        std::fs::create_dir_all(&workspace).unwrap();
+        std::fs::write(
+            workspace.join("WeiDU.log"),
+            "~EET\\EET.TP2~ #0 #0 // EET core\n",
+        )
+        .unwrap();
+        assert!(
+            installed_components_are_logged(&workspace, "EET/EET.tp2", 0, &["0".to_owned()])
+                .unwrap()
+        );
+        assert!(
+            !installed_components_are_logged(&workspace, "EET/EET.tp2", 0, &["1".to_owned()])
+                .unwrap()
+        );
+        std::fs::remove_dir_all(workspace).unwrap();
+    }
 
     fn lockfile(readiness: &str) -> Lockfile {
         serde_json::from_str(&format!(

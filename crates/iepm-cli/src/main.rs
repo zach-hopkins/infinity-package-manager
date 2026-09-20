@@ -35,6 +35,27 @@ enum Command {
         #[arg(long, default_value = "modpack.lock.json")]
         lockfile: PathBuf,
     },
+    /// Materialize and execute an executable lockfile in explicitly bound,
+    /// disposable game workspaces. This never accepts machine paths in a lockfile.
+    Execute {
+        #[arg(long, default_value = "modpack.lock.json")]
+        lockfile: PathBuf,
+        #[arg(long, default_value = ".iepm-cache")]
+        cache: PathBuf,
+        #[arg(long)]
+        weidu: PathBuf,
+        #[arg(long = "workspace", value_name = "NAME=PATH", required = true)]
+        workspace: Vec<String>,
+        #[arg(long)]
+        log_dir: PathBuf,
+        #[arg(long, help = "Confirm every --workspace is a fresh disposable copy")]
+        confirm_disposable: bool,
+        #[arg(
+            long,
+            help = "Continue only past WeiDU exit code 3 when every requested component is logged as installed with warnings"
+        )]
+        allow_weidu_warnings: bool,
+    },
 }
 
 fn main() -> Result<()> {
@@ -92,6 +113,36 @@ fn main() -> Result<()> {
             let lockfile: iepm_core::Lockfile = serde_json::from_str(&lockfile_text)
                 .with_context(|| format!("could not parse {}", lockfile.display()))?;
             print!("{}", iepm::render_plan(&lockfile)?);
+        }
+        Command::Execute {
+            lockfile,
+            cache,
+            weidu,
+            workspace,
+            log_dir,
+            confirm_disposable,
+            allow_weidu_warnings,
+        } => {
+            let lockfile_text = std::fs::read_to_string(&lockfile)
+                .with_context(|| format!("could not read {}", lockfile.display()))?;
+            let lockfile: iepm_core::Lockfile = serde_json::from_str(&lockfile_text)
+                .with_context(|| format!("could not parse {}", lockfile.display()))?;
+            let report = iepm::execute(
+                &lockfile,
+                &iepm::ExecuteOptions {
+                    cache,
+                    weidu,
+                    workspaces: iepm::parse_workspace_bindings(&workspace)?,
+                    log_dir,
+                    confirm_disposable,
+                    allow_weidu_warnings,
+                },
+            )?;
+            println!(
+                "completed {} WeiDU action(s); logs: {}",
+                report.actions,
+                report.log_dir.display()
+            );
         }
     }
     Ok(())

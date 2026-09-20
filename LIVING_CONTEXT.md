@@ -12,16 +12,23 @@
 
 IEPM is a Rust package-management control plane above WeiDU. Product A's A0–A4
 foundation has completed a hostile pre-A5 review and subsequent remediation.
-The project is **yellow-green for constrained A5**. The non-mutating `iepm
-plan`/preflight now has an evidence-backed, executable minimal EET route
-fixture: DLC Merger, source/target EE Fixpack, EET import, and EET_End. Its
-component sequence and shared-WeiDU command envelope have been compared with
-a local known-good runner: each generic invocation carries the bound game
-workspace, WeiDU language index, game locale, and noninteractive flags. The
-observed successful EET import was v14.0 while the pinned archive is v14.1,
-so this establishes route shape—not v14.1 execution verification. The next
-work is disposable-workspace validation of that minimal route before
-describing the full mod stack or allowing any game installation.
+The project is **green for the minimal A5 EET route and yellow for broader
+A5**. `iepm execute` has completed the evidence-backed five-action route in
+fresh disposable Steam copies: DLC Merger, source/target EE Fixpack, EET
+import, and EET_End. It verified/extracted pinned artifacts, bound named local
+workspaces without storing their paths in the lockfile, retained action
+receipts, and required explicit disposable-workspace confirmation. The next
+work is measured output fingerprints plus cancellation/recovery behavior and
+another real package counterexample before describing the full mod stack.
+
+The source-tagged EET v14.1 archive's TP2 declares itself v14.0, and EET core
+emits non-stopping warnings under shared WeiDU 251. This is resolved evidence,
+not a version-model failure: source tag, archive hash, TP2 display version,
+and executor identity remain separate facts. An explicit warning policy may
+continue only exit code 3 with both `INSTALLED WITH WARNINGS` output and a
+matching `WeiDU.log` component record. EET_End also invokes an embedded WeiDU
+24900; the shared toolchain pin identifies IEPM's top-level process, not every
+subprocess a package may choose to launch.
 
 Manifest/package records use schema 2 and replayable lockfiles use schema 3.
 The resolver still reads legacy schema-1 manifests and registry records as a
@@ -209,14 +216,13 @@ manifest → registry → resolver → lockfile → verified artifacts
 
 - **A0–A4:** v2 schemas, registry loading/validation, complete resolution,
   replayable lockfile, and verified artifact preparation.
-- **A5:** non-mutating `iepm plan`/preflight is complete; its minimal EET
-  route has passed a manual structural comparison. Next are disposable-
-  workspace WeiDU execution, process supervision, logs,
-  cancellation/failure behavior, and EET multi-root workflow. The v14.1
-  archive has not yet been executed; `examples/eet-minimal` remains an
-  executable but non-mutating route fixture, and
-  `docs/a5-eet-evidence.md` records its evidence. Neither authorizes an
-  installation outside a disposable workspace.
+- **A5:** the minimal EET route has passed manual comparison and a full
+  disposable execution with action receipts. `iepm execute` is intentionally
+  narrow: verified artifacts, safe materialization, explicit environment
+  bindings, sequential process supervision, and opt-in audited warnings. Next
+  are measured workspace fingerprints, cancellation/recovery behavior, and
+  more ecosystem counterexamples. `examples/eet-minimal` remains a controlled
+  fixture, not authorization to install into a user's primary game tree.
 - **A6:** TP2-assisted registry ingestion, release drift review, and
   conservative structural inheritance.
 - **A7:** user-facing CLI ergonomics such as search, add, verify, and install.
@@ -236,7 +242,8 @@ uninstallable by policy. WeiDU remains the escape hatch.
 3. Compare that plan with a manual known-good EET installation.
 4. Reject `analysis-only` locks before any mutation.
 5. Execute only in disposable, IEPM-controlled build workspaces—not a user's
-   only Steam/GOG installation.
+   only Steam/GOG installation. Require an explicit runtime confirmation and
+   retain command/stdout/stderr receipts for each action.
 6. Treat cancellation, reboot, and WeiDU failure as normal outcomes; favor
    rebuild-from-known-clean over heroic in-place rollback.
 7. Turn every real exception found during A5 into a narrowly scoped fixture

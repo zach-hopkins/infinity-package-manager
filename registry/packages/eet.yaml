@@ -19,6 +19,9 @@ releases:
       phase: eet-import
       after: [dlc-merger]
     provenance: derived
+    claims:
+      - claim: The source-tagged v14.1 archive declares EET.tp2 VERSION v14.0; its core component completed a clean minimal A5 conversion under shared WeiDU 251 with non-stopping WeiDU warnings.
+        provenance: verified
     relationships:
       - kind: requires
         package: dlc-merger

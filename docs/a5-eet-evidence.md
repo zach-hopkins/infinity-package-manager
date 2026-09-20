@@ -21,10 +21,19 @@ an existing game tree.
   flags (`--skip-at-view`, `--no-exit-pause`, and `--noautoupdate`). A package
   must not be assumed to ship a `setup-*.exe`; EE Fixpack is a concrete
   counterexample.
-- EET v14.1's documented noninteractive route supplies the BGEE source path
+- The EET archive retrieved from the source tag `v14.1` supplies the BGEE source path
   through `--args-list sp <path>`. IEPM records the portable
   `source-environment` name in the lockfile and renders a runtime binding
   placeholder instead of an absolute path.
+- A clean disposable run completed all five selected components with shared
+  WeiDU 251. EET core returned exit code `3` after `INSTALLED WITH WARNINGS`,
+  but its requested component was recorded in `WeiDU.log`; EET_End then
+  completed normally. The EET TP2 in the hash-verified source-tagged archive
+  declares `VERSION ~v14.0~`, so a source tag, archive hash, and TP2 display
+  version must remain distinct facts.
+- EET_End's output reported an embedded `EET/bin/win32/x86_64/weidu.exe` at
+  version `24900`. The shared WeiDU 251 lockfile value identifies IEPM's
+  top-level invocation, not every executable a package may spawn internally.
 
 ## Contract implications
 
@@ -50,6 +59,16 @@ Its execution route is `EET/EET.tp2`, component `0`, English language index
 complete example stack remains analysis-only until every selected package has
 its own verified artifact and release-specific selectors.
 
+The A5 `execute` command binds every named environment to an existing local
+workspace, requires `chitin.key`, rejects nested/duplicate bindings and
+baseline environments, copies only verified extracted content without
+overwriting an existing materialized path, and retains one command/stdout/stderr
+receipt per action. Mutation additionally requires `--confirm-disposable`.
+`--allow-weidu-warnings` is deliberately separate: it accepts only exit code
+`3` when the output says `INSTALLED WITH WARNINGS` *and* all requested numeric
+components are independently present in `WeiDU.log`; every other nonzero exit
+remains fatal.
+
 ## Minimal executable route fixture
 
 `examples/eet-minimal/modpack.yaml` describes the observed five-package base:
@@ -63,7 +82,7 @@ The EET workspace begins as `bg2ee` and declares `after_eet_import: eet`.
 This is a lifecycle transition, not an assertion that EE Fixpack supports EET:
 its TP2 explicitly rejects EET, while EET_End explicitly requires EET core.
 The registry records local-archive-verified content identities for DLC Merger
-v2.1, EE Fixpack Beta 2, EET v14.1, and EET_End v14.1. The fixture's game
+v2.1, EE Fixpack Beta 2, and the source-tagged EET/EET_End archive v14.1. The fixture's game
 fingerprints are synthetic test values and must be replaced by measured
 disposable-workspace fingerprints before any future execution.
 
@@ -76,8 +95,10 @@ match: source DLC Merger `#0 #1`, source EE Fixpack `#0 #0`, target EE Fixpack
 runner's workspace, locale, and unattended shared-WeiDU arguments for every
 TP2-only route.
 
-The comparison is deliberately not marked as an EET v14.1 execution success:
-the historical successful target log records EET v14.0, whereas IEPM pins the
-separately hash-verified v14.1 archive. The manual evidence validates the
-model and command shape; a disposable v14.1 run is still required to validate
-the selected release and its resulting workspace fingerprint.
+The plan has now completed in a disposable workspace using the separately
+hash-verified source-tagged v14.1 archive. Its resulting target log records
+the TP2's own v14.0 display value, then EET_End standard component `#0 #0`.
+The run is evidence for this exact archive, command envelope, and component
+sequence—not a blanket compatibility claim for another EET release or a full
+mod stack. The resulting workspace fingerprint is still outstanding because
+the fixture's fingerprint profile is intentionally only a synthetic example.

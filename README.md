@@ -68,6 +68,14 @@ It accepts only schema-3 `executable` lockfiles and renders the intended
 materialization and WeiDU actions. It never fetches, starts a process, or
 changes a game tree.
 
+The narrow A5 executor is available for a fresh disposable copy only. It
+requires every named environment to be bound at runtime (not recorded in the
+lockfile), an explicit `--confirm-disposable`, a shared WeiDU binary, and a
+log directory. It verifies and materializes artifacts before executing in
+graph order, and retains a command/stdout/stderr receipt for every action.
+`--allow-weidu-warnings` is an explicit review decision: it accepts only
+WeiDU exit code 3 after the requested components are confirmed in `WeiDU.log`.
+
 The smallest executable EET route fixture is available at
 `examples/eet-minimal/modpack.yaml`. It uses a BG2EE target workspace with
 `after_eet_import: eet`: preparation and EET import run against BG2EE, while
@@ -111,6 +119,15 @@ cargo run -p iepm -- fetch --lockfile modpack.lock.json --cache .iepm-cache
 Artifact URLs must use HTTPS. An artifact is identified by SHA-256, may list
 mirrors, and may be restricted by platform and CPU architecture. ZIP extraction
 rejects unsafe paths and enforces an 8 GiB uncompressed-size limit.
+
+To execute an already-resolved minimal route, use paths to fresh game copies:
+
+```text
+cargo run -p iepm -- execute --lockfile modpack.lock.json --cache .iepm-cache \
+  --weidu C:\\tools\\weidu.exe --workspace bgee-source=C:\\testing\\bgee-source \
+  --workspace eet-target=C:\\testing\\bg2ee-target --log-dir C:\\testing\\iepm-logs \
+  --confirm-disposable
+```
 
 ## Try it
 
