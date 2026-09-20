@@ -1,6 +1,4 @@
-use iepm_core::{
-    Component, LockedPackage, Lockfile, Manifest, PackageRecord, Phase, Registry, Release,
-};
+use iepm_core::{Component, LockedPackage, Lockfile, Manifest, PackageRecord, Registry, Release};
 use std::collections::{BTreeMap, BTreeSet};
 use thiserror::Error;
 
@@ -231,7 +229,8 @@ fn order(selections: &[Selection<'_>]) -> Result<Vec<String>, ResolveError> {
 mod tests {
     use super::*;
     use iepm_core::{
-        Compatibility, GameTarget, Install, Manifest, PackageRecord, Provenance, RequestedMod,
+        Compatibility, GameTarget, Install, Manifest, PackageRecord, Phase, Provenance,
+        RequestedMod,
     };
     use std::path::PathBuf;
 
