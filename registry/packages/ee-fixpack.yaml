@@ -1,0 +1,39 @@
+schema: 2
+package: ee-fixpack
+releases:
+  - version: "Beta 2"
+    release_id: "ee-fixpack-beta-2"
+    artifacts:
+      - url: https://github.com/Gibberlings3/EE_Fixpack/releases/download/Beta_2/enhanced-edition-fixpack-beta-2.iemod
+        sha256: 7a57e43bd6c30c7e36b7c2b7c5531c7a0834de164da186808da03d24474592bf
+        platforms: [windows]
+    materialization:
+      source_root: eefixpack
+    compatibility:
+      games: [bgee, bg2ee]
+    install:
+      phase: preprocess
+    provenance: derived
+    relationships:
+      - kind: after
+        package: dlc-merger
+        when:
+          games: [bgee]
+    installers:
+      - tp2: eefixpack/setup-eefixpack.tp2
+        launcher: toolchain
+        languages:
+          - id: 0
+            name: English
+          - id: 1
+            name: Russian
+          - id: 2
+            name: Simplified Chinese
+          - id: 3
+            name: French
+    components:
+      - id: core-fixes
+        weidu:
+          tp2: eefixpack/setup-eefixpack.tp2
+          label: cd_eefp_core_fixes
+          number: 0

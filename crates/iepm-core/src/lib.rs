@@ -25,6 +25,11 @@ pub struct GameTarget {
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct GameEnvironment {
     pub target: String,
+    /// The target identity after the environment's `eet-import` phase. This
+    /// represents EET's documented BG2EE-to-EET workspace transformation.
+    /// Before and during that phase, `target` remains the active game.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub after_eet_import: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub version: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -265,6 +270,19 @@ pub enum Phase {
     Eet,
     EetEnd,
     PostEetEnd,
+}
+
+impl GameEnvironment {
+    /// The game identity against which a package executes. EET itself runs
+    /// against BG2EE during `eet-import`; later phases run against the
+    /// transformed EET tree when one is declared.
+    pub fn active_target(&self, phase: Phase) -> &str {
+        if phase > Phase::EetImport {
+            self.after_eet_import.as_deref().unwrap_or(&self.target)
+        } else {
+            &self.target
+        }
+    }
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]

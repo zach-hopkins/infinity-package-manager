@@ -55,6 +55,10 @@ pub enum ResolveError {
     PhaseViolation { before: String, after: String },
     #[error("ordering graph contains a cycle")]
     Cycle,
+    #[error(
+        "environment `{environment}` declares an EET result but has no `eet-import` transition"
+    )]
+    MissingEetImport { environment: String },
     #[error("resolution exceeded the candidate-search limit")]
     SearchLimit,
 }
@@ -184,6 +188,7 @@ pub fn resolve(
     }
 
     let solution = solve(&roots, BTreeMap::new(), registry, &environments, 0)?;
+    validate_eet_transitions(&solution, registry, &environments)?;
     validate_capabilities(&solution, registry)?;
     validate_conflicts(&solution, registry, &environments)?;
     let execution = order(&solution, registry, &environments)?;
@@ -364,6 +369,7 @@ pub fn resolve(
     for (name, environment) in &environments {
         if environment.fingerprint.is_none() {
             warnings.insert(format!("environment `{name}` has no fingerprint"));
+            blocking_reasons.insert(format!("environment `{name}` has no fingerprint"));
         }
     }
     if toolchain.weidu.is_none() {
@@ -398,6 +404,7 @@ fn normalized_environments(
         "target".to_owned(),
         GameEnvironment {
             target: game.target.clone(),
+            after_eet_import: None,
             version: game.version.clone(),
             fingerprint: game.fingerprint.as_ref().map(|value| GameFingerprint {
                 profile: "legacy-string-v1".to_owned(),
@@ -430,7 +437,8 @@ fn solve(
         (!release_matches(
             release(registry, key, *index),
             &requests[key],
-            &environments[&key.environment].target,
+            environments[&key.environment]
+                .active_target(release(registry, key, *index).install.phase),
             &key.package,
         )
         .unwrap_or(false))
@@ -452,7 +460,7 @@ fn solve(
             .get(&key.package)
             .ok_or_else(|| ResolveError::MissingPackage(key.package.clone()))?,
         &requests[&key],
-        &environments[&key.environment].target,
+        &environments[&key.environment],
     )?;
     let mut last_error = None;
     for index in candidates {
@@ -529,7 +537,9 @@ fn required_dependencies(release: &Release, environment: &GameEnvironment) -> Ve
                 .iter()
                 .filter(|relationship| {
                     relationship.kind == RelationshipKind::Requires
-                        && relationship.when.matches_game(&environment.target)
+                        && relationship
+                            .when
+                            .matches_game(environment.active_target(release.install.phase))
                 })
                 .map(|relationship| Dependency {
                     package: relationship.package.clone(),
@@ -566,14 +576,19 @@ fn release_matches(
 fn candidates(
     record: &PackageRecord,
     request: &Request,
-    game: &str,
+    environment: &GameEnvironment,
 ) -> Result<Vec<usize>, ResolveError> {
     let mut result = record
         .releases
         .iter()
         .enumerate()
         .filter_map(|(index, release)| {
-            match release_matches(release, request, game, &record.package) {
+            match release_matches(
+                release,
+                request,
+                environment.active_target(release.install.phase),
+                &record.package,
+            ) {
                 Ok(true) => Some(Ok(index)),
                 Ok(false) => None,
                 Err(error) => Some(Err(error)),
@@ -584,7 +599,7 @@ fn candidates(
         release_sort_key(&record.releases[*right]).cmp(&release_sort_key(&record.releases[*left]))
     });
     if result.is_empty() {
-        return Err(no_match(record, request, game));
+        return Err(no_match(record, request, &environment.target));
     }
     Ok(result)
 }
@@ -766,6 +781,26 @@ fn validate_capabilities(solution: &Solution, registry: &Registry) -> Result<(),
     Ok(())
 }
 
+fn validate_eet_transitions(
+    solution: &Solution,
+    registry: &Registry,
+    environments: &BTreeMap<String, GameEnvironment>,
+) -> Result<(), ResolveError> {
+    for (name, environment) in environments {
+        if environment.after_eet_import.is_some()
+            && !solution.selected.iter().any(|(key, index)| {
+                key.environment == *name
+                    && release(registry, key, *index).install.phase == iepm_core::Phase::EetImport
+            })
+        {
+            return Err(ResolveError::MissingEetImport {
+                environment: name.clone(),
+            });
+        }
+    }
+    Ok(())
+}
+
 fn validate_conflicts(
     solution: &Solution,
     registry: &Registry,
@@ -775,9 +810,9 @@ fn validate_conflicts(
         let selected_release = release(registry, key, *index);
         for relationship in &selected_release.relationships {
             if relationship.kind != RelationshipKind::Conflicts
-                || !relationship
-                    .when
-                    .matches_game(&environments[&key.environment].target)
+                || !relationship.when.matches_game(
+                    environments[&key.environment].active_target(selected_release.install.phase),
+                )
             {
                 continue;
             }
@@ -877,12 +912,15 @@ fn order(
         for relationship in &release.relationships {
             if !relationship
                 .when
-                .matches_game(&environments[&key.environment].target)
+                .matches_game(environments[&key.environment].active_target(release.install.phase))
             {
                 continue;
             }
             let other = Key {
-                environment: key.environment.clone(),
+                environment: relationship
+                    .environment
+                    .clone()
+                    .unwrap_or_else(|| key.environment.clone()),
                 package: canonical_package(registry, &relationship.package)?,
             };
             if !selected.contains(&other) {
@@ -968,6 +1006,7 @@ mod tests {
             "target".to_owned(),
             GameEnvironment {
                 target: "eet".to_owned(),
+                after_eet_import: None,
                 version: Some("2.6.6".to_owned()),
                 fingerprint: Some(GameFingerprint {
                     profile: "core-v1".to_owned(),
@@ -1500,5 +1539,32 @@ mod tests {
         assert!(lock.execution.iter().any(|node| {
             node.id == "eet-target::eet" && node.predecessors == ["bgee-source::dlc-merger"]
         }));
+    }
+
+    #[test]
+    fn minimal_eet_fixture_transitions_bg2ee_to_eet_and_is_executable() {
+        let root = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
+        let text = std::fs::read_to_string(root.join("examples/eet-minimal/modpack.yaml")).unwrap();
+        let fixture: Manifest = serde_yaml::from_str(&text).unwrap();
+        let registry = iepm_registry::load(&root.join("registry")).unwrap();
+        let lock = resolve(&fixture, &registry, "fixture", toolchain()).unwrap();
+        assert_eq!(lock.execution_readiness, ExecutionReadiness::Executable);
+        assert_eq!(
+            lock.environments["eet-target"].after_eet_import.as_deref(),
+            Some("eet")
+        );
+        assert_eq!(
+            lock.execution
+                .iter()
+                .map(|node| node.id.as_str())
+                .collect::<Vec<_>>(),
+            vec![
+                "bgee-source::dlc-merger",
+                "bgee-source::ee-fixpack",
+                "eet-target::ee-fixpack",
+                "eet-target::eet",
+                "eet-target::eet-end",
+            ]
+        );
     }
 }

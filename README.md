@@ -68,6 +68,13 @@ It accepts only schema-3 `executable` lockfiles and renders the intended
 materialization and WeiDU actions. It never fetches, starts a process, or
 changes a game tree.
 
+The smallest executable EET route fixture is available at
+`examples/eet-minimal/modpack.yaml`. It uses a BG2EE target workspace with
+`after_eet_import: eet`: preparation and EET import run against BG2EE, while
+EET_End runs against the transformed EET result. Its fingerprints are fixture
+values, so it is for plan verification only—not authorization to install into
+a real game directory.
+
 An environment may declare an ordered `baseline` of already-installed WeiDU
 log entries. `plan` renders that as a verify-only preflight and refuses to
 schedule a matching component for installation. EET's copied

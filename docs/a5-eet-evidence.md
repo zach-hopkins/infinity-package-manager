@@ -45,3 +45,20 @@ Its execution route is `EET/EET.tp2`, component `0`, English language index
 `0`, and a toolchain launcher. This establishes route mechanics only. The
 complete example stack remains analysis-only until every selected package has
 its own verified artifact and release-specific selectors.
+
+## Minimal executable route fixture
+
+`examples/eet-minimal/modpack.yaml` describes the observed five-package base:
+
+```text
+BGEE: DLC Merger → EE Fixpack
+BG2EE: EE Fixpack → EET import → EET_End (now running against EET)
+```
+
+The EET workspace begins as `bg2ee` and declares `after_eet_import: eet`.
+This is a lifecycle transition, not an assertion that EE Fixpack supports EET:
+its TP2 explicitly rejects EET, while EET_End explicitly requires EET core.
+The registry records local-archive-verified content identities for DLC Merger
+v2.1, EE Fixpack Beta 2, EET v14.1, and EET_End v14.1. The fixture's game
+fingerprints are synthetic test values and must be replaced by measured
+disposable-workspace fingerprints before any future execution.

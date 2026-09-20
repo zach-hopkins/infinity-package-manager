@@ -18,11 +18,16 @@ A5 must preflight and reject it before filesystem mutation. Portable lockfiles
 refer to named environments rather than local absolute game paths.
 
 EET is a platform transform rather than an ordinary content package. A schema-2
-plan names at least a BGEE/SoD source environment and an EET target
-environment. EET import can depend on source-environment work such as DLC
-Merger while native EET packages execute in the target. The phase vocabulary is
-`preprocess`, `bgee`, `eet-import`, `eet`, `eet-end`, and `post-eet-end`; it is
-not a substitute for graph edges or cross-environment inputs.
+plan names at least a BGEE/SoD source environment and a BG2EE target workspace.
+When the target declares `after_eet_import: eet`, packages through the
+`eet-import` phase execute against BG2EE; later phases execute against the
+transformed EET workspace with the same portable environment name. This allows
+pre-EET packages such as EE Fixpack to retain their true BG2EE compatibility
+without pretending they can run after EET. EET import can depend on
+source-environment work such as DLC Merger while native EET packages execute
+in the transformed target. The phase vocabulary is `preprocess`, `bgee`,
+`eet-import`, `eet`, `eet-end`, and `post-eet-end`; it is not a substitute for
+graph edges or cross-environment inputs.
 
 Capability conflicts are evaluated for selected components, rather than treating
 entire packages as mutually exclusive. For example, independent Tactics Remix

@@ -1,0 +1,42 @@
+schema: 2
+
+# This is a non-mutating A5 route fixture. The fingerprints are fixture values,
+# not a substitute for measuring disposable game workspaces at execution time.
+environments:
+  bgee-source:
+    target: bgee
+    version: "2.6.6"
+    platform: windows
+    language: English
+    fingerprint:
+      profile: fixture-v1
+      value: clean-bgee-sod-2.6.6
+  eet-target:
+    # EET executes against BG2EE, then turns this same named workspace into EET.
+    target: bg2ee
+    after_eet_import: eet
+    version: "2.6.6"
+    platform: windows
+    language: English
+    fingerprint:
+      profile: fixture-v1
+      value: clean-bg2ee-2.6.6
+
+mods:
+  - package: dlc-merger
+    environment: bgee-source
+    components: [merge-sod]
+  - package: ee-fixpack
+    environment: bgee-source
+    components: [core-fixes]
+  - package: ee-fixpack
+    environment: eet-target
+    components: [core-fixes]
+  - package: eet
+    environment: eet-target
+    components: [core]
+    installer_inputs:
+      source-environment: bgee-source
+  - package: eet-end
+    environment: eet-target
+    components: [standard]

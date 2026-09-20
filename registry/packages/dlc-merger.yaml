@@ -1,11 +1,41 @@
 schema: 2
 package: dlc-merger
 releases:
-  - version: "1.3"
-    release_id: "legacy-1.3"
+  - version: "2.1"
+    release_id: "dlc-merger-2.1-win32"
+    artifacts:
+      - url: https://github.com/Argent77/A7-DlcMerger/releases/download/v2.1/win-32bit-DlcMerger-v2.1.zip
+        sha256: 16b57b32662c1ac1e6d345afaf8669e01cf26eeafc5461000757edf33447e2eb
+        platforms: [windows]
     compatibility:
       games: [bgee]
     install:
       phase: preprocess
-    provenance: unverified
-    components: []
+    provenance: derived
+    installers:
+      - tp2: DlcMerger/DlcMerger.tp2
+        launcher: toolchain
+        languages:
+          - id: 0
+            name: English
+          - id: 1
+            name: Deutsch
+          - id: 2
+            name: Brazilian Portuguese (Translation by Felipe)
+          - id: 3
+            name: Spanish (Translation by ElGamerViejuno)
+          - id: 4
+            name: Simplified Chinese
+          - id: 5
+            name: French (Translation by Deratiseur)
+    components:
+      - id: merge-sod
+        weidu:
+          tp2: DlcMerger/DlcMerger.tp2
+          label: A7-DLCMERGER-MERGE_SOD
+          number: 1
+      - id: merge-all-available
+        weidu:
+          tp2: DlcMerger/DlcMerger.tp2
+          label: A7-DLCMERGER-MERGE_ALL_DLCS
+          number: 3

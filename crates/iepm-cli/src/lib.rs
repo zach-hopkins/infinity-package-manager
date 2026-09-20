@@ -62,7 +62,8 @@ pub fn render_plan(lockfile: &Lockfile) -> Result<String> {
         output.push(String::new());
         output.push(format!(
             "Environment: {} ({})",
-            node.environment, environment.target
+            node.environment,
+            environment_description(environment, node.phase)
         ));
         if checked_baselines.insert(node.environment.as_str()) && !environment.baseline.is_empty() {
             output.push("  Preflight baseline (verify; do not reinstall):".to_owned());
@@ -126,6 +127,22 @@ pub fn render_plan(lockfile: &Lockfile) -> Result<String> {
         }
     }
     Ok(format!("{}\n", output.join("\n")))
+}
+
+fn environment_description(
+    environment: &iepm_core::GameEnvironment,
+    phase: iepm_core::Phase,
+) -> String {
+    match (
+        environment.after_eet_import.as_deref(),
+        phase > iepm_core::Phase::EetImport,
+    ) {
+        (Some(result), true) => format!("{result}; transformed from {}", environment.target),
+        (Some(result), false) if phase == iepm_core::Phase::EetImport => {
+            format!("{}; transforms to {result}", environment.target)
+        }
+        _ => environment.target.clone(),
+    }
 }
 
 fn render_command(
@@ -348,5 +365,21 @@ mod tests {
         assert!(plan.contains("$IEPM_WEIDU \"EET/EET.tp2\" --force-install 0 --language 0 \"--args-list\" \"sp\" <bound-environment:bgee-source>"));
         assert!(plan.contains("Preflight baseline (verify; do not reinstall):"));
         assert!(!plan.contains("C:\\"));
+    }
+
+    #[test]
+    fn labels_the_active_target_on_each_side_of_eet_import() {
+        let environment: iepm_core::GameEnvironment = serde_json::from_value(serde_json::json!({
+            "target": "bg2ee", "after_eet_import": "eet"
+        }))
+        .unwrap();
+        assert_eq!(
+            environment_description(&environment, iepm_core::Phase::EetImport),
+            "bg2ee; transforms to eet"
+        );
+        assert_eq!(
+            environment_description(&environment, iepm_core::Phase::Eet),
+            "eet; transformed from bg2ee"
+        );
     }
 }

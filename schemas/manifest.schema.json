@@ -39,6 +39,7 @@
       "required": ["target"],
       "properties": {
         "target": { "enum": ["bgee", "bg2ee", "eet"] },
+        "after_eet_import": { "enum": ["bgee", "bg2ee", "eet"] },
         "version": { "type": "string" },
         "fingerprint": {
           "type": "object",

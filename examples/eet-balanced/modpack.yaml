@@ -9,7 +9,9 @@ environments:
     version: "2.6.6"
     platform: windows
   eet-target:
-    target: eet
+    # EET itself executes against this BG2EE workspace, which then becomes EET.
+    target: bg2ee
+    after_eet_import: eet
     version: "2.6.6"
     platform: windows
     language: English

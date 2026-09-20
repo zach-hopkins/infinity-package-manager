@@ -14,7 +14,7 @@ releases:
       source_root: Gibberlings3-EET-20d00c5
       include: [EET]
     compatibility:
-      games: [eet]
+      games: [bg2ee]
     install:
       phase: eet-import
       after: [dlc-merger]
@@ -22,6 +22,11 @@ releases:
     relationships:
       - kind: requires
         package: dlc-merger
+        environment: bgee-source
+      # The minimal EET fixture explicitly prepares source EE Fixpack first.
+      # This is an ordering edge, not a claim that EET requires it universally.
+      - kind: after
+        package: ee-fixpack
         environment: bgee-source
     installers:
       - tp2: EET/EET.tp2

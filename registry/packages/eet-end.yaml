@@ -1,13 +1,46 @@
-schema: 1
+schema: 2
 package: eet-end
 releases:
   - version: "14.1"
+    release_id: "eet-end-14.1"
+    artifacts:
+      - url: https://api.github.com/repos/Gibberlings3/EET/zipball/v14.1
+        sha256: cb1451e7ef341672fcd71ef8aa5edb010134f880e1eb3d398ed42a9ed3d934a7
+        platforms: [windows]
+    materialization:
+      source_root: Gibberlings3-EET-20d00c5
+      include: [EET_end]
     compatibility:
       games: [eet]
     install:
       phase: eet-end
       after: [eet]
-    provenance: unverified
+    provenance: derived
     dependencies:
       - package: eet
-    components: []
+    installers:
+      - tp2: EET_end/EET_end.tp2
+        launcher: toolchain
+        languages:
+          - id: 0
+            name: English
+          - id: 1
+            name: Polski (Polish)
+          - id: 2
+            name: Spanish
+          - id: 3
+            name: French
+          - id: 4
+            name: Czech
+          - id: 5
+            name: Russian
+          - id: 6
+            name: Deutsch (German)
+          - id: 7
+            name: Simplified Chinese
+    components:
+      - id: standard
+        default_selected: true
+        weidu:
+          tp2: EET_end/EET_end.tp2
+          number: 0

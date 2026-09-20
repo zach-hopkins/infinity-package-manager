@@ -13,11 +13,12 @@
 IEPM is a Rust package-management control plane above WeiDU. Product A's A0–A4
 foundation has completed a hostile pre-A5 review and subsequent remediation.
 The project is **yellow-green for constrained A5**. The non-mutating `iepm
-plan`/preflight now has an evidence-backed EET route fixture: it distinguishes
-source-log provenance from target history, supports shared-WeiDU TP2 routes,
-and keeps the EET source path symbolic. The next work is to complete a fully
-described EET stack and validate it in a disposable workspace before allowing
-any game installation.
+plan`/preflight now has an evidence-backed, executable minimal EET route
+fixture: DLC Merger, source/target EE Fixpack, EET import, and EET_End. It
+distinguishes source-log provenance from target history, supports shared-WeiDU
+TP2 routes, and keeps the EET source path symbolic. The next work is manual
+comparison and disposable-workspace validation of that minimal route before
+describing the full mod stack or allowing any game installation.
 
 Manifest/package records use schema 2 and replayable lockfiles use schema 3.
 The resolver still reads legacy schema-1 manifests and registry records as a
@@ -67,6 +68,13 @@ Execution nodes identify one package in one environment. Graph edges express
 real ordering, including cross-environment dependencies. Phases are hard
 barriers only within an environment; they are not a global substitute for a
 build graph.
+
+EET's target workspace changes identity in place. Its initial target is
+`bg2ee`; an environment that declares `after_eet_import: eet` runs packages
+through the `eet-import` phase against BG2EE, then runs later phases against
+EET. This is required by observed EE Fixpack behavior: it validly runs before
+EET on BG2EE and explicitly rejects an already-EET game. A declared result
+without an `eet-import` node is an invalid plan.
 
 ### Identity
 
@@ -195,11 +203,11 @@ manifest → registry → resolver → lockfile → verified artifacts
 - **A0–A4:** v2 schemas, registry loading/validation, complete resolution,
   replayable lockfile, and verified artifact preparation.
 - **A5:** non-mutating `iepm plan`/preflight is complete; next are trusted
-  registry fixtures, manual-plan comparison, disposable-workspace WeiDU
-  execution, process supervision, logs, cancellation/failure behavior, and
-  EET multi-root workflow. `docs/a5-eet-evidence.md` records the first
-  evidence-backed EET command/baseline fixture; it is not yet a full-stack
-  execution authorization.
+  manual-plan comparison, disposable-workspace WeiDU execution, process
+  supervision, logs, cancellation/failure behavior, and EET multi-root
+  workflow. `examples/eet-minimal` is an executable but non-mutating route
+  fixture; `docs/a5-eet-evidence.md` records its evidence. Neither authorizes
+  an installation outside a disposable workspace.
 - **A6:** TP2-assisted registry ingestion, release drift review, and
   conservative structural inheritance.
 - **A7:** user-facing CLI ergonomics such as search, add, verify, and install.
