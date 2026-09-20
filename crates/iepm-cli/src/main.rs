@@ -24,6 +24,12 @@ enum Command {
         #[arg(long, help = "Exact WeiDU version that will execute this lockfile")]
         weidu_version: Option<String>,
     },
+    Fetch {
+        #[arg(long, default_value = "modpack.lock.json")]
+        lockfile: PathBuf,
+        #[arg(long, default_value = ".iepm-cache")]
+        cache: PathBuf,
+    },
 }
 
 fn main() -> Result<()> {
@@ -57,6 +63,23 @@ fn main() -> Result<()> {
                 lockfile.packages.len(),
                 output.display()
             );
+        }
+        Command::Fetch { lockfile, cache } => {
+            let lockfile_text = std::fs::read_to_string(&lockfile)
+                .with_context(|| format!("could not read {}", lockfile.display()))?;
+            let lockfile: iepm_core::Lockfile = serde_json::from_str(&lockfile_text)
+                .with_context(|| format!("could not parse {}", lockfile.display()))?;
+            let store = iepm_artifacts::ArtifactStore::new(&cache)
+                .with_context(|| format!("could not initialize cache {}", cache.display()))?;
+            let prepared = store.prepare_lockfile(&lockfile)?;
+            for artifact in &prepared {
+                println!(
+                    "prepared {}: {}",
+                    artifact.package,
+                    artifact.extracted.display()
+                );
+            }
+            println!("prepared {} artifact(s)", prepared.len());
         }
     }
     Ok(())

@@ -78,6 +78,25 @@ pub struct Release {
 pub struct Artifact {
     pub url: String,
     pub sha256: String,
+    #[serde(default)]
+    pub format: ArchiveFormat,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub platforms: Vec<ArtifactPlatform>,
+}
+
+#[derive(Debug, Clone, Copy, Default, Deserialize, Serialize, PartialEq, Eq)]
+#[serde(rename_all = "kebab-case")]
+pub enum ArchiveFormat {
+    #[default]
+    Zip,
+}
+
+#[derive(Debug, Clone, Copy, Deserialize, Serialize, PartialEq, Eq)]
+#[serde(rename_all = "kebab-case")]
+pub enum ArtifactPlatform {
+    Windows,
+    Linux,
+    Macos,
 }
 
 #[derive(Debug, Clone, Deserialize)]
@@ -138,7 +157,7 @@ pub enum Provenance {
     Unverified,
 }
 
-#[derive(Debug, Clone, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct Lockfile {
     pub schema: u32,
     pub game: GameTarget,
@@ -148,23 +167,23 @@ pub struct Lockfile {
     pub install_order: Vec<String>,
 }
 
-#[derive(Debug, Clone, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct Toolchain {
     pub iepm: String,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub weidu: Option<String>,
 }
 
-#[derive(Debug, Clone, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct LockedPackage {
     pub package: String,
     pub version: String,
     pub phase: Phase,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub artifact: Option<Artifact>,
-    #[serde(skip_serializing_if = "Vec::is_empty")]
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub components: Vec<String>,
-    #[serde(skip_serializing_if = "Vec::is_empty")]
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub dependencies: Vec<Dependency>,
     pub provenance: Provenance,
 }

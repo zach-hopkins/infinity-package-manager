@@ -3,6 +3,7 @@ members = [
   "crates/iepm-core",
   "crates/iepm-registry",
   "crates/iepm-resolver",
+  "crates/iepm-artifacts",
   "crates/iepm-cli",
 ]
 resolver = "2"
@@ -20,5 +21,8 @@ serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 serde_yaml = "0.9"
 semver = "1.0"
+reqwest = { version = "0.12", default-features = false, features = ["blocking", "rustls-tls"] }
+sha2 = "0.10"
 thiserror = "2.0"
 walkdir = "2.5"
+zip = { version = "2.2", default-features = false, features = ["deflate"] }

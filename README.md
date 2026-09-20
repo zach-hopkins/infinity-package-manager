@@ -34,9 +34,10 @@ The repository contains the Product A foundation:
 
 The resolver supports SemVer requirements for package releases and stable,
 symbolic component selection. Its lockfiles preserve the resolved graph,
-registry revision, game data, artifacts when known, and toolchain identity. The
-next milestones are artifact verification and WeiDU execution. No GUI or
-semantic compiler is in scope yet.
+registry revision, game data, artifacts when known, and toolchain identity.
+The `fetch` command downloads HTTPS ZIP artifacts into a content-addressed
+cache, verifies SHA-256 values, and safely extracts them. The next milestone is
+WeiDU execution. No GUI or semantic compiler is in scope yet.
 
 For example, a manifest can select a version range and symbolic component IDs:
 
@@ -52,6 +53,16 @@ The optional `version` field uses [SemVer requirement syntax](https://docs.rs/se
 Pass `--weidu-version` to record the exact executor expected for a resolved
 installation. If the registry has not yet established an artifact or game
 fingerprint, IEPM leaves it absent instead of fabricating a claim.
+
+To prepare the resolved artifacts for a lockfile:
+
+```text
+cargo run -p iepm -- fetch --lockfile modpack.lock.json --cache .iepm-cache
+```
+
+Artifact URLs must use HTTPS. ZIP extraction rejects unsafe paths and enforces
+an 8 GiB uncompressed-size limit; registries may restrict an artifact to
+`windows`, `linux`, or `macos`.
 
 ## Try it
 

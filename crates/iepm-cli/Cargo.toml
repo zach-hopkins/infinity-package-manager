@@ -11,5 +11,6 @@ clap.workspace = true
 iepm-core = { path = "../iepm-core" }
 iepm-registry = { path = "../iepm-registry" }
 iepm-resolver = { path = "../iepm-resolver" }
+iepm-artifacts = { path = "../iepm-artifacts" }
 serde_json.workspace = true
 serde_yaml.workspace = true

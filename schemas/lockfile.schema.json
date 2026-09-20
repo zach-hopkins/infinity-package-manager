@@ -40,7 +40,9 @@
             "required": ["url", "sha256"],
             "properties": {
               "url": { "type": "string", "format": "uri" },
-              "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+              "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+              "format": { "enum": ["zip"] },
+              "platforms": { "type": "array", "items": { "enum": ["windows", "linux", "macos"] } }
             },
             "additionalProperties": false
           },

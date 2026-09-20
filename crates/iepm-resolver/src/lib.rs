@@ -508,6 +508,8 @@ mod tests {
         package.releases[0].artifact = Some(Artifact {
             url: "https://example.invalid/package-1.0.zip".to_owned(),
             sha256: "a".repeat(64),
+            format: Default::default(),
+            platforms: vec![],
         });
         package.releases[0].dependencies = vec![
             Dependency {

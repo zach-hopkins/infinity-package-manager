@@ -7,7 +7,7 @@
 - [x] A2 (initial): deterministic graph validation and ordering
 - [x] A2: release-specific version constraints and symbolic component selection
 - [x] A3: complete lockfile provenance, toolchain, and fingerprints
-- [ ] A4: artifact download, cache, extraction, and SHA-256 verification
+- [x] A4: artifact download, cache, extraction, and SHA-256 verification
 - [ ] A5: ordered WeiDU execution with EET platform phases
 - [ ] A6: TP2-assisted registry ingestion and release-drift review
 - [ ] A7: user-facing search/add/verify CLI polish

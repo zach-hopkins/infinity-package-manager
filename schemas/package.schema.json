@@ -15,7 +15,7 @@
         "required": ["version", "compatibility", "install", "provenance"],
         "properties": {
           "version": { "type": "string" },
-          "artifact": { "type": "object", "required": ["url", "sha256"], "properties": { "url": { "type": "string", "format": "uri" }, "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" } } },
+          "artifact": { "type": "object", "required": ["url", "sha256"], "properties": { "url": { "type": "string", "format": "uri" }, "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }, "format": { "enum": ["zip"], "default": "zip" }, "platforms": { "type": "array", "items": { "enum": ["windows", "linux", "macos"] }, "uniqueItems": true } }, "additionalProperties": false },
           "compatibility": { "type": "object", "required": ["games"], "properties": { "games": { "type": "array", "items": { "enum": ["bgee", "bg2ee", "eet"] } } } },
           "install": { "type": "object", "required": ["phase"], "properties": { "phase": { "enum": ["preprocess", "bgee", "eet-import", "eet", "eet-end", "post-eet-end"] }, "before": { "type": "array", "items": { "type": "string" } }, "after": { "type": "array", "items": { "type": "string" } } } },
           "provenance": { "enum": ["declared", "derived", "verified", "community", "unverified"] },
