@@ -44,13 +44,12 @@ pub fn resolve(
         );
     }
 
-    let mut cursor = 0;
-    while cursor < requested.len() {
-        let package = requested
-            .keys()
-            .nth(cursor)
-            .expect("cursor is in range")
-            .clone();
+    let mut pending = requested.keys().cloned().collect::<Vec<_>>();
+    let mut expanded = BTreeSet::new();
+    while let Some(package) = pending.pop() {
+        if !expanded.insert(package.clone()) {
+            continue;
+        }
         let record = registry
             .get(&package)
             .ok_or_else(|| ResolveError::MissingPackage(package.clone()))?;
@@ -61,9 +60,11 @@ pub fn resolve(
             }
         })?;
         for dependency in &release.dependencies {
-            requested.entry(dependency.package.clone()).or_default();
+            if !requested.contains_key(&dependency.package) {
+                requested.insert(dependency.package.clone(), Vec::new());
+                pending.push(dependency.package.clone());
+            }
         }
-        cursor += 1;
     }
 
     let mut selections = Vec::new();
