@@ -1,4 +1,6 @@
-use iepm_core::{Component, LockedPackage, Lockfile, Manifest, PackageRecord, Registry, Release};
+use iepm_core::{
+    Component, LockedPackage, Lockfile, Manifest, PackageRecord, Registry, Release, Toolchain,
+};
 use semver::{Version, VersionReq};
 use std::collections::{BTreeMap, BTreeSet};
 use thiserror::Error;
@@ -63,6 +65,7 @@ pub fn resolve(
     manifest: &Manifest,
     registry: &Registry,
     registry_revision: &str,
+    toolchain: Toolchain,
 ) -> Result<Lockfile, ResolveError> {
     if manifest.schema != 1 {
         return Err(ResolveError::Schema(manifest.schema));
@@ -120,12 +123,9 @@ pub fn resolve(
             package: selection.package.to_owned(),
             version: selection.release.version.clone(),
             phase: selection.release.install.phase,
-            artifact_sha256: selection
-                .release
-                .artifact
-                .as_ref()
-                .map(|artifact| artifact.sha256.clone()),
+            artifact: selection.release.artifact.clone(),
             components: selection.components,
+            dependencies: selection.release.dependencies.clone(),
             provenance: selection.release.provenance,
         })
         .collect();
@@ -134,6 +134,7 @@ pub fn resolve(
         schema: 1,
         game: manifest.game.clone(),
         registry_revision: registry_revision.to_owned(),
+        toolchain,
         packages: selected,
         install_order: order,
     })
@@ -328,8 +329,8 @@ fn order(selections: &[Selection<'_>]) -> Result<Vec<String>, ResolveError> {
 mod tests {
     use super::*;
     use iepm_core::{
-        Compatibility, Dependency, GameTarget, Install, Manifest, PackageRecord, Phase, Provenance,
-        RequestedMod,
+        Artifact, Compatibility, Dependency, GameTarget, Install, Manifest, PackageRecord, Phase,
+        Provenance, RequestedMod,
     };
     use std::path::PathBuf;
 
@@ -359,6 +360,13 @@ mod tests {
         }
     }
 
+    fn test_toolchain() -> Toolchain {
+        Toolchain {
+            iepm: "test-manager".to_owned(),
+            weidu: Some("24600".to_owned()),
+        }
+    }
+
     #[test]
     fn phases_order_independent_packages() {
         let mut registry = Registry::new();
@@ -377,7 +385,9 @@ mod tests {
             ],
         };
         assert_eq!(
-            resolve(&manifest, &registry, "test").unwrap().install_order,
+            resolve(&manifest, &registry, "test", test_toolchain())
+                .unwrap()
+                .install_order,
             vec!["base", "post"]
         );
     }
@@ -389,7 +399,7 @@ mod tests {
             std::fs::read_to_string(root.join("examples/eet-balanced/modpack.yaml")).unwrap();
         let manifest: Manifest = serde_yaml::from_str(&manifest_text).unwrap();
         let registry = iepm_registry::load(&root.join("registry")).unwrap();
-        let lockfile = resolve(&manifest, &registry, "fixture").unwrap();
+        let lockfile = resolve(&manifest, &registry, "fixture", test_toolchain()).unwrap();
         assert_eq!(lockfile.packages.len(), 10);
         assert_eq!(
             lockfile.install_order,
@@ -428,7 +438,7 @@ mod tests {
             }],
         };
 
-        let lockfile = resolve(&manifest, &registry, "test").unwrap();
+        let lockfile = resolve(&manifest, &registry, "test", test_toolchain()).unwrap();
         assert_eq!(lockfile.packages[0].version, "1.4");
     }
 
@@ -455,7 +465,7 @@ mod tests {
             mods: vec![RequestedMod::Package("package".to_owned())],
         };
 
-        let lockfile = resolve(&manifest, &registry, "test").unwrap();
+        let lockfile = resolve(&manifest, &registry, "test", test_toolchain()).unwrap();
         assert!(
             lockfile
                 .packages
@@ -483,11 +493,95 @@ mod tests {
         };
 
         assert_eq!(
-            resolve(&manifest, &registry, "test").unwrap_err(),
+            resolve(&manifest, &registry, "test", test_toolchain()).unwrap_err(),
             ResolveError::InvalidVersionRequirement {
                 package: "package".to_owned(),
                 requirement: "not-a-requirement".to_owned(),
             }
+        );
+    }
+
+    #[test]
+    fn lockfile_preserves_artifact_edges_and_toolchain_identity() {
+        let mut registry = Registry::new();
+        let mut package = record("package", Phase::Eet);
+        package.releases[0].artifact = Some(Artifact {
+            url: "https://example.invalid/package-1.0.zip".to_owned(),
+            sha256: "a".repeat(64),
+        });
+        package.releases[0].dependencies = vec![
+            Dependency {
+                package: "support".to_owned(),
+                version: Some("=1.0".to_owned()),
+                components: vec!["required-component".to_owned()],
+            },
+            Dependency {
+                package: "unconstrained".to_owned(),
+                version: None,
+                components: vec![],
+            },
+        ];
+        let mut support = record("support", Phase::Eet);
+        support.releases[0].components = vec![Component {
+            id: "required-component".to_owned(),
+            provides: vec![],
+        }];
+        registry.insert("package".to_owned(), package);
+        registry.insert("support".to_owned(), support);
+        registry.insert(
+            "unconstrained".to_owned(),
+            record("unconstrained", Phase::Eet),
+        );
+        let manifest = Manifest {
+            schema: 1,
+            game: GameTarget {
+                target: "eet".to_owned(),
+                version: Some("2.6.6".to_owned()),
+                fingerprint: Some("sha256:game-fixture".to_owned()),
+            },
+            mods: vec![RequestedMod::Package("package".to_owned())],
+        };
+
+        let lockfile = resolve(&manifest, &registry, "registry-fixture", test_toolchain()).unwrap();
+        let package = lockfile
+            .packages
+            .iter()
+            .find(|package| package.package == "package")
+            .unwrap();
+        assert_eq!(lockfile.registry_revision, "registry-fixture");
+        assert_eq!(lockfile.toolchain.iepm, "test-manager");
+        assert_eq!(lockfile.toolchain.weidu.as_deref(), Some("24600"));
+        assert_eq!(
+            lockfile.game.fingerprint.as_deref(),
+            Some("sha256:game-fixture")
+        );
+        assert_eq!(
+            package
+                .artifact
+                .as_ref()
+                .map(|artifact| artifact.url.as_str()),
+            Some("https://example.invalid/package-1.0.zip")
+        );
+        assert_eq!(package.dependencies[0].package, "support");
+        assert_eq!(package.dependencies[0].components, ["required-component"]);
+
+        let serialized = serde_json::to_value(lockfile).unwrap();
+        assert_eq!(serialized["toolchain"]["iepm"], "test-manager");
+        let serialized_package = serialized["packages"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .find(|package| package["package"] == "package")
+            .unwrap();
+        assert!(
+            serialized_package["dependencies"][1]
+                .get("version")
+                .is_none()
+        );
+        assert!(
+            serialized_package["dependencies"][1]
+                .get("components")
+                .is_none()
         );
     }
 }

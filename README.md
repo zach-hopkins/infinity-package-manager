@@ -33,9 +33,10 @@ The repository contains the Product A foundation:
 - a fixture for the planned conservative EET stack
 
 The resolver supports SemVer requirements for package releases and stable,
-symbolic component selection. It always records the exact selected release in
-the lockfile. The next milestones are complete lockfile provenance, artifact
-verification, and WeiDU execution. No GUI or semantic compiler is in scope yet.
+symbolic component selection. Its lockfiles preserve the resolved graph,
+registry revision, game data, artifacts when known, and toolchain identity. The
+next milestones are artifact verification and WeiDU execution. No GUI or
+semantic compiler is in scope yet.
 
 For example, a manifest can select a version range and symbolic component IDs:
 
@@ -47,6 +48,10 @@ mods:
 ```
 
 The optional `version` field uses [SemVer requirement syntax](https://docs.rs/semver/latest/semver/struct.VersionReq.html). Use `=8.2` for an exact release.
+
+Pass `--weidu-version` to record the exact executor expected for a resolved
+installation. If the registry has not yet established an artifact or game
+fingerprint, IEPM leaves it absent instead of fabricating a claim.
 
 ## Try it
 

@@ -1,6 +1,6 @@
 use anyhow::{Context, Result};
 use clap::{Parser, Subcommand};
-use iepm_core::Manifest;
+use iepm_core::{Manifest, Toolchain};
 use std::path::PathBuf;
 
 #[derive(Parser)]
@@ -21,6 +21,8 @@ enum Command {
         output: PathBuf,
         #[arg(long, default_value = "working-tree")]
         registry_revision: String,
+        #[arg(long, help = "Exact WeiDU version that will execute this lockfile")]
+        weidu_version: Option<String>,
     },
 }
 
@@ -31,13 +33,22 @@ fn main() -> Result<()> {
             manifest,
             output,
             registry_revision,
+            weidu_version,
         } => {
             let manifest_text = std::fs::read_to_string(&manifest)
                 .with_context(|| format!("could not read {}", manifest.display()))?;
             let manifest: Manifest = serde_yaml::from_str(&manifest_text)
                 .with_context(|| format!("could not parse {}", manifest.display()))?;
             let registry = iepm_registry::load(&registry)?;
-            let lockfile = iepm_resolver::resolve(&manifest, &registry, &registry_revision)?;
+            let lockfile = iepm_resolver::resolve(
+                &manifest,
+                &registry,
+                &registry_revision,
+                Toolchain {
+                    iepm: env!("CARGO_PKG_VERSION").to_owned(),
+                    weidu: weidu_version,
+                },
+            )?;
             let json = serde_json::to_string_pretty(&lockfile)?;
             std::fs::write(&output, format!("{json}\n"))
                 .with_context(|| format!("could not write {}", output.display()))?;

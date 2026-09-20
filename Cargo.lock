@@ -159,6 +159,7 @@ dependencies = [
  "iepm-core",
  "iepm-registry",
  "semver",
+ "serde_json",
  "serde_yaml",
  "thiserror",
 ]

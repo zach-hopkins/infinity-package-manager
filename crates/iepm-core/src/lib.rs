@@ -74,7 +74,7 @@ pub struct Release {
     pub components: Vec<Component>,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct Artifact {
     pub url: String,
     pub sha256: String,
@@ -105,12 +105,12 @@ pub enum Phase {
     PostEetEnd,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct Dependency {
     pub package: String,
-    #[serde(default)]
+    #[serde(default, skip_serializing_if = "Option::is_none")]
     pub version: Option<String>,
-    #[serde(default)]
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub components: Vec<String>,
 }
 
@@ -143,8 +143,16 @@ pub struct Lockfile {
     pub schema: u32,
     pub game: GameTarget,
     pub registry_revision: String,
+    pub toolchain: Toolchain,
     pub packages: Vec<LockedPackage>,
     pub install_order: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize)]
+pub struct Toolchain {
+    pub iepm: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub weidu: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -153,9 +161,11 @@ pub struct LockedPackage {
     pub version: String,
     pub phase: Phase,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub artifact_sha256: Option<String>,
+    pub artifact: Option<Artifact>,
     #[serde(skip_serializing_if = "Vec::is_empty")]
     pub components: Vec<String>,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub dependencies: Vec<Dependency>,
     pub provenance: Provenance,
 }
 
