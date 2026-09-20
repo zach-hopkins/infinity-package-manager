@@ -41,7 +41,8 @@ The repository contains the Product A foundation:
 Manifest/package records use schema 2; replayable lockfiles use schema 3. The
 current contracts describe named game environments, opaque release IDs,
 release-specific WeiDU component selectors, installer language/inputs,
-materialization metadata, explicit execution graphs, and A5 readiness.
+preflight baselines, materialization metadata, explicit execution graphs, and
+A5 readiness.
 The resolver reads legacy schema-1 manifests and registry records as a
 migration convenience, but always emits schema-3 lockfiles.
 
@@ -66,6 +67,12 @@ cargo run -p iepm -- plan --lockfile modpack.lock.json
 It accepts only schema-3 `executable` lockfiles and renders the intended
 materialization and WeiDU actions. It never fetches, starts a process, or
 changes a game tree.
+
+An environment may declare an ordered `baseline` of already-installed WeiDU
+log entries. `plan` renders that as a verify-only preflight and refuses to
+schedule a matching component for installation. EET's copied
+`WeiDU-BGEE.log` remains source-history provenance, not a second target plan;
+see [the EET execution evidence](docs/a5-eet-evidence.md).
 
 For example, a manifest can select a version range and symbolic component IDs:
 

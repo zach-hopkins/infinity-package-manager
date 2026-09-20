@@ -1,21 +1,61 @@
 schema: 2
 package: eet
 releases:
+  # The archive identity and TP2 route were derived from the observed v14.1
+  # package. This establishes only execution mechanics, not a blanket
+  # compatibility claim for arbitrary source-side mod stacks.
   - version: "14.1"
-    release_id: "legacy-14.1"
+    release_id: "eet-14.1"
+    artifacts:
+      - url: https://api.github.com/repos/Gibberlings3/EET/zipball/v14.1
+        sha256: cb1451e7ef341672fcd71ef8aa5edb010134f880e1eb3d398ed42a9ed3d934a7
+        platforms: [windows]
+    materialization:
+      source_root: Gibberlings3-EET-20d00c5
+      include: [EET]
     compatibility:
       games: [eet]
     install:
       phase: eet-import
       after: [dlc-merger]
-    provenance: unverified
+    provenance: derived
     relationships:
       - kind: requires
         package: dlc-merger
         environment: bgee-source
     installers:
       - tp2: EET/EET.tp2
+        launcher: toolchain
+        languages:
+          - id: 0
+            name: English
+          - id: 1
+            name: Polski (Polish)
+          - id: 2
+            name: Spanish
+          - id: 3
+            name: French
+          - id: 4
+            name: Czech
+          - id: 5
+            name: Russian
+          - id: 6
+            name: Deutsch (German)
+          - id: 7
+            name: Simplified Chinese
         inputs:
           - name: source-environment
             required: true
-    components: []
+        arguments:
+          - kind: literal
+            value: --args-list
+          - kind: literal
+            value: sp
+          - kind: environment-input
+            input: source-environment
+    components:
+      - id: core
+        default_selected: true
+        weidu:
+          tp2: EET/EET.tp2
+          number: 0

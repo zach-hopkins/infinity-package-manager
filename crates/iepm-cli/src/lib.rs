@@ -1,6 +1,9 @@
 use anyhow::{Result, bail};
-use iepm_core::{ExecutionReadiness, LockedPackage, Lockfile, WeiDUComponent};
-use std::collections::BTreeMap;
+use iepm_core::{
+    ExecutionReadiness, Installer, InstallerArgument, InstallerLauncher, LockedPackage, Lockfile,
+    WeiDUComponent,
+};
+use std::collections::{BTreeMap, BTreeSet};
 
 /// Render the first A5 deliverable: a non-mutating, auditable execution plan.
 /// It never fetches, materializes, starts a process, or touches a game tree.
@@ -47,6 +50,7 @@ pub fn render_plan(lockfile: &Lockfile) -> Result<String> {
             .to_owned(),
     ];
     let mut action = 1_usize;
+    let mut checked_baselines = BTreeSet::new();
     for node in &lockfile.execution {
         let package = packages
             .get(&(node.environment.as_str(), node.package.as_str()))
@@ -60,6 +64,15 @@ pub fn render_plan(lockfile: &Lockfile) -> Result<String> {
             "Environment: {} ({})",
             node.environment, environment.target
         ));
+        if checked_baselines.insert(node.environment.as_str()) && !environment.baseline.is_empty() {
+            output.push("  Preflight baseline (verify; do not reinstall):".to_owned());
+            for entry in &environment.baseline {
+                output.push(format!(
+                    "    ~{}~ #{} #{}",
+                    entry.tp2, entry.language, entry.component
+                ));
+            }
+        }
         if !node.predecessors.is_empty() {
             output.push(format!("  Requires: {}", node.predecessors.join(", ")));
         }
@@ -82,10 +95,6 @@ pub fn render_plan(lockfile: &Lockfile) -> Result<String> {
                 .iter()
                 .find(|installer| installer.tp2 == tp2)
                 .expect("preflighted installer route");
-            let program = installer
-                .program
-                .as_deref()
-                .ok_or_else(|| anyhow::anyhow!("{tp2} has no executable program"))?;
             let language_id = installer
                 .languages
                 .iter()
@@ -104,8 +113,8 @@ pub fn render_plan(lockfile: &Lockfile) -> Result<String> {
             output.push(format!("{action}. Run WeiDU for {}", package.package));
             output.push(format!("   Installer TP2: {tp2}"));
             output.push(format!(
-                "   Command: \"{program}\" --language {language_id} --force-install {}",
-                numbers.join(" ")
+                "   Command: {}",
+                render_command(installer, package, lockfile, language_id, &numbers)?
             ));
             if !package.installer_inputs.is_empty() {
                 output.push("   Portable inputs:".to_owned());
@@ -117,6 +126,59 @@ pub fn render_plan(lockfile: &Lockfile) -> Result<String> {
         }
     }
     Ok(format!("{}\n", output.join("\n")))
+}
+
+fn render_command(
+    installer: &Installer,
+    package: &LockedPackage,
+    lockfile: &Lockfile,
+    language_id: u32,
+    components: &[String],
+) -> Result<String> {
+    let mut command = match installer.launcher {
+        InstallerLauncher::Bundled => vec![format!(
+            "\"{}\"",
+            installer
+                .program
+                .as_deref()
+                .ok_or_else(|| anyhow::anyhow!("{} has no executable program", installer.tp2))?
+        )],
+        InstallerLauncher::Toolchain => vec!["$IEPM_WEIDU".to_owned(), quote(&installer.tp2)],
+    };
+    for component in components {
+        command.push("--force-install".to_owned());
+        command.push(component.clone());
+    }
+    command.push("--language".to_owned());
+    command.push(language_id.to_string());
+    for argument in &installer.arguments {
+        match argument {
+            InstallerArgument::Literal { value } => command.push(quote(value)),
+            InstallerArgument::EnvironmentInput { input } => {
+                let environment = package.installer_inputs.get(input).ok_or_else(|| {
+                    anyhow::anyhow!(
+                        "{} requires installer input {} for its command",
+                        package.package,
+                        input
+                    )
+                })?;
+                if !lockfile.environments.contains_key(environment) {
+                    bail!(
+                        "{} binds {} to unknown environment {}",
+                        package.package,
+                        input,
+                        environment
+                    );
+                }
+                command.push(format!("<bound-environment:{environment}>"));
+            }
+        }
+    }
+    Ok(command.join(" "))
+}
+
+fn quote(value: &str) -> String {
+    format!("\"{value}\"")
 }
 
 fn artifact_description(package: &LockedPackage) -> Result<String> {
@@ -215,7 +277,7 @@ mod tests {
         let plan = render_plan(&lockfile("executable")).unwrap();
         assert!(plan.contains("IEPM execution plan (non-mutating)"));
         assert!(plan.contains("Materialize fixture@release-1"));
-        assert!(plan.contains("\"setup-fixture.exe\" --language 0 --force-install 0"));
+        assert!(plan.contains("\"setup-fixture.exe\" --force-install 0 --language 0"));
         assert!(plan.contains("No artifact fetches"));
     }
 
@@ -240,5 +302,51 @@ mod tests {
                 .to_string()
                 .contains("re-resolve it to schema 3")
         );
+    }
+
+    #[test]
+    fn renders_a_toolchain_route_and_baseline_without_machine_paths() {
+        let lock: Lockfile = serde_json::from_value(serde_json::json!({
+            "schema": 3,
+            "environments": {
+                "bgee-source": {"target": "bgee"},
+                "eet-target": {
+                    "target": "eet", "language": "English",
+                    "baseline": [{
+                        "tp2": "eefixpack/setup-eefixpack.tp2",
+                        "language": 0,
+                        "component": 0
+                    }]
+                }
+            },
+            "registry_revision": "fixture",
+            "toolchain": {"iepm": "test", "weidu": "24600"},
+            "packages": [{
+                "package": "eet", "release_id": "release-1", "version": "One",
+                "environment": "eet-target", "phase": "eet-import",
+                "artifact": {"url": "https://example.invalid/eet.zip", "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"},
+                "installers": [{
+                    "tp2": "EET/EET.tp2", "launcher": "toolchain",
+                    "languages": [{"id": 0, "name": "English"}],
+                    "inputs": [{"name": "source-environment", "required": true}],
+                    "arguments": [
+                        {"kind": "literal", "value": "--args-list"},
+                        {"kind": "literal", "value": "sp"},
+                        {"kind": "environment-input", "input": "source-environment"}
+                    ]
+                }],
+                "components": [{"id": "core", "weidu": {"tp2": "EET/EET.tp2", "number": 0}}],
+                "language": "English",
+                "installer_inputs": {"source-environment": "bgee-source"},
+                "provenance": "derived"
+            }],
+            "execution": [{"id": "eet-target::eet", "package": "eet", "environment": "eet-target", "phase": "eet-import"}],
+            "execution_readiness": "executable"
+        }))
+        .unwrap();
+        let plan = render_plan(&lock).unwrap();
+        assert!(plan.contains("$IEPM_WEIDU \"EET/EET.tp2\" --force-install 0 --language 0 \"--args-list\" \"sp\" <bound-environment:bgee-source>"));
+        assert!(plan.contains("Preflight baseline (verify; do not reinstall):"));
+        assert!(!plan.contains("C:\\"));
     }
 }

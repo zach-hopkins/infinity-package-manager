@@ -48,7 +48,21 @@
         },
         "platform": { "enum": ["windows", "linux", "macos"] },
         "store": { "type": "string" },
-        "language": { "type": "string" }
+        "language": { "type": "string" },
+        "baseline": {
+          "type": "array",
+          "description": "Ordered WeiDU entries expected to already exist in this environment; these are preflight assertions, not requested installs.",
+          "items": {
+            "type": "object",
+            "required": ["tp2", "language", "component"],
+            "properties": {
+              "tp2": { "type": "string" },
+              "language": { "type": "integer", "minimum": 0 },
+              "component": { "type": "integer", "minimum": 0 }
+            },
+            "additionalProperties": false
+          }
+        }
       },
       "additionalProperties": false
     }

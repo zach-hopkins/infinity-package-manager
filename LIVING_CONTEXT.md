@@ -13,8 +13,11 @@
 IEPM is a Rust package-management control plane above WeiDU. Product A's A0–A4
 foundation has completed a hostile pre-A5 review and subsequent remediation.
 The project is **yellow-green for constrained A5**. The non-mutating `iepm
-plan`/preflight exists; the next work is to validate its output against a real,
-fully described EET stack before allowing any game installation.
+plan`/preflight now has an evidence-backed EET route fixture: it distinguishes
+source-log provenance from target history, supports shared-WeiDU TP2 routes,
+and keeps the EET source path symbolic. The next work is to complete a fully
+described EET stack and validate it in a disposable workspace before allowing
+any game installation.
 
 Manifest/package records use schema 2 and replayable lockfiles use schema 3.
 The resolver still reads legacy schema-1 manifests and registry records as a
@@ -145,6 +148,19 @@ store absolute local game paths, user-profile paths, or secrets in a manifest
 or lockfile. For example, record `source-environment: bgee-source`, then bind
 that name to a local path outside the lockfile.
 
+An environment can also declare an ordered WeiDU `baseline`: components
+expected to be present before IEPM's requested execution graph begins. A
+baseline is a preflight assertion, never an implicit install request. It must
+not be confused with EET's copied `WeiDU-BGEE.log`, which is source provenance
+preserved in the target rather than a target execution queue. Until A5 has an
+explicit verify-existing action, a selected component that duplicates an
+environment baseline is a blocking error rather than a reinstall.
+
+Installers may use either a package-bundled launcher or the pinned shared
+WeiDU toolchain. Required arguments are typed literals or named environment
+bindings, not interpolated shell commands. This distinction is required by
+real packages that ship only a TP2, such as the observed EE Fixpack archive.
+
 Resolution and execution are separate states:
 
 - `analysis-only`: useful resolved graph, but one or more execution facts are
@@ -181,7 +197,9 @@ manifest → registry → resolver → lockfile → verified artifacts
 - **A5:** non-mutating `iepm plan`/preflight is complete; next are trusted
   registry fixtures, manual-plan comparison, disposable-workspace WeiDU
   execution, process supervision, logs, cancellation/failure behavior, and
-  EET multi-root workflow.
+  EET multi-root workflow. `docs/a5-eet-evidence.md` records the first
+  evidence-backed EET command/baseline fixture; it is not yet a full-stack
+  execution authorization.
 - **A6:** TP2-assisted registry ingestion, release drift review, and
   conservative structural inheritance.
 - **A7:** user-facing CLI ergonomics such as search, add, verify, and install.

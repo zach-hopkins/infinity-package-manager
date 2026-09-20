@@ -1,7 +1,7 @@
 use iepm_core::{
     Artifact, Capability, Dependency, ExecutionNode, ExecutionReadiness, GameEnvironment,
-    GameFingerprint, LockedComponent, LockedPackage, Lockfile, Manifest, PackageRecord, Provenance,
-    Registry, RelationshipKind, Release, Toolchain,
+    GameFingerprint, InstallerArgument, InstallerLauncher, LockedComponent, LockedPackage,
+    Lockfile, Manifest, PackageRecord, Provenance, Registry, RelationshipKind, Release, Toolchain,
 };
 use semver::{Version, VersionReq};
 use std::collections::{BTreeMap, BTreeSet, VecDeque};
@@ -269,12 +269,31 @@ pub fn resolve(
                             ));
                         }
                         Some(installer) => {
-                            if installer.program.is_none() {
+                            if installer.launcher == InstallerLauncher::Bundled
+                                && installer.program.is_none()
+                            {
                                 blocking_reasons.insert(format!(
                                     "{} installer {} has no executable program",
                                     key.node_id(),
                                     installer.tp2
                                 ));
+                            }
+                            for argument in &installer.arguments {
+                                if let InstallerArgument::EnvironmentInput { input } = argument {
+                                    let Some(environment) = request.installer_inputs.get(input) else {
+                                        blocking_reasons.insert(format!(
+                                            "{} installer {} requires environment input {}",
+                                            key.node_id(), installer.tp2, input
+                                        ));
+                                        continue;
+                                    };
+                                    if !environments.contains_key(environment) {
+                                        blocking_reasons.insert(format!(
+                                            "{} installer {} binds {} to unknown environment {}",
+                                            key.node_id(), installer.tp2, input, environment
+                                        ));
+                                    }
+                                }
                             }
                             match language.as_deref() {
                                 None => {
@@ -296,7 +315,26 @@ pub fn resolve(
                                         language
                                     ));
                                 }
-                                Some(_) => {}
+                                Some(language) => {
+                                    let language_id = installer
+                                        .languages
+                                        .iter()
+                                        .find(|candidate| candidate.name == language)
+                                        .expect("checked above")
+                                        .id;
+                                    if selector.number.is_some_and(|number| {
+                                        environments[&key.environment].baseline.iter().any(|entry| {
+                                            entry.tp2.eq_ignore_ascii_case(&selector.tp2)
+                                                && entry.language == language_id
+                                                && entry.component == number
+                                        })
+                                    }) {
+                                        blocking_reasons.insert(format!(
+                                            "{} selects {} which is declared in its environment baseline; refusing to reinstall it",
+                                            key.node_id(), component.id
+                                        ));
+                                    }
+                                }
                             }
                         }
                     };
@@ -368,6 +406,7 @@ fn normalized_environments(
             platform: None,
             store: None,
             language: None,
+            baseline: vec![],
         },
     );
     Ok((environments, true))
@@ -937,6 +976,7 @@ mod tests {
                 platform: None,
                 store: None,
                 language: Some("English".to_owned()),
+                baseline: vec![],
             },
         )])
     }
@@ -1092,11 +1132,13 @@ mod tests {
         package.installers.push(iepm_core::Installer {
             tp2: "setup-package.tp2".to_owned(),
             program: Some("setup-package.exe".to_owned()),
+            launcher: Default::default(),
             languages: vec![],
             inputs: vec![iepm_core::InstallerInput {
                 name: "source-environment".to_owned(),
                 required: true,
             }],
+            arguments: vec![],
         });
         registry.insert("package".to_owned(), record("package", vec![package]));
         assert!(matches!(
@@ -1125,11 +1167,13 @@ mod tests {
         package.installers.push(iepm_core::Installer {
             tp2: "mod/setup-package.tp2".to_owned(),
             program: Some("setup-package.exe".to_owned()),
+            launcher: Default::default(),
             languages: vec![iepm_core::InstallerLanguage {
                 id: 0,
                 name: "English".to_owned(),
             }],
             inputs: vec![],
+            arguments: vec![],
         });
         package.components.push(iepm_core::Component {
             id: "main".to_owned(),
@@ -1155,6 +1199,102 @@ mod tests {
         assert_eq!(
             lock.packages[0].installers[0].program.as_deref(),
             Some("setup-package.exe")
+        );
+    }
+
+    #[test]
+    fn accepts_a_shared_toolchain_route_without_a_bundled_launcher() {
+        let mut registry = Registry::new();
+        let mut package = release("1", Phase::Eet);
+        package.artifact = Some(Artifact {
+            url: "https://example.invalid/package.zip".to_owned(),
+            sha256: "a".repeat(64),
+            mirrors: vec![],
+            format: Default::default(),
+            platforms: vec![],
+            architectures: vec![],
+        });
+        package.installers.push(iepm_core::Installer {
+            tp2: "mod/setup-package.tp2".to_owned(),
+            program: None,
+            launcher: InstallerLauncher::Toolchain,
+            languages: vec![iepm_core::InstallerLanguage {
+                id: 0,
+                name: "English".to_owned(),
+            }],
+            inputs: vec![],
+            arguments: vec![],
+        });
+        package.components.push(iepm_core::Component {
+            id: "main".to_owned(),
+            default_selected: true,
+            weidu: Some(iepm_core::WeiDUComponent {
+                tp2: "mod/setup-package.tp2".to_owned(),
+                label: None,
+                number: Some(0),
+                subcomponent: None,
+            }),
+            provides: vec![],
+        });
+        registry.insert("package".to_owned(), record("package", vec![package]));
+        let lock = resolve(
+            &manifest(vec![RequestedMod::Package("package".to_owned())]),
+            &registry,
+            "test",
+            toolchain(),
+        )
+        .unwrap();
+        assert_eq!(lock.execution_readiness, ExecutionReadiness::Executable);
+        assert_eq!(
+            lock.packages[0].installers[0].launcher,
+            InstallerLauncher::Toolchain
+        );
+    }
+
+    #[test]
+    fn baseline_component_cannot_be_reinstalled() {
+        let mut registry = Registry::new();
+        let mut package = release("1", Phase::Eet);
+        package.installers.push(iepm_core::Installer {
+            tp2: "mod/setup-package.tp2".to_owned(),
+            program: Some("setup-package.exe".to_owned()),
+            launcher: InstallerLauncher::Bundled,
+            languages: vec![iepm_core::InstallerLanguage {
+                id: 0,
+                name: "English".to_owned(),
+            }],
+            inputs: vec![],
+            arguments: vec![],
+        });
+        package.components.push(iepm_core::Component {
+            id: "main".to_owned(),
+            default_selected: true,
+            weidu: Some(iepm_core::WeiDUComponent {
+                tp2: "mod/setup-package.tp2".to_owned(),
+                label: None,
+                number: Some(0),
+                subcomponent: None,
+            }),
+            provides: vec![],
+        });
+        registry.insert("package".to_owned(), record("package", vec![package]));
+        let mut manifest = manifest(vec![RequestedMod::Package("package".to_owned())]);
+        manifest
+            .environments
+            .get_mut("target")
+            .unwrap()
+            .baseline
+            .push(iepm_core::WeiDULogEntry {
+                tp2: "MOD/SETUP-PACKAGE.TP2".to_owned(),
+                language: 0,
+                component: 0,
+            });
+        let lock = resolve(&manifest, &registry, "test", toolchain()).unwrap();
+        assert_eq!(lock.execution_readiness, ExecutionReadiness::AnalysisOnly);
+        assert!(
+            lock.blocking_reasons
+                .iter()
+                .any(|reason| reason.contains("refusing to reinstall"))
         );
     }
 

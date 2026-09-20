@@ -35,6 +35,11 @@ pub struct GameEnvironment {
     pub store: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub language: Option<String>,
+    /// Components already present in the clean, named environment. These are
+    /// preflight assertions, not execution nodes: A5 must verify them rather
+    /// than try to install them a second time.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub baseline: Vec<WeiDULogEntry>,
 }
 
 /// The profile is versioned so fingerprint algorithms can change without
@@ -332,6 +337,16 @@ pub struct WeiDUComponent {
     pub subcomponent: Option<String>,
 }
 
+/// A single, ordered entry expected in an environment's WeiDU baseline log.
+/// It intentionally records WeiDU's numeric language and component identity,
+/// rather than a display name that may change between releases.
+#[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq)]
+pub struct WeiDULogEntry {
+    pub tp2: String,
+    pub language: u32,
+    pub component: u32,
+}
+
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct Installer {
     pub tp2: String,
@@ -339,10 +354,35 @@ pub struct Installer {
     /// `setup-example.exe`. It is required for an executable A5 plan.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub program: Option<String>,
+    /// A package may ship a setup launcher, or be invoked by the pinned shared
+    /// WeiDU toolchain against its TP2. The latter is common for extracted
+    /// packages and avoids fabricating a launcher that is not present.
+    #[serde(default)]
+    pub launcher: InstallerLauncher,
     #[serde(default)]
     pub languages: Vec<InstallerLanguage>,
     #[serde(default)]
     pub inputs: Vec<InstallerInput>,
+    /// Typed extra arguments required by this installer. This is deliberately
+    /// not a shell template: only literal tokens and named environment
+    /// bindings are representable.
+    #[serde(default)]
+    pub arguments: Vec<InstallerArgument>,
+}
+
+#[derive(Debug, Clone, Copy, Default, Deserialize, Serialize, PartialEq, Eq)]
+#[serde(rename_all = "kebab-case")]
+pub enum InstallerLauncher {
+    #[default]
+    Bundled,
+    Toolchain,
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq)]
+#[serde(tag = "kind", rename_all = "kebab-case")]
+pub enum InstallerArgument {
+    Literal { value: String },
+    EnvironmentInput { input: String },
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
