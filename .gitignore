@@ -1,0 +1,4 @@
+/target/
+/outputs/
+*.lock.json
+!.github/**/*.lock.json

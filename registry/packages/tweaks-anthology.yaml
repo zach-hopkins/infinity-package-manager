@@ -1,0 +1,12 @@
+schema: 1
+package: tweaks-anthology
+releases:
+  - version: "v10"
+    compatibility:
+      games: [bgee, bg2ee, eet]
+    install:
+      phase: eet
+      after: [eet]
+      before: [eet-end]
+    provenance: unverified
+    components: []

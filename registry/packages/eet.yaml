@@ -1,0 +1,13 @@
+schema: 1
+package: eet
+releases:
+  - version: "14.1"
+    compatibility:
+      games: [eet]
+    install:
+      phase: eet-import
+      after: [dlc-merger]
+    provenance: unverified
+    dependencies:
+      - package: dlc-merger
+    components: []

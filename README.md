@@ -1,0 +1,65 @@
+# Infinity Package Manager
+
+**IEPM** is a standards-first package manager for Infinity Engine mods. It keeps
+[WeiDU](https://www.weidu.org/) as the execution backend while adding a modern,
+reproducible control layer above it.
+
+> WeiDU solved: “How do I safely patch Baldur's Gate?”
+>
+> IEPM aims to solve: “How does an ecosystem of independently authored patches
+> behave like a modern package repository?”
+
+## The four questions
+
+| Layer | Question | Purpose |
+| --- | --- | --- |
+| Manifest | What does the player want? | Small, shareable human intent. |
+| Registry | What releases and components exist? | Versioned ecosystem knowledge, evidence, phases, dependencies, and conflicts. |
+| Lockfile | What exact solution was chosen? | A reproducible resolved build. |
+| Semantic model | What do components mean? | A later enhancement for safe merging and useful conflict explanations. |
+
+Product A is deliberately limited to package management: stable IDs, releases,
+artifacts, compatibility, dependency resolution, capabilities, ordering, and
+reproducible lockfiles. It does not need to understand arbitrary WeiDU programs.
+
+## Current status
+
+The repository contains the Product A foundation:
+
+- YAML package, manifest, and lockfile schemas
+- static, forkable registry records with provenance
+- a Rust registry reader and deterministic resolver prototype
+- dependency, exclusive-capability, phase, and `before`/`after` validation
+- a fixture for the planned conservative EET stack
+
+The next milestones are richer version constraints and component selection,
+then artifact verification and WeiDU execution. No GUI or semantic compiler is
+in scope yet.
+
+## Try it
+
+With Rust 1.85 or newer installed:
+
+```text
+cargo run -p iepm -- resolve \
+  --registry registry \
+  --manifest examples/eet-balanced/modpack.yaml \
+  --output modpack.lock.json
+```
+
+The resulting `modpack.lock.json` is the authoritative resolved build;
+`WeiDU.log` will eventually be an execution receipt, not the lockfile.
+
+## Repository layout
+
+```text
+crates/       Rust reference implementation
+docs/         Architecture and data-model decisions
+schemas/      Language-independent contracts
+registry/     Static package records
+examples/     Reproducible manifest fixtures
+tests/        Resolver fixture coverage
+```
+
+See [ROADMAP.md](ROADMAP.md), [docs/architecture.md](docs/architecture.md), and
+[CONTRIBUTING.md](CONTRIBUTING.md).

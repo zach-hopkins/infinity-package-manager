@@ -1,0 +1,12 @@
+schema: 1
+package: ascension
+releases:
+  - version: "2.0.27"
+    compatibility:
+      games: [bg2ee, eet]
+    install:
+      phase: eet
+      after: [eet]
+      before: [eet-end]
+    provenance: unverified
+    components: []

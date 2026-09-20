@@ -1,0 +1,14 @@
+schema: 1
+package: infinity-ui-plus-plus
+releases:
+  - version: "4.6"
+    compatibility:
+      games: [bg2ee, eet]
+    install:
+      phase: eet
+      after: [eeex]
+      before: [eet-end]
+    provenance: unverified
+    dependencies:
+      - package: eeex
+    components: []

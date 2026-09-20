@@ -1,0 +1,18 @@
+schema: 1
+
+game:
+  target: eet
+  version: "2.6.6"
+
+# This is an intentionally conservative resolver fixture. Versions, artifacts,
+# and selected WeiDU components need verified registry evidence before install.
+mods:
+  - ascension
+  - tweaks-anthology
+  - eeex
+  - infinity-ui-plus-plus
+  - bubbs-spell-menu
+  - hidden-gameplay-options
+  - eet-end
+  - package: tactics-remix
+    components: [tactical-encounters]

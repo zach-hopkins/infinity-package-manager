@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://iepm.dev/schemas/manifest.schema.json",
+  "title": "IEPM manifest",
+  "type": "object",
+  "required": ["schema", "game", "mods"],
+  "properties": {
+    "schema": { "const": 1 },
+    "game": {
+      "type": "object",
+      "required": ["target"],
+      "properties": {
+        "target": { "enum": ["bgee", "bg2ee", "eet"] },
+        "version": { "type": "string" },
+        "fingerprint": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "mods": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          {
+            "type": "object",
+            "required": ["package"],
+            "properties": {
+              "package": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+              "components": { "type": "array", "items": { "type": "string" }, "uniqueItems": true }
+            },
+            "additionalProperties": false
+          }
+        ]
+      }
+    }
+  },
+  "additionalProperties": false
+}

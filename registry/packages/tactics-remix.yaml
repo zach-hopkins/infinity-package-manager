@@ -1,0 +1,17 @@
+schema: 1
+package: tactics-remix
+releases:
+  - version: "8.2"
+    compatibility:
+      games: [bg2ee, eet]
+    install:
+      phase: post-eet-end
+      after: [eet-end]
+    provenance: unverified
+    components:
+      - id: smarter-mages
+        provides:
+          - name: mage-ai
+            exclusive: true
+      - id: tactical-encounters
+        provides: []

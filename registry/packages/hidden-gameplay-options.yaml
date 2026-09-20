@@ -1,0 +1,12 @@
+schema: 1
+package: hidden-gameplay-options
+releases:
+  - version: "1.0"
+    compatibility:
+      games: [bg2ee, eet]
+    install:
+      phase: eet
+      after: [eet]
+      before: [eet-end]
+    provenance: unverified
+    components: []

@@ -1,0 +1,13 @@
+schema: 1
+package: eet-end
+releases:
+  - version: "14.1"
+    compatibility:
+      games: [eet]
+    install:
+      phase: eet-end
+      after: [eet]
+    provenance: unverified
+    dependencies:
+      - package: eet
+    components: []
