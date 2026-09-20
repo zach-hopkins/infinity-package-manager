@@ -1,5 +1,9 @@
 # Foundational guardrails
 
+> This is a compact companion to the authoritative
+> [living project context](../LIVING_CONTEXT.md). Keep the durable rationale
+> and current project state there; retain this page as a focused checklist.
+
 This document records the architecture review decisions that future maintainers
 and coding agents must preserve. It is deliberately a constraint list, not a
 wish list for a larger package manager.

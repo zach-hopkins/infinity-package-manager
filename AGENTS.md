@@ -40,6 +40,5 @@ code; favor small additions that preserve old lockfile meaning.
 - A5 begins with non-mutating plan/preflight output against disposable build
   workspaces. Do not execute against a user's only game installation.
 
-Read [docs/foundation-guardrails.md](docs/foundation-guardrails.md) before
-changing schemas, resolver behavior, registry semantics, artifact handling, or
-the A5 execution boundary.
+Read [LIVING_CONTEXT.md](LIVING_CONTEXT.md) before changing schemas, resolver
+behavior, registry semantics, artifact handling, or the A5 execution boundary.

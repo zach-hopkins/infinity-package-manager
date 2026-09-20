@@ -31,5 +31,5 @@ the exclusive `mage-ai` capability.
 
 Aliases are exact identity normalization. Fork, predecessor, and continuation
 relationships are informational lineage, not automatic package replacement.
-See [foundation guardrails](foundation-guardrails.md) for the project-wide
-growth policy.
+See the [living project context](../LIVING_CONTEXT.md) for the project-wide
+growth policy and current A5 boundary.

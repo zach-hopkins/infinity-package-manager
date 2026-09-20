@@ -2,8 +2,8 @@
 
 IEPM is designed to survive without a heroic central maintainer. Prefer small,
 auditable changes to the static registry and preserve old lockfile behavior.
-Read [the foundation guardrails](docs/foundation-guardrails.md) before changing
-schemas, resolver behavior, registry vocabulary, artifact handling, or A5.
+Read [the living project context](LIVING_CONTEXT.md) before changing schemas,
+resolver behavior, registry vocabulary, artifact handling, or A5.
 
 ## Registry rules
 

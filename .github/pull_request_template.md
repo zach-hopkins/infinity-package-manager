@@ -1,6 +1,7 @@
 ## Change scope
 
 Describe the real mod, installer behavior, or reproducibility problem this change addresses.
+Read [LIVING_CONTEXT.md](../LIVING_CONTEXT.md) before completing this checklist.
 
 ## Foundation check
 

@@ -22,11 +22,11 @@ Product A is deliberately limited to package management: stable IDs, releases,
 artifacts, compatibility, dependency resolution, capabilities, ordering, and
 reproducible lockfiles. It does not need to understand arbitrary WeiDU programs.
 
-The repository's durable architectural constraints are documented in
-[foundation guardrails](docs/foundation-guardrails.md). They apply equally to
-human contributors and coding agents: schema evolution must be evidence-led,
-EET remains multi-environment, lineage never silently substitutes a fork, and
-only an explicitly executable lockfile may reach A5 mutation.
+The repository's authoritative project memory is
+[LIVING_CONTEXT.md](LIVING_CONTEXT.md). It applies equally to human
+contributors and coding agents: schema evolution must be evidence-led, EET
+remains multi-environment, lineage never silently substitutes a fork, and only
+an explicitly executable lockfile may reach A5 mutation.
 
 ## Current status
 
