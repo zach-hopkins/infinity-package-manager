@@ -73,7 +73,10 @@ The smallest executable EET route fixture is available at
 `after_eet_import: eet`: preparation and EET import run against BG2EE, while
 EET_End runs against the transformed EET result. Its fingerprints are fixture
 values, so it is for plan verification only—not authorization to install into
-a real game directory.
+a real game directory. Shared-WeiDU routes also require a game `locale` such
+as `en_US`; `plan` renders that locale, the bound workspace, and the
+noninteractive WeiDU flags separately from each package's numeric WeiDU
+language index.
 
 An environment may declare an ordered `baseline` of already-installed WeiDU
 log entries. `plan` renders that as a verify-only preflight and refuses to

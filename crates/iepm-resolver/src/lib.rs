@@ -283,6 +283,14 @@ pub fn resolve(
                                     installer.tp2
                                 ));
                             }
+                            if installer.launcher == InstallerLauncher::Toolchain
+                                && environments[&key.environment].locale.is_none()
+                            {
+                                blocking_reasons.insert(format!(
+                                    "{} installer {} has no game locale for shared WeiDU",
+                                    key.node_id(), installer.tp2
+                                ));
+                            }
                             for argument in &installer.arguments {
                                 if let InstallerArgument::EnvironmentInput { input } = argument {
                                     let Some(environment) = request.installer_inputs.get(input) else {
@@ -413,6 +421,7 @@ fn normalized_environments(
             platform: None,
             store: None,
             language: None,
+            locale: None,
             baseline: vec![],
         },
     );
@@ -1015,6 +1024,7 @@ mod tests {
                 platform: None,
                 store: None,
                 language: Some("English".to_owned()),
+                locale: Some("en_US".to_owned()),
                 baseline: vec![],
             },
         )])
@@ -1276,17 +1286,25 @@ mod tests {
             provides: vec![],
         });
         registry.insert("package".to_owned(), record("package", vec![package]));
-        let lock = resolve(
-            &manifest(vec![RequestedMod::Package("package".to_owned())]),
-            &registry,
-            "test",
-            toolchain(),
-        )
-        .unwrap();
+        let mut manifest = manifest(vec![RequestedMod::Package("package".to_owned())]);
+        let lock = resolve(&manifest, &registry, "test", toolchain()).unwrap();
         assert_eq!(lock.execution_readiness, ExecutionReadiness::Executable);
         assert_eq!(
             lock.packages[0].installers[0].launcher,
             InstallerLauncher::Toolchain
+        );
+
+        manifest.environments.get_mut("target").unwrap().locale = None;
+        let without_locale = resolve(&manifest, &registry, "test", toolchain()).unwrap();
+        assert_eq!(
+            without_locale.execution_readiness,
+            ExecutionReadiness::AnalysisOnly
+        );
+        assert!(
+            without_locale
+                .blocking_reasons
+                .iter()
+                .any(|reason| reason.contains("no game locale for shared WeiDU"))
         );
     }
 

@@ -40,6 +40,10 @@ pub struct GameEnvironment {
     pub store: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub language: Option<String>,
+    /// Game-install locale used by the shared WeiDU executor, such as
+    /// `en_US`. This is distinct from a mod's selected WeiDU language index.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub locale: Option<String>,
     /// Components already present in the clean, named environment. These are
     /// preflight assertions, not execution nodes: A5 must verify them rather
     /// than try to install them a second time.

@@ -160,14 +160,40 @@ fn render_command(
                 .as_deref()
                 .ok_or_else(|| anyhow::anyhow!("{} has no executable program", installer.tp2))?
         )],
-        InstallerLauncher::Toolchain => vec!["$IEPM_WEIDU".to_owned(), quote(&installer.tp2)],
+        InstallerLauncher::Toolchain => {
+            let environment = lockfile
+                .environments
+                .get(&package.environment)
+                .expect("locked package environment was preflighted");
+            let locale = environment.locale.as_deref().ok_or_else(|| {
+                anyhow::anyhow!(
+                    "{} has no game locale for shared WeiDU",
+                    package.environment
+                )
+            })?;
+            vec![
+                "$IEPM_WEIDU".to_owned(),
+                quote(&installer.tp2),
+                "--game".to_owned(),
+                format!("<bound-workspace:{}>", package.environment),
+                "--language".to_owned(),
+                language_id.to_string(),
+                "--use-lang".to_owned(),
+                quote(locale),
+                "--skip-at-view".to_owned(),
+                "--no-exit-pause".to_owned(),
+                "--noautoupdate".to_owned(),
+            ]
+        }
     };
     for component in components {
         command.push("--force-install".to_owned());
         command.push(component.clone());
     }
-    command.push("--language".to_owned());
-    command.push(language_id.to_string());
+    if installer.launcher == InstallerLauncher::Bundled {
+        command.push("--language".to_owned());
+        command.push(language_id.to_string());
+    }
     for argument in &installer.arguments {
         match argument {
             InstallerArgument::Literal { value } => command.push(quote(value)),
@@ -328,7 +354,7 @@ mod tests {
             "environments": {
                 "bgee-source": {"target": "bgee"},
                 "eet-target": {
-                    "target": "eet", "language": "English",
+                    "target": "eet", "language": "English", "locale": "en_US",
                     "baseline": [{
                         "tp2": "eefixpack/setup-eefixpack.tp2",
                         "language": 0,
@@ -362,7 +388,7 @@ mod tests {
         }))
         .unwrap();
         let plan = render_plan(&lock).unwrap();
-        assert!(plan.contains("$IEPM_WEIDU \"EET/EET.tp2\" --force-install 0 --language 0 \"--args-list\" \"sp\" <bound-environment:bgee-source>"));
+        assert!(plan.contains("$IEPM_WEIDU \"EET/EET.tp2\" --game <bound-workspace:eet-target> --language 0 --use-lang \"en_US\" --skip-at-view --no-exit-pause --noautoupdate --force-install 0 \"--args-list\" \"sp\" <bound-environment:bgee-source>"));
         assert!(plan.contains("Preflight baseline (verify; do not reinstall):"));
         assert!(!plan.contains("C:\\"));
     }

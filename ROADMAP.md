@@ -10,7 +10,7 @@
 - [x] A4: content-addressed artifact variants/mirrors, hardened cache, extraction, and SHA-256 verification
 - [x] A5 (first slice): schema-3 executable preflight and non-mutating `iepm plan`
 - [x] A5 (evidence slice): executable minimal EET lifecycle fixture with source history and shared-WeiDU routes
-- [ ] A5: validate plan against a trusted EET fixture, then ordered WeiDU execution in disposable environment workspaces
+- [ ] A5: execute the manually compared minimal EET plan against a disposable v14.1 workspace, then add ordered WeiDU execution, process supervision, and recovery behavior
 - [ ] A6: TP2-assisted registry ingestion and release-drift review
 - [ ] A7: user-facing search/add/verify CLI polish
 

@@ -14,10 +14,13 @@ IEPM is a Rust package-management control plane above WeiDU. Product A's A0–A4
 foundation has completed a hostile pre-A5 review and subsequent remediation.
 The project is **yellow-green for constrained A5**. The non-mutating `iepm
 plan`/preflight now has an evidence-backed, executable minimal EET route
-fixture: DLC Merger, source/target EE Fixpack, EET import, and EET_End. It
-distinguishes source-log provenance from target history, supports shared-WeiDU
-TP2 routes, and keeps the EET source path symbolic. The next work is manual
-comparison and disposable-workspace validation of that minimal route before
+fixture: DLC Merger, source/target EE Fixpack, EET import, and EET_End. Its
+component sequence and shared-WeiDU command envelope have been compared with
+a local known-good runner: each generic invocation carries the bound game
+workspace, WeiDU language index, game locale, and noninteractive flags. The
+observed successful EET import was v14.0 while the pinned archive is v14.1,
+so this establishes route shape—not v14.1 execution verification. The next
+work is disposable-workspace validation of that minimal route before
 describing the full mod stack or allowing any game installation.
 
 Manifest/package records use schema 2 and replayable lockfiles use schema 3.
@@ -165,9 +168,13 @@ explicit verify-existing action, a selected component that duplicates an
 environment baseline is a blocking error rather than a reinstall.
 
 Installers may use either a package-bundled launcher or the pinned shared
-WeiDU toolchain. Required arguments are typed literals or named environment
-bindings, not interpolated shell commands. This distinction is required by
-real packages that ship only a TP2, such as the observed EE Fixpack archive.
+WeiDU toolchain. Shared-WeiDU execution requires a named workspace and game
+locale (for example `en_US`), separate from the package's numeric WeiDU
+language index; it renders the observed unattended flags rather than relying
+on interactive defaults. Required arguments are typed literals or named
+environment bindings, not interpolated shell commands. This distinction is
+required by real packages that ship only a TP2, such as the observed EE
+Fixpack archive.
 
 Resolution and execution are separate states:
 
@@ -202,12 +209,14 @@ manifest → registry → resolver → lockfile → verified artifacts
 
 - **A0–A4:** v2 schemas, registry loading/validation, complete resolution,
   replayable lockfile, and verified artifact preparation.
-- **A5:** non-mutating `iepm plan`/preflight is complete; next are trusted
-  manual-plan comparison, disposable-workspace WeiDU execution, process
-  supervision, logs, cancellation/failure behavior, and EET multi-root
-  workflow. `examples/eet-minimal` is an executable but non-mutating route
-  fixture; `docs/a5-eet-evidence.md` records its evidence. Neither authorizes
-  an installation outside a disposable workspace.
+- **A5:** non-mutating `iepm plan`/preflight is complete; its minimal EET
+  route has passed a manual structural comparison. Next are disposable-
+  workspace WeiDU execution, process supervision, logs,
+  cancellation/failure behavior, and EET multi-root workflow. The v14.1
+  archive has not yet been executed; `examples/eet-minimal` remains an
+  executable but non-mutating route fixture, and
+  `docs/a5-eet-evidence.md` records its evidence. Neither authorizes an
+  installation outside a disposable workspace.
 - **A6:** TP2-assisted registry ingestion, release drift review, and
   conservative structural inheritance.
 - **A7:** user-facing CLI ergonomics such as search, add, verify, and install.

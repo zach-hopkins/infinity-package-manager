@@ -50,6 +50,7 @@
         "platform": { "enum": ["windows", "linux", "macos"] },
         "store": { "type": "string" },
         "language": { "type": "string" },
+        "locale": { "type": "string", "pattern": "^[A-Za-z]{2,3}_[A-Za-z]{2,4}$" },
         "baseline": {
           "type": "array",
           "description": "Ordered WeiDU entries expected to already exist in this environment; these are preflight assertions, not requested installs.",

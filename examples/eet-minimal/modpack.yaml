@@ -8,6 +8,7 @@ environments:
     version: "2.6.6"
     platform: windows
     language: English
+    locale: en_US
     fingerprint:
       profile: fixture-v1
       value: clean-bgee-sod-2.6.6
@@ -18,6 +19,7 @@ environments:
     version: "2.6.6"
     platform: windows
     language: English
+    locale: en_US
     fingerprint:
       profile: fixture-v1
       value: clean-bg2ee-2.6.6

@@ -16,8 +16,10 @@ an existing game tree.
 - The target's ordinary `WeiDU.log` remains a distinct target history. It may
   include pre-existing target preparation such as EE Fixpack before EET.
 - A known-good runner invokes the shared WeiDU executable with the TP2 path,
-  numeric `--force-install` values, and a numeric `--language` value. A
-  package must not be assumed to ship a `setup-*.exe`; EE Fixpack is a concrete
+  a bound game directory, numeric `--force-install` values, a numeric
+  `--language` value, the game locale (`--use-lang en_US`), and unattended
+  flags (`--skip-at-view`, `--no-exit-pause`, and `--noautoupdate`). A package
+  must not be assumed to ship a `setup-*.exe`; EE Fixpack is a concrete
   counterexample.
 - EET v14.1's documented noninteractive route supplies the BGEE source path
   through `--args-list sp <path>`. IEPM records the portable
@@ -34,10 +36,12 @@ failure prevents a hidden reinstall until the future executor has an explicit
 verify-existing action.
 
 Installer metadata supports only two launchers: a bundled program or the
-pinned shared WeiDU toolchain. Required extra arguments are typed literal
-tokens or named environment bindings, never a shell-command template. This is
-the smallest extension supported by the EET evidence and preserves portable
-lockfiles.
+pinned shared WeiDU toolchain. A shared-toolchain plan requires an environment
+locale and renders its runtime workspace binding, numeric language index, and
+the observed unattended command envelope. Required extra arguments are typed
+literal tokens or named environment bindings, never a shell-command template.
+This is the smallest extension supported by the EET evidence and preserves
+portable lockfiles.
 
 The EET v14.1 archive content identity now recorded in the registry is
 `cb1451e7ef341672fcd71ef8aa5edb010134f880e1eb3d398ed42a9ed3d934a7`.
@@ -62,3 +66,18 @@ The registry records local-archive-verified content identities for DLC Merger
 v2.1, EE Fixpack Beta 2, EET v14.1, and EET_End v14.1. The fixture's game
 fingerprints are synthetic test values and must be replaced by measured
 disposable-workspace fingerprints before any future execution.
+
+## Manual comparison status
+
+The rendered five-package route was compared read-only with the local
+known-good runner and its logs. The component order and numeric selections
+match: source DLC Merger `#0 #1`, source EE Fixpack `#0 #0`, target EE Fixpack
+`#0 #0`, EET core `#0 #0`, then EET_End `#0 #0`. The plan now also renders the
+runner's workspace, locale, and unattended shared-WeiDU arguments for every
+TP2-only route.
+
+The comparison is deliberately not marked as an EET v14.1 execution success:
+the historical successful target log records EET v14.0, whereas IEPM pins the
+separately hash-verified v14.1 archive. The manual evidence validates the
+model and command shape; a disposable v14.1 run is still required to validate
+the selected release and its resulting workspace fingerprint.
