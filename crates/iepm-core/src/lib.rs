@@ -354,6 +354,11 @@ pub struct Component {
     pub weidu: Option<WeiDUComponent>,
     #[serde(default)]
     pub provides: Vec<Capability>,
+    /// Stable component IDs in the same package that must also be selected.
+    /// This is deliberately package-local; cross-package requirements belong
+    /// on the release relationship that owns both package identities.
+    #[serde(default)]
+    pub requires: Vec<String>,
     /// Selector and component-level evidence can differ from a release's
     /// overall provenance. This is particularly important for mechanically
     /// observed TP2 selectors combined with separately curated semantics.

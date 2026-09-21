@@ -60,7 +60,17 @@ releases:
               - https://github.com/Gibberlings3/SwordCoastStratagems
       - id: smarter-priests
         weidu: { tp2: stratagems/setup-stratagems.tp2, number: 6040 }
+      - id: improved-fiends-celestials
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 6510 }
+        requires: [initialize-ai]
+        claims:
+          - claim: The exact v35.21 TP2 declares selector 6510 and requires SCS AI initialization (5900).
+            provenance: derived
       - id: ascension-irenicus-sendai
         weidu: { tp2: stratagems/setup-stratagems.tp2, number: 6840 }
       - id: ascension-demons
         weidu: { tp2: stratagems/setup-stratagems.tp2, number: 6850 }
+        requires: [initialize-ai, improved-fiends-celestials]
+        claims:
+          - claim: The exact v35.21 TP2 declares selector 6850 and requires SCS AI initialization (5900) plus Improved Fiends and Celestials (6510).
+            provenance: derived

@@ -390,7 +390,12 @@ pub fn resolve(
                 components,
                 language,
                 installer_inputs: request.installer_inputs.clone(),
-                dependencies: required_dependencies(release, &environments[&key.environment]),
+                dependencies: required_dependencies(
+                    &key.package,
+                    release,
+                    &environments[&key.environment],
+                    request,
+                )?,
                 provenance: release.provenance,
             })
         })
@@ -531,7 +536,12 @@ fn expand_requests(
             .get(&key.package)
             .ok_or_else(|| ResolveError::MissingPackage(key.package.clone()))?;
         let release = &record.releases[*index];
-        for dependency in required_dependencies(release, &environments[&key.environment]) {
+        for dependency in required_dependencies(
+            &key.package,
+            release,
+            &environments[&key.environment],
+            &requests[&key],
+        )? {
             let dependency_key = Key {
                 environment: dependency
                     .environment
@@ -557,8 +567,22 @@ fn expand_requests(
     Ok(requests)
 }
 
-fn required_dependencies(release: &Release, environment: &GameEnvironment) -> Vec<Dependency> {
-    release
+fn required_dependencies(
+    package: &str,
+    release: &Release,
+    environment: &GameEnvironment,
+    request: &Request,
+) -> Result<Vec<Dependency>, ResolveError> {
+    let component_requires = selected_components(package, release, request)?
+        .into_iter()
+        .flat_map(|component| component.requires.iter().cloned())
+        .map(|component| Dependency {
+            package: package.to_owned(),
+            environment: None,
+            version: None,
+            components: vec![component],
+        });
+    Ok(release
         .dependencies
         .iter()
         .cloned()
@@ -579,7 +603,8 @@ fn required_dependencies(release: &Release, environment: &GameEnvironment) -> Ve
                     components: relationship.components.clone(),
                 }),
         )
-        .collect()
+        .chain(component_requires)
+        .collect())
 }
 
 fn release_matches(
@@ -910,7 +935,12 @@ fn order(
 
     for (key, index) in &solution.selected {
         let release = release(registry, key, *index);
-        for dependency in required_dependencies(release, &environments[&key.environment]) {
+        for dependency in required_dependencies(
+            &key.package,
+            release,
+            &environments[&key.environment],
+            &solution.requests[key],
+        )? {
             let dependency_key = Key {
                 environment: dependency
                     .environment
@@ -918,7 +948,10 @@ fn order(
                     .unwrap_or_else(|| key.environment.clone()),
                 package: canonical_package(registry, &dependency.package)?,
             };
-            if selected.contains(&dependency_key) {
+            // A component-local prerequisite extends this package's one
+            // WeiDU invocation; it must not create a self-edge in the
+            // package execution graph.
+            if dependency_key != *key && selected.contains(&dependency_key) {
                 add_edge(&dependency_key, key)?;
             }
         }
@@ -1119,6 +1152,7 @@ mod tests {
                 non_recording: false,
             }),
             provides: vec![],
+            requires: vec![],
             claims: vec![],
         });
         registry.insert("package".to_owned(), record("package", vec![package]));
@@ -1259,6 +1293,7 @@ mod tests {
                 non_recording: false,
             }),
             provides: vec![],
+            requires: vec![],
             claims: vec![],
         });
         registry.insert("package".to_owned(), record("package", vec![package]));
@@ -1318,6 +1353,7 @@ mod tests {
                 non_recording: false,
             }),
             provides: vec![],
+            requires: vec![],
             claims: vec![],
         });
         let mut sfx_package = package.clone();
@@ -1391,6 +1427,7 @@ mod tests {
                 non_recording: false,
             }),
             provides: vec![],
+            requires: vec![],
             claims: vec![],
         });
         registry.insert("package".to_owned(), record("package", vec![package]));
@@ -1442,6 +1479,7 @@ mod tests {
                 non_recording: false,
             }),
             provides: vec![],
+            requires: vec![],
             claims: vec![],
         });
         registry.insert("package".to_owned(), record("package", vec![package]));
@@ -1615,8 +1653,54 @@ mod tests {
                 name: capability.to_owned(),
                 exclusive: true,
             }],
+            requires: vec![],
             claims: vec![],
         }
+    }
+
+    #[test]
+    fn selected_component_adds_its_same_package_prerequisites() {
+        let mut registry = Registry::new();
+        let mut package = release("1", Phase::Eet);
+        let initializer = component("initialize-ai", "initializer");
+        let mut fiends = component("improved-fiends-celestials", "fiends");
+        fiends.requires = vec!["initialize-ai".to_owned()];
+        let mut demons = component("ascension-demons", "demons");
+        demons.requires = vec![
+            "initialize-ai".to_owned(),
+            "improved-fiends-celestials".to_owned(),
+        ];
+        package.components = vec![initializer, fiends, demons];
+        registry.insert("stratagems".to_owned(), record("stratagems", vec![package]));
+
+        let lock = resolve(
+            &manifest(vec![RequestedMod::Selection {
+                package: "stratagems".to_owned(),
+                version: None,
+                components: vec!["ascension-demons".to_owned()],
+                environment: Some("target".to_owned()),
+                language: None,
+                installer_inputs: BTreeMap::new(),
+            }]),
+            &registry,
+            "test",
+            toolchain(),
+        )
+        .unwrap();
+
+        let selected = lock.packages[0]
+            .components
+            .iter()
+            .map(|component| component.id.as_str())
+            .collect::<BTreeSet<_>>();
+        assert_eq!(
+            selected,
+            BTreeSet::from([
+                "ascension-demons",
+                "improved-fiends-celestials",
+                "initialize-ai",
+            ])
+        );
     }
 
     #[test]

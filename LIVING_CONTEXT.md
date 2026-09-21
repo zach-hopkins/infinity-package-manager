@@ -176,6 +176,12 @@ Relationships can be component-scoped and game-conditioned. A hard requirement
 enters the dependency graph; ordering is not a fake dependency; optional and
 recommendation data do not become implicit requirements.
 
+A component may also declare package-local `requires` by stable IEPM component
+ID. Those prerequisites extend the same package's single WeiDU action; they do
+not create a self-edge in the package graph. Cross-package requirements remain
+release relationships, where package identity and environment binding are
+explicit.
+
 Capabilities express narrow semantic overlap, such as mutually exclusive mage
 AI components. They are registry-curated and must not become a giant ontology
 or a policy DSL. Add a new condition, capability convention, or expression
