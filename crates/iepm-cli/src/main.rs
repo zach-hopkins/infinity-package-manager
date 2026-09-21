@@ -42,6 +42,29 @@ enum Command {
         #[arg(long)]
         locale: Option<String>,
     },
+    /// Read inert structural facts from a local TP2 source file. This does not
+    /// execute WeiDU code or change registry records.
+    InspectTp2 {
+        #[arg(long)]
+        tp2: PathBuf,
+    },
+    /// Compare an inspected TP2 with one curated registry release. A drift is
+    /// review evidence only; this command never updates registry metadata.
+    ReviewTp2 {
+        #[arg(long, default_value = "registry")]
+        registry: PathBuf,
+        #[arg(long)]
+        package: String,
+        #[arg(long)]
+        release_id: String,
+        #[arg(long)]
+        tp2: PathBuf,
+        #[arg(
+            long,
+            help = "Registry-relative TP2 path; required only when the release has multiple installers"
+        )]
+        installer_tp2: Option<String>,
+    },
     /// Materialize and execute an executable lockfile in explicitly bound,
     /// disposable game workspaces. This never accepts machine paths in a lockfile.
     Execute {
@@ -124,6 +147,34 @@ fn main() -> Result<()> {
         Command::Fingerprint { workspace, locale } => {
             let fingerprint = iepm::measure_workspace_fingerprint(&workspace, locale.as_deref())?;
             println!("{}", serde_json::to_string_pretty(&fingerprint)?);
+        }
+        Command::InspectTp2 { tp2 } => {
+            let source = std::fs::read_to_string(&tp2)
+                .with_context(|| format!("could not read {}", tp2.display()))?;
+            println!(
+                "{}",
+                serde_json::to_string_pretty(&iepm_registry::inspect_tp2(&source))?
+            );
+        }
+        Command::ReviewTp2 {
+            registry,
+            package,
+            release_id,
+            tp2,
+            installer_tp2,
+        } => {
+            let source = std::fs::read_to_string(&tp2)
+                .with_context(|| format!("could not read {}", tp2.display()))?;
+            let registry = iepm_registry::load(&registry)?;
+            let observed = iepm_registry::inspect_tp2(&source);
+            let review = iepm_registry::review_tp2(
+                &registry,
+                &package,
+                &release_id,
+                installer_tp2.as_deref(),
+                &observed,
+            )?;
+            println!("{}", serde_json::to_string_pretty(&review)?);
         }
         Command::Execute {
             lockfile,

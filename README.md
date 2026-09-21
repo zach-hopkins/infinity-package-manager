@@ -55,8 +55,10 @@ installer decisions, registry revision, and toolchain identity.
 The `fetch` command downloads HTTPS ZIP artifacts into a content-addressed
 cache, verifies SHA-256 values, tries declared mirrors, bounds downloads, and
 safely extracts them. Extraction rejects unsafe, duplicate, and
-case-colliding paths and revalidates cached extracted content. The next
-milestone is still WeiDU execution; no GUI or semantic compiler is in scope.
+case-colliding paths and revalidates cached extracted content. A6 also offers
+inert TP2 structural inspection and release-drift review for registry curators;
+it never executes TP2 source or updates YAML automatically. See
+[the A6 boundary](docs/a6-tp2-ingestion.md).
 
 The first A5 slice is available as a non-mutating preflight:
 
@@ -140,6 +142,17 @@ To inspect a candidate workspace's fingerprint without mutating it:
 ```text
 cargo run -p iepm -- fingerprint --workspace C:\\testing\\bgee-source --locale en_US
 ```
+
+To prepare curator-review evidence from a known local TP2 without running it:
+
+```text
+cargo run -p iepm -- inspect-tp2 --tp2 C:\\mods\\Example\\setup-Example.tp2
+cargo run -p iepm -- review-tp2 --registry registry --package example \
+  --release-id example-release --tp2 C:\\mods\\Example\\setup-Example.tp2
+```
+
+`match` confirms only version/language/component-selector agreement. It does
+not verify compatibility, installer behavior, or a release's artifact.
 
 ## Try it
 

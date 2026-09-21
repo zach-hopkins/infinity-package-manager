@@ -27,8 +27,15 @@ The bundled-launcher counterexample, Hidden Gameplay Options v5.1 component
 10, has now completed in a fresh disposable BG2EE copy with official release
 content. It proved that bundled and shared WeiDU both require a declared game
 locale and the same language/locale/unattended/component argument order. The
-next work is A6 ingestion and release-drift evidence, while keeping broader
-stack coverage deliberately incremental.
+next work is A7 user-facing registry ergonomics, while keeping broader stack
+coverage deliberately incremental. A6 now reads a selected local TP2 as inert
+text and reviews its `VERSION`, language declaration order, and
+`BEGIN`/`DESIGNATED`/`LABEL` selectors against one curated release. It emits
+review JSON but never executes TP2 code, discovers behavior, or rewrites YAML.
+The retained official Hidden Gameplay Options v5.1 source is the first
+evidence point: its opaque release ID, display version, English language index
+0, and selected component selectors match the registry. This corroborates but
+does not replace its A5 disposable execution evidence.
 
 The source-tagged EET v14.1 archive's TP2 declares itself v14.0, and EET core
 emits non-stopping warnings under shared WeiDU 251. This is resolved evidence,
@@ -242,7 +249,11 @@ manifest → registry → resolver → lockfile → verified artifacts
   `examples/eet-minimal` remains a controlled
   fixture, not authorization to install into a user's primary game tree.
 - **A6:** TP2-assisted registry ingestion, release drift review, and
-  conservative structural inheritance.
+  conservative structural inheritance. The implemented path is deliberately a
+  manual ingestion aid: a selected TP2 yields structural observations and a
+  drift report for an existing release. It does not auto-create releases or
+  inherit compatibility, relationships, artifacts, installer inputs, or
+  verification because those are behavioral or release-trust claims.
 - **A7:** user-facing CLI ergonomics such as search, add, verify, and install.
 - **Product B:** semantic analyzer; controlled component installs plus useful
   resource-level diffs.

@@ -14,7 +14,7 @@
 - [x] A5 (execution integrity): pre-mutation core-layout fingerprints and final output-fingerprint receipts for the minimal EET route
 - [x] A5 (recovery boundary): interrupted runs retain a non-resumable state marker; a fresh workspace is required
 - [x] A5 (bundled launcher): verified Hidden Gameplay Options v5.1 component 10 on a fresh disposable BG2EE copy
-- [ ] A6: TP2-assisted registry ingestion and release-drift review
+- [x] A6: inert TP2 structural ingestion aid and release-drift review
 - [ ] A7: user-facing search/add/verify CLI polish
 
 Product B (semantic analysis) and Product C (semantic merge/compiler) remain

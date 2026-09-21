@@ -638,6 +638,7 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "iepm-core",
+ "serde",
  "serde_yaml",
  "walkdir",
 ]

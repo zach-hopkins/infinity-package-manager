@@ -8,5 +8,6 @@ rust-version.workspace = true
 [dependencies]
 anyhow.workspace = true
 iepm-core = { path = "../iepm-core" }
+serde.workspace = true
 serde_yaml.workspace = true
 walkdir.workspace = true
