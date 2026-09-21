@@ -14,12 +14,16 @@ receipt its installation command.
 | `examples/bg2ee-content-starter/modpack.yaml` | Ascension rewritten final chapter, Call of the Lost Goddess core, Throne of the Mad God core | One fresh BG2EE 2.6.6 English full-copy build, shared WeiDU 25100 |
 | `examples/bg2ee-bubbs-spell-menu/modpack.yaml` | EEex bootstrap/main, Bubb's Spell Menu main | One fresh BG2EE 2.6.6 English full-copy build, shared WeiDU 25100 |
 | `examples/bg2ee-infinity-ui/modpack.yaml` | EEex bootstrap/main, Infinity UI++ core | One fresh BG2EE 2.6.6 English full-copy build, shared WeiDU 25100 |
+| `examples/bg2ee-tweaks-starter/modpack.yaml` | Tweaks: Icon Improvements, More Interjections, Remove XP Cap | One fresh BG2EE 2.6.6 English full-copy build, shared WeiDU 25100 |
 
 These fixtures prove their listed exact selections only. They do not prove
 every optional component, a full Forge order, gameplay behavior, or EET
-compatibility. SCS and Tweaks Anthology remain planning-only because their
-official Windows releases are EXE distributions without a package-specific
-preparation recipe.
+compatibility. Tweaks uses its exact published v18 IEMOD artifact. SCS retains
+the exact official Windows EXE as an analysis-only record: IEPM does not
+implement generic executable-archive preparation. An author source-tag archive
+was examined but fails IEPM's case-collision archive safety check, so it is not
+silently substituted for the EXE. A safe, package-specific test of that official
+EXE remains required before SCS can enter the personal-use fixture set.
 
 ## From a clean game copy
 

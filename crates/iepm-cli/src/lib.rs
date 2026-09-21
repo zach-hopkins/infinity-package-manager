@@ -1,4 +1,4 @@
-use anyhow::{Result, bail};
+use anyhow::{Context, Result, bail};
 use iepm_artifacts::ArtifactStore;
 use iepm_core::{
     ExecutionReadiness, GameFingerprint, Installer, InstallerArgument, InstallerLauncher,
@@ -715,6 +715,15 @@ pub fn execute(lockfile: &Lockfile, options: &ExecuteOptions) -> Result<Executio
         })
         .collect::<BTreeMap<_, _>>();
 
+    // A fresh Enhanced Edition game does not necessarily include this standard
+    // WeiDU state file. Some legitimate TP2 components read it during their
+    // first action, before WeiDU has had a chance to write its first receipt.
+    // Initializing only an absent, regular file keeps first-install behavior
+    // deterministic without replacing any existing install history.
+    for workspace in options.workspaces.values() {
+        ensure_weidu_log(workspace)?;
+    }
+
     let mut actions = 0_usize;
     for node in &lockfile.execution {
         let package = packages
@@ -1223,6 +1232,17 @@ fn installed_components_are_logged(
     }))
 }
 
+fn ensure_weidu_log(workspace: &Path) -> Result<()> {
+    let log = workspace.join("WeiDU.log");
+    if !log.exists() {
+        fs::write(&log, "").with_context(|| format!("could not initialize {}", log.display()))?;
+    }
+    if !log.is_file() {
+        bail!("WeiDU log is not a regular file: {}", log.display());
+    }
+    Ok(())
+}
+
 /// Render the first A5 deliverable: a non-mutating, auditable execution plan.
 /// It never fetches, materializes, starts a process, or touches a game tree.
 pub fn render_plan(lockfile: &Lockfile) -> Result<String> {
@@ -1549,6 +1569,27 @@ mod tests {
         assert!(
             !installed_components_are_logged(&workspace, "EET/EET.tp2", 0, &["1".to_owned()])
                 .unwrap()
+        );
+        std::fs::remove_dir_all(workspace).unwrap();
+    }
+
+    #[test]
+    fn initializes_an_absent_weidu_log_without_replacing_history() {
+        let workspace = std::env::temp_dir().join(format!(
+            "iepm-initialize-weidu-log-test-{}",
+            std::process::id()
+        ));
+        std::fs::create_dir_all(&workspace).unwrap();
+        ensure_weidu_log(&workspace).unwrap();
+        assert_eq!(
+            std::fs::read_to_string(workspace.join("WeiDU.log")).unwrap(),
+            ""
+        );
+        std::fs::write(workspace.join("WeiDU.log"), "existing history\n").unwrap();
+        ensure_weidu_log(&workspace).unwrap();
+        assert_eq!(
+            std::fs::read_to_string(workspace.join("WeiDU.log")).unwrap(),
+            "existing history\n"
         );
         std::fs::remove_dir_all(workspace).unwrap();
     }

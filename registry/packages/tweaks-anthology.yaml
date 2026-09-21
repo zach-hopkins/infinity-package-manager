@@ -2,6 +2,40 @@ schema: 2
 package: tweaks-anthology
 aliases: [cdtweaks]
 releases:
+  # The IEMOD archive is a published Windows release asset.  Keeping this
+  # separate from the retained source-tag record preserves artifact identity
+  # rather than presenting the two distributions as interchangeable.
+  - release_id: tweaks-anthology-v18-iemod
+    version: "v18"
+    semver: "18.0.0"
+    artifacts:
+      - url: https://github.com/Gibberlings3/Tweaks-Anthology/releases/download/v18/the-tweaks-anthology-v18.iemod
+        sha256: 776212ec781ddf14071a9f74df075824fe8430a13302d2bea7d11fd91d179b17
+        platforms: [windows]
+    compatibility:
+      games: [bgee, bg2ee, eet]
+    install:
+      phase: eet
+      after: [eet]
+      before: [eet-end]
+    provenance: unverified
+    claims:
+      - claim: The URL and SHA-256 identify the exact published v18 IEMOD artifact. Its TP2 path, VERSION, English language index, and listed component selectors were mechanically derived from that artifact.
+        provenance: derived
+        evidence:
+          - https://github.com/Gibberlings3/Tweaks-Anthology/releases/tag/v18
+      - claim: Components 110 (Icon Improvements), 1010 (More Interjections), and 2090 (Remove Experience Cap) completed together in a fresh IEPM-managed English BG2EE 2.6.6 workspace under shared WeiDU 25100. The artifact was fetched into a fresh cache and the completed build was sealed.
+        provenance: verified
+    installers:
+      - tp2: cdtweaks/setup-cdtweaks.tp2
+        launcher: toolchain
+        languages:
+          - id: 0
+            name: English
+    components:
+      - { id: icon-improvements, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_icon_improvements, number: 110 } }
+      - { id: more-interjections, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_more_interjections, number: 1010 } }
+      - { id: remove-xp-cap, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_remove_xp_cap, number: 2090 } }
   - release_id: tweaks-anthology-v18-source
     version: "v18"
     artifacts:
