@@ -153,6 +153,15 @@ in [the A7 workflow guide](docs/a7-cli-workflow.md). IEPM deliberately does not
 yet reuse prefix checkpoints: a safe cache key needs more evidence than the
 core-layout fingerprint.
 
+The managed lifecycle has completed a fresh-download, full-copy Hidden Gameplay
+Options v5.1 `install-all` execution and sealed-build evidence run; see [the
+bundled-launcher evidence](docs/a5-hidden-gameplay-options-evidence.md). A
+Forge-derived larger EET order also resolves as intentionally `analysis-only`:
+its exact registry coverage and causal execution blockers are documented in
+[the Forge coverage evidence](docs/forge-coverage-evidence.md). That boundary
+is deliberate—IEPM does not silently replace a requested package or run a
+partially described order.
+
 To prepare curator-review evidence from a known local TP2 without running it:
 
 ```text

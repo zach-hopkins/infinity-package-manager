@@ -1,0 +1,61 @@
+schema: 2
+
+# Resolver-only coverage request derived from Forge-Mod_Install List.txt.
+# It includes only exact existing IEPM package identities. In particular,
+# Forge's `stratagems` entry is not silently substituted with `tactics-remix`,
+# and the unregistered quest mods remain outside this request.
+environments:
+  bgee-source:
+    target: bgee
+    version: "2.6.6"
+    platform: windows
+    language: English
+    locale: en_US
+    fingerprint:
+      profile: iepm-core-layout-v1
+      value: 04fc6602150ff7788875573dbf0b7f4aeb7ca26aaf83b022c77d9fc417d848c3
+  eet-target:
+    target: bg2ee
+    after_eet_import: eet
+    version: "2.6.6"
+    platform: windows
+    language: English
+    locale: en_US
+    fingerprint:
+      profile: iepm-core-layout-v1
+      value: 298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f
+
+mods:
+  # EET's declared source dependency requires an explicit selected component;
+  # Forge's list starts after this base prerequisite.
+  - package: dlc-merger
+    environment: bgee-source
+    components: [merge-sod]
+  - package: ee-fixpack
+    environment: bgee-source
+    components: [core-fixes]
+  - package: ee-fixpack
+    environment: eet-target
+    components: [core-fixes]
+  - package: eet
+    environment: eet-target
+    components: [core]
+    installer_inputs:
+      source-environment: bgee-source
+  - package: eeex
+    environment: eet-target
+  - package: infinity-ui-plus-plus
+    environment: eet-target
+  - package: bubbs-spell-menu
+    environment: eet-target
+  - package: hidden-gameplay-options
+    version: "5.1"
+    environment: eet-target
+    components: [install-all]
+  - package: ascension
+    environment: eet-target
+  - package: tweaks-anthology
+    environment: eet-target
+  - package: eet-end
+    environment: eet-target
+    components: [standard]

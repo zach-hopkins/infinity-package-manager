@@ -23,11 +23,17 @@ disposable-workspace confirmation. An interrupted or prior run-state marker
 is deliberately non-resumable: rebuild a fresh controlled workspace rather
 than attempting rollback. A controlled interruption during EET import proved
 that the marker rejects an in-place retry before fingerprinting or mutation.
-The bundled-launcher counterexample, Hidden Gameplay Options v5.1 component
-10, has now completed in a fresh disposable BG2EE copy with official release
-content. It proved that bundled and shared WeiDU both require a declared game
-locale and the same language/locale/unattended/component argument order. The
-Product A's initial A7 usability surface is now complete. The next work is
+The bundled-launcher counterexample, Hidden Gameplay Options v5.1, has now
+completed both a narrow component-10 execution and a fresh-download
+component-0 (`install-all`) execution through the managed full-copy snapshot →
+workspace → sealed-build route. The latter began from a clean BG2EE 2.6.6
+source snapshot and produced a distinct sealed output fingerprint. It proved
+that bundled and shared WeiDU both require a declared game locale and the same
+language/locale/unattended/component argument order. The Product A's initial
+A7 usability surface is now complete. A Forge-derived broad-order fixture now
+also resolves as intentionally `analysis-only`: the resolver exposes exact
+missing release, installer, and selector evidence rather than silently
+substituting package identities or mutating a workspace. The next work is
 broader registry and A5 route coverage, while keeping scope deliberately
 incremental. A6 now reads a selected local TP2 as inert
 text and reviews its `VERSION`, language declaration order, and
@@ -268,6 +274,10 @@ manifest → registry → resolver → lockfile → verified artifacts
   `snapshot`/`workspace`/`seal`. It intentionally does not add automatic
   checkpoint reuse, a virtual filesystem, hardlinks, or implicit registry
   selection.
+- **Next UI slice:** a thin GUI may expose the existing managed lifecycle and
+  readiness diagnostics. It must preserve CLI gates: `analysis-only` locks are
+  non-installable, explicit disposable confirmation remains required, and
+  unavailable exact packages are shown as coverage gaps rather than replaced.
 - **Product B:** semantic analyzer; controlled component installs plus useful
   resource-level diffs.
 - **Product C:** optional semantic merge/compiler layer. Do not build it into

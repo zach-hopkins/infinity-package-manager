@@ -19,6 +19,10 @@ releases:
         provenance: verified
         evidence:
           - https://github.com/Argent77/A7-HiddenGameplayOptions/releases/tag/v5.1
+      - claim: The official Windows v5.1 archive completed component 0 (Install all Hidden Gameplay Options at once) in a fresh IEPM-managed full-copy BG2EE 2.6.6 workspace, then sealed as a completed build, using a fresh verified artifact fetch and its bundled launcher under WeiDU 25100.
+        provenance: verified
+        evidence:
+          - https://github.com/Argent77/A7-HiddenGameplayOptions/releases/tag/v5.1
     installers:
       - tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2
         program: setup-HiddenGameplayOptions.exe

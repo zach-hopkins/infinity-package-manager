@@ -32,3 +32,31 @@ fresh-copy retry established the smallest general correction: all WeiDU
 launchers require a locked game locale and receive numeric mod language, game
 locale, unattended flags, then requested components. This is a process-envelope
 fact, not a package-specific relationship or a new schema abstraction.
+
+## Managed full-copy route
+
+The later A7 evidence pass exercised the broader `install-all` stable component
+instead of the narrow debug option. It began from a separately measured clean
+Steam BG2EE 2.6.6 core-layout fingerprint:
+
+```text
+298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f
+```
+
+IEPM copied that source into a managed source snapshot, created a new
+disposable workspace from it, and fetched the official v5.1 ZIP into a new
+empty artifact cache. Component `install-all` mapped to numeric selector `0`.
+The bundled launcher completed successfully, and the workspace `WeiDU.log`
+records `~HIDDENGAMEPLAYOPTIONS\\HIDDENGAMEPLAYOPTIONS.TP2~ #0 #0`.
+
+The successful workspace was then sealed as a separate build. Its resulting
+`iepm-core-layout-v1` fingerprint was:
+
+```text
+09091959f0dbc838e1dbb218b8f8978cc0212ebe9c2c26c35711b9854734ca2d
+```
+
+This verifies IEPM's managed snapshot → disposable workspace → sealed-build
+route for a second selector of the same exact release. It does not establish
+that arbitrary releases, components, native extensions, or self-extracting
+archives can use that route without their own verified execution evidence.
