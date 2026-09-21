@@ -72,16 +72,19 @@ The narrow A5 executor is available for a fresh disposable copy only. It
 requires every named environment to be bound at runtime (not recorded in the
 lockfile), an explicit `--confirm-disposable`, a shared WeiDU binary, and a
 log directory. It verifies and materializes artifacts before executing in
-graph order, and retains a command/stdout/stderr receipt for every action.
+graph order, verifies the lockfile's core-layout fingerprint before mutation,
+and retains a command/stdout/stderr receipt plus final workspace fingerprints.
+An existing run-state marker is never resumed in place: use a new controlled
+copy and log directory after interruption.
 `--allow-weidu-warnings` is an explicit review decision: it accepts only
 WeiDU exit code 3 after the requested components are confirmed in `WeiDU.log`.
 
 The smallest executable EET route fixture is available at
 `examples/eet-minimal/modpack.yaml`. It uses a BG2EE target workspace with
 `after_eet_import: eet`: preparation and EET import run against BG2EE, while
-EET_End runs against the transformed EET result. Its fingerprints are fixture
-values, so it is for plan verification only—not authorization to install into
-a real game directory. Shared-WeiDU routes also require a game `locale` such
+EET_End runs against the transformed EET result. Its fingerprints were measured
+from the exact clean Steam 2.6.6 copies used for the evidence run, so they are
+not universal game fingerprints. Shared-WeiDU routes also require a game `locale` such
 as `en_US`; `plan` renders that locale, the bound workspace, and the
 noninteractive WeiDU flags separately from each package's numeric WeiDU
 language index.
@@ -127,6 +130,12 @@ cargo run -p iepm -- execute --lockfile modpack.lock.json --cache .iepm-cache \
   --weidu C:\\tools\\weidu.exe --workspace bgee-source=C:\\testing\\bgee-source \
   --workspace eet-target=C:\\testing\\bg2ee-target --log-dir C:\\testing\\iepm-logs \
   --confirm-disposable
+```
+
+To inspect a candidate workspace's fingerprint without mutating it:
+
+```text
+cargo run -p iepm -- fingerprint --workspace C:\\testing\\bgee-source --locale en_US
 ```
 
 ## Try it

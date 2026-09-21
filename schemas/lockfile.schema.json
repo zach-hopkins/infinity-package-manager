@@ -18,7 +18,7 @@
   "$defs": {
     "environment": {
       "type": "object", "required": ["target"],
-      "properties": { "target": { "enum": ["bgee", "bg2ee", "eet"] }, "version": { "type": "string" }, "fingerprint": { "type": "object", "required": ["profile", "value"], "properties": { "profile": { "type": "string" }, "value": { "type": "string" } }, "additionalProperties": false }, "platform": { "enum": ["windows", "linux", "macos"] }, "store": { "type": "string" }, "language": { "type": "string" } }, "additionalProperties": false
+      "properties": { "target": { "enum": ["bgee", "bg2ee", "eet"] }, "after_eet_import": { "enum": ["bgee", "bg2ee", "eet"] }, "version": { "type": "string" }, "fingerprint": { "type": "object", "required": ["profile", "value"], "properties": { "profile": { "type": "string" }, "value": { "type": "string" } }, "additionalProperties": false }, "platform": { "enum": ["windows", "linux", "macos"] }, "store": { "type": "string" }, "language": { "type": "string" }, "locale": { "type": "string", "pattern": "^[A-Za-z]{2,3}_[A-Za-z]{2,4}$" }, "baseline": { "type": "array", "items": { "type": "object", "required": ["tp2", "language", "component"], "properties": { "tp2": { "type": "string" }, "language": { "type": "integer", "minimum": 0 }, "component": { "type": "integer", "minimum": 0 } }, "additionalProperties": false } } }, "additionalProperties": false
     },
     "artifact": {
       "type": "object", "required": ["url", "sha256"],

@@ -63,7 +63,13 @@ The A5 `execute` command binds every named environment to an existing local
 workspace, requires `chitin.key`, rejects nested/duplicate bindings and
 baseline environments, copies only verified extracted content without
 overwriting an existing materialized path, and retains one command/stdout/stderr
-receipt per action. Mutation additionally requires `--confirm-disposable`.
+receipt per action. Before mutation it measures each locked workspace with the
+`iepm-core-layout-v1` profile: a fixed, explicit set of core identity/layout
+facts rather than a whole-tree hash. On success it writes a final fingerprint
+receipt. A run-state marker forbids resuming any prior or interrupted run in
+place; recovery is a fresh disposable workspace and log directory, not an
+unproven rollback protocol. Mutation additionally requires
+`--confirm-disposable`.
 `--allow-weidu-warnings` is deliberately separate: it accepts only exit code
 `3` when the output says `INSTALLED WITH WARNINGS` *and* all requested numeric
 components are independently present in `WeiDU.log`; every other nonzero exit
@@ -82,9 +88,13 @@ The EET workspace begins as `bg2ee` and declares `after_eet_import: eet`.
 This is a lifecycle transition, not an assertion that EE Fixpack supports EET:
 its TP2 explicitly rejects EET, while EET_End explicitly requires EET core.
 The registry records local-archive-verified content identities for DLC Merger
-v2.1, EE Fixpack Beta 2, and the source-tagged EET/EET_End archive v14.1. The fixture's game
-fingerprints are synthetic test values and must be replaced by measured
-disposable-workspace fingerprints before any future execution.
+v2.1, EE Fixpack Beta 2, and the source-tagged EET/EET_End archive v14.1. Its
+locked input fingerprints were measured from the exact clean Steam 2.6.6
+copies used in this evidence run: BGEE
+`04fc6602150ff7788875573dbf0b7f4aeb7ca26aaf83b022c77d9fc417d848c3` and BG2EE
+`298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f`. These
+values are scoped to that build and profile, not claimed as portable facts for
+every installation.
 
 ## Manual comparison status
 
@@ -98,7 +108,16 @@ TP2-only route.
 The plan has now completed in a disposable workspace using the separately
 hash-verified source-tagged v14.1 archive. Its resulting target log records
 the TP2's own v14.0 display value, then EET_End standard component `#0 #0`.
+The successful run's output receipt measured source
+`aac798737ecbbf12a34473a517689e704d4f2b5e043a925fa6ca74fa3b82a32c` and target
+`b3e566acf7f4c20d11fc24b26000f02adec6d04d0f9920078f6392f25e5b6b18` under the
+same profile. The run receipt and state marker reside in the chosen log
+directory and contain no workspace paths in the portable lockfile.
+A separate fresh-copy run was deliberately interrupted while EET import was
+active. Its `running` state marker remained, and the rebuilt executor rejected
+the identical retry on that marker before it measured the now-partial game
+tree or launched another process. This proves the conservative recovery
+contract; it does not claim rollback or resumable-install support.
 The run is evidence for this exact archive, command envelope, and component
 sequence—not a blanket compatibility claim for another EET release or a full
-mod stack. The resulting workspace fingerprint is still outstanding because
-the fixture's fingerprint profile is intentionally only a synthetic example.
+mod stack.

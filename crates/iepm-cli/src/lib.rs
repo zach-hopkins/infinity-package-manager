@@ -1,14 +1,78 @@
 use anyhow::{Result, bail};
 use iepm_artifacts::ArtifactStore;
 use iepm_core::{
-    ExecutionReadiness, Installer, InstallerArgument, InstallerLauncher, LockedPackage, Lockfile,
-    WeiDUComponent,
+    ExecutionReadiness, GameFingerprint, Installer, InstallerArgument, InstallerLauncher,
+    LockedPackage, Lockfile, WeiDUComponent,
 };
+use sha2::{Digest, Sha256};
 use std::collections::{BTreeMap, BTreeSet};
 use std::fs;
+use std::io::Read;
 use std::path::{Component, Path, PathBuf};
 use std::process::{Command, Stdio};
 use walkdir::WalkDir;
+
+/// A deliberately small, versioned profile over files that identify an EE
+/// installation's executable/key/DLC/log state. It is not a whole-tree hash.
+pub const CORE_FINGERPRINT_PROFILE: &str = "iepm-core-layout-v1";
+
+/// Measure the core state of a bound game workspace without modifying it.
+pub fn measure_workspace_fingerprint(
+    workspace: &Path,
+    locale: Option<&str>,
+) -> Result<GameFingerprint> {
+    if !workspace.join("chitin.key").is_file() {
+        bail!("workspace has no chitin.key: {}", workspace.display());
+    }
+    let mut paths = vec![
+        PathBuf::from("Baldur.exe"),
+        PathBuf::from("chitin.key"),
+        PathBuf::from("engine.lua"),
+        PathBuf::from("WeiDU.log"),
+        PathBuf::from("EET.flag"),
+        PathBuf::from("dlc/sod-dlc.zip"),
+        PathBuf::from("dlc/sod-dlc.disabled"),
+    ];
+    if let Some(locale) = locale {
+        paths.push(PathBuf::from("lang").join(locale).join("dialog.tlk"));
+    }
+    paths.sort();
+    let mut hasher = Sha256::new();
+    hasher.update(format!("{CORE_FINGERPRINT_PROFILE}\n").as_bytes());
+    for relative in paths {
+        let path = workspace.join(&relative);
+        hasher.update(relative.to_string_lossy().replace('\\', "/").as_bytes());
+        hasher.update([0]);
+        if path.is_file() {
+            hasher.update(b"file\0");
+            hasher.update(hash_file(&path)?.as_bytes());
+        } else if path.exists() {
+            bail!("fingerprint path is not a file: {}", path.display());
+        } else {
+            hasher.update(b"missing");
+        }
+        hasher.update([0]);
+    }
+    Ok(GameFingerprint {
+        profile: CORE_FINGERPRINT_PROFILE.to_owned(),
+        value: format!("{:x}", hasher.finalize()),
+    })
+}
+
+fn hash_file(path: &Path) -> Result<String> {
+    let mut file = fs::File::open(path)
+        .map_err(|error| anyhow::anyhow!("could not read {}: {error}", path.display()))?;
+    let mut hasher = Sha256::new();
+    let mut buffer = [0_u8; 64 * 1024];
+    loop {
+        let read = file.read(&mut buffer)?;
+        if read == 0 {
+            break;
+        }
+        hasher.update(&buffer[..read]);
+    }
+    Ok(format!("{:x}", hasher.finalize()))
+}
 
 /// Machine-local bindings and explicit authority required for A5 mutation.
 /// They are intentionally not stored in the portable lockfile.
@@ -24,6 +88,7 @@ pub struct ExecuteOptions {
 pub struct ExecutionReport {
     pub actions: usize,
     pub log_dir: PathBuf,
+    pub final_fingerprints: BTreeMap<String, GameFingerprint>,
 }
 
 /// Parse repeated `environment=path` CLI values without allowing an implicit
@@ -65,6 +130,16 @@ pub fn execute(lockfile: &Lockfile, options: &ExecuteOptions) -> Result<Executio
         );
     }
     validate_workspace_bindings(lockfile, &options.workspaces)?;
+    fs::create_dir_all(&options.log_dir).map_err(|error| {
+        anyhow::anyhow!("could not create {}: {error}", options.log_dir.display())
+    })?;
+    let run_state = options.log_dir.join("iepm-run-state.json");
+    if run_state.exists() {
+        bail!(
+            "{} already records a previous run; rebuild fresh workspaces and use a new log directory instead of resuming in place",
+            run_state.display()
+        );
+    }
     for (name, environment) in &lockfile.environments {
         if !environment.baseline.is_empty() {
             bail!(
@@ -72,11 +147,36 @@ pub fn execute(lockfile: &Lockfile, options: &ExecuteOptions) -> Result<Executio
                 name
             );
         }
+        let expected = environment
+            .fingerprint
+            .as_ref()
+            .ok_or_else(|| anyhow::anyhow!("{name} has no locked environment fingerprint"))?;
+        let actual = measure_workspace_fingerprint(
+            &options.workspaces[name],
+            environment.locale.as_deref(),
+        )?;
+        if &actual != expected {
+            bail!(
+                "workspace fingerprint mismatch for {name}: expected {}:{}, got {}:{}",
+                expected.profile,
+                expected.value,
+                actual.profile,
+                actual.value
+            );
+        }
     }
 
-    fs::create_dir_all(&options.log_dir).map_err(|error| {
-        anyhow::anyhow!("could not create {}: {error}", options.log_dir.display())
-    })?;
+    write_json_atomically(
+        &run_state,
+        &serde_json::json!({
+            "schema": 1,
+            "status": "running",
+            "registry_revision": lockfile.registry_revision,
+            "toolchain": lockfile.toolchain,
+            "environments": lockfile.environments.keys().collect::<Vec<_>>(),
+        }),
+        false,
+    )?;
     let store = ArtifactStore::new(&options.cache)?;
     let prepared = store.prepare_lockfile(lockfile)?;
     let artifacts = prepared
@@ -162,10 +262,73 @@ pub fn execute(lockfile: &Lockfile, options: &ExecuteOptions) -> Result<Executio
             )?;
         }
     }
+    let final_fingerprints = lockfile
+        .environments
+        .iter()
+        .map(|(name, environment)| {
+            Ok((
+                name.clone(),
+                measure_workspace_fingerprint(
+                    &options.workspaces[name],
+                    environment.locale.as_deref(),
+                )?,
+            ))
+        })
+        .collect::<Result<BTreeMap<_, _>>>()?;
+    let receipt = serde_json::json!({
+        "schema": 1,
+        "status": "completed",
+        "actions": actions,
+        "registry_revision": lockfile.registry_revision,
+        "toolchain": lockfile.toolchain,
+        "final_fingerprints": final_fingerprints,
+    });
+    write_json_atomically(
+        &options.log_dir.join("iepm-run-receipt.json"),
+        &receipt,
+        false,
+    )?;
+    write_json_atomically(
+        &run_state,
+        &serde_json::json!({
+            "schema": 1,
+            "status": "completed",
+            "receipt": "iepm-run-receipt.json",
+        }),
+        true,
+    )?;
     Ok(ExecutionReport {
         actions,
         log_dir: options.log_dir.clone(),
+        final_fingerprints,
     })
+}
+
+fn write_json_atomically(
+    path: &Path,
+    value: &serde_json::Value,
+    replace_existing: bool,
+) -> Result<()> {
+    let temporary = path.with_extension("part");
+    if temporary.exists() {
+        bail!(
+            "refusing to overwrite incomplete receipt: {}",
+            temporary.display()
+        );
+    }
+    if path.exists() {
+        if !replace_existing {
+            bail!("refusing to overwrite receipt: {}", path.display());
+        }
+        fs::remove_file(path)
+            .map_err(|error| anyhow::anyhow!("could not replace {}: {error}", path.display()))?;
+    }
+    let serialized = serde_json::to_vec_pretty(value)?;
+    fs::write(&temporary, serialized)
+        .map_err(|error| anyhow::anyhow!("could not write {}: {error}", temporary.display()))?;
+    fs::rename(&temporary, path)
+        .map_err(|error| anyhow::anyhow!("could not finalize {}: {error}", path.display()))?;
+    Ok(())
 }
 
 fn ensure_executable(lockfile: &Lockfile) -> Result<()> {
@@ -804,6 +967,28 @@ mod tests {
             !installed_components_are_logged(&workspace, "EET/EET.tp2", 0, &["1".to_owned()])
                 .unwrap()
         );
+        std::fs::remove_dir_all(workspace).unwrap();
+    }
+
+    #[test]
+    fn core_fingerprint_changes_when_a_selected_layout_fact_changes() {
+        let workspace = std::env::temp_dir().join(format!(
+            "iepm-fingerprint-test-{}-{}",
+            std::process::id(),
+            std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap()
+                .as_nanos()
+        ));
+        std::fs::create_dir_all(&workspace).unwrap();
+        std::fs::write(workspace.join("chitin.key"), "fixture key").unwrap();
+
+        let before = measure_workspace_fingerprint(&workspace, None).unwrap();
+        std::fs::write(workspace.join("EET.flag"), "created by EET").unwrap();
+        let after = measure_workspace_fingerprint(&workspace, None).unwrap();
+
+        assert_eq!(before.profile, CORE_FINGERPRINT_PROFILE);
+        assert_ne!(before.value, after.value);
         std::fs::remove_dir_all(workspace).unwrap();
     }
 

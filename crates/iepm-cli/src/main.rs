@@ -35,6 +35,13 @@ enum Command {
         #[arg(long, default_value = "modpack.lock.json")]
         lockfile: PathBuf,
     },
+    /// Measure a non-mutating versioned core fingerprint for a game workspace.
+    Fingerprint {
+        #[arg(long)]
+        workspace: PathBuf,
+        #[arg(long)]
+        locale: Option<String>,
+    },
     /// Materialize and execute an executable lockfile in explicitly bound,
     /// disposable game workspaces. This never accepts machine paths in a lockfile.
     Execute {
@@ -113,6 +120,10 @@ fn main() -> Result<()> {
             let lockfile: iepm_core::Lockfile = serde_json::from_str(&lockfile_text)
                 .with_context(|| format!("could not parse {}", lockfile.display()))?;
             print!("{}", iepm::render_plan(&lockfile)?);
+        }
+        Command::Fingerprint { workspace, locale } => {
+            let fingerprint = iepm::measure_workspace_fingerprint(&workspace, locale.as_deref())?;
+            println!("{}", serde_json::to_string_pretty(&fingerprint)?);
         }
         Command::Execute {
             lockfile,

@@ -11,7 +11,9 @@
 - [x] A5 (first slice): schema-3 executable preflight and non-mutating `iepm plan`
 - [x] A5 (evidence slice): executable minimal EET lifecycle fixture with source history and shared-WeiDU routes
 - [x] A5 (minimal execution): verified-artifact materialization, explicit disposable bindings, sequential action receipts, and a full five-action EET run
-- [ ] A5: measured workspace fingerprints, cancellation/recovery behavior, and further real-package execution counterexamples
+- [x] A5 (execution integrity): pre-mutation core-layout fingerprints and final output-fingerprint receipts for the minimal EET route
+- [x] A5 (recovery boundary): interrupted runs retain a non-resumable state marker; a fresh workspace is required
+- [ ] A5: further real-package execution counterexamples
 - [ ] A6: TP2-assisted registry ingestion and release-drift review
 - [ ] A7: user-facing search/add/verify CLI polish
 

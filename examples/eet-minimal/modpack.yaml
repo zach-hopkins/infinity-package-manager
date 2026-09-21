@@ -1,7 +1,8 @@
 schema: 2
 
-# This is a non-mutating A5 route fixture. The fingerprints are fixture values,
-# not a substitute for measuring disposable game workspaces at execution time.
+# Measured from the clean Steam 2.6.6 source roots used for the first A5 run.
+# These are portable core-layout facts, not machine paths; `iepm execute`
+# measures each bound disposable copy again before allowing mutation.
 environments:
   bgee-source:
     target: bgee
@@ -10,8 +11,8 @@ environments:
     language: English
     locale: en_US
     fingerprint:
-      profile: fixture-v1
-      value: clean-bgee-sod-2.6.6
+      profile: iepm-core-layout-v1
+      value: 04fc6602150ff7788875573dbf0b7f4aeb7ca26aaf83b022c77d9fc417d848c3
   eet-target:
     # EET executes against BG2EE, then turns this same named workspace into EET.
     target: bg2ee
@@ -21,8 +22,8 @@ environments:
     language: English
     locale: en_US
     fingerprint:
-      profile: fixture-v1
-      value: clean-bg2ee-2.6.6
+      profile: iepm-core-layout-v1
+      value: 298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f
 
 mods:
   - package: dlc-merger

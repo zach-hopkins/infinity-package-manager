@@ -16,10 +16,15 @@ The project is **green for the minimal A5 EET route and yellow for broader
 A5**. `iepm execute` has completed the evidence-backed five-action route in
 fresh disposable Steam copies: DLC Merger, source/target EE Fixpack, EET
 import, and EET_End. It verified/extracted pinned artifacts, bound named local
-workspaces without storing their paths in the lockfile, retained action
-receipts, and required explicit disposable-workspace confirmation. The next
-work is measured output fingerprints plus cancellation/recovery behavior and
-another real package counterexample before describing the full mod stack.
+workspaces without storing their paths in the lockfile, measured an explicit
+core-layout input fingerprint before mutation, retained action receipts and a
+completed output-fingerprint receipt, and required explicit
+disposable-workspace confirmation. An interrupted or prior run-state marker
+is deliberately non-resumable: rebuild a fresh controlled workspace rather
+than attempting rollback. A controlled interruption during EET import proved
+that the marker rejects an in-place retry before fingerprinting or mutation.
+The next work is another real-package counterexample before describing the
+full mod stack.
 
 The source-tagged EET v14.1 archive's TP2 declares itself v14.0, and EET core
 emits non-stopping warnings under shared WeiDU 251. This is resolved evidence,
@@ -159,7 +164,10 @@ reason to build a general content-addressed filesystem.
 A lockfile captures canonical identities, selected artifact content,
 materialization metadata, component selectors, installer program and
 release-specific language-index mapping, portable installer inputs, toolchain,
-environment fingerprints, registry revision, and execution graph.
+environment fingerprints, registry revision, and execution graph. The current
+`iepm-core-layout-v1` profile is a small, documented set of game identity and
+layout facts, not a misleading full-tree hash; it is measured before execution
+and again in the final receipt.
 
 Environment names are portable; local paths are machine configuration. Never
 store absolute local game paths, user-profile paths, or secrets in a manifest
@@ -219,9 +227,12 @@ manifest → registry → resolver → lockfile → verified artifacts
 - **A5:** the minimal EET route has passed manual comparison and a full
   disposable execution with action receipts. `iepm execute` is intentionally
   narrow: verified artifacts, safe materialization, explicit environment
-  bindings, sequential process supervision, and opt-in audited warnings. Next
-  are measured workspace fingerprints, cancellation/recovery behavior, and
-  more ecosystem counterexamples. `examples/eet-minimal` remains a controlled
+  bindings, pre-mutation input fingerprints, sequential process supervision,
+  opt-in audited warnings, and final output receipts. A run-state marker makes
+  interrupted workspaces non-resumable; rebuild rather than roll back. A
+  deliberate interrupted-run test has exercised that boundary. Next are more
+  ecosystem counterexamples.
+  `examples/eet-minimal` remains a controlled
   fixture, not authorization to install into a user's primary game tree.
 - **A6:** TP2-assisted registry ingestion, release drift review, and
   conservative structural inheritance.
