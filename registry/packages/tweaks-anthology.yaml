@@ -61,8 +61,16 @@ releases:
         provenance: declared
         evidence:
           - https://github.com/Gibberlings3/Tweaks-Anthology/releases/tag/v18
+      - claim: The source-tagged v18 archive exposes the same cdtweaks TP2, English language index, and component selectors mechanically observed in the SHA-verified v18 IEMOD artifact. IEPM may execute its declared toolchain route, but this does not make untested component combinations compatibility-verified.
+        provenance: derived
+        evidence:
+          - https://github.com/Gibberlings3/Tweaks-Anthology/releases/tag/v18
     installers:
       - tp2: cdtweaks/setup-cdtweaks.tp2
+        launcher: toolchain
+        languages:
+          - id: 0
+            name: English
     components:
       - { id: icon-improvements, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_icon_improvements, number: 110 } }
       - { id: more-interjections, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_more_interjections, number: 1010 } }

@@ -1,0 +1,56 @@
+schema: 2
+
+# Exact Tweaks Anthology choices from Forge-Mod_Install List.txt. This is a
+# disposable BG2EE execution fixture, not evidence for the full EET order.
+environments:
+  target:
+    target: bg2ee
+    version: "2.6.6"
+    platform: windows
+    language: English
+    locale: en_US
+    fingerprint:
+      profile: iepm-core-layout-v1
+      value: 298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f
+
+mods:
+  - package: tweaks-anthology
+    version: id:tweaks-anthology-v18-source
+    environment: target
+    components:
+      - remove-xp-cap
+      - icon-improvements
+      - more-interjections
+      - alter-wounded-triggers
+      - reveal-chapter-six-wilderness
+      - reveal-cloakwood-except-mines
+      - multiplayer-kickout-dialogue
+      - send-npcs-to-inn
+      - add-bags-of-holding
+      - reveal-city-areas
+      - higher-store-stacks
+      - thieving-in-heavy-armor
+      - expanded-dual-class-options
+      - protection-items-pnp
+      - item-spells-at-character-level
+      - loosen-cleric-multiclass-equipment
+      - improved-cure-cause-wounds
+      - alternate-concentration-check
+      - learn-spells-100-percent
+      - potion-stacks-40
+      - scroll-stacks-40
+      - angry-npcs-never-leave
+      - disable-non-hostile-rest-spawns
+      - stores-buy-all-items
+      - extra-ankheg-armor
+      - ammo-recovery-75
+      - throwing-recovery-75
+      - death-cam
+      - reduced-party-chunking
+      - movement-casting-speed-100
+      - interval-save-30
+      - travel-regeneration
+      - automatic-ranger-tracking
+      - adjust-evil-npc-reactions
+      - allow-npc-pairs-to-separate
+      - disable-advanced-ai-auto-assignment
