@@ -1,0 +1,23 @@
+schema: 2
+
+# Native-extension mechanics fixture. This proves only the exact core and
+# LuaJIT components in a disposable BG2EE workspace; it is not an assertion
+# that every EEex module or dependent UI package is behaviorally verified.
+environments:
+  target:
+    target: bg2ee
+    version: "2.6.6"
+    platform: windows
+    language: English
+    locale: en_US
+    fingerprint:
+      profile: iepm-core-layout-v1
+      value: 298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f
+
+mods:
+  - package: eeex
+    environment: target
+    # The exact release requires its unlabelled component 0 before the
+    # labelled main component 1. Explicit component choices intentionally do
+    # not implicitly add defaults, so the prerequisite stays visible here.
+    components: [bootstrap, core, luajit]

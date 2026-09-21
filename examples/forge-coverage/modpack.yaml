@@ -45,7 +45,7 @@ mods:
       source-environment: bgee-source
   - package: eeex
     environment: eet-target
-    components: [core, luajit]
+    components: [bootstrap, core, luajit]
   - package: infinity-ui-plus-plus
     environment: eet-target
     components: [core]

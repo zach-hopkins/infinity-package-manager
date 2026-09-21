@@ -294,11 +294,23 @@ pub fn inspect_tp2(source: &str) -> Tp2Observation {
         warnings: Vec::new(),
     };
     let mut current: Option<Tp2Component> = None;
+    let mut awaiting_language_name = false;
 
     for raw_line in source.trim_start_matches('\u{feff}').lines() {
         let line = raw_line.trim();
         if line.is_empty() || line.starts_with("//") {
             continue;
+        }
+        if awaiting_language_name {
+            if let Some(name) = value_at_start(line) {
+                observation.languages.push(Tp2Language {
+                    id: observation.languages.len() as u32,
+                    name,
+                });
+                awaiting_language_name = false;
+                continue;
+            }
+            awaiting_language_name = false;
         }
         if starts_keyword(line, "VERSION") {
             if observation.version.is_none() {
@@ -312,6 +324,8 @@ pub fn inspect_tp2(source: &str) -> Tp2Observation {
                     id: observation.languages.len() as u32,
                     name,
                 });
+            } else {
+                awaiting_language_name = true;
             }
             continue;
         }
@@ -321,8 +335,11 @@ pub fn inspect_tp2(source: &str) -> Tp2Observation {
             }
             current = Some(Tp2Component {
                 begin: value_after_keyword(line, "BEGIN"),
+                // A bare BEGIN receives WeiDU's declaration-order selector.
+                // Numeric text inside BEGIN (for example `BEGIN ~1~`) is a
+                // component title, not necessarily a selector.
                 number: number_after_keyword(line, "DESIGNATED")
-                    .or_else(|| number_after_keyword(line, "BEGIN")),
+                    .or(Some(observation.components.len() as u32)),
                 label: value_after_keyword(line, "LABEL"),
             });
             continue;
@@ -345,8 +362,8 @@ pub fn inspect_tp2(source: &str) -> Tp2Observation {
             }
         }
         if let Some(component) = current.as_mut() {
-            if component.number.is_none() {
-                component.number = number_after_keyword(line, "DESIGNATED");
+            if let Some(number) = number_after_keyword(line, "DESIGNATED") {
+                component.number = Some(number);
             }
             if component.label.is_none() {
                 component.label = value_after_keyword(line, "LABEL");
@@ -760,7 +777,11 @@ fn starts_keyword(line: &str, keyword: &str) -> bool {
 
 fn value_after_keyword(line: &str, keyword: &str) -> Option<String> {
     let offset = find_keyword(line, keyword)? + keyword.len();
-    let value = line[offset..].trim_start();
+    value_at_start(&line[offset..])
+}
+
+fn value_at_start(value: &str) -> Option<String> {
+    let value = value.trim_start();
     let delimiter = match value.chars().next()? {
         '~' => '~',
         '"' => '"',
@@ -864,6 +885,36 @@ ACTION_DEFINE_ASSOCIATIVE_ARRAY ignored BEGIN LABEL
         );
         assert!(observation.game_predicates.is_empty());
         assert!(observation.component_predicates.is_empty());
+    }
+
+    #[test]
+    fn inspection_handles_multiline_languages_and_implicit_component_numbers() {
+        let observation = inspect_tp2(
+            r#"
+LANGUAGE
+  ~English~ ~mod/tra~ ~mod/tra/english.tra~
+BEGIN @100
+BEGIN @200
+BEGIN ~1~
+DESIGNATED 20
+"#,
+        );
+
+        assert_eq!(
+            observation.languages,
+            vec![Tp2Language {
+                id: 0,
+                name: "English".to_owned(),
+            }]
+        );
+        assert_eq!(
+            observation
+                .components
+                .iter()
+                .map(|component| component.number)
+                .collect::<Vec<_>>(),
+            vec![Some(0), Some(1), Some(20)]
+        );
     }
 
     #[test]

@@ -12,6 +12,7 @@ use zip::ZipArchive;
 
 const MAX_EXTRACTED_BYTES: u64 = 8 * 1024 * 1024 * 1024;
 const MAX_DOWNLOAD_BYTES: u64 = 2 * 1024 * 1024 * 1024;
+const IEPM_USER_AGENT: &str = "Infinity-Package-Manager/0.1";
 
 #[derive(Debug, Clone)]
 pub struct PreparedArtifact {
@@ -31,6 +32,9 @@ impl ArtifactStore {
         fs::create_dir_all(root.join("archives"))?;
         fs::create_dir_all(root.join("extracted"))?;
         let client = Client::builder()
+            // GitHub's archive API rejects anonymous clients. This header is
+            // acquisition metadata only; artifact identity remains SHA-256.
+            .user_agent(IEPM_USER_AGENT)
             .https_only(true)
             .timeout(Duration::from_secs(120))
             .redirect(reqwest::redirect::Policy::limited(5))

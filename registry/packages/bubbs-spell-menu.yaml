@@ -23,15 +23,18 @@ releases:
         provenance: derived
         evidence:
           - https://github.com/Bubb13/Bubbs-Spell-Menu-Extended/tree/v5.2
+      - claim: Component 0 completed after EEex components 0 and 1 in a fresh managed English BG2EE 2.6.6 workspace under shared WeiDU 25100.
+        provenance: verified
     installers:
       - tp2: bubb_spell_menu_extended/bubb_spell_menu_extended.tp2
+        launcher: toolchain
         languages:
           - id: 0
             name: English
     components:
       - id: main
         default_selected: true
-        weidu: { tp2: bubb_spell_menu_extended/bubb_spell_menu_extended.tp2, label: B3-BubbsSpellMenuExtended-Main }
+        weidu: { tp2: bubb_spell_menu_extended/bubb_spell_menu_extended.tp2, label: B3-BubbsSpellMenuExtended-Main, number: 0 }
         claims:
-          - claim: The component LABEL is structurally observed. The selected numeric invocation and installer behavior remain unverified.
+          - claim: The component LABEL is structurally observed. Numeric selector 0 and installer behavior require disposable execution evidence.
             provenance: derived

@@ -25,8 +25,11 @@ releases:
         provenance: derived
         evidence:
           - https://github.com/Gibberlings3/Ascension
+      - claim: Component 0 completed with Call of the Lost Goddess component 0 and Throne of the Mad God component 0 in a fresh managed English BG2EE 2.6.6 workspace under shared WeiDU 25100.
+        provenance: verified
     installers:
       - tp2: ascension/Ascension.tp2
+        launcher: toolchain
         languages:
           - id: 0
             name: English

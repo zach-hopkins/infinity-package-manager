@@ -34,7 +34,11 @@ A7 usability surface is now complete. The initial registry bootstrap now
 covers every Forge-reference package identity plus a small popular EE ecosystem
 layer. Exact artifact and TP2 facts remain claim-level derived evidence;
 release compatibility and execution remain unverified until they have stronger
-evidence. A Forge-derived broad-order fixture resolves as intentionally
+evidence. Fresh full-copy BG2EE 2.6.6 executions now cover a four-mod popular
+starter, an Ascension/Call/Throne content fixture, EEex bootstrap/main/LuaJIT,
+and separate EEex-dependent Bubb's Spell Menu and Infinity UI++ fixtures.
+Their exact selected components carry verified claims; untested components and
+the broad-order EET interactions remain unverified. A Forge-derived broad-order fixture resolves as intentionally
 `analysis-only`: the resolver exposes missing launcher, selector,
 materialization, and unsupported-EXE evidence rather than silently substituting
 package identities or mutating a workspace. The next work is broader registry

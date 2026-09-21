@@ -169,6 +169,10 @@ local extracted packages or ZIP-family archives without executing them. See
 [the bootstrap registry guide](docs/bootstrap-registry.md) and [the TP2
 ingestion guide](docs/a6-tp2-ingestion.md).
 
+For a clean-copy personal trial of the currently tested starter stacks, see
+[personal-use.md](docs/personal-use.md). The full Forge fixture remains
+planning-only until its release-specific executable routes are proven.
+
 To prepare curator-review evidence from a known local TP2 without running it:
 
 ```text

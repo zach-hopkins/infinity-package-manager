@@ -24,8 +24,11 @@ releases:
           - https://github.com/AciferBG/Call-of-the-Lost-Goddess/releases/tag/v3.1
       - claim: Numeric component 0 is the primary component in the Forge reference list; the TP2 structurally exposes DESIGNATED 0 but no LABEL.
         provenance: community
+      - claim: Component 0 completed with Ascension component 0 and Throne of the Mad God component 0 in a fresh managed English BG2EE 2.6.6 workspace under shared WeiDU 25100.
+        provenance: verified
     installers:
       - tp2: Godcall/Setup-Godcall.tp2
+        launcher: toolchain
         languages:
           - id: 1
             name: English

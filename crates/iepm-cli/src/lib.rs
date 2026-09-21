@@ -1198,6 +1198,13 @@ fn run_weidu(
             }
         );
     }
+    if !installed_components_are_logged(workspace, &installer.tp2, language_id, components)? {
+        bail!(
+            "WeiDU action {action} for {} exited successfully but did not record every requested component in WeiDU.log; inspect {}",
+            package.package,
+            stdout_path.display(),
+        );
+    }
     Ok(())
 }
 

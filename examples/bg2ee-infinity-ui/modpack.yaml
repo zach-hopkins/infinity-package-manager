@@ -1,0 +1,23 @@
+schema: 2
+
+# EEex-aware UI fixture for the exact source-tagged Infinity UI++ v1.23 tree.
+# Component 0 is mechanically derived from TP2 declaration order; the actual
+# run must still leave its WeiDU receipt before it earns stronger evidence.
+environments:
+  target:
+    target: bg2ee
+    version: "2.6.6"
+    platform: windows
+    language: English
+    locale: en_US
+    fingerprint:
+      profile: iepm-core-layout-v1
+      value: 298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f
+
+mods:
+  - package: eeex
+    environment: target
+    components: [bootstrap, core]
+  - package: infinity-ui-plus-plus
+    environment: target
+    components: [core]

@@ -1,0 +1,31 @@
+schema: 2
+
+# A deliberately small, useful BG2EE stack for the first fresh personal-use
+# integration run. Each selected release is an exact ZIP/IEMOD artifact with
+# a resolved shared-WeiDU invocation. Compatibility is still shown as a
+# warning unless the resulting disposable build produces stronger evidence.
+environments:
+  target:
+    target: bg2ee
+    version: "2.6.6"
+    platform: windows
+    language: English
+    locale: en_US
+    fingerprint:
+      profile: iepm-core-layout-v1
+      value: 298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f
+
+mods:
+  - package: hidden-gameplay-options
+    version: "5.1"
+    environment: target
+    components: [install-all]
+  - package: spell-revisions
+    environment: target
+    components: [main]
+  - package: iwdification
+    environment: target
+    components: [bard-songs]
+  - package: rogue-rebalancing
+    environment: target
+    components: [core]

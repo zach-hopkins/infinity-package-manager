@@ -1,0 +1,27 @@
+schema: 2
+
+# Exact Forge-reference content releases exercised as a separate BG2EE
+# mechanics fixture. It intentionally has no inferred cross-mod ordering:
+# those relationships require their own evidence before an EET build can rely
+# on them.
+environments:
+  target:
+    target: bg2ee
+    version: "2.6.6"
+    platform: windows
+    language: English
+    locale: en_US
+    fingerprint:
+      profile: iepm-core-layout-v1
+      value: 298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f
+
+mods:
+  - package: ascension
+    environment: target
+    components: [rewritten-final-chapter]
+  - package: call-of-the-lost-goddess
+    environment: target
+    components: [core-story]
+  - package: throne-of-the-mad-god
+    environment: target
+    components: [core-story]

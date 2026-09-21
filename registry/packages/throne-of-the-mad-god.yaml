@@ -24,8 +24,11 @@ releases:
           - https://github.com/AciferBG/Throne-of-the-Mad-God/releases/tag/v2.3
       - claim: Numeric component 0 is the primary component in the Forge reference list. The TP2's first BEGIN declaration is structurally observed but has no DESIGNATED or LABEL selector.
         provenance: community
+      - claim: Component 0 completed with Ascension component 0 and Call of the Lost Goddess component 0 in a fresh managed English BG2EE 2.6.6 workspace under shared WeiDU 25100.
+        provenance: verified
     installers:
       - tp2: ThroneoftheMadGod/Setup-ThroneoftheMadGod.tp2
+        launcher: toolchain
         languages:
           - id: 1
             name: English

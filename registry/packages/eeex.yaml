@@ -25,12 +25,21 @@ releases:
         provenance: declared
         evidence:
           - https://github.com/Bubb13/EEex/blob/master/README.md
+      - claim: Components 0 (bootstrap), 1 (EEex), and 8 (LuaJIT) completed in a fresh managed English BG2EE 2.6.6 workspace under shared WeiDU 25100; the completed workspace contained EEex.dll and InfinityLoader runtime files. Components 0 and 1 also completed before Bubb's Spell Menu and Infinity UI++ mechanics fixtures.
+        provenance: verified
     installers:
       - tp2: EEex/EEex.tp2
+        launcher: toolchain
         languages:
           - id: 0
             name: English
     components:
+      - id: bootstrap
+        default_selected: true
+        weidu: { tp2: EEex/EEex.tp2, number: 0 }
+        claims:
+          - claim: The unlabelled numeric component 0 is mechanically observed and must precede the labelled main component in the exact v1.2.0 release.
+            provenance: derived
       - id: core
         weidu: { tp2: EEex/EEex.tp2, label: B3-EEex-Main, number: 1 }
       - id: luajit

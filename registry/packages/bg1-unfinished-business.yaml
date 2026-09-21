@@ -22,6 +22,10 @@ releases:
           - https://github.com/Pocket-Plane-Group/bg1ub/releases/tag/v17.1
     installers:
       - tp2: bg1ub/bg1ub.tp2
+        launcher: toolchain
+        languages:
+          - id: 0
+            name: English
     components:
       - id: ice-island-level-two-restoration
         weidu: { tp2: bg1ub/bg1ub.tp2, label: bg1ub-IceIslLevelTwoRestoration, number: 0 }

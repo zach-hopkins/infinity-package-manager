@@ -23,8 +23,14 @@ releases:
         provenance: declared
         evidence:
           - https://github.com/Gibberlings3/SwordCoastStratagems/blob/master/stratagems/doc/readme-stratagems.html
+      - claim: Component 50 (bard songs) completed with Hidden Gameplay Options component 0, Rogue Rebalancing component 0, and Spell Revisions component 0 in a fresh managed English BG2EE 2.6.6 workspace under shared WeiDU 25100.
+        provenance: verified
     installers:
       - tp2: iwdification/setup-iwdification.tp2
+        launcher: toolchain
+        languages:
+          - id: 0
+            name: English
     components:
       - id: bard-songs
         weidu: { tp2: iwdification/setup-iwdification.tp2, label: cd_iwdification_bard_songs, number: 50 }

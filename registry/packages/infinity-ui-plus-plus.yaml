@@ -23,12 +23,18 @@ releases:
         provenance: derived
         evidence:
           - https://github.com/Renegade0/InfinityUI/tree/v1.23
+      - claim: Component 0 completed after EEex components 0 and 1 in a fresh managed English BG2EE 2.6.6 workspace under shared WeiDU 25100.
+        provenance: verified
     installers:
       - tp2: infinity_ui/infinity_ui.tp2
+        launcher: toolchain
+        languages:
+          - id: 0
+            name: English
     components:
       - id: core
         default_selected: true
-        weidu: { tp2: infinity_ui/infinity_ui.tp2 }
+        weidu: { tp2: infinity_ui/infinity_ui.tp2, number: 0 }
         claims:
-          - claim: The first TP2 BEGIN declaration is structurally observed, but this release does not expose a mechanically observed DESIGNATED numeric selector or LABEL for it.
+          - claim: The first TP2 BEGIN declaration is structurally observed. Its numeric selector is declaration-order component 0; the release exposes no LABEL.
             provenance: derived

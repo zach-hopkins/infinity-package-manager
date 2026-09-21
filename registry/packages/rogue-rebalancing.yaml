@@ -20,8 +20,14 @@ releases:
         provenance: derived
         evidence:
           - https://github.com/Spellhold-Studios/Rogue-Rebalancing/releases/tag/v4.92
+      - claim: Component 0 completed with Hidden Gameplay Options component 0, IWDification component 50, and Spell Revisions component 0 in a fresh managed English BG2EE 2.6.6 workspace under shared WeiDU 25100.
+        provenance: verified
     installers:
       - tp2: rr/setup-rr.tp2
+        launcher: toolchain
+        languages:
+          - id: 0
+            name: English
     components:
       - id: core
         weidu: { tp2: rr/setup-rr.tp2, number: 0 }
