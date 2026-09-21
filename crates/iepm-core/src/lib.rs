@@ -232,6 +232,10 @@ impl Artifact {
 pub enum ArchiveFormat {
     #[default]
     Zip,
+    /// An exact release asset whose content can be hashed and selected, but
+    /// which A4 must not prepare or execute generically. A package-specific
+    /// materialization fixture is required before it can become runnable.
+    Executable,
 }
 
 #[derive(Debug, Clone, Copy, Deserialize, Serialize, PartialEq, Eq)]
@@ -346,6 +350,11 @@ pub struct Component {
     pub weidu: Option<WeiDUComponent>,
     #[serde(default)]
     pub provides: Vec<Capability>,
+    /// Selector and component-level evidence can differ from a release's
+    /// overall provenance. This is particularly important for mechanically
+    /// observed TP2 selectors combined with separately curated semantics.
+    #[serde(default)]
+    pub claims: Vec<ClaimProvenance>,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]

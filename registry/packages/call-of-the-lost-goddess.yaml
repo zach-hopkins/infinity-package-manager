@@ -1,0 +1,35 @@
+schema: 2
+package: call-of-the-lost-goddess
+aliases: [godcall]
+releases:
+  - release_id: call-of-the-lost-goddess-v3.1
+    version: "v3.1"
+    artifacts:
+      - url: https://github.com/AciferBG/Call-of-the-Lost-Goddess/releases/download/v3.1/Call_of_the_lost_goddess_V_3.1.zip
+        sha256: 7711cb1df00a01af2a3cb053ad070b79a1a3f96649efad003a74746942374569
+        platforms: [windows]
+    materialization:
+      source_root: Godcall
+    compatibility:
+      games: [bg2ee, eet]
+    install:
+      phase: eet
+      after: [eet]
+      before: [eet-end]
+    provenance: unverified
+    claims:
+      - claim: Release URL, archive hash, TP2 path, VERSION v3.1, and language declaration order were mechanically derived from the exact v3.1 archive.
+        provenance: derived
+        evidence:
+          - https://github.com/AciferBG/Call-of-the-Lost-Goddess/releases/tag/v3.1
+      - claim: Numeric component 0 is the primary component in the Forge reference list; the TP2 structurally exposes DESIGNATED 0 but no LABEL.
+        provenance: community
+    installers:
+      - tp2: Godcall/Setup-Godcall.tp2
+        languages:
+          - id: 1
+            name: English
+    components:
+      - id: core-story
+        default_selected: true
+        weidu: { tp2: Godcall/Setup-Godcall.tp2, number: 0 }

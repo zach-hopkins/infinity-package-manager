@@ -640,7 +640,9 @@ dependencies = [
  "iepm-core",
  "serde",
  "serde_yaml",
+ "sha2",
  "walkdir",
+ "zip",
 ]
 
 [[package]]

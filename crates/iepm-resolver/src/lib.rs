@@ -1,7 +1,8 @@
 use iepm_core::{
-    Artifact, Capability, Dependency, ExecutionNode, ExecutionReadiness, GameEnvironment,
-    GameFingerprint, InstallerArgument, InstallerLauncher, LockedComponent, LockedPackage,
-    Lockfile, Manifest, PackageRecord, Provenance, Registry, RelationshipKind, Release, Toolchain,
+    ArchiveFormat, Artifact, Capability, Dependency, ExecutionNode, ExecutionReadiness,
+    GameEnvironment, GameFingerprint, InstallerArgument, InstallerLauncher, LockedComponent,
+    LockedPackage, Lockfile, Manifest, PackageRecord, Provenance, Registry, RelationshipKind,
+    Release, Toolchain,
 };
 use semver::{Version, VersionReq};
 use std::collections::{BTreeMap, BTreeSet, VecDeque};
@@ -245,6 +246,16 @@ pub fn resolve(
             if artifact.is_none() {
                 warnings.insert(format!("{} has no verified artifact", key.node_id()));
                 blocking_reasons.insert(format!("{} has no verified artifact", key.node_id()));
+            }
+            if artifact
+                .as_ref()
+                .is_some_and(|artifact| artifact.format != ArchiveFormat::Zip)
+            {
+                blocking_reasons.insert(format!(
+                    "{} uses artifact format {:?}, which has no generic A4 preparation route",
+                    key.node_id(),
+                    artifact.as_ref().expect("checked above").format
+                ));
             }
             if release.installers.is_empty() {
                 blocking_reasons.insert(format!(
@@ -1094,6 +1105,7 @@ mod tests {
                 subcomponent: None,
             }),
             provides: vec![],
+            claims: vec![],
         });
         registry.insert("package".to_owned(), record("package", vec![package]));
         let lock = resolve(
@@ -1232,6 +1244,7 @@ mod tests {
                 subcomponent: None,
             }),
             provides: vec![],
+            claims: vec![],
         });
         registry.insert("package".to_owned(), record("package", vec![package]));
         let mut manifest = manifest(vec![RequestedMod::Package("package".to_owned())]);
@@ -1253,6 +1266,59 @@ mod tests {
                 .blocking_reasons
                 .iter()
                 .any(|reason| reason.contains("no game locale for WeiDU execution"))
+        );
+    }
+
+    #[test]
+    fn treats_an_exact_executable_artifact_as_analysis_only() {
+        let mut registry = Registry::new();
+        let mut package = release("1", Phase::Eet);
+        package.artifact = Some(Artifact {
+            url: "https://example.invalid/package.exe".to_owned(),
+            sha256: "a".repeat(64),
+            mirrors: vec![],
+            format: ArchiveFormat::Executable,
+            platforms: vec![iepm_core::ArtifactPlatform::Windows],
+            architectures: vec![],
+        });
+        package.installers.push(iepm_core::Installer {
+            tp2: "mod/setup-package.tp2".to_owned(),
+            program: Some("setup-package.exe".to_owned()),
+            launcher: Default::default(),
+            languages: vec![iepm_core::InstallerLanguage {
+                id: 0,
+                name: "English".to_owned(),
+            }],
+            inputs: vec![],
+            arguments: vec![],
+        });
+        package.components.push(iepm_core::Component {
+            id: "main".to_owned(),
+            default_selected: true,
+            weidu: Some(iepm_core::WeiDUComponent {
+                tp2: "mod/setup-package.tp2".to_owned(),
+                label: None,
+                number: Some(0),
+                subcomponent: None,
+            }),
+            provides: vec![],
+            claims: vec![],
+        });
+        registry.insert("package".to_owned(), record("package", vec![package]));
+
+        let lock = resolve(
+            &manifest(vec![RequestedMod::Package("package".to_owned())]),
+            &registry,
+            "test",
+            toolchain(),
+        )
+        .unwrap();
+
+        assert_eq!(lock.execution_readiness, ExecutionReadiness::AnalysisOnly);
+        assert!(
+            lock.blocking_reasons
+                .iter()
+                .any(|reason| reason.contains("no generic A4 preparation route"))
         );
     }
 
@@ -1289,6 +1355,7 @@ mod tests {
                 subcomponent: None,
             }),
             provides: vec![],
+            claims: vec![],
         });
         registry.insert("package".to_owned(), record("package", vec![package]));
         let mut manifest = manifest(vec![RequestedMod::Package("package".to_owned())]);
@@ -1338,6 +1405,7 @@ mod tests {
                 subcomponent: None,
             }),
             provides: vec![],
+            claims: vec![],
         });
         registry.insert("package".to_owned(), record("package", vec![package]));
         let mut manifest = manifest(vec![RequestedMod::Package("package".to_owned())]);
@@ -1510,6 +1578,7 @@ mod tests {
                 name: capability.to_owned(),
                 exclusive: true,
             }],
+            claims: vec![],
         }
     }
 

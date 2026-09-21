@@ -1,0 +1,27 @@
+schema: 2
+package: rogue-rebalancing
+aliases: [rr]
+releases:
+  - release_id: rogue-rebalancing-v4.92
+    version: "v4.92"
+    artifacts:
+      - url: https://github.com/Spellhold-Studios/Rogue-Rebalancing/releases/download/v4.92/rr-v492.zip
+        sha256: 692297f6da8fbfe40eeccfc3ac8fd449c66b2c8e91d3d59b70cd5866a69c503e
+        platforms: [windows]
+    materialization:
+      source_root: rr
+    compatibility:
+      games: [bgee, bg2ee, eet]
+    install:
+      phase: eet
+    provenance: unverified
+    claims:
+      - claim: The ZIP was freshly downloaded from the official v4.92 release and SHA-256 verified. Its TP2 path, VERSION v4.92, and numeric component declarations were mechanically inspected.
+        provenance: derived
+        evidence:
+          - https://github.com/Spellhold-Studios/Rogue-Rebalancing/releases/tag/v4.92
+    installers:
+      - tp2: rr/setup-rr.tp2
+    components:
+      - id: core
+        weidu: { tp2: rr/setup-rr.tp2, number: 0 }

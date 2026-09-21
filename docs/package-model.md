@@ -15,6 +15,13 @@ subcomponent group. `provenance` names source strength: `declared`, `derived`,
 `verified`, `community`, or `unverified`; behavioral and compatibility claims
 must not inherit that status merely because structural data did.
 
+Component selectors can carry claim-level provenance too. This lets a record
+say that a numeric/LABEL pair was mechanically observed while a capability,
+ordering relationship, or compatibility claim is separately author-declared or
+community-curated. Upstream integration is valuable maintenance information,
+but it is not required for a release to become IEPM-verified through exact
+artifacts and repeatable test evidence.
+
 Manifests contain intent. Lockfiles contain the resolver's exact choice:
 
 - named game environments, each with a versioned fingerprint profile
@@ -32,8 +39,14 @@ Unknown metadata is omitted rather than invented. An omitted game fingerprint,
 artifact, or WeiDU version makes the lockfile honest about what it cannot yet
 reproduce; `iepm verify` will later turn those gaps into actionable checks.
 
-Currently A4 supports explicit `zip` artifacts. They are cached by SHA-256,
+Currently A4 prepares explicit `zip` artifacts. They are cached by SHA-256,
 verified before use, may have fallback mirrors, and are extracted only after
 rejecting unsafe, duplicate, case-colliding, and symbolic-link paths. An empty
 `platforms` or `architectures` list denotes a portable artifact; a nonempty
 list is an allow-list.
+
+The registry can additionally record an `executable` artifact format so a
+released Windows EXE has a URL, platform, and SHA-256 without being mislabeled
+as a ZIP. It remains deliberately non-preparable and non-executable until a
+release-specific materialization fixture exists; this is evidence retention,
+not generic EXE support.

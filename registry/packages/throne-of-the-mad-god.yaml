@@ -1,0 +1,35 @@
+schema: 2
+package: throne-of-the-mad-god
+aliases: [throneofthemadgod]
+releases:
+  - release_id: throne-of-the-mad-god-v2.3
+    version: "2.3"
+    artifacts:
+      - url: https://github.com/AciferBG/Throne-of-the-Mad-God/releases/download/v2.3/Throne_of_the_Mad_God_v2.3.zip
+        sha256: 24c5e501128e92fea1f4a5562b02e30af2f69fc29e9584b3b689cc407a19c0da
+        platforms: [windows]
+    materialization:
+      source_root: ThroneoftheMadGod
+    compatibility:
+      games: [bg2ee, eet]
+    install:
+      phase: eet
+      after: [eet]
+      before: [eet-end]
+    provenance: unverified
+    claims:
+      - claim: Release URL, archive hash, TP2 path, VERSION 2.3, and language declaration order were mechanically derived from the exact v2.3 archive.
+        provenance: derived
+        evidence:
+          - https://github.com/AciferBG/Throne-of-the-Mad-God/releases/tag/v2.3
+      - claim: Numeric component 0 is the primary component in the Forge reference list. The TP2's first BEGIN declaration is structurally observed but has no DESIGNATED or LABEL selector.
+        provenance: community
+    installers:
+      - tp2: ThroneoftheMadGod/Setup-ThroneoftheMadGod.tp2
+        languages:
+          - id: 1
+            name: English
+    components:
+      - id: core-story
+        default_selected: true
+        weidu: { tp2: ThroneoftheMadGod/Setup-ThroneoftheMadGod.tp2, number: 0 }

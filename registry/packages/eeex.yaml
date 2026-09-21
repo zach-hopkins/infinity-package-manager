@@ -1,12 +1,39 @@
-schema: 1
+schema: 2
 package: eeex
 releases:
-  - version: "0.9.15"
+  - release_id: eeex-v1.2.0
+    version: "v1.2.0"
+    artifacts:
+      - url: https://github.com/Bubb13/EEex/releases/download/v1.2.0/eeex-v1.2.0.zip
+        sha256: ac2d81bc5e6fdba04a686338a969507e5beca9cb082b2809a556e0874e690a88
+        platforms: [windows]
+    materialization:
+      source_root: EEex
     compatibility:
-      games: [bg2ee, eet]
+      games: [bgee, bg2ee, eet]
     install:
       phase: eet
       after: [eet]
       before: [eet-end]
     provenance: unverified
-    components: []
+    claims:
+      - claim: Release URL, archive hash, TP2 path, VERSION v1.2.0, language order, and selectors were mechanically derived from the exact v1.2.0 archive.
+        provenance: derived
+        evidence:
+          - https://github.com/Bubb13/EEex/releases/tag/v1.2.0
+      - claim: EEex is a native executable extension. Presence of its TP2 does not establish a safe generic WeiDU materialization or execution route.
+        provenance: declared
+        evidence:
+          - https://github.com/Bubb13/EEex/blob/master/README.md
+    installers:
+      - tp2: EEex/EEex.tp2
+        languages:
+          - id: 0
+            name: English
+    components:
+      - id: core
+        weidu: { tp2: EEex/EEex.tp2, label: B3-EEex-Main, number: 1 }
+      - id: luajit
+        weidu: { tp2: EEex/EEex.tp2, label: B3-EEex-LuaJIT, number: 8 }
+      - id: effect-menu
+        weidu: { tp2: EEex/EEex.tp2, label: B3-EEex-Module-Effect-Menu, number: 2 }

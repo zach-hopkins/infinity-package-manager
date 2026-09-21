@@ -7,19 +7,22 @@ performed without treating existing local mod downloads as input evidence.
 
 ## Exact identity scope
 
-`examples/forge-coverage/modpack.yaml` expresses the portion of that order
-whose package identities already exist in IEPM's registry. It intentionally
-does **not** substitute Forge's `stratagems` request with the distinct
-`tactics-remix` package. Likewise, Call of the Lost Goddess and Throne of the
-Mad God are left out because they have no registry records. This preserves the
-requester's intent and makes coverage gaps visible rather than making a
+`examples/forge-coverage/modpack.yaml` now expresses every exact package
+identity from the reference order. It intentionally does **not** substitute
+Forge's `stratagems` request with the distinct `tactics-remix` package. Call
+of the Lost Goddess and Throne of the Mad God have likewise been added under
+their exact identities. This preserves the requester's intent and makes
+remaining component and execution gaps visible rather than making a
 plausible-looking but different build.
 
 The fixture contains the explicit EET prerequisites required for a meaningful
 graph: DLC Merger, EE Fixpack in its source and target environments, EET, and
 EET_End. It also represents the currently known identities for EEex, Infinity
-UI++, Bubb's Spell Menu, Hidden Gameplay Options, Ascension, and Tweaks
-Anthology. It is a resolver-coverage fixture, not an install manifest.
+UI++, Bubb's Spell Menu, Hidden Gameplay Options, Call of the Lost Goddess,
+Throne of the Mad God, Ascension, Tweaks Anthology, and SCS. It is a
+resolver-coverage fixture, not an install manifest. The initial SCS component
+subset is deliberately bounded; `inspect-package` exposes the complete 146
+structural component declarations for later curated mapping.
 
 ## Large-build result
 
@@ -28,11 +31,14 @@ cross-environment EET graph. `iepm verify --require-executable` and a guarded
 `iepm install` both rejected it as `analysis-only` before any workspace,
 artifact cache, log directory, or game tree could be changed.
 
-The causal blockers are intentionally specific: Ascension, Bubb's Spell Menu,
-EEex, Infinity UI++, and Tweaks Anthology each still lack a verified artifact,
-installer definition, and selected executable component in the registry. That
-is a passing safety result: the resolver supports discovery and planning but
-does not pretend a broad mod order is runnable from partial metadata.
+The causal blockers are intentionally specific: exact artifact identity and
+many TP2 selectors now exist, but Ascension, Bubb's Spell Menu, EEex, Infinity
+UI++, Call of the Lost Goddess, Throne of the Mad God, Tweaks Anthology, and
+SCS still lack one or more verified launcher, language, numeric-selector, or
+materialization facts. SCS additionally records a Windows EXE artifact that
+IEPM deliberately refuses to prepare generically. That is a passing safety
+result: the resolver supports discovery and planning but does not pretend a
+broad mod order is runnable from partial metadata.
 
 ## Fresh popular-mod fixtures
 
@@ -51,10 +57,10 @@ and exposes a core component plus numbered optional modules. These are
 structural observations only. They neither verify EEex's native installer
 effects nor establish that any module is compatible with this build order.
 
-No support for executable/self-extracting archives was added. Treating an EXE
-as an archive or an installer is an execution-boundary decision, not a format
-enum cleanup; it needs a specific release recipe and a trusted disposable
-execution fixture first.
+The registry can now retain an EXE artifact's exact SHA-256 and platform while
+the resolver/A4 explicitly reject it as non-preparable. This is not generic
+EXE support: treating an EXE as an archive or installer still needs a specific
+release recipe and a trusted disposable execution fixture first.
 
 Upstream release pages and project documentation establish the distribution
 context for these fixtures: [Tweaks Anthology releases](https://github.com/Gibberlings3/Tweaks-Anthology/releases),

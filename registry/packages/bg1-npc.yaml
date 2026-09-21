@@ -1,0 +1,17 @@
+schema: 2
+package: bg1-npc
+aliases: [bg1npc]
+releases:
+  - release_id: bg1npc-v32
+    version: "v32"
+    compatibility:
+      games: [bgee, eet]
+    install:
+      phase: bgee
+    provenance: unverified
+    claims:
+      - claim: The upstream project describes BG1 NPC as a WeiDU mod for BGEE and documents EET support. This bootstrap record intentionally has no artifact hash or component mappings yet.
+        provenance: declared
+        evidence:
+          - https://github.com/Gibberlings3/BG1NPC
+          - https://github.com/Gibberlings3/BG1NPC/releases/tag/v32

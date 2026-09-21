@@ -1,0 +1,18 @@
+schema: 2
+package: item-revisions
+aliases: [item-rev]
+releases:
+  - release_id: item-revisions-v3.0.17
+    version: "v3.0.17"
+    compatibility:
+      games: [bgee, bg2ee, eet]
+    install:
+      phase: eet
+      before: [stratagems]
+    provenance: unverified
+    claims:
+      - claim: The upstream v3.0.17 release is recognized. SCS documentation recommends Item Revisions before SCS; IEPM records that as ordering only. Artifact hash, component selectors, and installer behavior remain unverified.
+        provenance: declared
+        evidence:
+          - https://github.com/Gibberlings3/ItemRevisions/releases/tag/v3.0.17
+          - https://github.com/Gibberlings3/SwordCoastStratagems/blob/master/stratagems/doc/readme-stratagems.html

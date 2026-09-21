@@ -2,8 +2,9 @@ schema: 2
 
 # Resolver-only coverage request derived from Forge-Mod_Install List.txt.
 # It includes only exact existing IEPM package identities. In particular,
-# Forge's `stratagems` entry is not silently substituted with `tactics-remix`,
-# and the unregistered quest mods remain outside this request.
+# Forge's `stratagems` entry is not silently substituted with `tactics-remix`.
+# Component coverage is deliberately bounded to selectors mechanically mapped
+# during this bootstrap; the reference list remains a larger future fixture.
 environments:
   bgee-source:
     target: bgee
@@ -44,18 +45,45 @@ mods:
       source-environment: bgee-source
   - package: eeex
     environment: eet-target
+    components: [core, luajit]
   - package: infinity-ui-plus-plus
     environment: eet-target
+    components: [core]
   - package: bubbs-spell-menu
     environment: eet-target
+    components: [main]
   - package: hidden-gameplay-options
     version: "5.1"
     environment: eet-target
     components: [install-all]
   - package: ascension
     environment: eet-target
+    components:
+      - rewritten-final-chapter
+      - redeem-balthazar
+      - improved-sarevok-interactions
+      - improved-imoen-interactions
+      - restored-bhaalspawn-powers
+      - improved-slayer-transformation
+      - expanded-bioware-epilogues
+      - tougher-abazigal
+      - tougher-balthazar
+      - tougher-demogorgon
+      - tougher-gromnir
+      - tougher-illasera
+      - tougher-yaga-shura
+  - package: call-of-the-lost-goddess
+    environment: eet-target
+    components: [core-story]
+  - package: throne-of-the-mad-god
+    environment: eet-target
+    components: [core-story]
   - package: tweaks-anthology
     environment: eet-target
+    components: [remove-xp-cap, icon-improvements, more-interjections]
+  - package: stratagems
+    environment: eet-target
+    components: [batch-mode, spell-tweaks-batch, initialize-ai, smarter-mages, smarter-priests, ascension-irenicus-sendai, ascension-demons]
   - package: eet-end
     environment: eet-target
     components: [standard]

@@ -30,12 +30,15 @@ workspace → sealed-build route. The latter began from a clean BG2EE 2.6.6
 source snapshot and produced a distinct sealed output fingerprint. It proved
 that bundled and shared WeiDU both require a declared game locale and the same
 language/locale/unattended/component argument order. The Product A's initial
-A7 usability surface is now complete. A Forge-derived broad-order fixture now
-also resolves as intentionally `analysis-only`: the resolver exposes exact
-missing release, installer, and selector evidence rather than silently
-substituting package identities or mutating a workspace. The next work is
-broader registry and A5 route coverage, while keeping scope deliberately
-incremental. A6 now reads a selected local TP2 as inert
+A7 usability surface is now complete. The initial registry bootstrap now
+covers every Forge-reference package identity plus a small popular EE ecosystem
+layer. Exact artifact and TP2 facts remain claim-level derived evidence;
+release compatibility and execution remain unverified until they have stronger
+evidence. A Forge-derived broad-order fixture resolves as intentionally
+`analysis-only`: the resolver exposes missing launcher, selector,
+materialization, and unsupported-EXE evidence rather than silently substituting
+package identities or mutating a workspace. The next work is broader registry
+and A5 route coverage, while keeping scope deliberately incremental. A6 now reads a selected local TP2 as inert
 text and reviews its `VERSION`, language declaration order, and
 `BEGIN`/`DESIGNATED`/`LABEL` selectors against one curated release. It emits
 review JSON but never executes TP2 code, discovers behavior, or rewrites YAML.
@@ -268,6 +271,11 @@ manifest → registry → resolver → lockfile → verified artifacts
   drift report for an existing release. It does not auto-create releases or
   inherit compatibility, relationships, artifacts, installer inputs, or
   verification because those are behavioral or release-trust claims.
+  Bootstrap extension: `inspect-package` safely reads an extracted directory
+  or ZIP-family archive and reports content identity plus inert TP2 structure;
+  `derive-bgmod` creates an author-reviewable schema-2 candidate only when
+  callers explicitly provide nonmechanical game/phase inputs. Literal
+  predicates are evidence, not auto-created resolver relationships.
 - **A7:** user-facing CLI ergonomics are complete for the first Product A
   workflow: curated `search`, preview-first `add`, non-mutating lockfile
   `verify`, `install` aliasing the guarded A5 executor, and full-copy
@@ -278,6 +286,9 @@ manifest → registry → resolver → lockfile → verified artifacts
   readiness diagnostics. It must preserve CLI gates: `analysis-only` locks are
   non-installable, explicit disposable confirmation remains required, and
   unavailable exact packages are shown as coverage gaps rather than replaced.
+  The GUI should display artifact integrity, mechanical metadata,
+  compatibility verification, and upstream integration as separate status
+  dimensions; author participation is never required for IEPM verification.
 - **Product B:** semantic analyzer; controlled component installs plus useful
   resource-level diffs.
 - **Product C:** optional semantic merge/compiler layer. Do not build it into

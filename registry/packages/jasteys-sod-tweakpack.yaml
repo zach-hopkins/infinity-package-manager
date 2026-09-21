@@ -1,0 +1,16 @@
+schema: 2
+package: jasteys-sod-tweakpack
+releases:
+  - release_id: jasteys-sod-tweakpack-v13
+    version: "v13"
+    compatibility:
+      games: [bgee, eet]
+    install:
+      phase: eet
+    provenance: unverified
+    claims:
+      - claim: The upstream v13 project describes this as a set of SoD-related tweaks for SoD, EET, and BGT. Artifact hash, component selectors, and installer behavior remain unverified.
+        provenance: declared
+        evidence:
+          - https://github.com/Gibberlings3/Jasteys_SoD_Tweakpack
+          - https://github.com/Gibberlings3/Jasteys_SoD_Tweakpack/releases/tag/v13

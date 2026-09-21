@@ -1,9 +1,16 @@
 use anyhow::{Context, Result, bail};
 use iepm_core::{Installer, PackageRecord, Registry, Release};
 use serde::Serialize;
+use sha2::{Digest, Sha256};
 use std::collections::{BTreeMap, BTreeSet};
+use std::fs::File;
+use std::io::Read;
 use std::path::Path;
 use walkdir::WalkDir;
+use zip::ZipArchive;
+
+const MAX_INSPECTED_PACKAGE_BYTES: u64 = 8 * 1024 * 1024 * 1024;
+const MAX_INSPECTED_TP2_BYTES: u64 = 64 * 1024 * 1024;
 
 pub fn load(path: &Path) -> Result<Registry> {
     let mut registry = Registry::new();
@@ -50,6 +57,15 @@ pub struct Tp2Observation {
     pub version: Option<String>,
     pub languages: Vec<Tp2Language>,
     pub components: Vec<Tp2Component>,
+    /// Literal `GAME_IS` clauses observed in the TP2. They are source facts,
+    /// not a normalized compatibility verdict.
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub game_predicates: Vec<String>,
+    /// Literal component relationship clauses. They are intentionally left as
+    /// source text because resolving package identity from a TP2 token is an
+    /// ecosystem-curation question, not a parser fact.
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub component_predicates: Vec<Tp2Predicate>,
     #[serde(skip_serializing_if = "Vec::is_empty")]
     pub warnings: Vec<String>,
 }
@@ -74,6 +90,197 @@ pub struct Tp2Component {
     pub label: Option<String>,
 }
 
+#[derive(Debug, Clone, Serialize, PartialEq, Eq, PartialOrd, Ord)]
+pub struct Tp2Predicate {
+    pub kind: String,
+    pub expression: String,
+}
+
+/// Structural observations of one local directory or ZIP-family package. This
+/// is suitable for an opaque local release: it identifies potential WeiDU TP2
+/// source without treating any installer code as safe to run.
+#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+pub struct PackageObservation {
+    pub schema: u32,
+    pub source_kind: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub sha256: Option<String>,
+    pub weidu_package: bool,
+    pub tp2_files: Vec<ObservedTp2File>,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub warnings: Vec<String>,
+}
+
+#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+pub struct ObservedTp2File {
+    pub path: String,
+    #[serde(flatten)]
+    pub observation: Tp2Observation,
+}
+
+/// Inspect a local extracted package directory or a ZIP-family archive without
+/// execution or extraction. ZIP entry paths, declared sizes, and symlinks are
+/// checked before any TP2 content is read.
+pub fn inspect_package(path: &Path) -> Result<PackageObservation> {
+    if path.is_dir() {
+        return inspect_directory(path);
+    }
+    if path.is_file() {
+        return inspect_zip_package(path);
+    }
+    bail!("package path does not exist: {}", path.display())
+}
+
+/// Render a deliberately incomplete, author-reviewable schema-2 package
+/// record from mechanical observations. Callers must explicitly provide games
+/// and phase because those are not safely inferred from TP2 text.
+pub fn derive_bgmod_candidate(
+    package: &str,
+    release_id: &str,
+    version: &str,
+    games: &[String],
+    phase: &str,
+    observation: &PackageObservation,
+) -> Result<String> {
+    if !valid_package_id(package) {
+        bail!("{package} is not a valid package ID");
+    }
+    if release_id.trim().is_empty() || version.trim().is_empty() || games.is_empty() {
+        bail!("release ID, version, and at least one explicitly supplied game are required");
+    }
+    let allowed_phases = [
+        "preprocess",
+        "bgee",
+        "eet-import",
+        "eet",
+        "eet-end",
+        "post-eet-end",
+    ];
+    if !allowed_phases.contains(&phase) {
+        bail!("{phase} is not a valid IEPM install phase");
+    }
+
+    let mut component_ids = BTreeSet::new();
+    let mut installers = Vec::new();
+    let mut components = Vec::new();
+    for file in &observation.tp2_files {
+        installers.push(CandidateInstaller {
+            tp2: file.path.clone(),
+            languages: file.observation.languages.clone(),
+        });
+        let stem = slug_component(
+            Path::new(&file.path)
+                .file_stem()
+                .and_then(|value| value.to_str())
+                .unwrap_or("tp2"),
+        );
+        for (ordinal, component) in file.observation.components.iter().enumerate() {
+            let Some(id) = candidate_component_id(&stem, ordinal, component) else {
+                continue;
+            };
+            let id = unique_component_id(id, &mut component_ids);
+            components.push(CandidateComponent {
+                id,
+                weidu: CandidateWeiDUComponent {
+                    tp2: file.path.clone(),
+                    label: component.label.clone(),
+                    number: component.number,
+                },
+            });
+        }
+    }
+
+    let mut claims = vec![CandidateClaim {
+        claim: "TP2 paths, VERSION text, language declaration order, component selectors, and literal predicates in this candidate were mechanically derived from the selected local package; compatibility, ordering, installer behavior, and verification require separate evidence.".to_owned(),
+        provenance: "derived".to_owned(),
+    }];
+    if let Some(sha256) = &observation.sha256 {
+        claims.push(CandidateClaim {
+            claim: format!("The inspected local archive has SHA-256 {sha256}. A source URL must be curated before it becomes an IEPM artifact location."),
+            provenance: "derived".to_owned(),
+        });
+    }
+
+    let candidate = CandidatePackage {
+        schema: 2,
+        package: package.to_owned(),
+        releases: vec![CandidateRelease {
+            release_id: release_id.to_owned(),
+            version: version.to_owned(),
+            compatibility: CandidateCompatibility {
+                games: games.to_vec(),
+            },
+            install: CandidateInstall {
+                phase: phase.to_owned(),
+            },
+            provenance: "derived".to_owned(),
+            claims,
+            installers,
+            components,
+        }],
+    };
+    Ok(serde_yaml::to_string(&candidate)?)
+}
+
+#[derive(Serialize)]
+struct CandidatePackage {
+    schema: u32,
+    package: String,
+    releases: Vec<CandidateRelease>,
+}
+
+#[derive(Serialize)]
+struct CandidateRelease {
+    release_id: String,
+    version: String,
+    compatibility: CandidateCompatibility,
+    install: CandidateInstall,
+    provenance: String,
+    claims: Vec<CandidateClaim>,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    installers: Vec<CandidateInstaller>,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    components: Vec<CandidateComponent>,
+}
+
+#[derive(Serialize)]
+struct CandidateCompatibility {
+    games: Vec<String>,
+}
+
+#[derive(Serialize)]
+struct CandidateInstall {
+    phase: String,
+}
+
+#[derive(Serialize)]
+struct CandidateClaim {
+    claim: String,
+    provenance: String,
+}
+
+#[derive(Serialize)]
+struct CandidateInstaller {
+    tp2: String,
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    languages: Vec<Tp2Language>,
+}
+
+#[derive(Serialize)]
+struct CandidateComponent {
+    id: String,
+    weidu: CandidateWeiDUComponent,
+}
+
+#[derive(Serialize)]
+struct CandidateWeiDUComponent {
+    tp2: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    label: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    number: Option<u32>,
+}
+
 /// Read the small, stable structural surface of a TP2 file. The parser is
 /// intentionally line-oriented; complex WeiDU source remains WeiDU's domain.
 pub fn inspect_tp2(source: &str) -> Tp2Observation {
@@ -82,6 +289,8 @@ pub fn inspect_tp2(source: &str) -> Tp2Observation {
         version: None,
         languages: Vec::new(),
         components: Vec::new(),
+        game_predicates: Vec::new(),
+        component_predicates: Vec::new(),
         warnings: Vec::new(),
     };
     let mut current: Option<Tp2Component> = None;
@@ -118,6 +327,23 @@ pub fn inspect_tp2(source: &str) -> Tp2Observation {
             });
             continue;
         }
+        for (keyword, kind) in [
+            ("GAME_IS", "game-is"),
+            ("REQUIRE_COMPONENT", "require-component"),
+            ("FORBID_COMPONENT", "forbid-component"),
+        ] {
+            if let Some(offset) = find_keyword(line, keyword) {
+                let expression = line[offset + keyword.len()..].trim().to_owned();
+                if keyword == "GAME_IS" {
+                    observation.game_predicates.push(expression);
+                } else {
+                    observation.component_predicates.push(Tp2Predicate {
+                        kind: kind.to_owned(),
+                        expression,
+                    });
+                }
+            }
+        }
         if let Some(component) = current.as_mut() {
             if component.number.is_none() {
                 component.number = number_after_keyword(line, "DESIGNATED");
@@ -130,6 +356,10 @@ pub fn inspect_tp2(source: &str) -> Tp2Observation {
     if let Some(component) = current {
         observation.components.push(component);
     }
+    observation.game_predicates.sort();
+    observation.game_predicates.dedup();
+    observation.component_predicates.sort();
+    observation.component_predicates.dedup();
     if observation.version.is_none() {
         observation
             .warnings
@@ -141,6 +371,162 @@ pub fn inspect_tp2(source: &str) -> Tp2Observation {
             .push("no BEGIN declarations observed".to_owned());
     }
     observation
+}
+
+fn inspect_directory(path: &Path) -> Result<PackageObservation> {
+    let mut files = WalkDir::new(path)
+        .into_iter()
+        .collect::<std::result::Result<Vec<_>, _>>()?
+        .into_iter()
+        .filter(|entry| entry.file_type().is_file() && is_tp2_path(entry.path()))
+        .map(|entry| entry.into_path())
+        .collect::<Vec<_>>();
+    files.sort();
+    let mut tp2_files = Vec::new();
+    for file in files {
+        let relative = file
+            .strip_prefix(path)
+            .expect("walk result is rooted in package")
+            .to_string_lossy()
+            .replace('\\', "/");
+        let source = std::fs::read_to_string(&file)
+            .with_context(|| format!("could not read TP2 source {}", file.display()))?;
+        if source.len() as u64 > MAX_INSPECTED_TP2_BYTES {
+            bail!("TP2 source exceeds inspection limit: {}", file.display());
+        }
+        tp2_files.push(ObservedTp2File {
+            path: relative,
+            observation: inspect_tp2(&source),
+        });
+    }
+    Ok(PackageObservation {
+        schema: 1,
+        source_kind: "directory".to_owned(),
+        sha256: None,
+        weidu_package: !tp2_files.is_empty(),
+        tp2_files,
+        warnings: Vec::new(),
+    })
+}
+
+fn inspect_zip_package(path: &Path) -> Result<PackageObservation> {
+    let sha256 = sha256_file(path)?;
+    let file = File::open(path).with_context(|| format!("could not open {}", path.display()))?;
+    let mut archive = ZipArchive::new(file)
+        .with_context(|| format!("{} is not a valid ZIP-family archive", path.display()))?;
+    let mut total_size = 0_u64;
+    let mut tp2_files = Vec::new();
+    for index in 0..archive.len() {
+        let mut entry = archive.by_index(index)?;
+        let enclosed = entry
+            .enclosed_name()
+            .ok_or_else(|| anyhow::anyhow!("archive entry has unsafe path: {}", entry.name()))?
+            .to_owned();
+        total_size = total_size
+            .checked_add(entry.size())
+            .ok_or_else(|| anyhow::anyhow!("archive exceeds inspection size limit"))?;
+        if total_size > MAX_INSPECTED_PACKAGE_BYTES {
+            bail!(
+                "archive exceeds {} byte inspection limit",
+                MAX_INSPECTED_PACKAGE_BYTES
+            );
+        }
+        if entry
+            .unix_mode()
+            .is_some_and(|mode| mode & 0o170000 == 0o120000)
+        {
+            bail!("archive contains a symbolic-link entry: {}", entry.name());
+        }
+        if entry.is_dir() || !is_tp2_path(&enclosed) {
+            continue;
+        }
+        if entry.size() > MAX_INSPECTED_TP2_BYTES {
+            bail!("TP2 entry exceeds inspection limit: {}", entry.name());
+        }
+        let mut bytes = Vec::with_capacity(entry.size() as usize);
+        entry.read_to_end(&mut bytes)?;
+        tp2_files.push(ObservedTp2File {
+            path: enclosed.to_string_lossy().replace('\\', "/"),
+            observation: inspect_tp2(&String::from_utf8_lossy(&bytes)),
+        });
+    }
+    tp2_files.sort_by(|left, right| left.path.cmp(&right.path));
+    Ok(PackageObservation {
+        schema: 1,
+        source_kind: "zip".to_owned(),
+        sha256: Some(sha256),
+        weidu_package: !tp2_files.is_empty(),
+        tp2_files,
+        warnings: Vec::new(),
+    })
+}
+
+fn is_tp2_path(path: &Path) -> bool {
+    path.extension()
+        .and_then(|extension| extension.to_str())
+        .is_some_and(|extension| extension.eq_ignore_ascii_case("tp2"))
+}
+
+fn sha256_file(path: &Path) -> Result<String> {
+    let mut file =
+        File::open(path).with_context(|| format!("could not open {}", path.display()))?;
+    let mut hasher = Sha256::new();
+    let mut buffer = [0_u8; 64 * 1024];
+    loop {
+        let bytes = file.read(&mut buffer)?;
+        if bytes == 0 {
+            break;
+        }
+        hasher.update(&buffer[..bytes]);
+    }
+    Ok(format!("{:x}", hasher.finalize()))
+}
+
+fn candidate_component_id(stem: &str, ordinal: usize, component: &Tp2Component) -> Option<String> {
+    component
+        .number
+        .map(|number| format!("derived-{stem}-{number}"))
+        .or_else(|| {
+            component
+                .label
+                .as_deref()
+                .map(|label| format!("derived-{stem}-{}", slug_component(label)))
+        })
+        .or_else(|| {
+            component
+                .begin
+                .as_deref()
+                .map(|_| format!("derived-{stem}-ordinal-{}", ordinal + 1))
+        })
+}
+
+fn unique_component_id(candidate: String, seen: &mut BTreeSet<String>) -> String {
+    if seen.insert(candidate.clone()) {
+        return candidate;
+    }
+    let mut suffix = 2_u32;
+    loop {
+        let value = format!("{candidate}-{suffix}");
+        if seen.insert(value.clone()) {
+            return value;
+        }
+        suffix += 1;
+    }
+}
+
+fn slug_component(value: &str) -> String {
+    let mut output = String::new();
+    let mut separator = false;
+    for character in value.chars() {
+        if character.is_ascii_alphanumeric() {
+            output.push(character.to_ascii_lowercase());
+            separator = false;
+        } else if !separator && !output.is_empty() {
+            output.push('-');
+            separator = true;
+        }
+    }
+    output.trim_matches('-').to_owned()
 }
 
 #[derive(Debug, Clone, Serialize, PartialEq, Eq)]
@@ -476,6 +862,8 @@ ACTION_DEFINE_ASSOCIATIVE_ARRAY ignored BEGIN LABEL
                 label: Some("SAMPLE-ENABLE".to_owned()),
             }]
         );
+        assert!(observation.game_predicates.is_empty());
+        assert!(observation.component_predicates.is_empty());
     }
 
     #[test]
@@ -552,6 +940,74 @@ BEGIN @101 DESIGNATED 11 LABEL ~SAMPLE-ENABLE~
                 .findings
                 .iter()
                 .any(|finding| finding.kind == "component-selector-pair-drift")
+        );
+    }
+
+    #[test]
+    fn inspection_keeps_literal_predicates_as_source_facts() {
+        let observation = inspect_tp2(
+            r#"
+GAME_IS ~bgee~ OR ~eet~
+REQUIRE_COMPONENT ~other-mod/setup-other.tp2~ ~0~
+FORBID_COMPONENT ~other-mod/setup-other.tp2~ ~10~
+BEGIN @1 DESIGNATED 0 LABEL ~SAMPLE-CORE~
+"#,
+        );
+
+        assert_eq!(observation.game_predicates, vec!["~bgee~ OR ~eet~"]);
+        assert_eq!(
+            observation.component_predicates,
+            vec![
+                Tp2Predicate {
+                    kind: "forbid-component".to_owned(),
+                    expression: "~other-mod/setup-other.tp2~ ~10~".to_owned(),
+                },
+                Tp2Predicate {
+                    kind: "require-component".to_owned(),
+                    expression: "~other-mod/setup-other.tp2~ ~0~".to_owned(),
+                },
+            ]
+        );
+    }
+
+    #[test]
+    fn candidate_requires_explicit_nonmechanical_inputs() {
+        let observation = PackageObservation {
+            schema: 1,
+            source_kind: "directory".to_owned(),
+            sha256: None,
+            weidu_package: true,
+            tp2_files: vec![ObservedTp2File {
+                path: "Sample/setup-sample.tp2".to_owned(),
+                observation: inspect_tp2(
+                    "VERSION ~1.2.3~\nLANGUAGE ~English~\nBEGIN @1 DESIGNATED 0 LABEL ~SAMPLE-CORE~",
+                ),
+            }],
+            warnings: vec![],
+        };
+        let yaml = derive_bgmod_candidate(
+            "sample-mod",
+            "sample-release",
+            "1.2.3",
+            &["bg2ee".to_owned()],
+            "eet",
+            &observation,
+        )
+        .expect("candidate succeeds");
+
+        assert!(yaml.contains("provenance: derived"));
+        assert!(yaml.contains("derived-setup-sample-0"));
+        assert!(yaml.contains("SAMPLE-CORE"));
+        assert!(
+            derive_bgmod_candidate(
+                "sample-mod",
+                "sample-release",
+                "1.2.3",
+                &[],
+                "eet",
+                &observation,
+            )
+            .is_err()
         );
     }
 }

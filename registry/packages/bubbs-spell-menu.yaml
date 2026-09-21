@@ -1,7 +1,16 @@
-schema: 1
+schema: 2
 package: bubbs-spell-menu
+aliases: [bubbs-spell-menu-extended]
 releases:
-  - version: "5.2"
+  - release_id: bubbs-spell-menu-v5.2
+    version: "v5.2"
+    artifacts:
+      - url: https://api.github.com/repos/Bubb13/Bubbs-Spell-Menu-Extended/zipball/v5.2
+        sha256: 66840543c60d34a21478dde8c63760abc12fda69dba86c8195f8aebbe76ad37a
+        platforms: [windows]
+    materialization:
+      source_root: Bubb13-Bubbs-Spell-Menu-Extended-5512e35
+      include: [bubb_spell_menu_extended]
     compatibility:
       games: [bg2ee, eet]
     install:
@@ -9,6 +18,20 @@ releases:
       after: [eeex]
       before: [eet-end]
     provenance: unverified
-    dependencies:
-      - package: eeex
-    components: []
+    claims:
+      - claim: Release URL, archive hash, TP2 path, VERSION v5.2, English language index 0, and main-component LABEL were mechanically derived from the exact source-tagged archive.
+        provenance: derived
+        evidence:
+          - https://github.com/Bubb13/Bubbs-Spell-Menu-Extended/tree/v5.2
+    installers:
+      - tp2: bubb_spell_menu_extended/bubb_spell_menu_extended.tp2
+        languages:
+          - id: 0
+            name: English
+    components:
+      - id: main
+        default_selected: true
+        weidu: { tp2: bubb_spell_menu_extended/bubb_spell_menu_extended.tp2, label: B3-BubbsSpellMenuExtended-Main }
+        claims:
+          - claim: The component LABEL is structurally observed. The selected numeric invocation and installer behavior remain unverified.
+            provenance: derived

@@ -22,7 +22,7 @@
     },
     "artifact": {
       "type": "object", "required": ["url", "sha256"],
-      "properties": { "url": { "type": "string", "format": "uri" }, "mirrors": { "type": "array", "items": { "type": "string", "format": "uri" } }, "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }, "format": { "enum": ["zip"] }, "platforms": { "type": "array", "items": { "enum": ["windows", "linux", "macos"] } }, "architectures": { "type": "array", "items": { "enum": ["x86", "x86-64", "aarch64"] } } }, "additionalProperties": false
+      "properties": { "url": { "type": "string", "format": "uri" }, "mirrors": { "type": "array", "items": { "type": "string", "format": "uri" } }, "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }, "format": { "enum": ["zip", "executable"] }, "platforms": { "type": "array", "items": { "enum": ["windows", "linux", "macos"] } }, "architectures": { "type": "array", "items": { "enum": ["x86", "x86-64", "aarch64"] } } }, "additionalProperties": false
     },
     "package": {
       "type": "object", "required": ["package", "release_id", "version", "environment", "phase", "provenance"],

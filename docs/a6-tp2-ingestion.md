@@ -68,3 +68,31 @@ They reinforce two constraints: download location and mutable upstream
 metadata are not content identity, while operational installers often need
 mod-specific prompt/patch/recovery behavior. IEPM retains SHA-256 as artifact
 identity and keeps such behavior outside A6's inert structural parser.
+
+## Opaque local packages and author-reviewable candidates
+
+The bootstrap path also accepts an extracted directory or a ZIP-family local
+release, including `.iemod`:
+
+```text
+iepm inspect-package --path C:\mods\unknown-release.zip
+iepm derive-bgmod --path C:\mods\unknown-release.zip \
+  --package example-mod --release-id example-v1 --version 1.0 \
+  --game bg2ee --phase eet
+```
+
+`inspect-package` checks archive paths, declared sizes, and symlinks before
+reading any TP2 source. It reports the archive hash (where applicable), TP2
+paths, and inert structural observations; it does not extract into a game tree
+or start a process. Along with the existing selector data, it preserves literal
+`GAME_IS`, `REQUIRE_COMPONENT`, and `FORBID_COMPONENT` clauses as raw evidence
+instead of turning them into resolver rules.
+
+`derive-bgmod` renders a deliberately incomplete schema-2 candidate. Game
+targets and phase are required caller inputs because they cannot safely be
+inferred from TP2 source. Its `derived-*` IDs are review placeholders, not an
+automatic replacement for stable user-intent IDs. The generator does not
+invent an artifact URL, installer launcher, prompt answer, ordering rule, or
+compatibility verdict. This makes the same schema usable as an author-reviewable
+metadata starting point without turning IEPM's registry into the permanent
+authority for package-local facts.

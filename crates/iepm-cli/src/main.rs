@@ -125,6 +125,29 @@ enum Command {
         #[arg(long)]
         tp2: PathBuf,
     },
+    /// Inspect an extracted directory or ZIP-family archive for inert WeiDU
+    /// package structure. This never runs setup binaries or TP2 code.
+    InspectPackage {
+        #[arg(long)]
+        path: PathBuf,
+    },
+    /// Emit an author-reviewable package-record candidate from a local
+    /// directory or ZIP-family archive. Games and phase are explicit inputs:
+    /// they are not inferred from mechanical TP2 observations.
+    DeriveBgmod {
+        #[arg(long)]
+        path: PathBuf,
+        #[arg(long)]
+        package: String,
+        #[arg(long)]
+        release_id: String,
+        #[arg(long)]
+        version: String,
+        #[arg(long = "game", required = true)]
+        games: Vec<String>,
+        #[arg(long)]
+        phase: String,
+    },
     /// Compare an inspected TP2 with one curated registry release. A drift is
     /// review evidence only; this command never updates registry metadata.
     ReviewTp2 {
@@ -347,6 +370,33 @@ fn main() -> Result<()> {
             println!(
                 "{}",
                 serde_json::to_string_pretty(&iepm_registry::inspect_tp2(&source))?
+            );
+        }
+        Command::InspectPackage { path } => {
+            println!(
+                "{}",
+                serde_json::to_string_pretty(&iepm_registry::inspect_package(&path)?)?
+            );
+        }
+        Command::DeriveBgmod {
+            path,
+            package,
+            release_id,
+            version,
+            games,
+            phase,
+        } => {
+            let observation = iepm_registry::inspect_package(&path)?;
+            print!(
+                "{}",
+                iepm_registry::derive_bgmod_candidate(
+                    &package,
+                    &release_id,
+                    &version,
+                    &games,
+                    &phase,
+                    &observation,
+                )?
             );
         }
         Command::ReviewTp2 {

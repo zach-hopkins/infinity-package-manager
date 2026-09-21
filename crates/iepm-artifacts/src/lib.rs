@@ -54,6 +54,7 @@ impl ArtifactStore {
     }
 
     pub fn prepare(&self, package: &str, artifact: &Artifact) -> Result<PreparedArtifact> {
+        self.ensure_supported_format(artifact)?;
         self.ensure_platform_compatible(artifact)?;
         let archive = self
             .fetch(artifact)
@@ -170,6 +171,9 @@ impl ArtifactStore {
         fs::create_dir_all(&destination)?;
         match artifact.format {
             ArchiveFormat::Zip => extract_zip(archive_path, &destination)?,
+            ArchiveFormat::Executable => bail!(
+                "generic executable artifact preparation is intentionally unsupported; add a release-specific materialization fixture first"
+            ),
         }
         let digest = tree_digest(&destination)?;
         fs::write(&marker, format!("{}\n{}\n", artifact.sha256, digest)).with_context(|| {
@@ -182,6 +186,7 @@ impl ArtifactStore {
         validate_sha256(&artifact.sha256)?;
         let extension = match artifact.format {
             ArchiveFormat::Zip => "zip",
+            ArchiveFormat::Executable => "exe",
         };
         Ok(self
             .root
@@ -212,6 +217,16 @@ impl ArtifactStore {
             return Ok(());
         }
         bail!("artifact is unavailable for this CPU architecture")
+    }
+
+    fn ensure_supported_format(&self, artifact: &Artifact) -> Result<()> {
+        if artifact.format == ArchiveFormat::Zip {
+            return Ok(());
+        }
+        bail!(
+            "artifact format {:?} is recorded but not generically preparable; add a release-specific materialization fixture first",
+            artifact.format
+        )
     }
 }
 
@@ -509,6 +524,18 @@ mod tests {
         artifact.platforms = vec![incompatible];
 
         assert!(store.prepare("fixture", &artifact).is_err());
+        fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn rejects_recorded_executable_artifacts_before_network_access() {
+        let root = temporary_directory("executable-artifact");
+        let store = ArtifactStore::new(&root).unwrap();
+        let mut executable = artifact("a".repeat(64));
+        executable.format = ArchiveFormat::Executable;
+
+        let error = store.prepare("fixture", &executable).unwrap_err();
+        assert!(error.to_string().contains("not generically preparable"));
         fs::remove_dir_all(root).unwrap();
     }
 }

@@ -1,7 +1,16 @@
-schema: 1
+schema: 2
 package: infinity-ui-plus-plus
+aliases: [infinity-ui]
 releases:
-  - version: "4.6"
+  - release_id: infinity-ui-v1.23
+    version: "v1.23"
+    artifacts:
+      - url: https://api.github.com/repos/Renegade0/InfinityUI/zipball/v1.23
+        sha256: bea7b64daa026cd32edc093fb5c22d96f2afe181d1aab374dbbb9fd83efe028a
+        platforms: [windows]
+    materialization:
+      source_root: Renegade0-InfinityUI-90446b0
+      include: [infinity_ui]
     compatibility:
       games: [bg2ee, eet]
     install:
@@ -9,6 +18,17 @@ releases:
       after: [eeex]
       before: [eet-end]
     provenance: unverified
-    dependencies:
-      - package: eeex
-    components: []
+    claims:
+      - claim: Release URL, archive hash, TP2 path, and VERSION v1.15 were mechanically derived from the exact source-tagged v1.23 archive. The tag and TP2 VERSION are intentionally recorded as distinct facts.
+        provenance: derived
+        evidence:
+          - https://github.com/Renegade0/InfinityUI/tree/v1.23
+    installers:
+      - tp2: infinity_ui/infinity_ui.tp2
+    components:
+      - id: core
+        default_selected: true
+        weidu: { tp2: infinity_ui/infinity_ui.tp2 }
+        claims:
+          - claim: The first TP2 BEGIN declaration is structurally observed, but this release does not expose a mechanically observed DESIGNATED numeric selector or LABEL for it.
+            provenance: derived

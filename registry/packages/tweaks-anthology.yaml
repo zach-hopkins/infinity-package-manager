@@ -1,7 +1,16 @@
-schema: 1
+schema: 2
 package: tweaks-anthology
+aliases: [cdtweaks]
 releases:
-  - version: "v10"
+  - release_id: tweaks-anthology-v18-source
+    version: "v18"
+    artifacts:
+      - url: https://api.github.com/repos/Gibberlings3/Tweaks-Anthology/zipball/v18
+        sha256: 48b0da06d8cf5a17d80b32abcc44456beef2f356fdcb60a6a74bca00b4fc7e68
+        platforms: [windows]
+    materialization:
+      source_root: Gibberlings3-Tweaks-Anthology-031ec93
+      include: [cdtweaks]
     compatibility:
       games: [bgee, bg2ee, eet]
     install:
@@ -9,4 +18,51 @@ releases:
       after: [eet]
       before: [eet-end]
     provenance: unverified
-    components: []
+    claims:
+      - claim: Release URL, archive hash, TP2 path, VERSION v18, and all listed component number/LABEL pairs were mechanically derived from the exact source-tagged v18 archive.
+        provenance: derived
+        evidence:
+          - https://github.com/Gibberlings3/Tweaks-Anthology/releases/tag/v18
+      - claim: The official Windows release also distributes an EXE. IEPM records a ZIP-source artifact for structural/bootstrap use; it has not established that this source archive is a substitute for the official Windows installer route.
+        provenance: declared
+        evidence:
+          - https://github.com/Gibberlings3/Tweaks-Anthology/releases/tag/v18
+    installers:
+      - tp2: cdtweaks/setup-cdtweaks.tp2
+    components:
+      - { id: icon-improvements, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_icon_improvements, number: 110 } }
+      - { id: more-interjections, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_more_interjections, number: 1010 } }
+      - { id: alter-wounded-triggers, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_alter_wounded_triggers, number: 1020 } }
+      - { id: reveal-chapter-six-wilderness, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_reveal_ch6_wilderness, number: 1030 } }
+      - { id: reveal-cloakwood-except-mines, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_reveal_cloakwood_4, number: 1036 } }
+      - { id: multiplayer-kickout-dialogue, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_mp_kickout_dialogue, number: 1070 } }
+      - { id: send-npcs-to-inn, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_send_bg_npcs_to_inn, number: 1075 } }
+      - { id: add-bags-of-holding, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_add_bags_of_holding, number: 1080 } }
+      - { id: reveal-city-areas, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_reveal_city_areas, number: 1100 } }
+      - { id: higher-store-stacks, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_stores_sell_higher_stacks, number: 1120 } }
+      - { id: remove-xp-cap, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_remove_xp_cap, number: 2090 } }
+      - { id: thieving-in-heavy-armor, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_thieving_in_heavy_armor, number: 2100 } }
+      - { id: expanded-dual-class-options, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_more_dual_classes, number: 2140 } }
+      - { id: protection-items-pnp, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_protection_items_pnp, number: 2150 } }
+      - { id: item-spells-at-character-level, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_item_spells_at_char_level, number: 2170 } }
+      - { id: loosen-cleric-multiclass-equipment, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_cleric_multis_loosen_equipment_restrictions, number: 2420 } }
+      - { id: improved-cure-cause-wounds, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nwn_cure_cause_wounds, number: 2630 } }
+      - { id: alternate-concentration-check, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_alternate_concentration_check_v1, number: 2690 } }
+      - { id: learn-spells-100-percent, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_easy_spell_learning_capped, number: 3030 } }
+      - { id: potion-stacks-40, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_increase_potion_stacks_40, number: 3101 } }
+      - { id: scroll-stacks-40, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_increase_scroll_stacks_40, number: 3111 } }
+      - { id: angry-npcs-never-leave, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_happy_patch_angry_never_leave, number: 3121 } }
+      - { id: disable-non-hostile-rest-spawns, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_rest_spawns_alter_nonhostile_disable, number: 3191 } }
+      - { id: stores-buy-all-items, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_stores_buy_all_items, number: 3205 } }
+      - { id: extra-ankheg-armor, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_taerom_makes_multiple_ankheg_armor, number: 3230 } }
+      - { id: ammo-recovery-75, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_recover_ammo_75, number: 3262 } }
+      - { id: throwing-recovery-75, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_recover_throwing_weapons_75, number: 3272 } }
+      - { id: death-cam, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_death_cam, number: 3300 } }
+      - { id: reduced-party-chunking, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_reduced_party_chunking, number: 3330 } }
+      - { id: movement-casting-speed-100, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_noncombat_speed_casting_increase_100, number: 3344 } }
+      - { id: interval-save-30, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_create_interval_one_save_30, number: 3351 } }
+      - { id: travel-regeneration, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_sensible_regeneration_when_traveling, number: 3380 } }
+      - { id: automatic-ranger-tracking, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_automatic_ranger_tracking, number: 3390 } }
+      - { id: adjust-evil-npc-reactions, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_adjust_evil_npc_reactions, number: 4000 } }
+      - { id: allow-npc-pairs-to-separate, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_allow_npc_pairs_to_separate, number: 4025 } }
+      - { id: disable-advanced-ai-auto-assignment, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_disable_joinable_ai_scripts, number: 4140 } }

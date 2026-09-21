@@ -1,0 +1,31 @@
+schema: 2
+package: bg1-unfinished-business
+aliases: [bg1ub]
+releases:
+  - release_id: bg1ub-v17.1
+    version: "v17.1"
+    artifacts:
+      - url: https://github.com/Pocket-Plane-Group/bg1ub/releases/download/v17.1/bg1-unfinished-business-v17.1.zip
+        sha256: 89dcdf44963cbf84b7458b628ba22bc087d093fbac93527d84a1e253011d7ad6
+        platforms: [windows]
+    materialization:
+      source_root: bg1ub
+    compatibility:
+      games: [bgee]
+    install:
+      phase: bgee
+    provenance: unverified
+    claims:
+      - claim: The ZIP was freshly downloaded from the official v17.1 release and SHA-256 verified. Its TP2 path, VERSION v17.1, 35 numeric/LABEL component selectors, and BGEE predicates were mechanically inspected.
+        provenance: derived
+        evidence:
+          - https://github.com/Pocket-Plane-Group/bg1ub/releases/tag/v17.1
+    installers:
+      - tp2: bg1ub/bg1ub.tp2
+    components:
+      - id: ice-island-level-two-restoration
+        weidu: { tp2: bg1ub/bg1ub.tp2, label: bg1ub-IceIslLevelTwoRestoration, number: 0 }
+      - id: mysterious-vial
+        weidu: { tp2: bg1ub/bg1ub.tp2, label: bg1ub-MysteriousVial, number: 1 }
+      - id: creature-corrections
+        weidu: { tp2: bg1ub/bg1ub.tp2, label: bg1ub-CreatureCorrections, number: 16 }

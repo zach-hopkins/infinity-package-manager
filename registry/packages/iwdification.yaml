@@ -1,0 +1,34 @@
+schema: 2
+package: iwdification
+releases:
+  - release_id: iwdification-v11
+    version: "v11"
+    artifacts:
+      - url: https://github.com/Gibberlings3/iwdification/releases/download/v11/iwdification-v11.iemod
+        sha256: 4af9d463d3b4afe1e296fe056b6c93e9b6b95e5bcb5541eca81dcbb8ba15db3f
+        platforms: [windows]
+    materialization:
+      source_root: iwdification
+    compatibility:
+      games: [bgee, bg2ee, eet]
+    install:
+      phase: eet
+    provenance: unverified
+    claims:
+      - claim: The IEMOD ZIP-family artifact was freshly downloaded from the official v11 release and SHA-256 verified. Its TP2 path, VERSION v11, language-independent selector data, and literal game predicates were mechanically inspected.
+        provenance: derived
+        evidence:
+          - https://github.com/Gibberlings3/iwdification/releases/tag/v11
+      - claim: The SCS documentation says its Icewind Dale spell-system component should not be combined with IWDification's corresponding system. IEPM does not encode a package-wide conflict because that overlap is component-specific and has not yet been mapped.
+        provenance: declared
+        evidence:
+          - https://github.com/Gibberlings3/SwordCoastStratagems/blob/master/stratagems/doc/readme-stratagems.html
+    installers:
+      - tp2: iwdification/setup-iwdification.tp2
+    components:
+      - id: bard-songs
+        weidu: { tp2: iwdification/setup-iwdification.tp2, label: cd_iwdification_bard_songs, number: 50 }
+      - id: arcane-spells
+        weidu: { tp2: iwdification/setup-iwdification.tp2, label: cd_iwdification_arcane_spells, number: 30 }
+      - id: divine-spells
+        weidu: { tp2: iwdification/setup-iwdification.tp2, label: cd_iwdification_divine_spells, number: 40 }

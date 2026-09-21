@@ -162,6 +162,13 @@ its exact registry coverage and causal execution blockers are documented in
 is deliberate—IEPM does not silently replace a requested package or run a
 partially described order.
 
+The growing EE bootstrap registry is an evidence overlay rather than a central
+allow-list: exact package/artifact and mechanically derived TP2 facts are kept
+separate from compatibility and execution evidence. It can also inspect opaque
+local extracted packages or ZIP-family archives without executing them. See
+[the bootstrap registry guide](docs/bootstrap-registry.md) and [the TP2
+ingestion guide](docs/a6-tp2-ingestion.md).
+
 To prepare curator-review evidence from a known local TP2 without running it:
 
 ```text

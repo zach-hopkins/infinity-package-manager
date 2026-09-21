@@ -1,0 +1,56 @@
+schema: 2
+package: stratagems
+aliases: [sword-coast-stratagems, scs]
+releases:
+  - release_id: stratagems-v35.21-windows
+    version: "v35.21"
+    artifacts:
+      - url: https://github.com/Gibberlings3/SwordCoastStratagems/releases/download/v35.21/stratagems-35.21.exe
+        sha256: 7e8754e1bb541fce1686314e0d4967b66c5740615907521dca5e63153326602f
+        format: executable
+        platforms: [windows]
+    compatibility:
+      games: [bgee, bg2ee, eet]
+    install:
+      phase: eet
+      after: [eet]
+      before: [eet-end]
+    provenance: unverified
+    claims:
+      - claim: The current Windows release URL, asset SHA-256, TP2 path, VERSION 35.21, and listed numeric selectors were mechanically derived from the exact released package.
+        provenance: derived
+        evidence:
+          - https://github.com/Gibberlings3/SwordCoastStratagems/releases/tag/v35.21
+      - claim: This release is a Windows EXE. IEPM records its content identity but intentionally has no generic executable-archive preparation or execution path.
+        provenance: derived
+        evidence:
+          - https://github.com/Gibberlings3/SwordCoastStratagems/releases/tag/v35.21
+      - claim: SCS is an optional-component AI/tactical mod; its component-level choices require separate compatibility evidence.
+        provenance: declared
+        evidence:
+          - https://github.com/Gibberlings3/SwordCoastStratagems
+    installers:
+      - tp2: stratagems/setup-stratagems.tp2
+    components:
+      - id: batch-mode
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 100 }
+      - id: spell-tweaks-batch
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 2000 }
+      - id: initialize-ai
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 5900 }
+      - id: smarter-mages
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 6030 }
+        provides:
+          - name: mage-ai
+            exclusive: true
+        claims:
+          - claim: The selector is mechanically derived. The mage-ai capability is a narrow curated classification for this component, not a package-wide conflict claim.
+            provenance: community
+            evidence:
+              - https://github.com/Gibberlings3/SwordCoastStratagems
+      - id: smarter-priests
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 6040 }
+      - id: ascension-irenicus-sendai
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 6840 }
+      - id: ascension-demons
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 6850 }

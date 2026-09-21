@@ -1,7 +1,14 @@
-schema: 1
+schema: 2
 package: ascension
 releases:
-  - version: "2.0.27"
+  - release_id: ascension-2.1.0
+    version: "2.1.0"
+    artifacts:
+      - url: https://github.com/Gibberlings3/Ascension/releases/download/2.1.0/ascension-2.1.0.zip
+        sha256: bd0ee14b3770d56104eaa81287c88a8672afa889a35184fb308be12d6d707e77
+        platforms: [windows]
+    materialization:
+      source_root: ascension
     compatibility:
       games: [bg2ee, eet]
     install:
@@ -9,4 +16,44 @@ releases:
       after: [eet]
       before: [eet-end]
     provenance: unverified
-    components: []
+    claims:
+      - claim: Release URL, archive hash, TP2 path, VERSION 2.1.0, language order, and the listed component selectors were mechanically derived from the exact v2.1.0 archive.
+        provenance: derived
+        evidence:
+          - https://github.com/Gibberlings3/Ascension/releases/tag/2.1.0
+      - claim: The archive's TP2 contains literal BG2EE/EET predicates and component-level FORBID_COMPONENT clauses. IEPM retains those observations for review but has not translated them into package-wide conflicts.
+        provenance: derived
+        evidence:
+          - https://github.com/Gibberlings3/Ascension
+    installers:
+      - tp2: ascension/Ascension.tp2
+        languages:
+          - id: 0
+            name: English
+    components:
+      - id: rewritten-final-chapter
+        weidu: { tp2: ascension/Ascension.tp2, label: Ascension-RewrittenFinalChapterOfToB, number: 0 }
+      - id: redeem-balthazar
+        weidu: { tp2: ascension/Ascension.tp2, label: Ascension-BalthazarCanBeRedeemed, number: 10 }
+      - id: improved-sarevok-interactions
+        weidu: { tp2: ascension/Ascension.tp2, label: Ascension-ImprovedSarevokPlayerInteractions, number: 20 }
+      - id: improved-imoen-interactions
+        weidu: { tp2: ascension/Ascension.tp2, label: Ascension-ImprovedImoenPlayerInteractions, number: 30 }
+      - id: restored-bhaalspawn-powers
+        weidu: { tp2: ascension/Ascension.tp2, label: Ascension-RestoredBhaalspawnPowers, number: 40 }
+      - id: improved-slayer-transformation
+        weidu: { tp2: ascension/Ascension.tp2, label: Ascension-ImprovedSlayerTransformation, number: 50 }
+      - id: expanded-bioware-epilogues
+        weidu: { tp2: ascension/Ascension.tp2, label: Ascension-DavidGaiderExpandedEpilogues, number: 60 }
+      - id: tougher-abazigal
+        weidu: { tp2: ascension/Ascension.tp2, label: Ascension-TougherAbazigal, number: 1000 }
+      - id: tougher-balthazar
+        weidu: { tp2: ascension/Ascension.tp2, label: Ascension-TougherBalthazar, number: 1100 }
+      - id: tougher-demogorgon
+        weidu: { tp2: ascension/Ascension.tp2, label: Ascension-TougherDemogorgon, number: 1200 }
+      - id: tougher-gromnir
+        weidu: { tp2: ascension/Ascension.tp2, label: Ascension-TougherGromnir, number: 1300 }
+      - id: tougher-illasera
+        weidu: { tp2: ascension/Ascension.tp2, label: Ascension-TougherIllasera, number: 1400 }
+      - id: tougher-yaga-shura
+        weidu: { tp2: ascension/Ascension.tp2, label: Ascension-TougherYagaShura, number: 1500 }
