@@ -22,7 +22,7 @@
     },
     "artifact": {
       "type": "object", "required": ["url", "sha256"],
-      "properties": { "url": { "type": "string", "format": "uri" }, "mirrors": { "type": "array", "items": { "type": "string", "format": "uri" } }, "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }, "format": { "enum": ["zip", "executable"] }, "platforms": { "type": "array", "items": { "enum": ["windows", "linux", "macos"] } }, "architectures": { "type": "array", "items": { "enum": ["x86", "x86-64", "aarch64"] } } }, "additionalProperties": false
+      "properties": { "url": { "type": "string", "format": "uri" }, "mirrors": { "type": "array", "items": { "type": "string", "format": "uri" } }, "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }, "format": { "enum": ["zip", "executable", "windows-rar-sfx"] }, "platforms": { "type": "array", "items": { "enum": ["windows", "linux", "macos"] } }, "architectures": { "type": "array", "items": { "enum": ["x86", "x86-64", "aarch64"] } } }, "additionalProperties": false
     },
     "package": {
       "type": "object", "required": ["package", "release_id", "version", "environment", "phase", "provenance"],
@@ -30,7 +30,7 @@
         "package": { "type": "string" }, "release_id": { "type": "string" }, "version": { "type": "string" }, "environment": { "type": "string" }, "phase": { "type": "string" }, "artifact": { "$ref": "#/$defs/artifact" },
         "materialization": { "type": "object", "properties": { "source_root": { "type": "string" }, "include": { "type": "array", "items": { "type": "string" } } }, "additionalProperties": false },
         "installers": { "type": "array", "items": { "type": "object", "required": ["tp2"], "properties": { "tp2": { "type": "string" }, "program": { "type": "string" }, "languages": { "type": "array", "items": { "type": "object", "required": ["id", "name"], "properties": { "id": { "type": "integer", "minimum": 0 }, "name": { "type": "string" } }, "additionalProperties": false } }, "inputs": { "type": "array", "items": { "type": "object", "required": ["name"], "properties": { "name": { "type": "string" }, "required": { "type": "boolean" } }, "additionalProperties": false } } }, "additionalProperties": false } },
-        "components": { "type": "array", "items": { "type": "object", "required": ["id"], "properties": { "id": { "type": "string" }, "weidu": { "type": "object", "required": ["tp2"], "properties": { "tp2": { "type": "string" }, "label": { "type": "string" }, "number": { "type": "integer" }, "subcomponent": { "type": "string" } }, "additionalProperties": false } }, "additionalProperties": false } },
+        "components": { "type": "array", "items": { "type": "object", "required": ["id"], "properties": { "id": { "type": "string" }, "weidu": { "type": "object", "required": ["tp2"], "properties": { "tp2": { "type": "string" }, "label": { "type": "string" }, "number": { "type": "integer" }, "subcomponent": { "type": "string" }, "non_recording": { "type": "boolean" } }, "additionalProperties": false } }, "additionalProperties": false } },
         "language": { "type": "string" }, "installer_inputs": { "type": "object", "additionalProperties": { "type": "string" } }, "dependencies": { "type": "array" }, "provenance": { "enum": ["declared", "derived", "verified", "community", "unverified"] }
       }, "additionalProperties": false
     },

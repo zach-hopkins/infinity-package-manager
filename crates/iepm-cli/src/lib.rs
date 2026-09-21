@@ -766,6 +766,16 @@ pub fn execute(lockfile: &Lockfile, options: &ExecuteOptions) -> Result<Executio
                         .to_string()
                 })
                 .collect::<Vec<_>>();
+            let receipt_components = components
+                .iter()
+                .filter(|component| !component.non_recording)
+                .map(|component| {
+                    component
+                        .number
+                        .expect("executable lockfile was preflighted")
+                        .to_string()
+                })
+                .collect::<Vec<_>>();
             actions += 1;
             run_weidu(
                 installer,
@@ -776,6 +786,7 @@ pub fn execute(lockfile: &Lockfile, options: &ExecuteOptions) -> Result<Executio
                 &options.weidu,
                 language_id,
                 &component_numbers,
+                &receipt_components,
                 actions,
                 &options.log_dir,
                 options.allow_weidu_warnings,
@@ -1082,6 +1093,7 @@ fn run_weidu(
     weidu: &Path,
     language_id: u32,
     components: &[String],
+    receipt_components: &[String],
     action: usize,
     log_dir: &Path,
     allow_weidu_warnings: bool,
@@ -1181,7 +1193,12 @@ fn run_weidu(
         if allow_weidu_warnings
             && output.status.code() == Some(3)
             && stdout.contains("INSTALLED WITH WARNINGS")
-            && installed_components_are_logged(workspace, &installer.tp2, language_id, components)?
+            && installed_components_are_logged(
+                workspace,
+                &installer.tp2,
+                language_id,
+                receipt_components,
+            )?
         {
             let warnings = stdout
                 .lines()
@@ -1207,7 +1224,8 @@ fn run_weidu(
             }
         );
     }
-    if !installed_components_are_logged(workspace, &installer.tp2, language_id, components)? {
+    if !installed_components_are_logged(workspace, &installer.tp2, language_id, receipt_components)?
+    {
         bail!(
             "WeiDU action {action} for {} exited successfully but did not record every requested component in WeiDU.log; inspect {}",
             package.package,

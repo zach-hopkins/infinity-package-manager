@@ -1,0 +1,20 @@
+schema: 2
+
+# Bounded SCS execution coverage for common batch/AI features. The release is
+# the exact official v35.21 Windows SFX artifact, not a source archive.
+environments:
+  target:
+    target: bg2ee
+    version: "2.6.6"
+    platform: windows
+    language: English
+    locale: en_US
+    fingerprint:
+      profile: iepm-core-layout-v1
+      value: 298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f
+
+mods:
+  - package: stratagems
+    version: id:stratagems-v35.21-windows
+    environment: target
+    components: [batch-mode, spell-tweaks-batch, initialize-ai, smarter-mages, smarter-priests]

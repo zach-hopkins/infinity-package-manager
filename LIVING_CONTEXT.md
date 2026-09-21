@@ -46,6 +46,13 @@ and A5 route coverage, while keeping scope deliberately incremental. A6 now read
 text and reviews its `VERSION`, language declaration order, and
 `BEGIN`/`DESIGNATED`/`LABEL` selectors against one curated release. It emits
 review JSON but never executes TP2 code, discovers behavior, or rewrites YAML.
+The official SCS v35.21 Windows release now has a bounded personal-use route:
+IEPM reads its SHA-pinned WinRAR SFX payload through a local `UnRAR.exe`
+helper, never invokes the SFX stub, and completed a sealed fresh BG2EE 2.6.6
+fixture for dispatcher 100 plus components 2000, 5900, 6030, and 6040. The
+dispatcher is explicitly non-recording; its selected nested WeiDU components
+remain the required receipt evidence. Other SCS components and broad EET
+interactions remain unverified.
 The retained official Hidden Gameplay Options v5.1 source is the first
 evidence point: its opaque release ID, display version, English language index
 0, and selected component selectors match the registry. This corroborates but
@@ -183,6 +190,11 @@ A4 owns secure acquisition and preparation. A5 owns copying/materializing into
 a controlled game workspace and executing WeiDU. The extracted-tree digest,
 safe ZIP path handling, and case/symlink checks are integrity safeguards—not a
 reason to build a general content-addressed filesystem.
+
+The first non-ZIP preparation exception is `windows-rar-sfx`: an explicitly
+typed WinRAR self-extracting payload may be read by local `UnRAR.exe` into the
+artifact cache. IEPM does not execute the SFX stub or thereby claim an OS-level
+sandbox; unclassified executable artifacts remain analysis-only.
 
 ### Portable reproducibility and execution readiness
 

@@ -249,7 +249,7 @@ pub fn resolve(
             }
             if artifact
                 .as_ref()
-                .is_some_and(|artifact| artifact.format != ArchiveFormat::Zip)
+                .is_some_and(|artifact| artifact.format == ArchiveFormat::Executable)
             {
                 blocking_reasons.insert(format!(
                     "{} uses artifact format {:?}, which has no generic A4 preparation route",
@@ -266,6 +266,19 @@ pub fn resolve(
             if selected_components.is_empty() {
                 blocking_reasons.insert(format!(
                     "{} has no selected executable WeiDU component",
+                    key.node_id()
+                ));
+            }
+            if !selected_components.is_empty()
+                && selected_components.iter().all(|component| {
+                    component
+                        .weidu
+                        .as_ref()
+                        .is_some_and(|selector| selector.non_recording)
+                })
+            {
+                blocking_reasons.insert(format!(
+                    "{} selects only non-recording dispatcher components; select at least one recording component",
                     key.node_id()
                 ));
             }
@@ -1103,6 +1116,7 @@ mod tests {
                 label: Some("smart_mages".to_owned()),
                 number: None,
                 subcomponent: None,
+                non_recording: false,
             }),
             provides: vec![],
             claims: vec![],
@@ -1242,6 +1256,7 @@ mod tests {
                 label: Some("main".to_owned()),
                 number: Some(0),
                 subcomponent: None,
+                non_recording: false,
             }),
             provides: vec![],
             claims: vec![],
@@ -1300,11 +1315,22 @@ mod tests {
                 label: None,
                 number: Some(0),
                 subcomponent: None,
+                non_recording: false,
             }),
             provides: vec![],
             claims: vec![],
         });
+        let mut sfx_package = package.clone();
+        sfx_package
+            .artifact
+            .as_mut()
+            .expect("fixture has an artifact")
+            .format = ArchiveFormat::WindowsRarSfx;
         registry.insert("package".to_owned(), record("package", vec![package]));
+        registry.insert(
+            "rar-package".to_owned(),
+            record("rar-package", vec![sfx_package]),
+        );
 
         let lock = resolve(
             &manifest(vec![RequestedMod::Package("package".to_owned())]),
@@ -1320,6 +1346,15 @@ mod tests {
                 .iter()
                 .any(|reason| reason.contains("no generic A4 preparation route"))
         );
+
+        let sfx_lock = resolve(
+            &manifest(vec![RequestedMod::Package("rar-package".to_owned())]),
+            &registry,
+            "test",
+            toolchain(),
+        )
+        .unwrap();
+        assert_eq!(sfx_lock.execution_readiness, ExecutionReadiness::Executable);
     }
 
     #[test]
@@ -1353,6 +1388,7 @@ mod tests {
                 label: None,
                 number: Some(0),
                 subcomponent: None,
+                non_recording: false,
             }),
             provides: vec![],
             claims: vec![],
@@ -1403,6 +1439,7 @@ mod tests {
                 label: None,
                 number: Some(0),
                 subcomponent: None,
+                non_recording: false,
             }),
             provides: vec![],
             claims: vec![],

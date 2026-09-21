@@ -7,7 +7,7 @@ releases:
     artifacts:
       - url: https://github.com/Gibberlings3/SwordCoastStratagems/releases/download/v35.21/stratagems-35.21.exe
         sha256: 7e8754e1bb541fce1686314e0d4967b66c5740615907521dca5e63153326602f
-        format: executable
+        format: windows-rar-sfx
         platforms: [windows]
     compatibility:
       games: [bgee, bg2ee, eet]
@@ -21,19 +21,29 @@ releases:
         provenance: derived
         evidence:
           - https://github.com/Gibberlings3/SwordCoastStratagems/releases/tag/v35.21
-      - claim: This release is a Windows EXE. IEPM records its content identity but intentionally has no generic executable-archive preparation or execution path.
-        provenance: derived
+      - claim: The exact SHA-verified EXE was extracted in an isolated non-game staging directory by UnRAR reading its RAR payload, producing stratagems/ and setup-stratagems.exe without invoking the SFX stub or launching an installer.
+        provenance: verified
         evidence:
           - https://github.com/Gibberlings3/SwordCoastStratagems/releases/tag/v35.21
       - claim: SCS is an optional-component AI/tactical mod; its component-level choices require separate compatibility evidence.
         provenance: declared
         evidence:
           - https://github.com/Gibberlings3/SwordCoastStratagems
+      - claim: Batch dispatcher 100 and its selected recording components 2000 (spell tweaks batch), 5900 (initialize AI), 6030 (smarter mages), and 6040 (smarter priests) completed in a fresh IEPM-managed English BG2EE 2.6.6 workspace under shared WeiDU 25100. The exact official EXE was read through the named UnRAR recipe and the completed build was sealed.
+        provenance: verified
+        evidence:
+          - https://github.com/Gibberlings3/SwordCoastStratagems/releases/tag/v35.21
     installers:
       - tp2: stratagems/setup-stratagems.tp2
+        launcher: toolchain
+        languages:
+          - id: 0
+            name: English
     components:
       - id: batch-mode
-        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 100 }
+        # This selector starts SCS's nested batch installer. Its requested
+        # recording components, rather than 100 itself, appear in WeiDU.log.
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 100, non_recording: true }
       - id: spell-tweaks-batch
         weidu: { tp2: stratagems/setup-stratagems.tp2, number: 2000 }
       - id: initialize-ai

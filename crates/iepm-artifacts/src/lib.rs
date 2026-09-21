@@ -8,6 +8,11 @@ use std::fs::{self, File};
 use std::io::{self, Read, Write};
 use std::path::{Path, PathBuf};
 use std::time::Duration;
+#[cfg(target_os = "windows")]
+use std::{
+    process::{Command, Stdio},
+    time::Instant,
+};
 use zip::ZipArchive;
 
 const MAX_EXTRACTED_BYTES: u64 = 8 * 1024 * 1024 * 1024;
@@ -178,6 +183,7 @@ impl ArtifactStore {
             ArchiveFormat::Executable => bail!(
                 "generic executable artifact preparation is intentionally unsupported; add a release-specific materialization fixture first"
             ),
+            ArchiveFormat::WindowsRarSfx => extract_windows_rar_sfx(archive_path, &destination)?,
         }
         let digest = tree_digest(&destination)?;
         fs::write(&marker, format!("{}\n{}\n", artifact.sha256, digest)).with_context(|| {
@@ -190,7 +196,7 @@ impl ArtifactStore {
         validate_sha256(&artifact.sha256)?;
         let extension = match artifact.format {
             ArchiveFormat::Zip => "zip",
-            ArchiveFormat::Executable => "exe",
+            ArchiveFormat::Executable | ArchiveFormat::WindowsRarSfx => "exe",
         };
         Ok(self
             .root
@@ -224,7 +230,10 @@ impl ArtifactStore {
     }
 
     fn ensure_supported_format(&self, artifact: &Artifact) -> Result<()> {
-        if artifact.format == ArchiveFormat::Zip {
+        if matches!(
+            artifact.format,
+            ArchiveFormat::Zip | ArchiveFormat::WindowsRarSfx
+        ) {
             return Ok(());
         }
         bail!(
@@ -232,6 +241,75 @@ impl ArtifactStore {
             artifact.format
         )
     }
+}
+
+/// Extract an explicitly classified WinRAR self-extracting archive without
+/// invoking its SFX stub. This is a deliberately narrow A4 primitive
+/// established by the SCS v35.21 fixture; generic executable artifacts remain
+/// non-preparable.
+fn extract_windows_rar_sfx(archive_path: &Path, destination: &Path) -> Result<()> {
+    #[cfg(target_os = "windows")]
+    {
+        let unrar = find_unrar()?;
+        let mut child = Command::new(&unrar)
+            .arg("x")
+            .arg("-idq")
+            .arg(archive_path)
+            .arg(format!("{}\\", destination.display()))
+            .current_dir(destination)
+            .stdin(Stdio::null())
+            .stdout(Stdio::null())
+            .stderr(Stdio::null())
+            .spawn()
+            .with_context(|| format!("could not start UnRAR {}", unrar.display()))?;
+        let deadline = Instant::now() + Duration::from_secs(60);
+        loop {
+            if let Some(status) = child.try_wait()? {
+                if status.success() {
+                    return Ok(());
+                }
+                bail!(
+                    "UnRAR extraction failed for {} with {status}",
+                    archive_path.display()
+                );
+            }
+            if Instant::now() >= deadline {
+                child.kill()?;
+                let _ = child.wait();
+                bail!(
+                    "UnRAR extraction exceeded the 60-second safety limit: {}",
+                    archive_path.display()
+                );
+            }
+            std::thread::sleep(Duration::from_millis(100));
+        }
+    }
+    #[cfg(not(target_os = "windows"))]
+    {
+        let _ = (archive_path, destination);
+        bail!("Windows RAR SFX preparation is available only on Windows")
+    }
+}
+
+#[cfg(target_os = "windows")]
+fn find_unrar() -> Result<PathBuf> {
+    let mut candidates = std::env::var_os("IEPM_UNRAR")
+        .map(PathBuf::from)
+        .into_iter()
+        .collect::<Vec<_>>();
+    for name in ["ProgramFiles", "ProgramFiles(x86)"] {
+        if let Some(root) = std::env::var_os(name) {
+            candidates.push(PathBuf::from(root).join("WinRAR").join("UnRAR.exe"));
+        }
+    }
+    candidates
+        .into_iter()
+        .find(|candidate| candidate.is_file())
+        .ok_or_else(|| {
+            anyhow::anyhow!(
+                "Windows RAR SFX preparation requires UnRAR.exe; install WinRAR or set IEPM_UNRAR to its local path"
+            )
+        })
 }
 
 fn host_platform() -> ArtifactPlatform {

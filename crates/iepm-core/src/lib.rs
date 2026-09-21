@@ -236,6 +236,10 @@ pub enum ArchiveFormat {
     /// which A4 must not prepare or execute generically. A package-specific
     /// materialization fixture is required before it can become runnable.
     Executable,
+    /// A Windows WinRAR self-extracting archive. This is deliberately a
+    /// separate format from a generic executable: A4 invokes its documented
+    /// extraction mode into the artifact cache, never as a game installer.
+    WindowsRarSfx,
 }
 
 #[derive(Debug, Clone, Copy, Deserialize, Serialize, PartialEq, Eq)]
@@ -366,6 +370,11 @@ pub struct WeiDUComponent {
     pub number: Option<u32>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub subcomponent: Option<String>,
+    /// Some release-specific selectors dispatch nested WeiDU work rather than
+    /// writing their own line to WeiDU.log. They remain executable selectors,
+    /// but another selected recording component must supply the receipt.
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
+    pub non_recording: bool,
 }
 
 /// A single, ordered entry expected in an environment's WeiDU baseline log.
