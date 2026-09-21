@@ -415,7 +415,6 @@ pub struct BuildOptions {
     pub weidu_version: String,
     pub registry_revision: String,
     pub confirm_disposable: bool,
-    pub allow_weidu_warnings: bool,
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -431,6 +430,18 @@ pub struct BuildReport {
     pub log_dir: PathBuf,
     pub actions: usize,
     pub warnings: Vec<String>,
+    pub weidu_warnings: Vec<WeiduWarningReceipt>,
+}
+
+/// An audited WeiDU warning that did not prevent the requested components
+/// from being recorded as installed. The full command output remains in the
+/// ordinary action logs; this is the concise user-facing receipt.
+#[derive(Debug, Clone, Serialize)]
+pub struct WeiduWarningReceipt {
+    pub action: usize,
+    pub package: String,
+    pub log: PathBuf,
+    pub details: String,
 }
 
 pub struct PreparedBuild {
@@ -610,7 +621,6 @@ where
             workspaces,
             log_dir: log_dir.clone(),
             confirm_disposable: true,
-            allow_weidu_warnings: options.allow_weidu_warnings,
         },
     )?;
 
@@ -626,6 +636,7 @@ where
         log_dir,
         actions: execution.actions,
         warnings: prepared.lockfile.warnings,
+        weidu_warnings: execution.weidu_warnings,
     };
     progress(BuildProgress {
         stage: "complete".to_owned(),
@@ -1007,13 +1018,13 @@ pub struct ExecuteOptions {
     pub workspaces: BTreeMap<String, PathBuf>,
     pub log_dir: PathBuf,
     pub confirm_disposable: bool,
-    pub allow_weidu_warnings: bool,
 }
 
 pub struct ExecutionReport {
     pub actions: usize,
     pub log_dir: PathBuf,
     pub final_fingerprints: BTreeMap<String, GameFingerprint>,
+    pub weidu_warnings: Vec<WeiduWarningReceipt>,
 }
 
 /// Parse repeated `environment=path` CLI values without allowing an implicit
@@ -1155,6 +1166,7 @@ pub fn execute(lockfile: &Lockfile, options: &ExecuteOptions) -> Result<Executio
     }
 
     let mut actions = 0_usize;
+    let mut weidu_warnings = Vec::new();
     for node in &lockfile.execution {
         let package = packages
             .get(&(node.environment.as_str(), node.package.as_str()))
@@ -1219,7 +1231,7 @@ pub fn execute(lockfile: &Lockfile, options: &ExecuteOptions) -> Result<Executio
                 &receipt_components,
                 actions,
                 &options.log_dir,
-                options.allow_weidu_warnings,
+                &mut weidu_warnings,
             )?;
         }
     }
@@ -1272,6 +1284,7 @@ pub fn execute(lockfile: &Lockfile, options: &ExecuteOptions) -> Result<Executio
         actions,
         log_dir: options.log_dir.clone(),
         final_fingerprints,
+        weidu_warnings,
     })
 }
 
@@ -1526,7 +1539,7 @@ fn run_weidu(
     receipt_components: &[String],
     action: usize,
     log_dir: &Path,
-    allow_weidu_warnings: bool,
+    weidu_warnings: &mut Vec<WeiduWarningReceipt>,
 ) -> Result<()> {
     let locale = lockfile.environments[&package.environment]
         .locale
@@ -1618,10 +1631,11 @@ fn run_weidu(
         .map_err(|error| anyhow::anyhow!("could not start {}: {error}", program.display()))?;
     fs::write(&stdout_path, &output.stdout)?;
     fs::write(&stderr_path, &output.stderr)?;
+    let stdout = String::from_utf8_lossy(&output.stdout);
+    let warning_receipt =
+        write_weidu_warning_receipt(&stdout, action, &package.package, log_dir, &stem)?;
     if !output.status.success() {
-        let stdout = String::from_utf8_lossy(&output.stdout);
-        if allow_weidu_warnings
-            && output.status.code() == Some(3)
+        if output.status.code() == Some(3)
             && stdout.contains("INSTALLED WITH WARNINGS")
             && installed_components_are_logged(
                 workspace,
@@ -1630,15 +1644,9 @@ fn run_weidu(
                 receipt_components,
             )?
         {
-            let warnings = stdout
-                .lines()
-                .filter(|line| line.contains("WARNING") || line.contains("INSTALLED WITH WARNINGS"))
-                .collect::<Vec<_>>()
-                .join("\n");
-            fs::write(
-                log_dir.join(format!("{stem}.warnings.log")),
-                format!("{warnings}\n"),
-            )?;
+            if let Some(receipt) = warning_receipt {
+                weidu_warnings.push(receipt);
+            }
             return Ok(());
         }
         bail!(
@@ -1647,12 +1655,11 @@ fn run_weidu(
             output.status,
             stdout_path.display(),
             stderr_path.display(),
-            if output.status.code() == Some(3) && stdout.contains("INSTALLED WITH WARNINGS") {
-                "; re-run with --allow-weidu-warnings only if the warning receipt is acceptable"
-            } else {
-                ""
-            }
+            ""
         );
+    }
+    if let Some(receipt) = warning_receipt {
+        weidu_warnings.push(receipt);
     }
     if !installed_components_are_logged(workspace, &installer.tp2, language_id, receipt_components)?
     {
@@ -1663,6 +1670,31 @@ fn run_weidu(
         );
     }
     Ok(())
+}
+
+fn write_weidu_warning_receipt(
+    stdout: &str,
+    action: usize,
+    package: &str,
+    log_dir: &Path,
+    stem: &str,
+) -> Result<Option<WeiduWarningReceipt>> {
+    let details = stdout
+        .lines()
+        .filter(|line| line.contains("WARNING") || line.contains("INSTALLED WITH WARNINGS"))
+        .collect::<Vec<_>>()
+        .join("\n");
+    if details.is_empty() {
+        return Ok(None);
+    }
+    let log = log_dir.join(format!("{stem}.warnings.log"));
+    fs::write(&log, format!("{details}\n"))?;
+    Ok(Some(WeiduWarningReceipt {
+        action,
+        package: package.to_owned(),
+        log,
+        details,
+    }))
 }
 
 fn installed_components_are_logged(
@@ -2121,6 +2153,19 @@ mod tests {
             !installed_components_are_logged(&workspace, "EET/EET.tp2", 0, &["1".to_owned()])
                 .unwrap()
         );
+        let receipt = write_weidu_warning_receipt(
+            "WARNING: missing optional resource\nINSTALLED WITH WARNINGS EET core",
+            4,
+            "eet",
+            &workspace,
+            "04-eet",
+        )
+        .unwrap()
+        .unwrap();
+        assert_eq!(receipt.action, 4);
+        assert_eq!(receipt.package, "eet");
+        assert!(receipt.log.is_file());
+        assert!(receipt.details.contains("INSTALLED WITH WARNINGS"));
         std::fs::remove_dir_all(workspace).unwrap();
     }
 
@@ -2480,7 +2525,6 @@ mods:
             weidu_version: "25100".to_owned(),
             registry_revision: "fixture".to_owned(),
             confirm_disposable: true,
-            allow_weidu_warnings: false,
         })
         .unwrap();
 

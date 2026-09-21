@@ -26,6 +26,7 @@
 		log_dir: string;
 		actions: number;
 		warnings: string[];
+		weidu_warnings: { action: number; package: string; log: string; details: string }[];
 	};
 
 	let startup = $state<StartupState | null>(null);
@@ -42,7 +43,7 @@
 	let experienceName = $state('');
 	let bgeeDirectory = $state('');
 	let bg2eeDirectory = $state('');
-	let allowWarnings = $state(false);
+	let showInstallWarnings = $state(false);
 
 	const stages = [
 		['1', 'Choose', 'Games and mod list'],
@@ -56,7 +57,6 @@
 			experienceName: experienceName.trim() || null,
 			bgeeDirectory: bgeeDirectory.trim() || null,
 			bg2eeDirectory: bg2eeDirectory.trim() || null,
-			allowWeiduWarnings: allowWarnings
 		};
 	}
 
@@ -258,10 +258,8 @@
 
 						<label class="block"><span class="text-xs font-semibold text-ink-800/65">Mod list file</span><div class="mt-2 flex gap-2"><input bind:value={manifest} placeholder="Choose an IEPM .yaml mod list" class="min-w-0 flex-1 rounded-lg border border-black/10 bg-white px-3 py-2.5 text-sm outline-none focus:border-moss-500 focus:ring-3 focus:ring-moss-500/10" /><button onclick={pickManifest} class="rounded-lg border border-black/12 bg-white px-4 text-sm font-semibold hover:bg-paper-50">Browse</button></div><span class="mt-1.5 block text-[11px] text-ink-800/45">The app brings its own mod registry. You only choose the list you want to install.</span></label>
 
-						<label class="flex items-center gap-2 rounded-xl border border-black/8 bg-white/60 p-4 text-xs text-ink-800/70"><input type="checkbox" bind:checked={allowWarnings} class="accent-moss-600" />Accept a receipted WeiDU warning only when every requested component is confirmed installed.</label>
-
 						{#if error}<div class="rounded-xl border border-red-500/20 bg-red-50 px-4 py-3 text-sm leading-5 text-red-800">{error}</div>{/if}
-						{#if result}<div class="rounded-xl border border-emerald-500/25 bg-emerald-50 px-4 py-3 text-sm text-emerald-900"><p class="font-semibold">Your mod experience is ready</p><p class="mt-1 break-all text-xs">{result.sealed_build}</p></div>{/if}
+						{#if result}<div class="rounded-xl border border-emerald-500/25 bg-emerald-50 px-4 py-3 text-sm text-emerald-900"><p class="font-semibold">Your mod experience is ready</p><p class="mt-1 break-all text-xs">{result.sealed_build}</p>{#if result.weidu_warnings.length}<button onclick={() => (showInstallWarnings = !showInstallWarnings)} class="mt-3 text-xs font-semibold text-emerald-800 underline">{showInstallWarnings ? 'Hide' : 'Show'} {result.weidu_warnings.length} WeiDU warning {result.weidu_warnings.length === 1 ? 'receipt' : 'receipts'}</button>{#if showInstallWarnings}<div class="mt-2 space-y-2 rounded-lg border border-emerald-500/20 bg-white/60 p-3 text-xs text-ink-800/75">{#each result.weidu_warnings as warning}<div><p class="font-semibold">Action {warning.action}: {warning.package}</p><pre class="mt-1 whitespace-pre-wrap font-mono text-[10px] leading-4">{warning.details}</pre><p class="mt-1 break-all text-[10px] text-ink-800/50">Saved receipt: {warning.log}</p></div>{/each}</div>{/if}{/if}</div>{/if}
 
 						<div class="flex items-center gap-3 pt-1"><button onclick={reviewPlan} disabled={busy || !manifest.trim() || (!bgeeDirectory.trim() && !bg2eeDirectory.trim())} class="rounded-lg border border-black/12 bg-white px-5 py-2.5 text-sm font-semibold text-ink-800 shadow-sm hover:bg-paper-50 disabled:opacity-50">Review plan</button><button onclick={installExperience} disabled={busy || !preview} class="rounded-lg bg-moss-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-moss-500 disabled:cursor-not-allowed disabled:opacity-40">{busy ? 'Working…' : 'Install experience'}</button>{#if progress}<span class="text-xs text-ink-800/55"><strong class="font-semibold capitalize">{progress.stage}:</strong> {progress.message}</span>{/if}</div>
 					</section>

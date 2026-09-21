@@ -18,7 +18,6 @@ struct GuidedBuildRequest {
     experience_name: Option<String>,
     bgee_directory: Option<String>,
     bg2ee_directory: Option<String>,
-    allow_weidu_warnings: bool,
 }
 
 #[derive(Debug, Serialize)]
@@ -225,7 +224,6 @@ fn desktop_build_options(
             weidu_version: toolchain.version.clone(),
             registry_revision: "desktop-bundled-registry".to_owned(),
             confirm_disposable: true,
-            allow_weidu_warnings: request.allow_weidu_warnings,
         },
         toolchain,
         uses_local_override,

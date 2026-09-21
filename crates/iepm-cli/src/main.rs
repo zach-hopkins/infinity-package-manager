@@ -41,11 +41,6 @@ enum Command {
             help = "Confirm IEPM may create and mutate fresh disposable copies"
         )]
         confirm_disposable: bool,
-        #[arg(
-            long,
-            help = "Accept WeiDU exit code 3 only when all requested components are recorded"
-        )]
-        allow_weidu_warnings: bool,
     },
     Resolve {
         #[arg(long, default_value = "registry")]
@@ -216,11 +211,6 @@ enum Command {
         log_dir: PathBuf,
         #[arg(long, help = "Confirm every --workspace is a fresh disposable copy")]
         confirm_disposable: bool,
-        #[arg(
-            long,
-            help = "Continue only past WeiDU exit code 3 when every requested component is logged as installed with warnings"
-        )]
-        allow_weidu_warnings: bool,
     },
 }
 
@@ -236,7 +226,6 @@ fn main() -> Result<()> {
             weidu_version,
             registry_revision,
             confirm_disposable,
-            allow_weidu_warnings,
         } => {
             let sources = parse_build_sources(&manifest, &sources)?;
             let report = iepm::run_build_with_progress(
@@ -250,7 +239,6 @@ fn main() -> Result<()> {
                     weidu_version,
                     registry_revision,
                     confirm_disposable,
-                    allow_weidu_warnings,
                 },
                 |event| println!("[{}] {}", event.stage, event.message),
             )?;
@@ -502,7 +490,6 @@ fn main() -> Result<()> {
             workspace,
             log_dir,
             confirm_disposable,
-            allow_weidu_warnings,
         } => {
             let lockfile_text = std::fs::read_to_string(&lockfile)
                 .with_context(|| format!("could not read {}", lockfile.display()))?;
@@ -516,7 +503,6 @@ fn main() -> Result<()> {
                     workspaces: iepm::parse_workspace_bindings(&workspace)?,
                     log_dir,
                     confirm_disposable,
-                    allow_weidu_warnings,
                 },
             )?;
             println!(

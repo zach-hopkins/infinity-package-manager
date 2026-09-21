@@ -274,7 +274,8 @@ manifest → registry → resolver → lockfile → verified artifacts
   disposable execution with action receipts. `iepm execute` is intentionally
   narrow: verified artifacts, safe materialization, explicit environment
   bindings, pre-mutation input fingerprints, sequential process supervision,
-  opt-in audited warnings, and final output receipts. A run-state marker makes
+  automatically accepted, audited warning receipts, and final output receipts.
+  A run-state marker makes
   interrupted workspaces non-resumable; rebuild rather than roll back. A
   deliberate interrupted-run test has exercised that boundary. A second real
   Windows release has completed through the bundled-launcher path. A7 adds an

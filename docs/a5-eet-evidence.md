@@ -71,10 +71,10 @@ receipt. A run-state marker forbids resuming any prior or interrupted run in
 place; recovery is a fresh disposable workspace and log directory, not an
 unproven rollback protocol. Mutation additionally requires
 `--confirm-disposable`.
-`--allow-weidu-warnings` is deliberately separate: it accepts only exit code
-`3` when the output says `INSTALLED WITH WARNINGS` *and* all requested numeric
-components are independently present in `WeiDU.log`; every other nonzero exit
-remains fatal.
+IEPM automatically accepts exit code `3` only when the output says
+`INSTALLED WITH WARNINGS` *and* all requested numeric components are
+independently present in `WeiDU.log`. It retains a warning receipt and the
+full action logs; every other nonzero exit remains fatal.
 
 ## Minimal executable route fixture
 

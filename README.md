@@ -84,8 +84,10 @@ An existing run-state marker is never resumed in place: use a new controlled
 copy and log directory after interruption. Every WeiDU launcher—bundled or
 shared—requires both its numeric mod language and the game's locale; IEPM
 renders those before unattended flags and component selection.
-`--allow-weidu-warnings` is an explicit review decision: it accepts only
-WeiDU exit code 3 after the requested components are confirmed in `WeiDU.log`.
+IEPM automatically continues past WeiDU exit code 3 only when WeiDU reports
+`INSTALLED WITH WARNINGS` and the requested components are confirmed in
+`WeiDU.log`. It retains a concise warning receipt beside the full action logs.
+Other non-zero exits still fail the build.
 
 The normal personal-use entry point now composes the same guarded stages:
 
