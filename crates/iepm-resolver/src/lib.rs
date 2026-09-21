@@ -283,11 +283,9 @@ pub fn resolve(
                                     installer.tp2
                                 ));
                             }
-                            if installer.launcher == InstallerLauncher::Toolchain
-                                && environments[&key.environment].locale.is_none()
-                            {
+                            if environments[&key.environment].locale.is_none() {
                                 blocking_reasons.insert(format!(
-                                    "{} installer {} has no game locale for shared WeiDU",
+                                    "{} installer {} has no game locale for WeiDU execution",
                                     key.node_id(), installer.tp2
                                 ));
                             }
@@ -1236,18 +1234,25 @@ mod tests {
             provides: vec![],
         });
         registry.insert("package".to_owned(), record("package", vec![package]));
-        let lock = resolve(
-            &manifest(vec![RequestedMod::Package("package".to_owned())]),
-            &registry,
-            "test",
-            toolchain(),
-        )
-        .unwrap();
+        let mut manifest = manifest(vec![RequestedMod::Package("package".to_owned())]);
+        let lock = resolve(&manifest, &registry, "test", toolchain()).unwrap();
         assert_eq!(lock.execution_readiness, ExecutionReadiness::Executable);
         assert!(lock.blocking_reasons.is_empty());
         assert_eq!(
             lock.packages[0].installers[0].program.as_deref(),
             Some("setup-package.exe")
+        );
+        manifest.environments.get_mut("target").unwrap().locale = None;
+        let without_locale = resolve(&manifest, &registry, "test", toolchain()).unwrap();
+        assert_eq!(
+            without_locale.execution_readiness,
+            ExecutionReadiness::AnalysisOnly
+        );
+        assert!(
+            without_locale
+                .blocking_reasons
+                .iter()
+                .any(|reason| reason.contains("no game locale for WeiDU execution"))
         );
     }
 
@@ -1304,7 +1309,7 @@ mod tests {
             without_locale
                 .blocking_reasons
                 .iter()
-                .any(|reason| reason.contains("no game locale for shared WeiDU"))
+                .any(|reason| reason.contains("no game locale for WeiDU execution"))
         );
     }
 
@@ -1583,6 +1588,33 @@ mod tests {
                 "eet-target::eet",
                 "eet-target::eet-end",
             ]
+        );
+    }
+
+    #[test]
+    fn bundled_launcher_fixture_is_executable_with_a_game_locale() {
+        let root = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..");
+        let text =
+            std::fs::read_to_string(root.join("examples/hidden-gameplay-options-a5/modpack.yaml"))
+                .unwrap();
+        let fixture: Manifest = serde_yaml::from_str(&text).unwrap();
+        let registry = iepm_registry::load(&root.join("registry")).unwrap();
+        let lock = resolve(&fixture, &registry, "fixture", toolchain()).unwrap();
+        assert_eq!(lock.execution_readiness, ExecutionReadiness::Executable);
+        assert_eq!(
+            lock.packages[0].release_id,
+            "a7-hidden-gameplay-options-v5.1"
+        );
+        assert_eq!(
+            lock.packages[0].installers[0].launcher,
+            InstallerLauncher::Bundled
+        );
+        assert_eq!(
+            lock.packages[0].components[0]
+                .weidu
+                .as_ref()
+                .and_then(|selector| selector.number),
+            Some(10)
         );
     }
 }

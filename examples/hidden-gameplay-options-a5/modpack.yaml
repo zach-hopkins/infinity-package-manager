@@ -1,0 +1,20 @@
+schema: 2
+
+# A narrow, standalone A5 executor fixture. The fingerprint is measured from
+# the clean Steam 2.6.6 BG2EE root used for the disposable evidence run.
+environments:
+  bg2ee-test:
+    target: bg2ee
+    version: "2.6.6"
+    platform: windows
+    language: English
+    locale: en_US
+    fingerprint:
+      profile: iepm-core-layout-v1
+      value: 298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f
+
+mods:
+  - package: hidden-gameplay-options
+    version: "5.1"
+    environment: bg2ee-test
+    components: [enable-debug-mode]

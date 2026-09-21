@@ -23,8 +23,12 @@ disposable-workspace confirmation. An interrupted or prior run-state marker
 is deliberately non-resumable: rebuild a fresh controlled workspace rather
 than attempting rollback. A controlled interruption during EET import proved
 that the marker rejects an in-place retry before fingerprinting or mutation.
-The next work is another real-package counterexample before describing the
-full mod stack.
+The bundled-launcher counterexample, Hidden Gameplay Options v5.1 component
+10, has now completed in a fresh disposable BG2EE copy with official release
+content. It proved that bundled and shared WeiDU both require a declared game
+locale and the same language/locale/unattended/component argument order. The
+next work is A6 ingestion and release-drift evidence, while keeping broader
+stack coverage deliberately incremental.
 
 The source-tagged EET v14.1 archive's TP2 declares itself v14.0, and EET core
 emits non-stopping warnings under shared WeiDU 251. This is resolved evidence,
@@ -183,13 +187,15 @@ explicit verify-existing action, a selected component that duplicates an
 environment baseline is a blocking error rather than a reinstall.
 
 Installers may use either a package-bundled launcher or the pinned shared
-WeiDU toolchain. Shared-WeiDU execution requires a named workspace and game
+WeiDU toolchain. Every WeiDU execution requires a named workspace and game
 locale (for example `en_US`), separate from the package's numeric WeiDU
-language index; it renders the observed unattended flags rather than relying
+language index; both launcher paths render `--language`, `--use-lang`,
+unattended flags, and component selection in that order rather than relying
 on interactive defaults. Required arguments are typed literals or named
-environment bindings, not interpolated shell commands. This distinction is
+environment bindings, not interpolated shell commands. The distinction is
 required by real packages that ship only a TP2, such as the observed EE
-Fixpack archive.
+Fixpack archive, and by packages that ship a setup executable, such as Hidden
+Gameplay Options.
 
 Resolution and execution are separate states:
 
@@ -230,8 +236,9 @@ manifest → registry → resolver → lockfile → verified artifacts
   bindings, pre-mutation input fingerprints, sequential process supervision,
   opt-in audited warnings, and final output receipts. A run-state marker makes
   interrupted workspaces non-resumable; rebuild rather than roll back. A
-  deliberate interrupted-run test has exercised that boundary. Next are more
-  ecosystem counterexamples.
+  deliberate interrupted-run test has exercised that boundary. A second real
+  Windows release has completed through the bundled-launcher path. Next is A6
+  ingestion and release-drift review.
   `examples/eet-minimal` remains a controlled
   fixture, not authorization to install into a user's primary game tree.
 - **A6:** TP2-assisted registry ingestion, release drift review, and

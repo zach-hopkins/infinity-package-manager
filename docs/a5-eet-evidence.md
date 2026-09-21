@@ -45,12 +45,13 @@ failure prevents a hidden reinstall until the future executor has an explicit
 verify-existing action.
 
 Installer metadata supports only two launchers: a bundled program or the
-pinned shared WeiDU toolchain. A shared-toolchain plan requires an environment
-locale and renders its runtime workspace binding, numeric language index, and
-the observed unattended command envelope. Required extra arguments are typed
+pinned shared WeiDU toolchain. Every WeiDU plan requires an environment locale;
+the shared-toolchain plan additionally renders its runtime workspace binding.
+Both routes render numeric language, game locale, and the observed unattended
+command envelope before component selection. Required extra arguments are typed
 literal tokens or named environment bindings, never a shell-command template.
-This is the smallest extension supported by the EET evidence and preserves
-portable lockfiles.
+This is the smallest extension supported by the EET and bundled-launcher
+evidence and preserves portable lockfiles.
 
 The EET v14.1 archive content identity now recorded in the registry is
 `cb1451e7ef341672fcd71ef8aa5edb010134f880e1eb3d398ed42a9ed3d934a7`.

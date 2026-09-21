@@ -1,6 +1,42 @@
-schema: 1
+schema: 2
 package: hidden-gameplay-options
 releases:
+  # Windows release v5.1, matched against the locally retained official
+  # archive before the A5 disposable BG2EE execution evidence.
+  - version: "5.1"
+    release_id: "a7-hidden-gameplay-options-v5.1"
+    artifacts:
+      - url: https://github.com/Argent77/A7-HiddenGameplayOptions/releases/download/v5.1/win-A7-HiddenGameplayOptions-v5.1.zip
+        sha256: 11ccf8555486a73bdd1072f311f995f193e2bfa0784bf4d169e77b0b7ea22b3e
+        platforms: [windows]
+    compatibility:
+      games: [bg2ee, eet]
+    install:
+      phase: eet
+    provenance: derived
+    claims:
+      - claim: The official Windows v5.1 archive completed component 10 in a fresh Steam BG2EE 2.6.6 disposable workspace using its bundled launcher under WeiDU 25100.
+        provenance: verified
+        evidence:
+          - https://github.com/Argent77/A7-HiddenGameplayOptions/releases/tag/v5.1
+    installers:
+      - tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2
+        program: setup-HiddenGameplayOptions.exe
+        launcher: bundled
+        languages:
+          - id: 0
+            name: English
+    components:
+      - id: install-all
+        weidu:
+          tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2
+          label: A7-HIDDENGAMEPLAYOPTIONS-INSTALL_ALL
+          number: 0
+      - id: enable-debug-mode
+        weidu:
+          tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2
+          label: A7-HIDDENGAMEPLAYOPTIONS-OPTION_ENABLE_DEBUG_MODE
+          number: 10
   - version: "1.0"
     compatibility:
       games: [bg2ee, eet]

@@ -514,6 +514,15 @@ fn run_weidu(
     log_dir: &Path,
     allow_weidu_warnings: bool,
 ) -> Result<()> {
+    let locale = lockfile.environments[&package.environment]
+        .locale
+        .as_deref()
+        .ok_or_else(|| {
+            anyhow::anyhow!(
+                "{} has no game locale for WeiDU execution",
+                package.environment
+            )
+        })?;
     let program = match installer.launcher {
         InstallerLauncher::Bundled => {
             workspace.join(safe_relative(installer.program.as_deref().ok_or_else(
@@ -525,21 +534,18 @@ fn run_weidu(
     let mut args = Vec::new();
     match installer.launcher {
         InstallerLauncher::Bundled => {
+            args.extend(["--language".to_owned(), language_id.to_string()]);
+            args.extend(["--use-lang".to_owned(), locale.to_owned()]);
+            args.extend([
+                "--skip-at-view".to_owned(),
+                "--no-exit-pause".to_owned(),
+                "--noautoupdate".to_owned(),
+            ]);
             for component in components {
                 args.extend(["--force-install".to_owned(), component.clone()]);
             }
-            args.extend(["--language".to_owned(), language_id.to_string()]);
         }
         InstallerLauncher::Toolchain => {
-            let locale = lockfile.environments[&package.environment]
-                .locale
-                .as_deref()
-                .ok_or_else(|| {
-                    anyhow::anyhow!(
-                        "{} has no game locale for shared WeiDU",
-                        package.environment
-                    )
-                })?;
             args.extend([
                 installer.tp2.clone(),
                 "--game".to_owned(),
@@ -794,6 +800,16 @@ fn render_command(
     language_id: u32,
     components: &[String],
 ) -> Result<String> {
+    let environment = lockfile
+        .environments
+        .get(&package.environment)
+        .expect("locked package environment was preflighted");
+    let locale = environment.locale.as_deref().ok_or_else(|| {
+        anyhow::anyhow!(
+            "{} has no game locale for WeiDU execution",
+            package.environment
+        )
+    })?;
     let mut command = match installer.launcher {
         InstallerLauncher::Bundled => vec![format!(
             "\"{}\"",
@@ -803,16 +819,6 @@ fn render_command(
                 .ok_or_else(|| anyhow::anyhow!("{} has no executable program", installer.tp2))?
         )],
         InstallerLauncher::Toolchain => {
-            let environment = lockfile
-                .environments
-                .get(&package.environment)
-                .expect("locked package environment was preflighted");
-            let locale = environment.locale.as_deref().ok_or_else(|| {
-                anyhow::anyhow!(
-                    "{} has no game locale for shared WeiDU",
-                    package.environment
-                )
-            })?;
             vec![
                 "$IEPM_WEIDU".to_owned(),
                 quote(&installer.tp2),
@@ -828,13 +834,20 @@ fn render_command(
             ]
         }
     };
-    for component in components {
-        command.push("--force-install".to_owned());
-        command.push(component.clone());
-    }
     if installer.launcher == InstallerLauncher::Bundled {
         command.push("--language".to_owned());
         command.push(language_id.to_string());
+        command.push("--use-lang".to_owned());
+        command.push(quote(locale));
+        command.extend([
+            "--skip-at-view".to_owned(),
+            "--no-exit-pause".to_owned(),
+            "--noautoupdate".to_owned(),
+        ]);
+    }
+    for component in components {
+        command.push("--force-install".to_owned());
+        command.push(component.clone());
     }
     for argument in &installer.arguments {
         match argument {
@@ -996,7 +1009,7 @@ mod tests {
         serde_json::from_str(&format!(
             r#"{{
                 "schema": 3,
-                "environments": {{"target": {{"target": "bg2ee", "language": "English"}}}},
+                "environments": {{"target": {{"target": "bg2ee", "language": "English", "locale": "en_US"}}}},
                 "registry_revision": "fixture",
                 "toolchain": {{"iepm": "test", "weidu": "24600"}},
                 "packages": [{{
@@ -1022,7 +1035,7 @@ mod tests {
         let plan = render_plan(&lockfile("executable")).unwrap();
         assert!(plan.contains("IEPM execution plan (non-mutating)"));
         assert!(plan.contains("Materialize fixture@release-1"));
-        assert!(plan.contains("\"setup-fixture.exe\" --force-install 0 --language 0"));
+        assert!(plan.contains("\"setup-fixture.exe\" --language 0 --use-lang \"en_US\" --skip-at-view --no-exit-pause --noautoupdate --force-install 0"));
         assert!(plan.contains("No artifact fetches"));
     }
 

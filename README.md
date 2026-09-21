@@ -75,7 +75,9 @@ log directory. It verifies and materializes artifacts before executing in
 graph order, verifies the lockfile's core-layout fingerprint before mutation,
 and retains a command/stdout/stderr receipt plus final workspace fingerprints.
 An existing run-state marker is never resumed in place: use a new controlled
-copy and log directory after interruption.
+copy and log directory after interruption. Every WeiDU launcher—bundled or
+shared—requires both its numeric mod language and the game's locale; IEPM
+renders those before unattended flags and component selection.
 `--allow-weidu-warnings` is an explicit review decision: it accepts only
 WeiDU exit code 3 after the requested components are confirmed in `WeiDU.log`.
 
@@ -84,7 +86,7 @@ The smallest executable EET route fixture is available at
 `after_eet_import: eet`: preparation and EET import run against BG2EE, while
 EET_End runs against the transformed EET result. Its fingerprints were measured
 from the exact clean Steam 2.6.6 copies used for the evidence run, so they are
-not universal game fingerprints. Shared-WeiDU routes also require a game `locale` such
+not universal game fingerprints. All WeiDU routes also require a game `locale` such
 as `en_US`; `plan` renders that locale, the bound workspace, and the
 noninteractive WeiDU flags separately from each package's numeric WeiDU
 language index.
@@ -93,7 +95,8 @@ An environment may declare an ordered `baseline` of already-installed WeiDU
 log entries. `plan` renders that as a verify-only preflight and refuses to
 schedule a matching component for installation. EET's copied
 `WeiDU-BGEE.log` remains source-history provenance, not a second target plan;
-see [the EET execution evidence](docs/a5-eet-evidence.md).
+see [the EET execution evidence](docs/a5-eet-evidence.md) and [bundled launcher
+evidence](docs/a5-hidden-gameplay-options-evidence.md).
 
 For example, a manifest can select a version range and symbolic component IDs:
 
