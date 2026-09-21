@@ -14,6 +14,8 @@ different questions which should never be collapsed into one badge:
 The registry YAML remains the source of truth for artifact identity, selectors,
 relationships, and claim provenance. Update this ledger in the same change as
 a material support change, linking the registry record and any evidence note.
+The [compatibility policy](compatibility.md#verification-scope-prove-claims-not-universes)
+defines the deliberately narrow scope of each automated-verification claim.
 
 | Mod | Component coverage | Can IEPM run it? | Compatibility standing | Notes |
 | --- | --- | --- | --- | --- |
