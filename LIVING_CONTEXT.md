@@ -27,8 +27,9 @@ The bundled-launcher counterexample, Hidden Gameplay Options v5.1 component
 10, has now completed in a fresh disposable BG2EE copy with official release
 content. It proved that bundled and shared WeiDU both require a declared game
 locale and the same language/locale/unattended/component argument order. The
-next work is A7 user-facing registry ergonomics, while keeping broader stack
-coverage deliberately incremental. A6 now reads a selected local TP2 as inert
+Product A's initial A7 usability surface is now complete. The next work is
+broader registry and A5 route coverage, while keeping scope deliberately
+incremental. A6 now reads a selected local TP2 as inert
 text and reviews its `VERSION`, language declaration order, and
 `BEGIN`/`DESIGNATED`/`LABEL` selectors against one curated release. It emits
 review JSON but never executes TP2 code, discovers behavior, or rewrites YAML.
@@ -244,8 +245,15 @@ manifest → registry → resolver → lockfile → verified artifacts
   opt-in audited warnings, and final output receipts. A run-state marker makes
   interrupted workspaces non-resumable; rebuild rather than roll back. A
   deliberate interrupted-run test has exercised that boundary. A second real
-  Windows release has completed through the bundled-launcher path. Next is A6
-  ingestion and release-drift review.
+  Windows release has completed through the bundled-launcher path. A7 adds an
+  IEPM-managed full-copy lifecycle around this execution boundary: source
+  snapshots are clone-only, workspace copies are the only accepted mutation
+  targets, and completed workspace sets can be sealed as separate builds.
+  This is an IEPM-enforced state contract, not a claim to sandbox arbitrary
+  external processes or an OS-level immutable ACL. Interrupted and failed
+  workspaces remain non-reusable. Prefix checkpoints are deliberately deferred
+  because their identity requires the resolved prefix and toolchain facts, not
+  merely the core-layout fingerprint.
   `examples/eet-minimal` remains a controlled
   fixture, not authorization to install into a user's primary game tree.
 - **A6:** TP2-assisted registry ingestion, release drift review, and
@@ -254,7 +262,12 @@ manifest → registry → resolver → lockfile → verified artifacts
   drift report for an existing release. It does not auto-create releases or
   inherit compatibility, relationships, artifacts, installer inputs, or
   verification because those are behavioral or release-trust claims.
-- **A7:** user-facing CLI ergonomics such as search, add, verify, and install.
+- **A7:** user-facing CLI ergonomics are complete for the first Product A
+  workflow: curated `search`, preview-first `add`, non-mutating lockfile
+  `verify`, `install` aliasing the guarded A5 executor, and full-copy
+  `snapshot`/`workspace`/`seal`. It intentionally does not add automatic
+  checkpoint reuse, a virtual filesystem, hardlinks, or implicit registry
+  selection.
 - **Product B:** semantic analyzer; controlled component installs plus useful
   resource-level diffs.
 - **Product C:** optional semantic merge/compiler layer. Do not build it into

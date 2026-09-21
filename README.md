@@ -30,13 +30,14 @@ an explicitly executable lockfile may reach A5 mutation.
 
 ## Current status
 
-The repository contains the Product A foundation:
+The repository contains the Product A foundation and first CLI workflow:
 
 - YAML package, manifest, and lockfile schemas
 - static, forkable registry records with provenance
 - a Rust registry reader and deterministic resolver prototype
 - environment-aware dependency, exclusive-capability, phase, and `before`/`after` validation
 - a fixture for the planned conservative EET stack
+- search, preview-first manifest add, portable lockfile verification, and managed full-copy workspace commands
 
 Manifest/package records use schema 2; replayable lockfiles use schema 3. The
 current contracts describe named game environments, opaque release IDs,
@@ -70,10 +71,13 @@ It accepts only schema-3 `executable` lockfiles and renders the intended
 materialization and WeiDU actions. It never fetches, starts a process, or
 changes a game tree.
 
-The narrow A5 executor is available for a fresh disposable copy only. It
-requires every named environment to be bound at runtime (not recorded in the
-lockfile), an explicit `--confirm-disposable`, a shared WeiDU binary, and a
-log directory. It verifies and materializes artifacts before executing in
+The narrow A5 executor is available for a fresh **managed** disposable copy
+only. Use `iepm snapshot` and `iepm workspace` to create the full-copy
+workspaces first; `execute` (also available as `install`) rejects source
+snapshots, sealed builds, and unmanaged paths. It requires every named
+environment to be bound at runtime (not recorded in the lockfile), an explicit
+`--confirm-disposable`, a shared WeiDU binary, and a log directory. It verifies
+and materializes artifacts before executing in
 graph order, verifies the lockfile's core-layout fingerprint before mutation,
 and retains a command/stdout/stderr receipt plus final workspace fingerprints.
 An existing run-state marker is never resumed in place: use a new controlled
@@ -128,7 +132,7 @@ Artifact URLs must use HTTPS. An artifact is identified by SHA-256, may list
 mirrors, and may be restricted by platform and CPU architecture. ZIP extraction
 rejects unsafe paths and enforces an 8 GiB uncompressed-size limit.
 
-To execute an already-resolved minimal route, use paths to fresh game copies:
+To execute an already-resolved minimal route, use paths created by `iepm workspace`:
 
 ```text
 cargo run -p iepm -- execute --lockfile modpack.lock.json --cache .iepm-cache \
@@ -142,6 +146,12 @@ To inspect a candidate workspace's fingerprint without mutating it:
 ```text
 cargo run -p iepm -- fingerprint --workspace C:\\testing\\bgee-source --locale en_US
 ```
+
+The CLI workflow, including `search`, preview-first `add`, non-mutating
+`verify`, full-copy `snapshot`/`workspace`, `install`, and `seal`, is described
+in [the A7 workflow guide](docs/a7-cli-workflow.md). IEPM deliberately does not
+yet reuse prefix checkpoints: a safe cache key needs more evidence than the
+core-layout fingerprint.
 
 To prepare curator-review evidence from a known local TP2 without running it:
 

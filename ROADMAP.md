@@ -15,7 +15,7 @@
 - [x] A5 (recovery boundary): interrupted runs retain a non-resumable state marker; a fresh workspace is required
 - [x] A5 (bundled launcher): verified Hidden Gameplay Options v5.1 component 10 on a fresh disposable BG2EE copy
 - [x] A6: inert TP2 structural ingestion aid and release-drift review
-- [ ] A7: user-facing search/add/verify CLI polish
+- [x] A7: search, preview-first add, lockfile verify, and managed full-copy workspace CLI
 
 Product B (semantic analysis) and Product C (semantic merge/compiler) remain
 future enhancements. They must not block Product A.

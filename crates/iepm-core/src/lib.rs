@@ -3,7 +3,7 @@ use std::collections::BTreeMap;
 
 /// Human intent. Schema 2 uses `environments`; `game` remains readable only so
 /// existing schema-1 manifests can be migrated by the resolver.
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct Manifest {
     pub schema: u32,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -60,7 +60,7 @@ pub struct GameFingerprint {
     pub value: String,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(untagged)]
 pub enum RequestedMod {
     Package(String),

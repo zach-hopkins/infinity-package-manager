@@ -2,7 +2,7 @@ use anyhow::{Result, bail};
 use iepm_artifacts::ArtifactStore;
 use iepm_core::{
     ExecutionReadiness, GameFingerprint, Installer, InstallerArgument, InstallerLauncher,
-    LockedPackage, Lockfile, WeiDUComponent,
+    LockedPackage, Lockfile, Manifest, Registry, RequestedMod, WeiDUComponent,
 };
 use sha2::{Digest, Sha256};
 use std::collections::{BTreeMap, BTreeSet};
@@ -15,6 +15,501 @@ use walkdir::WalkDir;
 /// A deliberately small, versioned profile over files that identify an EE
 /// installation's executable/key/DLC/log state. It is not a whole-tree hash.
 pub const CORE_FINGERPRINT_PROFILE: &str = "iepm-core-layout-v1";
+
+/// Explicit human intent accepted by `iepm add`. It deliberately does not
+/// select a release, artifact, or component on the user's behalf.
+pub struct AddSelection {
+    pub package: String,
+    pub environment: Option<String>,
+    pub version: Option<String>,
+    pub components: Vec<String>,
+    pub language: Option<String>,
+}
+
+/// Add one canonical selection to a schema-2 manifest without writing it.
+/// Callers must explicitly choose to persist the returned, normalized YAML.
+pub fn append_manifest_selection(
+    manifest: &Manifest,
+    registry: &Registry,
+    selection: AddSelection,
+) -> Result<Manifest> {
+    if manifest.schema != 2 {
+        bail!(
+            "iepm add only edits schema-2 manifests; migrate schema {} before changing it",
+            manifest.schema
+        );
+    }
+    let package = canonical_package_id(registry, &selection.package)?;
+    let environment = match selection.environment {
+        Some(environment) => {
+            if !manifest.environments.contains_key(&environment) {
+                bail!("manifest has no environment {environment}");
+            }
+            environment
+        }
+        None if manifest.environments.len() == 1 => manifest
+            .environments
+            .keys()
+            .next()
+            .expect("one environment has a key")
+            .clone(),
+        None => bail!(
+            "manifest has multiple environments; pass --environment to make the target explicit"
+        ),
+    };
+    let unique_components = selection.components.iter().collect::<BTreeSet<_>>();
+    if unique_components.len() != selection.components.len() {
+        bail!("a component was requested more than once");
+    }
+    let already_requested = manifest.mods.iter().any(|requested| {
+        canonical_package_id(registry, requested.package())
+            .is_ok_and(|existing| existing == package)
+            && requested.environment().unwrap_or(&environment) == environment
+    });
+    if already_requested {
+        bail!("{package} is already requested for environment {environment}");
+    }
+
+    let mut updated = manifest.clone();
+    updated.mods.push(RequestedMod::Selection {
+        package,
+        version: selection.version,
+        components: selection.components,
+        environment: Some(environment),
+        language: selection.language,
+        installer_inputs: BTreeMap::new(),
+    });
+    Ok(updated)
+}
+
+/// Canonicalize only exact aliases recorded by the registry. Lineage is never
+/// considered because it is history, not permission to substitute a package.
+pub fn canonical_package_id(registry: &Registry, requested: &str) -> Result<String> {
+    if registry.contains_key(requested) {
+        return Ok(requested.to_owned());
+    }
+    registry
+        .values()
+        .find(|record| record.aliases.iter().any(|alias| alias == requested))
+        .map(|record| record.package.clone())
+        .ok_or_else(|| anyhow::anyhow!("package not found in registry: {requested}"))
+}
+
+pub struct LockfileVerification {
+    pub structurally_valid: bool,
+    pub execution_readiness: ExecutionReadiness,
+    pub structural_problems: Vec<String>,
+    pub blocking_reasons: Vec<String>,
+    pub warnings: Vec<String>,
+}
+
+/// Verify the portable lockfile's internal references without fetching an
+/// artifact, touching a cache, or mutating a game workspace.
+pub fn verify_lockfile(lockfile: &Lockfile) -> LockfileVerification {
+    let mut problems = Vec::new();
+    if lockfile.schema != 3 {
+        problems.push(format!(
+            "schema {} is not the replayable schema-3 lockfile format",
+            lockfile.schema
+        ));
+    }
+    if lockfile.environments.is_empty() {
+        problems.push("lockfile has no named environments".to_owned());
+    }
+    let mut package_keys = BTreeSet::new();
+    for package in &lockfile.packages {
+        let key = (package.environment.as_str(), package.package.as_str());
+        if !lockfile.environments.contains_key(&package.environment) {
+            problems.push(format!(
+                "locked package {} references unknown environment {}",
+                package.package, package.environment
+            ));
+        }
+        if !package_keys.insert(key) {
+            problems.push(format!(
+                "lockfile repeats package {} in environment {}",
+                package.package, package.environment
+            ));
+        }
+    }
+    let mut node_ids = BTreeSet::new();
+    let mut execution_keys = BTreeSet::new();
+    for node in &lockfile.execution {
+        if !node_ids.insert(node.id.as_str()) {
+            problems.push(format!("lockfile repeats execution node {}", node.id));
+        }
+        if !lockfile.environments.contains_key(&node.environment) {
+            problems.push(format!(
+                "execution node {} references unknown environment {}",
+                node.id, node.environment
+            ));
+        }
+        let key = (node.environment.as_str(), node.package.as_str());
+        if !package_keys.contains(&key) {
+            problems.push(format!(
+                "execution node {} has no matching locked package {} in {}",
+                node.id, node.package, node.environment
+            ));
+        }
+        if !execution_keys.insert(key) {
+            problems.push(format!(
+                "lockfile repeats execution for package {} in environment {}",
+                node.package, node.environment
+            ));
+        }
+    }
+    for key in package_keys.difference(&execution_keys) {
+        problems.push(format!(
+            "locked package {} in {} has no execution node",
+            key.1, key.0
+        ));
+    }
+    for node in &lockfile.execution {
+        for predecessor in &node.predecessors {
+            if predecessor == &node.id {
+                problems.push(format!("execution node {} depends on itself", node.id));
+            } else if !node_ids.contains(predecessor.as_str()) {
+                problems.push(format!(
+                    "execution node {} references missing predecessor {}",
+                    node.id, predecessor
+                ));
+            }
+        }
+    }
+    if lockfile.execution_readiness == ExecutionReadiness::AnalysisOnly
+        && lockfile.blocking_reasons.is_empty()
+    {
+        problems.push("analysis-only lockfile has no causal blocking reasons".to_owned());
+    }
+    if lockfile.execution_readiness == ExecutionReadiness::Executable {
+        if let Err(error) = render_plan(lockfile) {
+            problems.push(format!("executable plan preflight failed: {error}"));
+        }
+    }
+    LockfileVerification {
+        structurally_valid: problems.is_empty(),
+        execution_readiness: lockfile.execution_readiness,
+        structural_problems: problems,
+        blocking_reasons: lockfile.blocking_reasons.clone(),
+        warnings: lockfile.warnings.clone(),
+    }
+}
+
+pub fn render_verification(report: &LockfileVerification) -> String {
+    let mut lines = vec![
+        "IEPM lockfile verification (non-mutating)".to_owned(),
+        format!(
+            "Structure: {}",
+            if report.structurally_valid {
+                "valid"
+            } else {
+                "invalid"
+            }
+        ),
+        format!(
+            "Execution readiness: {}",
+            match report.execution_readiness {
+                ExecutionReadiness::Executable => "executable",
+                ExecutionReadiness::AnalysisOnly => "analysis-only",
+            }
+        ),
+        "Artifact bytes were not fetched or checked; use `iepm fetch` for verified preparation."
+            .to_owned(),
+    ];
+    if !report.structural_problems.is_empty() {
+        lines.push("Structural problems:".to_owned());
+        lines.extend(
+            report
+                .structural_problems
+                .iter()
+                .map(|problem| format!("- {problem}")),
+        );
+    }
+    if !report.blocking_reasons.is_empty() {
+        lines.push("Execution blockers:".to_owned());
+        lines.extend(
+            report
+                .blocking_reasons
+                .iter()
+                .map(|reason| format!("- {reason}")),
+        );
+    }
+    if !report.warnings.is_empty() {
+        lines.push("Warnings:".to_owned());
+        lines.extend(report.warnings.iter().map(|warning| format!("- {warning}")));
+    }
+    format!("{}\n", lines.join("\n"))
+}
+
+const WORKSPACE_STATE_FILE: &str = ".iepm-workspace.json";
+const BUILD_STATE_FILE: &str = ".iepm-build.json";
+
+/// Import a full local game copy as an IEPM-managed source snapshot. IEPM
+/// treats this copy as immutable: it may be cloned, but it can never be bound
+/// to A5 execution as a writable workspace.
+pub fn import_source_snapshot(
+    source: &Path,
+    store: &Path,
+    name: &str,
+    locale: Option<&str>,
+) -> Result<PathBuf> {
+    validate_store_name(name, "snapshot name")?;
+    if !source.is_dir() {
+        bail!(
+            "source snapshot input is not a directory: {}",
+            source.display()
+        );
+    }
+    let source = source.canonicalize().map_err(|error| {
+        anyhow::anyhow!(
+            "could not canonicalize source {}: {error}",
+            source.display()
+        )
+    })?;
+    let fingerprint = measure_workspace_fingerprint(&source, locale)?;
+    let destination = projected_canonical_path(store)?
+        .join("sources")
+        .join(name)
+        .join(&fingerprint.value);
+    if destination.starts_with(&source) {
+        bail!(
+            "source snapshot destination must not be inside its source tree: {}",
+            destination.display()
+        );
+    }
+    if destination.exists() {
+        bail!(
+            "source snapshot already exists: {}; use its immutable copy rather than overwriting it",
+            destination.display()
+        );
+    }
+    copy_tree(&source, &destination)?;
+    write_workspace_state(
+        &destination,
+        "source-snapshot",
+        "sealed",
+        Some(&fingerprint),
+    )?;
+    Ok(destination)
+}
+
+/// Create a new full-copy workspace set from explicitly named source snapshots.
+/// The returned build root is local state; no path enters a manifest or lockfile.
+pub fn create_disposable_workspaces(
+    snapshots: &BTreeMap<String, PathBuf>,
+    store: &Path,
+    build: &str,
+) -> Result<PathBuf> {
+    validate_store_name(build, "build name")?;
+    if snapshots.is_empty() {
+        bail!("at least one named source snapshot is required");
+    }
+    let root = store.join("workspaces").join(build);
+    if root.exists() {
+        bail!(
+            "workspace build already exists: {}; create a fresh named build instead",
+            root.display()
+        );
+    }
+    let mut source_fingerprints = BTreeMap::new();
+    for (environment, snapshot) in snapshots {
+        validate_store_name(environment, "environment name")?;
+        let state = read_workspace_state(snapshot)?;
+        expect_workspace_state(&state, "source-snapshot", "sealed", snapshot)?;
+        let fingerprint = state.get("fingerprint").cloned().ok_or_else(|| {
+            anyhow::anyhow!("source snapshot has no fingerprint: {}", snapshot.display())
+        })?;
+        let destination = root.join(environment);
+        copy_tree(snapshot, &destination)?;
+        write_workspace_state_value(&destination, "workspace", "ready", fingerprint.clone())?;
+        source_fingerprints.insert(environment, fingerprint);
+    }
+    write_json_atomically(
+        &root.join(BUILD_STATE_FILE),
+        &serde_json::json!({
+            "schema": 1,
+            "kind": "workspace-build",
+            "status": "ready",
+            "sources": source_fingerprints,
+        }),
+        false,
+    )?;
+    Ok(root)
+}
+
+/// Copy a successfully completed disposable workspace set into a sealed local
+/// build. This keeps the completed build immutable to IEPM and leaves the
+/// original workspace available for manual inspection or deletion.
+pub fn seal_successful_build(
+    workspace_root: &Path,
+    store: &Path,
+    name: &str,
+    log_dir: &Path,
+) -> Result<PathBuf> {
+    validate_store_name(name, "sealed build name")?;
+    let receipt: serde_json::Value = read_json(&log_dir.join("iepm-run-receipt.json"))?;
+    if receipt.get("status").and_then(serde_json::Value::as_str) != Some("completed") {
+        bail!(
+            "execution receipt does not record a completed build: {}",
+            log_dir.display()
+        );
+    }
+    let build_state: serde_json::Value = read_json(&workspace_root.join(BUILD_STATE_FILE))?;
+    expect_workspace_state(&build_state, "workspace-build", "ready", workspace_root)?;
+
+    let mut environments = Vec::new();
+    for entry in fs::read_dir(workspace_root)? {
+        let entry = entry?;
+        if !entry.file_type()?.is_dir() {
+            continue;
+        }
+        let state = read_workspace_state(&entry.path())?;
+        expect_workspace_state(&state, "workspace", "completed", &entry.path())?;
+        environments.push(entry.file_name());
+    }
+    if environments.is_empty() {
+        bail!("workspace build has no managed environment directories");
+    }
+    let destination = store.join("builds").join(name);
+    if destination.exists() {
+        bail!(
+            "sealed build already exists: {}; choose a new name rather than overwriting it",
+            destination.display()
+        );
+    }
+    copy_tree(workspace_root, &destination)?;
+    for environment in &environments {
+        let path = destination.join(environment);
+        let state = read_workspace_state(&path)?;
+        let fingerprint = state.get("fingerprint").cloned().ok_or_else(|| {
+            anyhow::anyhow!("workspace has no source fingerprint: {}", path.display())
+        })?;
+        write_workspace_state_value(&path, "sealed-build", "sealed", fingerprint)?;
+    }
+    write_json_atomically(
+        &destination.join(BUILD_STATE_FILE),
+        &serde_json::json!({
+            "schema": 1,
+            "kind": "sealed-build",
+            "status": "sealed",
+            "execution_receipt": "iepm-run-receipt.json",
+        }),
+        true,
+    )?;
+    Ok(destination)
+}
+
+fn validate_store_name(value: &str, description: &str) -> Result<()> {
+    if value.is_empty()
+        || value.contains(['/', '\\'])
+        || value == "."
+        || value == ".."
+        || value
+            .bytes()
+            .any(|byte| !(byte.is_ascii_alphanumeric() || byte == b'-' || byte == b'_'))
+    {
+        bail!("{description} must use only letters, digits, hyphens, or underscores: {value}");
+    }
+    Ok(())
+}
+
+fn projected_canonical_path(path: &Path) -> Result<PathBuf> {
+    let mut candidate = if path.is_absolute() {
+        path.to_owned()
+    } else {
+        std::env::current_dir()?.join(path)
+    };
+    let mut missing = Vec::new();
+    while !candidate.exists() {
+        let name = candidate.file_name().ok_or_else(|| {
+            anyhow::anyhow!("could not find an existing parent for {}", path.display())
+        })?;
+        missing.push(name.to_os_string());
+        candidate = candidate
+            .parent()
+            .ok_or_else(|| {
+                anyhow::anyhow!("could not find an existing parent for {}", path.display())
+            })?
+            .to_owned();
+    }
+    let mut resolved = candidate.canonicalize().map_err(|error| {
+        anyhow::anyhow!("could not canonicalize {}: {error}", candidate.display())
+    })?;
+    for name in missing.iter().rev() {
+        resolved.push(name);
+    }
+    Ok(resolved)
+}
+
+fn workspace_state_path(path: &Path) -> PathBuf {
+    path.join(WORKSPACE_STATE_FILE)
+}
+
+fn read_workspace_state(path: &Path) -> Result<serde_json::Value> {
+    read_json(&workspace_state_path(path))
+}
+
+fn read_json(path: &Path) -> Result<serde_json::Value> {
+    let source = fs::read_to_string(path)
+        .map_err(|error| anyhow::anyhow!("could not read {}: {error}", path.display()))?;
+    serde_json::from_str(&source)
+        .map_err(|error| anyhow::anyhow!("could not parse {}: {error}", path.display()))
+}
+
+fn expect_workspace_state(
+    value: &serde_json::Value,
+    kind: &str,
+    status: &str,
+    path: &Path,
+) -> Result<()> {
+    if value.get("schema").and_then(serde_json::Value::as_u64) != Some(1)
+        || value.get("kind").and_then(serde_json::Value::as_str) != Some(kind)
+        || value.get("status").and_then(serde_json::Value::as_str) != Some(status)
+    {
+        bail!(
+            "{} is not an IEPM {} in {} state",
+            path.display(),
+            kind,
+            status
+        );
+    }
+    Ok(())
+}
+
+fn write_workspace_state(
+    path: &Path,
+    kind: &str,
+    status: &str,
+    fingerprint: Option<&GameFingerprint>,
+) -> Result<()> {
+    write_workspace_state_value(
+        path,
+        kind,
+        status,
+        fingerprint
+            .map(serde_json::to_value)
+            .transpose()?
+            .unwrap_or(serde_json::Value::Null),
+    )
+}
+
+fn write_workspace_state_value(
+    path: &Path,
+    kind: &str,
+    status: &str,
+    fingerprint: serde_json::Value,
+) -> Result<()> {
+    write_json_atomically(
+        &workspace_state_path(path),
+        &serde_json::json!({
+            "schema": 1,
+            "kind": kind,
+            "status": status,
+            "fingerprint": fingerprint,
+        }),
+        true,
+    )
+}
 
 /// Measure the core state of a bound game workspace without modifying it.
 pub fn measure_workspace_fingerprint(
@@ -130,6 +625,7 @@ pub fn execute(lockfile: &Lockfile, options: &ExecuteOptions) -> Result<Executio
         );
     }
     validate_workspace_bindings(lockfile, &options.workspaces)?;
+    validate_log_dir(&options.log_dir, &options.workspaces)?;
     fs::create_dir_all(&options.log_dir).map_err(|error| {
         anyhow::anyhow!("could not create {}: {error}", options.log_dir.display())
     })?;
@@ -164,6 +660,21 @@ pub fn execute(lockfile: &Lockfile, options: &ExecuteOptions) -> Result<Executio
                 actual.value
             );
         }
+    }
+
+    for workspace in options.workspaces.values() {
+        let state = read_workspace_state(workspace)?;
+        expect_workspace_state(&state, "workspace", "ready", workspace)?;
+    }
+    for workspace in options.workspaces.values() {
+        let state = read_workspace_state(workspace)?;
+        let fingerprint = state.get("fingerprint").cloned().ok_or_else(|| {
+            anyhow::anyhow!(
+                "workspace has no source fingerprint: {}",
+                workspace.display()
+            )
+        })?;
+        write_workspace_state_value(workspace, "workspace", "running", fingerprint)?;
     }
 
     write_json_atomically(
@@ -297,6 +808,16 @@ pub fn execute(lockfile: &Lockfile, options: &ExecuteOptions) -> Result<Executio
         }),
         true,
     )?;
+    for workspace in options.workspaces.values() {
+        let state = read_workspace_state(workspace)?;
+        let fingerprint = state.get("fingerprint").cloned().ok_or_else(|| {
+            anyhow::anyhow!(
+                "workspace has no source fingerprint: {}",
+                workspace.display()
+            )
+        })?;
+        write_workspace_state_value(workspace, "workspace", "completed", fingerprint)?;
+    }
     Ok(ExecutionReport {
         actions,
         log_dir: options.log_dir.clone(),
@@ -370,6 +891,8 @@ fn validate_workspace_bindings(
                 workspace.display()
             );
         }
+        let state = read_workspace_state(workspace)?;
+        expect_workspace_state(&state, "workspace", "ready", workspace)?;
         let path = workspace.canonicalize().map_err(|error| {
             anyhow::anyhow!("could not canonicalize {}: {error}", workspace.display())
         })?;
@@ -382,6 +905,46 @@ fn validate_workspace_bindings(
                     "workspaces {left_name} and {right_name} must be distinct, non-nested directories"
                 );
             }
+        }
+    }
+    Ok(())
+}
+
+fn validate_log_dir(log_dir: &Path, workspaces: &BTreeMap<String, PathBuf>) -> Result<()> {
+    let projected = if log_dir.exists() {
+        log_dir.canonicalize().map_err(|error| {
+            anyhow::anyhow!(
+                "could not canonicalize log directory {}: {error}",
+                log_dir.display()
+            )
+        })?
+    } else {
+        let parent = log_dir
+            .parent()
+            .ok_or_else(|| anyhow::anyhow!("log directory has no parent: {}", log_dir.display()))?;
+        let name = log_dir
+            .file_name()
+            .ok_or_else(|| anyhow::anyhow!("log directory has no name: {}", log_dir.display()))?;
+        parent
+            .canonicalize()
+            .map_err(|error| {
+                anyhow::anyhow!(
+                    "log directory parent must exist before execution {}: {error}",
+                    parent.display()
+                )
+            })?
+            .join(name)
+    };
+    for workspace in workspaces.values() {
+        let workspace = workspace.canonicalize()?;
+        if projected == workspace
+            || projected.starts_with(&workspace)
+            || workspace.starts_with(&projected)
+        {
+            bail!(
+                "log directory must be separate from every workspace: {}",
+                projected.display()
+            );
         }
     }
     Ok(())
@@ -1122,5 +1685,120 @@ mod tests {
             environment_description(&environment, iepm_core::Phase::Eet),
             "eet; transformed from bg2ee"
         );
+    }
+
+    #[test]
+    fn verifies_lockfile_references_without_fetching_artifacts() {
+        let mut valid = lockfile("executable");
+        let report = verify_lockfile(&valid);
+        assert!(report.structurally_valid);
+        assert!(render_verification(&report).contains("Artifact bytes were not fetched"));
+
+        valid.execution[0].predecessors.push("missing".to_owned());
+        let invalid = verify_lockfile(&valid);
+        assert!(!invalid.structurally_valid);
+        assert!(
+            invalid
+                .structural_problems
+                .iter()
+                .any(|problem| problem.contains("missing predecessor"))
+        );
+    }
+
+    #[test]
+    fn add_canonicalizes_exact_aliases_and_makes_environment_explicit() {
+        let record: iepm_core::PackageRecord = serde_yaml::from_str(
+            r#"
+schema: 2
+package: sample-mod
+aliases: [old-sample]
+releases:
+  - version: "1.0"
+    compatibility:
+      games: [bg2ee]
+    install:
+      phase: eet
+    provenance: unverified
+"#,
+        )
+        .unwrap();
+        let registry = Registry::from([(record.package.clone(), record)]);
+        let manifest: Manifest = serde_yaml::from_str(
+            r#"
+schema: 2
+environments:
+  target:
+    target: bg2ee
+mods: []
+"#,
+        )
+        .unwrap();
+        let updated = append_manifest_selection(
+            &manifest,
+            &registry,
+            AddSelection {
+                package: "old-sample".to_owned(),
+                environment: None,
+                version: Some("1.0".to_owned()),
+                components: Vec::new(),
+                language: None,
+            },
+        )
+        .unwrap();
+
+        assert_eq!(updated.mods[0].package(), "sample-mod");
+        assert_eq!(updated.mods[0].environment(), Some("target"));
+    }
+
+    #[test]
+    fn manages_full_copy_snapshots_workspaces_and_sealed_builds() {
+        let root = std::env::temp_dir().join(format!(
+            "iepm-workspace-test-{}-{}",
+            std::process::id(),
+            std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap()
+                .as_nanos()
+        ));
+        let source = root.join("source");
+        let store = root.join("store");
+        std::fs::create_dir_all(&source).unwrap();
+        std::fs::write(source.join("chitin.key"), "fixture key").unwrap();
+        std::fs::write(source.join("Baldur.exe"), "fixture executable").unwrap();
+
+        assert!(import_source_snapshot(&source, &source, "nested", None).is_err());
+
+        let snapshot = import_source_snapshot(&source, &store, "bg2ee-clean", None).unwrap();
+        let snapshot_state = read_workspace_state(&snapshot).unwrap();
+        expect_workspace_state(&snapshot_state, "source-snapshot", "sealed", &snapshot).unwrap();
+
+        let workspaces = BTreeMap::from([("target".to_owned(), snapshot)]);
+        let workspace_root =
+            create_disposable_workspaces(&workspaces, &store, "trial-one").unwrap();
+        let workspace = workspace_root.join("target");
+        let workspace_state = read_workspace_state(&workspace).unwrap();
+        expect_workspace_state(&workspace_state, "workspace", "ready", &workspace).unwrap();
+        let workspace_bindings = BTreeMap::from([("target".to_owned(), workspace.clone())]);
+        assert!(validate_log_dir(&workspace.join("logs"), &workspace_bindings).is_err());
+
+        let fingerprint = workspace_state.get("fingerprint").cloned().unwrap();
+        write_workspace_state_value(&workspace, "workspace", "completed", fingerprint).unwrap();
+        let logs = root.join("logs");
+        std::fs::create_dir_all(&logs).unwrap();
+        std::fs::write(
+            logs.join("iepm-run-receipt.json"),
+            r#"{"schema":1,"status":"completed"}"#,
+        )
+        .unwrap();
+
+        let sealed =
+            seal_successful_build(&workspace_root, &store, "trial-one-final", &logs).unwrap();
+        let sealed_workspace = sealed.join("target");
+        let sealed_state = read_workspace_state(&sealed_workspace).unwrap();
+        expect_workspace_state(&sealed_state, "sealed-build", "sealed", &sealed_workspace).unwrap();
+        assert!(workspace.join("Baldur.exe").is_file());
+        assert!(sealed_workspace.join("Baldur.exe").is_file());
+
+        std::fs::remove_dir_all(root).unwrap();
     }
 }
