@@ -1,8 +1,9 @@
 use anyhow::{Context, Result, bail};
 use iepm_artifacts::ArtifactStore;
 use iepm_core::{
-    ExecutionReadiness, GameFingerprint, Installer, InstallerArgument, InstallerLauncher,
-    LockedPackage, Lockfile, Manifest, Registry, RequestedMod, WeiDUComponent,
+    ArchiveFormat, Artifact, ArtifactArchitecture, ArtifactPlatform, ExecutionReadiness,
+    GameFingerprint, Installer, InstallerArgument, InstallerLauncher, LockedPackage, Lockfile,
+    Manifest, Registry, RequestedMod, WeiDUComponent,
 };
 use serde::Serialize;
 use sha2::{Digest, Sha256};
@@ -16,6 +17,162 @@ use walkdir::WalkDir;
 /// A deliberately small, versioned profile over files that identify an EE
 /// installation's executable/key/DLC/log state. It is not a whole-tree hash.
 pub const CORE_FINGERPRINT_PROFILE: &str = "iepm-core-layout-v1";
+pub const DEFAULT_WEIDU_VERSION: &str = "25100";
+
+/// The exact normal 64-bit Windows WeiDU v251 package used by the established
+/// BGEE/BG2EE execution fixtures. The archive SHA-256 is GitHub's release-asset
+/// digest for WeiDUorg/weidu v251.00, not a mutable "latest" reference.
+const DEFAULT_WEIDU_WINDOWS_251_URL: &str =
+    "https://github.com/WeiDUorg/weidu/releases/download/v251.00/WeiDU-Windows-251.zip";
+const DEFAULT_WEIDU_WINDOWS_251_SHA256: &str =
+    "a54c6198d6ebed8139793fcacb225500d563657c23fc775b840383f9750493d8";
+
+#[derive(Debug, Clone, Serialize)]
+pub struct ManagedWeiduToolchain {
+    pub version: String,
+    pub executable: PathBuf,
+}
+
+/// Prepare IEPM's currently supported shared Windows WeiDU toolchain under
+/// the local store. Artifact acquisition stays hash-verified and separate
+/// from game mutation; callers may then pass the returned path to A5.
+pub fn prepare_default_weidu_toolchain(store: &Path) -> Result<ManagedWeiduToolchain> {
+    let artifact = default_weidu_windows_251_artifact();
+    let prepared = ArtifactStore::new(store.join("toolchains").join("weidu-25100"))?
+        .prepare("weidu-25100", &artifact)?;
+    let executable = find_weidu_executable(&prepared.extracted)?;
+    Ok(ManagedWeiduToolchain {
+        version: DEFAULT_WEIDU_VERSION.to_owned(),
+        executable,
+    })
+}
+
+/// Validate an explicitly user-selected local escape hatch when Windows security
+/// prevents acquisition of the normal SHA-pinned release. This is intentionally
+/// separate from the default route: the executable's version is checked, but
+/// IEPM cannot establish its release-archive provenance from a loose file.
+pub fn validate_local_weidu_override(executable: &Path) -> Result<ManagedWeiduToolchain> {
+    if !executable.is_file() {
+        bail!(
+            "the selected WeiDU executable does not exist: {}",
+            executable.display()
+        );
+    }
+    let output = Command::new(executable)
+        .arg("--version")
+        .output()
+        .with_context(|| format!("could not run {} --version", executable.display()))?;
+    if !output.status.success() {
+        bail!(
+            "{} --version exited with {}",
+            executable.display(),
+            output.status
+        );
+    }
+    let version_output = format!(
+        "{}{}",
+        String::from_utf8_lossy(&output.stdout),
+        String::from_utf8_lossy(&output.stderr)
+    );
+    if !version_output
+        .lines()
+        .any(|line| line.trim() == format!("WeiDU version {DEFAULT_WEIDU_VERSION}"))
+    {
+        bail!(
+            "the selected executable is not the supported WeiDU v{}: {}",
+            DEFAULT_WEIDU_VERSION,
+            version_output.trim()
+        );
+    }
+    Ok(ManagedWeiduToolchain {
+        version: DEFAULT_WEIDU_VERSION.to_owned(),
+        executable: executable.to_path_buf(),
+    })
+}
+
+fn find_weidu_executable(extracted: &Path) -> Result<PathBuf> {
+    let executables = WalkDir::new(extracted)
+        .into_iter()
+        .filter_map(Result::ok)
+        .filter(|entry| entry.file_type().is_file())
+        .filter(|entry| {
+            entry
+                .file_name()
+                .to_string_lossy()
+                .eq_ignore_ascii_case("weidu.exe")
+        })
+        .map(|entry| entry.into_path())
+        .collect::<Vec<_>>();
+    match executables.as_slice() {
+        [executable] => Ok(executable.clone()),
+        [] => bail!(
+            "verified WeiDU v251 archive did not contain weidu.exe: {}",
+            extracted.display()
+        ),
+        _ => bail!(
+            "verified WeiDU v251 archive contained more than one weidu.exe; refusing to guess: {}",
+            extracted.display()
+        ),
+    }
+}
+
+fn default_weidu_windows_251_artifact() -> Artifact {
+    Artifact {
+        url: DEFAULT_WEIDU_WINDOWS_251_URL.to_owned(),
+        sha256: DEFAULT_WEIDU_WINDOWS_251_SHA256.to_owned(),
+        mirrors: Vec::new(),
+        format: ArchiveFormat::Zip,
+        platforms: vec![ArtifactPlatform::Windows],
+        architectures: vec![ArtifactArchitecture::X86_64],
+    }
+}
+
+/// Bind the familiar human game choices to every named manifest environment.
+/// EET remains explicit in the manifest, but a normal UI need only collect a
+/// clean BGEE/SoD source when it is actually required and a clean BG2EE source.
+pub fn bind_standard_game_sources(
+    manifest_path: &Path,
+    bgee: Option<PathBuf>,
+    bg2ee: Option<PathBuf>,
+) -> Result<BTreeMap<String, PathBuf>> {
+    let source = fs::read_to_string(manifest_path)
+        .with_context(|| format!("could not read {}", manifest_path.display()))?;
+    let manifest: Manifest = serde_yaml::from_str(&source)
+        .with_context(|| format!("could not parse {}", manifest_path.display()))?;
+    if manifest.environments.is_empty() {
+        bail!("the selected manifest has no named schema-2 environments");
+    }
+    let mut bindings = BTreeMap::new();
+    for (name, environment) in manifest.environments {
+        let source = match environment.target.as_str() {
+            "bgee" => bgee.as_ref(),
+            "bg2ee" => bg2ee.as_ref(),
+            other => bail!(
+                "environment {name} targets {other}; the desktop MVP currently supports BGEE and BG2EE source selection"
+            ),
+        }
+        .ok_or_else(|| {
+            anyhow::anyhow!(
+                "environment {name} requires a clean {} source folder",
+                if environment.target == "bgee" {
+                    "BG:EE / Siege of Dragonspear"
+                } else {
+                    "BG2:EE"
+                }
+            )
+        })?;
+        bindings.insert(name, source.clone());
+    }
+    Ok(bindings)
+}
+
+pub fn default_experience_name() -> String {
+    let seconds = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .unwrap_or_default()
+        .as_secs();
+    format!("mod-experience-{seconds}")
+}
 
 /// Explicit human intent accepted by `iepm add`. It deliberately does not
 /// select a release, artifact, or component on the user's behalf.
@@ -1825,6 +1982,109 @@ fn components_by_tp2(package: &LockedPackage) -> Result<BTreeMap<&str, Vec<&WeiD
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn default_windows_weidu_artifact_is_exact_and_hash_pinned() {
+        let artifact = default_weidu_windows_251_artifact();
+        assert_eq!(DEFAULT_WEIDU_VERSION, "25100");
+        assert_eq!(
+            artifact.url,
+            "https://github.com/WeiDUorg/weidu/releases/download/v251.00/WeiDU-Windows-251.zip"
+        );
+        assert_eq!(
+            artifact.sha256,
+            "a54c6198d6ebed8139793fcacb225500d563657c23fc775b840383f9750493d8"
+        );
+        assert_eq!(artifact.format, ArchiveFormat::Zip);
+        assert_eq!(artifact.platforms, vec![ArtifactPlatform::Windows]);
+        assert_eq!(artifact.architectures, vec![ArtifactArchitecture::X86_64]);
+    }
+
+    #[test]
+    fn maps_simple_game_choices_to_each_eet_environment() {
+        let fixture = std::env::temp_dir().join(format!(
+            "iepm-standard-source-bindings-{}-{}.yaml",
+            std::process::id(),
+            std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap()
+                .as_nanos()
+        ));
+        std::fs::write(
+            &fixture,
+            "schema: 2\nenvironments:\n  bgee-source:\n    target: bgee\n  eet-target:\n    target: bg2ee\nmods: []\n",
+        )
+        .unwrap();
+        let bgee = PathBuf::from("C:\\games\\bgee");
+        let bg2ee = PathBuf::from("C:\\games\\bg2ee");
+
+        let bindings =
+            bind_standard_game_sources(&fixture, Some(bgee.clone()), Some(bg2ee.clone())).unwrap();
+        assert_eq!(bindings["bgee-source"], bgee);
+        assert_eq!(bindings["eet-target"], bg2ee);
+
+        std::fs::remove_file(fixture).unwrap();
+    }
+
+    #[test]
+    fn finds_weidu_inside_its_release_directory() {
+        let root = std::env::temp_dir().join(format!(
+            "iepm-weidu-release-layout-{}-{}",
+            std::process::id(),
+            std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap()
+                .as_nanos()
+        ));
+        let nested = root.join("WeiDU-Windows");
+        std::fs::create_dir_all(&nested).unwrap();
+        std::fs::write(nested.join("weidu.exe"), "fixture").unwrap();
+
+        assert_eq!(
+            find_weidu_executable(&root).unwrap(),
+            nested.join("weidu.exe")
+        );
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn accepts_a_user_selected_matching_weidu_override() {
+        let executable = std::env::temp_dir().join(format!(
+            "iepm-weidu-override-{}-{}.cmd",
+            std::process::id(),
+            std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap()
+                .as_nanos()
+        ));
+        std::fs::write(&executable, "@echo WeiDU version 25100\r\n").unwrap();
+
+        let toolchain = validate_local_weidu_override(&executable).unwrap();
+        assert_eq!(toolchain.version, DEFAULT_WEIDU_VERSION);
+        assert_eq!(toolchain.executable, executable);
+        std::fs::remove_file(&toolchain.executable).unwrap();
+    }
+
+    #[test]
+    #[ignore = "downloads the official WeiDU release and requires network access"]
+    fn prepares_the_pinned_official_weidu_release() {
+        let root = std::env::temp_dir().join(format!(
+            "iepm-managed-weidu-{}-{}",
+            std::process::id(),
+            std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap()
+                .as_nanos()
+        ));
+        let toolchain = prepare_default_weidu_toolchain(&root).unwrap();
+        let output = Command::new(&toolchain.executable)
+            .arg("--version")
+            .output()
+            .unwrap();
+        assert!(output.status.success());
+        assert!(String::from_utf8_lossy(&output.stdout).contains(&toolchain.version));
+        std::fs::remove_dir_all(root).unwrap();
+    }
 
     #[test]
     fn parses_explicit_workspace_bindings_without_duplicates() {

@@ -314,6 +314,15 @@ manifest → registry → resolver → lockfile → verified artifacts
   coverage gaps rather than replaced. Artifact integrity, mechanical metadata,
   compatibility verification, and upstream integration remain separate status
   dimensions; author participation is never required for IEPM verification.
+  The guided desktop route owns only user-facing local setup: a persisted IEPM
+  library location, ordinary Steam discovery plus explicit Browse choices for
+  clean BG:EE/BG2:EE sources, and an optional friendly mod-experience name.
+  It ships the static registry as an application resource; users do not choose
+  a registry path. The normal Windows toolchain is the exact WeiDU v251 release
+  archive with GitHub-published SHA-256, prepared under the library and passed
+  to the existing Rust build API. A local v251 executable override exists only
+  as an advanced recovery path when Windows Security blocks acquisition; it is
+  version-checked but must never be represented as archive-hash verified.
 - **Product B:** semantic analyzer; controlled component installs plus useful
   resource-level diffs.
 - **Product C:** optional semantic merge/compiler layer. Do not build it into

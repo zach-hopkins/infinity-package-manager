@@ -225,5 +225,12 @@ examples/     Reproducible manifest fixtures
 tests/        Resolver fixture coverage
 ```
 
+The desktop client is the friendly local route: it ships the registry, saves
+one IEPM library location, detects common Steam game folders, provides native
+Browse controls, and automatically prepares the SHA-verified Windows WeiDU
+251 release before previewing or building a disposable mod experience. See
+[the desktop README](apps/desktop/README.md) for the first-use flow and its
+narrow Windows Security recovery path.
+
 See [ROADMAP.md](ROADMAP.md), [docs/architecture.md](docs/architecture.md), and
 [CONTRIBUTING.md](CONTRIBUTING.md).
