@@ -37,7 +37,7 @@ The repository contains the Product A foundation and first CLI workflow:
 - a Rust registry reader and deterministic resolver prototype
 - environment-aware dependency, exclusive-capability, phase, and `before`/`after` validation
 - a fixture for the planned conservative EET stack
-- search, preview-first manifest add, portable lockfile verification, and managed full-copy workspace commands
+- search, preview-first manifest add, portable lockfile verification, managed full-copy workspace commands, and a one-command `build` path
 
 Manifest/package records use schema 2; replayable lockfiles use schema 3. The
 current contracts describe named game environments, opaque release IDs,
@@ -86,6 +86,20 @@ shared—requires both its numeric mod language and the game's locale; IEPM
 renders those before unattended flags and component selection.
 `--allow-weidu-warnings` is an explicit review decision: it accepts only
 WeiDU exit code 3 after the requested components are confirmed in `WeiDU.log`.
+
+The normal personal-use entry point now composes the same guarded stages:
+
+```text
+iepm build --registry registry --manifest my-mods.yaml \
+  --source C:\Games\BG2EE-clean --store C:\Games\IEPM \
+  --build my-build --weidu C:\tools\weidu.exe \
+  --weidu-version 25100 --confirm-disposable
+```
+
+It resolves and verifies before mutation, reuses an identical immutable source
+snapshot, creates fresh workspaces, installs, and seals the completed build
+with its effective manifest, lockfile, plan, and receipts. The lower-level
+commands remain available for diagnosis.
 
 The smallest executable EET route fixture is available at
 `examples/eet-minimal/modpack.yaml`. It uses a BG2EE target workspace with
@@ -148,7 +162,8 @@ cargo run -p iepm -- fingerprint --workspace C:\\testing\\bgee-source --locale e
 ```
 
 The CLI workflow, including `search`, preview-first `add`, non-mutating
-`verify`, full-copy `snapshot`/`workspace`, `install`, and `seal`, is described
+`verify`, one-command `build`, and full-copy `snapshot`/`workspace`, `install`,
+and `seal`, is described
 in [the A7 workflow guide](docs/a7-cli-workflow.md). IEPM deliberately does not
 yet reuse prefix checkpoints: a safe cache key needs more evidence than the
 core-layout fingerprint.
@@ -202,6 +217,7 @@ The resulting `modpack.lock.json` is the authoritative resolved build;
 
 ```text
 crates/       Rust reference implementation
+apps/desktop/ Tauri 2 + SvelteKit desktop shell (Bun, TypeScript, Tailwind)
 docs/         Architecture and data-model decisions
 schemas/      Language-independent contracts
 registry/     Static package records

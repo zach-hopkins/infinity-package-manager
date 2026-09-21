@@ -29,8 +29,15 @@ component-0 (`install-all`) execution through the managed full-copy snapshot →
 workspace → sealed-build route. The latter began from a clean BG2EE 2.6.6
 source snapshot and produced a distinct sealed output fingerprint. It proved
 that bundled and shared WeiDU both require a declared game locale and the same
-language/locale/unattended/component argument order. The Product A's initial
-A7 usability surface is now complete. The initial registry bootstrap now
+language/locale/unattended/component argument order. Product A's A7 CLI now
+includes a one-command `build` workflow over the same guarded stages. It
+resolves and verifies before mutation, derives a missing source fingerprint in
+memory, reuses immutable snapshots by exact fingerprint, creates fresh
+full-copy workspaces, installs, and seals the output with its effective
+manifest, lockfile, plan, and receipts. The initial thin Tauri 2/SvelteKit
+desktop shell lives in the same monorepo and calls these Rust operations
+through commands and structured progress events; it does not duplicate
+package-management decisions in TypeScript. The initial registry bootstrap now
 covers every Forge-reference package identity plus a small popular EE ecosystem
 layer. Exact artifact and TP2 facts remain claim-level derived evidence;
 release compatibility and execution remain unverified until they have stronger
@@ -294,16 +301,18 @@ manifest → registry → resolver → lockfile → verified artifacts
   predicates are evidence, not auto-created resolver relationships.
 - **A7:** user-facing CLI ergonomics are complete for the first Product A
   workflow: curated `search`, preview-first `add`, non-mutating lockfile
-  `verify`, `install` aliasing the guarded A5 executor, and full-copy
-  `snapshot`/`workspace`/`seal`. It intentionally does not add automatic
-  checkpoint reuse, a virtual filesystem, hardlinks, or implicit registry
-  selection.
-- **Next UI slice:** a thin GUI may expose the existing managed lifecycle and
-  readiness diagnostics. It must preserve CLI gates: `analysis-only` locks are
-  non-installable, explicit disposable confirmation remains required, and
-  unavailable exact packages are shown as coverage gaps rather than replaced.
-  The GUI should display artifact integrity, mechanical metadata,
-  compatibility verification, and upstream integration as separate status
+  `verify`, `install` aliasing the guarded A5 executor, full-copy
+  `snapshot`/`workspace`/`seal`, and one-command `build`. It intentionally does
+  not add automatic checkpoint reuse, a virtual filesystem, hardlinks, or
+  implicit registry selection.
+- **Desktop base:** `apps/desktop` is a Tauri 2, SvelteKit, TypeScript,
+  Tailwind, and Bun application. SvelteKit is configured as a static SPA with
+  SSR disabled. Its thin Tauri commands call the Rust build/preflight APIs and
+  forward structured progress events. Future UI work must preserve the CLI
+  gates: `analysis-only` locks are non-installable, explicit disposable
+  confirmation remains required, and unavailable exact packages are shown as
+  coverage gaps rather than replaced. Artifact integrity, mechanical metadata,
+  compatibility verification, and upstream integration remain separate status
   dimensions; author participation is never required for IEPM verification.
 - **Product B:** semantic analyzer; controlled component installs plus useful
   resource-level diffs.

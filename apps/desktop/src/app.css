@@ -1,0 +1,32 @@
+@import 'tailwindcss';
+
+@theme {
+	--font-sans: 'Segoe UI Variable', 'Segoe UI', system-ui, sans-serif;
+	--color-ink-950: #15191c;
+	--color-ink-800: #293137;
+	--color-paper-50: #f8f7f3;
+	--color-paper-100: #eeece5;
+	--color-moss-500: #667b5c;
+	--color-moss-600: #526649;
+	--color-amber-500: #c98b37;
+}
+
+@layer base {
+	html {
+		font-family: var(--font-sans);
+		background: var(--color-paper-100);
+		color: var(--color-ink-950);
+	}
+
+	body {
+		min-width: 760px;
+		min-height: 100vh;
+		margin: 0;
+	}
+
+	button,
+	input,
+	textarea {
+		font: inherit;
+	}
+}

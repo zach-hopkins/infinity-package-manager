@@ -29,7 +29,26 @@ have fresh full-copy evidence; other optional components remain unverified.
 ## From a clean game copy
 
 Use a new store outside the source game. Substitute your own paths and make a
-copy of a manifest if your clean game has a different fingerprint.
+copy of a manifest to choose different mods or components. If its environment
+has no fingerprint, `build` measures the clean source and records the value in
+the effective manifest and lockfile without rewriting your source file.
+
+```powershell
+iepm build --registry registry `
+  --manifest examples\bg2ee-tweaks-starter\modpack.yaml `
+  --source C:\Games\BG2EE-clean `
+  --store C:\Games\IEPM `
+  --build tweaks-trial-1 `
+  --weidu C:\Games\WeiDU-Windows\weidu.exe `
+  --weidu-version 25100 `
+  --confirm-disposable
+```
+
+The finished game is under `C:\Games\IEPM\builds\tweaks-trial-1\target`.
+Warnings about incomplete compatibility evidence are shown but do not block a
+technically executable build.
+
+The same work remains available as separate expert/debugging commands:
 
 ```powershell
 iepm snapshot --source C:\Games\BG2EE-clean --store C:\Games\IEPM --name bg2ee-clean --locale en_US

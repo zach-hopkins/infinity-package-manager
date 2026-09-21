@@ -1,6 +1,7 @@
 use anyhow::{Context, Result};
 use clap::{Parser, Subcommand};
 use iepm_core::{ExecutionReadiness, Manifest, Registry, Toolchain};
+use std::collections::BTreeMap;
 use std::path::PathBuf;
 
 #[derive(Parser)]
@@ -12,6 +13,40 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Command {
+    /// Build and seal a complete modded game from a manifest in one command.
+    Build {
+        #[arg(long, default_value = "registry")]
+        registry: PathBuf,
+        #[arg(long)]
+        manifest: PathBuf,
+        #[arg(long)]
+        store: PathBuf,
+        #[arg(long)]
+        build: String,
+        #[arg(
+            long = "source",
+            value_name = "ENVIRONMENT=PATH",
+            required = true,
+            help = "Clean game source. NAME=PATH may be repeated; PATH alone is allowed for a one-environment manifest"
+        )]
+        sources: Vec<String>,
+        #[arg(long)]
+        weidu: PathBuf,
+        #[arg(long, help = "Exact WeiDU version used for this build")]
+        weidu_version: String,
+        #[arg(long, default_value = "working-tree")]
+        registry_revision: String,
+        #[arg(
+            long,
+            help = "Confirm IEPM may create and mutate fresh disposable copies"
+        )]
+        confirm_disposable: bool,
+        #[arg(
+            long,
+            help = "Accept WeiDU exit code 3 only when all requested components are recorded"
+        )]
+        allow_weidu_warnings: bool,
+    },
     Resolve {
         #[arg(long, default_value = "registry")]
         registry: PathBuf,
@@ -191,6 +226,47 @@ enum Command {
 
 fn main() -> Result<()> {
     match Cli::parse().command {
+        Command::Build {
+            registry,
+            manifest,
+            store,
+            build,
+            sources,
+            weidu,
+            weidu_version,
+            registry_revision,
+            confirm_disposable,
+            allow_weidu_warnings,
+        } => {
+            let sources = parse_build_sources(&manifest, &sources)?;
+            let report = iepm::run_build_with_progress(
+                &iepm::BuildOptions {
+                    registry,
+                    manifest,
+                    store,
+                    build,
+                    sources,
+                    weidu,
+                    weidu_version,
+                    registry_revision,
+                    confirm_disposable,
+                    allow_weidu_warnings,
+                },
+                |event| println!("[{}] {}", event.stage, event.message),
+            )?;
+            if !report.warnings.is_empty() {
+                println!("Warnings (installation was allowed):");
+                for warning in &report.warnings {
+                    println!("- {warning}");
+                }
+            }
+            println!(
+                "completed {} WeiDU action(s); sealed build: {}",
+                report.actions,
+                report.sealed_build.display()
+            );
+            println!("receipts: {}", report.log_dir.display());
+        }
         Command::Resolve {
             registry,
             manifest,
@@ -451,6 +527,28 @@ fn main() -> Result<()> {
         }
     }
     Ok(())
+}
+
+fn parse_build_sources(manifest: &PathBuf, values: &[String]) -> Result<BTreeMap<String, PathBuf>> {
+    if values.len() == 1 && !values[0].contains('=') {
+        let source = std::fs::read_to_string(manifest)
+            .with_context(|| format!("could not read {}", manifest.display()))?;
+        let manifest: Manifest = serde_yaml::from_str(&source)
+            .with_context(|| format!("could not parse {}", manifest.display()))?;
+        if manifest.environments.len() != 1 {
+            anyhow::bail!(
+                "--source PATH shorthand requires exactly one named manifest environment; use NAME=PATH bindings"
+            );
+        }
+        let name = manifest
+            .environments
+            .keys()
+            .next()
+            .expect("checked one environment")
+            .clone();
+        return Ok(BTreeMap::from([(name, PathBuf::from(&values[0]))]));
+    }
+    iepm::parse_workspace_bindings(values)
 }
 
 fn render_search(registry: &Registry, query: Option<&str>, game: Option<&str>) -> String {

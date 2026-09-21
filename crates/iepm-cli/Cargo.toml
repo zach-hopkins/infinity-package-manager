@@ -12,6 +12,7 @@ iepm-core = { path = "../iepm-core" }
 iepm-registry = { path = "../iepm-registry" }
 iepm-resolver = { path = "../iepm-resolver" }
 iepm-artifacts = { path = "../iepm-artifacts" }
+serde.workspace = true
 serde_json.workspace = true
 serde_yaml.workspace = true
 sha2.workspace = true

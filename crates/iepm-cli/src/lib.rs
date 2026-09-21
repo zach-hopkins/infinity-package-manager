@@ -4,6 +4,7 @@ use iepm_core::{
     ExecutionReadiness, GameFingerprint, Installer, InstallerArgument, InstallerLauncher,
     LockedPackage, Lockfile, Manifest, Registry, RequestedMod, WeiDUComponent,
 };
+use serde::Serialize;
 use sha2::{Digest, Sha256};
 use std::collections::{BTreeMap, BTreeSet};
 use std::fs;
@@ -244,6 +245,277 @@ pub fn render_verification(report: &LockfileVerification) -> String {
 const WORKSPACE_STATE_FILE: &str = ".iepm-workspace.json";
 const BUILD_STATE_FILE: &str = ".iepm-build.json";
 
+/// Inputs for the one-command personal build workflow. Machine-local paths
+/// stay here and never enter the portable manifest or lockfile.
+#[derive(Debug, Clone)]
+pub struct BuildOptions {
+    pub registry: PathBuf,
+    pub manifest: PathBuf,
+    pub store: PathBuf,
+    pub build: String,
+    pub sources: BTreeMap<String, PathBuf>,
+    pub weidu: PathBuf,
+    pub weidu_version: String,
+    pub registry_revision: String,
+    pub confirm_disposable: bool,
+    pub allow_weidu_warnings: bool,
+}
+
+#[derive(Debug, Clone, Serialize)]
+pub struct BuildProgress {
+    pub stage: String,
+    pub message: String,
+}
+
+#[derive(Debug, Clone, Serialize)]
+pub struct BuildReport {
+    pub sealed_build: PathBuf,
+    pub lockfile: PathBuf,
+    pub log_dir: PathBuf,
+    pub actions: usize,
+    pub warnings: Vec<String>,
+}
+
+pub struct PreparedBuild {
+    pub manifest: Manifest,
+    pub lockfile: Lockfile,
+    pub plan: String,
+    pub verification: String,
+}
+
+/// Perform the complete non-mutating part of `iepm build`: bind clean local
+/// sources, derive or validate their fingerprints, resolve, verify, and render
+/// the exact execution plan. The manifest on disk is never rewritten.
+pub fn prepare_build(options: &BuildOptions) -> Result<PreparedBuild> {
+    validate_store_name(&options.build, "build name")?;
+    if !options.weidu.is_file() {
+        bail!(
+            "shared WeiDU executable does not exist: {}",
+            options.weidu.display()
+        );
+    }
+    let source = fs::read_to_string(&options.manifest)
+        .with_context(|| format!("could not read {}", options.manifest.display()))?;
+    let mut manifest: Manifest = serde_yaml::from_str(&source)
+        .with_context(|| format!("could not parse {}", options.manifest.display()))?;
+    if manifest.environments.is_empty() {
+        bail!("iepm build requires a schema-2 manifest with named environments");
+    }
+    if options.sources.len() != manifest.environments.len()
+        || !options.sources.keys().eq(manifest.environments.keys())
+    {
+        bail!("source bindings must name every and only every manifest environment");
+    }
+    for (name, environment) in &mut manifest.environments {
+        let source = &options.sources[name];
+        let actual = measure_workspace_fingerprint(source, environment.locale.as_deref())?;
+        if let Some(expected) = &environment.fingerprint {
+            if expected != &actual {
+                bail!(
+                    "clean source fingerprint mismatch for {name}: expected {}:{}, got {}:{}",
+                    expected.profile,
+                    expected.value,
+                    actual.profile,
+                    actual.value
+                );
+            }
+        } else {
+            environment.fingerprint = Some(actual);
+        }
+    }
+
+    let registry = iepm_registry::load(&options.registry)?;
+    let lockfile = iepm_resolver::resolve(
+        &manifest,
+        &registry,
+        &options.registry_revision,
+        iepm_core::Toolchain {
+            iepm: env!("CARGO_PKG_VERSION").to_owned(),
+            weidu: Some(options.weidu_version.clone()),
+        },
+    )?;
+    let verification_report = verify_lockfile(&lockfile);
+    let verification = render_verification(&verification_report);
+    if !verification_report.structurally_valid {
+        bail!("resolved lockfile failed structural verification:\n{verification}");
+    }
+    if lockfile.execution_readiness != ExecutionReadiness::Executable {
+        let reasons = lockfile
+            .blocking_reasons
+            .iter()
+            .map(|reason| format!("- {reason}"))
+            .collect::<Vec<_>>()
+            .join("\n");
+        bail!("build is not executable:\n{reasons}");
+    }
+    let plan = render_plan(&lockfile)?;
+    Ok(PreparedBuild {
+        manifest,
+        lockfile,
+        plan,
+        verification,
+    })
+}
+
+/// Run the complete snapshot -> workspace -> resolve/install -> seal workflow.
+/// Progress is deliberately a small concrete event shape shared by the CLI
+/// and desktop shell; package-management decisions remain in Rust.
+pub fn run_build_with_progress<F>(options: &BuildOptions, mut progress: F) -> Result<BuildReport>
+where
+    F: FnMut(BuildProgress),
+{
+    if !options.confirm_disposable {
+        bail!("refusing to build without explicit disposable-workspace confirmation");
+    }
+    progress(BuildProgress {
+        stage: "preflight".to_owned(),
+        message: "Resolving and checking the requested build".to_owned(),
+    });
+    let prepared = prepare_build(options)?;
+
+    let workspace_root = options.store.join("workspaces").join(&options.build);
+    let sealed_build = options.store.join("builds").join(&options.build);
+    let log_dir = options.store.join("logs").join(&options.build);
+    for (description, path) in [
+        ("workspace", &workspace_root),
+        ("sealed build", &sealed_build),
+        ("log directory", &log_dir),
+    ] {
+        if path.exists() {
+            bail!(
+                "{description} already exists: {}; choose a fresh build name",
+                path.display()
+            );
+        }
+    }
+
+    progress(BuildProgress {
+        stage: "snapshot".to_owned(),
+        message: "Preparing immutable clean-game snapshots".to_owned(),
+    });
+    let mut snapshots = BTreeMap::new();
+    for (name, environment) in &prepared.manifest.environments {
+        let fingerprint = environment
+            .fingerprint
+            .as_ref()
+            .expect("prepare_build filled every environment fingerprint");
+        if let Some(snapshot) = reusable_source_snapshot(&options.store, fingerprint)? {
+            snapshots.insert(name.clone(), snapshot);
+        } else {
+            let snapshot = import_source_snapshot(
+                &options.sources[name],
+                &options.store,
+                name,
+                environment.locale.as_deref(),
+            )?;
+            snapshots.insert(name.clone(), snapshot);
+        }
+    }
+
+    progress(BuildProgress {
+        stage: "workspace".to_owned(),
+        message: "Creating fresh disposable workspaces".to_owned(),
+    });
+    let workspace_root = create_disposable_workspaces(&snapshots, &options.store, &options.build)?;
+    let workspaces = prepared
+        .manifest
+        .environments
+        .keys()
+        .map(|name| (name.clone(), workspace_root.join(name)))
+        .collect::<BTreeMap<_, _>>();
+
+    fs::create_dir_all(&log_dir)
+        .with_context(|| format!("could not create {}", log_dir.display()))?;
+    let lockfile_path = log_dir.join("modpack.lock.json");
+    fs::write(
+        &lockfile_path,
+        format!("{}\n", serde_json::to_string_pretty(&prepared.lockfile)?),
+    )?;
+    fs::write(
+        log_dir.join("effective-manifest.yaml"),
+        serde_yaml::to_string(&prepared.manifest)?,
+    )?;
+    fs::write(log_dir.join("execution-plan.txt"), &prepared.plan)?;
+    fs::write(
+        log_dir.join("preflight-verification.txt"),
+        &prepared.verification,
+    )?;
+
+    progress(BuildProgress {
+        stage: "install".to_owned(),
+        message: "Fetching verified artifacts and installing with WeiDU".to_owned(),
+    });
+    let execution = execute(
+        &prepared.lockfile,
+        &ExecuteOptions {
+            cache: options.store.join("cache"),
+            weidu: options.weidu.clone(),
+            workspaces,
+            log_dir: log_dir.clone(),
+            confirm_disposable: true,
+            allow_weidu_warnings: options.allow_weidu_warnings,
+        },
+    )?;
+
+    progress(BuildProgress {
+        stage: "seal".to_owned(),
+        message: "Sealing the completed build and its receipts".to_owned(),
+    });
+    let sealed_build =
+        seal_successful_build(&workspace_root, &options.store, &options.build, &log_dir)?;
+    let report = BuildReport {
+        sealed_build,
+        lockfile: lockfile_path,
+        log_dir,
+        actions: execution.actions,
+        warnings: prepared.lockfile.warnings,
+    };
+    progress(BuildProgress {
+        stage: "complete".to_owned(),
+        message: format!("Build is ready at {}", report.sealed_build.display()),
+    });
+    Ok(report)
+}
+
+pub fn run_build(options: &BuildOptions) -> Result<BuildReport> {
+    run_build_with_progress(options, |_| {})
+}
+
+fn reusable_source_snapshot(
+    store: &Path,
+    fingerprint: &GameFingerprint,
+) -> Result<Option<PathBuf>> {
+    let sources = store.join("sources");
+    if !sources.is_dir() {
+        return Ok(None);
+    }
+    let mut candidates = fs::read_dir(&sources)?
+        .filter_map(|entry| entry.ok())
+        .filter(|entry| entry.file_type().is_ok_and(|kind| kind.is_dir()))
+        .map(|entry| entry.path().join(&fingerprint.value))
+        .filter(|path| path.is_dir())
+        .collect::<Vec<_>>();
+    candidates.sort();
+    if let Some(candidate) = candidates.into_iter().next() {
+        let state = read_workspace_state(&candidate)?;
+        expect_workspace_state(&state, "source-snapshot", "sealed", &candidate)?;
+        let stored: GameFingerprint = serde_json::from_value(
+            state
+                .get("fingerprint")
+                .cloned()
+                .ok_or_else(|| anyhow::anyhow!("source snapshot has no fingerprint"))?,
+        )?;
+        if &stored != fingerprint {
+            bail!(
+                "stored snapshot fingerprint does not match its path: {}",
+                candidate.display()
+            );
+        }
+        return Ok(Some(candidate));
+    }
+    Ok(None)
+}
+
 /// Import a full local game copy as an IEPM-managed source snapshot. IEPM
 /// treats this copy as immutable: it may be cloned, but it can never be bound
 /// to A5 execution as a writable workspace.
@@ -378,6 +650,7 @@ pub fn seal_successful_build(
         );
     }
     copy_tree(workspace_root, &destination)?;
+    copy_tree(log_dir, &destination.join("iepm-logs"))?;
     for environment in &environments {
         let path = destination.join(environment);
         let state = read_workspace_state(&path)?;
@@ -392,7 +665,7 @@ pub fn seal_successful_build(
             "schema": 1,
             "kind": "sealed-build",
             "status": "sealed",
-            "execution_receipt": "iepm-run-receipt.json",
+            "execution_receipt": "iepm-logs/iepm-run-receipt.json",
         }),
         true,
     )?;
@@ -1864,6 +2137,105 @@ mods: []
         expect_workspace_state(&sealed_state, "sealed-build", "sealed", &sealed_workspace).unwrap();
         assert!(workspace.join("Baldur.exe").is_file());
         assert!(sealed_workspace.join("Baldur.exe").is_file());
+        assert!(
+            sealed
+                .join("iepm-logs")
+                .join("iepm-run-receipt.json")
+                .is_file()
+        );
+
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn prepares_one_command_build_without_rewriting_the_manifest() {
+        let root = std::env::temp_dir().join(format!(
+            "iepm-build-preflight-test-{}-{}",
+            std::process::id(),
+            std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap()
+                .as_nanos()
+        ));
+        let registry = root.join("registry");
+        let source = root.join("source");
+        std::fs::create_dir_all(&registry).unwrap();
+        std::fs::create_dir_all(&source).unwrap();
+        std::fs::write(source.join("chitin.key"), "fixture key").unwrap();
+        std::fs::write(
+            registry.join("fixture.yaml"),
+            format!(
+                r#"schema: 2
+package: fixture
+releases:
+  - version: One
+    release_id: fixture-one
+    artifact:
+      url: https://example.invalid/fixture.zip
+      sha256: {}
+    compatibility:
+      games: [bg2ee]
+    install:
+      phase: eet
+    provenance: unverified
+    components:
+      - id: main
+        weidu:
+          tp2: fixture/setup-fixture.tp2
+          number: 0
+    installers:
+      - tp2: fixture/setup-fixture.tp2
+        launcher: toolchain
+        languages:
+          - id: 0
+            name: English
+"#,
+                "a".repeat(64)
+            ),
+        )
+        .unwrap();
+        let manifest = root.join("modpack.yaml");
+        let manifest_source = r#"schema: 2
+environments:
+  target:
+    target: bg2ee
+    language: English
+    locale: en_US
+mods:
+  - package: fixture
+    environment: target
+    components: [main]
+"#;
+        std::fs::write(&manifest, manifest_source).unwrap();
+        let weidu = root.join("weidu.exe");
+        std::fs::write(&weidu, "fixture").unwrap();
+
+        let prepared = prepare_build(&BuildOptions {
+            registry,
+            manifest: manifest.clone(),
+            store: root.join("store"),
+            build: "trial-one".to_owned(),
+            sources: BTreeMap::from([("target".to_owned(), source)]),
+            weidu,
+            weidu_version: "25100".to_owned(),
+            registry_revision: "fixture".to_owned(),
+            confirm_disposable: true,
+            allow_weidu_warnings: false,
+        })
+        .unwrap();
+
+        assert!(
+            prepared.manifest.environments["target"]
+                .fingerprint
+                .is_some()
+        );
+        assert_eq!(
+            prepared.lockfile.execution_readiness,
+            ExecutionReadiness::Executable
+        );
+        assert!(prepared.plan.contains("Run WeiDU for fixture"));
+        assert_eq!(std::fs::read_to_string(manifest).unwrap(), manifest_source);
+        assert!(!root.join("store").exists());
 
         std::fs::remove_dir_all(root).unwrap();
     }

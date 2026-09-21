@@ -1,7 +1,9 @@
 # A7: CLI workflow and managed workspaces
 
 A7 makes the existing Product A flow usable without weakening its safety
-boundaries. The CLI now has four groups of operations:
+boundaries. The normal personal-use path is now one `build` command; the
+lower-level commands remain available for inspection and recovery work. The
+CLI has five groups of operations:
 
 - discover intent with `search` and preview explicit edits with `add`;
 - validate a portable lockfile with `verify` and prepare archive bytes with
@@ -9,6 +11,39 @@ boundaries. The CLI now has four groups of operations:
 - create managed full-copy source snapshots and disposable workspaces;
 - run the existing A5 executor (also available as `iepm install`) and seal a
   successful output as a separate full copy.
+- compose those stages through `build` for the normal end-to-end workflow.
+
+## One-command build
+
+For a one-environment BG2EE manifest:
+
+```text
+iepm build --registry registry --manifest my-mods.yaml \
+  --source C:\Games\BG2EE-clean --store C:\Games\IEPM \
+  --build my-bg2ee-build --weidu C:\Games\WeiDU\weidu.exe \
+  --weidu-version 25100 --confirm-disposable
+```
+
+For EET or another multi-environment manifest, repeat an explicit binding:
+
+```text
+--source bgee-source=C:\Games\BGEE-clean \
+--source eet-target=C:\Games\BG2EE-clean
+```
+
+`build` first performs the non-mutating work: it reads the clean sources,
+fills a missing manifest fingerprint in memory, resolves the exact releases,
+verifies that the result is executable, and renders the plan. It does not
+rewrite the user's manifest. Only then does it reuse or create immutable
+snapshots, create fresh full-copy workspaces, fetch and install, and seal a
+successful build. Unverified compatibility is reported once and remains
+installable; a missing artifact, installer, or component selector is a real
+execution blocker and stops before workspace creation.
+
+The sealed build contains `iepm-logs/` with the effective manifest, lockfile,
+plan, preflight report, command output, and completion receipt. A failed build
+keeps its workspace and logs for inspection but can never be resumed under the
+same build name.
 
 ## Intent and preflight
 
@@ -29,7 +64,7 @@ does not preserve comments. `verify` checks portable lockfile references and
 readiness only. It never fetches bytes, so `fetch` remains the content-hash
 verification and preparation step.
 
-## Full-copy workspace lifecycle
+## Manual full-copy workspace lifecycle
 
 Use a local store outside your Steam/GOG installation. Each command refuses to
 overwrite an existing destination.

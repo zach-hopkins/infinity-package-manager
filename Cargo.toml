@@ -5,6 +5,7 @@ members = [
   "crates/iepm-resolver",
   "crates/iepm-artifacts",
   "crates/iepm-cli",
+  "apps/desktop/src-tauri",
 ]
 resolver = "2"
 
