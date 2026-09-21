@@ -33,6 +33,10 @@ releases:
         provenance: verified
         evidence:
           - https://github.com/Gibberlings3/SwordCoastStratagems/releases/tag/v35.21
+      - claim: In the exact 14-action Forge-derived EET build, SCS's batch dispatcher recorded 2000, 5900, 6030, 6040, 6510 (Improved Fiends and Celestials), 6840, and 6850 (Ascension demons). The run completed and the IEPM build was sealed under shared WeiDU 25100.
+        provenance: verified
+        evidence:
+          - https://github.com/Gibberlings3/SwordCoastStratagems/releases/tag/v35.21
     installers:
       - tp2: stratagems/setup-stratagems.tp2
         launcher: toolchain

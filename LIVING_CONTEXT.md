@@ -60,6 +60,11 @@ fixture for dispatcher 100 plus components 2000, 5900, 6030, and 6040. The
 dispatcher is explicitly non-recording; its selected nested WeiDU components
 remain the required receipt evidence. Other SCS components and broad EET
 interactions remain unverified.
+One exact Forge-derived 14-action EET selection subsequently completed and
+sealed, including SCS 6510 (Improved Fiends and Celestials), 6840, and 6850
+(Ascension demons) after the registry resolved their same-package component
+requirements. This strengthens evidence for those exact selections only; it
+does not verify SCS's remaining catalog or arbitrary stack combinations.
 The retained official Hidden Gameplay Options v5.1 source is the first
 evidence point: its opaque release ID, display version, English language index
 0, and selected component selectors match the registry. This corroborates but
