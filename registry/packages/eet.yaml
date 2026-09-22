@@ -67,3 +67,11 @@ releases:
         weidu:
           tp2: EET/EET.tp2
           number: 0
+      - id: create-desktop-shortcut
+        weidu:
+          tp2: EET/EET.tp2
+          number: 100
+        requires: [core]
+        claims:
+          - claim: The exact v14.1 source-tag TP2 comments selector 100 as desktop shortcut creation and requires EET core component 0.
+            provenance: derived
