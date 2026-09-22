@@ -38,7 +38,7 @@ labels. This ledger must use those words only with those meanings.
 | Call of the Lost Goddess v3.1 | Complete 3-component structural catalog | Yes | **Untested** — the core route has fixture install evidence; optional portraits/voiceover and policy launch smoke remain untested | [registry](../registry/packages/call-of-the-lost-goddess.yaml) |
 | Throne of the Mad God | Recorded component | Yes | **Untested** — fixture install evidence exists; policy launch smoke remains | [registry](../registry/packages/throne-of-the-mad-god.yaml) |
 | EEex | Recorded components | Yes | **Untested** — bootstrap/main/LuaJIT have install evidence; launch smoke and native-extension interactions remain | [registry](../registry/packages/eeex.yaml) |
-| Infinity UI++ | Recorded component | Yes | **Untested** — dedicated install evidence exists; policy launch smoke remains | [registry](../registry/packages/infinity-ui-plus-plus.yaml) |
+| Infinity UI++ v1.23 source | Complete 9-component structural catalog; quicksave slot selections are component-scoped alternatives | Yes | **Untested** — the core has dedicated install evidence; optional selectors and policy launch smoke remain untested | [registry](../registry/packages/infinity-ui-plus-plus.yaml) |
 | Bubb's Spell Menu | Recorded component | Yes | **Untested** — the EEex-dependent fixture installed; policy launch smoke remains | [registry](../registry/packages/bubbs-spell-menu.yaml) |
 
 ## Reading the Forge manifest

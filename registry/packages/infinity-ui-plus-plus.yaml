@@ -38,3 +38,31 @@ releases:
         claims:
           - claim: The first TP2 BEGIN declaration is structurally observed. Its numeric selector is declaration-order component 0; the release exposes no LABEL.
             provenance: derived
+      - id: transparent-tooltip-background
+        weidu: { tp2: infinity_ui/infinity_ui.tp2, number: 1 }
+        claims:
+          - claim: The exact v1.23 source-tag TP2 comments selector 1 as the transparent tooltip background option.
+            provenance: derived
+      - id: update-dialog-text
+        weidu: { tp2: infinity_ui/infinity_ui.tp2, number: 2 }
+        claims:
+          - claim: The exact v1.23 source-tag TP2 comments selector 2 as the dialog.tlk text update option.
+            provenance: derived
+      - id: quicksave-slots-one
+        weidu: { tp2: infinity_ui/infinity_ui.tp2, number: 3 }
+        provides: [{ name: quicksave-slot-count, exclusive: true }]
+      - id: quicksave-slots-two
+        weidu: { tp2: infinity_ui/infinity_ui.tp2, number: 4 }
+        provides: [{ name: quicksave-slot-count, exclusive: true }]
+      - id: quicksave-slots-three
+        weidu: { tp2: infinity_ui/infinity_ui.tp2, number: 5 }
+        provides: [{ name: quicksave-slot-count, exclusive: true }]
+      - id: quicksave-slots-four
+        weidu: { tp2: infinity_ui/infinity_ui.tp2, number: 6 }
+        provides: [{ name: quicksave-slot-count, exclusive: true }]
+      - id: quicksave-slots-five
+        weidu: { tp2: infinity_ui/infinity_ui.tp2, number: 7 }
+        provides: [{ name: quicksave-slot-count, exclusive: true }]
+      - id: quicksave-slots-six
+        weidu: { tp2: infinity_ui/infinity_ui.tp2, number: 8 }
+        provides: [{ name: quicksave-slot-count, exclusive: true }]
