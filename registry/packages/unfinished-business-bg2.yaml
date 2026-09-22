@@ -10,7 +10,7 @@ releases:
     materialization: { source_root: UnfinishedBusiness-28, include: [ub] }
     compatibility: { games: [bg2ee, eet] }
     install: { phase: eet }
-    provenance: unverified
+    provenance: verified
     claims:
       - claim: The exact author v28 source-tag archive was SHA-256 verified. Its active setup-ub.tp2 declares VERSION v28, nine WeiDU languages, and 26 structural components; two are explicitly deprecated for BG2EE and are not offered as current-game choices. The separate ub/kalah/kalah.tp2 is a legacy TP2, not the active main installer.
         provenance: derived
@@ -21,6 +21,9 @@ releases:
       - claim: The active TP2 explicitly deprecates Gorf the Squisher Fix and Corrected BAMs and Scripts for BG2EE, directing classic-BG2 users to G3 Fixpack; the late ToB choices require GAME_INCLUDES tob.
         provenance: derived
         evidence: [https://github.com/Pocket-Plane-Group/UnfinishedBusiness]
+      - claim: Three exact English restoration choices (#0, #12, #18) completed a clean IEPM-managed BG2EE 2.6.6 build, were recorded in WeiDU.log, sealed, and reached the Shadows of Amn main menu. The other current-game choices and EET remain untested.
+        provenance: verified
+        evidence: [evidence/pa4-bg2ee-unfinished-business.json]
     installers:
       - tp2: ub/setup-ub.tp2
         launcher: toolchain

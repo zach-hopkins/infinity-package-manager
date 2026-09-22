@@ -187,5 +187,6 @@ deprecated for BG2EE in the TP2, so they are observed but not user-facing.
 The separate `ub/kalah/kalah.tp2` is a legacy installer and is not the active
 UB component catalog. The source TP2 is Windows-1252; `review-tp2` used a
 mechanically transcoded temporary copy and reported `match`. The bounded
-three-component fixture is executable, but installation and EET remain
-Untested.
+three-component fixture completed a clean BG2EE build and main-menu smoke;
+those exact choices are Supported. The other 21 choices and EET remain
+Untested. See [`pa4-bg2ee-unfinished-business-evidence.md`](pa4-bg2ee-unfinished-business-evidence.md).
