@@ -61,6 +61,7 @@ classification backlog.
 | Ascension 2.1.0 | 19 | 19 | 0 |
 | Call of the Lost Goddess v3.1 | 3 | 3 | 0 |
 | Infinity UI++ v1.23 source | 9 | 9 | 0 |
+| EEex v1.2.0 | 9 | 9 | 0 |
 | DLC Merger 2.1 | 4 | 4 | 0 |
 | EE Fixpack Beta 2 | 7 | 3 | 4 internal-only |
 

@@ -42,7 +42,25 @@ releases:
             provenance: derived
       - id: core
         weidu: { tp2: EEex/EEex.tp2, label: B3-EEex-Main, number: 1 }
+        requires: [bootstrap]
       - id: luajit
         weidu: { tp2: EEex/EEex.tp2, label: B3-EEex-LuaJIT, number: 8 }
+        requires: [core]
       - id: effect-menu
         weidu: { tp2: EEex/EEex.tp2, label: B3-EEex-Module-Effect-Menu, number: 2 }
+        requires: [core]
+      - id: empty-containers
+        weidu: { tp2: EEex/EEex.tp2, label: B3-EEex-Module-Empty-Containers, number: 3 }
+        requires: [core]
+      - id: advanced-hotkeys
+        weidu: { tp2: EEex/EEex.tp2, label: B3-EEex-Module-Hotkey, number: 4 }
+        requires: [core]
+      - id: ui-scaling
+        weidu: { tp2: EEex/EEex.tp2, label: B3-EEex-Module-Scale, number: 5 }
+        requires: [core]
+      - id: time-step
+        weidu: { tp2: EEex/EEex.tp2, label: B3-EEex-Module-Time-Step, number: 6 }
+        requires: [core]
+      - id: action-cooldown-timers
+        weidu: { tp2: EEex/EEex.tp2, label: B3-EEex-Module-Timer-Main, number: 7 }
+        requires: [core]
