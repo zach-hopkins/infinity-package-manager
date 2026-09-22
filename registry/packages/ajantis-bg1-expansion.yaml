@@ -1,0 +1,39 @@
+schema: 2
+package: ajantis-bg1-expansion
+aliases: [ajantisbg1]
+releases:
+  - release_id: ajantis-bg1-expansion-v22-source
+    version: "22"
+    artifacts:
+      - url: https://github.com/Gibberlings3/Ajantis_BG1_Expansion/archive/refs/tags/v22.zip
+        sha256: 7479c3b6d2ba8ab9acb509de3d6101ac862d8a3c7f6ec7a99e4e8defa7b60dbe
+        platforms: [windows]
+    materialization: { source_root: Ajantis_BG1_Expansion-22, include: [ajantisbg1] }
+    compatibility: { games: [bgee, eet] }
+    install: { phase: eet, after: [eet, bg1npc], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact author v22 tag ZIP was SHA-256 verified; the main TP2 declares VERSION 22, four WeiDU languages, and three LABEL-bearing components numbered 0, 1, and 30.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The author supports BGEE and EET. BG1NPC Project is optional for the main friendship path but should precede this mod when both are installed; it enables additional romance content.
+        provenance: declared
+        evidence: [https://github.com/Gibberlings3/Ajantis_BG1_Expansion]
+      - claim: Shield-art component 1 requires the BG1NPC shield item in the game tree. SoD crossmod component 30 mechanically names ajantisbg1.tp2 component 0 as a prerequisite; how WeiDU resolves that spelling against the main Setup-AjantisBG1.tp2 needs an execution fixture. Both optional choices remain Untested and are not implied by the default selection.
+        provenance: derived
+        evidence: [https://github.com/Gibberlings3/Ajantis_BG1_Expansion]
+      - claim: The main TP2 forbids installation after EET_End. EET target placement after EET import and before EET_End is an IEPM interpretation of that guard and remains Untested.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+    installers:
+      - tp2: ajantisbg1/Setup-AjantisBG1.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: Francais }
+          - { id: 2, name: Deutsch }
+          - { id: 3, name: Simplified Chinese }
+    components:
+      - { id: friendship-and-romance-expansion, default_selected: true, weidu: { tp2: ajantisbg1/Setup-AjantisBG1.tp2, label: AjantisBG1Expansion-main, number: 0 } }
+      - { id: family-shield-art, weidu: { tp2: ajantisbg1/Setup-AjantisBG1.tp2, label: AjantisBG1Expansion-shieldBAM, number: 1 } }
+      - { id: sod-npc-crossmod-content, weidu: { tp2: ajantisbg1/Setup-AjantisBG1.tp2, label: C#Ajantis_SoD_NPC-crossmod_content, number: 30 } }
