@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://iepm.dev/schemas/discovery-catalog.schema.json",
+  "title": "IEPM schema-1 ecosystem discovery catalog",
+  "description": "Non-executable discovery and display metadata. This schema does not make package, artifact, compatibility, ordering, or support claims.",
+  "type": "object",
+  "required": ["schema", "source", "entries"],
+  "properties": {
+    "schema": { "const": 1 },
+    "source": { "$ref": "#/$defs/source" },
+    "entries": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/entry" }
+    }
+  },
+  "$defs": {
+    "package-id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "source": {
+      "type": "object",
+      "required": ["kind", "repository", "revision", "license", "input", "input_sha256"],
+      "properties": {
+        "kind": { "const": "infinity-mod-forge" },
+        "repository": { "type": "string", "format": "uri" },
+        "revision": { "type": "string", "minLength": 1 },
+        "license": { "type": "string", "minLength": 1 },
+        "input": { "const": "data/mods-index.json" },
+        "input_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      },
+      "additionalProperties": false
+    },
+    "entry": {
+      "type": "object",
+      "required": [
+        "source_id", "tp2_name", "name", "category", "source_game_predicate_observed",
+        "component_count", "source_install_order", "candidate_package", "identity_status"
+      ],
+      "properties": {
+        "source_id": { "type": "integer", "minimum": 0 },
+        "tp2_name": { "type": "string", "minLength": 1 },
+        "name": { "type": "string", "minLength": 1 },
+        "author": { "type": "string" },
+        "summary": { "type": "string" },
+        "category": { "type": "string", "minLength": 1 },
+        "tags": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "narrative_phases": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "observed_game_targets": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "source_game_predicate_observed": { "type": "boolean" },
+        "component_count": { "type": "integer", "minimum": 0 },
+        "language_indices": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 0 } },
+        "homepage": { "type": "string", "format": "uri" },
+        "github": {
+          "type": "object",
+          "required": ["owner", "repository"],
+          "properties": {
+            "owner": { "type": "string", "minLength": 1 },
+            "repository": { "type": "string", "minLength": 1 }
+          },
+          "additionalProperties": false
+        },
+        "source_version": { "type": "string" },
+        "source_install_order": { "type": "integer" },
+        "candidate_package": { "$ref": "#/$defs/package-id" },
+        "identity_status": { "enum": ["candidate", "matched-curated", "candidate-collision"] },
+        "curated_package": { "$ref": "#/$defs/package-id" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

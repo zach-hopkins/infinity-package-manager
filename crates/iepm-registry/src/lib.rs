@@ -1,3 +1,5 @@
+pub mod catalog;
+
 use anyhow::{Context, Result, bail};
 use iepm_core::{Installer, PackageRecord, Registry, Release};
 use serde::Serialize;

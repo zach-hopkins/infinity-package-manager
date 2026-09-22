@@ -94,10 +94,14 @@ claiming installability.
 
 Product A closeout now has a frozen process in
 `docs/product-a-closeout-plan.md`. Broad ecosystem discovery and executable
-support are separate layers: IEPM will import a pinned Infinity Mod Forge
-snapshot into a generated discovery catalog, classify reachable landing pages
-separately from exact downloadable artifacts, and keep opaque/user-supplied
-WeiDU packages experimentally installable where technical preflight succeeds.
+support are separate layers. PA-1 imported the pinned Infinity Mod Forge
+commit `046414eec9315eb1500f2e68147aa281ab35873d` into a generated,
+non-executable 813-record catalog with no rejected records or candidate-ID
+collisions. It preserves source display/filter observations and candidate
+identity mappings without promoting them into resolver facts. PA-2 will
+classify reachable landing pages separately from exact downloadable artifacts;
+opaque/user-supplied WeiDU packages remain experimentally installable where
+technical preflight succeeds.
 The Supported coverage cohort is not an arbitrary “top 100.” It is the
 smallest cohort of at least 50 packages that covers at least 95% of weighted,
 deduplicated package selections in a dated public corpus, plus required

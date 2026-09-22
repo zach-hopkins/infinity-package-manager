@@ -33,6 +33,8 @@ The evidence-based ecosystem indexing and 95%-coverage work is specified in the
 audit is recorded in the [Infinity Mod Forge assessment](docs/research/infinity-mod-forge-assessment.md).
 The paired acquisition/installer research is recorded in the
 [Infinity Mod Runner assessment](docs/research/infinity-mod-runner-assessment.md).
+The broad, non-executable catalog and its regeneration boundary are documented
+in [the ecosystem discovery catalog guide](docs/discovery-catalog.md).
 
 The repository's authoritative project memory is
 [LIVING_CONTEXT.md](LIVING_CONTEXT.md). It applies equally to human

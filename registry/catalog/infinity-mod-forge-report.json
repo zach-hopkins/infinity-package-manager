@@ -1,0 +1,112 @@
+{
+  "schema": 1,
+  "source": {
+    "kind": "infinity-mod-forge",
+    "repository": "https://github.com/krionashnald/InfinityModForge-Personal",
+    "revision": "046414eec9315eb1500f2e68147aa281ab35873d",
+    "license": "MIT",
+    "input": "data/mods-index.json",
+    "input_sha256": "d6b7c83b57ec919d02750ba8955b1fdc3c74c3e2d11cb3bcda3c0d315571f640"
+  },
+  "records_read": 813,
+  "records_imported": 813,
+  "rejections": [],
+  "candidate_collisions": [],
+  "curated_matches": [
+    {
+      "source_id": 3,
+      "candidate_package": "dlcmerger",
+      "curated_package": "dlc-merger"
+    },
+    {
+      "source_id": 4,
+      "candidate_package": "eefixpack",
+      "curated_package": "ee-fixpack"
+    },
+    {
+      "source_id": 5,
+      "candidate_package": "bg1ub",
+      "curated_package": "bg1-unfinished-business"
+    },
+    {
+      "source_id": 12,
+      "candidate_package": "eet",
+      "curated_package": "eet"
+    },
+    {
+      "source_id": 17,
+      "candidate_package": "infinity-ui",
+      "curated_package": "infinity-ui-plus-plus"
+    },
+    {
+      "source_id": 20,
+      "candidate_package": "eeex",
+      "curated_package": "eeex"
+    },
+    {
+      "source_id": 21,
+      "candidate_package": "bubb-spell-menu-extended",
+      "curated_package": "bubbs-spell-menu"
+    },
+    {
+      "source_id": 47,
+      "candidate_package": "bg1npc",
+      "curated_package": "bg1-npc"
+    },
+    {
+      "source_id": 103,
+      "candidate_package": "godcall",
+      "curated_package": "call-of-the-lost-goddess"
+    },
+    {
+      "source_id": 109,
+      "candidate_package": "ascension",
+      "curated_package": "ascension"
+    },
+    {
+      "source_id": 247,
+      "candidate_package": "cdtweaks",
+      "curated_package": "tweaks-anthology"
+    },
+    {
+      "source_id": 283,
+      "candidate_package": "item-rev",
+      "curated_package": "item-revisions"
+    },
+    {
+      "source_id": 288,
+      "candidate_package": "spell-rev",
+      "curated_package": "spell-revisions"
+    },
+    {
+      "source_id": 292,
+      "candidate_package": "iwdification",
+      "curated_package": "iwdification"
+    },
+    {
+      "source_id": 311,
+      "candidate_package": "rr",
+      "curated_package": "rogue-rebalancing"
+    },
+    {
+      "source_id": 341,
+      "candidate_package": "stratagems",
+      "curated_package": "stratagems"
+    },
+    {
+      "source_id": 386,
+      "candidate_package": "tactics-remix",
+      "curated_package": "tactics-remix"
+    },
+    {
+      "source_id": 449,
+      "candidate_package": "eet-end",
+      "curated_package": "eet-end"
+    },
+    {
+      "source_id": 506,
+      "candidate_package": "throneofthemadgod",
+      "curated_package": "throne-of-the-mad-god"
+    }
+  ]
+}

@@ -40,7 +40,7 @@ The ordered implementation milestones, discovery/support layer definitions,
 95% cohort metric, and confirmation artifacts are normative in the
 [Product A closeout plan](docs/product-a-closeout-plan.md).
 
-- [ ] import the pinned ecosystem discovery catalog, account for every source record, and classify landing-page and exact-artifact health separately;
+- [x] import the pinned ecosystem discovery catalog and account for every source record; PA-2 will classify landing-page and exact-artifact health separately;
 - [ ] freeze and name the smallest Product A coverage cohort of at least 50 packages that reaches at least 95% of the documented selection corpus;
 - [ ] give every cohort release an exact artifact route and complete component catalog, with every exposed component explicitly Supported, Untested, or Incompatible for each intended target;
 - [ ] ensure every component advertised as Supported satisfies the quantitative evidence policy—nothing becomes green merely because it is present in the registry;

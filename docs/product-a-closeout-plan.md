@@ -74,6 +74,11 @@ If the 95% threshold requires 73 packages, the cohort has 73. If it requires
 
 ### PA-1 — Freeze the discovery source and catalog contract
 
+**Completed 2026-09-21.** The initial import is pinned to Forge commit
+`046414eec9315eb1500f2e68147aa281ab35873d`: 813 records imported, zero
+rejections, zero candidate-ID collisions, and 19 unambiguous matches to the
+existing curated registry. See [the discovery catalog guide](discovery-catalog.md).
+
 Deliverables:
 
 - a small, versioned discovery-record contract separate from executable

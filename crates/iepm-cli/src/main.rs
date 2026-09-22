@@ -70,6 +70,31 @@ enum Command {
         #[arg(long, help = "Show only releases that declare this game target")]
         game: Option<String>,
     },
+    /// Generate the separate, non-executable discovery catalog from a pinned
+    /// Infinity Mod Forge `data/mods-index.json` checkout. This never creates
+    /// package releases, artifacts, compatibility claims, or lockfile input.
+    CatalogImportForge {
+        #[arg(long, help = "Pinned Forge data/mods-index.json input")]
+        source: PathBuf,
+        #[arg(long, default_value = "registry/catalog/infinity-mod-forge.json")]
+        output: PathBuf,
+        #[arg(
+            long,
+            default_value = "registry/catalog/infinity-mod-forge-report.json"
+        )]
+        report: PathBuf,
+        #[arg(long, default_value = "registry")]
+        curated_registry: PathBuf,
+        #[arg(
+            long,
+            default_value = "https://github.com/krionashnald/InfinityModForge-Personal"
+        )]
+        source_repository: String,
+        #[arg(long, default_value = "046414eec9315eb1500f2e68147aa281ab35873d")]
+        source_revision: String,
+        #[arg(long, default_value = "MIT")]
+        source_license: String,
+    },
     /// Preview an explicit manifest selection. The source manifest remains
     /// unchanged unless --write is passed.
     Add {
@@ -320,6 +345,41 @@ fn main() -> Result<()> {
                 "{}",
                 render_search(&registry, query.as_deref(), game.as_deref())
             );
+        }
+        Command::CatalogImportForge {
+            source,
+            output,
+            report,
+            curated_registry,
+            source_repository,
+            source_revision,
+            source_license,
+        } => {
+            let curated_registry = iepm_registry::load(&curated_registry)?;
+            let imported = iepm_registry::catalog::import_infinity_mod_forge_index(
+                &source,
+                &source_repository,
+                &source_revision,
+                &source_license,
+                Some(&curated_registry),
+            )?;
+            iepm_registry::catalog::write_discovery_catalog_import(&imported, &output, &report)?;
+            println!(
+                "imported {} of {} Forge records into {}; report: {}",
+                imported.report.records_imported,
+                imported.report.records_read,
+                output.display(),
+                report.display()
+            );
+            if !imported.report.rejections.is_empty()
+                || !imported.report.candidate_collisions.is_empty()
+            {
+                println!(
+                    "review required: {} rejected record(s), {} candidate identity collision(s)",
+                    imported.report.rejections.len(),
+                    imported.report.candidate_collisions.len()
+                );
+            }
         }
         Command::Add {
             registry,
