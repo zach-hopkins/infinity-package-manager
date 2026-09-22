@@ -1,0 +1,26 @@
+schema: 2
+
+# PA-4 executable-route preflight for ten exact author-tagged friendship
+# releases. This selection has not been installed or launch-tested as a stack.
+environments:
+  target:
+    target: bg2ee
+    version: "2.6.6"
+    platform: windows
+    language: English
+    locale: en_US
+    fingerprint:
+      profile: iepm-core-layout-v1
+      value: 298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f
+
+mods:
+  - { package: cernd-friendship, environment: target, components: [friendship] }
+  - { package: haerdalis-friendship, environment: target, components: [friendship] }
+  - { package: imoen-friendship, environment: target, components: [friendship] }
+  - { package: korgan-friendship, environment: target, components: [friendship] }
+  - { package: mazzy-friendship, environment: target, components: [friendship] }
+  - { package: minsc-friendship, environment: target, components: [friendship] }
+  - { package: sarevok-friendship, environment: target, components: [friendship] }
+  - { package: valygar-friendship, environment: target, components: [friendship] }
+  - { package: viconia-friendship, environment: target, components: [friendship] }
+  - { package: yoshimo-friendship, environment: target, components: [friendship] }

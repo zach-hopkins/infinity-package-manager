@@ -64,6 +64,7 @@ classification backlog.
 | Tweaks Anthology v18 source | 446 | 393 | 53 |
 | Sirene v3.1 tag archive | 10 | 10 | 0 |
 | LeUI v4.9.1 tag archive | 3 | 3 | 0 |
+| Ten Spellhold Studios BG2 friendship tag archives | 10 total | 10 | 0 |
 | Hidden Gameplay Options v5.1 | 43 | 43 | 0 |
 | Ascension 2.1.0 | 19 | 19 | 0 |
 | Call of the Lost Goddess v3.1 | 3 | 3 | 0 |
@@ -102,3 +103,6 @@ verification.
 LeUI v4.9.1 similarly has all three TP2 declarations mapped to stable user
 choices. Its author documents an EE 2.6 route and installation before UI
 patchers; IEPM has not run an install or launch fixture yet.
+The ten friendship releases each expose one mechanically matched component.
+Their author READMEs identify BG2EE and EET, and a combined non-mutating
+preflight is executable, but no game install or launch evidence has been added.

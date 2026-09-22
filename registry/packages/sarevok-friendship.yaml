@@ -1,0 +1,27 @@
+schema: 2
+package: sarevok-friendship
+aliases: [sarevokfriendship]
+releases:
+  - release_id: sarevok-friendship-v2.7-source
+    version: "v2.7"
+    artifacts:
+      - url: https://github.com/SpellholdStudios/SarevokFriendship/archive/refs/tags/v2.7.zip
+        sha256: e803df2d10c1ba0a40c19b1f2804b0249b95caa31031dd9e512ddd73d790b4d7
+        platforms: [windows]
+    materialization: { source_root: SarevokFriendship-2.7, include: [sarevokfriendship] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact v2.7 author tag ZIP was SHA-256 verified; its TP2 declares VERSION v2.7, English language index 0, and one numeric component 0.
+        provenance: derived
+        evidence: [https://github.com/SpellholdStudios/SarevokFriendship/releases/tag/v2.7]
+      - claim: The author README identifies BG2EE and EET among the supported games; IEPM has not run an install or launch fixture.
+        provenance: declared
+        evidence: [https://github.com/SpellholdStudios/SarevokFriendship]
+    installers:
+      - tp2: sarevokfriendship/sarevokfriendship.tp2
+        launcher: toolchain
+        languages: [{ id: 0, name: English }]
+    components:
+      - { id: friendship, default_selected: true, weidu: { tp2: sarevokfriendship/sarevokfriendship.tp2, number: 0 } }

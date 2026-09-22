@@ -1,0 +1,26 @@
+schema: 2
+package: haerdalis-friendship
+releases:
+  - release_id: haerdalis-friendship-v1.2-source
+    version: "v1.2"
+    artifacts:
+      - url: https://github.com/SpellholdStudios/HaerdalisFriendship/archive/refs/tags/v1.2.zip
+        sha256: e4cae0eda59c9064bb9187c4bc617c12acca843430e8fe69deb61039be0ae5dd
+        platforms: [windows]
+    materialization: { source_root: HaerdalisFriendship-1.2, include: [haerdalis_friendship] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact v1.2 author tag ZIP was SHA-256 verified; its TP2 declares VERSION v1.2, English language index 0, and one numeric component 0.
+        provenance: derived
+        evidence: [https://github.com/SpellholdStudios/HaerdalisFriendship/releases/tag/v1.2]
+      - claim: The author README identifies BG2EE and EET among the supported games; IEPM has not run an install or launch fixture.
+        provenance: declared
+        evidence: [https://github.com/SpellholdStudios/HaerdalisFriendship]
+    installers:
+      - tp2: haerdalis_friendship/haerdalis_friendship.tp2
+        launcher: toolchain
+        languages: [{ id: 0, name: English }]
+    components:
+      - { id: friendship, default_selected: true, weidu: { tp2: haerdalis_friendship/haerdalis_friendship.tp2, number: 0 } }

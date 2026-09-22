@@ -1,0 +1,27 @@
+schema: 2
+package: yoshimo-friendship
+aliases: [yoshimo]
+releases:
+  - release_id: yoshimo-friendship-v5.0-source
+    version: "v5.0"
+    artifacts:
+      - url: https://github.com/SpellholdStudios/YoshimoFriendship/archive/refs/tags/v5.0.zip
+        sha256: d64eb00f1300cbc653b9e57e6d13f993b32fd1ac139f103fe902e509f5f0c41c
+        platforms: [windows]
+    materialization: { source_root: YoshimoFriendship-5.0, include: [yoshimo] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact v5.0 author tag ZIP was SHA-256 verified; its TP2 declares VERSION v5.0, English language index 0, and one numeric component 0.
+        provenance: derived
+        evidence: [https://github.com/SpellholdStudios/YoshimoFriendship/releases/tag/v5.0]
+      - claim: The author README identifies BG2EE and EET among the supported games; IEPM has not run an install or launch fixture.
+        provenance: declared
+        evidence: [https://github.com/SpellholdStudios/YoshimoFriendship]
+    installers:
+      - tp2: yoshimo/yoshimo.tp2
+        launcher: toolchain
+        languages: [{ id: 0, name: English }]
+    components:
+      - { id: friendship, default_selected: true, weidu: { tp2: yoshimo/yoshimo.tp2, number: 0 } }

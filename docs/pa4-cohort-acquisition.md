@@ -13,10 +13,10 @@ and raw component selectors. It does not promote the 56 to Supported or even
 to executable releases: source-tag archives can omit generated assets or have
 installer-specific behavior, and game targets/order still need review.
 
-Sirene and LeUI are the first two of these candidates with reviewed,
-executable registry routes. Both remain **Untested** until a disposable build
-and launch evidence exist. The remaining 54 tagged archives are exact-byte
-review inputs, not a promise that IEPM can install them. The seven branch
+Sirene, LeUI, and ten single-component Spellhold Studios friendship mods now
+have reviewed, executable registry routes. All remain **Untested** until a
+disposable build and launch evidence exist. The remaining 44 tagged archives
+are exact-byte review inputs, not a promise that IEPM can install them. The seven branch
 routes and 17 manual routes remain separate acquisition work; a mutable branch
 must first resolve to an exact commit and may never be presented as an author
 release solely on the basis of a ZIP signature.

@@ -1,0 +1,27 @@
+schema: 2
+package: minsc-friendship
+aliases: [minscfriendship]
+releases:
+  - release_id: minsc-friendship-v1.3-source
+    version: "v1.3"
+    artifacts:
+      - url: https://github.com/SpellholdStudios/MinscFriendship/archive/refs/tags/v1.3.zip
+        sha256: b066024aca681139401855d2f1d5cd85337840113d121c1784859d65785133da
+        platforms: [windows]
+    materialization: { source_root: MinscFriendship-1.3, include: [minscfriendship] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact v1.3 author tag ZIP was SHA-256 verified; its TP2 declares VERSION v1.3, English language index 0, and one numeric component 0.
+        provenance: derived
+        evidence: [https://github.com/SpellholdStudios/MinscFriendship/releases/tag/v1.3]
+      - claim: The author README identifies BG2EE and EET among the supported games; IEPM has not run an install or launch fixture.
+        provenance: declared
+        evidence: [https://github.com/SpellholdStudios/MinscFriendship]
+    installers:
+      - tp2: minscfriendship/minscfriendship.tp2
+        launcher: toolchain
+        languages: [{ id: 0, name: English }]
+    components:
+      - { id: friendship, default_selected: true, weidu: { tp2: minscfriendship/minscfriendship.tp2, number: 0 } }
