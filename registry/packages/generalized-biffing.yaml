@@ -10,7 +10,7 @@ releases:
     materialization: { source_root: Generalized-Biffing-2.9, include: [generalized_biffing] }
     compatibility: { games: [bgee, bg2ee, eet] }
     install: { phase: post-eet-end, after: [eet-end] }
-    provenance: unverified
+    provenance: verified
     claims:
       - claim: The exact author v2.9 tag ZIP was SHA-256 verified. Its TP2 declares VERSION v2.9, five WeiDU languages, and two labeled subcomponents numbered 0 and 1.
         provenance: derived
@@ -21,6 +21,9 @@ releases:
       - claim: The two choices are one WeiDU SUBCOMPONENT group, not two independent features. Component 0 biffs only WAV, TIS, and BAM files; component 1 biffs all files. The author readme recommends the former for small stacks and latter for megamods.
         provenance: declared
         evidence: [https://github.com/Spellhold-Studios/Generalized-Biffing]
+      - claim: The English media-only choice completed after Banter Pack SoA banters in a clean IEPM-managed BG2EE 2.6.6 build, appeared in WeiDU.log, and the sealed game reached the Shadows of Amn menu. The all-files alternative, EET, and performance effects remain Untested.
+        provenance: verified
+        evidence: [evidence/pa4-bg2ee-generalized-biffing.json]
     installers:
       - tp2: generalized_biffing/generalized_biffing.tp2
         launcher: toolchain

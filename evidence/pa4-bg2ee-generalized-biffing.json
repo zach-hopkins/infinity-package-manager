@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "Banter Pack v18 SoA banters then Generalized Biffing v2.9 English media-only on clean BG2EE 2.6.6",
+  "identity": {
+    "registry_revision": "a7655a4",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "1d357184e5f0f465964df5a2784e078e9e66bddc10aaaa42ccc9d3c860021360",
+    "environments": {
+      "target": {
+        "target": "bg2ee",
+        "fingerprint": {
+          "profile": "iepm-core-layout-v1",
+          "value": "298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f"
+        }
+      }
+    },
+    "packages": [
+      { "package": "banterpack", "release_id": "banterpack-v18-source", "environment": "target", "artifact_sha256": "c372aadca0ae794312e8ac76738fa38887f0f37e4ceff9c6249bcde2a843f47f", "components": ["soa-banters"] },
+      { "package": "generalized-biffing", "release_id": "generalized-biffing-v2.9-source", "environment": "target", "artifact_sha256": "0d7b0c4ed5714b97e6362243af4f660b3337cfaa9a8984d7f2c87775d41a598d", "components": ["biff-media-only"] }
+    ],
+    "execution_order": ["banterpack", "generalized-biffing"]
+  },
+  "checks": {
+    "artifact_verified": true,
+    "selector_known": true,
+    "requirements_modeled": true,
+    "component_catalog_complete": true,
+    "all_components_classified": true,
+    "core_components_supported": true,
+    "selected_components_supported": true,
+    "relationships_satisfied": true,
+    "no_opaque_selections": true,
+    "clean_disposable_install": true,
+    "all_actions_completed": true,
+    "requested_components_recorded": true,
+    "no_components_skipped": true,
+    "warnings_classified": true,
+    "sealed": true,
+    "eet_end_required": false,
+    "main_menu_smoke": true,
+    "gameplay_smoke": false
+  },
+  "evidence": ["examples/bg2ee-generalized-biffing/modpack.yaml", "docs/pa4-bg2ee-generalized-biffing-evidence.md"]
+}
