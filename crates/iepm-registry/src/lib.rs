@@ -348,6 +348,17 @@ pub fn inspect_tp2(source: &str) -> Tp2Observation {
             }
             continue;
         }
+        // WeiDU often writes `ACTION_IF condition` followed by `THEN BEGIN`
+        // on the next line. If the pending branch is not consumed here, the
+        // next real component BEGIN is incorrectly swallowed as action code.
+        if awaits_control_flow_begin
+            && (starts_keyword(line, "THEN") || starts_keyword(line, "ELSE"))
+            && find_keyword(line, "BEGIN").is_some()
+        {
+            control_flow_depth += 1;
+            awaits_control_flow_begin = false;
+            continue;
+        }
         if control_flow_depth > 0 && starts_keyword(line, "END") {
             control_flow_depth -= 1;
             continue;
@@ -1140,6 +1151,34 @@ BEGIN @200 DESIGNATED 10
                 .map(|component| component.number)
                 .collect::<Vec<_>>(),
             vec![Some(0), Some(10)]
+        );
+    }
+
+    #[test]
+    fn inspection_keeps_components_after_then_begin_action_blocks() {
+        let observation = inspect_tp2(
+            r#"
+BEGIN ~True Paladin~
+ACTION_IF FILE_EXISTS_IN_GAME ~bdcaelar.cre~
+THEN BEGIN
+  COPY_EXISTING ~c02siren.cre~ ~override~
+END
+BEGIN ~Cavalier~
+ACTION_IF FILE_EXISTS_IN_GAME ~bdcaelar.cre~
+THEN BEGIN
+  COPY_EXISTING ~c02siren.cre~ ~override~
+END
+BEGIN ~Inquisitor~
+"#,
+        );
+
+        assert_eq!(
+            observation
+                .components
+                .iter()
+                .map(|component| component.begin.as_deref())
+                .collect::<Vec<_>>(),
+            vec![Some("True Paladin"), Some("Cavalier"), Some("Inquisitor")]
         );
     }
 

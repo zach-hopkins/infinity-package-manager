@@ -61,7 +61,8 @@ classification backlog.
 | Package/release | Observed TP2 declarations | Existing stable IDs matched | Still unmapped |
 | --- | ---: | ---: | ---: |
 | SCS v35.21 | 146 | 134 | 12 intentionally non-user-facing |
-| Tweaks Anthology v18 source | 446 | 380 | 66 |
+| Tweaks Anthology v18 source | 446 | 393 | 53 |
+| Sirene v3.1 tag archive | 10 | 10 | 0 |
 | Hidden Gameplay Options v5.1 | 43 | 43 | 0 |
 | Ascension 2.1.0 | 19 | 19 | 0 |
 | Call of the Lost Goddess v3.1 | 3 | 3 | 0 |
@@ -86,3 +87,11 @@ four-component catalog. EE Fixpack contributes three real user-facing
 selectors; its other four TP2 declarations are explicit internal generation or
 test paths, so they remain recorded by the audit but are intentionally not
 offered as user components.
+
+The first newly promoted cohort release, Sirene v3.1, exposed a TP2-reader
+edge case: unindented `THEN BEGIN` action blocks previously swallowed later
+components. The inert reader now preserves all ten implicit-number selectors.
+Its component catalog is complete, but `review-tp2` reports
+`tp2-version-unobserved` because this author TP2 has no `VERSION` declaration;
+the v3.1 release tag is retained separately. This is not install or gameplay
+verification.

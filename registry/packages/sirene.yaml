@@ -1,0 +1,81 @@
+schema: 2
+package: sirene
+releases:
+  - release_id: sirene-v3.1
+    version: "v3.1"
+    artifacts:
+      - url: https://api.github.com/repos/TheArtisanBG/Sirene-BG1/zipball/v3.1
+        sha256: 88d5f65d324850ae3ea593d831030595f6869a9fe1dea57f5b1682d0aae642e5
+        platforms: [windows]
+    materialization:
+      source_root: TheArtisanBG-Sirene-BG1-64beded
+      include: [Sirene]
+    compatibility:
+      games: [bgee, eet]
+    install:
+      phase: bgee
+      before: [eet]
+    provenance: unverified
+    claims:
+      - claim: The exact v3.1 GitHub release-tag archive was downloaded and SHA-256 verified; its source tree contains Sirene/Setup-Sirene.tp2, one English language declaration, and ten implicit-number components. The TP2 has no VERSION declaration.
+        provenance: derived
+        evidence:
+          - https://github.com/TheArtisanBG/Sirene-BG1/releases/tag/v3.1
+      - claim: The author describes Sirene as a BGEE and Siege of Dragonspear NPC and documents extraction into a BGEE game directory.
+        provenance: declared
+        evidence:
+          - https://github.com/TheArtisanBG/Sirene-BG1
+      - claim: IEPM models EET use through the BGEE source phase. This is a placement inference from the documented BGEE route and has not been established by an automated EET install test.
+        provenance: derived
+        evidence:
+          - https://github.com/TheArtisanBG/Sirene-BG1
+      - claim: The source TP2 declares the five portrait options and four class options as separate subcomponent groups; each optional choice requires the main component. The class options use a Sirene.tp2 prerequisite spelling that must be checked in an execution fixture.
+        provenance: derived
+        evidence:
+          - https://github.com/TheArtisanBG/Sirene-BG1/releases/tag/v3.1
+    installers:
+      - tp2: Sirene/Setup-Sirene.tp2
+        launcher: toolchain
+        languages:
+          - id: 0
+            name: English
+    components:
+      - id: npc
+        default_selected: true
+        weidu: { tp2: Sirene/Setup-Sirene.tp2, number: 0 }
+      - id: portrait-isandir
+        weidu: { tp2: Sirene/Setup-Sirene.tp2, number: 1 }
+        requires: [npc]
+        provides: [{ name: sirene-portrait-scope, exclusive: true }]
+      - id: portrait-sporeboy
+        weidu: { tp2: Sirene/Setup-Sirene.tp2, number: 2 }
+        requires: [npc]
+        provides: [{ name: sirene-portrait-scope, exclusive: true }]
+      - id: portrait-sirick-light-armor
+        weidu: { tp2: Sirene/Setup-Sirene.tp2, number: 3 }
+        requires: [npc]
+        provides: [{ name: sirene-portrait-scope, exclusive: true }]
+      - id: portrait-sirick-lava-heavy-armor
+        weidu: { tp2: Sirene/Setup-Sirene.tp2, number: 4 }
+        requires: [npc]
+        provides: [{ name: sirene-portrait-scope, exclusive: true }]
+      - id: portrait-lodaligae
+        weidu: { tp2: Sirene/Setup-Sirene.tp2, number: 5 }
+        requires: [npc]
+        provides: [{ name: sirene-portrait-scope, exclusive: true }]
+      - id: class-true-paladin
+        weidu: { tp2: Sirene/Setup-Sirene.tp2, number: 6 }
+        requires: [npc]
+        provides: [{ name: sirene-class-scope, exclusive: true }]
+      - id: class-cavalier
+        weidu: { tp2: Sirene/Setup-Sirene.tp2, number: 7 }
+        requires: [npc]
+        provides: [{ name: sirene-class-scope, exclusive: true }]
+      - id: class-inquisitor
+        weidu: { tp2: Sirene/Setup-Sirene.tp2, number: 8 }
+        requires: [npc]
+        provides: [{ name: sirene-class-scope, exclusive: true }]
+      - id: class-undead-hunter
+        weidu: { tp2: Sirene/Setup-Sirene.tp2, number: 9 }
+        requires: [npc]
+        provides: [{ name: sirene-class-scope, exclusive: true }]

@@ -82,6 +82,10 @@ releases:
         provenance: derived
         evidence:
           - https://github.com/Gibberlings3/Tweaks-Anthology/releases/tag/v18
+      - claim: The Move BG NPCs selectors are individually gated by existing SCS and BG1 NPC marker files. IEPM maps their intent and same-package alternatives but does not infer that the selectors will install in a game where those markers already exist.
+        provenance: derived
+        evidence:
+          - https://github.com/Gibberlings3/Tweaks-Anthology/releases/tag/v18
     installers:
       - tp2: cdtweaks/setup-cdtweaks.tp2
         launcher: toolchain
@@ -92,10 +96,23 @@ releases:
       - { id: icon-improvements, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_icon_improvements, number: 110 } }
       - { id: more-interjections, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_more_interjections, number: 1010 } }
       - { id: alter-wounded-triggers, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_alter_wounded_triggers, number: 1020 } }
+      - { id: unique-item-names, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, number: 150 } }
       - { id: reveal-chapter-six-wilderness, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_reveal_ch6_wilderness, number: 1030 } }
-      - { id: reveal-cloakwood-except-mines, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_reveal_cloakwood_4, number: 1036 } }
+      - id: reveal-cloakwood-first-area
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_reveal_cloakwood_1, number: 1035 }
+        provides: [{ name: tweaks-cloakwood-reveal-scope, exclusive: true }]
+      - id: reveal-cloakwood-except-mines
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_reveal_cloakwood_4, number: 1036 }
+        provides: [{ name: tweaks-cloakwood-reveal-scope, exclusive: true }]
       - { id: multiplayer-kickout-dialogue, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_mp_kickout_dialogue, number: 1070 } }
       - { id: send-npcs-to-inn, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_send_bg_npcs_to_inn, number: 1075 } }
+      - { id: move-all-bg-npcs, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_move_bg_npcs_all, number: 1257 }, conflicts: [move-alora, move-eldoth, move-quayle, move-sharteel, move-tiax, move-viconia] }
+      - { id: move-alora, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_move_bg_npcs_alora, number: 1251 } }
+      - { id: move-eldoth, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_move_bg_npcs_eldoth, number: 1252 } }
+      - { id: move-quayle, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_move_bg_npcs_quayle, number: 1253 } }
+      - { id: move-sharteel, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_move_bg_npcs_sharteel, number: 1254 } }
+      - { id: move-tiax, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_move_bg_npcs_tiax, number: 1255 } }
+      - { id: move-viconia, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_move_bg_npcs_viconia, number: 1256 } }
       - { id: add-bags-of-holding, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_add_bags_of_holding, number: 1080 } }
       - id: reveal-city-areas
         weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_reveal_city_areas, number: 1100 }
@@ -821,6 +838,10 @@ releases:
       - id: better-soa-start-500k-xp-all-items
         weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_better_soa_start_500k_all_items, number: 3493 }
         provides: [{ name: tweaks-better-soa-start-scope, exclusive: true }]
+      - { id: better-soa-start-bg-tomes, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_better_soa_start_tomes, number: 3494 }, conflicts: [better-soa-start-300k-xp-all-items, better-soa-start-500k-xp-all-items] }
+      - { id: better-soa-start-golden-pantaloons, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_better_soa_start_pantaloons, number: 3495 }, conflicts: [better-soa-start-300k-xp-all-items, better-soa-start-500k-xp-all-items] }
+      - { id: better-soa-start-drizzt-items, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_better_soa_start_drizzt, number: 3496 }, conflicts: [better-soa-start-300k-xp-all-items, better-soa-start-500k-xp-all-items] }
+      - { id: better-soa-start-balduran-cloak, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_better_soa_start_balduran, number: 3497 }, conflicts: [better-soa-start-300k-xp-all-items, better-soa-start-500k-xp-all-items] }
       - { id: more-sensible-cowled-wizards, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_more_sensible_cowled_wizards, number: 3420 } }
       - { id: more-stoneskin-feedback, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_more_stoneskin_feedback, number: 3430 } }
       - { id: more-sensible-fireshield, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_more_sensible_fireshield, number: 3450 } }
