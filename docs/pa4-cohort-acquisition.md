@@ -18,7 +18,8 @@ single-component Pocket Plane quest mods, three further BG2EE friendships,
 Korgan's Redemption, Coran's BG Friendship, Xan's BG1 Friendship, High
 Quality Soundclips, Banter Pack, BioWare NPC Flirt Packs, Drake, Unfinished
 Business, Ajantis BG1 Expansion, Reduce Save Compression, Turnabout,
-Generalized Biffing, The Longer Road, and Isra NPC for BGII now have
+Generalized Biffing, The Longer Road, Isra NPC for BGII, and Isra NPC for BG
+now have
 reviewed, executable registry routes. The first ten friendship defaults and
 four quest defaults have exact-scope BG2EE
 build and main-menu evidence. The four newest routes also have revision-pinned

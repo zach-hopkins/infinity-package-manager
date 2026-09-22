@@ -1,0 +1,38 @@
+schema: 2
+package: isra-bg1
+aliases: [isra]
+releases:
+  - release_id: isra-bg1-v3.5-source
+    version: "v3.5"
+    artifacts:
+      - url: https://github.com/SpellholdStudios/Isra_NPC/archive/refs/tags/v3.5.zip
+        sha256: 36c01fa48dd96b6aa4d04c19d4f81e4d519d66a6380bf0642c198fed8a2e129e
+        platforms: [windows]
+    materialization: { source_root: Isra_NPC-3.5, include: [isra] }
+    compatibility: { games: [bgee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact v3.5 author-tag archive matched SHA-256. Its TP2 declares VERSION v3.5, three languages, and three LABEL-bearing components numbered 0, 1, and 2.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The author documents BGEE, SoD, and EET support and recommends installation after EET, Gavin, and Valerie when present. The EET ordering is modeled; optional NPC crossmod ordering is not a hard main-component dependency.
+        provenance: declared
+        evidence: [https://github.com/SpellholdStudios/Isra_NPC]
+      - claim: The TP2 refuses an unmerged SoD DLC on BGEE. The bounded BGEE fixture therefore installs DLC Merger first; a source without SoD does not require it.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: Both optional crossmod components require Isra main. Valerie crossmod also requires Valerie's dialogue resource; Gavin crossmod requires Gavin's component zero. These optional interactions remain Untested and must not be selected without their partner mods.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+    installers:
+      - tp2: isra/isra.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: "Russian (Translation: JamesMaxwell & Arcanecoast.ru)" }
+          - { id: 2, name: "Italiano (traduzione di Coland)" }
+    components:
+      - { id: isra-bg1-npc, default_selected: true, weidu: { tp2: isra/isra.tp2, label: isra_npc_for_bg, number: 0 } }
+      - { id: valerie-crossmod, weidu: { tp2: isra/isra.tp2, label: isra_valerie_crossmod_content, number: 1 }, requires: [isra-bg1-npc] }
+      - { id: gavin-crossmod, weidu: { tp2: isra/isra.tp2, label: isra_gavin_crossmod_content, number: 2 }, requires: [isra-bg1-npc] }

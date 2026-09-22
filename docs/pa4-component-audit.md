@@ -75,6 +75,7 @@ classification backlog.
 | Generalized Biffing v2.9 | 2 | 2 | 0; the alternatives belong to one WeiDU subcomponent group |
 | The Longer Road v2.0.7 | 2 | 2 | 0; main requires two Ascension components and optional portrait requires main |
 | Isra NPC for BGII v3.1 | 2 | 2 | 0; optional crossmod requires main and only adds interactions for detected installed NPCs |
+| Isra NPC for BG v3.5 | 3 | 3 | 0; main requires a supported BG1 engine, optional Valerie and Gavin crossmod choices require main plus their partner mods |
 | Ten Spellhold Studios BG2 friendship tag archives | 10 total | 10 | 0 |
 | Dorn, Hexxat, and Jaheira Friendships; Korgan's Redemption tag archives | 4 total | 4 | 0 |
 | Coran's BG Friendship and Xan's BG1 Friendship tag archives | 2 total | 2 | 0 |
