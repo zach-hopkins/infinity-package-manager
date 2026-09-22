@@ -1,0 +1,30 @@
+schema: 2
+package: reduce-save-compression
+aliases: [b3-reducesavecompression]
+releases:
+  - release_id: reduce-save-compression-v1.2-source
+    version: "v1.2"
+    artifacts:
+      - url: https://github.com/Bubb13/B3-ReduceSaveCompression/archive/refs/tags/v1.2.zip
+        sha256: 0760b00ac32543cb7d32aa81291da61de1f142713d27268032d10118986406cb
+        platforms: [windows]
+    materialization: { source_root: B3-ReduceSaveCompression-1.2, include: [B3-ReduceSaveCompression] }
+    compatibility: { games: [bgee, bg2ee, eet] }
+    install: { phase: eet }
+    provenance: unverified
+    claims:
+      - claim: The exact author v1.2 tag archive was SHA-256 verified. Its TP2 declares VERSION v1.2 and one LABEL-bearing component with GAME_IS predicates for BGEE, BG2EE, EET, IWDEE, and PSTEE; the latter two are outside this registry's current game vocabulary. The TP2 has no LANGUAGE declaration; WeiDU's implicit language index 0 is mapped to English for execution.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The author README describes a save-speed versus file-size tradeoff, Windows/Linux/Mac support, and BGEE/BG2EE version 2.6 compatibility.
+        provenance: declared
+        evidence: [https://github.com/Bubb13/B3-ReduceSaveCompression]
+      - claim: The component patches a game executable's bytes and is sensitive to game binary version; source predicates do not establish that every executable build contains the expected pattern.
+        provenance: derived
+        evidence: [https://github.com/Bubb13/B3-ReduceSaveCompression]
+    installers:
+      - tp2: B3-ReduceSaveCompression/B3-ReduceSaveCompression.tp2
+        launcher: toolchain
+        languages: [{ id: 0, name: English }]
+    components:
+      - { id: reduce-save-compression, default_selected: true, weidu: { tp2: B3-ReduceSaveCompression/B3-ReduceSaveCompression.tp2, label: B3-ReduceSaveCompression-Main, number: 0 } }

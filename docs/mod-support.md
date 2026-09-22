@@ -42,6 +42,7 @@ labels. This ledger must use those words only with those meanings.
 | Banter Pack v18 | Complete four-component catalog: SoA/ToB content and two independent accelerators | All four BG2EE English selectors built and launched | **Supported** for tested BG2EE 2.6.6 selection; EET and in-game banter behavior Untested | [evidence](pa4-bg2ee-banterpack-evidence.md) |
 | BioWare NPC Flirt Packs v1.07 | Complete 16-component structural catalog: four companions, SoA/ToB, with separate Solaufein interaction choices | Eight base BG2EE English choices built and launched | **Supported** for tested eight-choice BG2EE 2.6.6 selection; Solaufein choices, EET, and dialogue behavior Untested | [evidence](pa4-bg2ee-npcflirt-evidence.md) |
 | Unfinished Business v28 | 24 current BG2EE/EET choices mapped from 26 main-TP2 declarations; two deprecated BG2EE choices withheld | Three English BG2EE restorations built and launched | **Supported** for the tested BG2EE 2.6.6 three-choice route; the other 21 choices, EET, and gameplay Untested | [evidence](pa4-bg2ee-unfinished-business-evidence.md) |
+| Reduce Save Compression v1.2 | Complete one-component catalog; directly patches game executable bytes | Executable bounded BG2EE fixture; run only on disposable game copies | **Untested** — binary-pattern install and launch smoke not yet performed; other games remain Untested | [registry](../registry/packages/reduce-save-compression.yaml) |
 | Drake v1.7a | Complete six-component structural catalog, including one required portrait choice | BGEE NPC and default portrait installed in two independent sealed builds; both crashed before menu | **Incompatible** for this exact BGEE 2.6.6 NPC + default portrait configuration after two identical launch faults; other choices/EET Untested | [evidence](pa4-bgee-drake-evidence.md) |
 | Cernd Friendship v1.4 | Complete one-component catalog | BG2EE default built and launched | **Supported** on tested BG2EE 2.6.6 fingerprint; EET Untested | [registry](../registry/packages/cernd-friendship.yaml) |
 | Haer'dalis Friendship v1.2 | Complete one-component catalog | BG2EE default built and launched | **Supported** on tested BG2EE 2.6.6 fingerprint; EET Untested | [registry](../registry/packages/haerdalis-friendship.yaml) |
@@ -88,10 +89,11 @@ selectors, curated relationships, and automated disposable-build evidence.
 ## Cohort work boundary
 
 The frozen cohort contains 19 packages that were already mapped when it was
-selected and 80 indexed candidates. Twenty-seven of those candidates (Sirene,
+selected and 80 indexed candidates. Twenty-eight of those candidates (Sirene,
 LeUI, thirteen BG2 friendship releases, four Pocket Plane quest mods,
 Korgan's Redemption, Coran's BG Friendship, Xan's BG1 Friendship, and High
-Quality Soundclips, Banter Pack, BioWare NPC Flirt Packs, Drake, and Unfinished Business) now have curated executable identities; 53 remain
+Quality Soundclips, Banter Pack, BioWare NPC Flirt Packs, Drake, Unfinished
+Business, and Reduce Save Compression) now have curated executable identities; 52 remain
 discovery-only. The remaining
 candidates are **not** silently
 excluded: they may proceed through IEPM's opaque local-package route once

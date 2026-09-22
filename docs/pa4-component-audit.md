@@ -69,6 +69,7 @@ classification backlog.
 | BioWare NPC Flirt Packs v1.07 tag archive | 16 | 16 | 0 |
 | Drake v1.7a tag archive | 6 | 6 | 0 |
 | Unfinished Business v28 main TP2 | 26 | 24 | 2 explicitly deprecated for BG2EE |
+| Reduce Save Compression v1.2 | 1 | 1 | 0; TP2 has no explicit LANGUAGE, so the review tool reports a language-mapping drift for the implicit index 0 |
 | Ten Spellhold Studios BG2 friendship tag archives | 10 total | 10 | 0 |
 | Dorn, Hexxat, and Jaheira Friendships; Korgan's Redemption tag archives | 4 total | 4 | 0 |
 | Coran's BG Friendship and Xan's BG1 Friendship tag archives | 2 total | 2 | 0 |
