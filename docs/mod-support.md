@@ -32,7 +32,8 @@ labels. This ledger must use those words only with those meanings.
 | EE Fixpack Beta 2 | 3 user-facing selectors mapped; 4 observed TP2 declarations are internal maintenance/test entries | Yes, for the EET fixture | **Untested** — source/target core install evidence exists; optional selectors still need their own evidence | [registry](../registry/packages/ee-fixpack.yaml) |
 | EET / EET_End | EET core plus optional desktop shortcut structurally mapped; EET_End standard route recorded | Yes, for the narrow EET route | **Untested** — the controlled route installed; policy launch and gameplay smokes remain | [evidence](a5-eet-evidence.md) |
 | Hidden Gameplay Options v5.1 | Complete 43-component structural catalog | Yes | **Untested** — components 0 and 10 have separate install receipts; the other 41 selectors and policy launch smoke remain untested | [registry](../registry/packages/hidden-gameplay-options.yaml) |
-| Tweaks Anthology v18 | 393 stable IDs mapped against 446 live TP2 declarations; installer-declared alternatives and selected EEex prerequisites are guarded | Yes for mapped source selectors | **Untested** — starter and Forge install receipts exist, but policy launch smoke and 53 structural entries still need user-intent classification | [registry](../registry/packages/tweaks-anthology.yaml) |
+| IWDification v11 | 22 current-game selectors mapped against 24 TP2 declarations; one deprecated and one classic-only entry omitted; two component-level Tweaks overlaps guarded | Yes for mapped selectors | **Untested** — bard songs has an exact BG2EE install receipt; the newly mapped choices and policy launch smoke remain | [registry](../registry/packages/iwdification.yaml) |
+| Tweaks Anthology v18 | 394 stable IDs mapped against 446 live TP2 declarations; three current-game residual selectors need custom values, while 49 are legacy/deprecated; selected EEex prerequisites and two IWDification overlaps are guarded | Yes for mapped source selectors | **Untested** — starter and Forge install receipts exist, but policy launch smoke and broad component verification remain | [registry](../registry/packages/tweaks-anthology.yaml) |
 | Sirene v3.1 | Complete ten-component structural catalog from the SHA-pinned official release-tag archive | Default BGEE route resolves as executable; artifact and game execution are not yet tested | **Untested** — no install or launch receipt; optional portrait/class choices are structurally mapped only | [registry](../registry/packages/sirene.yaml) |
 | LeUI 4.9.1 | Complete three-component structural catalog from the SHA-pinned author tag archive; explicit before-SCS placement | Default BG2EE route resolves as executable; artifact and game execution are not yet tested | **Untested** — no install or launch receipt; other UI-overhaul relationships remain unverified | [registry](../registry/packages/leui.yaml) |
 | Cernd Friendship v1.4 | Complete one-component catalog | BG2EE default built and launched | **Supported** on tested BG2EE 2.6.6 fingerprint; EET Untested | [registry](../registry/packages/cernd-friendship.yaml) |
@@ -76,7 +77,7 @@ selectors, curated relationships, and automated disposable-build evidence.
 ## Cohort work boundary
 
 The frozen cohort contains 19 packages that were already mapped when it was
-selected and 80 indexed candidates. Twelve of those candidates (Sirene, LeUI,
+selected and 80 indexed candidates. Sixteen of those candidates (Sirene, LeUI,
 the ten BG2 friendship releases, and four Pocket Plane quest mods) now have
 curated executable identities; 64 remain discovery-only. The remaining
 candidates are **not** silently

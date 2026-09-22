@@ -25,6 +25,10 @@ releases:
           - https://github.com/Gibberlings3/SwordCoastStratagems/blob/master/stratagems/doc/readme-stratagems.html
       - claim: Component 50 (bard songs) completed with Hidden Gameplay Options component 0, Rogue Rebalancing component 0, and Spell Revisions component 0 in a fresh managed English BG2EE 2.6.6 workspace under shared WeiDU 25100.
         provenance: verified
+      - claim: The exact v11 TP2 rejects Tweaks Anthology component 70 when selecting IWD casting graphics, and rejects Tweaks component 100 when selecting drab commoners. These are component-level exclusions, not a package-wide incompatibility. The additional named selectors below are mechanically matched but remain installation-untested.
+        provenance: derived
+        evidence:
+          - https://github.com/Gibberlings3/iwdification/releases/tag/v11
     installers:
       - tp2: iwdification/setup-iwdification.tp2
         launcher: toolchain
@@ -32,9 +36,44 @@ releases:
           - id: 0
             name: English
     components:
+      - id: icewind-dale-casting-graphics
+        weidu: { tp2: iwdification/setup-iwdification.tp2, label: cd_tweaks_iwd_casting_graphics, number: 10 }
+        provides: [{ name: icewind-dale-casting-graphics, exclusive: true }]
+      - id: drab-commoners
+        weidu: { tp2: iwdification/setup-iwdification.tp2, label: cd_tweaks_drab_commoners, number: 20 }
+        provides: [{ name: drab-commoners, exclusive: true }]
       - id: bard-songs
         weidu: { tp2: iwdification/setup-iwdification.tp2, label: cd_iwdification_bard_songs, number: 50 }
       - id: arcane-spells
         weidu: { tp2: iwdification/setup-iwdification.tp2, label: cd_iwdification_arcane_spells, number: 30 }
       - id: divine-spells
         weidu: { tp2: iwdification/setup-iwdification.tp2, label: cd_iwdification_divine_spells, number: 40 }
+      - { id: two-handed-axes, weidu: { tp2: iwdification/setup-iwdification.tp2, label: cd_iwdification_2h_axes, number: 60 } }
+      - { id: expanded-polymorph-self, weidu: { tp2: iwdification/setup-iwdification.tp2, label: cd_iwdification_expanded_polymorph_self, number: 90 } }
+      - { id: damage-animations, weidu: { tp2: iwdification/setup-iwdification.tp2, label: cd_iwdification_damage_animations, number: 130 } }
+      - id: randomized-equipment-high-quality
+        weidu: { tp2: iwdification/setup-iwdification.tp2, label: cd_iwdification_randomized_equipment_hq, number: 140 }
+        provides: [{ name: iwdification-randomized-equipment-scope, exclusive: true }]
+      - id: randomized-equipment
+        weidu: { tp2: iwdification/setup-iwdification.tp2, label: cd_iwdification_randomized_equipment, number: 141 }
+        provides: [{ name: iwdification-randomized-equipment-scope, exclusive: true }]
+      - { id: spear-damage, weidu: { tp2: iwdification/setup-iwdification.tp2, label: cd_iwdification_spear_damage, number: 190 } }
+      - { id: bard-kit-selectable-songs, weidu: { tp2: iwdification/setup-iwdification.tp2, label: cd_iwdification_bard_kit_selectable_songs, number: 180 }, unsupported_games: [bgee] }
+      - { id: bard-spell-progression-unnerfed, weidu: { tp2: iwdification/setup-iwdification.tp2, label: cd_tweaks_bard_spell_progression_unnerfed, number: 150 } }
+      - { id: druid-abilities, weidu: { tp2: iwdification/setup-iwdification.tp2, label: cd_iwdification_druid_abilities, number: 70 } }
+      - { id: elven-druids, weidu: { tp2: iwdification/setup-iwdification.tp2, label: cd_iwdification_elven_druids, number: 71 } }
+      - { id: paladin-abilities, weidu: { tp2: iwdification/setup-iwdification.tp2, label: cd_iwdification_paladin_abilities, number: 100 } }
+      - { id: paladin-spell-progression-iwd, weidu: { tp2: iwdification/setup-iwdification.tp2, label: cd_tweaks_paladin_spell_progression_iwd, number: 160 } }
+      - id: tracking-all-rangers
+        weidu: { tp2: iwdification/setup-iwdification.tp2, number: 110 }
+        provides: [{ name: iwdification-ranger-tracking-scope, exclusive: true }]
+      - id: tracking-unkitted-rangers
+        weidu: { tp2: iwdification/setup-iwdification.tp2, number: 111 }
+        provides: [{ name: iwdification-ranger-tracking-scope, exclusive: true }]
+      - { id: ranger-spell-progression-iwd, weidu: { tp2: iwdification/setup-iwdification.tp2, label: cd_tweaks_ranger_spell_progression_iwd, number: 170 } }
+      - id: thief-evasion
+        weidu: { tp2: iwdification/setup-iwdification.tp2, label: cd_iwdification_thief_evasion, number: 120 }
+        provides: [{ name: iwdification-thief-evasion-scope, exclusive: true }]
+      - id: thief-evasion-no-kits
+        weidu: { tp2: iwdification/setup-iwdification.tp2, label: cd_iwdification_thief_evasion_no_kits, number: 121 }
+        provides: [{ name: iwdification-thief-evasion-scope, exclusive: true }]

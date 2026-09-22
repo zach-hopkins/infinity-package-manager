@@ -61,7 +61,8 @@ classification backlog.
 | Package/release | Observed TP2 declarations | Existing stable IDs matched | Still unmapped |
 | --- | ---: | ---: | ---: |
 | SCS v35.21 | 143 | 134 | 9 intentionally non-user-facing |
-| Tweaks Anthology v18 source | 446 | 393 | 53 |
+| Tweaks Anthology v18 source | 446 | 394 | 52 |
+| IWDification v11 IEMOD | 24 | 22 | 2 non-user-facing/legacy |
 | Sirene v3.1 tag archive | 10 | 10 | 0 |
 | LeUI v4.9.1 tag archive | 3 | 3 | 0 |
 | Ten Spellhold Studios BG2 friendship tag archives | 10 total | 10 | 0 |
@@ -89,6 +90,19 @@ four-component catalog. EE Fixpack contributes three real user-facing
 selectors; its other four TP2 declarations are explicit internal generation or
 test paths, so they remain recorded by the audit but are intentionally not
 offered as user components.
+The Tweaks residual audit identified one additional BGEE/BG2EE/EET selector,
+IWD casting graphics (70), which is now mapped. Three remaining current-game
+selectors (3176, 3347, 3358) request custom user values, so they are not yet
+honestly expressible as fixed one-click choices. The other 49 residual raw
+declarations are deprecated or gated to classic/IWD/PST variants; they are not
+missing current-game choices. The source TP2 also revealed that two previously
+mapped Tweaks selectors (72 and 80) cannot run on BGEE/BG2EE/EET. They remain
+visible as release-specific choices but are marked unsupported on those games.
+IWDification's 22 current-game choices are now mapped; its residual 72 is
+deprecated and 80 is gated to classic BG2. Its components 10/20 reciprocally
+exclude Tweaks 70/100. IEPM models only those two component-level overlaps,
+not a broad conflict between the packages. Every newly mapped selector is
+still Untested until an exact managed install produces evidence.
 The SCS count was also corrected after the inert reader excluded three
 declarations inside block comments (an internal test and two resource
 collectors). Earlier prose counted those disabled blocks as live components.

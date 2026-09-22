@@ -86,6 +86,10 @@ releases:
         provenance: derived
         evidence:
           - https://github.com/Gibberlings3/Tweaks-Anthology/releases/tag/v18
+      - claim: Source v18 TP2 component 70 rejects IWDification component 10, and component 100 rejects IWDification component 20. Components 72 and 80 explicitly exclude BGEE/BG2EE/EET; their previously advertised support on those games was corrected. These are mechanical predicates, not proof that the newly mapped components have passed install or gameplay tests.
+        provenance: derived
+        evidence:
+          - https://github.com/Gibberlings3/Tweaks-Anthology/releases/tag/v18
     installers:
       - tp2: cdtweaks/setup-cdtweaks.tp2
         launcher: toolchain
@@ -173,10 +177,13 @@ releases:
       - { id: viconia-skin-color, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_viconia_skin_color, number: 40 } }
       - { id: avatar-morphing-script, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_avatar_morphing_script, number: 50 } }
       - { id: weapon-animation-tweaks, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_weapon_animation_tweaks, number: 60 } }
-      - { id: bg-casting-graphics, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_bg_casting_graphics, number: 72 } }
-      - { id: restore-soa-loading-screen, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_restore_soa_loading_screen, number: 80 } }
+      - id: icewind-dale-casting-graphics
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_iwd_casting_graphics, number: 70 }
+        provides: [{ name: icewind-dale-casting-graphics, exclusive: true }]
+      - { id: bg-casting-graphics, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_bg_casting_graphics, number: 72 }, unsupported_games: [bgee, bg2ee, eet] }
+      - { id: restore-soa-loading-screen, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_restore_soa_loading_screen, number: 80 }, unsupported_games: [bgee, bg2ee, eet] }
       - { id: remove-portrait-icons, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_remove_portrait_icons, number: 90 } }
-      - { id: drab-commoners, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_drab_commoners, number: 100 } }
+      - { id: drab-commoners, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_drab_commoners, number: 100 }, provides: [{ name: drab-commoners, exclusive: true }] }
       - { id: force-dialogue-pause, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_force_all_dialogue_to_pause, number: 130 } }
       - { id: fix-boo-squeak, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_fix_boo_squeak, number: 140 } }
       - { id: glowing-magical-shields, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_glowing_magical_shields, number: 160 } }
