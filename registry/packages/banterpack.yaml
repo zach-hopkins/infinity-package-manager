@@ -1,0 +1,45 @@
+schema: 2
+package: banterpack
+releases:
+  - release_id: banterpack-v18-source
+    version: "v18"
+    artifacts:
+      - url: https://github.com/Pocket-Plane-Group/Banter_Pack/archive/refs/tags/v18.zip
+        sha256: c372aadca0ae794312e8ac76738fa38887f0f37e4ceff9c6249bcde2a843f47f
+        platforms: [windows]
+    materialization: { source_root: Banter_Pack-18, include: [banterpack] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet }
+    provenance: unverified
+    claims:
+      - claim: >-
+          The exact author v18 tag archive was SHA-256 verified; its TP2
+          declares VERSION v18, nine languages, and four labeled components:
+          SoA and ToB content plus separate SoA and ToB banter accelerator
+          scripts.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The TP2 gates the ToB content component on GAME_INCLUDES tob and guards each accelerator against its own existing marker file. Neither accelerator is a mechanical prerequisite for the content components.
+        provenance: derived
+        evidence: [https://github.com/Pocket-Plane-Group/Banter_Pack]
+      - claim: The author describes BG2EE and EET as supported game targets.
+        provenance: declared
+        evidence: [https://github.com/Pocket-Plane-Group/Banter_Pack]
+    installers:
+      - tp2: banterpack/Setup-banterpack.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: "Espanol (Traducido por Clan DLAN)" }
+          - { id: 2, name: "Deutsch (Uebersetzung durch rosenranken.de)" }
+          - { id: 3, name: "Francais (Translated by Mathrim Cauthon)" }
+          - { id: 4, name: "Polski (Translated by Damian Staniszewski)" }
+          - { id: 5, name: "Italian (Translated by Xeno.Team and others, updated by Ilot)" }
+          - { id: 6, name: "Russian (Translated by Prowler)" }
+          - { id: 7, name: "Korean (Translated by Tannedbear)" }
+          - { id: 8, name: "Chinese (Translated by Merzbau)" }
+    components:
+      - { id: soa-banters, default_selected: true, weidu: { tp2: banterpack/Setup-banterpack.tp2, label: PPGBanterPacks-soa, number: 0 } }
+      - { id: soa-banter-accelerator, weidu: { tp2: banterpack/Setup-banterpack.tp2, label: PPGBanterPacks-soa_banteraccelerator, number: 1 } }
+      - { id: tob-banters, default_selected: true, weidu: { tp2: banterpack/Setup-banterpack.tp2, label: PPGBanterPacks-tob, number: 2 } }
+      - { id: tob-banter-accelerator, weidu: { tp2: banterpack/Setup-banterpack.tp2, label: PPGBanterPacks-tob_banteraccelerator, number: 3 } }
