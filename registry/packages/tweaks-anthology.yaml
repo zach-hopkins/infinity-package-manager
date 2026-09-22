@@ -97,7 +97,12 @@ releases:
       - { id: multiplayer-kickout-dialogue, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_mp_kickout_dialogue, number: 1070 } }
       - { id: send-npcs-to-inn, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_send_bg_npcs_to_inn, number: 1075 } }
       - { id: add-bags-of-holding, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_add_bags_of_holding, number: 1080 } }
-      - { id: reveal-city-areas, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_reveal_city_areas, number: 1100 } }
+      - id: reveal-city-areas
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_reveal_city_areas, number: 1100 }
+        provides: [{ name: tweaks-city-area-reveal-scope, exclusive: true }]
+      - id: do-not-reveal-city-areas
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_do_not_reveal_city_areas, number: 1101 }
+        provides: [{ name: tweaks-city-area-reveal-scope, exclusive: true }]
       - { id: higher-store-stacks, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_stores_sell_higher_stacks, number: 1120 } }
       - { id: remove-xp-cap, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_remove_xp_cap, number: 2090 } }
       - { id: thieving-in-heavy-armor, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_thieving_in_heavy_armor, number: 2100 } }
@@ -918,3 +923,38 @@ releases:
       - { id: nwn-cantrips, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nwn_cantrips, number: 6330 } }
       - { id: nwn-animal-companion, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nwn_animal_companion, number: 6340 } }
       - { id: nwn-opportunist, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nwn_opportunist, number: 6350 } }
+      - id: character-colors-all-helmets-and-shields
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_char_colors_all_helms_shields, number: 190 }
+        provides: [{ name: tweaks-character-colors-scope, exclusive: true }]
+      - id: character-colors-normal-helmets-and-shields
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_char_colors_normal_helms_shields, number: 191 }
+        provides: [{ name: tweaks-character-colors-scope, exclusive: true }]
+      - id: character-colors-all-helmets
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_char_colors_all_helms, number: 192 }
+        provides: [{ name: tweaks-character-colors-scope, exclusive: true }]
+      - id: character-colors-normal-helmets
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_char_colors_normal_helms, number: 193 }
+        provides: [{ name: tweaks-character-colors-scope, exclusive: true }]
+      - id: character-colors-all-shields
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_char_colors_all_shields, number: 194 }
+        provides: [{ name: tweaks-character-colors-scope, exclusive: true }]
+      - id: character-colors-normal-shields
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_char_colors_normal_shields, number: 195 }
+        provides: [{ name: tweaks-character-colors-scope, exclusive: true }]
+      - id: remove-equipped-blur-effects
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_remove_equipped_blur_effects, number: 200 }
+        provides: [{ name: tweaks-equipped-effect-visuals-scope, exclusive: true }]
+      - id: remove-equipped-spell-trap-effects
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_remove_equipped_spell_trap_effects, number: 3150 }
+        provides: [{ name: tweaks-equipped-effect-visuals-scope, exclusive: true }]
+      - id: remove-equipped-blur-and-spell-trap-effects
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_remove_equipped_blur_spell_trap_effects, number: 3151 }
+        provides: [{ name: tweaks-equipped-effect-visuals-scope, exclusive: true }]
+      - { id: replace-fire-and-cold-resistance-icons, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_replace_fire_cold_resist_icons, number: 2010 } }
+      - { id: colorblind-overlays, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_colorblind_overlays, number: 220 } }
+      - id: outline-white-spell-icons-black
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_outline_white_spell_icons_with_black, number: 240 }
+        provides: [{ name: tweaks-white-spell-icon-outline-scope, exclusive: true }]
+      - id: outline-white-spell-icons-gray
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_outline_white_spell_icons_with_gray, number: 241 }
+        provides: [{ name: tweaks-white-spell-icon-outline-scope, exclusive: true }]
