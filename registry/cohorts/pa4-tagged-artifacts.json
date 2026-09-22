@@ -1,0 +1,5061 @@
+{
+  "schema": 1,
+  "catalog_source_revision": "046414eec9315eb1500f2e68147aa281ab35873d",
+  "skip": 0,
+  "limit": 56,
+  "results": [
+    {
+      "source_id": 7,
+      "package": "sirene",
+      "name": "Sirene NPC",
+      "candidate_url": "https://github.com/ArtemiusI/Sirene-BG1/archive/refs/tags/v3.1.zip",
+      "sha256": "9a5c2cc050803f165b5488537fd72624be65e4a2468c6870271d3333970ec0a7",
+      "bytes": 5686075,
+      "weidu_package": true,
+      "tp2_files": [
+        "Sirene-BG1-3.1/Sirene/Setup-Sirene.tp2"
+      ],
+      "components_observed": 10.0,
+      "tp2_observations": [
+        {
+          "path": "Sirene-BG1-3.1/Sirene/Setup-Sirene.tp2",
+          "schema": 1,
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            }
+          ],
+          "components": [
+            {
+              "begin": "Sirene NPC for Baldur's Gate: Enhanced Edition",
+              "number": 0
+            },
+            {
+              "begin": "BG2 Default (Isandir)",
+              "number": 1
+            },
+            {
+              "begin": "Original BG1 Default (sporeboy)",
+              "number": 2
+            },
+            {
+              "begin": "Alternate 1 (Sirick, Light Armor)",
+              "number": 3
+            },
+            {
+              "begin": "Alternate 1 (Sirick/Lava, Heavy Armor)",
+              "number": 4
+            },
+            {
+              "begin": "Alternate 2 (Lodaligae)",
+              "number": 5
+            },
+            {
+              "begin": "True Paladin",
+              "number": 6
+            },
+            {
+              "begin": "Cavalier",
+              "number": 7
+            },
+            {
+              "begin": "Inquisitor",
+              "number": 8
+            },
+            {
+              "begin": "Undead Hunter",
+              "number": 9
+            }
+          ],
+          "component_predicates": [
+            {
+              "kind": "require-component",
+              "expression": "~Setup-Sirene.tp2~ ~0~ ~The main component must be installed.~"
+            },
+            {
+              "kind": "require-component",
+              "expression": "~Sirene.tp2~ ~0~ ~This component requires Sirene to be installed~"
+            }
+          ],
+          "warnings": [
+            "no VERSION declaration observed"
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 8,
+      "package": "drake",
+      "name": "Drake NPC",
+      "candidate_url": "https://github.com/ArtemiusI/Drake/archive/refs/tags/v1.7a.zip",
+      "sha256": "341fb5f032232754c86cce87ca27dc87f1b9fc992c97608de67f9b0f4c87c783",
+      "bytes": 25473632,
+      "weidu_package": true,
+      "tp2_files": [
+        "Drake-1.7a/Drake/Setup-Drake.tp2"
+      ],
+      "components_observed": 6.0,
+      "tp2_observations": [
+        {
+          "path": "Drake-1.7a/Drake/Setup-Drake.tp2",
+          "schema": 1,
+          "version": "1.7",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            }
+          ],
+          "components": [
+            {
+              "begin": "Drake NPC for Baldur's Gate: Enhanced Edition",
+              "number": 0
+            },
+            {
+              "begin": "Default Portrait (The Artisan)",
+              "number": 1
+            },
+            {
+              "begin": "BG2-style (The Artisan)",
+              "number": 2
+            },
+            {
+              "begin": "Beta Portrait (Lava Del'Vortel)",
+              "number": 3
+            },
+            {
+              "begin": "OPTIONAL: Install Universal Crossbows, Crossbow Proficiency for Drake?",
+              "number": 4
+            },
+            {
+              "begin": "OPTIONAL: Original Soundset by BillyYank",
+              "number": 5
+            }
+          ],
+          "game_predicates": [
+            "~bgee eet~) ~This component must be installed on BG:EE or EET.~",
+            "~bgee eet~) ~This component must be installed on BG:EE.~"
+          ],
+          "component_predicates": [
+            {
+              "kind": "require-component",
+              "expression": "~Setup-Drake.tp2~ ~0~ ~The main component must be installed.~"
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 16,
+      "package": "leui",
+      "name": "Lefreut's Enhanced UI (BG2EE skin)",
+      "candidate_url": "https://github.com/r-e-d/LeUI/archive/refs/tags/v4.9.1.zip",
+      "sha256": "2174c08008409b923df98f1f1192a0fdb9019727d5bf6956d23cf4219043e953",
+      "bytes": 19544361,
+      "weidu_package": true,
+      "tp2_files": [
+        "LeUI-4.9.1/LeUI/LeUI.tp2"
+      ],
+      "components_observed": 3.0,
+      "tp2_observations": [
+        {
+          "path": "LeUI-4.9.1/LeUI/LeUI.tp2",
+          "schema": 1,
+          "version": "4.9.1",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@10000",
+              "number": 0
+            },
+            {
+              "begin": "@10001",
+              "number": 1
+            },
+            {
+              "begin": "@10002",
+              "number": 2
+            }
+          ],
+          "game_predicates": [
+            "~bgee bg2ee eet sod~ @90000"
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 18,
+      "package": "eeuitweaks",
+      "name": "EE UI Tweaks",
+      "candidate_url": "https://github.com/r-e-d/EEUITweaks/archive/refs/tags/v4.0.7.zip",
+      "sha256": "e09d451901e6b70d7dbc98750c9ec5317e92ceec63b6afd764361db6d29920cd",
+      "bytes": 22418163,
+      "weidu_package": true,
+      "tp2_files": [
+        "EEUITweaks-4.0.7/EEUITweaks/EEUITweaks.tp2"
+      ],
+      "components_observed": 67.0,
+      "tp2_observations": [
+        {
+          "path": "EEUITweaks-4.0.7/EEUITweaks/EEUITweaks.tp2",
+          "schema": 1,
+          "version": "4.0.7",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@100000",
+              "number": 1000
+            },
+            {
+              "begin": "@101000",
+              "number": 1010
+            },
+            {
+              "begin": "@109000",
+              "number": 1090
+            },
+            {
+              "begin": "@109065",
+              "number": 1091
+            },
+            {
+              "begin": "@102000",
+              "number": 1020
+            },
+            {
+              "begin": "@103000",
+              "number": 1030
+            },
+            {
+              "begin": "@104000",
+              "number": 1040
+            },
+            {
+              "begin": "@104100",
+              "number": 1041
+            },
+            {
+              "begin": "@108000",
+              "number": 1080
+            },
+            {
+              "begin": "@104200",
+              "number": 1042
+            },
+            {
+              "begin": "@104400",
+              "number": 1044
+            },
+            {
+              "begin": "@105000",
+              "number": 1050
+            },
+            {
+              "begin": "@107000",
+              "number": 1070
+            },
+            {
+              "begin": "@106000",
+              "number": 1060
+            },
+            {
+              "begin": "@110000",
+              "number": 1100
+            },
+            {
+              "begin": "@200000",
+              "number": 2000
+            },
+            {
+              "begin": "@209000",
+              "number": 2090
+            },
+            {
+              "begin": "@201000",
+              "number": 2010
+            },
+            {
+              "begin": "@202000",
+              "number": 2020
+            },
+            {
+              "begin": "@203000",
+              "number": 2030
+            },
+            {
+              "begin": "@204000",
+              "number": 2040
+            },
+            {
+              "begin": "@204200",
+              "number": 2042
+            },
+            {
+              "begin": "@204400",
+              "number": 2044
+            },
+            {
+              "begin": "@206000",
+              "number": 2060
+            },
+            {
+              "begin": "@205000",
+              "number": 2050
+            },
+            {
+              "begin": "@207000",
+              "number": 2070
+            },
+            {
+              "begin": "@208000",
+              "number": 2080
+            },
+            {
+              "begin": "@210000",
+              "number": 2100
+            },
+            {
+              "begin": "@211000",
+              "number": 2110
+            },
+            {
+              "begin": "@212000",
+              "number": 2120
+            },
+            {
+              "begin": "@213000",
+              "number": 2130
+            },
+            {
+              "begin": "@214000",
+              "number": 2140
+            },
+            {
+              "begin": "@306000",
+              "number": 2900
+            },
+            {
+              "begin": "@300000",
+              "number": 3000
+            },
+            {
+              "begin": "@301000",
+              "number": 3010
+            },
+            {
+              "begin": "@302000",
+              "number": 3020
+            },
+            {
+              "begin": "@302300",
+              "number": 3023
+            },
+            {
+              "begin": "@302400",
+              "number": 3024
+            },
+            {
+              "begin": "@307000",
+              "number": 3070
+            },
+            {
+              "begin": "@302800",
+              "number": 3028
+            },
+            {
+              "begin": "@303000",
+              "number": 3030
+            },
+            {
+              "begin": "@304000",
+              "number": 3040
+            },
+            {
+              "begin": "@304100",
+              "number": 3041
+            },
+            {
+              "begin": "@304200",
+              "number": 3042
+            },
+            {
+              "begin": "@304300",
+              "number": 3043
+            },
+            {
+              "begin": "@304400",
+              "number": 3044
+            },
+            {
+              "begin": "@304500",
+              "number": 3045
+            },
+            {
+              "begin": "@305000",
+              "number": 3050
+            },
+            {
+              "begin": "@305004",
+              "number": 3051
+            },
+            {
+              "begin": "@400500",
+              "number": 4005
+            },
+            {
+              "begin": "@400508",
+              "number": 4006
+            },
+            {
+              "begin": "@400000",
+              "number": 4000
+            },
+            {
+              "begin": "@401000",
+              "number": 4010
+            },
+            {
+              "begin": "@402000",
+              "number": 4020
+            },
+            {
+              "begin": "@402500",
+              "number": 4025
+            },
+            {
+              "begin": "@403000",
+              "number": 4030
+            },
+            {
+              "begin": "@404000",
+              "number": 4040
+            },
+            {
+              "begin": "@500000",
+              "number": 5000
+            },
+            {
+              "begin": "@502000",
+              "number": 5020
+            },
+            {
+              "begin": "@503000",
+              "number": 5030
+            },
+            {
+              "begin": "@504000",
+              "number": 5040
+            },
+            {
+              "begin": "@504001",
+              "number": 5041
+            },
+            {
+              "begin": "dummy",
+              "number": 62
+            },
+            {
+              "begin": "dummy",
+              "number": 63
+            },
+            {
+              "begin": "dummy",
+              "number": 64
+            },
+            {
+              "begin": "dummy",
+              "number": 65
+            },
+            {
+              "begin": "dummy",
+              "number": 66
+            }
+          ],
+          "game_predicates": [
+            "~bg2ee~)",
+            "~bg2ee~) AND",
+            "~bg2ee~) OR",
+            "~bgee bg2ee eet iwdee~)",
+            "~bgee bg2ee eet iwdee~) AND",
+            "~bgee bg2ee eet pstee~)",
+            "~bgee bg2ee eet~)",
+            "~bgee bg2ee eet~) AND",
+            "~bgee iwdee~) OR",
+            "~bgee~)",
+            "~bgee~) AND",
+            "~bgee~) AND (GAME_INCLUDES ~sod~) AND",
+            "~bgee~) OR",
+            "~eet~)",
+            "~eet~) AND",
+            "~eet~) OR",
+            "~iwdee~) OR",
+            "~pstee~)"
+          ],
+          "component_predicates": [
+            {
+              "kind": "require-component",
+              "expression": "~EEUITweaks.tp2~ ~1000~ @26"
+            },
+            {
+              "kind": "require-component",
+              "expression": "~EEUITweaks.tp2~ ~3000~ @301001"
+            },
+            {
+              "kind": "require-component",
+              "expression": "~EEUITweaks/EEUITweaks.tp2~ ~1000~ @26"
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 24,
+      "package": "bgeeclassicmovies",
+      "name": "BG:EE Classic Movies",
+      "candidate_url": "https://github.com/Sampsca/BGEE-Classic-Movies/archive/refs/tags/V2.4.1.zip",
+      "sha256": "c740bce60ee33bed5652d51652015a2ad3ca5b199480a49f804dbee35f65cc58",
+      "bytes": 586709034,
+      "weidu_package": true,
+      "tp2_files": [
+        "BGEE-Classic-Movies-2.4.1/BGEEClassicMovies/BGEEClassicMovies.tp2"
+      ],
+      "components_observed": 8.0,
+      "tp2_observations": [
+        {
+          "path": "BGEE-Classic-Movies-2.4.1/BGEEClassicMovies/BGEEClassicMovies.tp2",
+          "schema": 1,
+          "version": "v2.4.1",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Polski (Polish)"
+            },
+            {
+              "id": 2,
+              "name": "Espanol (Spanish)"
+            },
+            {
+              "id": 3,
+              "name": "Deutsch (German)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@1",
+              "number": 0,
+              "label": "PS_BGEEClassicMovies_ReplaceMovies"
+            },
+            {
+              "begin": "@4",
+              "number": 1,
+              "label": "PS_BGEEClassicMovies_AddMissingMovies"
+            },
+            {
+              "begin": "@6",
+              "number": 2,
+              "label": "PS_BGEEClassicMovies_AddMoviesToInGameMenu"
+            },
+            {
+              "begin": "@16",
+              "number": 3,
+              "label": "PS_BGEEClassicMovies_RestoreChapterDreamScreens"
+            },
+            {
+              "begin": "@20",
+              "number": 4,
+              "label": "PS_BGEEClassicMovies_DisableLogoAndIntroMovies"
+            },
+            {
+              "begin": "@21",
+              "number": 5,
+              "label": "PS_BGEEClassicMovies_DisableLogoMovie"
+            },
+            {
+              "begin": "@22",
+              "number": 6,
+              "label": "PS_BGEEClassicMovies_ReplaceLogo"
+            },
+            {
+              "begin": "@23",
+              "number": 7,
+              "label": "PS_BGEEClassicMovies_PrependClassicLogos"
+            }
+          ],
+          "game_predicates": [
+            "\"bgee eet\" @3"
+          ],
+          "component_predicates": [
+            {
+              "kind": "forbid-component",
+              "expression": "~BGEE_PL/setup-BGEE_PL.tp2~ 1 ~Filmiki juz zainstalowane wraz z modem BGEE_PL~"
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 33,
+      "package": "c-endlessbg1",
+      "name": "Endless BG1 Mod",
+      "candidate_url": "https://github.com/Gibberlings3/EndlessBG1/archive/refs/tags/v20.2.zip",
+      "sha256": "2623f4d43a5178acc315c3688cac721877fb8cced9d3fddddc9febd61a6233f4",
+      "bytes": 2587539,
+      "weidu_package": true,
+      "tp2_files": [
+        "EndlessBG1-20.2/c#endlessbg1/c#endlessbg1.tp2"
+      ],
+      "components_observed": 19.0,
+      "tp2_observations": [
+        {
+          "path": "EndlessBG1-20.2/c#endlessbg1/c#endlessbg1.tp2",
+          "schema": 1,
+          "version": "20.2",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Deutsch"
+            },
+            {
+              "id": 2,
+              "name": "Russian (by Austin, Arkie & Arcanecoast.ru)"
+            },
+            {
+              "id": 3,
+              "name": "Polski"
+            },
+            {
+              "id": 4,
+              "name": "Francais"
+            },
+            {
+              "id": 5,
+              "name": "Italiano"
+            },
+            {
+              "id": 6,
+              "name": "Spanish"
+            },
+            {
+              "id": 7,
+              "name": "Brazilian Portuguese"
+            },
+            {
+              "id": 8,
+              "name": "Simplified Chinese (translation: Lzw104522773)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@5001",
+              "number": 0,
+              "label": "EBG1_MainComponent"
+            },
+            {
+              "begin": "@5002",
+              "number": 1,
+              "label": "EBG1_MoreFlavor"
+            },
+            {
+              "begin": "@5018",
+              "number": 2,
+              "label": "EBG1_HeroCutscene"
+            },
+            {
+              "begin": "@5008",
+              "number": 3,
+              "label": "EBG1_SarevokItems"
+            },
+            {
+              "begin": "@5014",
+              "number": 4,
+              "label": "EBG1_SarevokSword"
+            },
+            {
+              "begin": "@5004",
+              "number": 5,
+              "label": "EBG1_ImoenJannath"
+            },
+            {
+              "begin": "@5005",
+              "number": 6,
+              "label": "EBG1_EltanInPalace"
+            },
+            {
+              "begin": "@5006",
+              "number": 7,
+              "label": "EBG1_FFHealerInBhaalTemple"
+            },
+            {
+              "begin": "@5015",
+              "number": 8,
+              "label": "EBG1_ElminsterAppearance_jastey"
+            },
+            {
+              "begin": "@5016",
+              "number": 9,
+              "label": "EBG1_ElminsterAppearance_restored"
+            },
+            {
+              "begin": "@5009",
+              "number": 10,
+              "label": "EBG1_RefugeesInBGCity"
+            },
+            {
+              "begin": "@5010",
+              "number": 11,
+              "label": "EBG1_TreasurerInPalaceDungeon"
+            },
+            {
+              "begin": "@5011",
+              "number": 12,
+              "label": "EBG1_DenkodCommentsOnSarevoksDeath"
+            },
+            {
+              "begin": "@5017",
+              "number": 13,
+              "label": "EBG1_SkipThievesMazeOnce"
+            },
+            {
+              "begin": "@5024",
+              "number": 14,
+              "label": "EBG1_KorlaszDungeonBG1"
+            },
+            {
+              "begin": "@5026",
+              "number": 15,
+              "label": "EBG1_FensterInPalace"
+            },
+            {
+              "begin": "C#STFENS",
+              "number": 16
+            },
+            {
+              "begin": "@5027",
+              "number": 16,
+              "label": "EBG1_CorwinInPalace"
+            },
+            {
+              "begin": "C#STCORW",
+              "number": 18
+            }
+          ],
+          "game_predicates": [
+            "~eet bgee bgt~) @5000",
+            "~eet bgee bgt~) @5013",
+            "~eet~ ? 200000 : 0",
+            "~eet~) OR (GAME_IS ~bgee~ AND FILE_EXISTS_IN_GAME ~bd0103.are~)) @5012"
+          ],
+          "component_predicates": [
+            {
+              "kind": "forbid-component",
+              "expression": "~EET_end.tp2~ ~0~ @5023"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~EET_end.tp2~ ~1~ @5023"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~JA#BGT_AdvPack/Setup-JA#BGT_AdvPack.tp2~ 1 @5029"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~bg1re/bg1re.tp2~ 6 @5020"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~imoen_forever.tp2~ ~10~ @5025"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~transitions/setup-transitions.tp2~ 0 @5021"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~transitions/setup-transitions.tp2~ 0 @5022"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~transitions/setup-transitions.tp2~ 20 @5022"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~transitions/setup-transitions.tp2~ 21 @5022"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~transitions/setup-transitions.tp2~ 50 @5022"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~transitions/setup-transitions.tp2~ 60 @5022"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~transitions/setup-transitions.tp2~ 70 @5022"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~transitions/setup-transitions.tp2~ 71 @5022"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~transitions/setup-transitions.tp2~ 72 @5022"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~transitions/setup-transitions.tp2~ 80 @5022"
+            },
+            {
+              "kind": "require-component",
+              "expression": "~c#endlessbg1.tp2~ ~0~ @5003"
+            },
+            {
+              "kind": "require-component",
+              "expression": "~c#endlessbg1.tp2~ ~1~ @5019"
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 35,
+      "package": "c-sodtweaks",
+      "name": "Jastey's Tweaks",
+      "candidate_url": "https://github.com/Gibberlings3/Jasteys_SoD_Tweakpack/archive/refs/tags/v13.zip",
+      "sha256": "069c1d06920fa992f7a6252a3d282df335c089a5fa81b7efede17b7bf2a04ef9",
+      "bytes": 2663004,
+      "weidu_package": true,
+      "tp2_files": [
+        "Jasteys_SoD_Tweakpack-13/c#sodtweaks/setup-c#sodtweaks.tp2"
+      ],
+      "components_observed": 17.0,
+      "tp2_observations": [
+        {
+          "path": "Jasteys_SoD_Tweakpack-13/c#sodtweaks/setup-c#sodtweaks.tp2",
+          "schema": 1,
+          "version": "v13",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Deutsch"
+            },
+            {
+              "id": 2,
+              "name": "Russian"
+            },
+            {
+              "id": 3,
+              "name": "French"
+            },
+            {
+              "id": 4,
+              "name": "Polish"
+            },
+            {
+              "id": 5,
+              "name": "Spanish"
+            },
+            {
+              "id": 6,
+              "name": "Simplified Chinese"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@1003",
+              "number": 1,
+              "label": "JasteySodTweaks-EndingIndependentReplies"
+            },
+            {
+              "begin": "@1005",
+              "number": 2,
+              "label": "JasteySodTweaks-DoNotMissDialogues_NPCInParty"
+            },
+            {
+              "begin": "@1006",
+              "number": 3,
+              "label": "JasteySodTweaks-DoNotMissDialogues_All"
+            },
+            {
+              "begin": "@1007",
+              "number": 4,
+              "label": "JasteySodTweaks-SkipKorlaszDungeon"
+            },
+            {
+              "begin": "@1008",
+              "number": 5,
+              "label": "JasteySodTweaks-MoreDialogueChoices_PreventDeadEnds"
+            },
+            {
+              "begin": "@1009",
+              "number": 6,
+              "label": "JasteySodTweaks-ImoensSoDPortrait"
+            },
+            {
+              "begin": "@1011",
+              "number": 7,
+              "label": "JasteySodTweaks-RestoreAbductionFight"
+            },
+            {
+              "begin": "@1013",
+              "number": 8,
+              "label": "JasteySodTweaks-AdjustStartingXP"
+            },
+            {
+              "begin": "@1014",
+              "number": 9,
+              "label": "JasteySodTweaks-AdjustStartingXP_90000"
+            },
+            {
+              "begin": "@1015",
+              "number": 10,
+              "label": "JasteySodTweaks-AdjustStartingXP_125000"
+            },
+            {
+              "begin": "@1016",
+              "number": 11,
+              "label": "JasteySodTweaks-AdjustStartingXP_161000"
+            },
+            {
+              "begin": "@1019",
+              "number": 12,
+              "label": "JasteySodTweaks-SoDEnding_RevisedFull"
+            },
+            {
+              "begin": "@1020",
+              "number": 13,
+              "label": "JasteySodTweaks-SoDEnding_RevisedStreamlined"
+            },
+            {
+              "begin": "@1022",
+              "number": 14,
+              "label": "JasteySodTweaks-SoDEnding_OriginalStreamlined"
+            },
+            {
+              "begin": "@1021",
+              "number": 15,
+              "label": "JasteySodTweaks-SoDEnding_Skipit"
+            },
+            {
+              "begin": "@1026",
+              "number": 20,
+              "label": "JasteySoDTweaks_PortalCloseToril"
+            },
+            {
+              "begin": "@1025",
+              "number": 21,
+              "label": "JasteySoDTweaks_HephernaanTakesKey"
+            }
+          ],
+          "game_predicates": [
+            "~bgee~ AND FILE_EXISTS_IN_GAME ~bd0103.are~) @1010",
+            "~eet bgt~) @1001",
+            "~eet~ ? 200000 : 0",
+            "~eet~) OR (GAME_IS ~bgee~ AND FILE_EXISTS_IN_GAME ~bd0103.are~))  @1000"
+          ],
+          "component_predicates": [
+            {
+              "kind": "forbid-component",
+              "expression": "~EET_end.tp2~ ~0~ @1017"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~EET_end.tp2~ ~1~ @1017"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~c#anotherfinehell.tp2~ ~0~ @1023"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~c#anotherfinehell.tp2~ ~0~ @1024"
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 36,
+      "package": "c-sodboabri",
+      "name": "The Boareskyr Bridge Scene",
+      "candidate_url": "https://github.com/Gibberlings3/The_Boareskyr_Bridge_Scene/archive/refs/tags/v8.zip",
+      "sha256": "f6d5b37ed4e3cb08aaac13ec716c8320e71e3697d0fbd65166b0796e9949b164",
+      "bytes": 2371910,
+      "weidu_package": true,
+      "tp2_files": [
+        "The_Boareskyr_Bridge_Scene-8/c#sodboabri/c#sodboabri.tp2"
+      ],
+      "components_observed": 4.0,
+      "tp2_observations": [
+        {
+          "path": "The_Boareskyr_Bridge_Scene-8/c#sodboabri/c#sodboabri.tp2",
+          "schema": 1,
+          "version": "v8",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Deutsch"
+            },
+            {
+              "id": 2,
+              "name": "Francais"
+            },
+            {
+              "id": 3,
+              "name": "Italiano"
+            },
+            {
+              "id": 4,
+              "name": "Russian"
+            },
+            {
+              "id": 5,
+              "name": "Polish"
+            },
+            {
+              "id": 6,
+              "name": "Spanish"
+            },
+            {
+              "id": 7,
+              "name": "Simplified Chinese"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@1001",
+              "number": 0,
+              "label": "c#sodboabri_AcknowledgeSceneBoareskyrBridge"
+            },
+            {
+              "begin": "@1003",
+              "number": 1,
+              "label": "c#sodboabri_TescriptionText"
+            },
+            {
+              "begin": "@1005",
+              "number": 2,
+              "label": "c#sodboabri_DifferentChoices"
+            },
+            {
+              "begin": "@1008",
+              "number": 3,
+              "label": "c#sodboabri_StatChanges"
+            }
+          ],
+          "game_predicates": [
+            "~eet~ ? 200000 : 0",
+            "~eet~) OR (GAME_IS ~bgee~ AND FILE_EXISTS_IN_GAME ~bd0103.are~))  @1000"
+          ],
+          "component_predicates": [
+            {
+              "kind": "forbid-component",
+              "expression": "~EET_end.tp2~ ~0~ @1017"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~EET_end.tp2~ ~1~ @1017"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~c#sodboabri.tp2~ ~1~ @1009"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~c#sodboabri.tp2~ ~2~ @1009"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~c#sodboabri.tp2~ ~3~ @1009"
+            },
+            {
+              "kind": "require-component",
+              "expression": "~c#sodboabri.tp2~ ~0~ @1004"
+            },
+            {
+              "kind": "require-component",
+              "expression": "~c#sodboabri.tp2~ ~1~ @1006"
+            },
+            {
+              "kind": "require-component",
+              "expression": "~c#sodboabri.tp2~ ~2~ @1007"
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 37,
+      "package": "imoen-forever",
+      "name": "Imoen 4 Ever",
+      "candidate_url": "https://github.com/Gibberlings3/Imoen4Ever/archive/refs/tags/v11.6.zip",
+      "sha256": "c57fee7058159ee681e77d4c2a80d5a100b6b4adece1d4fadada16fd878593d6",
+      "bytes": 3472941,
+      "weidu_package": true,
+      "tp2_files": [
+        "Imoen4Ever-11.6/imoen_forever/imoen_forever.tp2"
+      ],
+      "components_observed": 16.0,
+      "tp2_observations": [
+        {
+          "path": "Imoen4Ever-11.6/imoen_forever/imoen_forever.tp2",
+          "schema": 1,
+          "version": "v11.6",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Deutsch"
+            },
+            {
+              "id": 2,
+              "name": "Polski"
+            },
+            {
+              "id": 3,
+              "name": "Russian"
+            },
+            {
+              "id": 4,
+              "name": "Simplified Chinese (translation: Lewis Liu)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@9928",
+              "number": 0,
+              "label": "Imoen4Ever-BGII-ImoenReturnsChapter2"
+            },
+            {
+              "begin": "@9912",
+              "number": 1,
+              "label": "Imoen4Ever-BGII-DialoguesContentSoA"
+            },
+            {
+              "begin": "@9920",
+              "number": 2,
+              "label": "Imoen4Ever-BGII-YoshimoBrynnlaw"
+            },
+            {
+              "begin": "@9914",
+              "number": 3,
+              "label": "Imoen4Ever-BGII-ImoenProtectionSpellChapter2&3"
+            },
+            {
+              "begin": "@9915",
+              "number": 9,
+              "label": "Imoen4Ever-BGII-Compatibility_Saerileth_Alternatives"
+            },
+            {
+              "begin": "@9906",
+              "number": 10,
+              "label": "Imoen4Ever-SoD-ImoeninGroupKorlaszDungeon"
+            },
+            {
+              "begin": "@9907",
+              "number": 11,
+              "label": "Imoen4Ever-SoD-ImoenReturnsCamp"
+            },
+            {
+              "begin": "@9909",
+              "number": 12,
+              "label": "Imoen4Ever-SoD-BetterReasonPalace"
+            },
+            {
+              "begin": "@9910",
+              "number": 13,
+              "label": "Imoen4Ever-SoD-CutesceneImoenDukeJannath"
+            },
+            {
+              "begin": "@9923",
+              "number": 14,
+              "label": "Imoen4Ever-SoD-DialoguesContentChapters8to12"
+            },
+            {
+              "begin": "@9929",
+              "number": 15,
+              "label": "Imoen4Ever-SoD-ImoenSameAtEnd"
+            },
+            {
+              "begin": "@9926",
+              "number": 16,
+              "label": "Imoen4Ever-SoD-UnifyPortrait_SoDPortrait"
+            },
+            {
+              "begin": "@9925",
+              "number": 17,
+              "label": "Imoen4Ever-SoD-UnifyPortrait_BG1Portrait"
+            },
+            {
+              "begin": "@9931",
+              "number": 20,
+              "label": "Imoen4Ever-SoD-MoveImoensChest"
+            },
+            {
+              "begin": "@9936",
+              "number": 25,
+              "label": "Imoen4Ever-SoD-PIDChapters8to12"
+            },
+            {
+              "begin": "@9933",
+              "number": 30,
+              "label": "Imoen4Ever-Imoen_Alternate_Portrait_Acifer"
+            }
+          ],
+          "game_predicates": [
+            "~bg2ee eet bgt tob~ @9905",
+            "~bg2ee eet~) OR (MOD_IS_INSTALLED ~setup-bg2fixpack.TP2~ \"0\")) @9901",
+            "~bgee bg2ee tob bgt eet~)  @9934",
+            "~bgee~) ~This component is for SoD only~",
+            "~eet~ ? 200000 : 0"
+          ],
+          "component_predicates": [
+            {
+              "kind": "forbid-component",
+              "expression": "~EET_end.tp2~ ~0~ @9930"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~EET_end.tp2~ ~1~ @9930"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~c#endlessbg1.tp2~ ~14~ @9932"
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 40,
+      "package": "bp-in-bg",
+      "name": "Bonus Pack in Baldur's Gate",
+      "candidate_url": "https://github.com/UnearthedArcana/BP_in_BG/archive/refs/tags/1.2.1.zip",
+      "sha256": "231929cf1df4009a0712a85a57ef6f4ff562b2ba0afb9e15c04918a9e085dab8",
+      "bytes": 1713393,
+      "weidu_package": true,
+      "tp2_files": [
+        "BP_in_BG-1.2.1/BP_in_BG/bp_in_bg.tp2"
+      ],
+      "components_observed": 1.0,
+      "tp2_observations": [
+        {
+          "path": "BP_in_BG-1.2.1/BP_in_BG/bp_in_bg.tp2",
+          "schema": 1,
+          "version": "1.2.1",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "French"
+            },
+            {
+              "id": 2,
+              "name": "Simplified Chinese (translation: Lewis Liu)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@100",
+              "number": 100
+            }
+          ],
+          "game_predicates": [
+            "~bgee eet~ @101"
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 41,
+      "package": "reflections",
+      "name": "Reflections of Destiny",
+      "candidate_url": "https://github.com/subtledoctor/Reflections-of-Destiny/archive/refs/tags/0.9.4.zip",
+      "sha256": "4ef856cdd4733ad3a2ffb1f6d136b4d3536091fa6bb333d839ba9bbdc8b060a5",
+      "bytes": 1653380,
+      "weidu_package": true,
+      "tp2_files": [
+        "Reflections-of-Destiny-0.9.4/Reflections_of_Destiny/Reflections_of_Destiny.tp2"
+      ],
+      "components_observed": 7.0,
+      "tp2_observations": [
+        {
+          "path": "Reflections-of-Destiny-0.9.4/Reflections_of_Destiny/Reflections_of_Destiny.tp2",
+          "schema": 1,
+          "version": "0.9.3",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@100",
+              "number": 100,
+              "label": "D5_REFLECTIONS_BACK_FUTURE"
+            },
+            {
+              "begin": "@110",
+              "number": 110,
+              "label": "D5_REFLECTIONS_MIRROR_SHARD"
+            },
+            {
+              "begin": "@200",
+              "number": 200,
+              "label": "D5_REFLECTIONS_REWRITE_CAELAR"
+            },
+            {
+              "begin": "@220",
+              "number": 220,
+              "label": "D5_REFLECTIONS_MAGICAL_REALISM"
+            },
+            {
+              "begin": "@230",
+              "number": 230,
+              "label": "D5_REFLECTIONS_FEYR_ITSELF"
+            },
+            {
+              "begin": "@240",
+              "number": 240,
+              "label": "D5_REFLECTIONS_PRECIPICE_OF_DEATH"
+            },
+            {
+              "begin": "@330",
+              "number": 330,
+              "label": "D5_REFLECTIONS_SOD_CONTENT_SOA"
+            }
+          ],
+          "game_predicates": [
+            "~eet~ ? 200000 : 0",
+            "~eet~) OR (GAME_INCLUDES ~sod~) ~ ~",
+            "~eet~) ~ ~"
+          ],
+          "component_predicates": [
+            {
+              "kind": "forbid-component",
+              "expression": "~EET_end.tp2~ ~0~ @5"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~EET_end.tp2~ ~1~ @5"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~c#endlessbg1.tp2~ ~14~ @3"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~imoen_forever.tp2~ ~10~ @4"
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 42,
+      "package": "bgqe",
+      "name": "Baldur's Gate Mini Quests and Encounters Modification",
+      "candidate_url": "https://github.com/Gibberlings3/BG_Quests_And_Encounters/archive/refs/tags/v31.zip",
+      "sha256": "275e82396aed28d944d80ea7ac05ca48c2705beff0621f85ba1caaa536216f6f",
+      "bytes": 3742121,
+      "weidu_package": true,
+      "tp2_files": [
+        "BG_Quests_And_Encounters-31/bgqe/setup-bgqe.tp2"
+      ],
+      "components_observed": 18.0,
+      "tp2_observations": [
+        {
+          "path": "BG_Quests_And_Encounters-31/bgqe/setup-bgqe.tp2",
+          "schema": 1,
+          "version": "31",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Deutsch"
+            },
+            {
+              "id": 2,
+              "name": "Francais"
+            },
+            {
+              "id": 3,
+              "name": "Italiano"
+            },
+            {
+              "id": 4,
+              "name": "Russian"
+            },
+            {
+              "id": 5,
+              "name": "Polski"
+            },
+            {
+              "id": 6,
+              "name": "Espanol"
+            },
+            {
+              "id": 7,
+              "name": "Simplified Chinese"
+            },
+            {
+              "id": 8,
+              "name": "Turkce"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@38",
+              "number": 0,
+              "label": "bgqe_slimequest"
+            },
+            {
+              "begin": "@13",
+              "number": 1,
+              "label": "bgqe_familyquest"
+            },
+            {
+              "begin": "@19",
+              "number": 2,
+              "label": "bgqe_babysitting"
+            },
+            {
+              "begin": "@39",
+              "number": 3,
+              "label": "bgqe_nashkelmonster"
+            },
+            {
+              "begin": "@43",
+              "number": 4,
+              "label": "bgqe_fallenpaladin"
+            },
+            {
+              "begin": "@48",
+              "number": 5,
+              "label": "bgqe_undyinglove"
+            },
+            {
+              "begin": "@50",
+              "number": 6,
+              "label": "bgqe_orclover"
+            },
+            {
+              "begin": "@56",
+              "number": 7,
+              "label": "bgqe_unexpectedhelp"
+            },
+            {
+              "begin": "@61",
+              "number": 8,
+              "label": "bgqe_manypaws"
+            },
+            {
+              "begin": "@98",
+              "number": 9,
+              "label": "bgqe_drunk"
+            },
+            {
+              "begin": "@105",
+              "number": 10,
+              "label": "bgqe_noober"
+            },
+            {
+              "begin": "@5000",
+              "number": 11,
+              "label": "bgqe_bragesword"
+            },
+            {
+              "begin": "@5001",
+              "number": 12,
+              "label": "bgqe_seacharts"
+            },
+            {
+              "begin": "@5002",
+              "number": 13,
+              "label": "bgqe_waterqueentemple"
+            },
+            {
+              "begin": "@5004",
+              "number": 14,
+              "label": "bgqe_worriedfarmer"
+            },
+            {
+              "begin": "@5005",
+              "number": 15,
+              "label": "bgqe_bodiesforgoodcause"
+            },
+            {
+              "begin": "@5009",
+              "number": 16,
+              "label": "bgqe_cordyrnokillingsil"
+            },
+            {
+              "begin": "@5011",
+              "number": 17,
+              "label": "bgqe_improved_borda"
+            }
+          ],
+          "game_predicates": [
+            "\"bg1 totsc\"",
+            "\"bgee eet\"",
+            "~bg1 totsc~) @5006",
+            "~bgt bgee eet~ @5008",
+            "~bgt eet~ BEGIN",
+            "~totsc tutu tutu_totsc bgt bgee eet~ @5008",
+            "~tutu tutu_totsc bgt bgee eet~ @5008"
+          ],
+          "component_predicates": [
+            {
+              "kind": "forbid-component",
+              "expression": "~EET_end.tp2~ ~0~ @5010"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~EET_end.tp2~ ~1~ @5010"
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 43,
+      "package": "ac-quest",
+      "name": "Ascalon's Questpack",
+      "candidate_url": "https://github.com/Gitjas/Ascalons_Questpack/archive/refs/tags/v7.0.zip",
+      "sha256": "b6b0ca11925f782afd8db8f7207b63a4160db4a649e245bf606e301cd93af118",
+      "bytes": 21091557,
+      "weidu_package": true,
+      "tp2_files": [
+        "Ascalons_Questpack-7.0/AC_QUEST/ac_quest.TP2"
+      ],
+      "components_observed": 13.0,
+      "tp2_observations": [
+        {
+          "path": "Ascalons_Questpack-7.0/AC_QUEST/ac_quest.TP2",
+          "schema": 1,
+          "version": "7.0",
+          "languages": [
+            {
+              "id": 0,
+              "name": "Deutsch (German)"
+            },
+            {
+              "id": 1,
+              "name": "English"
+            },
+            {
+              "id": 2,
+              "name": "Russian"
+            },
+            {
+              "id": 3,
+              "name": "Italian"
+            },
+            {
+              "id": 4,
+              "name": "French"
+            },
+            {
+              "id": 5,
+              "name": "Spanish"
+            },
+            {
+              "id": 6,
+              "name": "Simplified Chinese"
+            },
+            {
+              "id": 7,
+              "name": "Polish (by my_summertime, SoM Membress, part of CoB Clan)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@5000003",
+              "number": 0,
+              "label": "AscalonsQuestpack-JobWellPaid"
+            },
+            {
+              "begin": "@5000005",
+              "number": 1,
+              "label": "AscalonsQuestpack-FeastforGnolls"
+            },
+            {
+              "begin": "@5000019",
+              "number": 2,
+              "label": "AscalonsQuestpack-Rabbit"
+            },
+            {
+              "begin": "@5000020",
+              "number": 3,
+              "label": "AscalonsQuestpack-Rabbit_alternative"
+            },
+            {
+              "begin": "@5000007",
+              "number": 4,
+              "label": "AscalonsQuestpack-LostSon"
+            },
+            {
+              "begin": "@5000008",
+              "number": 5,
+              "label": "AscalonsQuestpack-WolvesMen_Highhedge"
+            },
+            {
+              "begin": "@5000010",
+              "number": 6,
+              "label": "AscalonsQuestpack-WolvesMen_Beregost"
+            },
+            {
+              "begin": "@5000011",
+              "number": 7,
+              "label": "AscalonsQuestpack-GreatKarlini"
+            },
+            {
+              "begin": "@5000012",
+              "number": 8,
+              "label": "AscalonsQuestpack-Gibberlings"
+            },
+            {
+              "begin": "@5000013",
+              "number": 9,
+              "label": "AscalonsQuestpack-Fans"
+            },
+            {
+              "begin": "@5000017",
+              "number": 10,
+              "label": "AscalonsQuestpack-SerpentsAbbathor"
+            },
+            {
+              "begin": "@5000018",
+              "number": 11,
+              "label": "AscalonsQuestpack-SerpentsAbbathor_Tweak"
+            },
+            {
+              "begin": "@5000015",
+              "number": 12,
+              "label": "AscalonsQuestpack-HalflingEyeless"
+            }
+          ],
+          "game_predicates": [
+            "~bgee eet~ BEGIN",
+            "~bgee tutu_totsc~ THEN BEGIN",
+            "~bgt bgee tutu_totsc eet~ @5000004",
+            "~bgt eet~ THEN BEGIN",
+            "~bgt tob bg2ee eet~ @5000004",
+            "~tutu_totsc bgt~ BEGIN"
+          ],
+          "component_predicates": [
+            {
+              "kind": "forbid-component",
+              "expression": "~EET_end.tp2~ ~0~ @5000016"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~EET_end.tp2~ ~1~ @5000016"
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 44,
+      "package": "extraexpandedenhancedencounters",
+      "name": "Extra Enhanced Expanded Encounters!",
+      "candidate_url": "https://github.com/GraionDilach/ExtraExpandedEnhancedEncounters/archive/refs/tags/4.4.zip",
+      "sha256": "967ef5ffad7b097d3d93812f94ffd8bd22f3ff9c55b485928a85f7eebbdac2d4",
+      "bytes": 143637,
+      "weidu_package": true,
+      "tp2_files": [
+        "ExtraExpandedEnhancedEncounters-4.4/ExtraExpandedEnhancedEncounters/ExtraExpandedEnhancedEncounters.tp2"
+      ],
+      "components_observed": 8.0,
+      "tp2_observations": [
+        {
+          "path": "ExtraExpandedEnhancedEncounters-4.4/ExtraExpandedEnhancedEncounters/ExtraExpandedEnhancedEncounters.tp2",
+          "schema": 1,
+          "version": "4.4",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Russian (by yota13 & p_zombie)"
+            },
+            {
+              "id": 2,
+              "name": "Spanish (by alaisFcZ)"
+            },
+            {
+              "id": 3,
+              "name": "Simplified Chinese (translation: Lewis Liu)"
+            },
+            {
+              "id": 4,
+              "name": "Polish (by Aristo)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@1",
+              "number": 0,
+              "label": "OL-EEEE-COAST-WAY"
+            },
+            {
+              "begin": "@2",
+              "number": 1,
+              "label": "OL-EEEE-LONELY-PEAKS"
+            },
+            {
+              "begin": "@3",
+              "number": 2,
+              "label": "OL-EEEE-GNOLL-STRONGHOLD"
+            },
+            {
+              "begin": "@4",
+              "number": 3,
+              "label": "OL-EEEE-GNOLL-STRONGHOLD-CAVE"
+            },
+            {
+              "begin": "@5",
+              "number": 4,
+              "label": "OL-EEEE-XANS-NEW-GROVE"
+            },
+            {
+              "begin": "@6",
+              "number": 5,
+              "label": "OL-EEEE-CLOAKWOOD-BRIDGE"
+            },
+            {
+              "begin": "@7",
+              "number": 6,
+              "label": "OL-EEEE-WYVERN-CAVE"
+            },
+            {
+              "begin": "@8",
+              "number": 7,
+              "label": "OL-EEEE-UNDERCITY"
+            }
+          ],
+          "game_predicates": [
+            "~bgee eet~) @11"
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 49,
+      "package": "ajantisbg1",
+      "name": "Ajantis BG1 Expansion Modification",
+      "candidate_url": "https://github.com/Gibberlings3/Ajantis_BG1_Expansion/archive/refs/tags/v22.zip",
+      "sha256": "7479c3b6d2ba8ab9acb509de3d6101ac862d8a3c7f6ec7a99e4e8defa7b60dbe",
+      "bytes": 3224126,
+      "weidu_package": true,
+      "tp2_files": [
+        "Ajantis_BG1_Expansion-22/ajantisbg1/Setup-AjantisBG1.tp2"
+      ],
+      "components_observed": 3.0,
+      "tp2_observations": [
+        {
+          "path": "Ajantis_BG1_Expansion-22/ajantisbg1/Setup-AjantisBG1.tp2",
+          "schema": 1,
+          "version": "22",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Francais"
+            },
+            {
+              "id": 2,
+              "name": "Deutsch"
+            },
+            {
+              "id": 3,
+              "name": "Simplified Chinese"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@0",
+              "number": 0,
+              "label": "AjantisBG1Expansion-main"
+            },
+            {
+              "begin": "@16",
+              "number": 1,
+              "label": "AjantisBG1Expansion-shieldBAM"
+            },
+            {
+              "begin": "@90004",
+              "number": 30,
+              "label": "C#Ajantis_SoD_NPC-crossmod_content"
+            }
+          ],
+          "game_predicates": [
+            "~bgee eet~) @17",
+            "~eet~ ? 257802 : 57802) @24",
+            "~totsc tutu tutu_totsc bgt bgee eet~ @25",
+            "~totsc~) @25"
+          ],
+          "component_predicates": [
+            {
+              "kind": "forbid-component",
+              "expression": "~EET_end.tp2~ ~0~ @26"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~EET_end.tp2~ ~1~ @26"
+            },
+            {
+              "kind": "require-component",
+              "expression": "~ajantisbg1.tp2~ ~0~  @90003"
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 50,
+      "package": "coranbgfriend",
+      "name": "Coran's BG Extended Friendship Talks",
+      "candidate_url": "https://github.com/Gibberlings3/CoranBGFriend/archive/refs/tags/v5.2.zip",
+      "sha256": "b0a76e5299ed5275f7072dba5b21e94a9f099b748ebe7785cb34be1502365b4a",
+      "bytes": 2446271,
+      "weidu_package": true,
+      "tp2_files": [
+        "CoranBGFriend-5.2/coranbgfriend/coranbgfriend.tp2"
+      ],
+      "components_observed": 1.0,
+      "tp2_observations": [
+        {
+          "path": "CoranBGFriend-5.2/coranbgfriend/coranbgfriend.tp2",
+          "schema": 1,
+          "version": "v5.2",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Deutsch"
+            },
+            {
+              "id": 2,
+              "name": "Russian"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@3",
+              "number": 0,
+              "label": "Domi-CoranBGFriend-Main"
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 51,
+      "package": "xanbg1friend",
+      "name": "Xan's Friendship Path",
+      "candidate_url": "https://github.com/Pocket-Plane-Group/Xan_BG1_Friendship/archive/refs/tags/v11.zip",
+      "sha256": "17e128a3f8d98d434b70ce1708b846ca9429c6124e76c37a0778aab7630e78ae",
+      "bytes": 4941797,
+      "weidu_package": true,
+      "tp2_files": [
+        "Xan_BG1_Friendship-11/XanBG1Friend/Setup-XanBG1Friend.tp2"
+      ],
+      "components_observed": 1.0,
+      "tp2_observations": [
+        {
+          "path": "Xan_BG1_Friendship-11/XanBG1Friend/Setup-XanBG1Friend.tp2",
+          "schema": 1,
+          "version": "v11",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Russian"
+            },
+            {
+              "id": 2,
+              "name": "German (Translated by Steffen)"
+            },
+            {
+              "id": 3,
+              "name": "French (Translated by Eleima)"
+            },
+            {
+              "id": 4,
+              "name": "Italian (Translated by totuccio5)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "Xan's friendship path for BG1",
+              "number": 0
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 62,
+      "package": "ub",
+      "name": "Unfinished Business",
+      "candidate_url": "https://github.com/Pocket-Plane-Group/UnfinishedBusiness/archive/refs/tags/v28.zip",
+      "sha256": "953b849329626a50e8de5927170c927b1ade0641f409aa83be2a6b63fd0b0203",
+      "bytes": 5140775,
+      "weidu_package": true,
+      "tp2_files": [
+        "UnfinishedBusiness-28/ub/kalah/kalah.tp2",
+        "UnfinishedBusiness-28/ub/setup-ub.tp2"
+      ],
+      "components_observed": 27.0,
+      "tp2_observations": [
+        {
+          "path": "UnfinishedBusiness-28/ub/kalah/kalah.tp2",
+          "schema": 1,
+          "languages": [],
+          "components": [
+            {
+              "begin": "Andyr's Kalah expansion component for Unfinished Business",
+              "number": 0
+            }
+          ],
+          "warnings": [
+            "no VERSION declaration observed"
+          ]
+        },
+        {
+          "path": "UnfinishedBusiness-28/ub/setup-ub.tp2",
+          "schema": 1,
+          "version": "v28",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "French (graoumf and Les D'Oghmatiques)"
+            },
+            {
+              "id": 2,
+              "name": "Polski (Yarpen, Cahir)"
+            },
+            {
+              "id": 3,
+              "name": "Deutsch (Rosenranken.de)"
+            },
+            {
+              "id": 4,
+              "name": "Espa�ol (Clan DLAN)"
+            },
+            {
+              "id": 5,
+              "name": "Czech (yenn)"
+            },
+            {
+              "id": 6,
+              "name": "Russian (Alex&AERIE.RU, BigMF, Hawkmoon, Regharrr. Updated by Prowler)"
+            },
+            {
+              "id": 7,
+              "name": "Chinese (Scar_kun)"
+            },
+            {
+              "id": 8,
+              "name": "Italian (Giuseppe Cali, Ilot)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@0",
+              "number": 0
+            },
+            {
+              "begin": "@20",
+              "number": 1
+            },
+            {
+              "begin": "@47",
+              "number": 2
+            },
+            {
+              "begin": "@25",
+              "number": 3
+            },
+            {
+              "begin": "@26",
+              "number": 4
+            },
+            {
+              "begin": "@27",
+              "number": 5
+            },
+            {
+              "begin": "@28",
+              "number": 6
+            },
+            {
+              "begin": "@29",
+              "number": 7
+            },
+            {
+              "begin": "@48",
+              "number": 8
+            },
+            {
+              "begin": "@52",
+              "number": 9
+            },
+            {
+              "begin": "@66",
+              "number": 10
+            },
+            {
+              "begin": "@71",
+              "number": 11
+            },
+            {
+              "begin": "@30",
+              "number": 12
+            },
+            {
+              "begin": "@70",
+              "number": 13
+            },
+            {
+              "begin": "@72",
+              "number": 14
+            },
+            {
+              "begin": "@49",
+              "number": 15
+            },
+            {
+              "begin": "@50",
+              "number": 16
+            },
+            {
+              "begin": "@53",
+              "number": 17
+            },
+            {
+              "begin": "@54",
+              "number": 18
+            },
+            {
+              "begin": "@68",
+              "number": 19
+            },
+            {
+              "begin": "@73",
+              "number": 20
+            },
+            {
+              "begin": "@95",
+              "number": 21
+            },
+            {
+              "begin": "@81",
+              "number": 22
+            },
+            {
+              "begin": "@85",
+              "number": 23
+            },
+            {
+              "begin": "@1000",
+              "number": 24
+            },
+            {
+              "begin": "@1313",
+              "number": 25
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 63,
+      "package": "arestorationp",
+      "name": "Almateria's Restoration Project",
+      "candidate_url": "https://github.com/SpellholdStudios/Almaterias_Restoration_Project/archive/refs/tags/v10.1.zip",
+      "sha256": "97ca579bac66c807b4628938ba7b809c81d5513eb8432e10c6f4705ed6dbf842",
+      "bytes": 1231441,
+      "weidu_package": true,
+      "tp2_files": [
+        "Almateria-Restoration-Project-10.1/arestorationp/arestorationp.tp2"
+      ],
+      "components_observed": 13.0,
+      "tp2_observations": [
+        {
+          "path": "Almateria-Restoration-Project-10.1/arestorationp/arestorationp.tp2",
+          "schema": 1,
+          "version": "v10.1",
+          "languages": [
+            {
+              "id": 0,
+              "name": "Polski"
+            },
+            {
+              "id": 1,
+              "name": "English"
+            },
+            {
+              "id": 2,
+              "name": "Italiano (by Sergio)"
+            },
+            {
+              "id": 3,
+              "name": "Nederlands (by Tzarnal)"
+            },
+            {
+              "id": 4,
+              "name": "lingua latina (by Sleep of Bronze)"
+            },
+            {
+              "id": 5,
+              "name": "Foeroyskr (BG2EE) (by inscrutable horse)"
+            },
+            {
+              "id": 6,
+              "name": "Simplified Chinese (by Sebastian C and Lzw104522773)"
+            },
+            {
+              "id": 7,
+              "name": "Francais (by Isaya and the d'Oghmatiques)"
+            },
+            {
+              "id": 8,
+              "name": "Deutsch (by Dachrisma)"
+            },
+            {
+              "id": 9,
+              "name": "Portugues brasileiro (by Felipe)"
+            },
+            {
+              "id": 10,
+              "name": "Russian (by Austin & ArcaneCoast.ru)"
+            },
+            {
+              "id": 11,
+              "name": "Czech (by Radim \"Edvin\" Klimek)"
+            },
+            {
+              "id": 12,
+              "name": "Spanish (by Memnoch)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@100",
+              "number": 0,
+              "label": "Almaterias_Restoration_Project-Restored_Locations"
+            },
+            {
+              "begin": "@200",
+              "number": 1,
+              "label": "Almaterias_Restoration_Project-Restored_Characters_and_Dialogs"
+            },
+            {
+              "begin": "@300",
+              "number": 2,
+              "label": "Almaterias_Restoration_Project-Restored_Sounds"
+            },
+            {
+              "begin": "@500",
+              "number": 3,
+              "label": "Almaterias_Restoration_Project-Restored_Items"
+            },
+            {
+              "begin": "@600",
+              "number": 4,
+              "label": "Almaterias_Restoration_Project-Restored_Wish_Options"
+            },
+            {
+              "begin": "@700",
+              "number": 5,
+              "label": "Almaterias_Restoration_Project-Restored_XP_for_Minor_Things"
+            },
+            {
+              "begin": "@800",
+              "number": 6,
+              "label": "Almaterias_Restoration_Project-Lich_Deril"
+            },
+            {
+              "begin": "@900",
+              "number": 7,
+              "label": "Almaterias_Restoration_Project-Restored_Random_Encounters"
+            },
+            {
+              "begin": "",
+              "number": 8
+            },
+            {
+              "begin": "@1200",
+              "number": 9,
+              "label": "Almaterias_Restoration_Project-Better_Item_Import"
+            },
+            {
+              "begin": "@1300",
+              "number": 10,
+              "label": "Almaterias_Restoration_Project-Restored_Final_Slayer_Dream"
+            },
+            {
+              "begin": "@1400",
+              "number": 11,
+              "label": "Almaterias_Restoration_Project-Alternate_Slayer_Change"
+            },
+            {
+              "begin": "@1500",
+              "number": 12,
+              "label": "Almaterias_Restoration_Project-Restored_Waukeens_Promenade_Cutscene"
+            }
+          ],
+          "game_predicates": [
+            "~bg2ee eet~ @1201"
+          ],
+          "component_predicates": [
+            {
+              "kind": "require-component",
+              "expression": "\"setup-arestorationp.tp2\" \"11\" ~Requires the previous component.~"
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 66,
+      "package": "hiddenadventure",
+      "name": "Hidden Adventures",
+      "candidate_url": "https://github.com/Gitjas/hiddenadventure/archive/refs/tags/vBeta_9.zip",
+      "sha256": "006f878be9b89ffa3c2c8e0b6d2922c49de79a05c757306433c8a3f83b491613",
+      "bytes": 3131245,
+      "weidu_package": true,
+      "tp2_files": [
+        "hiddenadventure-vBeta_9/hiddenadventure/hiddenadventure.tp2"
+      ],
+      "components_observed": 11.0,
+      "tp2_observations": [
+        {
+          "path": "hiddenadventure-vBeta_9/hiddenadventure/hiddenadventure.tp2",
+          "schema": 1,
+          "version": "Beta_9",
+          "languages": [
+            {
+              "id": 0,
+              "name": "German"
+            },
+            {
+              "id": 1,
+              "name": "English"
+            },
+            {
+              "id": 2,
+              "name": "Russian (by yota13)"
+            },
+            {
+              "id": 3,
+              "name": "Polish (by memory)"
+            },
+            {
+              "id": 4,
+              "name": "Spanish (by alaisFcZ)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@1001",
+              "number": 0,
+              "label": "hidden_adventures-ladyelgea"
+            },
+            {
+              "begin": "@3001",
+              "number": 1,
+              "label": "hidden_adventures-anomenplot"
+            },
+            {
+              "begin": "@4001",
+              "number": 2,
+              "label": "hidden_adventures-jerliashop"
+            },
+            {
+              "begin": "@5001",
+              "number": 3,
+              "label": "hidden_adventures-holywater_lathandertemple"
+            },
+            {
+              "begin": "@6001",
+              "number": 4,
+              "label": "hidden_adventures-waveblade_treasury"
+            },
+            {
+              "begin": "@7001",
+              "number": 5,
+              "label": "hidden_adventures-silverdagger_ID"
+            },
+            {
+              "begin": "@8001",
+              "number": 6,
+              "label": "hidden_adventures-bard_stronghold_resting"
+            },
+            {
+              "begin": "@100001",
+              "number": 7,
+              "label": "hidden_adventures-bard_stronghold_bard"
+            },
+            {
+              "begin": "@110001",
+              "number": 8,
+              "label": "hidden_adventures-silversword"
+            },
+            {
+              "begin": "@120000",
+              "number": 9,
+              "label": "hidden_adventures-tunnel_saradush"
+            },
+            {
+              "begin": "@120003",
+              "number": 10,
+              "label": "hidden_adventures-masktemple_docks"
+            }
+          ],
+          "game_predicates": [
+            "~bgt eet~ @0"
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 76,
+      "package": "com-encounters",
+      "name": "CoM Encounters",
+      "candidate_url": "https://github.com/The-Gate-Project/Com_encounters/archive/refs/tags/v1.22.zip",
+      "sha256": "ce2f050867869d7776c5365289b160173b606830e6322e4993952812caf9d7dd",
+      "bytes": 1136648,
+      "weidu_package": true,
+      "tp2_files": [
+        "Com_encounters-1.22/com_encounters/SETUP-com_encounters.tp2"
+      ],
+      "components_observed": 3.0,
+      "tp2_observations": [
+        {
+          "path": "Com_encounters-1.22/com_encounters/SETUP-com_encounters.tp2",
+          "schema": 1,
+          "version": "v1.22",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Francais (Traduction de Thot des d'Oghmatiques)"
+            },
+            {
+              "id": 2,
+              "name": "German (Translation by Gerri)"
+            },
+            {
+              "id": 3,
+              "name": "Italian (Translation by ilot)"
+            },
+            {
+              "id": 4,
+              "name": "Russian (by aerie.ru & arcanecoast.ru)"
+            },
+            {
+              "id": 5,
+              "name": "Polish (by Aristo)"
+            },
+            {
+              "id": 6,
+              "name": "Spanish (by alaisFcZ)"
+            },
+            {
+              "id": 7,
+              "name": "Simplified Chinese (translation: Lewis Liu)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@10000",
+              "number": 0,
+              "label": "CoM_Solaufein-Com_encounters"
+            },
+            {
+              "begin": "@10138",
+              "number": 1,
+              "label": "CoM_Solaufein-improved_druids"
+            },
+            {
+              "begin": "@10139",
+              "number": 2,
+              "label": "CoM_Solaufein-improved_shagbag"
+            }
+          ],
+          "game_predicates": [
+            "~tob bgt bg2ee eet~ @10010"
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 78,
+      "package": "tod",
+      "name": "Tower of Deception",
+      "candidate_url": "https://github.com/InfinityMods/TowerOfDeception/archive/refs/tags/v4.1.0.zip",
+      "sha256": "2b89f6418d77e76ac58f352c7fa1bdd00111cd20bc2cced8c82ee1510efcc28d",
+      "bytes": 25803832,
+      "weidu_package": true,
+      "tp2_files": [
+        "TowerOfDeception-4.1.0/tod/tod.tp2"
+      ],
+      "components_observed": 4.0,
+      "tp2_observations": [
+        {
+          "path": "TowerOfDeception-4.1.0/tod/tod.tp2",
+          "schema": 1,
+          "version": "v4.1.0",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Castellano (traducido por Clan REO y RPG-Bardo.com)"
+            },
+            {
+              "id": 2,
+              "name": "Czech (prelozil Vlasak a Jab, www.sigil.cz, Radim Klímek)"
+            },
+            {
+              "id": 3,
+              "name": "Russian (translation Austin&Tanger Soto&www.aerie.ru)"
+            },
+            {
+              "id": 4,
+              "name": "Italian (translated by ilot)"
+            },
+            {
+              "id": 5,
+              "name": "German (translated by Gerri)"
+            },
+            {
+              "id": 6,
+              "name": "Francais (traduit par Le Marquis)"
+            },
+            {
+              "id": 7,
+              "name": "Polish (translated by Grzebul and Cuttooth)"
+            },
+            {
+              "id": 8,
+              "name": "Chinese"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@100",
+              "number": 0,
+              "label": "TowerOfDeception-Main"
+            },
+            {
+              "begin": "@106",
+              "number": 1,
+              "label": "TowerOfDeception-ImprovedAstralShardGuardian"
+            },
+            {
+              "begin": "@108",
+              "number": 2,
+              "label": "TowerOfDeception-UstrainEncounter"
+            },
+            {
+              "begin": "@109",
+              "number": 3,
+              "label": "TowerOfDeception-WarbladeTwilightFix"
+            }
+          ],
+          "game_predicates": [
+            "~BGT TOB BG2EE EET~ @101"
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 79,
+      "package": "a7-testyourmettle",
+      "name": "Test Your Mettle!",
+      "candidate_url": "https://github.com/Argent77/A7-TestYourMettle/archive/refs/tags/v1.6.zip",
+      "sha256": "ef982be26bea827ac1269a454b7e8019e21ea751de4cdbfd5dd2ca75c5e91559",
+      "bytes": 36320043,
+      "weidu_package": true,
+      "tp2_files": [
+        "A7-TestYourMettle-1.6/A7-TestYourMettle/A7-TestYourMettle.tp2"
+      ],
+      "components_observed": 6.0,
+      "tp2_observations": [
+        {
+          "path": "A7-TestYourMettle-1.6/A7-TestYourMettle/A7-TestYourMettle.tp2",
+          "schema": 1,
+          "version": "1.6",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "German"
+            },
+            {
+              "id": 2,
+              "name": "Russian (translation: tipun, stn)"
+            },
+            {
+              "id": 3,
+              "name": "French (translation: deratiseur)"
+            },
+            {
+              "id": 4,
+              "name": "Simplified Chinese (translation: yoshimo0417)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@1",
+              "number": 0,
+              "label": "A7-TESTYOURMETTLE-MAIN"
+            },
+            {
+              "begin": "@11",
+              "number": 11,
+              "label": "A7-TESTYOURMETTLE-REDUCE_XP_BY_50"
+            },
+            {
+              "begin": "@12",
+              "number": 12,
+              "label": "A7-TESTYOURMETTLE-REDUCE_XP_BY_75"
+            },
+            {
+              "begin": "@13",
+              "number": 13,
+              "label": "A7-TESTYOURMETTLE-REDUCE_XP_BY_90"
+            },
+            {
+              "begin": "@14",
+              "number": 14,
+              "label": "A7-TESTYOURMETTLE-REDUCE_XP_BY_100"
+            },
+            {
+              "begin": "@20",
+              "number": 20,
+              "label": "A7-TESTYOURMETTLE-SPACEWARP_IN_STORES"
+            }
+          ],
+          "game_predicates": [
+            "~bg2ee eet~ && FILE_EXISTS ~engine.lua~) @100"
+          ],
+          "component_predicates": [
+            {
+              "kind": "require-component",
+              "expression": "~A7-TestYourMettle.tp2~ 0 @101"
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 80,
+      "package": "assassinations",
+      "name": "Assassinations",
+      "candidate_url": "https://github.com/Pocket-Plane-Group/Assassinations/archive/refs/tags/v19.zip",
+      "sha256": "69affd9c09b5dde9d8133a37483c0eca26d53926b351eef0cbe956254ecb8e04",
+      "bytes": 8671731,
+      "weidu_package": true,
+      "tp2_files": [
+        "Assassinations-19/Assassinations/Assassinations.tp2"
+      ],
+      "components_observed": 1.0,
+      "tp2_observations": [
+        {
+          "path": "Assassinations-19/Assassinations/Assassinations.tp2",
+          "schema": 1,
+          "version": "v19",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Russian"
+            },
+            {
+              "id": 2,
+              "name": "Spanish (Translated by Memnoch)"
+            },
+            {
+              "id": 3,
+              "name": "German (Translated by Toran)"
+            },
+            {
+              "id": 4,
+              "name": "Italian (Translated by ilot)"
+            },
+            {
+              "id": 5,
+              "name": "Polish (Translated by Cuttooth)"
+            },
+            {
+              "id": 6,
+              "name": "French (Translated by Le Marquis)"
+            },
+            {
+              "id": 7,
+              "name": "Chinese (Translated by Merzbau)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@0",
+              "number": 0
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 81,
+      "package": "sellswords",
+      "name": "The Sellswords",
+      "candidate_url": "https://github.com/Pocket-Plane-Group/Sellswords/archive/refs/tags/v9.1.zip",
+      "sha256": "a5969376c1b63e2be1213882c5703afc60714772b93f906ccb53e76f990dfb2c",
+      "bytes": 24190231,
+      "weidu_package": true,
+      "tp2_files": [
+        "Sellswords-9.1/Sellswords/Sellswords.tp2"
+      ],
+      "components_observed": 1.0,
+      "tp2_observations": [
+        {
+          "path": "Sellswords-9.1/Sellswords/Sellswords.tp2",
+          "schema": 1,
+          "version": "v9.1",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Russian"
+            },
+            {
+              "id": 2,
+              "name": "German (by Gerri)"
+            },
+            {
+              "id": 3,
+              "name": "Chinese (by Merzbau)"
+            },
+            {
+              "id": 4,
+              "name": "French"
+            },
+            {
+              "id": 5,
+              "name": "Polish (by Stars of Mystra)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@0",
+              "number": 0
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 82,
+      "package": "backbrynnlaw",
+      "name": "Back to Brynnlaw",
+      "candidate_url": "https://github.com/Pocket-Plane-Group/Back_to_Brynnlaw/archive/refs/tags/v9.zip",
+      "sha256": "fffb5ef9a0569db9423d74dfd396e8b0232d391fdaf9fdb6086246dbea90332a",
+      "bytes": 5387617,
+      "weidu_package": true,
+      "tp2_files": [
+        "Back_to_Brynnlaw-9/BackBrynnlaw/backbrynnlaw.tp2"
+      ],
+      "components_observed": 1.0,
+      "tp2_observations": [
+        {
+          "path": "Back_to_Brynnlaw-9/BackBrynnlaw/backbrynnlaw.tp2",
+          "schema": 1,
+          "version": "v9",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Russian"
+            },
+            {
+              "id": 2,
+              "name": "Deutsch"
+            },
+            {
+              "id": 3,
+              "name": "Chinese"
+            },
+            {
+              "id": 4,
+              "name": "French"
+            },
+            {
+              "id": 5,
+              "name": "Polish"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@0",
+              "number": 0
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 83,
+      "package": "dc",
+      "name": "Dungeon Crawl",
+      "candidate_url": "https://github.com/Pocket-Plane-Group/Dungeon_Crawl/archive/refs/tags/v13.1.zip",
+      "sha256": "c598c4495a863636a9b458e66c6a039c53e11cf103d691b30c7df7c2a55820e5",
+      "bytes": 9990585,
+      "weidu_package": true,
+      "tp2_files": [
+        "Dungeon_Crawl-13.1/DC/DC.tp2"
+      ],
+      "components_observed": 1.0,
+      "tp2_observations": [
+        {
+          "path": "Dungeon_Crawl-13.1/DC/DC.tp2",
+          "schema": 1,
+          "version": "v13.1",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Russian"
+            },
+            {
+              "id": 2,
+              "name": "German (Translated by Gerri)"
+            },
+            {
+              "id": 3,
+              "name": "Italian (Translated by Ilot)"
+            },
+            {
+              "id": 4,
+              "name": "Polish (Translated by Aristo)"
+            },
+            {
+              "id": 5,
+              "name": "Chinese (Translated by Merzbau)"
+            },
+            {
+              "id": 6,
+              "name": "French (Translated by deratiseur)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@0",
+              "number": 0
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 86,
+      "package": "re",
+      "name": "Romantic Encounters",
+      "candidate_url": "https://github.com/Gibberlings3/Romantic_Encounters_BG2/archive/refs/tags/v15.zip",
+      "sha256": "66eb5761124da3253fe78344bbfc4545cda83ce46a70c3ee072eaa5909bfb5f3",
+      "bytes": 4269386,
+      "weidu_package": true,
+      "tp2_files": [
+        "Romantic_Encounters_BG2-15/RE/Setup-RE.tp2"
+      ],
+      "components_observed": 55.0,
+      "tp2_observations": [
+        {
+          "path": "Romantic_Encounters_BG2-15/RE/Setup-RE.tp2",
+          "schema": 1,
+          "version": "v15",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Russian (Translated by Aerie.ru)"
+            },
+            {
+              "id": 2,
+              "name": "French (Translated by Les d'Oghmatiques)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@0",
+              "number": 0
+            },
+            {
+              "begin": "@1",
+              "number": 1
+            },
+            {
+              "begin": "@2",
+              "number": 2
+            },
+            {
+              "begin": "@4",
+              "number": 3
+            },
+            {
+              "begin": "@5",
+              "number": 4
+            },
+            {
+              "begin": "@6",
+              "number": 5
+            },
+            {
+              "begin": "@8",
+              "number": 6
+            },
+            {
+              "begin": "@9",
+              "number": 7
+            },
+            {
+              "begin": "@10",
+              "number": 8
+            },
+            {
+              "begin": "@12",
+              "number": 9
+            },
+            {
+              "begin": "@17",
+              "number": 10
+            },
+            {
+              "begin": "@18",
+              "number": 11
+            },
+            {
+              "begin": "@19",
+              "number": 12
+            },
+            {
+              "begin": "@20",
+              "number": 13
+            },
+            {
+              "begin": "@21",
+              "number": 14
+            },
+            {
+              "begin": "@22",
+              "number": 15
+            },
+            {
+              "begin": "@23",
+              "number": 16
+            },
+            {
+              "begin": "@24",
+              "number": 17
+            },
+            {
+              "begin": "@25",
+              "number": 18
+            },
+            {
+              "begin": "@29",
+              "number": 19
+            },
+            {
+              "begin": "@30",
+              "number": 20
+            },
+            {
+              "begin": "@31",
+              "number": 21
+            },
+            {
+              "begin": "@32",
+              "number": 22
+            },
+            {
+              "begin": "@36",
+              "number": 23
+            },
+            {
+              "begin": "@37",
+              "number": 24
+            },
+            {
+              "begin": "@39",
+              "number": 25
+            },
+            {
+              "begin": "@48",
+              "number": 26
+            },
+            {
+              "begin": "@49",
+              "number": 27
+            },
+            {
+              "begin": "@50",
+              "number": 28
+            },
+            {
+              "begin": "@57",
+              "number": 29
+            },
+            {
+              "begin": "@58",
+              "number": 30
+            },
+            {
+              "begin": "@60",
+              "number": 31
+            },
+            {
+              "begin": "@62",
+              "number": 32
+            },
+            {
+              "begin": "@65",
+              "number": 33
+            },
+            {
+              "begin": "@66",
+              "number": 34
+            },
+            {
+              "begin": "@67",
+              "number": 35
+            },
+            {
+              "begin": "@68",
+              "number": 36
+            },
+            {
+              "begin": "@70",
+              "number": 37
+            },
+            {
+              "begin": "@71",
+              "number": 38
+            },
+            {
+              "begin": "@73",
+              "number": 39
+            },
+            {
+              "begin": "@74",
+              "number": 40
+            },
+            {
+              "begin": "@75",
+              "number": 41
+            },
+            {
+              "begin": "@77",
+              "number": 42
+            },
+            {
+              "begin": "@82",
+              "number": 43
+            },
+            {
+              "begin": "@83",
+              "number": 44
+            },
+            {
+              "begin": "@86",
+              "number": 45
+            },
+            {
+              "begin": "@88",
+              "number": 46
+            },
+            {
+              "begin": "@89",
+              "number": 47
+            },
+            {
+              "begin": "@90",
+              "number": 48
+            },
+            {
+              "begin": "@91",
+              "number": 49
+            },
+            {
+              "begin": "@92",
+              "number": 50
+            },
+            {
+              "begin": "@93",
+              "number": 51
+            },
+            {
+              "begin": "@97",
+              "number": 52
+            },
+            {
+              "begin": "@98",
+              "number": 53
+            },
+            {
+              "begin": "@99",
+              "number": 54
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 110,
+      "package": "turnabout",
+      "name": "Turnabout",
+      "candidate_url": "https://github.com/Pocket-Plane-Group/Turnabout/archive/refs/tags/v1.8.zip",
+      "sha256": "2e637c93eb922bd14a8290dc1c521d196a6c2a2ad2b15afac3d95eb175de711e",
+      "bytes": 8569698,
+      "weidu_package": true,
+      "tp2_files": [
+        "Turnabout-1.8/turnabout/setup-turnabout.tp2"
+      ],
+      "components_observed": 2.0,
+      "tp2_observations": [
+        {
+          "path": "Turnabout-1.8/turnabout/setup-turnabout.tp2",
+          "schema": 1,
+          "version": "v1.8",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "French"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@1",
+              "number": 0,
+              "label": "Turnabout-main"
+            },
+            {
+              "begin": "@54",
+              "number": 1,
+              "label": "Turnabout-BalthazarPortrait"
+            }
+          ],
+          "game_predicates": [
+            "~tob bgt bg2ee eet~ @2"
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 111,
+      "package": "longerroad",
+      "name": "The Longer Road",
+      "candidate_url": "https://github.com/InfinityMods/LongerRoadEE/archive/refs/tags/2.0.7.zip",
+      "sha256": "5e46d529574121d7b8712a7f427fcc4f6f5d44b9da6294ba61c81f5569ea34e6",
+      "bytes": 10211014,
+      "weidu_package": true,
+      "tp2_files": [
+        "LongerRoad-2.0.7/LongerRoad/LongerRoad.tp2"
+      ],
+      "components_observed": 2.0,
+      "tp2_observations": [
+        {
+          "path": "LongerRoad-2.0.7/LongerRoad/LongerRoad.tp2",
+          "schema": 1,
+          "version": "2.0.7",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Espanol (Traducido cerca Immortality y compana)"
+            },
+            {
+              "id": 2,
+              "name": "Francais (Traduction de Erszebeth)"
+            },
+            {
+              "id": 3,
+              "name": "Polski (Tlumaczenie Cuttooth)"
+            },
+            {
+              "id": 4,
+              "name": "Russian (Arcanecoast Team)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@0",
+              "number": 0,
+              "label": "LongerRoad-Main"
+            },
+            {
+              "begin": "@126",
+              "number": 1,
+              "label": "LongerRoad-RestoreIrenicusSoAPortrait"
+            }
+          ],
+          "game_predicates": [
+            "~bg2ee eet~"
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 126,
+      "package": "isra",
+      "name": "Isra NPC for BG",
+      "candidate_url": "https://github.com/SpellholdStudios/Isra_NPC/archive/refs/tags/v3.5.zip",
+      "sha256": "36c01fa48dd96b6aa4d04c19d4f81e4d519d66a6380bf0642c198fed8a2e129e",
+      "bytes": 5761542,
+      "weidu_package": true,
+      "tp2_files": [
+        "Isra_NPC-3.5/isra/isra.tp2"
+      ],
+      "components_observed": 3.0,
+      "tp2_observations": [
+        {
+          "path": "Isra_NPC-3.5/isra/isra.tp2",
+          "schema": 1,
+          "version": "v3.5",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Russian (Translation: JamesMaxwell & Arcanecoast.ru)"
+            },
+            {
+              "id": 2,
+              "name": "Italiano (traduzione di Coland)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@1",
+              "number": 0,
+              "label": "isra_npc_for_bg"
+            },
+            {
+              "begin": "@2",
+              "number": 1,
+              "label": "isra_valerie_crossmod_content"
+            },
+            {
+              "begin": "@3",
+              "number": 2,
+              "label": "isra_gavin_crossmod_content"
+            }
+          ],
+          "game_predicates": [
+            "\"eet\") ? 1 : 0",
+            "~bgee eet~) ? 1 : 0",
+            "~bgee~ AND GAME_INCLUDES ~sod~) ? 1 : 0",
+            "~bgee~ AND NOT GAME_INCLUDES ~sod~) ? 1 : 0",
+            "~bgt~) ? 1 : 0",
+            "~tutu tutu_totsc bgee eet bgt~ @11",
+            "~tutu tutu_totsc~ ? 1 : 0)",
+            "~tutu_totsc bgt bgee eet~) ? 1 : 0"
+          ],
+          "component_predicates": [
+            {
+              "kind": "require-component",
+              "expression": "~gavin.tp2~ ~0~ @16"
+            },
+            {
+              "kind": "require-component",
+              "expression": "~isra.tp2~ ~0~ @12"
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 168,
+      "package": "isra-bg2",
+      "name": "Isra NPC",
+      "candidate_url": "https://github.com/SpellholdStudios/Isra_NPC_BG2/archive/refs/tags/v3.1.zip",
+      "sha256": "45bd7011bdb30ef2b4759ac9a8fa2a4a25711efa545efbfc2b0c20841180a8a8",
+      "bytes": 10889253,
+      "weidu_package": true,
+      "tp2_files": [
+        "Isra_NPC_BG2-3.1/isra_bg2/isra_bg2.tp2"
+      ],
+      "components_observed": 2.0,
+      "tp2_observations": [
+        {
+          "path": "Isra_NPC_BG2-3.1/isra_bg2/isra_bg2.tp2",
+          "schema": 1,
+          "version": "v3.1",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@0",
+              "number": 0,
+              "label": "isra_npc_for_bg2"
+            },
+            {
+              "begin": "@2",
+              "number": 1,
+              "label": "isra_npc_for_bg2_crossmod_content"
+            }
+          ],
+          "game_predicates": [
+            "\"bg2ee\") ? 1 : 0",
+            "\"eet\") ? 1 : 0",
+            "~bg2ee eet~) ? 1 : 0",
+            "~bgt tob tutu tutu_totsc~) ? 1 : 0"
+          ],
+          "component_predicates": [
+            {
+              "kind": "require-component",
+              "expression": "~isra_bg2.tp2~ ~0~ @3"
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 204,
+      "package": "cernd",
+      "name": "Cernd Friendship",
+      "candidate_url": "https://github.com/SpellholdStudios/CerndFriendship/archive/refs/tags/v1.4.zip",
+      "sha256": "ffb0cbd029adb2642453953d05865552af5202d057cd276aabb5cfd1c6e4ea1e",
+      "bytes": 861208,
+      "weidu_package": true,
+      "tp2_files": [
+        "CerndFriendship-1.4/cernd/cernd.tp2"
+      ],
+      "components_observed": 1.0,
+      "tp2_observations": [
+        {
+          "path": "CerndFriendship-1.4/cernd/cernd.tp2",
+          "schema": 1,
+          "version": "v1.4",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Russian by shaker653 from arcanecoast.ru"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@0",
+              "number": 0,
+              "label": "cernd_friendship"
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 207,
+      "package": "haerdalis-friendship",
+      "name": "Haer'dalis Friendship",
+      "candidate_url": "https://github.com/SpellholdStudios/HaerdalisFriendship/archive/refs/tags/v1.2.zip",
+      "sha256": "e4cae0eda59c9064bb9187c4bc617c12acca843430e8fe69deb61039be0ae5dd",
+      "bytes": 2361645,
+      "weidu_package": true,
+      "tp2_files": [
+        "HaerdalisFriendship-1.2/haerdalis_friendship/haerdalis_friendship.tp2"
+      ],
+      "components_observed": 1.0,
+      "tp2_observations": [
+        {
+          "path": "HaerdalisFriendship-1.2/haerdalis_friendship/haerdalis_friendship.tp2",
+          "schema": 1,
+          "version": "v1.2",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@0",
+              "number": 0,
+              "label": "haerdalis_friendship"
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 208,
+      "package": "imoenfriendship",
+      "name": "Imoen Friendship",
+      "candidate_url": "https://github.com/SpellholdStudios/ImoenFriendship/archive/refs/tags/v3.6.zip",
+      "sha256": "369c9f53e4e421caff63307ad43ececb6e4310a702b8dad32e341313a80227a8",
+      "bytes": 2341394,
+      "weidu_package": true,
+      "tp2_files": [
+        "ImoenFriendship-3.6/imoenfriendship/imoenfriendship.tp2"
+      ],
+      "components_observed": 1.0,
+      "tp2_observations": [
+        {
+          "path": "ImoenFriendship-3.6/imoenfriendship/imoenfriendship.tp2",
+          "schema": 1,
+          "version": "v3.6",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Russian (translation by ArcaneCoast.ru)"
+            },
+            {
+              "id": 2,
+              "name": "Polish (translation by Lava Del'Vortel)"
+            },
+            {
+              "id": 3,
+              "name": "Francais (traduction : Isaya)"
+            },
+            {
+              "id": 4,
+              "name": "Espanol (traduccion por Clan DLAN)"
+            },
+            {
+              "id": 5,
+              "name": "Chinese (translation by Merzbau)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@0",
+              "number": 0,
+              "label": "imoen_friendship"
+            }
+          ],
+          "game_predicates": [
+            "~bg2ee bgt tob eet~ @1"
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 212,
+      "package": "korganfriendship",
+      "name": "Korgan Friendship",
+      "candidate_url": "https://github.com/SpellholdStudios/KorganFriendship/archive/refs/tags/v1.6.zip",
+      "sha256": "aba82785eaffcfdb7083a8dc55e90b6207037888df34bbf77e4c81b4567c737b",
+      "bytes": 884526,
+      "weidu_package": true,
+      "tp2_files": [
+        "KorganFriendship-1.6/korganfriendship/korganfriendship.tp2"
+      ],
+      "components_observed": 1.0,
+      "tp2_observations": [
+        {
+          "path": "KorganFriendship-1.6/korganfriendship/korganfriendship.tp2",
+          "schema": 1,
+          "version": "v1.6",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Russian (translation by Austin & Arcanecoast Team)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@1",
+              "number": 0,
+              "label": "korgan_friendship"
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 213,
+      "package": "korgan",
+      "name": "Korgan's Redemption",
+      "candidate_url": "https://github.com/SpellholdStudios/KorgansRedemption/archive/refs/tags/v10.0.1.zip",
+      "sha256": "e9fec975b435b16691cd43d1a13f8a1eb128b0903edea50aaf2b60d711b3538d",
+      "bytes": 831901,
+      "weidu_package": true,
+      "tp2_files": [
+        "KorgansRedemption-10.0.1/korgan/korgan.tp2"
+      ],
+      "components_observed": 1.0,
+      "tp2_observations": [
+        {
+          "path": "KorgansRedemption-10.0.1/korgan/korgan.tp2",
+          "schema": 1,
+          "version": "v10.0.1",
+          "languages": [
+            {
+              "id": 0,
+              "name": "Polski"
+            },
+            {
+              "id": 1,
+              "name": "English"
+            },
+            {
+              "id": 2,
+              "name": "Russian (translation by Austin)"
+            },
+            {
+              "id": 3,
+              "name": "Francais (traduction : Le Marquis)"
+            },
+            {
+              "id": 4,
+              "name": "Deutsch (Uebersetzung von the BiG World Textpack German team)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@0",
+              "number": 0,
+              "label": "korgan_redemption"
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 214,
+      "package": "mazzy",
+      "name": "Mazzy Friendship",
+      "candidate_url": "https://github.com/SpellholdStudios/MazzyFriendship/archive/refs/tags/v3.5.zip",
+      "sha256": "31b4131b55a3090378fd18c0bc053503b55cfd0c1267b501c0555e6ecf404175",
+      "bytes": 919165,
+      "weidu_package": true,
+      "tp2_files": [
+        "MazzyFriendship-3.5/mazzy/mazzy.tp2"
+      ],
+      "components_observed": 1.0,
+      "tp2_observations": [
+        {
+          "path": "MazzyFriendship-3.5/mazzy/mazzy.tp2",
+          "schema": 1,
+          "version": "v3.5",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Francais (traduction : Ixion)"
+            },
+            {
+              "id": 2,
+              "name": "Deutsch (Uebersetzung vom Kerzenburgforum)"
+            },
+            {
+              "id": 3,
+              "name": "Chinese (translation by Merzbau)"
+            },
+            {
+              "id": 4,
+              "name": "Russian (translation by Evilkiss & Arcanecoast.ru)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@0",
+              "number": 0,
+              "label": "mazzy_friendship"
+            }
+          ],
+          "game_predicates": [
+            "~bg2ee tob bgt eet~ @1"
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 215,
+      "package": "minscfriendship",
+      "name": "Minsc Friendship",
+      "candidate_url": "https://github.com/SpellholdStudios/MinscFriendship/archive/refs/tags/v1.3.zip",
+      "sha256": "b066024aca681139401855d2f1d5cd85337840113d121c1784859d65785133da",
+      "bytes": 2401048,
+      "weidu_package": true,
+      "tp2_files": [
+        "MinscFriendship-1.3/minscfriendship/minscfriendship.tp2"
+      ],
+      "components_observed": 1.0,
+      "tp2_observations": [
+        {
+          "path": "MinscFriendship-1.3/minscfriendship/minscfriendship.tp2",
+          "schema": 1,
+          "version": "v1.3",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Russian (translation by Arkie & Arcanecoast.ru)"
+            },
+            {
+              "id": 2,
+              "name": "Espanol (traduccion por Magis365)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@1",
+              "number": 0,
+              "label": "minsc_friendship"
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 219,
+      "package": "sarevokfriendship",
+      "name": "Sarevok Friendship",
+      "candidate_url": "https://github.com/SpellholdStudios/SarevokFriendship/archive/refs/tags/v2.7.zip",
+      "sha256": "e803df2d10c1ba0a40c19b1f2804b0249b95caa31031dd9e512ddd73d790b4d7",
+      "bytes": 887699,
+      "weidu_package": true,
+      "tp2_files": [
+        "SarevokFriendship-2.7/sarevokfriendship/sarevokfriendship.tp2"
+      ],
+      "components_observed": 1.0,
+      "tp2_observations": [
+        {
+          "path": "SarevokFriendship-2.7/sarevokfriendship/sarevokfriendship.tp2",
+          "schema": 1,
+          "version": "v2.7",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Francais (traduction : Isaya)"
+            },
+            {
+              "id": 2,
+              "name": "Polish (translation by Astharoshe, member of SoM)"
+            },
+            {
+              "id": 3,
+              "name": "Chinese (translation by Merzbau)"
+            },
+            {
+              "id": 4,
+              "name": "Russian (translation by Arkie)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@0",
+              "number": 0,
+              "label": "sarevok_friendship"
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 220,
+      "package": "valygarfriendship",
+      "name": "Valygar Friendship",
+      "candidate_url": "https://github.com/SpellholdStudios/ValygarFriendship/archive/refs/tags/v1.5.zip",
+      "sha256": "cde7a4e747d9ba846b2809b180569f3334c37cf4cc23e976288cc8cd3df0eb59",
+      "bytes": 2406348,
+      "weidu_package": true,
+      "tp2_files": [
+        "ValygarFriendship-1.5/valygarfriendship/valygarfriendship.tp2"
+      ],
+      "components_observed": 1.0,
+      "tp2_observations": [
+        {
+          "path": "ValygarFriendship-1.5/valygarfriendship/valygarfriendship.tp2",
+          "schema": 1,
+          "version": "v1.5",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Russian (translation by Alisia Messar, Enigma-Evilkiss and Arcanecoast.ru)"
+            },
+            {
+              "id": 2,
+              "name": "Chinese (translation by Merzbau)"
+            },
+            {
+              "id": 3,
+              "name": "Espanol (traduccion por Magis365)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@0",
+              "number": 0,
+              "label": "valygar_friendship"
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 221,
+      "package": "viconia",
+      "name": "Viconia Friendship",
+      "candidate_url": "https://github.com/SpellholdStudios/ViconiaFriendship/archive/refs/tags/v4.5.zip",
+      "sha256": "284987be5cc74f578bd90305eedd5a05ffa0aa40c491d92e426dd7c06959bd6a",
+      "bytes": 967538,
+      "weidu_package": true,
+      "tp2_files": [
+        "ViconiaFriendship-4.5/viconia/viconia.tp2"
+      ],
+      "components_observed": 1.0,
+      "tp2_observations": [
+        {
+          "path": "ViconiaFriendship-4.5/viconia/viconia.tp2",
+          "schema": 1,
+          "version": "v4.5",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Francais (traduction : Ixyon)"
+            },
+            {
+              "id": 2,
+              "name": "Russian (translation by arcanecoast.ru)"
+            },
+            {
+              "id": 3,
+              "name": "Chinese (translation by Merzbau)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@0",
+              "number": 0,
+              "label": "viconia_friendship"
+            }
+          ],
+          "game_predicates": [
+            "~bg2ee tob bgt eet~ @5"
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 222,
+      "package": "yoshimo",
+      "name": "Yoshimo Friendship",
+      "candidate_url": "https://github.com/SpellholdStudios/YoshimoFriendship/archive/refs/tags/v5.0.zip",
+      "sha256": "d64eb00f1300cbc653b9e57e6d13f993b32fd1ac139f103fe902e509f5f0c41c",
+      "bytes": 2384685,
+      "weidu_package": true,
+      "tp2_files": [
+        "YoshimoFriendship-5.0/yoshimo/yoshimo.tp2"
+      ],
+      "components_observed": 1.0,
+      "tp2_observations": [
+        {
+          "path": "YoshimoFriendship-5.0/yoshimo/yoshimo.tp2",
+          "schema": 1,
+          "version": "v5.0",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Polski (translation by Lava Del'Vortel)"
+            },
+            {
+              "id": 2,
+              "name": "Francais (traduction : Isaya, Ixyon et Graoumf)"
+            },
+            {
+              "id": 3,
+              "name": "Chinese (translation by Merzbau)"
+            },
+            {
+              "id": 4,
+              "name": "Russian (translation by Arkie)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@0",
+              "number": 0,
+              "label": "yoshimo_friendship"
+            }
+          ],
+          "game_predicates": [
+            "~bg2ee bgt tob eet~ @1"
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 229,
+      "package": "dornfriendship",
+      "name": "Dorn Friendship",
+      "candidate_url": "https://github.com/SpellholdStudios/Dorn-Friendship/archive/refs/tags/v1.2.zip",
+      "sha256": "f956a94d3aa24e425d1ba99a8d2755b5273fa7b0850968a90ce5e1736a47813c",
+      "bytes": 63803,
+      "weidu_package": true,
+      "tp2_files": [
+        "Dorn-Friendship-1.2/DornFriendship/DornFriendship.tp2"
+      ],
+      "components_observed": 1.0,
+      "tp2_observations": [
+        {
+          "path": "Dorn-Friendship-1.2/DornFriendship/DornFriendship.tp2",
+          "schema": 1,
+          "version": "1.2",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Russian (translation by Jarly)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@1",
+              "number": 0,
+              "label": "Dorn_friendship"
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 230,
+      "package": "hexxatfriendship",
+      "name": "Hexxat Friendship",
+      "candidate_url": "https://github.com/SpellholdStudios/Hexxat-Friendship/archive/refs/tags/v1.2.zip",
+      "sha256": "69639376973f49c675fb9f613401b28bcebccf6313b8192bff1dc30cb66fe49b",
+      "bytes": 48793,
+      "weidu_package": true,
+      "tp2_files": [
+        "Hexxat-Friendship-1.2/HexxatFriendship/HexxatFriendship.tp2"
+      ],
+      "components_observed": 1.0,
+      "tp2_observations": [
+        {
+          "path": "Hexxat-Friendship-1.2/HexxatFriendship/HexxatFriendship.tp2",
+          "schema": 1,
+          "version": "1.2",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Russian (by Jarly)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@1",
+              "number": 0,
+              "label": "hexxat_friendship"
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 233,
+      "package": "sodrtd",
+      "name": "Road to Discovery",
+      "candidate_url": "https://github.com/Gibberlings3/Road_To_Discovery_for_SoD/archive/refs/tags/v6.zip",
+      "sha256": "f331c3d4da6d55dc741687cce0c03e806e36c3268295c4de29a84c3aae6fdcbf",
+      "bytes": 327855,
+      "weidu_package": true,
+      "tp2_files": [
+        "Road_To_Discovery_for_SoD-6/sodrtd/sodrtd.tp2"
+      ],
+      "components_observed": 9.0,
+      "tp2_observations": [
+        {
+          "path": "Road_To_Discovery_for_SoD-6/sodrtd/sodrtd.tp2",
+          "schema": 1,
+          "version": "6.0",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Deutsch"
+            },
+            {
+              "id": 2,
+              "name": "French"
+            },
+            {
+              "id": 3,
+              "name": "Italian"
+            },
+            {
+              "id": 4,
+              "name": "Spanish"
+            },
+            {
+              "id": 5,
+              "name": "Russian"
+            },
+            {
+              "id": 6,
+              "name": "Simplified Chinese"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@100000",
+              "number": 80,
+              "label": "#L-SOD-STAT_BASED_OPTIONS"
+            },
+            {
+              "begin": "@100005",
+              "number": 0,
+              "label": "SoDRoadToDiscovery-main"
+            },
+            {
+              "begin": "@100007",
+              "number": 10,
+              "label": "SoDRoadToDiscovery-consistency"
+            },
+            {
+              "begin": "@100009",
+              "number": 20,
+              "label": "SoDRoadToDiscovery-aware_officers"
+            },
+            {
+              "begin": "@100010",
+              "number": 30,
+              "label": "SoDRoadToDiscovery-consistency_reply_options"
+            },
+            {
+              "begin": "@100012",
+              "number": 40,
+              "label": "SoDRoadToDiscovery-PC_tells_officers"
+            },
+            {
+              "begin": "@100016",
+              "number": 50,
+              "label": "SoDRoadToDiscovery-officers_reactions"
+            },
+            {
+              "begin": "@100020",
+              "number": 60,
+              "label": "SoDRoadToDiscovery-additional_infopoints"
+            },
+            {
+              "begin": "@100022",
+              "number": 70,
+              "label": "SoDRoadToDiscovery-additional_communication_officers"
+            }
+          ],
+          "game_predicates": [
+            "~eet~ ? 200000 : 0"
+          ],
+          "component_predicates": [
+            {
+              "kind": "forbid-component",
+              "expression": "~EET_end.tp2~ ~0~ @100004"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~EET_end.tp2~ ~1~ @100004"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~sodrtd.tp2~ ~30~ ~This component needs to be installed before component \"Give PC consistency reply options\".~"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~sodrtd.tp2~ ~70~ @100019"
+            },
+            {
+              "kind": "require-component",
+              "expression": "~sodrtd.tp2~ ~0~ @100008"
+            },
+            {
+              "kind": "require-component",
+              "expression": "~sodrtd.tp2~ ~10~ @100011"
+            },
+            {
+              "kind": "require-component",
+              "expression": "~sodrtd.tp2~ ~20~ @100017"
+            },
+            {
+              "kind": "require-component",
+              "expression": "~sodrtd.tp2~ ~40~ @100018"
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 235,
+      "package": "npcflirt",
+      "name": "Bioware NPC Flirt Packs",
+      "candidate_url": "https://github.com/Pocket-Plane-Group/NPC_Flirt_Packs/archive/refs/tags/v1.07.zip",
+      "sha256": "65b0a2b64134b0039062024e79d6b03a87b7df91eda4e9061d5d0c80ceead568",
+      "bytes": 3166447,
+      "weidu_package": true,
+      "tp2_files": [
+        "NPC_Flirt_Packs-1.07/npcflirt/setup-npcflirt.tp2"
+      ],
+      "components_observed": 16.0,
+      "tp2_observations": [
+        {
+          "path": "NPC_Flirt_Packs-1.07/npcflirt/setup-npcflirt.tp2",
+          "schema": 1,
+          "version": "v1.07",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Espanol (Traducido por Clan DLAN)"
+            },
+            {
+              "id": 2,
+              "name": "German (Translated by Beaz and Beyshaliban)"
+            },
+            {
+              "id": 3,
+              "name": "French (Translated by Thot)"
+            },
+            {
+              "id": 4,
+              "name": "Russian (Translated by Austin, Staylos $ Arcanecoast)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@1",
+              "number": 0
+            },
+            {
+              "begin": "@2",
+              "number": 1
+            },
+            {
+              "begin": "@3",
+              "number": 2
+            },
+            {
+              "begin": "@4",
+              "number": 3
+            },
+            {
+              "begin": "@5",
+              "number": 4
+            },
+            {
+              "begin": "@6",
+              "number": 5
+            },
+            {
+              "begin": "@7",
+              "number": 6
+            },
+            {
+              "begin": "@8",
+              "number": 7
+            },
+            {
+              "begin": "@9",
+              "number": 8
+            },
+            {
+              "begin": "@10",
+              "number": 9
+            },
+            {
+              "begin": "@11",
+              "number": 10
+            },
+            {
+              "begin": "@12",
+              "number": 11
+            },
+            {
+              "begin": "@13",
+              "number": 12
+            },
+            {
+              "begin": "@14",
+              "number": 13
+            },
+            {
+              "begin": "@15",
+              "number": 14
+            },
+            {
+              "begin": "@16",
+              "number": 15
+            }
+          ],
+          "game_predicates": [
+            "~tob bg2ee eet bgt~ @100"
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 236,
+      "package": "banterpack",
+      "name": "Banter Packs",
+      "candidate_url": "https://github.com/Pocket-Plane-Group/Banter_Pack/archive/refs/tags/v18.zip",
+      "sha256": "c372aadca0ae794312e8ac76738fa38887f0f37e4ceff9c6249bcde2a843f47f",
+      "bytes": 2792668,
+      "weidu_package": true,
+      "tp2_files": [
+        "Banter_Pack-18/banterpack/Setup-banterpack.tp2"
+      ],
+      "components_observed": 4.0,
+      "tp2_observations": [
+        {
+          "path": "Banter_Pack-18/banterpack/Setup-banterpack.tp2",
+          "schema": 1,
+          "version": "v18",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Espanol (Traducido por Clan DLAN)"
+            },
+            {
+              "id": 2,
+              "name": "Deutsch (Uebersetzung durch rosenranken.de)"
+            },
+            {
+              "id": 3,
+              "name": "Francais (Translated by Mathrim Cauthon)"
+            },
+            {
+              "id": 4,
+              "name": "Polski (Translated by Damian Staniszewski)"
+            },
+            {
+              "id": 5,
+              "name": "Italian (Translated by Xeno.Team and others, updated by Ilot)"
+            },
+            {
+              "id": 6,
+              "name": "Russian (Translated by Prowler)"
+            },
+            {
+              "id": 7,
+              "name": "Korean (Translated by Tannedbear)"
+            },
+            {
+              "id": 8,
+              "name": "Chinese (Translated by Merzbau)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@1",
+              "number": 0,
+              "label": "PPGBanterPacks-soa"
+            },
+            {
+              "begin": "@93",
+              "number": 1,
+              "label": "PPGBanterPacks-soa_banteraccelerator"
+            },
+            {
+              "begin": "@14",
+              "number": 2,
+              "label": "PPGBanterPacks-tob"
+            },
+            {
+              "begin": "@95",
+              "number": 3,
+              "label": "PPGBanterPacks-tob_banteraccelerator"
+            }
+          ],
+          "game_predicates": [
+            "~bg2ee eet~)) THEN BEGIN"
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 238,
+      "package": "crossmodbg2",
+      "name": "Crossmod Banter Pack",
+      "candidate_url": "https://github.com/Gibberlings3/Crossmod_Banter_Pack_for_Baldurs_Gate_II/archive/refs/tags/v30.zip",
+      "sha256": "aa8578bbfcba7fc82aed971a9eb667f952da6d7552b921debd5397bfdd63a824",
+      "bytes": 3976783,
+      "weidu_package": true,
+      "tp2_files": [
+        "Crossmod_Banter_Pack_for_Baldurs_Gate_II-30/crossmodbg2/setup-crossmodbg2.tp2"
+      ],
+      "components_observed": 3.0,
+      "tp2_observations": [
+        {
+          "path": "Crossmod_Banter_Pack_for_Baldurs_Gate_II-30/crossmodbg2/setup-crossmodbg2.tp2",
+          "schema": 1,
+          "version": "v30",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "German"
+            },
+            {
+              "id": 2,
+              "name": "Russian"
+            },
+            {
+              "id": 3,
+              "name": "Italian"
+            },
+            {
+              "id": 4,
+              "name": "Simplified Chinese"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@1000",
+              "number": 0,
+              "label": "cd_crossmod_banter_pack_bg2_soa"
+            },
+            {
+              "begin": "@2000",
+              "number": 1,
+              "label": "cd_crossmod_banter_pack_bg2_tob"
+            },
+            {
+              "begin": "@3000",
+              "number": 2,
+              "label": "cd_crossmod_banter_pack_bg2_romance_conflicts"
+            }
+          ],
+          "game_predicates": [
+            "~bgt eet bg2ee soa tob~ @100"
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 246,
+      "package": "eet-tweaks",
+      "name": "Baldur's Gate: Enhanced Edition Trilogy Tweaks (EET Tweaks)",
+      "candidate_url": "https://github.com/K4thos/EET_Tweaks/archive/refs/tags/v1.12.zip",
+      "sha256": "c43b8a070755a52ef8eff8c3865be203545a01b4a75e0e6474ea1d5aa975880c",
+      "bytes": 17068287,
+      "weidu_package": true,
+      "tp2_files": [
+        "EET_Tweaks-1.12/EET_Tweaks/EET_Tweaks.tp2"
+      ],
+      "components_observed": 65.0,
+      "tp2_observations": [
+        {
+          "path": "EET_Tweaks-1.12/EET_Tweaks/EET_Tweaks.tp2",
+          "schema": 1,
+          "version": "1.12",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Polski (Polish)"
+            },
+            {
+              "id": 2,
+              "name": "Czech"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@900101",
+              "number": 1000
+            },
+            {
+              "begin": "@900102",
+              "number": 1001
+            },
+            {
+              "begin": "@900201",
+              "number": 1010
+            },
+            {
+              "begin": "@900202",
+              "number": 1011
+            },
+            {
+              "begin": "@900203",
+              "number": 1012
+            },
+            {
+              "begin": "@900301",
+              "number": 1020
+            },
+            {
+              "begin": "@900302",
+              "number": 1021
+            },
+            {
+              "begin": "@900401",
+              "number": 1030
+            },
+            {
+              "begin": "@900402",
+              "number": 1031
+            },
+            {
+              "begin": "@900501",
+              "number": 1040
+            },
+            {
+              "begin": "@900502",
+              "number": 1041
+            },
+            {
+              "begin": "@900503",
+              "number": 1042
+            },
+            {
+              "begin": "@900600",
+              "number": 1050
+            },
+            {
+              "begin": "@900700",
+              "number": 1060
+            },
+            {
+              "begin": "@910101",
+              "number": 2000
+            },
+            {
+              "begin": "@910102",
+              "number": 2001
+            },
+            {
+              "begin": "@910103",
+              "number": 2002
+            },
+            {
+              "begin": "@910104",
+              "number": 2003
+            },
+            {
+              "begin": "@910201",
+              "number": 2010
+            },
+            {
+              "begin": "@910202",
+              "number": 2011
+            },
+            {
+              "begin": "@910203",
+              "number": 2012
+            },
+            {
+              "begin": "@910204",
+              "number": 2013
+            },
+            {
+              "begin": "@910301",
+              "number": 2020
+            },
+            {
+              "begin": "@910302",
+              "number": 2021
+            },
+            {
+              "begin": "@910303",
+              "number": 2022
+            },
+            {
+              "begin": "@910304",
+              "number": 2023
+            },
+            {
+              "begin": "@910401",
+              "number": 2030
+            },
+            {
+              "begin": "@910402",
+              "number": 2031
+            },
+            {
+              "begin": "@910403",
+              "number": 2032
+            },
+            {
+              "begin": "@910404",
+              "number": 2033
+            },
+            {
+              "begin": "@910501",
+              "number": 2040
+            },
+            {
+              "begin": "@910502",
+              "number": 2041
+            },
+            {
+              "begin": "@910503",
+              "number": 2042
+            },
+            {
+              "begin": "@910504",
+              "number": 2043
+            },
+            {
+              "begin": "@910505",
+              "number": 2044
+            },
+            {
+              "begin": "@910601",
+              "number": 2050
+            },
+            {
+              "begin": "@910602",
+              "number": 2051
+            },
+            {
+              "begin": "@910603",
+              "number": 2052
+            },
+            {
+              "begin": "@910604",
+              "number": 2053
+            },
+            {
+              "begin": "@910605",
+              "number": 2054
+            },
+            {
+              "begin": "@910606",
+              "number": 2055
+            },
+            {
+              "begin": "@910607",
+              "number": 2056
+            },
+            {
+              "begin": "@910701",
+              "number": 2060
+            },
+            {
+              "begin": "@910702",
+              "number": 2061
+            },
+            {
+              "begin": "@910703",
+              "number": 2062
+            },
+            {
+              "begin": "@910704",
+              "number": 2063
+            },
+            {
+              "begin": "@910705",
+              "number": 2064
+            },
+            {
+              "begin": "@910706",
+              "number": 2065
+            },
+            {
+              "begin": "@910707",
+              "number": 2066
+            },
+            {
+              "begin": "@910800",
+              "number": 2070
+            },
+            {
+              "begin": "@910900",
+              "number": 2080
+            },
+            {
+              "begin": "@920100",
+              "number": 3000
+            },
+            {
+              "begin": "@920200",
+              "number": 3010
+            },
+            {
+              "begin": "@920301",
+              "number": 3020
+            },
+            {
+              "begin": "@920302",
+              "number": 3021
+            },
+            {
+              "begin": "@920303",
+              "number": 3022
+            },
+            {
+              "begin": "@920500",
+              "number": 3040
+            },
+            {
+              "begin": "@920600",
+              "number": 3050
+            },
+            {
+              "begin": "@930300",
+              "number": 4020
+            },
+            {
+              "begin": "@930500",
+              "number": 4040
+            },
+            {
+              "begin": "@930600",
+              "number": 4050
+            },
+            {
+              "begin": "@930700",
+              "number": 4060
+            },
+            {
+              "begin": "@930800",
+              "number": 4070
+            },
+            {
+              "begin": "@930901",
+              "number": 4080
+            },
+            {
+              "begin": "@930902",
+              "number": 4081
+            }
+          ],
+          "game_predicates": [
+            "~bg1 totsc soa tob iwd how totlm iwd2 tutu tutu_totsc bgt ca iwd_in_bg2 bgee bg2ee iwdee eet~ @990000",
+            "~bg2ee iwdee eet~ @990000",
+            "~bgee bg2ee eet~ @990000",
+            "~bgee bg2ee iwdee eet~ @990000",
+            "~eet~ @990000",
+            "~soa tob tutu tutu_totsc bgt bgee bg2ee eet~ @990000",
+            "~soa tob tutu tutu_totsc bgt ca iwd_in_bg2 bgee bg2ee iwdee eet~ @990000"
+          ],
+          "component_predicates": [
+            {
+              "kind": "forbid-component",
+              "expression": "~Setup-BGTTweak.tp2~ 2300 @990002"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~WandCase/WandCase.tp2~ 0 @990002"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~xpmod/setup-xpmod.tp2~ 0 @990002"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~xpmod/setup-xpmod.tp2~ 1 @990002"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~xpmod/setup-xpmod.tp2~ 10 @990002"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~xpmod/setup-xpmod.tp2~ 11 @990002"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~xpmod/setup-xpmod.tp2~ 12 @990002"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~xpmod/setup-xpmod.tp2~ 13 @990002"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~xpmod/setup-xpmod.tp2~ 14 @990002"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~xpmod/setup-xpmod.tp2~ 15 @990002"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~xpmod/setup-xpmod.tp2~ 16 @990002"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~xpmod/setup-xpmod.tp2~ 17 @990002"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~xpmod/setup-xpmod.tp2~ 18 @990002"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~xpmod/setup-xpmod.tp2~ 19 @990002"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~xpmod/setup-xpmod.tp2~ 2 @990002"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~xpmod/setup-xpmod.tp2~ 20 @990002"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~xpmod/setup-xpmod.tp2~ 21 @990002"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~xpmod/setup-xpmod.tp2~ 3 @990002"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~xpmod/setup-xpmod.tp2~ 4 @990002"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~xpmod/setup-xpmod.tp2~ 5 @990002"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~xpmod/setup-xpmod.tp2~ 6 @990002"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~xpmod/setup-xpmod.tp2~ 7 @990002"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~xpmod/setup-xpmod.tp2~ 8 @990002"
+            },
+            {
+              "kind": "forbid-component",
+              "expression": "~xpmod/setup-xpmod.tp2~ 9 @990002"
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 428,
+      "package": "bp-bgt-worldmap",
+      "name": "Worldmap",
+      "candidate_url": "https://github.com/SpellholdStudios/BP-BGT-Worldmap/archive/refs/tags/v13.1.1.zip",
+      "sha256": "3890046ab83ae9316299087345cc7011c484fbd343db3958862004bc053314a7",
+      "bytes": 290473374,
+      "weidu_package": true,
+      "tp2_files": [
+        "BP-BGT-Worldmap-13.1.1/bp-bgt-worldmap/setup-bp-bgt-worldmap.tp2"
+      ],
+      "components_observed": 6.0,
+      "tp2_observations": [
+        {
+          "path": "BP-BGT-Worldmap-13.1.1/bp-bgt-worldmap/setup-bp-bgt-worldmap.tp2",
+          "schema": 1,
+          "version": "v13.1.1",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Deutsch"
+            },
+            {
+              "id": 2,
+              "name": "Italian"
+            },
+            {
+              "id": 3,
+              "name": "Polish"
+            },
+            {
+              "id": 4,
+              "name": "Spanish"
+            },
+            {
+              "id": 5,
+              "name": "French"
+            },
+            {
+              "id": 6,
+              "name": "Russian"
+            },
+            {
+              "id": 7,
+              "name": "Simplified Chinese"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@1000",
+              "number": 0,
+              "label": "worldmap-main"
+            },
+            {
+              "begin": "@4001",
+              "number": 1,
+              "label": "worldmap-replace-tob-map"
+            },
+            {
+              "begin": "@4002",
+              "number": 2,
+              "label": "worldmap-original-tob-map"
+            },
+            {
+              "begin": "@5000",
+              "number": 3,
+              "label": "worldmap-update-savegame"
+            },
+            {
+              "begin": "BG2 style",
+              "number": 4,
+              "label": "worldmap-fullscreen-bg2ee"
+            },
+            {
+              "begin": "Dragonspear style",
+              "number": 5,
+              "label": "worldmap-fullscreen-dragonspear-ui"
+            }
+          ],
+          "game_predicates": [
+            "~tutu tutu_totsc bgee eet~ ~This component is not available for this game~"
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 437,
+      "package": "hq-soundclips-bg2ee",
+      "name": "High Quality Soundclips",
+      "candidate_url": "https://github.com/Argent77/HQ-SoundClips-BG2EE/archive/refs/tags/v1.3.zip",
+      "sha256": "2a969c472597baf8eb038ad3e0b42eec25c161e8fbbece3200b47de6b4fe942b",
+      "bytes": 205336959,
+      "weidu_package": true,
+      "tp2_files": [
+        "HQ-SoundClips-BG2EE-1.3/HQ_SoundClips_BG2EE/HQ_SoundClips_BG2EE.tp2"
+      ],
+      "components_observed": 1.0,
+      "tp2_observations": [
+        {
+          "path": "HQ-SoundClips-BG2EE-1.3/HQ_SoundClips_BG2EE/HQ_SoundClips_BG2EE.tp2",
+          "schema": 1,
+          "version": "1.3",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Polski (tlumaczenie: Cahir)"
+            },
+            {
+              "id": 2,
+              "name": "Brazilian Portuguese (translation: Felipe)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@0",
+              "number": 0,
+              "label": "A7-HQ_SOUNDCLIPS_BG2EE-MAIN"
+            }
+          ],
+          "game_predicates": [
+            "~bg2ee eet~) @100"
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 471,
+      "package": "jaheirafriendship",
+      "name": "Jaheira Friendship",
+      "candidate_url": "https://github.com/Spellhold-Studios/Jaheira-Friendship/archive/refs/tags/v1.3.zip",
+      "sha256": "6e65bbb70096fdcba0c4a9727d9ab8ac63b635c3fcfd6ad7375815ab44f9fee4",
+      "bytes": 928624,
+      "weidu_package": true,
+      "tp2_files": [
+        "Jaheira-Friendship-1.3/JaheiraFriendship/JaheiraFriendship.tp2"
+      ],
+      "components_observed": 1.0,
+      "tp2_observations": [
+        {
+          "path": "Jaheira-Friendship-1.3/JaheiraFriendship/JaheiraFriendship.tp2",
+          "schema": 1,
+          "version": "v1.3",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Russian (translation by Austin)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@1",
+              "number": 0,
+              "label": "jaheira_friendship"
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 512,
+      "package": "darkhorizonsbgee",
+      "name": "Dark Horizons BG:EE",
+      "candidate_url": "https://github.com/The-Gate-Project/DarkHorizons/archive/refs/tags/v3.06.zip",
+      "sha256": "977e7771c9717e3139e96d261279c7337fcfd062fb5ea6b0efdedddc2c8ee9c2",
+      "bytes": 42622502,
+      "weidu_package": true,
+      "tp2_files": [
+        "DarkHorizons-3.06/DarkHorizons/DarkHorizons.tp2"
+      ],
+      "components_observed": 1.0,
+      "tp2_observations": [
+        {
+          "path": "DarkHorizons-3.06/DarkHorizons/DarkHorizons.tp2",
+          "schema": 1,
+          "version": "3.06",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Italian"
+            },
+            {
+              "id": 2,
+              "name": "German"
+            },
+            {
+              "id": 3,
+              "name": "Russian"
+            },
+            {
+              "id": 4,
+              "name": "Polish"
+            },
+            {
+              "id": 5,
+              "name": "Francais (traduit par Sanctifer des d'Oghmatiques)"
+            },
+            {
+              "id": 6,
+              "name": "Spanish"
+            },
+            {
+              "id": 7,
+              "name": "Simplified Chinese (Latest Chinese accent by YouYe)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@0",
+              "number": 10,
+              "label": "TeamBG_CoM_Solaufein-DarkHorizons"
+            }
+          ],
+          "game_predicates": [
+            "~Tutu_totsc~ THEN BEGIN"
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 685,
+      "package": "generalized-biffing",
+      "name": "Generalized Biffing",
+      "candidate_url": "https://github.com/Spellhold-Studios/Generalized-Biffing/archive/refs/tags/v2.9.zip",
+      "sha256": "0d7b0c4ed5714b97e6362243af4f660b3337cfaa9a8984d7f2c87775d41a598d",
+      "bytes": 882527,
+      "weidu_package": true,
+      "tp2_files": [
+        "Generalized-Biffing-2.9/generalized_biffing/generalized_biffing.tp2"
+      ],
+      "components_observed": 2.0,
+      "tp2_observations": [
+        {
+          "path": "Generalized-Biffing-2.9/generalized_biffing/generalized_biffing.tp2",
+          "schema": 1,
+          "version": "v2.9",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "francais (traduction : Isaya)"
+            },
+            {
+              "id": 2,
+              "name": "italiano"
+            },
+            {
+              "id": 3,
+              "name": "polski"
+            },
+            {
+              "id": 4,
+              "name": "portugues (Brasil) (traducao: Felipe)"
+            }
+          ],
+          "components": [
+            {
+              "begin": "@10",
+              "number": 0,
+              "label": "generalized_biffing_min"
+            },
+            {
+              "begin": "@11",
+              "number": 1,
+              "label": "generalized_biffing_all_files"
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "source_id": 701,
+      "package": "b3-reducesavecompression",
+      "name": "Reduce Save Compression",
+      "candidate_url": "https://github.com/Bubb13/B3-ReduceSaveCompression/archive/refs/tags/v1.2.zip",
+      "sha256": "0760b00ac32543cb7d32aa81291da61de1f142713d27268032d10118986406cb",
+      "bytes": 8023,
+      "weidu_package": true,
+      "tp2_files": [
+        "B3-ReduceSaveCompression-1.2/B3-ReduceSaveCompression/B3-ReduceSaveCompression.tp2"
+      ],
+      "components_observed": 1.0,
+      "tp2_observations": [
+        {
+          "path": "B3-ReduceSaveCompression-1.2/B3-ReduceSaveCompression/B3-ReduceSaveCompression.tp2",
+          "schema": 1,
+          "version": "v1.2",
+          "languages": [],
+          "components": [
+            {
+              "begin": "Reduce Save Compression",
+              "number": 0,
+              "label": "B3-ReduceSaveCompression-Main"
+            }
+          ],
+          "game_predicates": [
+            "~bgee bg2ee eet iwdee pstee~ ~Game not supported.~",
+            "~iwdee~ BEGIN",
+            "~pstee~ BEGIN"
+          ]
+        }
+      ],
+      "error": null
+    }
+  ]
+}

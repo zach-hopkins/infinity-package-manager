@@ -21,7 +21,7 @@ EET_End. It also represents the currently known identities for EEex, Infinity
 UI++, Bubb's Spell Menu, Hidden Gameplay Options, Call of the Lost Goddess,
 Throne of the Mad God, Ascension, Tweaks Anthology, and SCS. It is a
 resolver-coverage fixture, not an install manifest. The initial SCS component
-subset is deliberately bounded; `inspect-package` exposes the complete 146
+subset is deliberately bounded; `inspect-package` exposes the complete 143 live
 structural component declarations for later curated mapping.
 
 That description records the fixture's bootstrap origin. It is now also an

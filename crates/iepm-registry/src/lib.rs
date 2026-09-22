@@ -359,22 +359,21 @@ pub fn inspect_tp2(source: &str) -> Tp2Observation {
             awaits_control_flow_begin = false;
             continue;
         }
+        if awaits_control_flow_begin && starts_keyword(line, "BEGIN") {
+            control_flow_depth += 1;
+            awaits_control_flow_begin = false;
+            continue;
+        }
         if control_flow_depth > 0 && starts_keyword(line, "END") {
             control_flow_depth -= 1;
             continue;
         }
-        // WeiDU also uses indented `BEGIN` blocks for control flow inside a
-        // component. Only a BEGIN outside a known action block declares an
-        // install component. Treating every trimmed BEGIN as a component makes
-        // large TP2 inventories materially misleading.
-        if !raw_line.chars().next().is_some_and(char::is_whitespace)
-            && starts_keyword(line, "BEGIN")
-        {
-            if awaits_control_flow_begin {
-                control_flow_depth += 1;
-                awaits_control_flow_begin = false;
-                continue;
-            }
+        // Indentation does not distinguish a real WeiDU component from an
+        // action block: author TP2s contain both indented declarations and
+        // indented control-flow BEGINs. A component has a title argument;
+        // action `BEGIN` is bare. The tracked action context adds another
+        // guard for controls whose expression precedes BEGIN on its line.
+        if starts_keyword(line, "BEGIN") && value_after_keyword(line, "BEGIN").is_some() {
             if control_flow_depth > 0 {
                 continue;
             }
@@ -1179,6 +1178,80 @@ BEGIN ~Inquisitor~
                 .map(|component| component.begin.as_deref())
                 .collect::<Vec<_>>(),
             vec![Some("True Paladin"), Some("Cavalier"), Some("Inquisitor")]
+        );
+    }
+
+    #[test]
+    fn inspection_keeps_components_after_indented_begin_action_blocks() {
+        let observation = inspect_tp2(
+            r#"
+ALWAYS
+  ACTION_IF GAME_IS ~bgee~
+  BEGIN
+    OUTER_SET is_eet = 0
+  END
+END
+BEGIN @1
+DESIGNATED 0
+LABEL ~FIRST~
+  ACTION_IF GAME_IS ~eet~
+  BEGIN
+    COPY_EXISTING ~example.cre~ ~override~
+  END
+BEGIN @2
+DESIGNATED 1
+LABEL ~SECOND~
+"#,
+        );
+
+        assert_eq!(
+            observation
+                .components
+                .iter()
+                .map(|component| component.label.as_deref())
+                .collect::<Vec<_>>(),
+            vec![Some("FIRST"), Some("SECOND")]
+        );
+    }
+
+    #[test]
+    fn inspection_keeps_indented_component_declarations() {
+        let observation = inspect_tp2(
+            r#"
+  BEGIN ~Core NPC~
+  INCLUDE ~mod/core.tpa~
+BEGIN ~Portrait A~
+FORCED_SUBCOMPONENT ~Choose portrait~
+"#,
+        );
+
+        assert_eq!(observation.components.len(), 2);
+        assert_eq!(observation.components[0].begin.as_deref(), Some("Core NPC"));
+        assert_eq!(observation.components[0].number, Some(0));
+        assert_eq!(observation.components[1].number, Some(1));
+    }
+
+    #[test]
+    fn inspection_does_not_promote_bare_nested_begin_to_component() {
+        let observation = inspect_tp2(
+            r#"
+BEGIN @0 DESIGNATED 10
+  PATCH_IF some_condition BEGIN
+    BEGIN
+      WRITE_BYTE 0 1
+    END
+  END
+BEGIN @1 DESIGNATED 20
+"#,
+        );
+
+        assert_eq!(
+            observation
+                .components
+                .iter()
+                .map(|component| component.number)
+                .collect::<Vec<_>>(),
+            vec![Some(10), Some(20)]
         );
     }
 

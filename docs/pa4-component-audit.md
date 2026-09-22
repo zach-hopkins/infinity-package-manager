@@ -21,7 +21,7 @@ declarations.
 
 ## First audit: SCS v35.21 local package tree
 
-The available local SCS tree reports TP2 `VERSION 35.21` and **146** structural
+The available local SCS tree reports TP2 `VERSION 35.21` and **143** live structural
 component declarations. IEPM now maps **134** stable component IDs to that
 installer: every BGEE/BG2EE/EET-facing selector, including the supplied
 personal build and focused spell-tweak selectors. The newly mapped entries
@@ -29,7 +29,7 @@ retain mechanically derived selector/prerequisite evidence only; they are not
 a compatibility badge for the whole large stack. The focused selectors each
 carry a narrow same-package conflict with SCS's all-spell-tweaks dispatcher,
 exactly as its TP2 declares; they do not falsely conflict with one another.
-The remaining **12** visible declarations are deliberately not user-facing:
+The remaining **9** visible declarations are deliberately not user-facing:
 IWD-only selectors, legacy-only helper selectors, and internal TP2 test or
 resource-collection blocks.
 
@@ -60,9 +60,10 @@ classification backlog.
 
 | Package/release | Observed TP2 declarations | Existing stable IDs matched | Still unmapped |
 | --- | ---: | ---: | ---: |
-| SCS v35.21 | 146 | 134 | 12 intentionally non-user-facing |
+| SCS v35.21 | 143 | 134 | 9 intentionally non-user-facing |
 | Tweaks Anthology v18 source | 446 | 393 | 53 |
 | Sirene v3.1 tag archive | 10 | 10 | 0 |
+| LeUI v4.9.1 tag archive | 3 | 3 | 0 |
 | Hidden Gameplay Options v5.1 | 43 | 43 | 0 |
 | Ascension 2.1.0 | 19 | 19 | 0 |
 | Call of the Lost Goddess v3.1 | 3 | 3 | 0 |
@@ -87,6 +88,9 @@ four-component catalog. EE Fixpack contributes three real user-facing
 selectors; its other four TP2 declarations are explicit internal generation or
 test paths, so they remain recorded by the audit but are intentionally not
 offered as user components.
+The SCS count was also corrected after the inert reader excluded three
+declarations inside block comments (an internal test and two resource
+collectors). Earlier prose counted those disabled blocks as live components.
 
 The first newly promoted cohort release, Sirene v3.1, exposed a TP2-reader
 edge case: unindented `THEN BEGIN` action blocks previously swallowed later
@@ -95,3 +99,6 @@ Its component catalog is complete, but `review-tp2` reports
 `tp2-version-unobserved` because this author TP2 has no `VERSION` declaration;
 the v3.1 release tag is retained separately. This is not install or gameplay
 verification.
+LeUI v4.9.1 similarly has all three TP2 declarations mapped to stable user
+choices. Its author documents an EE 2.6 route and installation before UI
+patchers; IEPM has not run an install or launch fixture yet.

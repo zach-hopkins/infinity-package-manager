@@ -1,0 +1,46 @@
+schema: 2
+package: leui
+releases:
+  - release_id: leui-v4.9.1-source
+    version: "4.9.1"
+    artifacts:
+      - url: https://github.com/r-e-d/LeUI/archive/refs/tags/v4.9.1.zip
+        sha256: 2174c08008409b923df98f1f1192a0fdb9019727d5bf6956d23cf4219043e953
+        platforms: [windows]
+    materialization:
+      source_root: LeUI-4.9.1
+      include: [LeUI]
+    compatibility:
+      games: [bgee, bg2ee, eet]
+    install:
+      phase: eet
+      after: [eet]
+      before: [eet-end, stratagems]
+    provenance: unverified
+    claims:
+      - claim: The exact v4.9.1 tag archive was downloaded and SHA-256 verified. Its TP2 declares VERSION 4.9.1, one English language route, and three implicit-number components whose display names are defined in its English TRA file.
+        provenance: derived
+        evidence:
+          - https://github.com/r-e-d/LeUI/releases/tag/v4.9.1
+      - claim: The author describes LeUI for BGEE, SoD, BG2EE, and EET; recommends v4.9.1 for EE 2.6; and places it before EEUITweaks and UI-patching mods including Sword Coast Stratagems.
+        provenance: declared
+        evidence:
+          - https://github.com/r-e-d/LeUI
+      - claim: IEPM has not executed this source archive in a game workspace. Its declared game/order route and mechanically mapped selectors are not proof of compatibility with other UI overhauls.
+        provenance: derived
+        evidence:
+          - https://github.com/r-e-d/LeUI
+    installers:
+      - tp2: LeUI/LeUI.tp2
+        launcher: toolchain
+        languages:
+          - id: 0
+            name: English
+    components:
+      - id: core-ui
+        default_selected: true
+        weidu: { tp2: LeUI/LeUI.tp2, number: 0 }
+      - id: bg2-vanilla-spell-icons
+        weidu: { tp2: LeUI/LeUI.tp2, number: 1 }
+      - id: bg2-vanilla-description-fonts
+        weidu: { tp2: LeUI/LeUI.tp2, number: 2 }
