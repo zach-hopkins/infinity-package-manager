@@ -41,6 +41,50 @@ releases:
           tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2
           label: A7-HIDDENGAMEPLAYOPTIONS-OPTION_ENABLE_DEBUG_MODE
           number: 10
+      # Exact v5.1 labels are mechanically derived. These stable IDs express
+      # user choices only; they have no individual execution or compatibility
+      # evidence beyond the recorded structural selector mapping.
+      - { id: enable-ui-edit-mode, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-OPTION_ENABLE_UI_EDIT_MODE, number: 11 } }
+      - { id: show-strrefs, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-OPTION_SHOW_STRREFS, number: 12 } }
+      - { id: hotkeys-on-tooltips, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-OPTION_HOTKEYS_ON_TOOLTIPS, number: 13 } }
+      - { id: show-trigger-icons-on-tab, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-OPTION_SHOW_TRIGGER_ICONS_ON_TAB, number: 14 } }
+      - { id: allow-spacebar-in-dialogs, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-OPTION_ALLOW_SPACEBAR_IN_DIALOGS, number: 15 } }
+      - { id: limit-druidic-spells-for-cleric-ranger, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-OPTION_LIMIT_DRUIDIC_SPELLS_FOR_CLERIC_RANGER, number: 16 } }
+      - { id: three-e-sneak-attack, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-OPTION_3E_SNEAK_ATTACK, number: 17 } }
+      - { id: critical-hit-screen-shake, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-OPTION_CRITICAL_HIT_SCREEN_SHAKE, number: 18 } }
+      - { id: show-extra-combat-info, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-OPTION_SHOW_EXTRA_COMBAT_INFO, number: 19 } }
+      - { id: show-game-date-time-on-pause, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-OPTION_SHOW_GAME_DATE_AND_TIME_ON_PAUSE, number: 20 } }
+      - { id: disable-area-map-zoom, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-OPTION_DISABLE_AREA_MAP_ZOOM, number: 21 } }
+      - { id: reverse-mouse-wheel-zoom, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-OPTION_REVERSE_MOUSE_WHEEL_ZOOM, number: 22 } }
+      - { id: pause-game-on-map-screen, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-OPTION_PAUSE_GAME_ON_MAP_SCREEN, number: 23 } }
+      - { id: enable-fog, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-OPTION_ENABLE_FOG, number: 24 } }
+      - { id: disable-movies, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-OPTION_DISABLE_MOVIES, number: 25 } }
+      - { id: disable-cosmetic-attacks, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-OPTION_NO_COSMETIC_ATTACKS, number: 26 } }
+      - { id: nightmare-mode-xp-bonus, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-OPTION_XP_BONUS_IN_NIGHTMARE_MODE, number: 27 } }
+      - { id: trigger-bored-sounds, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-OPTION_TRIGGER_BORED_SOUNDS, number: 28 } }
+      - { id: frame-rate, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-OPTION_FRAME_RATE, number: 29 } }
+      - { id: action-feedback, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-OPTION_ACTION_FEEDBACK, number: 30 } }
+      - { id: enable-level-up-icon, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-OPTION_ENABLE_LEVEL_UP_ICON, number: 31 } }
+      - { id: show-aoe-radius, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-OPTION_SHOW_AOE_RADIUS, number: 32 } }
+      - { id: enhanced-path-search, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-OPTION_ENHANCED_PATH_SEARCH, number: 33 } }
+      - { id: expire-trap-highlights, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-OPTION_EXPIRE_TRAP_HIGHLIGHTS, number: 34 } }
+      - { id: show-learnable-spells, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-OPTION_SHOW_LEARNABLE_SPELLS, number: 35 } }
+      - { id: render-search-map, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-OPTION_RENDER_SEARCH_MAP, number: 36 } }
+      - { id: render-dynamic-search-map, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-OPTION_RENDER_DYNAMIC_SEARCH_MAP, number: 37 } }
+      - { id: create-interval-saves, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-OPTION_CREATE_INTERVAL_SAVES, number: 38 } }
+      - { id: force-dialog-pause, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-OPTION_FORCE_DIALOG_PAUSE, number: 39 } }
+      - { id: restored-loading-hints, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-OPTION_RESTORED_LOADING_HINTS, number: 40 } }
+      - { id: improved-cheat-menu, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-IMPROVED_CHEAT_MENU, number: 200 } }
+      - { id: improved-cheat-menu-update, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-IMPROVED_CHEAT_MENU_UPDATE, number: 201 } }
+      - { id: improved-ui-death, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-IMPROVED_UI-DEATH, number: 300 } }
+      - { id: improved-ui-quit, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-IMPROVED_UI-QUIT, number: 301 } }
+      - { id: improved-ui-game-fire, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-IMPROVED_UI-GAME-FIRE, number: 302 } }
+      - { id: improved-ui-game-quit, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-IMPROVED_UI-GAME-QUIT, number: 303 } }
+      - { id: improved-ui-game-load, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-IMPROVED_UI-GAME-LOAD, number: 304 } }
+      - { id: improved-ui-showhide-cheatmenu, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-IMPROVED_UI-SHOWHIDE-CHEATMENU, number: 305 } }
+      - { id: keybinding-priest, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-KEYBINDING_PRIEST, number: 101 } }
+      - { id: keybinding-mage, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-KEYBINDING_MAGE, number: 102 } }
+      - { id: keybinding-priest-mage, weidu: { tp2: HiddenGameplayOptions/HiddenGameplayOptions.tp2, label: A7-HIDDENGAMEPLAYOPTIONS-KEYBINDING_PRIEST_MAGE, number: 103 } }
   - version: "1.0"
     compatibility:
       games: [bg2ee, eet]
