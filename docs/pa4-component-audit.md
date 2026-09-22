@@ -59,6 +59,7 @@ classification backlog.
 | Tweaks Anthology v18 source | 450 | 36 | 414 |
 | Hidden Gameplay Options v5.1 | 43 | 43 | 0 |
 | Ascension 2.1.0 | 19 | 19 | 0 |
+| Call of the Lost Goddess v3.1 | 3 | 3 | 0 |
 | DLC Merger 2.1 | 4 | 4 | 0 |
 | EE Fixpack Beta 2 | 7 | 3 | 4 internal-only |
 

@@ -36,3 +36,15 @@ releases:
       - id: core-story
         default_selected: true
         weidu: { tp2: Godcall/Setup-Godcall.tp2, number: 0 }
+      - id: npc-portraits
+        weidu: { tp2: Godcall/Setup-Godcall.tp2, number: 50 }
+        requires: [core-story]
+        claims:
+          - claim: The exact v3.1 TP2 comments selector 50 as NPC portraits and requires its core component (0).
+            provenance: derived
+      - id: voiceover
+        weidu: { tp2: Godcall/Setup-Godcall.tp2, number: 200 }
+        requires: [core-story]
+        claims:
+          - claim: The exact v3.1 TP2 comments selector 200 as voiceover and requires its core component (0).
+            provenance: derived

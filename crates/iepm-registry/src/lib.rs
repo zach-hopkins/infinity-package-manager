@@ -299,6 +299,8 @@ pub fn inspect_tp2(source: &str) -> Tp2Observation {
     };
     let mut current: Option<Tp2Component> = None;
     let mut awaiting_language_name = false;
+    let mut control_flow_depth = 0_usize;
+    let mut awaits_control_flow_begin = false;
 
     for raw_line in source.trim_start_matches('\u{feff}').lines() {
         let line = raw_line.trim();
@@ -333,13 +335,36 @@ pub fn inspect_tp2(source: &str) -> Tp2Observation {
             }
             continue;
         }
-        // WeiDU uses indented `BEGIN` blocks for control flow inside a
-        // component. Only an unindented top-level BEGIN declares an install
-        // component. Treating every trimmed BEGIN as a component makes large
-        // TP2 inventories materially misleading.
+        // `ACTION_IF` and `ACTION_FOR_EACH` may put their control-flow BEGIN
+        // at column zero. Those are not install components, even though the
+        // same token starts a real top-level component declaration.
+        if starts_keyword(line, "ACTION_IF") || starts_keyword(line, "ACTION_FOR_EACH") {
+            if line.contains("BEGIN") {
+                control_flow_depth += 1;
+            } else {
+                awaits_control_flow_begin = true;
+            }
+            continue;
+        }
+        if control_flow_depth > 0 && starts_keyword(line, "END") {
+            control_flow_depth -= 1;
+            continue;
+        }
+        // WeiDU also uses indented `BEGIN` blocks for control flow inside a
+        // component. Only a BEGIN outside a known action block declares an
+        // install component. Treating every trimmed BEGIN as a component makes
+        // large TP2 inventories materially misleading.
         if !raw_line.chars().next().is_some_and(char::is_whitespace)
             && starts_keyword(line, "BEGIN")
         {
+            if awaits_control_flow_begin {
+                control_flow_depth += 1;
+                awaits_control_flow_begin = false;
+                continue;
+            }
+            if control_flow_depth > 0 {
+                continue;
+            }
             if let Some(component) = current.take() {
                 observation.components.push(component);
             }
@@ -1020,6 +1045,34 @@ BEGIN @200
                 .map(|component| component.begin.as_deref())
                 .collect::<Vec<_>>(),
             vec![Some("@100"), Some("@200")]
+        );
+    }
+
+    #[test]
+    fn inspection_ignores_unindented_action_control_flow_begin_blocks() {
+        let observation = inspect_tp2(
+            r#"
+BEGIN @100 DESIGNATED 0
+ACTION_FOR_EACH resource IN file1 file2 BEGIN
+  COPY ~%resource%~ ~override~
+END
+ACTION_FOR_EACH creature IN
+  foo
+  bar
+BEGIN
+  COPY ~%creature%~ ~override~
+END
+BEGIN @200 DESIGNATED 10
+"#,
+        );
+
+        assert_eq!(
+            observation
+                .components
+                .iter()
+                .map(|component| component.number)
+                .collect::<Vec<_>>(),
+            vec![Some(0), Some(10)]
         );
     }
 
