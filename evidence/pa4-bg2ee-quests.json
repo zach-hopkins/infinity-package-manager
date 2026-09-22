@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "Four Pocket Plane BG2 quest defaults on clean BG2EE 2.6.6",
+  "identity": {
+    "registry_revision": "af7081f",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "260eb0771e89426485fbef4454ea9c89e585d628feb9f4953e06d437086e296a",
+    "environments": {
+      "target": {
+        "target": "bg2ee",
+        "fingerprint": {
+          "profile": "iepm-core-layout-v1",
+          "value": "298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f"
+        }
+      }
+    },
+    "packages": [
+      { "package": "assassinations", "release_id": "assassinations-v19-source", "environment": "target", "artifact_sha256": "69affd9c09b5dde9d8133a37483c0eca26d53926b351eef0cbe956254ecb8e04", "components": ["assassinations-quest"] },
+      { "package": "back-to-brynnlaw", "release_id": "back-to-brynnlaw-v9-source", "environment": "target", "artifact_sha256": "fffb5ef9a0569db9423d74dfd396e8b0232d391fdaf9fdb6086246dbea90332a", "components": ["brynnlaw-quest"] },
+      { "package": "dungeon-crawl", "release_id": "dungeon-crawl-v13.1-source", "environment": "target", "artifact_sha256": "c598c4495a863636a9b458e66c6a039c53e11cf103d691b30c7df7c2a55820e5", "components": ["dungeon-crawl-quest"] },
+      { "package": "sellswords", "release_id": "sellswords-v9.1-source", "environment": "target", "artifact_sha256": "a5969376c1b63e2be1213882c5703afc60714772b93f906ccb53e76f990dfb2c", "components": ["sellswords-quest"] }
+    ],
+    "execution_order": ["assassinations", "back-to-brynnlaw", "dungeon-crawl", "sellswords"]
+  },
+  "checks": {
+    "artifact_verified": true,
+    "selector_known": true,
+    "requirements_modeled": true,
+    "component_catalog_complete": true,
+    "all_components_classified": true,
+    "core_components_supported": true,
+    "selected_components_supported": true,
+    "relationships_satisfied": true,
+    "no_opaque_selections": true,
+    "clean_disposable_install": true,
+    "all_actions_completed": true,
+    "requested_components_recorded": true,
+    "no_components_skipped": true,
+    "warnings_classified": true,
+    "sealed": true,
+    "eet_end_required": false,
+    "main_menu_smoke": true,
+    "gameplay_smoke": false
+  },
+  "evidence": ["examples/bg2ee-quests/modpack.yaml", "docs/pa4-bg2ee-quests-evidence.md"]
+}

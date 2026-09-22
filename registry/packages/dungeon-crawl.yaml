@@ -16,9 +16,12 @@ releases:
       - claim: The exact v13.1 author tag ZIP was SHA-256 verified; its TP2 declares VERSION v13.1, seven languages, and one numeric component 0.
         provenance: derived
         evidence: [https://github.com/Pocket-Plane-Group/Dungeon_Crawl/releases/tag/v13.1]
-      - claim: The author identifies BG2EE and EET as supported games; IEPM has not yet run an installation fixture for this release.
+      - claim: The author identifies BG2EE and EET as supported games; EET remains untested by IEPM.
         provenance: declared
         evidence: [https://github.com/Pocket-Plane-Group/Dungeon_Crawl]
+      - claim: The exact default component completed in a clean managed BG2EE 2.6.6 four-quest build, appeared in WeiDU.log, and the sealed game reached the Shadows of Amn main menu; this does not verify EET or gameplay.
+        provenance: verified
+        evidence: [evidence/pa4-bg2ee-quests.json]
     installers:
       - tp2: DC/DC.tp2
         launcher: toolchain

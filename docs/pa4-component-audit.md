@@ -113,5 +113,7 @@ remain untested.
 Assassinations v19, Sellswords v9.1, Back to Brynnlaw v9, and Dungeon Crawl
 v13.1 each have one TP2 declaration matched to a stable IEPM component ID.
 `review-tp2` reports `match` for all four, including exact author language
-labels. The combined BG2EE route preflights executable; installation and
-launch evidence has not yet been gathered.
+labels. Their combined BG2EE 2.6.6 route completed all four actions, recorded
+all four in `WeiDU.log`, sealed, and reached the playable Shadows of Amn
+menu. See [`pa4-bg2ee-quests-evidence.md`](pa4-bg2ee-quests-evidence.md).
+EET and gameplay remain untested.

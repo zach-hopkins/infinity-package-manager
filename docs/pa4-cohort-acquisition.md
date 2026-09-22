@@ -16,8 +16,9 @@ installer-specific behavior, and game targets/order still need review.
 Sirene, LeUI, ten single-component Spellhold Studios friendship mods, and four
 single-component Pocket Plane quest mods now have reviewed, executable
 registry routes. The friendship defaults have exact-scope BG2EE build and
-main-menu evidence; their EET routes remain Untested. Sirene, LeUI, and the
-four quest mods remain Untested pending execution evidence. The remaining 40
+main-menu evidence; the four quest defaults also have exact-scope BG2EE build
+and main-menu evidence. EET routes remain Untested. Sirene and LeUI remain
+Untested pending execution evidence. The remaining 40
 tagged archives are exact-byte review inputs, not a promise that IEPM can
 install them. The seven branch
 routes and 17 manual routes remain separate acquisition work; a mutable branch

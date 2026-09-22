@@ -1,6 +1,7 @@
 schema: 2
 
-# PA-4 exact author-tagged quest releases. This fixture starts Untested.
+# PA-4 exact author-tagged quest stack. Its BG2EE default route completed a
+# disposable install and main-menu smoke; see docs/pa4-bg2ee-quests-evidence.md.
 environments:
   target:
     target: bg2ee
