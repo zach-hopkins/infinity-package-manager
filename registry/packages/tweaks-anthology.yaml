@@ -58,7 +58,7 @@ releases:
         package: eeex
         components: [bootstrap]
         when:
-          selected_components: [hide-invisible-enemy-vfx, make-grease-ignitable, bears-and-boars-fight-at-zero-hp, limit-resting, useful-infravision, alternate-concentration-check, concentration-check-constitution-fixed, concentration-check-luck-fixed, concentration-check-constitution-damage, revised-troll-regeneration, nwn-style-summons]
+          selected_components: [hide-invisible-enemy-vfx, make-grease-ignitable, bears-and-boars-fight-at-zero-hp, limit-resting, useful-infravision, alternate-concentration-check, concentration-check-constitution-fixed, concentration-check-luck-fixed, concentration-check-constitution-damage, revised-troll-regeneration, nwn-style-summons, dorns-sword, more-sensible-cowled-wizards, more-stoneskin-feedback, more-sensible-fireshield, more-sensible-blade-barrier, dynamic-fps-change, more-sensible-morentherene]
     provenance: unverified
     claims:
       - claim: Release URL, archive hash, TP2 path, VERSION v18, and all listed component number/LABEL pairs were mechanically derived from the exact source-tagged v18 archive.
@@ -751,3 +751,129 @@ releases:
       - id: auto-save-name-bracketed-protagonist-space
         weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_personalize_savename_opt6, number: 3295 }
         provides: [{ name: tweaks-auto-save-name-scope, exclusive: true }]
+      - { id: disable-party-ai-on-new-game, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_new_game_disable_party_ai, number: 3310 } }
+      - { id: no-store-depreciation, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_no_store_depreciation, number: 3320 } }
+      - id: noncombat-speed-50-percent
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_noncombat_speed_increase_50, number: 3340 }
+        provides: [{ name: tweaks-noncombat-speed-scope, exclusive: true }]
+      - id: noncombat-speed-100-percent
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_noncombat_speed_increase_100, number: 3341 }
+        provides: [{ name: tweaks-noncombat-speed-scope, exclusive: true }]
+      - id: noncombat-speed-150-percent
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_noncombat_speed_increase_150, number: 3342 }
+        provides: [{ name: tweaks-noncombat-speed-scope, exclusive: true }]
+      - id: noncombat-speed-and-casting-50-percent
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_noncombat_speed_casting_increase_50, number: 3343 }
+        provides: [{ name: tweaks-noncombat-speed-scope, exclusive: true }]
+      - id: noncombat-speed-and-casting-150-percent
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_noncombat_speed_casting_increase_150, number: 3345 }
+        provides: [{ name: tweaks-noncombat-speed-scope, exclusive: true }]
+      - id: noncombat-casting-speed-only
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_noncombat_casting_increase_only, number: 3346 }
+        provides: [{ name: tweaks-noncombat-speed-scope, exclusive: true }]
+      - id: one-auto-save-every-15-minutes
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_create_interval_one_save_15, number: 3350 }
+        provides: [{ name: tweaks-auto-save-interval-scope, exclusive: true }]
+      - id: one-auto-save-every-60-minutes
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_create_interval_one_save_60, number: 3352 }
+        provides: [{ name: tweaks-auto-save-interval-scope, exclusive: true }]
+      - id: one-auto-save-every-120-minutes
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_create_interval_one_save_120, number: 3353 }
+        provides: [{ name: tweaks-auto-save-interval-scope, exclusive: true }]
+      - id: four-auto-saves-every-15-minutes
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_create_interval_four_saves_15, number: 3354 }
+        provides: [{ name: tweaks-auto-save-interval-scope, exclusive: true }]
+      - id: four-auto-saves-every-60-minutes
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_create_interval_four_saves_60, number: 3356 }
+        provides: [{ name: tweaks-auto-save-interval-scope, exclusive: true }]
+      - id: four-auto-saves-every-120-minutes
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_create_interval_four_saves_120, number: 3357 }
+        provides: [{ name: tweaks-auto-save-interval-scope, exclusive: true }]
+      - { id: restored-loading-hints, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_restored_loading_hints, number: 3400 } }
+      - id: casting-warnings-multiplayer
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_casting_warnings_mp, number: 3410 }
+        provides: [{ name: tweaks-casting-warnings-scope, exclusive: true }]
+      - id: casting-warnings-multiplayer-and-interrupted
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_casting_warnings_mpi, number: 3411 }
+        provides: [{ name: tweaks-casting-warnings-scope, exclusive: true }]
+      - id: casting-warnings-all
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_casting_warnings_all, number: 3412 }
+        provides: [{ name: tweaks-casting-warnings-scope, exclusive: true }]
+      - id: better-soa-start-300k-xp
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_better_soa_start_300k, number: 3490 }
+        provides: [{ name: tweaks-better-soa-start-scope, exclusive: true }]
+      - id: better-soa-start-500k-xp
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_better_soa_start_500k, number: 3491 }
+        provides: [{ name: tweaks-better-soa-start-scope, exclusive: true }]
+      - id: better-soa-start-300k-xp-all-items
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_better_soa_start_300k_all_items, number: 3492 }
+        provides: [{ name: tweaks-better-soa-start-scope, exclusive: true }]
+      - id: better-soa-start-500k-xp-all-items
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_better_soa_start_500k_all_items, number: 3493 }
+        provides: [{ name: tweaks-better-soa-start-scope, exclusive: true }]
+      - { id: more-sensible-cowled-wizards, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_more_sensible_cowled_wizards, number: 3420 } }
+      - { id: more-stoneskin-feedback, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_more_stoneskin_feedback, number: 3430 } }
+      - { id: more-sensible-fireshield, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_more_sensible_fireshield, number: 3450 } }
+      - { id: more-sensible-blade-barrier, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_more_sensible_blade_barrier, number: 3460 } }
+      - { id: dynamic-fps-change, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_dynamic_fps_change, number: 3470 } }
+      - { id: more-sensible-morentherene, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_more_sensible_morentherene, number: 3480 } }
+      - { id: improved-fate-spirit-summoning, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_improved_fate_spirit_summoning, number: 4010 } }
+      - { id: tob-style-npcs, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_tob_style_npcs, number: 4020 } }
+      - id: edwin-bg-stats
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_consistent_stats_edwin_bg, number: 4030 }
+        provides: [{ name: tweaks-edwin-stats-scope, exclusive: true }]
+      - id: edwin-bg2-stats
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_consistent_stats_edwin_bg2, number: 4031 }
+        provides: [{ name: tweaks-edwin-stats-scope, exclusive: true }]
+      - id: jaheira-bg-stats
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_consistent_stats_jaheira_bg, number: 4040 }
+        provides: [{ name: tweaks-jaheira-stats-scope, exclusive: true }]
+      - id: jaheira-bg2-stats
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_consistent_stats_jaheira_bg2, number: 4041 }
+        provides: [{ name: tweaks-jaheira-stats-scope, exclusive: true }]
+      - { id: neutral-good-jaheira, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_ng_jaheira, number: 4050 } }
+      - id: minsc-bg-stats
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_consistent_stats_minsc_bg, number: 4060 }
+        provides: [{ name: tweaks-minsc-stats-scope, exclusive: true }]
+      - id: minsc-bg2-stats
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_consistent_stats_minsc_bg2, number: 4061 }
+        provides: [{ name: tweaks-minsc-stats-scope, exclusive: true }]
+      - id: viconia-bg-stats
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_consistent_stats_viconia_bg, number: 4070 }
+        provides: [{ name: tweaks-viconia-stats-scope, exclusive: true }]
+      - id: viconia-bg2-stats
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_consistent_stats_viconia_bg2, number: 4071 }
+        provides: [{ name: tweaks-viconia-stats-scope, exclusive: true }]
+      - { id: khalid-fighter-mage, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_make_khalid_fighter_mage, number: 4080 } }
+      - { id: montaron-assassin, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_make_montaron_assassin, number: 4090 } }
+      - { id: neutral-evil-korgan, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_ne_korgan, number: 4100 } }
+      - { id: legal-constitution-kagain, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_kagain_legal_con, number: 4110 } }
+      - { id: legal-dexterity-coran, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_coran_legal_dex, number: 4120 } }
+      - { id: generic-mage-xan, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_make_xan_generic_mage, number: 4130 } }
+      - { id: generic-mage-dynaheir, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_make_dynaheir_generic_mage, number: 4131 } }
+      - { id: generic-mage-xzar, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_make_xzar_generic_mage, number: 4132 } }
+      - { id: generic-mage-edwin, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_make_edwin_generic_mage, number: 4133 } }
+      - { id: boo-in-minsc-inventory, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_move_boo_into_inventory, number: 4150 } }
+      - { id: yeslick-can-use-axes, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_yeslick_can_use_axes, number: 4160 } }
+      - { id: protect-sharteel, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_protect_sharteel, number: 4170 } }
+      - { id: removable-npc-items, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_removable_npc_items, number: 4180 } }
+      - { id: dorns-sword, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_dorns_sword, number: 4200 } }
+      - id: nalia-thief-level-5
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nalia_thief_level_5, number: 4210 }
+        provides: [{ name: tweaks-nalia-thief-level-scope, exclusive: true }]
+      - id: nalia-thief-level-6
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nalia_thief_level_6, number: 4211 }
+        provides: [{ name: tweaks-nalia-thief-level-scope, exclusive: true }]
+      - id: nalia-thief-level-7
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nalia_thief_level_7, number: 4212 }
+        provides: [{ name: tweaks-nalia-thief-level-scope, exclusive: true }]
+      - id: nalia-thief-level-8
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nalia_thief_level_8, number: 4213 }
+        provides: [{ name: tweaks-nalia-thief-level-scope, exclusive: true }]
+      - id: delay-neera-until-nashkel-mines
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_neera_delay_till_mines, number: 4220 }
+        provides: [{ name: tweaks-neera-delay-scope, exclusive: true }]
+      - id: delay-neera-until-5000-xp
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_neera_delay_till_5k_xp, number: 4221 }
+        provides: [{ name: tweaks-neera-delay-scope, exclusive: true }]
+      - { id: yoshimo-better-trapsetting, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_yoshimo_better_trapsetting, number: 4230 } }
