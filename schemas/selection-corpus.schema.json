@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "IEPM Product A Selection Corpus",
+  "type": "object",
+  "required": ["schema", "captured_on", "catalog_source_revision", "sources"],
+  "properties": {
+    "schema": { "const": 1 },
+    "captured_on": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+    "catalog_source_revision": { "type": "string", "minLength": 1 },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "family", "label", "input", "input_sha256", "deduplication_key", "counts_toward_coverage", "selections"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "family": { "type": "string", "minLength": 1 },
+          "label": { "type": "string", "minLength": 1 },
+          "input": { "type": "string", "minLength": 1 },
+          "input_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "deduplication_key": { "type": "string", "minLength": 1 },
+          "counts_toward_coverage": { "type": "boolean" },
+          "selections": { "type": "array", "items": { "type": "integer", "minimum": 0 }, "uniqueItems": true },
+          "unmapped_tokens": { "type": "array", "items": { "type": "string" }, "uniqueItems": true }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

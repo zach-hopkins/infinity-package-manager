@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://iepm.dev/schemas/acquisition-health.schema.json",
+  "title": "IEPM schema-1 catalog acquisition health report",
+  "description": "Time-bound page and candidate-archive observations. This report does not verify an artifact, package, compatibility claim, or installation route.",
+  "type": "object",
+  "required": ["schema", "catalog_sha256", "catalog_source_revision", "version_cache_sha256", "checked_unix_seconds", "catalog_entries_total", "entries_checked", "entries", "summary"],
+  "properties": {
+    "schema": { "const": 1 },
+    "catalog_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "catalog_source_revision": { "type": "string", "minLength": 1 },
+    "version_cache_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "checked_unix_seconds": { "type": "integer", "minimum": 0 },
+    "catalog_entries_total": { "type": "integer", "minimum": 0 },
+    "entries_checked": { "type": "integer", "minimum": 0 },
+    "entries": { "type": "array", "items": { "$ref": "#/$defs/entry" } },
+    "summary": { "$ref": "#/$defs/summary" }
+  },
+  "$defs": {
+    "entry": {
+      "type": "object",
+      "required": ["source_id", "catalog_url", "acquisition"],
+      "properties": {
+        "source_id": { "type": "integer", "minimum": 0 },
+        "catalog_url": { "$ref": "#/$defs/url-health" },
+        "acquisition": { "$ref": "#/$defs/acquisition" },
+        "artifact_probe": { "$ref": "#/$defs/artifact-probe" }
+      },
+      "additionalProperties": false
+    },
+    "url-health": {
+      "type": "object",
+      "required": ["status"],
+      "properties": {
+        "url": { "type": "string", "format": "uri" },
+        "status": { "enum": ["missing", "reachable", "redirected", "http-error", "request-error"] },
+        "method": { "enum": ["head", "get-range"] },
+        "http_status": { "type": "integer", "minimum": 100, "maximum": 599 },
+        "final_url": { "type": "string", "format": "uri" },
+        "content_type": { "type": "string" },
+        "error": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "acquisition": {
+      "type": "object",
+      "required": ["kind", "note"],
+      "properties": {
+        "kind": { "enum": ["github-tag-source-archive", "github-branch-source-archive", "manual-browser", "unavailable"] },
+        "candidate_url": { "type": "string", "format": "uri" },
+        "source_page": { "type": "string", "format": "uri" },
+        "repository": { "type": "string" },
+        "tag": { "type": "string" },
+        "note": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "artifact-probe": {
+      "type": "object",
+      "required": ["url", "status"],
+      "properties": {
+        "url": { "type": "string", "format": "uri" },
+        "status": { "enum": ["archive-signature-detected", "non-archive-response", "http-error", "request-error"] },
+        "http_status": { "type": "integer", "minimum": 100, "maximum": 599 },
+        "final_url": { "type": "string", "format": "uri" },
+        "content_type": { "type": "string" },
+        "bytes_examined": { "type": "integer", "minimum": 0 },
+        "error": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "summary": {
+      "type": "object",
+      "required": ["catalog_reachable", "catalog_redirected", "catalog_failed", "github_tag_candidates", "github_branch_candidates", "manual_routes", "unavailable_routes", "archive_signatures_detected", "non_archive_responses", "artifact_probe_failures"],
+      "properties": {
+        "catalog_reachable": { "type": "integer", "minimum": 0 },
+        "catalog_redirected": { "type": "integer", "minimum": 0 },
+        "catalog_failed": { "type": "integer", "minimum": 0 },
+        "github_tag_candidates": { "type": "integer", "minimum": 0 },
+        "github_branch_candidates": { "type": "integer", "minimum": 0 },
+        "manual_routes": { "type": "integer", "minimum": 0 },
+        "unavailable_routes": { "type": "integer", "minimum": 0 },
+        "archive_signatures_detected": { "type": "integer", "minimum": 0 },
+        "non_archive_responses": { "type": "integer", "minimum": 0 },
+        "artifact_probe_failures": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

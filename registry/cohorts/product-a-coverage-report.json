@@ -1,0 +1,156 @@
+{
+  "schema": 1,
+  "corpus_captured_on": "2026-09-21",
+  "catalog_source_revision": "046414eec9315eb1500f2e68147aa281ab35873d",
+  "counted_sources": 4,
+  "reference_sources": 13,
+  "unique_selected_candidates": 119,
+  "weighted_selection_total": 4.0,
+  "weighted_selection_covered": 3.8070175438596534,
+  "coverage": 0.9517543859649134,
+  "selected_packages": 99,
+  "source_diversity": {
+    "forge-preset": 3,
+    "user-reference": 1
+  },
+  "deferred_candidates": [
+    {
+      "source_id": 142,
+      "candidate_package": "xan",
+      "name": "Xan NPC",
+      "category": "NEW NPC MODS"
+    },
+    {
+      "source_id": 166,
+      "candidate_package": "fade",
+      "name": "Fade NPC",
+      "category": "NEW NPC MODS"
+    },
+    {
+      "source_id": 167,
+      "candidate_package": "adrian",
+      "name": "Adrian NPC",
+      "category": "NEW NPC MODS"
+    },
+    {
+      "source_id": 174,
+      "candidate_package": "skitianpcs",
+      "name": "Skitia NPCs",
+      "category": "NEW NPC MODS"
+    },
+    {
+      "source_id": 232,
+      "candidate_package": "a7-convenienteenpcs",
+      "name": "Convenient Enhanced Edition NPCs",
+      "category": "NPC EXPANSIONS"
+    },
+    {
+      "source_id": 237,
+      "candidate_package": "iepbanters",
+      "name": "IEP Extended Banters",
+      "category": "NPC CROSSMOD"
+    },
+    {
+      "source_id": 242,
+      "candidate_package": "butchery",
+      "name": "BuTcHeRy",
+      "category": "CREATURE MODS"
+    },
+    {
+      "source_id": 252,
+      "candidate_package": "forgotten-armament",
+      "name": "Forgotten Armament",
+      "category": "PRE-TACTICAL TWEAKS"
+    },
+    {
+      "source_id": 265,
+      "candidate_package": "stuffofthemagi",
+      "name": "Stuff of the Magi",
+      "category": "ITEM ADDITION MODS"
+    },
+    {
+      "source_id": 266,
+      "candidate_package": "malek-iwditempack",
+      "name": "IWD Item Pack",
+      "category": "ITEM ADDITION MODS"
+    },
+    {
+      "source_id": 273,
+      "candidate_package": "itemupgrade",
+      "name": "Item Upgrade",
+      "category": "ITEM ADDITION MODS"
+    },
+    {
+      "source_id": 320,
+      "candidate_package": "morpheus562-s-kitpack",
+      "name": "Morpheus562's Kitpack",
+      "category": "KIT & CLASS MODS"
+    },
+    {
+      "source_id": 326,
+      "candidate_package": "artisanskitpack",
+      "name": "The Artisan's Kitpack",
+      "category": "KIT & CLASS MODS"
+    },
+    {
+      "source_id": 331,
+      "candidate_package": "tomeandblood",
+      "name": "Tome and Blood",
+      "category": "KIT & CLASS MODS"
+    },
+    {
+      "source_id": 390,
+      "candidate_package": "crucible",
+      "name": "The Crucible",
+      "category": "TACTICAL MODS"
+    },
+    {
+      "source_id": 458,
+      "candidate_package": "dsotsc",
+      "name": "Dark Side of the Sword Coast",
+      "category": "QUEST MODS BG1"
+    },
+    {
+      "source_id": 460,
+      "candidate_package": "ee-cosmetic-enhancements",
+      "name": "EE Cosmetic Enhancements",
+      "category": "GRAPHICS"
+    },
+    {
+      "source_id": 463,
+      "candidate_package": "firkraag",
+      "name": "Super Firkraag",
+      "category": "CREATURE MODS"
+    },
+    {
+      "source_id": 472,
+      "candidate_package": "lightingpack",
+      "name": "Lighting Pack",
+      "category": "GRAPHICS"
+    },
+    {
+      "source_id": 589,
+      "candidate_package": "transitions",
+      "name": "Transitions",
+      "category": "QUEST MODS BG1"
+    },
+    {
+      "source_id": 591,
+      "candidate_package": "kivan",
+      "name": "Kivan of Shilmista",
+      "category": "NEW NPC MODS"
+    },
+    {
+      "source_id": 600,
+      "candidate_package": "gavin-bg2",
+      "name": "Gavin NPC",
+      "category": "NEW NPC MODS"
+    }
+  ],
+  "limitations": [
+    "Coverage is a deterministic measurement of this frozen corpus, not a claim about every player or every mod combination.",
+    "Each counted stack receives one total vote distributed across its distinct packages, preventing large component-heavy stacks from dominating smaller stacks.",
+    "IEPM reference manifests enforce required current-profile inclusion but do not add popularity weight.",
+    "Cohort inclusion is a PA-4 work queue, not an artifact, compatibility, or public support claim."
+  ]
+}

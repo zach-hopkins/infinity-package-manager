@@ -98,10 +98,15 @@ support are separate layers. PA-1 imported the pinned Infinity Mod Forge
 commit `046414eec9315eb1500f2e68147aa281ab35873d` into a generated,
 non-executable 813-record catalog with no rejected records or candidate-ID
 collisions. It preserves source display/filter observations and candidate
-identity mappings without promoting them into resolver facts. PA-2 will
-classify reachable landing pages separately from exact downloadable artifacts;
-opaque/user-supplied WeiDU packages remain experimentally installable where
-technical preflight succeeds.
+identity mappings without promoting them into resolver facts. PA-2 checked all
+813 catalog entries through rate-limited landing-page and candidate-archive
+probes; its report distinguishes reachability/signatures from exact,
+downloaded/hash-verified artifacts. PA-3 froze a 99-package initial cohort at
+95.18% of its dated, stack-normalized initial corpus. This is a PA-4 work
+queue—not a 95%-of-all-users claim—and 80 cohort entries remain discovery-only
+candidates until release work adds executable facts. Opaque/user-supplied
+WeiDU packages remain experimentally installable where technical preflight
+succeeds.
 The Supported coverage cohort is not an arbitrary “top 100.” It is the
 smallest cohort of at least 50 packages that covers at least 95% of weighted,
 deduplicated package selections in a dated public corpus, plus required

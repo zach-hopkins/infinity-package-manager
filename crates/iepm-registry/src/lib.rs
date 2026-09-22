@@ -1,4 +1,6 @@
 pub mod catalog;
+pub mod cohort;
+pub mod health;
 
 use anyhow::{Context, Result, bail};
 use iepm_core::{Installer, PackageRecord, Registry, Release};

@@ -10451,7 +10451,8 @@
       "source_version": "5.0",
       "source_install_order": 140,
       "candidate_package": "a7-hiddengameplayoptions",
-      "identity_status": "candidate"
+      "identity_status": "matched-curated",
+      "curated_package": "hidden-gameplay-options"
     },
     {
       "source_id": 378,

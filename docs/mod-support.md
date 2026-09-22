@@ -1,10 +1,10 @@
 # Mod support ledger
 
-This ledger is also the working input to the future Product A coverage cohort.
-Before Product B implementation begins, maintainers must freeze and name that
-cohort here, include the intended popular BGEE/BG2EE/EET and infrastructure
-coverage, and evaluate every exposed component under the measurable
-verification policy. The current table is not yet that frozen cohort.
+The first Product A coverage cohort is now frozen in
+[product-a-cohort.md](product-a-cohort.md): 99 packages meet 95.18% of its
+dated, stack-normalized input corpus. This ledger remains the human companion
+for PA-4 component and evidence work. Cohort membership schedules that work;
+it does not turn an indexed package into a green support badge.
 
 This is the human-facing companion to the static registry. It answers two
 different questions which should never be collapsed into one badge:
@@ -56,3 +56,16 @@ evidence to inspect, not incompatibility claims.
 Do not call an Untested row impossible simply because its author has not
 participated. A release can become Supported through exact artifacts, complete
 selectors, curated relationships, and automated disposable-build evidence.
+
+## Cohort work boundary
+
+The cohort currently contains 19 packages already mapped to curated IEPM
+identities and 80 indexed candidates. The 80 candidates are **not** silently
+excluded: they may proceed through IEPM's opaque local-package route once
+their exact bytes are supplied and safely inspected. They simply do not yet
+have an executable release record or component-by-component support ledger.
+
+For the mapped rows above, retain the same discipline: “Yes, for this exact
+component route” is not “all components and combinations are supported.” The
+complete selected/deferred list and PA-2 acquisition observations live in the
+[Product A cohort report](product-a-cohort.md).

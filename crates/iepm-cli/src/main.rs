@@ -95,6 +95,79 @@ enum Command {
         #[arg(long, default_value = "MIT")]
         source_license: String,
     },
+    /// Check project pages and Runner-derived acquisition candidates from a
+    /// discovery catalog. It never downloads a full artifact, hashes it, or
+    /// changes executable registry records.
+    CatalogCheckForge {
+        #[arg(long, default_value = "registry/catalog/infinity-mod-forge.json")]
+        catalog: PathBuf,
+        #[arg(long, help = "Pinned Forge data/version_cache.json input")]
+        version_cache: PathBuf,
+        #[arg(
+            long,
+            default_value = "registry/catalog/infinity-mod-forge-health.json"
+        )]
+        output: PathBuf,
+        #[arg(long, default_value_t = 4)]
+        workers: usize,
+        #[arg(long, default_value_t = 250)]
+        host_delay_ms: u64,
+        #[arg(long, default_value_t = 20)]
+        timeout_secs: u64,
+        #[arg(
+            long,
+            help = "Check only the first N catalog records; report remains explicitly partial"
+        )]
+        max_records: Option<usize>,
+    },
+    /// Freeze a selection corpus from Forge presets, IEPM reference manifests,
+    /// and an optional user-supplied Forge-style list. The output contains
+    /// source IDs only; it never turns those observations into registry facts.
+    CatalogCaptureCohort {
+        #[arg(long, default_value = "registry/catalog/infinity-mod-forge.json")]
+        catalog: PathBuf,
+        #[arg(long, help = "Pinned Forge data/presets.json input")]
+        forge_presets: PathBuf,
+        #[arg(long = "manifest", help = "IEPM reference manifest; may be repeated")]
+        manifests: Vec<PathBuf>,
+        #[arg(long, help = "Optional user-supplied Forge-style reference list")]
+        reference_list: Option<PathBuf>,
+        #[arg(long, help = "ISO calendar date on which the inputs were captured")]
+        captured_on: String,
+        #[arg(
+            long,
+            default_value = "registry/cohorts/product-a-selection-corpus.json"
+        )]
+        output: PathBuf,
+    },
+    /// Deterministically select the smallest Product A coverage cohort from a
+    /// frozen selection corpus. This is an evidence-planning aid, not a
+    /// support or compatibility decision.
+    CatalogBuildCohort {
+        #[arg(long, default_value = "registry/catalog/infinity-mod-forge.json")]
+        catalog: PathBuf,
+        #[arg(
+            long,
+            default_value = "registry/cohorts/product-a-selection-corpus.json"
+        )]
+        corpus: PathBuf,
+        #[arg(long, default_value = "registry/cohorts/product-a-cohort.json")]
+        output: PathBuf,
+        #[arg(
+            long,
+            default_value = "registry/cohorts/product-a-coverage-report.json"
+        )]
+        report: PathBuf,
+        #[arg(long, default_value_t = 50)]
+        minimum_packages: usize,
+        #[arg(long, default_value_t = 0.95)]
+        minimum_coverage: f64,
+        #[arg(
+            long = "mandatory-package",
+            help = "Curated or candidate package ID; may be repeated"
+        )]
+        mandatory_packages: Vec<String>,
+    },
     /// Preview an explicit manifest selection. The source manifest remains
     /// unchanged unless --write is passed.
     Add {
@@ -380,6 +453,107 @@ fn main() -> Result<()> {
                     imported.report.candidate_collisions.len()
                 );
             }
+        }
+        Command::CatalogCheckForge {
+            catalog,
+            version_cache,
+            output,
+            workers,
+            host_delay_ms,
+            timeout_secs,
+            max_records,
+        } => {
+            let report = iepm_registry::health::check_infinity_mod_forge_acquisition_from_paths(
+                &catalog,
+                &version_cache,
+                iepm_registry::health::AcquisitionHealthOptions {
+                    workers,
+                    minimum_host_delay: std::time::Duration::from_millis(host_delay_ms),
+                    timeout: std::time::Duration::from_secs(timeout_secs),
+                    max_records,
+                },
+            )?;
+            iepm_registry::health::write_acquisition_health_report(&report, &output)?;
+            let summary = &report.summary;
+            println!(
+                "checked {} of {} catalog record(s): {} reachable, {} redirected, {} page failure(s); {} tag candidate(s), {} branch candidate(s), {} manual route(s); {} archive signature(s), {} non-archive response(s), {} artifact probe failure(s). report: {}",
+                report.entries_checked,
+                report.catalog_entries_total,
+                summary.catalog_reachable,
+                summary.catalog_redirected,
+                summary.catalog_failed,
+                summary.github_tag_candidates,
+                summary.github_branch_candidates,
+                summary.manual_routes,
+                summary.archive_signatures_detected,
+                summary.non_archive_responses,
+                summary.artifact_probe_failures,
+                output.display(),
+            );
+        }
+        Command::CatalogCaptureCohort {
+            catalog,
+            forge_presets,
+            manifests,
+            reference_list,
+            captured_on,
+            output,
+        } => {
+            let catalog = iepm_registry::catalog::load_discovery_catalog(&catalog)?;
+            let corpus = iepm_registry::cohort::capture_product_a_selection_corpus(
+                &catalog,
+                &forge_presets,
+                &manifests,
+                reference_list.as_deref(),
+                &captured_on,
+            )?;
+            iepm_registry::cohort::write_selection_corpus(&corpus, &output)?;
+            println!(
+                "captured {} corpus source(s), {} mapped package selection(s), and {} unmapped token(s): {}",
+                corpus.sources.len(),
+                corpus
+                    .sources
+                    .iter()
+                    .map(|source| source.selections.len())
+                    .sum::<usize>(),
+                corpus
+                    .sources
+                    .iter()
+                    .map(|source| source.unmapped_tokens.len())
+                    .sum::<usize>(),
+                output.display(),
+            );
+        }
+        Command::CatalogBuildCohort {
+            catalog,
+            corpus,
+            output,
+            report,
+            minimum_packages,
+            minimum_coverage,
+            mandatory_packages,
+        } => {
+            let catalog = iepm_registry::catalog::load_discovery_catalog(&catalog)?;
+            let corpus = iepm_registry::cohort::load_selection_corpus(&corpus)?;
+            let result = iepm_registry::cohort::build_product_a_cohort(
+                &catalog,
+                &corpus,
+                &iepm_registry::cohort::CohortBuildOptions {
+                    minimum_packages,
+                    minimum_coverage,
+                    mandatory_packages,
+                },
+            )?;
+            iepm_registry::cohort::write_cohort_build(&result, &output, &report)?;
+            println!(
+                "selected {} cohort package(s): {:.2}% weighted coverage across {} counted source(s); {} deferred candidate(s). cohort: {}; report: {}",
+                result.cohort.packages.len(),
+                result.report.coverage * 100.0,
+                result.report.counted_sources,
+                result.report.deferred_candidates.len(),
+                output.display(),
+                report.display(),
+            );
         }
         Command::Add {
             registry,

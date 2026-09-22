@@ -1,0 +1,930 @@
+{
+  "schema": 1,
+  "corpus_captured_on": "2026-09-21",
+  "catalog_source_revision": "046414eec9315eb1500f2e68147aa281ab35873d",
+  "minimum_packages": 50,
+  "minimum_coverage_basis_points": 9500,
+  "packages": [
+    {
+      "source_id": 3,
+      "candidate_package": "dlcmerger",
+      "curated_package": "dlc-merger",
+      "name": "DLC Merger",
+      "category": "PRE EET BGEE MODS",
+      "observed_game_targets": [
+        "bg2ee",
+        "bgee",
+        "eet",
+        "iwdee",
+        "pstee"
+      ],
+      "inclusion_reason": "required current reference profile and observed in counted corpus"
+    },
+    {
+      "source_id": 4,
+      "candidate_package": "eefixpack",
+      "curated_package": "ee-fixpack",
+      "name": "EE Fixpack",
+      "category": "PRE EET BGEE MODS",
+      "observed_game_targets": [
+        "bg1",
+        "bg2",
+        "bg2ee",
+        "bgee",
+        "bgt",
+        "ca",
+        "eet",
+        "how",
+        "iwd",
+        "iwd2",
+        "iwd_in_bg2",
+        "iwdee",
+        "pst",
+        "pstee",
+        "soa",
+        "sod",
+        "tob",
+        "totlm",
+        "totsc",
+        "tutu",
+        "tutu_totsc"
+      ],
+      "inclusion_reason": "required current reference profile and observed in counted corpus"
+    },
+    {
+      "source_id": 5,
+      "candidate_package": "bg1ub",
+      "curated_package": "bg1-unfinished-business",
+      "name": "BG1 Unfinished Business",
+      "category": "PRE EET BGEE MODS",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 7,
+      "candidate_package": "sirene",
+      "name": "Sirene NPC",
+      "category": "NEW NPC MODS",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 8,
+      "candidate_package": "drake",
+      "name": "Drake NPC",
+      "category": "NEW NPC MODS",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 12,
+      "candidate_package": "eet",
+      "curated_package": "eet",
+      "name": "Baldur's Gate: Enhanced Edition Trilogy",
+      "category": "EET STARTS HERE",
+      "observed_game_targets": [],
+      "inclusion_reason": "required current reference profile and observed in counted corpus"
+    },
+    {
+      "source_id": 13,
+      "candidate_package": "bubb-revert-pathfinding",
+      "name": "Revert Pathfinding",
+      "category": "ENGINE",
+      "observed_game_targets": [
+        "bg2ee",
+        "bgee",
+        "eet",
+        "iwdee"
+      ],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 16,
+      "candidate_package": "leui",
+      "name": "Lefreut's Enhanced UI (BG2EE skin)",
+      "category": "INTERFACE",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 17,
+      "candidate_package": "infinity-ui",
+      "curated_package": "infinity-ui-plus-plus",
+      "name": "Infinity UI",
+      "category": "INTERFACE",
+      "observed_game_targets": [
+        "bg2ee",
+        "bgee",
+        "eet",
+        "iwdee"
+      ],
+      "inclusion_reason": "required current reference profile and observed in counted corpus"
+    },
+    {
+      "source_id": 18,
+      "candidate_package": "eeuitweaks",
+      "name": "EE UI Tweaks",
+      "category": "INTERFACE",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 20,
+      "candidate_package": "eeex",
+      "curated_package": "eeex",
+      "name": "EEex",
+      "category": "ENGINE",
+      "observed_game_targets": [],
+      "inclusion_reason": "required current reference profile and observed in counted corpus"
+    },
+    {
+      "source_id": 21,
+      "candidate_package": "bubb-spell-menu-extended",
+      "curated_package": "bubbs-spell-menu",
+      "name": "Bubb's Spell Menu Extended",
+      "category": "INTERFACE",
+      "observed_game_targets": [
+        "bg2ee",
+        "bgee",
+        "eet",
+        "iwdee"
+      ],
+      "inclusion_reason": "required current reference profile"
+    },
+    {
+      "source_id": 24,
+      "candidate_package": "bgeeclassicmovies",
+      "name": "BG:EE Classic Movies",
+      "category": "GRAPHICS",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 25,
+      "candidate_package": "bggo",
+      "name": "Baldur's Gate Graphics Overhaul",
+      "category": "GRAPHICS",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 29,
+      "candidate_package": "mih-fr",
+      "name": "Made in Heaven: Fixes & Restorations",
+      "category": "RESTORATIONS",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 33,
+      "candidate_package": "c-endlessbg1",
+      "name": "Endless BG1 Mod",
+      "category": "QUEST MODS BG1",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 35,
+      "candidate_package": "c-sodtweaks",
+      "name": "Jastey's Tweaks",
+      "category": "QUEST MODS BG1",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 36,
+      "candidate_package": "c-sodboabri",
+      "name": "The Boareskyr Bridge Scene",
+      "category": "QUEST MODS BG1",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 37,
+      "candidate_package": "imoen-forever",
+      "name": "Imoen 4 Ever",
+      "category": "QUEST MODS BG1",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 40,
+      "candidate_package": "bp-in-bg",
+      "name": "Bonus Pack in Baldur's Gate",
+      "category": "QUEST MODS BG1",
+      "observed_game_targets": [
+        "bgee",
+        "eet"
+      ],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 41,
+      "candidate_package": "reflections",
+      "name": "Reflections of Destiny",
+      "category": "QUEST MODS BG1",
+      "observed_game_targets": [
+        "bg2ee",
+        "eet"
+      ],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 42,
+      "candidate_package": "bgqe",
+      "name": "Baldur's Gate Mini Quests and Encounters Modification",
+      "category": "QUEST MODS BG1",
+      "observed_game_targets": [
+        "bgee",
+        "bgt",
+        "eet",
+        "totsc",
+        "tutu",
+        "tutu_totsc"
+      ],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 43,
+      "candidate_package": "ac-quest",
+      "name": "Ascalon's Questpack",
+      "category": "QUEST MODS BG1",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 44,
+      "candidate_package": "extraexpandedenhancedencounters",
+      "name": "Extra Enhanced Expanded Encounters!",
+      "category": "QUEST MODS BG1",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 46,
+      "candidate_package": "c-brage",
+      "name": "Brage's Redemption",
+      "category": "QUEST MODS BG1",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 47,
+      "candidate_package": "bg1npc",
+      "curated_package": "bg1-npc",
+      "name": "The BG1NPC Project",
+      "category": "QUEST MODS BG1",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 49,
+      "candidate_package": "ajantisbg1",
+      "name": "Ajantis BG1 Expansion Modification",
+      "category": "QUEST MODS BG1",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 50,
+      "candidate_package": "coranbgfriend",
+      "name": "Coran's BG Extended Friendship Talks",
+      "category": "QUEST MODS BG1",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 51,
+      "candidate_package": "xanbg1friend",
+      "name": "Xan's Friendship Path",
+      "category": "QUEST MODS BG1",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 55,
+      "candidate_package": "bg1re",
+      "name": "Baldur's Gate Romantic Encounters Modification (BG1RE)",
+      "category": "QUEST MODS BG1",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 57,
+      "candidate_package": "sirinescall",
+      "name": "The Lure of the Sirine's Call",
+      "category": "QUEST MODS BG1",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 62,
+      "candidate_package": "ub",
+      "name": "Unfinished Business",
+      "category": "QUEST MODS BG2",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 63,
+      "candidate_package": "arestorationp",
+      "name": "Almateria's Restoration Project",
+      "category": "QUEST MODS BG2",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 64,
+      "candidate_package": "d0questpack",
+      "name": "Quest Pack",
+      "category": "QUEST MODS BG2",
+      "observed_game_targets": [
+        "bg2ee",
+        "bgt",
+        "eet",
+        "soa",
+        "tob"
+      ],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 66,
+      "candidate_package": "hiddenadventure",
+      "name": "Hidden Adventures",
+      "category": "QUEST MODS BG2",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 76,
+      "candidate_package": "com-encounters",
+      "name": "CoM Encounters",
+      "category": "QUEST MODS BG2",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 78,
+      "candidate_package": "tod",
+      "name": "Tower of Deception",
+      "category": "QUEST MODS BG2",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 79,
+      "candidate_package": "a7-testyourmettle",
+      "name": "Test Your Mettle!",
+      "category": "QUEST MODS BG2",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 80,
+      "candidate_package": "assassinations",
+      "name": "Assassinations",
+      "category": "QUEST MODS BG2",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 81,
+      "candidate_package": "sellswords",
+      "name": "The Sellswords",
+      "category": "QUEST MODS BG2",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 82,
+      "candidate_package": "backbrynnlaw",
+      "name": "Back to Brynnlaw",
+      "category": "QUEST MODS BG2",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 83,
+      "candidate_package": "dc",
+      "name": "Dungeon Crawl",
+      "category": "QUEST MODS BG2",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 86,
+      "candidate_package": "re",
+      "name": "Romantic Encounters",
+      "category": "QUEST MODS BG2",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 87,
+      "candidate_package": "totdg",
+      "name": "Colours of Infinity: Tales of the Deep Gardens",
+      "category": "QUEST MODS BG2",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 88,
+      "candidate_package": "innershade",
+      "name": "Colours of Infinity: Innershade",
+      "category": "QUEST MODS BG2",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 89,
+      "candidate_package": "whitequeen",
+      "name": "Colours of Infinity: The White Queen",
+      "category": "QUEST MODS BG2",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 90,
+      "candidate_package": "l-isnf",
+      "name": "Colours of Infinity: I Shall Never Forget",
+      "category": "QUEST MODS BG2",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 91,
+      "candidate_package": "eilistraee",
+      "name": "Eilistraee's Song",
+      "category": "QUEST MODS BG2",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 92,
+      "candidate_package": "southernedge",
+      "name": "Athkatlan Grounds: Southern Edge",
+      "category": "QUEST MODS BG2",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 93,
+      "candidate_package": "ooze",
+      "name": "Athkatlan Grounds: The Ooze's Lounge",
+      "category": "QUEST MODS BG2",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 94,
+      "candidate_package": "tangledisle",
+      "name": "Athkatlan Grounds: The Tangled Oak Isle",
+      "category": "QUEST MODS BG2",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 95,
+      "candidate_package": "bridgesblock",
+      "name": "Athkatlan Grounds: Bridge's Block",
+      "category": "QUEST MODS BG2",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 96,
+      "candidate_package": "alabastersands",
+      "name": "Athkatlan Grounds: Alabaster Sands",
+      "category": "QUEST MODS BG2",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 103,
+      "candidate_package": "godcall",
+      "curated_package": "call-of-the-lost-goddess",
+      "name": "Call of the Lost Goddess",
+      "category": "QUEST MODS BG2",
+      "observed_game_targets": [],
+      "inclusion_reason": "required current reference profile and observed in counted corpus"
+    },
+    {
+      "source_id": 109,
+      "candidate_package": "ascension",
+      "curated_package": "ascension",
+      "name": "Ascension",
+      "category": "QUEST MODS ToB",
+      "observed_game_targets": [],
+      "inclusion_reason": "required current reference profile and observed in counted corpus"
+    },
+    {
+      "source_id": 110,
+      "candidate_package": "turnabout",
+      "name": "Turnabout",
+      "category": "QUEST MODS ToB",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 111,
+      "candidate_package": "longerroad",
+      "name": "The Longer Road",
+      "category": "QUEST MODS ToB",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 126,
+      "candidate_package": "isra",
+      "name": "Isra NPC for BG",
+      "category": "NEW NPC MODS",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 134,
+      "candidate_package": "recorder",
+      "name": "Recorder",
+      "category": "NEW NPC MODS",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 140,
+      "candidate_package": "ajantisbg2",
+      "name": "Sir Ajantis NPC",
+      "category": "NEW NPC MODS",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 168,
+      "candidate_package": "isra-bg2",
+      "name": "Isra NPC",
+      "category": "NEW NPC MODS",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 175,
+      "candidate_package": "sirene-bg2",
+      "name": "Sirene NPC",
+      "category": "NEW NPC MODS",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 204,
+      "candidate_package": "cernd",
+      "name": "Cernd Friendship",
+      "category": "NPC EXPANSIONS",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 207,
+      "candidate_package": "haerdalis-friendship",
+      "name": "Haer'dalis Friendship",
+      "category": "NPC EXPANSIONS",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 208,
+      "candidate_package": "imoenfriendship",
+      "name": "Imoen Friendship",
+      "category": "NPC EXPANSIONS",
+      "observed_game_targets": [
+        "bg2ee",
+        "bgt",
+        "eet",
+        "tob"
+      ],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 212,
+      "candidate_package": "korganfriendship",
+      "name": "Korgan Friendship",
+      "category": "NPC EXPANSIONS",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 213,
+      "candidate_package": "korgan",
+      "name": "Korgan's Redemption",
+      "category": "NPC EXPANSIONS",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 214,
+      "candidate_package": "mazzy",
+      "name": "Mazzy Friendship",
+      "category": "NPC EXPANSIONS",
+      "observed_game_targets": [
+        "bg2ee",
+        "bgt",
+        "eet",
+        "tob"
+      ],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 215,
+      "candidate_package": "minscfriendship",
+      "name": "Minsc Friendship",
+      "category": "NPC EXPANSIONS",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 219,
+      "candidate_package": "sarevokfriendship",
+      "name": "Sarevok Friendship",
+      "category": "NPC EXPANSIONS",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 220,
+      "candidate_package": "valygarfriendship",
+      "name": "Valygar Friendship",
+      "category": "NPC EXPANSIONS",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 221,
+      "candidate_package": "viconia",
+      "name": "Viconia Friendship",
+      "category": "NPC EXPANSIONS",
+      "observed_game_targets": [
+        "bg2ee",
+        "bgt",
+        "eet",
+        "tob"
+      ],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 222,
+      "candidate_package": "yoshimo",
+      "name": "Yoshimo Friendship",
+      "category": "NPC EXPANSIONS",
+      "observed_game_targets": [
+        "bg2ee",
+        "bgt",
+        "eet",
+        "tob"
+      ],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 229,
+      "candidate_package": "dornfriendship",
+      "name": "Dorn Friendship",
+      "category": "NPC EXPANSIONS",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 230,
+      "candidate_package": "hexxatfriendship",
+      "name": "Hexxat Friendship",
+      "category": "NPC EXPANSIONS",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 233,
+      "candidate_package": "sodrtd",
+      "name": "Road to Discovery",
+      "category": "NPC EXPANSIONS",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 234,
+      "candidate_package": "soddialogbanters",
+      "name": "SoD Dialog Banters",
+      "category": "NPC EXPANSIONS",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 235,
+      "candidate_package": "npcflirt",
+      "name": "Bioware NPC Flirt Packs",
+      "category": "NPC EXPANSIONS",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 236,
+      "candidate_package": "banterpack",
+      "name": "Banter Packs",
+      "category": "NPC CROSSMOD",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 238,
+      "candidate_package": "crossmodbg2",
+      "name": "Crossmod Banter Pack",
+      "category": "NPC CROSSMOD",
+      "observed_game_targets": [
+        "bg2ee",
+        "bgt",
+        "eet",
+        "soa",
+        "tob"
+      ],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 246,
+      "candidate_package": "eet-tweaks",
+      "name": "Baldur's Gate: Enhanced Edition Trilogy Tweaks (EET Tweaks)",
+      "category": "POST-TACTICAL TWEAKS",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 247,
+      "candidate_package": "cdtweaks",
+      "curated_package": "tweaks-anthology",
+      "name": "The Tweaks Anthology",
+      "category": "PRE-TACTICAL TWEAKS",
+      "observed_game_targets": [],
+      "inclusion_reason": "required current reference profile and observed in counted corpus"
+    },
+    {
+      "source_id": 288,
+      "candidate_package": "spell-rev",
+      "curated_package": "spell-revisions",
+      "name": "Spell Revisions",
+      "category": "SPELL MODS",
+      "observed_game_targets": [],
+      "inclusion_reason": "required current reference profile"
+    },
+    {
+      "source_id": 292,
+      "candidate_package": "iwdification",
+      "curated_package": "iwdification",
+      "name": "IWDification",
+      "category": "SPELL MODS",
+      "observed_game_targets": [],
+      "inclusion_reason": "required current reference profile and observed in counted corpus"
+    },
+    {
+      "source_id": 311,
+      "candidate_package": "rr",
+      "curated_package": "rogue-rebalancing",
+      "name": "Rogue Rebalancing",
+      "category": "KIT & CLASS MODS",
+      "observed_game_targets": [],
+      "inclusion_reason": "required current reference profile and observed in counted corpus"
+    },
+    {
+      "source_id": 341,
+      "candidate_package": "stratagems",
+      "curated_package": "stratagems",
+      "name": "Sword Coast Stratagems",
+      "category": "TACTICAL MODS",
+      "observed_game_targets": [],
+      "inclusion_reason": "required current reference profile and observed in counted corpus"
+    },
+    {
+      "source_id": 374,
+      "candidate_package": "a7-hiddengameplayoptions",
+      "curated_package": "hidden-gameplay-options",
+      "name": "Reveal Hidden Gameplay Options",
+      "category": "INTERFACE",
+      "observed_game_targets": [],
+      "inclusion_reason": "required current reference profile and observed in counted corpus"
+    },
+    {
+      "source_id": 386,
+      "candidate_package": "tactics-remix",
+      "curated_package": "tactics-remix",
+      "name": "Tactics Remix",
+      "category": "POST-TACTICAL TWEAKS",
+      "observed_game_targets": [
+        "bg2ee",
+        "bgee",
+        "eet",
+        "iwdee"
+      ],
+      "inclusion_reason": "required current reference profile and observed in counted corpus"
+    },
+    {
+      "source_id": 428,
+      "candidate_package": "bp-bgt-worldmap",
+      "name": "Worldmap",
+      "category": "EET FINALIZATION",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 437,
+      "candidate_package": "hq-soundclips-bg2ee",
+      "name": "High Quality Soundclips",
+      "category": "MUSIC & AUDIO",
+      "observed_game_targets": [
+        "bg2ee",
+        "eet"
+      ],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 449,
+      "candidate_package": "eet-end",
+      "curated_package": "eet-end",
+      "name": "Enhanced Edition Trilogy (End)",
+      "category": "EET FINALIZATION",
+      "observed_game_targets": [],
+      "inclusion_reason": "required current reference profile and observed in counted corpus"
+    },
+    {
+      "source_id": 470,
+      "candidate_package": "infinitysounds",
+      "name": "Infinity Sounds",
+      "category": "MUSIC & AUDIO",
+      "observed_game_targets": [
+        "bg2ee",
+        "bgee",
+        "eet",
+        "tob"
+      ],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 471,
+      "candidate_package": "jaheirafriendship",
+      "name": "Jaheira Friendship",
+      "category": "NPC EXPANSIONS",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 473,
+      "candidate_package": "ntotsc",
+      "name": "Northern Tales of the Sword Coast",
+      "category": "QUEST MODS BG1",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 474,
+      "candidate_package": "ppe",
+      "name": "Portraits Portraits Everywhere",
+      "category": "PORTRAITS",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 506,
+      "candidate_package": "throneofthemadgod",
+      "curated_package": "throne-of-the-mad-god",
+      "name": "Throne of the Mad God",
+      "category": "QUEST MODS BG2",
+      "observed_game_targets": [
+        "bg2ee",
+        "eet"
+      ],
+      "inclusion_reason": "required current reference profile and observed in counted corpus"
+    },
+    {
+      "source_id": 512,
+      "candidate_package": "darkhorizonsbgee",
+      "name": "Dark Horizons BG:EE",
+      "category": "QUEST MODS BG1",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 685,
+      "candidate_package": "generalized-biffing",
+      "name": "Generalized Biffing",
+      "category": "POST EET",
+      "observed_game_targets": [],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    },
+    {
+      "source_id": 701,
+      "candidate_package": "b3-reducesavecompression",
+      "name": "Reduce Save Compression",
+      "category": "POST EET",
+      "observed_game_targets": [
+        "bg2ee",
+        "bgee",
+        "eet",
+        "iwdee",
+        "pstee"
+      ],
+      "inclusion_reason": "meets frozen weighted-selection coverage threshold"
+    }
+  ]
+}

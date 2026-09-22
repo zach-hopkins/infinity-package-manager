@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "IEPM Product A Coverage Cohort",
+  "type": "object",
+  "required": ["schema", "corpus_captured_on", "catalog_source_revision", "minimum_packages", "minimum_coverage_basis_points", "packages"],
+  "properties": {
+    "schema": { "const": 1 },
+    "corpus_captured_on": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+    "catalog_source_revision": { "type": "string", "minLength": 1 },
+    "minimum_packages": { "type": "integer", "minimum": 1 },
+    "minimum_coverage_basis_points": { "type": "integer", "minimum": 0, "maximum": 10000 },
+    "packages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source_id", "candidate_package", "name", "category", "observed_game_targets", "inclusion_reason"],
+        "properties": {
+          "source_id": { "type": "integer", "minimum": 0 },
+          "candidate_package": { "type": "string", "minLength": 1 },
+          "curated_package": { "type": "string", "minLength": 1 },
+          "name": { "type": "string", "minLength": 1 },
+          "category": { "type": "string", "minLength": 1 },
+          "observed_game_targets": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+          "inclusion_reason": { "type": "string", "minLength": 1 }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

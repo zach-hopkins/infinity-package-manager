@@ -94,6 +94,11 @@
       "curated_package": "stratagems"
     },
     {
+      "source_id": 374,
+      "candidate_package": "a7-hiddengameplayoptions",
+      "curated_package": "hidden-gameplay-options"
+    },
+    {
       "source_id": 386,
       "candidate_package": "tactics-remix",
       "curated_package": "tactics-remix"

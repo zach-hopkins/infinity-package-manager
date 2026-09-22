@@ -148,6 +148,9 @@ pub fn import_infinity_mod_forge_index(
     let curated_lookup = curated_registry
         .map(build_curated_lookup)
         .unwrap_or_default();
+    let curated_github_lookup = curated_registry
+        .map(build_curated_github_lookup)
+        .unwrap_or_default();
     let mut entries = Vec::new();
     let mut rejections = Vec::new();
     let mut seen_source_ids = BTreeSet::new();
@@ -181,10 +184,22 @@ pub fn import_infinity_mod_forge_index(
             continue;
         }
         let candidate_package = candidate_package_id(&tp2_name, record.id);
-        let curated_packages = curated_lookup
+        let mut curated_packages = curated_lookup
             .get(&normalize_tp2_identity(&tp2_name))
             .cloned()
             .unwrap_or_default();
+        if let Some(github) = &record.github {
+            curated_packages.extend(
+                curated_github_lookup
+                    .get(&format!(
+                        "{}/{}",
+                        github.owner.to_ascii_lowercase(),
+                        github.repository.to_ascii_lowercase()
+                    ))
+                    .cloned()
+                    .unwrap_or_default(),
+            );
+        }
         let curated_package = (curated_packages.len() == 1).then(|| {
             curated_packages
                 .iter()
@@ -397,6 +412,38 @@ fn build_curated_lookup(registry: &Registry) -> BTreeMap<String, BTreeSet<String
         }
     }
     lookup
+}
+
+/// A source repository observed in the catalog can also identify an exact
+/// curated package when one of its pinned artifact locations names that same
+/// GitHub owner/repository. This is identity correlation only; it neither
+/// promotes the source artifact to an IEPM artifact nor asserts support.
+fn build_curated_github_lookup(registry: &Registry) -> BTreeMap<String, BTreeSet<String>> {
+    let mut lookup = BTreeMap::<String, BTreeSet<String>>::new();
+    for record in registry.values() {
+        for release in &record.releases {
+            for artifact in release.artifacts() {
+                let Some((owner, repository)) = github_repository_from_url(&artifact.url) else {
+                    continue;
+                };
+                lookup
+                    .entry(format!("{owner}/{repository}"))
+                    .or_default()
+                    .insert(record.package.clone());
+            }
+        }
+    }
+    lookup
+}
+
+fn github_repository_from_url(url: &str) -> Option<(String, String)> {
+    let marker = "github.com/";
+    let (_, remainder) = url.split_once(marker)?;
+    let mut segments = remainder.split('/');
+    let owner = segments.next()?.trim();
+    let repository = segments.next()?.trim();
+    (!owner.is_empty() && !repository.is_empty())
+        .then(|| (owner.to_ascii_lowercase(), repository.to_ascii_lowercase()))
 }
 
 fn candidate_collisions(entries: &[DiscoveryCatalogEntry]) -> Vec<DiscoveryCandidateCollision> {
@@ -646,5 +693,19 @@ mod tests {
         assert!(report.rejections.is_empty());
         assert!(report.candidate_collisions.is_empty());
         assert_eq!(catalog.source, report.source);
+    }
+
+    #[test]
+    fn recognizes_github_release_and_archive_urls_as_one_repository() {
+        assert_eq!(
+            github_repository_from_url(
+                "https://github.com/Argent77/A7-HiddenGameplayOptions/releases/download/v5.1/file.zip"
+            ),
+            Some(("argent77".to_owned(), "a7-hiddengameplayoptions".to_owned()))
+        );
+        assert_eq!(
+            github_repository_from_url("https://example.invalid/file.zip"),
+            None
+        );
     }
 }

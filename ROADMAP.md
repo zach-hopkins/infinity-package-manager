@@ -41,7 +41,7 @@ The ordered implementation milestones, discovery/support layer definitions,
 [Product A closeout plan](docs/product-a-closeout-plan.md).
 
 - [x] import the pinned ecosystem discovery catalog and account for every source record; PA-2 will classify landing-page and exact-artifact health separately;
-- [ ] freeze and name the smallest Product A coverage cohort of at least 50 packages that reaches at least 95% of the documented selection corpus;
+- [x] freeze and name the smallest Product A coverage cohort of at least 50 packages that reaches at least 95% of the documented selection corpus (99 packages / 95.18% of the dated initial corpus; see [cohort report](docs/product-a-cohort.md));
 - [ ] give every cohort release an exact artifact route and complete component catalog, with every exposed component explicitly Supported, Untested, or Incompatible for each intended target;
 - [ ] ensure every component advertised as Supported satisfies the quantitative evidence policy—nothing becomes green merely because it is present in the registry;
 - [ ] build one BGEE, one BG2EE, and one EET reference profile twice from clean snapshots, producing the same portable lock identity and complete action receipts on both runs;
@@ -51,9 +51,9 @@ The ordered implementation milestones, discovery/support layer definitions,
 - [ ] complete one clean-machine-style build through the ordinary CLI and desktop Product A paths without repository-only inputs.
 
 The 14-action Forge-derived EET build is important installation evidence, but
-the gate is not yet complete: the coverage cohort is not frozen, component
-catalog/support coverage remains incomplete, repeat builds are not yet recorded,
-and policy launch smokes remain.
+the gate is not yet complete: the initial cohort is frozen, while its
+component catalog/support coverage remains incomplete, repeat builds are not
+yet recorded, and policy launch smokes remain.
 
 Success condition:
 
