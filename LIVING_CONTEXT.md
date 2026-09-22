@@ -107,6 +107,12 @@ queue—not a 95%-of-all-users claim—and 80 cohort entries remain discovery-on
 candidates until release work adds executable facts. Opaque/user-supplied
 WeiDU packages remain experimentally installable where technical preflight
 succeeds.
+PA-4 now has a non-mutating component-inventory audit: `review-tp2` exposes
+every raw TP2 declaration not yet represented by a stable, curated component
+ID. Its first SCS v35.21 local-tree audit found 146 declarations, of which
+eight current IDs match structurally. The local launcher hash differs from the
+pinned release artifact, so it is structural evidence only; the other 138
+entries remain explicitly unmapped and Untested rather than auto-named.
 The Supported coverage cohort is not an arbitrary “top 100.” It is the
 smallest cohort of at least 50 packages that covers at least 95% of weighted,
 deduplicated package selections in a dated public corpus, plus required

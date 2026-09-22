@@ -67,7 +67,8 @@ For every cohort package, PA-4 must retain one explicit state:
 The existing detailed rows in [mod support ledger](mod-support.md) are the
 first PA-4 work already underway. Large packages such as Tweaks and SCS still
 need complete component classifications; a package-level install receipt does
-not complete that requirement.
+not complete that requirement. The exact structural gap is tracked by the
+[PA-4 component audit](pa4-component-audit.md).
 
 ## Reproduce
 

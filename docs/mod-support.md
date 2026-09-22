@@ -32,8 +32,8 @@ labels. This ledger must use those words only with those meanings.
 | EE Fixpack | Recorded release components | Yes, for the EET fixture | **Untested** — source/target install evidence exists; policy launch smoke is not yet recorded | [registry](../registry/packages/ee-fixpack.yaml) |
 | EET / EET_End | Recorded release components | Yes, for the narrow EET route | **Untested** — the controlled route installed; policy launch and gameplay smokes remain | [evidence](a5-eet-evidence.md) |
 | Hidden Gameplay Options | Recorded v5.1 components | Yes | **Untested** — components 0 and 10 have separate install receipts; policy launch smoke remains | [registry](../registry/packages/hidden-gameplay-options.yaml) |
-| Tweaks Anthology v18 | Complete mechanically-derived selector catalog in the source-tag release; Forge selections are all named | Yes | **Untested** — starter and Forge install receipts exist, but the policy launch smoke and full component classification remain | [registry](../registry/packages/tweaks-anthology.yaml) |
-| Sword Coast Stratagems v35.21 | Initial named selector subset; full catalog expansion is in progress | Yes for the mapped selectors; selected component prerequisites are added before execution | **Untested** — the Forge selectors installed, but launch smoke and the remaining catalog are incomplete | [registry](../registry/packages/stratagems.yaml) |
+| Tweaks Anthology v18 | 36 stable IDs mapped against 450 locally observed TP2 declarations; Forge selections are named | Yes for mapped selectors | **Untested** — starter and Forge install receipts exist, but the policy launch smoke and 414 structural entries still need user-intent classification | [registry](../registry/packages/tweaks-anthology.yaml) |
+| Sword Coast Stratagems v35.21 | 8 stable IDs mapped against 146 locally observed TP2 declarations | Yes for the mapped selectors; selected component prerequisites are added before execution | **Untested** — the Forge selectors installed, but launch smoke and 138 structural entries remain unclassified | [registry](../registry/packages/stratagems.yaml) |
 | Ascension | Forge-selected components mapped | Yes | **Untested** — core install evidence exists; policy launch smoke and remaining selections remain | [registry](../registry/packages/ascension.yaml) |
 | Call of the Lost Goddess | Recorded component | Yes | **Untested** — fixture install evidence exists; policy launch smoke remains | [registry](../registry/packages/call-of-the-lost-goddess.yaml) |
 | Throne of the Mad God | Recorded component | Yes | **Untested** — fixture install evidence exists; policy launch smoke remains | [registry](../registry/packages/throne-of-the-mad-god.yaml) |
@@ -69,3 +69,7 @@ For the mapped rows above, retain the same discipline: “Yes, for this exact
 component route” is not “all components and combinations are supported.” The
 complete selected/deferred list and PA-2 acquisition observations live in the
 [Product A cohort report](product-a-cohort.md).
+
+The PA-4 component-inventory procedure and the first SCS audit are documented
+in [PA-4 component audit](pa4-component-audit.md). It deliberately exposes
+unmapped TP2 selectors without turning them into misleading stable IDs.

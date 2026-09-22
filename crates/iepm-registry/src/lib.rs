@@ -559,9 +559,20 @@ pub struct Tp2Review {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub tp2_version: Option<String>,
     pub registry_version: String,
+    /// Complete inert structural inventory for this one installer. It exposes
+    /// coverage gaps without inventing stable component IDs for TP2 entries
+    /// that have not yet received a curator-reviewed user-intent name.
+    pub component_catalog: Tp2ComponentCatalogAudit,
     pub status: Tp2ReviewStatus,
     #[serde(skip_serializing_if = "Vec::is_empty")]
     pub findings: Vec<Tp2Finding>,
+}
+
+#[derive(Debug, Clone, Serialize, PartialEq, Eq)]
+pub struct Tp2ComponentCatalogAudit {
+    pub observed_components: usize,
+    pub mapped_registry_components: Vec<String>,
+    pub unmapped_observed_components: Vec<Tp2Component>,
 }
 
 #[derive(Debug, Clone, Copy, Serialize, PartialEq, Eq)]
@@ -616,6 +627,7 @@ pub fn review_tp2(
     review_languages(installer, observed, &mut findings);
     review_components(release, installer, observed, &mut findings);
     review_duplicates(observed, &mut findings);
+    let component_catalog = audit_component_catalog(release, installer, observed);
 
     Ok(Tp2Review {
         schema: 1,
@@ -624,6 +636,7 @@ pub fn review_tp2(
         installer_tp2: installer.tp2.clone(),
         tp2_version: observed.version.clone(),
         registry_version: release.version.clone(),
+        component_catalog,
         status: if findings.is_empty() {
             Tp2ReviewStatus::Match
         } else {
@@ -631,6 +644,67 @@ pub fn review_tp2(
         },
         findings,
     })
+}
+
+fn audit_component_catalog(
+    release: &Release,
+    installer: &Installer,
+    observed: &Tp2Observation,
+) -> Tp2ComponentCatalogAudit {
+    let mapped = release
+        .components
+        .iter()
+        .filter(|component| {
+            component
+                .weidu
+                .as_ref()
+                .is_some_and(|selector| same_tp2(&selector.tp2, &installer.tp2))
+        })
+        .filter(|component| {
+            let selector = component.weidu.as_ref().expect("filtered above");
+            observed.components.iter().any(|candidate| {
+                selector_matches_observed(selector.number, selector.label.as_deref(), candidate)
+            })
+        })
+        .map(|component| component.id.clone())
+        .collect::<Vec<_>>();
+    let unmapped_observed_components = observed
+        .components
+        .iter()
+        .filter(|observed_component| {
+            !release.components.iter().any(|component| {
+                component.weidu.as_ref().is_some_and(|selector| {
+                    same_tp2(&selector.tp2, &installer.tp2)
+                        && selector_matches_observed(
+                            selector.number,
+                            selector.label.as_deref(),
+                            observed_component,
+                        )
+                })
+            })
+        })
+        .cloned()
+        .collect();
+    Tp2ComponentCatalogAudit {
+        observed_components: observed.components.len(),
+        mapped_registry_components: mapped,
+        unmapped_observed_components,
+    }
+}
+
+fn selector_matches_observed(
+    number: Option<u32>,
+    label: Option<&str>,
+    observed: &Tp2Component,
+) -> bool {
+    match (number, label) {
+        (Some(number), Some(label)) => {
+            observed.number == Some(number) && observed.label.as_deref() == Some(label)
+        }
+        (Some(number), None) => observed.number == Some(number),
+        (None, Some(label)) => observed.label.as_deref() == Some(label),
+        (None, None) => false,
+    }
 }
 
 fn select_installer<'a>(release: &'a Release, requested: Option<&str>) -> Result<&'a Installer> {
@@ -975,6 +1049,17 @@ BEGIN @100 DESIGNATED 10 LABEL ~SAMPLE-ENABLE~
 
         assert_eq!(review.status, Tp2ReviewStatus::Match);
         assert!(review.findings.is_empty());
+        assert_eq!(review.component_catalog.observed_components, 1);
+        assert_eq!(
+            review.component_catalog.mapped_registry_components,
+            vec!["enable-feature"]
+        );
+        assert!(
+            review
+                .component_catalog
+                .unmapped_observed_components
+                .is_empty()
+        );
     }
 
     #[test]
@@ -995,6 +1080,17 @@ BEGIN @101 DESIGNATED 11 LABEL ~SAMPLE-ENABLE~
                 .findings
                 .iter()
                 .any(|finding| finding.kind == "component-selector-pair-drift")
+        );
+        assert_eq!(review.component_catalog.observed_components, 2);
+        assert!(
+            review
+                .component_catalog
+                .mapped_registry_components
+                .is_empty()
+        );
+        assert_eq!(
+            review.component_catalog.unmapped_observed_components.len(),
+            2
         );
     }
 
