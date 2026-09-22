@@ -35,7 +35,9 @@ releases:
     components:
       - { id: icon-improvements, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_icon_improvements, number: 110 } }
       - { id: more-interjections, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_more_interjections, number: 1010 } }
-      - { id: remove-xp-cap, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_remove_xp_cap, number: 2090 } }
+      - id: remove-xp-cap
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_remove_xp_cap, number: 2090 }
+        provides: [{ name: tweaks-xp-cap-scope, exclusive: true }]
   - release_id: tweaks-anthology-v18-source
     version: "v18"
     artifacts:
@@ -85,7 +87,9 @@ releases:
       - { id: remove-xp-cap, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_remove_xp_cap, number: 2090 } }
       - { id: thieving-in-heavy-armor, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_thieving_in_heavy_armor, number: 2100 } }
       - { id: expanded-dual-class-options, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_more_dual_classes, number: 2140 } }
-      - { id: protection-items-pnp, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_protection_items_pnp, number: 2150 } }
+      - id: protection-items-pnp
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_protection_items_pnp, number: 2150 }
+        provides: [{ name: tweaks-protection-items-scope, exclusive: true }]
       - { id: item-spells-at-character-level, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_item_spells_at_char_level, number: 2170 } }
       - { id: loosen-cleric-multiclass-equipment, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_cleric_multis_loosen_equipment_restrictions, number: 2420 } }
       - { id: improved-cure-cause-wounds, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nwn_cure_cause_wounds, number: 2630 } }
@@ -277,3 +281,54 @@ releases:
         unsupported_games: [bg2ee]
         provides: [{ name: tweaks-karoug-scope, exclusive: true }]
       - { id: monks-change-hand-weapon-damage-types, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_monk_weapons, number: 1370 } }
+      - { id: two-handed-bastard-swords, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_2h_bastard_swords, number: 2020 } }
+      - id: two-handed-katanas
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_2h_katanas, number: 2030 }
+        unsupported_games: [bgee]
+      - { id: two-handed-axes, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_2h_axes, number: 2035 } }
+      - { id: universal-clubs, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_universal_clubs, number: 2040 } }
+      - id: weapon-styles-for-all
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_weapon_styles_for_all, number: 2060 }
+        unsupported_games: [bgee]
+        conflicts: [bg-proficiencies-without-styles, iwd-proficiencies-without-styles]
+      - id: delay-high-level-abilities
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_delay_hlas, number: 2080 }
+        unsupported_games: [bgee]
+      - id: cap-xp-at-level-twenty
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_cap_xp_at_l20, number: 2091 }
+        unsupported_games: [bgee]
+        provides: [{ name: tweaks-xp-cap-scope, exclusive: true }]
+      - id: cap-xp-at-level-thirty
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_cap_xp_at_l30, number: 2092 }
+        unsupported_games: [bgee]
+        provides: [{ name: tweaks-xp-cap-scope, exclusive: true }]
+      - id: yoshimo-imoen-experience-transfer
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_yoshi_imoen_xp_transfer, number: 2720 }
+        unsupported_games: [bgee]
+      - { id: arcane-spellcasting-in-armor, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_casting_in_armor, number: 2120 } }
+      - id: protection-items-no-restrictions
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_protection_items_all, number: 2151 }
+        provides: [{ name: tweaks-protection-items-scope, exclusive: true }]
+      - id: protection-items-armor-plus-one
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_protection_items_armor_plus_one, number: 2152 }
+        provides: [{ name: tweaks-protection-items-scope, exclusive: true }]
+      - id: rebalanced-weapon-proficiencies
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_alter_prof_rebalanced, number: 2160 }
+        unsupported_games: [bgee]
+        provides: [{ name: tweaks-weapon-proficiencies-scope, exclusive: true }]
+      - id: bg-proficiencies-with-styles
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_alter_prof_bg_with_styles, number: 2161 }
+        unsupported_games: [bgee]
+        provides: [{ name: tweaks-weapon-proficiencies-scope, exclusive: true }]
+      - id: bg-proficiencies-without-styles
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_alter_prof_bg_no_styles, number: 2162 }
+        unsupported_games: [bgee]
+        provides: [{ name: tweaks-weapon-proficiencies-scope, exclusive: true }]
+      - id: iwd-proficiencies-with-styles
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_alter_prof_iwd_with_styles, number: 2163 }
+        unsupported_games: [bgee]
+        provides: [{ name: tweaks-weapon-proficiencies-scope, exclusive: true }]
+      - id: iwd-proficiencies-without-styles
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_alter_prof_iwd_no_styles, number: 2164 }
+        unsupported_games: [bgee]
+        provides: [{ name: tweaks-weapon-proficiencies-scope, exclusive: true }]
