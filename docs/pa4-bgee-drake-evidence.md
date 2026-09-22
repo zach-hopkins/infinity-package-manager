@@ -16,13 +16,22 @@ identity and status assertions are in
 - Sealed `WeiDU.log` recorded English components `#0` and `#1`: the NPC and
   the default forced portrait choice. The TP2 displays VERSION 1.7 while the
   author source tag is v1.7a; both facts are retained.
-- Launch attempts from the sealed game folder and with an explicit working
-  directory exited before a targetable BGEE window appeared. No new game
-  crash dump was observed during these attempts. The reason is not yet
-  established; no menu or gameplay smoke is claimed.
+- A second independent clean disposable build used the same pinned lockfile,
+  registry revision, source fingerprint, toolchain, and artifact. It completed
+  1/1 actions, recorded both components, had empty stderr, and sealed to the
+  same output fingerprint
+  `7e5badff73401c5d38b4f4b22c321125b2dae8dedcfd68d1e2521a4c039cd581`.
+- Both sealed builds exited before a targetable BGEE window appeared. Windows
+  Application Error events for each build recorded `Baldur.exe` exception
+  `0xc0000409` at offset `0x0000000000515ed9` (first at 14:56:44, second at
+  15:01:55 local time). A previously sealed, different BGEE 2.6.6 disposable
+  build launched normally on the same host. No menu or gameplay smoke is
+  claimed for Drake. The underlying game/mod defect has not been diagnosed.
 
-This is exact-scope install evidence, **not** Supported status. The selected
-BGEE route remains Untested pending a successful launch smoke or a diagnosed
-environmental cause. Alternate portraits, crossbow proficiency, original
-soundset, EET, and gameplay also remain Untested. Raw WeiDU output and the
-full sealed game remain in the user's local IEPM store, not Git.
+Under [verification policy](verification-policy.md), the exact Drake v1.7a
+NPC + default portrait configuration on this BGEE fingerprint is
+**Incompatible**: two independent clean builds reproduced the same launch
+failure. This does **not** establish that the NPC alone, alternate portraits,
+other game versions, or EET are incompatible; those routes remain Untested.
+Raw WeiDU outputs, Windows crash reports, and the full sealed games remain
+local, not in Git.

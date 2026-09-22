@@ -41,5 +41,13 @@
     "main_menu_smoke": false,
     "gameplay_smoke": false
   },
+  "incompatibility": [
+    {
+      "kind": "deterministic-failure",
+      "summary": "Two independent clean disposable BGEE 2.6.6 builds of Drake v1.7a NPC plus default portrait installed and sealed, but their Baldur.exe processes faulted before the menu with Windows Application Error 0xc0000409 at offset 0x0000000000515ed9. A separate previously sealed BGEE build launched on the same host.",
+      "deterministic_failures": 2,
+      "references": ["docs/pa4-bgee-drake-evidence.md"]
+    }
+  ],
   "evidence": ["examples/bgee-drake/modpack.yaml", "docs/pa4-bgee-drake-evidence.md"]
 }

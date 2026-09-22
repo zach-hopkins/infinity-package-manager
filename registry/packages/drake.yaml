@@ -21,6 +21,9 @@ releases:
       - claim: Placing Drake in the BGEE source phase before EET follows its BGEE installer predicate but does not prove the EET transfer route.
         provenance: derived
         evidence: [https://github.com/TheArtisanBG/Drake]
+      - claim: The exact v1.7a NPC plus default portrait selection installed twice in independent clean BGEE 2.6.6 builds, but both sealed games faulted before the menu with the same Windows Application Error; that exact configuration is Incompatible, with other component choices and EET untested.
+        provenance: verified
+        evidence: [docs/pa4-bgee-drake-evidence.md, evidence/pa4-bgee-drake.json]
     installers:
       - tp2: Drake/Setup-Drake.tp2
         launcher: toolchain
