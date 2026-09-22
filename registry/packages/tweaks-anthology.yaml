@@ -109,3 +109,34 @@ releases:
       - { id: adjust-evil-npc-reactions, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_adjust_evil_npc_reactions, number: 4000 } }
       - { id: allow-npc-pairs-to-separate, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_allow_npc_pairs_to_separate, number: 4025 } }
       - { id: disable-advanced-ai-auto-assignment, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_disable_joinable_ai_scripts, number: 4140 } }
+      # v18 TP2 LABELs are author-provided, release-specific selector facts.
+      # These UI/visual choices are structurally mapped but remain Untested.
+      - { id: batch-install, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_batch_install, number: 0, non_recording: true } }
+      - { id: remove-helmets, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_remove_helmets, number: 10 } }
+      - { id: imoen-avatar-change, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_imoen_avatar_change, number: 20 } }
+      - { id: nalia-avatar-change, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nalia_avatar_change, number: 30 } }
+      - { id: viconia-skin-color, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_viconia_skin_color, number: 40 } }
+      - { id: avatar-morphing-script, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_avatar_morphing_script, number: 50 } }
+      - { id: weapon-animation-tweaks, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_weapon_animation_tweaks, number: 60 } }
+      - { id: bg-casting-graphics, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_bg_casting_graphics, number: 72 } }
+      - { id: restore-soa-loading-screen, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_restore_soa_loading_screen, number: 80 } }
+      - { id: remove-portrait-icons, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_remove_portrait_icons, number: 90 } }
+      - { id: drab-commoners, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_drab_commoners, number: 100 } }
+      - { id: force-dialogue-pause, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_force_all_dialogue_to_pause, number: 130 } }
+      - { id: fix-boo-squeak, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_fix_boo_squeak, number: 140 } }
+      - { id: glowing-magical-shields, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_glowing_magical_shields, number: 160 } }
+      - id: unique-icons-selected
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_unique_icons, number: 170 }
+        provides: [{ name: tweaks-unique-icons-scope, exclusive: true }]
+      - id: unique-icons-all
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_unique_icons_all, number: 171 }
+        provides: [{ name: tweaks-unique-icons-scope, exclusive: true }]
+      - id: unique-containers-fixes-only
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_unique_containers_fixes_only, number: 180 }
+        provides: [{ name: tweaks-unique-containers-scope, exclusive: true }]
+      - id: unique-containers-fixes-icons
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_unique_containers_fixes_and_icons, number: 181 }
+        provides: [{ name: tweaks-unique-containers-scope, exclusive: true }]
+      - id: unique-containers-full
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_unique_containers_full, number: 182 }
+        provides: [{ name: tweaks-unique-containers-scope, exclusive: true }]
