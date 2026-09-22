@@ -10,7 +10,7 @@ releases:
     materialization: { source_root: Banter_Pack-18, include: [banterpack] }
     compatibility: { games: [bg2ee, eet] }
     install: { phase: eet }
-    provenance: unverified
+    provenance: verified
     claims:
       - claim: >-
           The exact author v18 tag archive was SHA-256 verified; its TP2
@@ -25,6 +25,9 @@ releases:
       - claim: The author describes BG2EE and EET as supported game targets.
         provenance: declared
         evidence: [https://github.com/Pocket-Plane-Group/Banter_Pack]
+      - claim: All four English components installed in a pinned clean BG2EE 2.6.6 build, appeared in WeiDU.log, and the sealed game reached the Shadows of Amn menu. Dialogue behavior and EET remain untested.
+        provenance: verified
+        evidence: [docs/pa4-bg2ee-banterpack-evidence.md, evidence/pa4-bg2ee-banterpack.json]
     installers:
       - tp2: banterpack/Setup-banterpack.tp2
         launcher: toolchain

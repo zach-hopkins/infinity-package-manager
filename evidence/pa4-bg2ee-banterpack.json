@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "Banter Pack v18 all four English components on clean BG2EE 2.6.6",
+  "identity": {
+    "registry_revision": "6f49521",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "a90eb3f01b3bb9ac606ba1234937afdaaeb2d94e7cb03727f1894309829090a8",
+    "environments": {
+      "target": {
+        "target": "bg2ee",
+        "fingerprint": {
+          "profile": "iepm-core-layout-v1",
+          "value": "298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f"
+        }
+      }
+    },
+    "packages": [
+      { "package": "banterpack", "release_id": "banterpack-v18-source", "environment": "target", "artifact_sha256": "c372aadca0ae794312e8ac76738fa38887f0f37e4ceff9c6249bcde2a843f47f", "components": ["soa-banters", "soa-banter-accelerator", "tob-banters", "tob-banter-accelerator"] }
+    ],
+    "execution_order": ["banterpack"]
+  },
+  "checks": {
+    "artifact_verified": true,
+    "selector_known": true,
+    "requirements_modeled": true,
+    "component_catalog_complete": true,
+    "all_components_classified": true,
+    "core_components_supported": true,
+    "selected_components_supported": true,
+    "relationships_satisfied": true,
+    "no_opaque_selections": true,
+    "clean_disposable_install": true,
+    "all_actions_completed": true,
+    "requested_components_recorded": true,
+    "no_components_skipped": true,
+    "warnings_classified": true,
+    "sealed": true,
+    "eet_end_required": false,
+    "main_menu_smoke": true,
+    "gameplay_smoke": false
+  },
+  "evidence": ["examples/bg2ee-banterpack/modpack.yaml", "docs/pa4-bg2ee-banterpack-evidence.md"]
+}

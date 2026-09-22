@@ -65,6 +65,7 @@ classification backlog.
 | IWDification v11 IEMOD | 24 | 22 | 2 non-user-facing/legacy |
 | Sirene v3.1 tag archive | 10 | 10 | 0 |
 | LeUI v4.9.1 tag archive | 3 | 3 | 0 |
+| Banter Pack v18 tag archive | 4 | 4 | 0 |
 | Ten Spellhold Studios BG2 friendship tag archives | 10 total | 10 | 0 |
 | Dorn, Hexxat, and Jaheira Friendships; Korgan's Redemption tag archives | 4 total | 4 | 0 |
 | Coran's BG Friendship and Xan's BG1 Friendship tag archives | 2 total | 2 | 0 |
@@ -151,3 +152,9 @@ matched and completed in a clean revision-pinned disposable BG2EE 2.6.6
 build, followed by a Shadows of Amn menu smoke. See
 [`pa4-bg2ee-hq-soundclips-evidence.md`](pa4-bg2ee-hq-soundclips-evidence.md).
 EET and audible output remain Untested.
+Banter Pack v18 has four LABEL-bearing SoA/ToB content and accelerator
+components structurally matched to stable IDs. All four English selections
+installed in a clean revision-pinned disposable BG2EE build and reached the
+Shadows of Amn menu. See
+[`pa4-bg2ee-banterpack-evidence.md`](pa4-bg2ee-banterpack-evidence.md).
+EET and dialogue behavior remain Untested.
