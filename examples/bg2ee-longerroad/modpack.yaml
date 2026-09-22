@@ -1,0 +1,19 @@
+schema: 2
+
+# PA-4 bounded main-story route. The registry selects both exact Ascension
+# components needed by Longer Road's TP2 before installation.
+environments:
+  target:
+    target: bg2ee
+    version: "2.6.6"
+    platform: windows
+    language: English
+    locale: en_US
+    fingerprint:
+      profile: iepm-core-layout-v1
+      value: 298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f
+
+mods:
+  - package: longerroad
+    environment: target
+    components: [irenicus-redemption-story]

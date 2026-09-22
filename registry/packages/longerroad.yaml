@@ -1,0 +1,50 @@
+schema: 2
+package: longerroad
+releases:
+  - release_id: longerroad-2.0.7-source
+    version: "2.0.7"
+    artifacts:
+      - url: https://github.com/InfinityMods/LongerRoadEE/archive/refs/tags/2.0.7.zip
+        sha256: 5e46d529574121d7b8712a7f427fcc4f6f5d44b9da6294ba61c81f5569ea34e6
+        platforms: [windows]
+    materialization: { source_root: LongerRoad-2.0.7, include: [LongerRoad] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet, after: [eet, ascension], before: [eet-end] }
+    relationships:
+      - kind: requires
+        package: ascension
+        components: [rewritten-final-chapter, redeem-balthazar]
+        when:
+          selected_components: [irenicus-redemption-story]
+    provenance: unverified
+    claims:
+      - claim: The exact v2.0.7 author-tag archive was SHA-256 verified. Its TP2 declares VERSION 2.0.7, five WeiDU languages, and two LABEL-bearing components numbered 0 and 1.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The main TP2 mechanically requires both Ascension's rewritten final chapter and redeemable Balthazar components.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The author readme requires Ascension v2.0.23 or newer; IEPM's pinned Ascension 2.1.0 satisfies that stated minimum.
+        provenance: declared
+        evidence: [https://github.com/InfinityMods/LongerRoadEE]
+      - claim: The optional Irenicus SoA portrait component mechanically requires Longer Road's own main component.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The author recommends installing after Wheels of Prophecy when both are selected; this is an ordering recommendation, not a hard dependency.
+        provenance: declared
+        evidence: [https://github.com/InfinityMods/LongerRoadEE]
+      - claim: The TP2 contains BG2EE and EET resource branches. EET placement and in-game story behavior remain Untested.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+    installers:
+      - tp2: LongerRoad/LongerRoad.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: "Espanol (Traducido cerca Immortality y compana)" }
+          - { id: 2, name: "Francais (Traduction de Erszebeth)" }
+          - { id: 3, name: "Polski (Tlumaczenie Cuttooth)" }
+          - { id: 4, name: "Russian (Arcanecoast Team)" }
+    components:
+      - { id: irenicus-redemption-story, default_selected: true, weidu: { tp2: LongerRoad/LongerRoad.tp2, label: LongerRoad-Main, number: 0 } }
+      - { id: restore-irenicus-soa-portrait, weidu: { tp2: LongerRoad/LongerRoad.tp2, label: LongerRoad-RestoreIrenicusSoAPortrait, number: 1 }, requires: [irenicus-redemption-story] }
