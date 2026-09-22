@@ -62,6 +62,8 @@ classification backlog.
 | Call of the Lost Goddess v3.1 | 3 | 3 | 0 |
 | Infinity UI++ v1.23 source | 9 | 9 | 0 |
 | EEex v1.2.0 | 9 | 9 | 0 |
+| Bubb's Spell Menu v5.2 | 1 | 1 | 0 |
+| Throne of the Mad God v2.3 | 1 | 1 | 0 |
 | DLC Merger 2.1 | 4 | 4 | 0 |
 | EE Fixpack Beta 2 | 7 | 3 | 4 internal-only |
 

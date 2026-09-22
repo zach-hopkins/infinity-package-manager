@@ -36,10 +36,10 @@ labels. This ledger must use those words only with those meanings.
 | Sword Coast Stratagems v35.21 | 78 stable IDs mapped against 146 locally observed TP2 declarations, including every selector in the personal EET build | Yes for the mapped selectors; selected component prerequisites are added before execution | **Untested** — the Forge selectors installed, but launch smoke and 68 structural entries remain unclassified | [registry](../registry/packages/stratagems.yaml) |
 | Ascension 2.1.0 | Complete 19-component structural catalog; all selectors matched against the local TP2 audit | Yes | **Untested** — the core route has install evidence, while the newly mapped optional components still require their own evidence | [registry](../registry/packages/ascension.yaml) |
 | Call of the Lost Goddess v3.1 | Complete 3-component structural catalog | Yes | **Untested** — the core route has fixture install evidence; optional portraits/voiceover and policy launch smoke remain untested | [registry](../registry/packages/call-of-the-lost-goddess.yaml) |
-| Throne of the Mad God | Recorded component | Yes | **Untested** — fixture install evidence exists; policy launch smoke remains | [registry](../registry/packages/throne-of-the-mad-god.yaml) |
+| Throne of the Mad God v2.3 | Complete 1-component structural catalog | Yes | **Untested** — fixture install evidence exists; policy launch smoke remains | [registry](../registry/packages/throne-of-the-mad-god.yaml) |
 | EEex v1.2.0 | Complete 9-component structural catalog; every optional module carries its mechanical core prerequisite | Yes | **Untested** — bootstrap/main/LuaJIT have install evidence; optional modules, launch smoke, and native-extension interactions remain | [registry](../registry/packages/eeex.yaml) |
 | Infinity UI++ v1.23 source | Complete 9-component structural catalog; quicksave slot selections are component-scoped alternatives | Yes | **Untested** — the core has dedicated install evidence; optional selectors and policy launch smoke remain untested | [registry](../registry/packages/infinity-ui-plus-plus.yaml) |
-| Bubb's Spell Menu | Recorded component | Yes | **Untested** — the EEex-dependent fixture installed; policy launch smoke remains | [registry](../registry/packages/bubbs-spell-menu.yaml) |
+| Bubb's Spell Menu v5.2 | Complete 1-component structural catalog | Yes | **Untested** — the EEex-dependent fixture installed; policy launch smoke remains | [registry](../registry/packages/bubbs-spell-menu.yaml) |
 
 ## Reading the Forge manifest
 
