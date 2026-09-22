@@ -1,0 +1,39 @@
+schema: 2
+package: dark-horizons
+aliases: [darkhorizonsbgee]
+releases:
+  - release_id: dark-horizons-v3.06-source
+    version: "3.06"
+    artifacts:
+      - url: https://github.com/The-Gate-Project/DarkHorizons/archive/refs/tags/v3.06.zip
+        sha256: 977e7771c9717e3139e96d261279c7337fcfd062fb5ea6b0efdedddc2c8ee9c2
+        platforms: [windows]
+    materialization: { source_root: DarkHorizons-3.06, include: [DarkHorizons] }
+    compatibility: { games: [bgee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact v3.06 author-tag ZIP matched SHA-256. Its TP2 declares VERSION 3.06, eight languages, main component 0, and optional nerfs component 10; a multiline BEGIN title required a TP2-reader fix before both selectors were visible.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The author documents BGEE and EET support and directs EET users to install after EET import. IEPM has not tested the EET route.
+        provenance: declared
+        evidence: [https://github.com/The-Gate-Project/DarkHorizons]
+      - claim: The optional nerfs component mechanically checks that Dark Horizons main component zero is installed. Its effects and coexistence with other item mods remain Untested.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+    installers:
+      - tp2: DarkHorizons/DarkHorizons.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: Italian }
+          - { id: 2, name: German }
+          - { id: 3, name: Russian }
+          - { id: 4, name: Polish }
+          - { id: 5, name: "Francais (traduit par Sanctifer des d'Oghmatiques)" }
+          - { id: 6, name: Spanish }
+          - { id: 7, name: "Simplified Chinese (Latest Chinese accent by YouYe)" }
+    components:
+      - { id: dark-horizons-quests, default_selected: true, weidu: { tp2: DarkHorizons/DarkHorizons.tp2, label: TeamBG_CoM_Solaufein-DarkHorizons, number: 0 } }
+      - { id: reduce-overpowered-items, weidu: { tp2: DarkHorizons/DarkHorizons.tp2, label: TeamBG_CoM_Solaufein-DarkHorizons_Nerfs_1, number: 10 }, requires: [dark-horizons-quests] }

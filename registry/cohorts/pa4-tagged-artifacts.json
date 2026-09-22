@@ -4914,7 +4914,7 @@
       "tp2_files": [
         "DarkHorizons-3.06/DarkHorizons/DarkHorizons.tp2"
       ],
-      "components_observed": 1.0,
+      "components_observed": 2.0,
       "tp2_observations": [
         {
           "path": "DarkHorizons-3.06/DarkHorizons/DarkHorizons.tp2",
@@ -4957,8 +4957,13 @@
           "components": [
             {
               "begin": "@0",
-              "number": 10,
+              "number": 0,
               "label": "TeamBG_CoM_Solaufein-DarkHorizons"
+            },
+            {
+              "begin": "Option 1 :\n\nMake generic overpowered or duplicate items undroppable or replaced by lesser similar, reduce powerfull ammo stacks.\n",
+              "number": 10,
+              "label": "TeamBG_CoM_Solaufein-DarkHorizons_Nerfs_1"
             }
           ],
           "game_predicates": [

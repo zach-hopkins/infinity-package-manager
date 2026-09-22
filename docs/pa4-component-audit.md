@@ -76,6 +76,8 @@ classification backlog.
 | The Longer Road v2.0.7 | 2 | 2 | 0; main requires two Ascension components and optional portrait requires main |
 | Isra NPC for BGII v3.1 | 2 | 2 | 0; optional crossmod requires main and only adds interactions for detected installed NPCs |
 | Isra NPC for BG v3.5 | 3 | 3 | 0; main requires a supported BG1 engine, optional Valerie and Gavin crossmod choices require main plus their partner mods |
+| Black Pits in BG 1.2.1 | 1 | 1 | 0; TP2 restricts component 100 to BGEE or EET |
+| Dark Horizons 3.06 | 2 | 2 | 0; multiline optional title was previously collapsed into main by the TP2 reader; optional nerfs selector 10 requires main selector 0 |
 | Ten Spellhold Studios BG2 friendship tag archives | 10 total | 10 | 0 |
 | Dorn, Hexxat, and Jaheira Friendships; Korgan's Redemption tag archives | 4 total | 4 | 0 |
 | Coran's BG Friendship and Xan's BG1 Friendship tag archives | 2 total | 2 | 0 |

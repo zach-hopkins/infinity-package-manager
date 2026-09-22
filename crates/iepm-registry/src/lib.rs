@@ -302,8 +302,26 @@ pub fn inspect_tp2(source: &str) -> Tp2Observation {
     let mut control_flow_depth = 0_usize;
     let mut awaits_control_flow_begin = false;
     let mut in_block_comment = false;
+    let mut multiline_component_title: Option<(char, String)> = None;
 
     for raw_line in source.trim_start_matches('\u{feff}').lines() {
+        // A quoted WeiDU component title may span lines. Until its closing
+        // delimiter, declaration-looking words are title text, not TP2 code.
+        if let Some((delimiter, title)) = multiline_component_title.as_mut() {
+            let fragment = raw_line.trim();
+            if let Some(end) = fragment.find(*delimiter) {
+                title.push('\n');
+                title.push_str(&fragment[..end]);
+                if let Some(component) = current.as_mut() {
+                    component.begin = Some(title.clone());
+                }
+                multiline_component_title = None;
+            } else {
+                title.push('\n');
+                title.push_str(fragment);
+            }
+            continue;
+        }
         let raw_line = strip_tp2_comments(raw_line, &mut in_block_comment);
         let line = raw_line.trim();
         if line.is_empty() || line.starts_with("//") {
@@ -373,23 +391,31 @@ pub fn inspect_tp2(source: &str) -> Tp2Observation {
         // indented control-flow BEGINs. A component has a title argument;
         // action `BEGIN` is bare. The tracked action context adds another
         // guard for controls whose expression precedes BEGIN on its line.
-        if starts_keyword(line, "BEGIN") && value_after_keyword(line, "BEGIN").is_some() {
-            if control_flow_depth > 0 {
+        if starts_keyword(line, "BEGIN") && control_flow_depth == 0 {
+            let title_source = line["BEGIN".len()..].trim_start();
+            let pending_title = match title_source.chars().next() {
+                Some(delimiter @ ('~' | '"'))
+                    if !title_source[delimiter.len_utf8()..].contains(delimiter) =>
+                {
+                    Some((delimiter, title_source[delimiter.len_utf8()..].to_owned()))
+                }
+                _ => None,
+            };
+            if pending_title.is_some() || value_after_keyword(line, "BEGIN").is_some() {
+                if let Some(component) = current.take() {
+                    observation.components.push(component);
+                }
+                current = Some(Tp2Component {
+                    begin: value_after_keyword(line, "BEGIN"),
+                    // A bare BEGIN receives WeiDU's declaration-order selector.
+                    // Numeric text inside BEGIN is a title, not a selector.
+                    number: number_after_keyword(line, "DESIGNATED")
+                        .or(Some(observation.components.len() as u32)),
+                    label: value_after_keyword(line, "LABEL"),
+                });
+                multiline_component_title = pending_title;
                 continue;
             }
-            if let Some(component) = current.take() {
-                observation.components.push(component);
-            }
-            current = Some(Tp2Component {
-                begin: value_after_keyword(line, "BEGIN"),
-                // A bare BEGIN receives WeiDU's declaration-order selector.
-                // Numeric text inside BEGIN (for example `BEGIN ~1~`) is a
-                // component title, not necessarily a selector.
-                number: number_after_keyword(line, "DESIGNATED")
-                    .or(Some(observation.components.len() as u32)),
-                label: value_after_keyword(line, "LABEL"),
-            });
-            continue;
         }
         for (keyword, kind) in [
             ("GAME_IS", "game-is"),
@@ -1100,6 +1126,40 @@ DESIGNATED 20
                 .map(|component| component.number)
                 .collect::<Vec<_>>(),
             vec![Some(0), Some(1), Some(20)]
+        );
+    }
+
+    #[test]
+    fn inspection_separates_multiline_component_title_from_prior_selector() {
+        let observation = inspect_tp2(
+            r#"
+BEGIN @0
+DESIGNATED 0
+LABEL ~main~
+BEGIN ~Option 1 :
+
+Make optional items less powerful.
+~
+DESIGNATED 10
+SUBCOMPONENT ~Nerfs~
+LABEL ~optional-nerfs~
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~example.tp2~ ~0~) ~Install main first~
+"#,
+        );
+
+        assert_eq!(observation.components.len(), 2);
+        assert_eq!(observation.components[0].number, Some(0));
+        assert_eq!(observation.components[0].label.as_deref(), Some("main"));
+        assert_eq!(observation.components[1].number, Some(10));
+        assert_eq!(
+            observation.components[1].label.as_deref(),
+            Some("optional-nerfs")
+        );
+        assert!(
+            observation.components[1]
+                .begin
+                .as_deref()
+                .is_some_and(|title| title.contains("Make optional items less powerful."))
         );
     }
 

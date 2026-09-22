@@ -1,0 +1,32 @@
+schema: 2
+package: bp-in-bg
+releases:
+  - release_id: bp-in-bg-1.2.1-source
+    version: "1.2.1"
+    artifacts:
+      - url: https://github.com/UnearthedArcana/BP_in_BG/archive/refs/tags/1.2.1.zip
+        sha256: 231929cf1df4009a0712a85a57ef6f4ff562b2ba0afb9e15c04918a9e085dab8
+        platforms: [windows]
+    materialization: { source_root: BP_in_BG-1.2.1, include: [BP_in_BG] }
+    compatibility: { games: [bgee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact 1.2.1 author-tag source ZIP matched SHA-256. Its TP2 declares VERSION 1.2.1, three languages, and one DESIGNATED component 100.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The TP2 requires BGEE or EET. The author says to install very early because this release overwrites Baeloth and Black Pits vendor dialogues; on EET it belongs immediately after EET import.
+        provenance: declared
+        evidence: [https://github.com/UnearthedArcana/BP_in_BG]
+      - claim: The mod's readme describes entering Black Pits from the BG1 campaign and warns that Baeloth cannot rejoin after that route; no such story behavior has been smoke-tested by IEPM.
+        provenance: declared
+        evidence: [https://github.com/UnearthedArcana/BP_in_BG]
+    installers:
+      - tp2: BP_in_BG/bp_in_bg.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: French }
+          - { id: 2, name: "Simplified Chinese (translation: Lewis Liu)" }
+    components:
+      - { id: black-pits-campaign-access, default_selected: true, weidu: { tp2: BP_in_BG/bp_in_bg.tp2, number: 100 } }
