@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "Ascension 2.1.0 components 0 and 10 then The Longer Road v2.0.7 English main on clean BG2EE 2.6.6",
+  "identity": {
+    "registry_revision": "ac5930e",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "fbb0e8185630e32a387d098d47753f26bca203847201d4052019607a74163175",
+    "environments": {
+      "target": {
+        "target": "bg2ee",
+        "fingerprint": {
+          "profile": "iepm-core-layout-v1",
+          "value": "298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f"
+        }
+      }
+    },
+    "packages": [
+      { "package": "ascension", "release_id": "ascension-2.1.0", "environment": "target", "artifact_sha256": "bd0ee14b3770d56104eaa81287c88a8672afa889a35184fb308be12d6d707e77", "components": ["rewritten-final-chapter", "redeem-balthazar"] },
+      { "package": "longerroad", "release_id": "longerroad-2.0.7-source", "environment": "target", "artifact_sha256": "5e46d529574121d7b8712a7f427fcc4f6f5d44b9da6294ba61c81f5569ea34e6", "components": ["irenicus-redemption-story"] }
+    ],
+    "execution_order": ["ascension", "longerroad"]
+  },
+  "checks": {
+    "artifact_verified": true,
+    "selector_known": true,
+    "requirements_modeled": true,
+    "component_catalog_complete": true,
+    "all_components_classified": true,
+    "core_components_supported": false,
+    "selected_components_supported": false,
+    "relationships_satisfied": true,
+    "no_opaque_selections": true,
+    "clean_disposable_install": true,
+    "all_actions_completed": true,
+    "requested_components_recorded": true,
+    "no_components_skipped": true,
+    "warnings_classified": true,
+    "sealed": true,
+    "eet_end_required": false,
+    "main_menu_smoke": false,
+    "gameplay_smoke": false
+  },
+  "evidence": ["examples/bg2ee-longerroad/modpack.yaml", "docs/pa4-bg2ee-longerroad-evidence.md"]
+}
