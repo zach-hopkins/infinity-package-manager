@@ -16,7 +16,7 @@ releases:
         components: [rewritten-final-chapter, redeem-balthazar]
         when:
           selected_components: [irenicus-redemption-story]
-    provenance: unverified
+    provenance: verified
     claims:
       - claim: The exact v2.0.7 author-tag archive was SHA-256 verified. Its TP2 declares VERSION 2.0.7, five WeiDU languages, and two LABEL-bearing components numbered 0 and 1.
         provenance: derived
@@ -36,6 +36,9 @@ releases:
       - claim: The TP2 contains BG2EE and EET resource branches. EET placement and in-game story behavior remain Untested.
         provenance: derived
         evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The exact English main component completed after IEPM selected both required Ascension 2.1.0 components in a clean BG2EE 2.6.6 build, appeared in WeiDU.log, and the sealed game reached the Throne of Bhaal menu. Optional portrait, EET, and story behavior remain Untested.
+        provenance: verified
+        evidence: [evidence/pa4-bg2ee-longerroad.json]
     installers:
       - tp2: LongerRoad/LongerRoad.tp2
         launcher: toolchain

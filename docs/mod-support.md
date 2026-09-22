@@ -66,8 +66,8 @@ labels. This ledger must use those words only with those meanings.
 | Sword Coast Stratagems v35.21 | 134 stable IDs mapped against 143 live local TP2 declarations: every BGEE/BG2EE/EET-facing selector and the personal EET build | Yes for mapped selectors; prerequisites and documented alternative choices are checked before execution | **Untested** — bounded selectors have install evidence, but policy launch smoke and gameplay evidence remain incomplete; the remaining 9 declarations are IWD-only or legacy-only | [registry](../registry/packages/stratagems.yaml) |
 | Ascension 2.1.0 | Complete 19-component structural catalog; all selectors matched against the local TP2 audit | Yes | **Untested** — the core route has install evidence, while the newly mapped optional components still require their own evidence | [registry](../registry/packages/ascension.yaml) |
 | Turnabout v1.8 | Complete two-component catalog; main requires Ascension's rewritten final chapter, while optional portrait is independent | Ascension plus Turnabout main built and launched from sealed BG2EE | **Supported** for the tested English BG2EE 2.6.6 route; optional portrait, EET, and endgame behavior Untested | [evidence](pa4-bg2ee-turnabout-evidence.md) |
-| The Longer Road v2.0.7 | Complete two-component catalog; main requires two exact Ascension choices, optional portrait requires main | Ascension plus Longer Road main installed into a clean BG2EE workspace and sealed; launch/menu smoke was inconclusive | **Untested** pending observed game menu; optional portrait, EET, and story behavior also Untested | [install evidence](pa4-bg2ee-longerroad-evidence.md) |
-| Isra NPC for BGII v3.1 | Complete two-component catalog; optional crossmod requires main and detects other installed NPCs by resource | Executable English BG2EE/EET route mapped; clean build pending | **Untested** — no Isra build, launch, or actual crossmod interaction evidence yet | [registry](../registry/packages/isra-bg2.yaml) |
+| The Longer Road v2.0.7 | Complete two-component catalog; main requires two exact Ascension choices, optional portrait requires main | Ascension plus Longer Road main built and launched from sealed BG2EE | **Supported** for the tested English BG2EE 2.6.6 route; optional portrait, EET, and story behavior Untested | [evidence](pa4-bg2ee-longerroad-evidence.md) |
+| Isra NPC for BGII v3.1 | Complete two-component catalog; optional crossmod requires main and detects other installed NPCs by resource | Main NPC component built and launched from sealed BG2EE | **Supported** for the tested English BG2EE 2.6.6 main route; crossmod, EET, and story behavior Untested | [evidence](pa4-bg2ee-isra-bg2-evidence.md) |
 | Generalized Biffing v2.9 | Complete two-choice subcomponent catalog; final-phase placement reflects author's after-all-mods direction | Banter Pack then media-only Biffing built and launched from sealed BG2EE | **Supported** for this narrow English BG2EE 2.6.6 route; all-files choice, EET, large stacks, and performance Untested | [evidence](pa4-bg2ee-generalized-biffing-evidence.md) |
 | Call of the Lost Goddess v3.1 | Complete 3-component structural catalog | Yes | **Untested** — the core route has fixture install evidence; optional portraits/voiceover and policy launch smoke remain untested | [registry](../registry/packages/call-of-the-lost-goddess.yaml) |
 | Throne of the Mad God v2.3 | Complete 1-component structural catalog | Yes | **Untested** — fixture install evidence exists; policy launch smoke remains | [registry](../registry/packages/throne-of-the-mad-god.yaml) |
@@ -94,11 +94,13 @@ selectors, curated relationships, and automated disposable-build evidence.
 ## Cohort work boundary
 
 The frozen cohort contains 19 packages that were already mapped when it was
-selected and 80 indexed candidates. Twenty-nine of those candidates (Sirene,
+selected and 80 indexed candidates. Thirty-three of those candidates (Sirene,
 LeUI, thirteen BG2 friendship releases, four Pocket Plane quest mods,
 Korgan's Redemption, Coran's BG Friendship, Xan's BG1 Friendship, and High
 Quality Soundclips, Banter Pack, BioWare NPC Flirt Packs, Drake, Unfinished
-Business, Reduce Save Compression, and Ajantis BG1 Expansion) now have curated executable identities; 51 remain
+Business, Reduce Save Compression, Ajantis BG1 Expansion, Turnabout,
+Generalized Biffing, The Longer Road, and Isra NPC for BGII) now have curated
+executable identities; 47 remain
 discovery-only. The remaining
 candidates are **not** silently
 excluded: they may proceed through IEPM's opaque local-package route once

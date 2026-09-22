@@ -1,12 +1,12 @@
 {
   "schema": 1,
   "scope": "configuration",
-  "subject": "Ascension 2.1.0 components 0 and 10 then The Longer Road v2.0.7 English main on clean BG2EE 2.6.6",
+  "subject": "Isra NPC for BGII v3.1 English main on clean BG2EE 2.6.6",
   "identity": {
-    "registry_revision": "ac5930e",
+    "registry_revision": "15ba451",
     "platform": "windows",
     "weidu_version": "25100",
-    "lock_sha256": "fbb0e8185630e32a387d098d47753f26bca203847201d4052019607a74163175",
+    "lock_sha256": "b7db7468b575b98af7467822ac085ffe9781d616af9e97801cd94ee866479678",
     "environments": {
       "target": {
         "target": "bg2ee",
@@ -17,10 +17,9 @@
       }
     },
     "packages": [
-      { "package": "ascension", "release_id": "ascension-2.1.0", "environment": "target", "artifact_sha256": "bd0ee14b3770d56104eaa81287c88a8672afa889a35184fb308be12d6d707e77", "components": ["rewritten-final-chapter", "redeem-balthazar"] },
-      { "package": "longerroad", "release_id": "longerroad-2.0.7-source", "environment": "target", "artifact_sha256": "5e46d529574121d7b8712a7f427fcc4f6f5d44b9da6294ba61c81f5569ea34e6", "components": ["irenicus-redemption-story"] }
+      { "package": "isra-bg2", "release_id": "isra-bg2-v3.1-source", "environment": "target", "artifact_sha256": "45bd7011bdb30ef2b4759ac9a8fa2a4a25711efa545efbfc2b0c20841180a8a8", "components": ["isra-bg2-npc"] }
     ],
-    "execution_order": ["ascension", "longerroad"]
+    "execution_order": ["isra-bg2"]
   },
   "checks": {
     "artifact_verified": true,
@@ -42,5 +41,5 @@
     "main_menu_smoke": true,
     "gameplay_smoke": false
   },
-  "evidence": ["examples/bg2ee-longerroad/modpack.yaml", "docs/pa4-bg2ee-longerroad-evidence.md"]
+  "evidence": ["examples/bg2ee-isra-bg2/modpack.yaml", "docs/pa4-bg2ee-isra-bg2-evidence.md"]
 }

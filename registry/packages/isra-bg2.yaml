@@ -10,7 +10,7 @@ releases:
     materialization: { source_root: Isra_NPC_BG2-3.1, include: [isra_bg2] }
     compatibility: { games: [bg2ee, eet] }
     install: { phase: eet, after: [eet], before: [eet-end] }
-    provenance: unverified
+    provenance: verified
     claims:
       - claim: The exact author v3.1 tag ZIP was SHA-256 verified. Its TP2 declares VERSION v3.1, English, and two LABEL-bearing designated components numbered 0 and 1.
         provenance: derived
@@ -21,6 +21,9 @@ releases:
       - claim: The optional crossmod component mechanically requires Isra's main component. It detects other installed NPCs by their game resources, so an empty standalone crossmod install is not evidence that any interaction works.
         provenance: derived
         evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The exact English main component completed in a clean BG2EE 2.6.6 build, appeared in WeiDU.log, and the sealed game reached the Shadows of Amn menu. The optional crossmod component, EET route, and NPC story behavior remain Untested.
+        provenance: verified
+        evidence: [evidence/pa4-bg2ee-isra-bg2.json]
     installers:
       - tp2: isra_bg2/isra_bg2.tp2
         launcher: toolchain

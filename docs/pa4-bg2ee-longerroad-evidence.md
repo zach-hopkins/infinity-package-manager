@@ -3,7 +3,8 @@
 On 2026-09-22, IEPM resolved
 [`examples/bg2ee-longerroad/modpack.yaml`](../examples/bg2ee-longerroad/modpack.yaml)
 and automatically selected both Ascension components required by Longer Road's
-main component. This is an installation result, **not** a Supported status.
+main component. The exact status assertion is in
+[`evidence/pa4-bg2ee-longerroad.json`](../evidence/pa4-bg2ee-longerroad.json).
 
 - Registry revision `ac5930e`; clean BG2EE 2.6.6 source fingerprint
   `298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f`;
@@ -18,13 +19,14 @@ main component. This is an installation result, **not** a Supported status.
   Both installer stderr logs were empty; no requested component was skipped.
 - Sealed `WeiDU.log` recorded English Ascension `#0` and `#10`, then Longer
   Road `#0`.
-- The sealed `Baldur.exe` process started but the UI inspector repeatedly
-  reported a stale prior build window and did not produce an observable menu
-  screen for this build. The process was closed without interacting with the
-  game. Therefore `main_menu_smoke` is **not passed**. No new-game, known-save,
+- The first launch inspection was inconclusive because the UI inspector
+  returned a stale prior-build window. After resetting that inspector, the
+  **same sealed build** was launched again, BG2EE 2.6.6 title selection was
+  observed, and the Throne of Bhaal Single Player menu was reached. The
+  startup movie segments were skipped with clicks. No new-game, known-save,
   Irenicus story, portrait, or EET smoke was performed.
 
 Under [`verification-policy.md`](verification-policy.md), the exact English
-BG2EE main route remains **Untested** until its menu is directly observed.
+BG2EE main route is **Supported**, not Verified.
 The full sealed game and raw WeiDU logs remain in the user's local IEPM store,
 not Git.
