@@ -1,0 +1,49 @@
+schema: 2
+package: npcflirt
+releases:
+  - release_id: npcflirt-v1.07-source
+    version: "v1.07"
+    artifacts:
+      - url: https://github.com/Pocket-Plane-Group/NPC_Flirt_Packs/archive/refs/tags/v1.07.zip
+        sha256: 65b0a2b64134b0039062024e79d6b03a87b7df91eda4e9061d5d0c80ceead568
+        platforms: [windows]
+    materialization: { source_root: NPC_Flirt_Packs-1.07, include: [npcflirt] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet }
+    provenance: unverified
+    claims:
+      - claim: The exact author v1.07 tag archive was SHA-256 verified; its TP2 declares VERSION v1.07, five languages, and sixteen implicit-number components for four BG2 companions across SoA/ToB, each with an optional Solaufein conflict component.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The ToB-specific components require GAME_IS tob, bg2ee, eet, or bgt. Solaufein conflict choices are separate components, not mechanical prerequisites of the base flirt content.
+        provenance: derived
+        evidence: [https://github.com/Pocket-Plane-Group/NPC_Flirt_Packs]
+      - claim: The author documents support for BG2EE and EET.
+        provenance: declared
+        evidence: [https://github.com/Pocket-Plane-Group/NPC_Flirt_Packs]
+    installers:
+      - tp2: npcflirt/setup-npcflirt.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: "Espanol (Traducido por Clan DLAN)" }
+          - { id: 2, name: "German (Translated by Beaz and Beyshaliban)" }
+          - { id: 3, name: "French (Translated by Thot)" }
+          - { id: 4, name: "Russian (Translated by Austin, Staylos $ Arcanecoast)" }
+    components:
+      - { id: aerie-soa, default_selected: true, weidu: { tp2: npcflirt/setup-npcflirt.tp2, number: 0 } }
+      - { id: aerie-solaufein-soa, weidu: { tp2: npcflirt/setup-npcflirt.tp2, number: 1 } }
+      - { id: aerie-tob, default_selected: true, weidu: { tp2: npcflirt/setup-npcflirt.tp2, number: 2 } }
+      - { id: aerie-solaufein-tob, weidu: { tp2: npcflirt/setup-npcflirt.tp2, number: 3 } }
+      - { id: jaheira-soa, default_selected: true, weidu: { tp2: npcflirt/setup-npcflirt.tp2, number: 4 } }
+      - { id: jaheira-solaufein-soa, weidu: { tp2: npcflirt/setup-npcflirt.tp2, number: 5 } }
+      - { id: jaheira-tob, default_selected: true, weidu: { tp2: npcflirt/setup-npcflirt.tp2, number: 6 } }
+      - { id: jaheira-solaufein-tob, weidu: { tp2: npcflirt/setup-npcflirt.tp2, number: 7 } }
+      - { id: viconia-soa, default_selected: true, weidu: { tp2: npcflirt/setup-npcflirt.tp2, number: 8 } }
+      - { id: viconia-solaufein-soa, weidu: { tp2: npcflirt/setup-npcflirt.tp2, number: 9 } }
+      - { id: viconia-tob, default_selected: true, weidu: { tp2: npcflirt/setup-npcflirt.tp2, number: 10 } }
+      - { id: viconia-solaufein-tob, weidu: { tp2: npcflirt/setup-npcflirt.tp2, number: 11 } }
+      - { id: anomen-soa, default_selected: true, weidu: { tp2: npcflirt/setup-npcflirt.tp2, number: 12 } }
+      - { id: anomen-solaufein-soa, weidu: { tp2: npcflirt/setup-npcflirt.tp2, number: 13 } }
+      - { id: anomen-tob, default_selected: true, weidu: { tp2: npcflirt/setup-npcflirt.tp2, number: 14 } }
+      - { id: anomen-solaufein-tob, weidu: { tp2: npcflirt/setup-npcflirt.tp2, number: 15 } }
