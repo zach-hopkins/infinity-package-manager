@@ -78,3 +78,76 @@ releases:
         claims:
           - claim: The exact v35.21 TP2 declares selector 6850 and requires SCS AI initialization (5900) plus Improved Fiends and Celestials (6510).
             provenance: derived
+      # These selectors are the user's recorded SCS v35 configuration. Their
+      # numeric identity and same-package prerequisites are mechanically read
+      # from v35.21's TP2; the readable names are durable IEPM intent IDs, not
+      # a claim that this large combined configuration is compatibility-verified.
+      - { id: reintroduce-extra-healing-potions, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3015 } }
+      - { id: bg2-elemental-arrows, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3017 } }
+      - { id: dispelling-arrows-max-five-per-store, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3041 } }
+      - { id: add-bg2-scrolls-to-bg1, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3501 } }
+      - { id: wider-random-scroll-selection, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3505 } }
+      - { id: inquisitor-dispel-one-point-five-times-level, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3540 } }
+      - { id: improved-healing-random-amount, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3550 } }
+      - { id: cure-cause-wounds-three-e-maximum-damage, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3551 } }
+      - { id: revised-inn-rooms, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4140 } }
+      - { id: hlas-as-innate-abilities, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4240 } }
+      - { id: sequencers-contingencies-as-innate-abilities, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4250 } }
+      - { id: ease-of-use-party-ai, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 5000 } }
+      - { id: smarter-general-ai, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 6000 }, requires: [initialize-ai] }
+      - { id: better-calls-for-help, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 6010 }, requires: [initialize-ai] }
+      - { id: potions-for-npcs, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 6100 }, requires: [initialize-ai, smarter-general-ai] }
+      - { id: improved-spiders, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 6200 }, requires: [initialize-ai] }
+      - { id: smarter-sirines-dryads, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 6300 }, requires: [initialize-ai] }
+      - { id: smarter-carrion-crawlers, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 6310 }, requires: [initialize-ai, smarter-general-ai] }
+      - { id: smarter-basilisks, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 6320 }, requires: [initialize-ai] }
+      - { id: improved-golems, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 6500 }, requires: [initialize-ai] }
+      - { id: smarter-genies, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 6520 }, requires: [initialize-ai] }
+      - { id: smarter-dragons, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 6540 }, requires: [initialize-ai] }
+      - { id: smarter-beholders, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 6550 }, requires: [initialize-ai] }
+      - { id: smarter-mind-flayers, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 6560 }, requires: [initialize-ai] }
+      - { id: smarter-githyanki, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 6570 }, requires: [initialize-ai, smarter-general-ai] }
+      - { id: improved-vampires, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 6580 }, requires: [initialize-ai] }
+      - { id: smarter-tob-final-villain, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 6590 }, requires: [initialize-ai] }
+      - { id: smarter-illasera, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 6800 }, requires: [initialize-ai] }
+      - { id: smarter-gromnir, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 6810 }, requires: [initialize-ai] }
+      - { id: smarter-yaga-shura, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 6820 }, requires: [initialize-ai] }
+      - { id: smarter-abazigal, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 6830 }, requires: [initialize-ai] }
+      - { id: improved-doppelgangers, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 7000 }, requires: [initialize-ai] }
+      - { id: tougher-black-talons-iron-throne-guards, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 7010 }, requires: [initialize-ai] }
+      - { id: improved-assassin-deployments, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 7020 }, requires: [initialize-ai] }
+      - { id: improved-kobolds, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 7030 }, requires: [initialize-ai] }
+      - { id: relocated-bounty-hunters, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 7040 }, requires: [initialize-ai] }
+      - { id: improved-ulcaster, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 7050 }, requires: [initialize-ai] }
+      - { id: improved-baldurans-isle, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 7060 }, requires: [initialize-ai] }
+      - { id: improved-durlags-tower, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 7070 }, requires: [initialize-ai] }
+      - { id: improved-demon-cultists, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 7080 }, requires: [initialize-ai] }
+      - { id: improved-cloakwood-druids, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 7090 }, requires: [initialize-ai, smarter-priests] }
+      - { id: improved-bassilus, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 7100 }, requires: [initialize-ai] }
+      - { id: improved-drasus-party, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 7110 }, requires: [initialize-ai] }
+      - { id: improved-red-wizards, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 7130 }, requires: [initialize-ai, smarter-mages] }
+      - { id: improved-undercity-assassins, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 7140 }, requires: [initialize-ai] }
+      - { id: improved-carsa-kahrk-interaction, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 7150 } }
+      - { id: tougher-chapter-two-end-battle, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 7200 }, requires: [initialize-ai] }
+      - { id: tougher-chapter-three-end-battle, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 7210 }, requires: [initialize-ai] }
+      - { id: tougher-chapter-four-end-battle, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 7220 }, requires: [initialize-ai] }
+      - { id: tougher-chapter-five-end-battle, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 7230 }, requires: [initialize-ai] }
+      - { id: improved-final-battle, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 7250 }, requires: [initialize-ai] }
+      - { id: improved-minor-encounters, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 7900 }, requires: [initialize-ai] }
+      - { id: harder-starting-dungeon, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 8000 }, requires: [initialize-ai] }
+      - { id: improved-shade-lord, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 8010 }, requires: [initialize-ai] }
+      - { id: spellcasting-demiliches, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 8020 }, requires: [initialize-ai, smarter-mages] }
+      - { id: difficulty-slider-level-dependent-monsters, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 8040 }, requires: [initialize-ai] }
+      - { id: improved-dearnise-keep, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 8060 }, requires: [initialize-ai] }
+      - { id: improved-unseeing-eye, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 8070 }, requires: [initialize-ai, smarter-beholders] }
+      - { id: improved-bodhi, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 8080 }, requires: [initialize-ai, improved-vampires] }
+      - { id: ascension-improved-bodhi, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 8085 }, requires: [initialize-ai, improved-bodhi] }
+      - { id: improved-spellhold-irenicus, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 8100 }, requires: [initialize-ai] }
+      - { id: improved-sahuagin, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 8110 }, requires: [initialize-ai] }
+      - { id: improved-beholder-hive, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 8120 }, requires: [initialize-ai] }
+      - { id: rebalanced-troll-regeneration, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 8130 } }
+      - { id: improved-drow, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 8140 }, requires: [initialize-ai] }
+      - { id: improved-watchers-keep, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 8150 }, requires: [initialize-ai] }
+      - { id: improved-fire-giant-temple, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 8160 }, requires: [initialize-ai] }
+      - { id: improved-sendais-enclave, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 8170 }, requires: [initialize-ai] }
+      - { id: improved-abazigals-lair, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 8180 }, requires: [initialize-ai] }

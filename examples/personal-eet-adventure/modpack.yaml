@@ -1,0 +1,177 @@
+schema: 2
+
+# Current-release equivalent of the supplied deduplicated WeiDU.log.
+# This is intentionally a desired build, not a claim that it reproduces every
+# file from the historical install. Use fresh, clean BG:EE and BG2:EE sources;
+# `iepm build` creates and mutates only disposable IEPM workspaces.
+environments:
+  bgee-source:
+    target: bgee
+    version: "2.6.6"
+    platform: windows
+    language: English
+    locale: en_US
+  eet-target:
+    target: bg2ee
+    after_eet_import: eet
+    version: "2.6.6"
+    platform: windows
+    language: English
+    locale: en_US
+
+mods:
+  - { package: dlc-merger, environment: bgee-source, components: [merge-sod] }
+  - { package: ee-fixpack, environment: bgee-source, components: [core-fixes] }
+  - { package: ee-fixpack, environment: eet-target, components: [core-fixes] }
+  - package: eet
+    environment: eet-target
+    components: [core]
+    installer_inputs: { source-environment: bgee-source }
+  - { package: eeex, environment: eet-target, components: [bootstrap, core, luajit] }
+  - { package: infinity-ui-plus-plus, environment: eet-target, components: [core] }
+  - { package: bubbs-spell-menu, environment: eet-target, components: [main] }
+  - { package: hidden-gameplay-options, version: "5.1", environment: eet-target, components: [install-all] }
+  - package: call-of-the-lost-goddess
+    environment: eet-target
+    components: [core-story]
+  - package: throne-of-the-mad-god
+    environment: eet-target
+    components: [core-story]
+  - package: ascension
+    environment: eet-target
+    components:
+      - rewritten-final-chapter
+      - redeem-balthazar
+      - improved-sarevok-interactions
+      - improved-imoen-interactions
+      - restored-bhaalspawn-powers
+      - improved-slayer-transformation
+      - expanded-bioware-epilogues
+      - tougher-abazigal
+      - tougher-balthazar
+      - tougher-demogorgon
+      - tougher-gromnir
+      - tougher-illasera
+      - tougher-yaga-shura
+  - package: tweaks-anthology
+    version: id:tweaks-anthology-v18-source
+    environment: eet-target
+    components:
+      - remove-xp-cap
+      - icon-improvements
+      - more-interjections
+      - alter-wounded-triggers
+      - reveal-chapter-six-wilderness
+      - reveal-cloakwood-except-mines
+      - multiplayer-kickout-dialogue
+      - send-npcs-to-inn
+      - add-bags-of-holding
+      - reveal-city-areas
+      - higher-store-stacks
+      - thieving-in-heavy-armor
+      - expanded-dual-class-options
+      - protection-items-pnp
+      - item-spells-at-character-level
+      - loosen-cleric-multiclass-equipment
+      - improved-cure-cause-wounds
+      - alternate-concentration-check
+      - learn-spells-100-percent
+      - potion-stacks-40
+      - scroll-stacks-40
+      - angry-npcs-never-leave
+      - disable-non-hostile-rest-spawns
+      - stores-buy-all-items
+      - extra-ankheg-armor
+      - ammo-recovery-75
+      - throwing-recovery-75
+      - death-cam
+      - reduced-party-chunking
+      - movement-casting-speed-100
+      - interval-save-30-cycle-four
+      - travel-regeneration
+      - automatic-ranger-tracking
+      - adjust-evil-npc-reactions
+      - allow-npc-pairs-to-separate
+      - disable-advanced-ai-auto-assignment
+  - package: stratagems
+    version: id:stratagems-v35.21-windows
+    environment: eet-target
+    components:
+      - batch-mode
+      - spell-tweaks-batch
+      - reintroduce-extra-healing-potions
+      - bg2-elemental-arrows
+      - dispelling-arrows-max-five-per-store
+      - add-bg2-scrolls-to-bg1
+      - wider-random-scroll-selection
+      - inquisitor-dispel-one-point-five-times-level
+      - improved-healing-random-amount
+      - cure-cause-wounds-three-e-maximum-damage
+      - revised-inn-rooms
+      - hlas-as-innate-abilities
+      - sequencers-contingencies-as-innate-abilities
+      - ease-of-use-party-ai
+      - initialize-ai
+      - smarter-general-ai
+      - better-calls-for-help
+      - smarter-mages
+      - smarter-priests
+      - potions-for-npcs
+      - improved-spiders
+      - smarter-sirines-dryads
+      - smarter-carrion-crawlers
+      - smarter-basilisks
+      - improved-golems
+      - improved-fiends-celestials
+      - smarter-genies
+      - smarter-dragons
+      - smarter-beholders
+      - smarter-mind-flayers
+      - smarter-githyanki
+      - improved-vampires
+      - smarter-tob-final-villain
+      - smarter-illasera
+      - smarter-gromnir
+      - smarter-yaga-shura
+      - smarter-abazigal
+      - ascension-irenicus-sendai
+      - ascension-demons
+      - improved-doppelgangers
+      - tougher-black-talons-iron-throne-guards
+      - improved-assassin-deployments
+      - improved-kobolds
+      - relocated-bounty-hunters
+      - improved-ulcaster
+      - improved-baldurans-isle
+      - improved-durlags-tower
+      - improved-demon-cultists
+      - improved-cloakwood-druids
+      - improved-bassilus
+      - improved-drasus-party
+      - improved-red-wizards
+      - improved-undercity-assassins
+      - improved-carsa-kahrk-interaction
+      - tougher-chapter-two-end-battle
+      - tougher-chapter-three-end-battle
+      - tougher-chapter-four-end-battle
+      - tougher-chapter-five-end-battle
+      - improved-final-battle
+      - improved-minor-encounters
+      - harder-starting-dungeon
+      - improved-shade-lord
+      - spellcasting-demiliches
+      - difficulty-slider-level-dependent-monsters
+      - improved-dearnise-keep
+      - improved-unseeing-eye
+      - improved-bodhi
+      - ascension-improved-bodhi
+      - improved-spellhold-irenicus
+      - improved-sahuagin
+      - improved-beholder-hive
+      - rebalanced-troll-regeneration
+      - improved-drow
+      - improved-watchers-keep
+      - improved-fire-giant-temple
+      - improved-sendais-enclave
+      - improved-abazigals-lair
+  - { package: eet-end, environment: eet-target, components: [standard] }

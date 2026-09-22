@@ -1,0 +1,2266 @@
+{
+  "schema": 3,
+  "environments": {
+    "bgee-source": {
+      "target": "bgee",
+      "version": "2.6.6",
+      "platform": "windows",
+      "language": "English",
+      "locale": "en_US"
+    },
+    "eet-target": {
+      "target": "bg2ee",
+      "after_eet_import": "eet",
+      "version": "2.6.6",
+      "platform": "windows",
+      "language": "English",
+      "locale": "en_US"
+    }
+  },
+  "registry_revision": "working-tree",
+  "toolchain": {
+    "iepm": "0.1.0",
+    "weidu": "25100"
+  },
+  "packages": [
+    {
+      "package": "dlc-merger",
+      "release_id": "dlc-merger-2.1-win32",
+      "version": "2.1",
+      "environment": "bgee-source",
+      "phase": "preprocess",
+      "artifact": {
+        "url": "https://github.com/Argent77/A7-DlcMerger/releases/download/v2.1/win-32bit-DlcMerger-v2.1.zip",
+        "sha256": "16b57b32662c1ac1e6d345afaf8669e01cf26eeafc5461000757edf33447e2eb",
+        "format": "zip",
+        "platforms": [
+          "windows"
+        ]
+      },
+      "installers": [
+        {
+          "tp2": "DlcMerger/DlcMerger.tp2",
+          "launcher": "toolchain",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Deutsch"
+            },
+            {
+              "id": 2,
+              "name": "Brazilian Portuguese (Translation by Felipe)"
+            },
+            {
+              "id": 3,
+              "name": "Spanish (Translation by ElGamerViejuno)"
+            },
+            {
+              "id": 4,
+              "name": "Simplified Chinese"
+            },
+            {
+              "id": 5,
+              "name": "French (Translation by Deratiseur)"
+            }
+          ],
+          "inputs": [],
+          "arguments": []
+        }
+      ],
+      "components": [
+        {
+          "id": "merge-sod",
+          "weidu": {
+            "tp2": "DlcMerger/DlcMerger.tp2",
+            "label": "A7-DLCMERGER-MERGE_SOD",
+            "number": 1
+          }
+        }
+      ],
+      "language": "English",
+      "provenance": "derived"
+    },
+    {
+      "package": "ee-fixpack",
+      "release_id": "ee-fixpack-beta-2",
+      "version": "Beta 2",
+      "environment": "bgee-source",
+      "phase": "preprocess",
+      "artifact": {
+        "url": "https://github.com/Gibberlings3/EE_Fixpack/releases/download/Beta_2/enhanced-edition-fixpack-beta-2.iemod",
+        "sha256": "7a57e43bd6c30c7e36b7c2b7c5531c7a0834de164da186808da03d24474592bf",
+        "format": "zip",
+        "platforms": [
+          "windows"
+        ]
+      },
+      "materialization": {
+        "source_root": "eefixpack"
+      },
+      "installers": [
+        {
+          "tp2": "eefixpack/setup-eefixpack.tp2",
+          "launcher": "toolchain",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Russian"
+            },
+            {
+              "id": 2,
+              "name": "Simplified Chinese"
+            },
+            {
+              "id": 3,
+              "name": "French"
+            }
+          ],
+          "inputs": [],
+          "arguments": []
+        }
+      ],
+      "components": [
+        {
+          "id": "core-fixes",
+          "weidu": {
+            "tp2": "eefixpack/setup-eefixpack.tp2",
+            "label": "cd_eefp_core_fixes",
+            "number": 0
+          }
+        }
+      ],
+      "language": "English",
+      "provenance": "derived"
+    },
+    {
+      "package": "ascension",
+      "release_id": "ascension-2.1.0",
+      "version": "2.1.0",
+      "environment": "eet-target",
+      "phase": "eet",
+      "artifact": {
+        "url": "https://github.com/Gibberlings3/Ascension/releases/download/2.1.0/ascension-2.1.0.zip",
+        "sha256": "bd0ee14b3770d56104eaa81287c88a8672afa889a35184fb308be12d6d707e77",
+        "format": "zip",
+        "platforms": [
+          "windows"
+        ]
+      },
+      "materialization": {
+        "source_root": "ascension"
+      },
+      "installers": [
+        {
+          "tp2": "ascension/Ascension.tp2",
+          "launcher": "toolchain",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            }
+          ],
+          "inputs": [],
+          "arguments": []
+        }
+      ],
+      "components": [
+        {
+          "id": "rewritten-final-chapter",
+          "weidu": {
+            "tp2": "ascension/Ascension.tp2",
+            "label": "Ascension-RewrittenFinalChapterOfToB",
+            "number": 0
+          }
+        },
+        {
+          "id": "redeem-balthazar",
+          "weidu": {
+            "tp2": "ascension/Ascension.tp2",
+            "label": "Ascension-BalthazarCanBeRedeemed",
+            "number": 10
+          }
+        },
+        {
+          "id": "improved-sarevok-interactions",
+          "weidu": {
+            "tp2": "ascension/Ascension.tp2",
+            "label": "Ascension-ImprovedSarevokPlayerInteractions",
+            "number": 20
+          }
+        },
+        {
+          "id": "improved-imoen-interactions",
+          "weidu": {
+            "tp2": "ascension/Ascension.tp2",
+            "label": "Ascension-ImprovedImoenPlayerInteractions",
+            "number": 30
+          }
+        },
+        {
+          "id": "restored-bhaalspawn-powers",
+          "weidu": {
+            "tp2": "ascension/Ascension.tp2",
+            "label": "Ascension-RestoredBhaalspawnPowers",
+            "number": 40
+          }
+        },
+        {
+          "id": "improved-slayer-transformation",
+          "weidu": {
+            "tp2": "ascension/Ascension.tp2",
+            "label": "Ascension-ImprovedSlayerTransformation",
+            "number": 50
+          }
+        },
+        {
+          "id": "expanded-bioware-epilogues",
+          "weidu": {
+            "tp2": "ascension/Ascension.tp2",
+            "label": "Ascension-DavidGaiderExpandedEpilogues",
+            "number": 60
+          }
+        },
+        {
+          "id": "tougher-abazigal",
+          "weidu": {
+            "tp2": "ascension/Ascension.tp2",
+            "label": "Ascension-TougherAbazigal",
+            "number": 1000
+          }
+        },
+        {
+          "id": "tougher-balthazar",
+          "weidu": {
+            "tp2": "ascension/Ascension.tp2",
+            "label": "Ascension-TougherBalthazar",
+            "number": 1100
+          }
+        },
+        {
+          "id": "tougher-demogorgon",
+          "weidu": {
+            "tp2": "ascension/Ascension.tp2",
+            "label": "Ascension-TougherDemogorgon",
+            "number": 1200
+          }
+        },
+        {
+          "id": "tougher-gromnir",
+          "weidu": {
+            "tp2": "ascension/Ascension.tp2",
+            "label": "Ascension-TougherGromnir",
+            "number": 1300
+          }
+        },
+        {
+          "id": "tougher-illasera",
+          "weidu": {
+            "tp2": "ascension/Ascension.tp2",
+            "label": "Ascension-TougherIllasera",
+            "number": 1400
+          }
+        },
+        {
+          "id": "tougher-yaga-shura",
+          "weidu": {
+            "tp2": "ascension/Ascension.tp2",
+            "label": "Ascension-TougherYagaShura",
+            "number": 1500
+          }
+        }
+      ],
+      "language": "English",
+      "provenance": "unverified"
+    },
+    {
+      "package": "bubbs-spell-menu",
+      "release_id": "bubbs-spell-menu-v5.2",
+      "version": "v5.2",
+      "environment": "eet-target",
+      "phase": "eet",
+      "artifact": {
+        "url": "https://api.github.com/repos/Bubb13/Bubbs-Spell-Menu-Extended/zipball/v5.2",
+        "sha256": "66840543c60d34a21478dde8c63760abc12fda69dba86c8195f8aebbe76ad37a",
+        "format": "zip",
+        "platforms": [
+          "windows"
+        ]
+      },
+      "materialization": {
+        "source_root": "Bubb13-Bubbs-Spell-Menu-Extended-5512e35",
+        "include": [
+          "bubb_spell_menu_extended"
+        ]
+      },
+      "installers": [
+        {
+          "tp2": "bubb_spell_menu_extended/bubb_spell_menu_extended.tp2",
+          "launcher": "toolchain",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            }
+          ],
+          "inputs": [],
+          "arguments": []
+        }
+      ],
+      "components": [
+        {
+          "id": "main",
+          "weidu": {
+            "tp2": "bubb_spell_menu_extended/bubb_spell_menu_extended.tp2",
+            "label": "B3-BubbsSpellMenuExtended-Main",
+            "number": 0
+          }
+        }
+      ],
+      "language": "English",
+      "provenance": "unverified"
+    },
+    {
+      "package": "call-of-the-lost-goddess",
+      "release_id": "call-of-the-lost-goddess-v3.1",
+      "version": "v3.1",
+      "environment": "eet-target",
+      "phase": "eet",
+      "artifact": {
+        "url": "https://github.com/AciferBG/Call-of-the-Lost-Goddess/releases/download/v3.1/Call_of_the_lost_goddess_V_3.1.zip",
+        "sha256": "7711cb1df00a01af2a3cb053ad070b79a1a3f96649efad003a74746942374569",
+        "format": "zip",
+        "platforms": [
+          "windows"
+        ]
+      },
+      "materialization": {
+        "source_root": "Godcall"
+      },
+      "installers": [
+        {
+          "tp2": "Godcall/Setup-Godcall.tp2",
+          "launcher": "toolchain",
+          "languages": [
+            {
+              "id": 1,
+              "name": "English"
+            }
+          ],
+          "inputs": [],
+          "arguments": []
+        }
+      ],
+      "components": [
+        {
+          "id": "core-story",
+          "weidu": {
+            "tp2": "Godcall/Setup-Godcall.tp2",
+            "number": 0
+          }
+        }
+      ],
+      "language": "English",
+      "provenance": "unverified"
+    },
+    {
+      "package": "ee-fixpack",
+      "release_id": "ee-fixpack-beta-2",
+      "version": "Beta 2",
+      "environment": "eet-target",
+      "phase": "preprocess",
+      "artifact": {
+        "url": "https://github.com/Gibberlings3/EE_Fixpack/releases/download/Beta_2/enhanced-edition-fixpack-beta-2.iemod",
+        "sha256": "7a57e43bd6c30c7e36b7c2b7c5531c7a0834de164da186808da03d24474592bf",
+        "format": "zip",
+        "platforms": [
+          "windows"
+        ]
+      },
+      "materialization": {
+        "source_root": "eefixpack"
+      },
+      "installers": [
+        {
+          "tp2": "eefixpack/setup-eefixpack.tp2",
+          "launcher": "toolchain",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Russian"
+            },
+            {
+              "id": 2,
+              "name": "Simplified Chinese"
+            },
+            {
+              "id": 3,
+              "name": "French"
+            }
+          ],
+          "inputs": [],
+          "arguments": []
+        }
+      ],
+      "components": [
+        {
+          "id": "core-fixes",
+          "weidu": {
+            "tp2": "eefixpack/setup-eefixpack.tp2",
+            "label": "cd_eefp_core_fixes",
+            "number": 0
+          }
+        }
+      ],
+      "language": "English",
+      "provenance": "derived"
+    },
+    {
+      "package": "eeex",
+      "release_id": "eeex-v1.2.0",
+      "version": "v1.2.0",
+      "environment": "eet-target",
+      "phase": "eet",
+      "artifact": {
+        "url": "https://github.com/Bubb13/EEex/releases/download/v1.2.0/eeex-v1.2.0.zip",
+        "sha256": "ac2d81bc5e6fdba04a686338a969507e5beca9cb082b2809a556e0874e690a88",
+        "format": "zip",
+        "platforms": [
+          "windows"
+        ]
+      },
+      "materialization": {
+        "source_root": "EEex"
+      },
+      "installers": [
+        {
+          "tp2": "EEex/EEex.tp2",
+          "launcher": "toolchain",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            }
+          ],
+          "inputs": [],
+          "arguments": []
+        }
+      ],
+      "components": [
+        {
+          "id": "bootstrap",
+          "weidu": {
+            "tp2": "EEex/EEex.tp2",
+            "number": 0
+          }
+        },
+        {
+          "id": "core",
+          "weidu": {
+            "tp2": "EEex/EEex.tp2",
+            "label": "B3-EEex-Main",
+            "number": 1
+          }
+        },
+        {
+          "id": "luajit",
+          "weidu": {
+            "tp2": "EEex/EEex.tp2",
+            "label": "B3-EEex-LuaJIT",
+            "number": 8
+          }
+        }
+      ],
+      "language": "English",
+      "provenance": "unverified"
+    },
+    {
+      "package": "eet",
+      "release_id": "eet-14.1",
+      "version": "14.1",
+      "environment": "eet-target",
+      "phase": "eet-import",
+      "artifact": {
+        "url": "https://api.github.com/repos/Gibberlings3/EET/zipball/v14.1",
+        "sha256": "cb1451e7ef341672fcd71ef8aa5edb010134f880e1eb3d398ed42a9ed3d934a7",
+        "format": "zip",
+        "platforms": [
+          "windows"
+        ]
+      },
+      "materialization": {
+        "source_root": "Gibberlings3-EET-20d00c5",
+        "include": [
+          "EET"
+        ]
+      },
+      "installers": [
+        {
+          "tp2": "EET/EET.tp2",
+          "launcher": "toolchain",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Polski (Polish)"
+            },
+            {
+              "id": 2,
+              "name": "Spanish"
+            },
+            {
+              "id": 3,
+              "name": "French"
+            },
+            {
+              "id": 4,
+              "name": "Czech"
+            },
+            {
+              "id": 5,
+              "name": "Russian"
+            },
+            {
+              "id": 6,
+              "name": "Deutsch (German)"
+            },
+            {
+              "id": 7,
+              "name": "Simplified Chinese"
+            }
+          ],
+          "inputs": [
+            {
+              "name": "source-environment",
+              "required": true
+            }
+          ],
+          "arguments": [
+            {
+              "kind": "literal",
+              "value": "--args-list"
+            },
+            {
+              "kind": "literal",
+              "value": "sp"
+            },
+            {
+              "kind": "environment-input",
+              "input": "source-environment"
+            }
+          ]
+        }
+      ],
+      "components": [
+        {
+          "id": "core",
+          "weidu": {
+            "tp2": "EET/EET.tp2",
+            "number": 0
+          }
+        }
+      ],
+      "language": "English",
+      "installer_inputs": {
+        "source-environment": "bgee-source"
+      },
+      "dependencies": [
+        {
+          "package": "dlc-merger",
+          "environment": "bgee-source"
+        }
+      ],
+      "provenance": "derived"
+    },
+    {
+      "package": "eet-end",
+      "release_id": "eet-end-14.1",
+      "version": "14.1",
+      "environment": "eet-target",
+      "phase": "eet-end",
+      "artifact": {
+        "url": "https://api.github.com/repos/Gibberlings3/EET/zipball/v14.1",
+        "sha256": "cb1451e7ef341672fcd71ef8aa5edb010134f880e1eb3d398ed42a9ed3d934a7",
+        "format": "zip",
+        "platforms": [
+          "windows"
+        ]
+      },
+      "materialization": {
+        "source_root": "Gibberlings3-EET-20d00c5",
+        "include": [
+          "EET_end"
+        ]
+      },
+      "installers": [
+        {
+          "tp2": "EET_end/EET_end.tp2",
+          "launcher": "toolchain",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            },
+            {
+              "id": 1,
+              "name": "Polski (Polish)"
+            },
+            {
+              "id": 2,
+              "name": "Spanish"
+            },
+            {
+              "id": 3,
+              "name": "French"
+            },
+            {
+              "id": 4,
+              "name": "Czech"
+            },
+            {
+              "id": 5,
+              "name": "Russian"
+            },
+            {
+              "id": 6,
+              "name": "Deutsch (German)"
+            },
+            {
+              "id": 7,
+              "name": "Simplified Chinese"
+            }
+          ],
+          "inputs": [],
+          "arguments": []
+        }
+      ],
+      "components": [
+        {
+          "id": "standard",
+          "weidu": {
+            "tp2": "EET_end/EET_end.tp2",
+            "number": 0
+          }
+        }
+      ],
+      "language": "English",
+      "dependencies": [
+        {
+          "package": "eet"
+        }
+      ],
+      "provenance": "derived"
+    },
+    {
+      "package": "hidden-gameplay-options",
+      "release_id": "a7-hidden-gameplay-options-v5.1",
+      "version": "5.1",
+      "environment": "eet-target",
+      "phase": "eet",
+      "artifact": {
+        "url": "https://github.com/Argent77/A7-HiddenGameplayOptions/releases/download/v5.1/win-A7-HiddenGameplayOptions-v5.1.zip",
+        "sha256": "11ccf8555486a73bdd1072f311f995f193e2bfa0784bf4d169e77b0b7ea22b3e",
+        "format": "zip",
+        "platforms": [
+          "windows"
+        ]
+      },
+      "installers": [
+        {
+          "tp2": "HiddenGameplayOptions/HiddenGameplayOptions.tp2",
+          "program": "setup-HiddenGameplayOptions.exe",
+          "launcher": "bundled",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            }
+          ],
+          "inputs": [],
+          "arguments": []
+        }
+      ],
+      "components": [
+        {
+          "id": "install-all",
+          "weidu": {
+            "tp2": "HiddenGameplayOptions/HiddenGameplayOptions.tp2",
+            "label": "A7-HIDDENGAMEPLAYOPTIONS-INSTALL_ALL",
+            "number": 0
+          }
+        }
+      ],
+      "language": "English",
+      "provenance": "derived"
+    },
+    {
+      "package": "infinity-ui-plus-plus",
+      "release_id": "infinity-ui-v1.23",
+      "version": "v1.23",
+      "environment": "eet-target",
+      "phase": "eet",
+      "artifact": {
+        "url": "https://api.github.com/repos/Renegade0/InfinityUI/zipball/v1.23",
+        "sha256": "bea7b64daa026cd32edc093fb5c22d96f2afe181d1aab374dbbb9fd83efe028a",
+        "format": "zip",
+        "platforms": [
+          "windows"
+        ]
+      },
+      "materialization": {
+        "source_root": "Renegade0-InfinityUI-90446b0",
+        "include": [
+          "infinity_ui"
+        ]
+      },
+      "installers": [
+        {
+          "tp2": "infinity_ui/infinity_ui.tp2",
+          "launcher": "toolchain",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            }
+          ],
+          "inputs": [],
+          "arguments": []
+        }
+      ],
+      "components": [
+        {
+          "id": "core",
+          "weidu": {
+            "tp2": "infinity_ui/infinity_ui.tp2",
+            "number": 0
+          }
+        }
+      ],
+      "language": "English",
+      "provenance": "unverified"
+    },
+    {
+      "package": "stratagems",
+      "release_id": "stratagems-v35.21-windows",
+      "version": "v35.21",
+      "environment": "eet-target",
+      "phase": "eet",
+      "artifact": {
+        "url": "https://github.com/Gibberlings3/SwordCoastStratagems/releases/download/v35.21/stratagems-35.21.exe",
+        "sha256": "7e8754e1bb541fce1686314e0d4967b66c5740615907521dca5e63153326602f",
+        "format": "windows-rar-sfx",
+        "platforms": [
+          "windows"
+        ]
+      },
+      "installers": [
+        {
+          "tp2": "stratagems/setup-stratagems.tp2",
+          "launcher": "toolchain",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            }
+          ],
+          "inputs": [],
+          "arguments": []
+        }
+      ],
+      "components": [
+        {
+          "id": "batch-mode",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 100,
+            "non_recording": true
+          }
+        },
+        {
+          "id": "spell-tweaks-batch",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 2000
+          }
+        },
+        {
+          "id": "initialize-ai",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 5900
+          }
+        },
+        {
+          "id": "smarter-mages",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 6030
+          }
+        },
+        {
+          "id": "smarter-priests",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 6040
+          }
+        },
+        {
+          "id": "improved-fiends-celestials",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 6510
+          }
+        },
+        {
+          "id": "ascension-irenicus-sendai",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 6840
+          }
+        },
+        {
+          "id": "ascension-demons",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 6850
+          }
+        },
+        {
+          "id": "reintroduce-extra-healing-potions",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 3015
+          }
+        },
+        {
+          "id": "bg2-elemental-arrows",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 3017
+          }
+        },
+        {
+          "id": "dispelling-arrows-max-five-per-store",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 3041
+          }
+        },
+        {
+          "id": "add-bg2-scrolls-to-bg1",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 3501
+          }
+        },
+        {
+          "id": "wider-random-scroll-selection",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 3505
+          }
+        },
+        {
+          "id": "inquisitor-dispel-one-point-five-times-level",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 3540
+          }
+        },
+        {
+          "id": "improved-healing-random-amount",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 3550
+          }
+        },
+        {
+          "id": "cure-cause-wounds-three-e-maximum-damage",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 3551
+          }
+        },
+        {
+          "id": "revised-inn-rooms",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 4140
+          }
+        },
+        {
+          "id": "hlas-as-innate-abilities",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 4240
+          }
+        },
+        {
+          "id": "sequencers-contingencies-as-innate-abilities",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 4250
+          }
+        },
+        {
+          "id": "ease-of-use-party-ai",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 5000
+          }
+        },
+        {
+          "id": "smarter-general-ai",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 6000
+          }
+        },
+        {
+          "id": "better-calls-for-help",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 6010
+          }
+        },
+        {
+          "id": "potions-for-npcs",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 6100
+          }
+        },
+        {
+          "id": "improved-spiders",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 6200
+          }
+        },
+        {
+          "id": "smarter-sirines-dryads",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 6300
+          }
+        },
+        {
+          "id": "smarter-carrion-crawlers",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 6310
+          }
+        },
+        {
+          "id": "smarter-basilisks",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 6320
+          }
+        },
+        {
+          "id": "improved-golems",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 6500
+          }
+        },
+        {
+          "id": "smarter-genies",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 6520
+          }
+        },
+        {
+          "id": "smarter-dragons",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 6540
+          }
+        },
+        {
+          "id": "smarter-beholders",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 6550
+          }
+        },
+        {
+          "id": "smarter-mind-flayers",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 6560
+          }
+        },
+        {
+          "id": "smarter-githyanki",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 6570
+          }
+        },
+        {
+          "id": "improved-vampires",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 6580
+          }
+        },
+        {
+          "id": "smarter-tob-final-villain",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 6590
+          }
+        },
+        {
+          "id": "smarter-illasera",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 6800
+          }
+        },
+        {
+          "id": "smarter-gromnir",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 6810
+          }
+        },
+        {
+          "id": "smarter-yaga-shura",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 6820
+          }
+        },
+        {
+          "id": "smarter-abazigal",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 6830
+          }
+        },
+        {
+          "id": "improved-doppelgangers",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 7000
+          }
+        },
+        {
+          "id": "tougher-black-talons-iron-throne-guards",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 7010
+          }
+        },
+        {
+          "id": "improved-assassin-deployments",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 7020
+          }
+        },
+        {
+          "id": "improved-kobolds",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 7030
+          }
+        },
+        {
+          "id": "relocated-bounty-hunters",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 7040
+          }
+        },
+        {
+          "id": "improved-ulcaster",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 7050
+          }
+        },
+        {
+          "id": "improved-baldurans-isle",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 7060
+          }
+        },
+        {
+          "id": "improved-durlags-tower",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 7070
+          }
+        },
+        {
+          "id": "improved-demon-cultists",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 7080
+          }
+        },
+        {
+          "id": "improved-cloakwood-druids",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 7090
+          }
+        },
+        {
+          "id": "improved-bassilus",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 7100
+          }
+        },
+        {
+          "id": "improved-drasus-party",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 7110
+          }
+        },
+        {
+          "id": "improved-red-wizards",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 7130
+          }
+        },
+        {
+          "id": "improved-undercity-assassins",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 7140
+          }
+        },
+        {
+          "id": "improved-carsa-kahrk-interaction",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 7150
+          }
+        },
+        {
+          "id": "tougher-chapter-two-end-battle",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 7200
+          }
+        },
+        {
+          "id": "tougher-chapter-three-end-battle",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 7210
+          }
+        },
+        {
+          "id": "tougher-chapter-four-end-battle",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 7220
+          }
+        },
+        {
+          "id": "tougher-chapter-five-end-battle",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 7230
+          }
+        },
+        {
+          "id": "improved-final-battle",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 7250
+          }
+        },
+        {
+          "id": "improved-minor-encounters",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 7900
+          }
+        },
+        {
+          "id": "harder-starting-dungeon",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 8000
+          }
+        },
+        {
+          "id": "improved-shade-lord",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 8010
+          }
+        },
+        {
+          "id": "spellcasting-demiliches",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 8020
+          }
+        },
+        {
+          "id": "difficulty-slider-level-dependent-monsters",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 8040
+          }
+        },
+        {
+          "id": "improved-dearnise-keep",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 8060
+          }
+        },
+        {
+          "id": "improved-unseeing-eye",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 8070
+          }
+        },
+        {
+          "id": "improved-bodhi",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 8080
+          }
+        },
+        {
+          "id": "ascension-improved-bodhi",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 8085
+          }
+        },
+        {
+          "id": "improved-spellhold-irenicus",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 8100
+          }
+        },
+        {
+          "id": "improved-sahuagin",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 8110
+          }
+        },
+        {
+          "id": "improved-beholder-hive",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 8120
+          }
+        },
+        {
+          "id": "rebalanced-troll-regeneration",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 8130
+          }
+        },
+        {
+          "id": "improved-drow",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 8140
+          }
+        },
+        {
+          "id": "improved-watchers-keep",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 8150
+          }
+        },
+        {
+          "id": "improved-fire-giant-temple",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 8160
+          }
+        },
+        {
+          "id": "improved-sendais-enclave",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 8170
+          }
+        },
+        {
+          "id": "improved-abazigals-lair",
+          "weidu": {
+            "tp2": "stratagems/setup-stratagems.tp2",
+            "number": 8180
+          }
+        }
+      ],
+      "language": "English",
+      "dependencies": [
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "improved-fiends-celestials"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "smarter-general-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "smarter-general-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "smarter-general-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "smarter-priests"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "smarter-mages"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "smarter-mages"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "smarter-beholders"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "improved-vampires"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "improved-bodhi"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        },
+        {
+          "package": "stratagems",
+          "components": [
+            "initialize-ai"
+          ]
+        }
+      ],
+      "provenance": "unverified"
+    },
+    {
+      "package": "throne-of-the-mad-god",
+      "release_id": "throne-of-the-mad-god-v2.3",
+      "version": "2.3",
+      "environment": "eet-target",
+      "phase": "eet",
+      "artifact": {
+        "url": "https://github.com/AciferBG/Throne-of-the-Mad-God/releases/download/v2.3/Throne_of_the_Mad_God_v2.3.zip",
+        "sha256": "24c5e501128e92fea1f4a5562b02e30af2f69fc29e9584b3b689cc407a19c0da",
+        "format": "zip",
+        "platforms": [
+          "windows"
+        ]
+      },
+      "materialization": {
+        "source_root": "ThroneoftheMadGod"
+      },
+      "installers": [
+        {
+          "tp2": "ThroneoftheMadGod/Setup-ThroneoftheMadGod.tp2",
+          "launcher": "toolchain",
+          "languages": [
+            {
+              "id": 1,
+              "name": "English"
+            }
+          ],
+          "inputs": [],
+          "arguments": []
+        }
+      ],
+      "components": [
+        {
+          "id": "core-story",
+          "weidu": {
+            "tp2": "ThroneoftheMadGod/Setup-ThroneoftheMadGod.tp2",
+            "number": 0
+          }
+        }
+      ],
+      "language": "English",
+      "provenance": "unverified"
+    },
+    {
+      "package": "tweaks-anthology",
+      "release_id": "tweaks-anthology-v18-source",
+      "version": "v18",
+      "environment": "eet-target",
+      "phase": "eet",
+      "artifact": {
+        "url": "https://api.github.com/repos/Gibberlings3/Tweaks-Anthology/zipball/v18",
+        "sha256": "48b0da06d8cf5a17d80b32abcc44456beef2f356fdcb60a6a74bca00b4fc7e68",
+        "format": "zip",
+        "platforms": [
+          "windows"
+        ]
+      },
+      "materialization": {
+        "source_root": "Gibberlings3-Tweaks-Anthology-031ec93",
+        "include": [
+          "cdtweaks"
+        ]
+      },
+      "installers": [
+        {
+          "tp2": "cdtweaks/setup-cdtweaks.tp2",
+          "launcher": "toolchain",
+          "languages": [
+            {
+              "id": 0,
+              "name": "English"
+            }
+          ],
+          "inputs": [],
+          "arguments": []
+        }
+      ],
+      "components": [
+        {
+          "id": "icon-improvements",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_icon_improvements",
+            "number": 110
+          }
+        },
+        {
+          "id": "more-interjections",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_more_interjections",
+            "number": 1010
+          }
+        },
+        {
+          "id": "alter-wounded-triggers",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_alter_wounded_triggers",
+            "number": 1020
+          }
+        },
+        {
+          "id": "reveal-chapter-six-wilderness",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_reveal_ch6_wilderness",
+            "number": 1030
+          }
+        },
+        {
+          "id": "reveal-cloakwood-except-mines",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_reveal_cloakwood_4",
+            "number": 1036
+          }
+        },
+        {
+          "id": "multiplayer-kickout-dialogue",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_mp_kickout_dialogue",
+            "number": 1070
+          }
+        },
+        {
+          "id": "send-npcs-to-inn",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_send_bg_npcs_to_inn",
+            "number": 1075
+          }
+        },
+        {
+          "id": "add-bags-of-holding",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_add_bags_of_holding",
+            "number": 1080
+          }
+        },
+        {
+          "id": "reveal-city-areas",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_reveal_city_areas",
+            "number": 1100
+          }
+        },
+        {
+          "id": "higher-store-stacks",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_stores_sell_higher_stacks",
+            "number": 1120
+          }
+        },
+        {
+          "id": "remove-xp-cap",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_remove_xp_cap",
+            "number": 2090
+          }
+        },
+        {
+          "id": "thieving-in-heavy-armor",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_thieving_in_heavy_armor",
+            "number": 2100
+          }
+        },
+        {
+          "id": "expanded-dual-class-options",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_more_dual_classes",
+            "number": 2140
+          }
+        },
+        {
+          "id": "protection-items-pnp",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_protection_items_pnp",
+            "number": 2150
+          }
+        },
+        {
+          "id": "item-spells-at-character-level",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_item_spells_at_char_level",
+            "number": 2170
+          }
+        },
+        {
+          "id": "loosen-cleric-multiclass-equipment",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_cleric_multis_loosen_equipment_restrictions",
+            "number": 2420
+          }
+        },
+        {
+          "id": "improved-cure-cause-wounds",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_nwn_cure_cause_wounds",
+            "number": 2630
+          }
+        },
+        {
+          "id": "alternate-concentration-check",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_alternate_concentration_check_v1",
+            "number": 2690
+          }
+        },
+        {
+          "id": "learn-spells-100-percent",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_easy_spell_learning_capped",
+            "number": 3030
+          }
+        },
+        {
+          "id": "potion-stacks-40",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_increase_potion_stacks_40",
+            "number": 3101
+          }
+        },
+        {
+          "id": "scroll-stacks-40",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_increase_scroll_stacks_40",
+            "number": 3111
+          }
+        },
+        {
+          "id": "angry-npcs-never-leave",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_happy_patch_angry_never_leave",
+            "number": 3121
+          }
+        },
+        {
+          "id": "disable-non-hostile-rest-spawns",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_rest_spawns_alter_nonhostile_disable",
+            "number": 3191
+          }
+        },
+        {
+          "id": "stores-buy-all-items",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_stores_buy_all_items",
+            "number": 3205
+          }
+        },
+        {
+          "id": "extra-ankheg-armor",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_taerom_makes_multiple_ankheg_armor",
+            "number": 3230
+          }
+        },
+        {
+          "id": "ammo-recovery-75",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_recover_ammo_75",
+            "number": 3262
+          }
+        },
+        {
+          "id": "throwing-recovery-75",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_recover_throwing_weapons_75",
+            "number": 3272
+          }
+        },
+        {
+          "id": "death-cam",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_death_cam",
+            "number": 3300
+          }
+        },
+        {
+          "id": "reduced-party-chunking",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_reduced_party_chunking",
+            "number": 3330
+          }
+        },
+        {
+          "id": "movement-casting-speed-100",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_noncombat_speed_casting_increase_100",
+            "number": 3344
+          }
+        },
+        {
+          "id": "interval-save-30-cycle-four",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_create_interval_four_saves_30",
+            "number": 3355
+          }
+        },
+        {
+          "id": "travel-regeneration",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_sensible_regeneration_when_traveling",
+            "number": 3380
+          }
+        },
+        {
+          "id": "automatic-ranger-tracking",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_automatic_ranger_tracking",
+            "number": 3390
+          }
+        },
+        {
+          "id": "adjust-evil-npc-reactions",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_adjust_evil_npc_reactions",
+            "number": 4000
+          }
+        },
+        {
+          "id": "allow-npc-pairs-to-separate",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_allow_npc_pairs_to_separate",
+            "number": 4025
+          }
+        },
+        {
+          "id": "disable-advanced-ai-auto-assignment",
+          "weidu": {
+            "tp2": "cdtweaks/setup-cdtweaks.tp2",
+            "label": "cd_tweaks_disable_joinable_ai_scripts",
+            "number": 4140
+          }
+        }
+      ],
+      "language": "English",
+      "provenance": "unverified"
+    }
+  ],
+  "execution": [
+    {
+      "id": "bgee-source::dlc-merger",
+      "package": "dlc-merger",
+      "environment": "bgee-source",
+      "phase": "preprocess"
+    },
+    {
+      "id": "bgee-source::ee-fixpack",
+      "package": "ee-fixpack",
+      "environment": "bgee-source",
+      "phase": "preprocess",
+      "predecessors": [
+        "bgee-source::dlc-merger"
+      ]
+    },
+    {
+      "id": "eet-target::ee-fixpack",
+      "package": "ee-fixpack",
+      "environment": "eet-target",
+      "phase": "preprocess"
+    },
+    {
+      "id": "eet-target::eet",
+      "package": "eet",
+      "environment": "eet-target",
+      "phase": "eet-import",
+      "predecessors": [
+        "bgee-source::dlc-merger",
+        "bgee-source::ee-fixpack",
+        "eet-target::ee-fixpack"
+      ]
+    },
+    {
+      "id": "eet-target::ascension",
+      "package": "ascension",
+      "environment": "eet-target",
+      "phase": "eet",
+      "predecessors": [
+        "eet-target::ee-fixpack",
+        "eet-target::eet"
+      ]
+    },
+    {
+      "id": "eet-target::call-of-the-lost-goddess",
+      "package": "call-of-the-lost-goddess",
+      "environment": "eet-target",
+      "phase": "eet",
+      "predecessors": [
+        "eet-target::ee-fixpack",
+        "eet-target::eet"
+      ]
+    },
+    {
+      "id": "eet-target::eeex",
+      "package": "eeex",
+      "environment": "eet-target",
+      "phase": "eet",
+      "predecessors": [
+        "eet-target::ee-fixpack",
+        "eet-target::eet"
+      ]
+    },
+    {
+      "id": "eet-target::bubbs-spell-menu",
+      "package": "bubbs-spell-menu",
+      "environment": "eet-target",
+      "phase": "eet",
+      "predecessors": [
+        "eet-target::ee-fixpack",
+        "eet-target::eeex",
+        "eet-target::eet"
+      ]
+    },
+    {
+      "id": "eet-target::hidden-gameplay-options",
+      "package": "hidden-gameplay-options",
+      "environment": "eet-target",
+      "phase": "eet",
+      "predecessors": [
+        "eet-target::ee-fixpack",
+        "eet-target::eet"
+      ]
+    },
+    {
+      "id": "eet-target::infinity-ui-plus-plus",
+      "package": "infinity-ui-plus-plus",
+      "environment": "eet-target",
+      "phase": "eet",
+      "predecessors": [
+        "eet-target::ee-fixpack",
+        "eet-target::eeex",
+        "eet-target::eet"
+      ]
+    },
+    {
+      "id": "eet-target::stratagems",
+      "package": "stratagems",
+      "environment": "eet-target",
+      "phase": "eet",
+      "predecessors": [
+        "eet-target::ee-fixpack",
+        "eet-target::eet"
+      ]
+    },
+    {
+      "id": "eet-target::throne-of-the-mad-god",
+      "package": "throne-of-the-mad-god",
+      "environment": "eet-target",
+      "phase": "eet",
+      "predecessors": [
+        "eet-target::ee-fixpack",
+        "eet-target::eet"
+      ]
+    },
+    {
+      "id": "eet-target::tweaks-anthology",
+      "package": "tweaks-anthology",
+      "environment": "eet-target",
+      "phase": "eet",
+      "predecessors": [
+        "eet-target::ee-fixpack",
+        "eet-target::eet"
+      ]
+    },
+    {
+      "id": "eet-target::eet-end",
+      "package": "eet-end",
+      "environment": "eet-target",
+      "phase": "eet-end",
+      "predecessors": [
+        "eet-target::ascension",
+        "eet-target::bubbs-spell-menu",
+        "eet-target::call-of-the-lost-goddess",
+        "eet-target::ee-fixpack",
+        "eet-target::eeex",
+        "eet-target::eet",
+        "eet-target::hidden-gameplay-options",
+        "eet-target::infinity-ui-plus-plus",
+        "eet-target::stratagems",
+        "eet-target::throne-of-the-mad-god",
+        "eet-target::tweaks-anthology"
+      ]
+    }
+  ],
+  "execution_readiness": "analysis-only",
+  "blocking_reasons": [
+    "environment `bgee-source` has no fingerprint",
+    "environment `eet-target` has no fingerprint"
+  ],
+  "warnings": [
+    "eet-target::ascension is unverified",
+    "eet-target::bubbs-spell-menu is unverified",
+    "eet-target::call-of-the-lost-goddess is unverified",
+    "eet-target::eeex is unverified",
+    "eet-target::infinity-ui-plus-plus is unverified",
+    "eet-target::stratagems is unverified",
+    "eet-target::throne-of-the-mad-god is unverified",
+    "eet-target::tweaks-anthology is unverified",
+    "environment `bgee-source` has no fingerprint",
+    "environment `eet-target` has no fingerprint"
+  ]
+}

@@ -20,11 +20,13 @@ only top-level component declarations count.
 ## First audit: SCS v35.21 local package tree
 
 The available local SCS tree reports TP2 `VERSION 35.21` and **146** structural
-component declarations. IEPM currently maps eight stable component IDs to that
-installer: batch mode, spell-tweaks batch, AI initialization, smarter mages,
-smarter priests, improved fiends/celestials, and the two Ascension integration
-selectors. The remaining **138** structural entries are now explicitly visible
-in the review output rather than being invisible coverage debt.
+component declarations. IEPM now maps **78** stable component IDs to that
+installer: the initial evidence-backed batch route plus every selector from
+the supplied personal build. The newly mapped entries retain mechanically
+derived selector/prerequisite evidence only; they are not a compatibility
+badge for the whole large stack. The remaining **68** structural entries are
+explicitly visible in the review output rather than being invisible coverage
+debt.
 
 This confirms the correct next PA-4 task: name/classify the unmapped entries
 from SCS's author release text, attach release-specific selectors, and keep
@@ -53,7 +55,7 @@ classification backlog.
 
 | Package/release | Observed TP2 declarations | Existing stable IDs matched | Still unmapped |
 | --- | ---: | ---: | ---: |
-| SCS v35.21 | 146 | 8 | 138 |
+| SCS v35.21 | 146 | 78 | 68 |
 | Tweaks Anthology v18 source | 450 | 36 | 414 |
 | Ascension 2.1.0 | 19 | 19 | 0 |
 | DLC Merger 2.1 | 4 | 4 | 0 |
