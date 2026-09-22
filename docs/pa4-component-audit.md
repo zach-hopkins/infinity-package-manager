@@ -54,11 +54,14 @@ classification backlog.
 | --- | ---: | ---: | ---: |
 | SCS v35.21 | 146 | 8 | 138 |
 | Tweaks Anthology v18 source | 450 | 36 | 414 |
-| Ascension 2.1.0 | 19 | 13 | 6 |
+| Ascension 2.1.0 | 19 | 19 | 0 |
 
 The higher Tweaks number reflects the source TP2's full structural surface,
 including choices/subcomponents; it does not mean 450 independent user-facing
 features. The existing Forge selections are represented, but that is not the
 same as a complete curated component catalog. This audit corrects an earlier
 over-broad impression: the registry has substantial **selected-route** support
-for Tweaks and SCS, not complete component support yet.
+for Tweaks and SCS, not complete component support yet. Ascension's six clear
+author-labeled optional components were then added as mechanically derived,
+explicitly Untested selectors, closing its structural catalog without claiming
+new compatibility or verification evidence.

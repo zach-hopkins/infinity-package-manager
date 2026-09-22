@@ -48,6 +48,8 @@ releases:
         weidu: { tp2: ascension/Ascension.tp2, label: Ascension-ImprovedSlayerTransformation, number: 50 }
       - id: expanded-bioware-epilogues
         weidu: { tp2: ascension/Ascension.tp2, label: Ascension-DavidGaiderExpandedEpilogues, number: 60 }
+      - id: alternate-epilogues-by-shawne
+        weidu: { tp2: ascension/Ascension.tp2, label: Ascension-AlternateEpiloguesByShawne, number: 61 }
       - id: tougher-abazigal
         weidu: { tp2: ascension/Ascension.tp2, label: Ascension-TougherAbazigal, number: 1000 }
       - id: tougher-balthazar
@@ -60,3 +62,13 @@ releases:
         weidu: { tp2: ascension/Ascension.tp2, label: Ascension-TougherIllasera, number: 1400 }
       - id: tougher-yaga-shura
         weidu: { tp2: ascension/Ascension.tp2, label: Ascension-TougherYagaShura, number: 1500 }
+      - id: full-body-portrait-bodhi
+        weidu: { tp2: ascension/Ascension.tp2, label: Ascension-FullbodyPortraitForBodhi, number: 2000 }
+      - id: alternate-balthazar-portrait
+        weidu: { tp2: ascension/Ascension.tp2, label: Ascension-AlternateBalthazarPortrait, number: 2100 }
+      - id: extended-ee-npc-epilogues
+        weidu: { tp2: ascension/Ascension.tp2, label: Ascension-ExtendedEpiloguesForEENPCbyShawne, number: 2200 }
+      - id: sharper-abazigal-gromnir-portraits
+        weidu: { tp2: ascension/Ascension.tp2, label: Ascension-SharperPortraitsAbazigalGromnir, number: 2300 }
+      - id: slightly-improved-cutscenes
+        weidu: { tp2: ascension/Ascension.tp2, label: Ascension-SlightlyImprovedCutscenes, number: 2400 }
