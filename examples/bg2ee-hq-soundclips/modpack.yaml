@@ -1,0 +1,17 @@
+schema: 2
+
+# PA-4 exact author-tagged BG2EE audio fixture. EET and non-English routes
+# remain separate, untested scopes.
+environments:
+  target:
+    target: bg2ee
+    version: "2.6.6"
+    platform: windows
+    language: English
+    locale: en_US
+    fingerprint:
+      profile: iepm-core-layout-v1
+      value: 298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f
+
+mods:
+  - { package: hq-soundclips-bg2ee, environment: target, components: [high-quality-soundclips] }
