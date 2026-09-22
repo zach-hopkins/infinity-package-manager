@@ -72,6 +72,7 @@ classification backlog.
 | Reduce Save Compression v1.2 | 1 | 1 | 0; TP2 has no explicit LANGUAGE, so the review tool reports a language-mapping drift for the implicit index 0 |
 | Ajantis BG1 Expansion v22 | 3 | 3 | 0; optional shield and SoD crossmod choices have external prerequisites |
 | Turnabout v1.8 | 2 | 2 | 0; main requires Ascension's rewritten final chapter and its supplied `bodhind.2da` |
+| Generalized Biffing v2.9 | 2 | 2 | 0; the alternatives belong to one WeiDU subcomponent group |
 | Ten Spellhold Studios BG2 friendship tag archives | 10 total | 10 | 0 |
 | Dorn, Hexxat, and Jaheira Friendships; Korgan's Redemption tag archives | 4 total | 4 | 0 |
 | Coran's BG Friendship and Xan's BG1 Friendship tag archives | 2 total | 2 | 0 |

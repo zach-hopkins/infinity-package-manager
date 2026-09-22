@@ -1,0 +1,22 @@
+schema: 2
+
+# PA-4 bounded check that a regular content mod runs before the final
+# media-only biffing choice. Not representative of a megamod stack.
+environments:
+  target:
+    target: bg2ee
+    version: "2.6.6"
+    platform: windows
+    language: English
+    locale: en_US
+    fingerprint:
+      profile: iepm-core-layout-v1
+      value: 298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f
+
+mods:
+  - package: banterpack
+    environment: target
+    components: [soa-banters]
+  - package: generalized-biffing
+    environment: target
+    components: [biff-media-only]

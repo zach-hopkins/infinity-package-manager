@@ -1,0 +1,40 @@
+schema: 2
+package: generalized-biffing
+releases:
+  - release_id: generalized-biffing-v2.9-source
+    version: "v2.9"
+    artifacts:
+      - url: https://github.com/Spellhold-Studios/Generalized-Biffing/archive/refs/tags/v2.9.zip
+        sha256: 0d7b0c4ed5714b97e6362243af4f660b3337cfaa9a8984d7f2c87775d41a598d
+        platforms: [windows]
+    materialization: { source_root: Generalized-Biffing-2.9, include: [generalized_biffing] }
+    compatibility: { games: [bgee, bg2ee, eet] }
+    install: { phase: post-eet-end, after: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact author v2.9 tag ZIP was SHA-256 verified. Its TP2 declares VERSION v2.9, five WeiDU languages, and two labeled subcomponents numbered 0 and 1.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The author says to install Generalized Biffing after all other WeiDU mods, and notes that it is usually unnecessary for Enhanced Edition games. IEPM places it in the final post-EET-End phase; order among other packages in that same phase still needs review.
+        provenance: declared
+        evidence: [https://github.com/Spellhold-Studios/Generalized-Biffing]
+      - claim: The two choices are one WeiDU SUBCOMPONENT group, not two independent features. Component 0 biffs only WAV, TIS, and BAM files; component 1 biffs all files. The author readme recommends the former for small stacks and latter for megamods.
+        provenance: declared
+        evidence: [https://github.com/Spellhold-Studios/Generalized-Biffing]
+    installers:
+      - tp2: generalized_biffing/generalized_biffing.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: "francais (traduction : Isaya)" }
+          - { id: 2, name: italiano }
+          - { id: 3, name: polski }
+          - { id: 4, name: "portugues (Brasil) (traducao: Felipe)" }
+    components:
+      - id: biff-media-only
+        default_selected: true
+        weidu: { tp2: generalized_biffing/generalized_biffing.tp2, label: generalized_biffing_min, number: 0 }
+        conflicts: [biff-all-files]
+      - id: biff-all-files
+        weidu: { tp2: generalized_biffing/generalized_biffing.tp2, label: generalized_biffing_all_files, number: 1 }
+        conflicts: [biff-media-only]
