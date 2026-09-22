@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "Drake v1.7a NPC and default portrait on clean BGEE 2.6.6",
+  "identity": {
+    "registry_revision": "323c927",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "2259559f65d3ada27fbc53414acb92f152128ee2a6df198660118e01db9d223b",
+    "environments": {
+      "target": {
+        "target": "bgee",
+        "fingerprint": {
+          "profile": "iepm-core-layout-v1",
+          "value": "04fc6602150ff7788875573dbf0b7f4aeb7ca26aaf83b022c77d9fc417d848c3"
+        }
+      }
+    },
+    "packages": [
+      { "package": "drake", "release_id": "drake-v1.7a-source", "environment": "target", "artifact_sha256": "341fb5f032232754c86cce87ca27dc87f1b9fc992c97608de67f9b0f4c87c783", "components": ["npc", "portrait-default"] }
+    ],
+    "execution_order": ["drake"]
+  },
+  "checks": {
+    "artifact_verified": true,
+    "selector_known": true,
+    "requirements_modeled": true,
+    "component_catalog_complete": true,
+    "all_components_classified": true,
+    "core_components_supported": false,
+    "selected_components_supported": false,
+    "relationships_satisfied": true,
+    "no_opaque_selections": true,
+    "clean_disposable_install": true,
+    "all_actions_completed": true,
+    "requested_components_recorded": true,
+    "no_components_skipped": true,
+    "warnings_classified": true,
+    "sealed": true,
+    "eet_end_required": false,
+    "main_menu_smoke": false,
+    "gameplay_smoke": false
+  },
+  "evidence": ["examples/bgee-drake/modpack.yaml", "docs/pa4-bgee-drake-evidence.md"]
+}

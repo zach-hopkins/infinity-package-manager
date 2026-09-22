@@ -173,3 +173,7 @@ NPC and a required portrait alternative. `review-tp2` flags display-version
 drift because the exact v1.7a tag's TP2 declares VERSION 1.7; these are
 distinct facts, not evidence of a mismatched artifact. Other portrait choices,
 crossbow proficiency, and the original soundset remain Untested.
+Its NPC and default portrait also completed a revision-pinned clean BGEE
+install, but the sealed game did not reach a menu in the observed launch
+attempts. See [`pa4-bgee-drake-evidence.md`](pa4-bgee-drake-evidence.md);
+the route remains Untested rather than being promoted on install evidence.
