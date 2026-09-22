@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "Reduce Save Compression v1.2 English default on clean BG2EE 2.6.6",
+  "identity": {
+    "registry_revision": "e311657",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "cca9749d8c7ce3933c4923ec02141e9e3b5d1d78ae449ffca2bb50dd953999d3",
+    "environments": {
+      "target": {
+        "target": "bg2ee",
+        "fingerprint": {
+          "profile": "iepm-core-layout-v1",
+          "value": "298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f"
+        }
+      }
+    },
+    "packages": [
+      { "package": "reduce-save-compression", "release_id": "reduce-save-compression-v1.2-source", "environment": "target", "artifact_sha256": "0760b00ac32543cb7d32aa81291da61de1f142713d27268032d10118986406cb", "components": ["reduce-save-compression"] }
+    ],
+    "execution_order": ["reduce-save-compression"]
+  },
+  "checks": {
+    "artifact_verified": true,
+    "selector_known": true,
+    "requirements_modeled": true,
+    "component_catalog_complete": true,
+    "all_components_classified": true,
+    "core_components_supported": true,
+    "selected_components_supported": true,
+    "relationships_satisfied": true,
+    "no_opaque_selections": true,
+    "clean_disposable_install": true,
+    "all_actions_completed": true,
+    "requested_components_recorded": true,
+    "no_components_skipped": true,
+    "warnings_classified": true,
+    "sealed": true,
+    "eet_end_required": false,
+    "main_menu_smoke": true,
+    "gameplay_smoke": false
+  },
+  "evidence": ["examples/bg2ee-reduce-save-compression/modpack.yaml", "docs/pa4-bg2ee-reduce-save-compression-evidence.md"]
+}

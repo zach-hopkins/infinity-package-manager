@@ -11,7 +11,7 @@ releases:
     materialization: { source_root: B3-ReduceSaveCompression-1.2, include: [B3-ReduceSaveCompression] }
     compatibility: { games: [bgee, bg2ee, eet] }
     install: { phase: eet }
-    provenance: unverified
+    provenance: verified
     claims:
       - claim: The exact author v1.2 tag archive was SHA-256 verified. Its TP2 declares VERSION v1.2 and one LABEL-bearing component with GAME_IS predicates for BGEE, BG2EE, EET, IWDEE, and PSTEE; the latter two are outside this registry's current game vocabulary. The TP2 has no LANGUAGE declaration; WeiDU's implicit language index 0 is mapped to English for execution.
         provenance: derived
@@ -22,6 +22,9 @@ releases:
       - claim: The component patches a game executable's bytes and is sensitive to game binary version; source predicates do not establish that every executable build contains the expected pattern.
         provenance: derived
         evidence: [https://github.com/Bubb13/B3-ReduceSaveCompression]
+      - claim: The exact default component patched a disposable BG2EE 2.6.6 executable in a clean IEPM-managed build, appeared in WeiDU.log, and the sealed game reached the Shadows of Amn main menu; other game binaries and actual save behavior remain untested.
+        provenance: verified
+        evidence: [evidence/pa4-bg2ee-reduce-save-compression.json]
     installers:
       - tp2: B3-ReduceSaveCompression/B3-ReduceSaveCompression.tp2
         launcher: toolchain
