@@ -332,3 +332,40 @@ releases:
         weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_alter_prof_iwd_no_styles, number: 2164 }
         unsupported_games: [bgee]
         provides: [{ name: tweaks-weapon-proficiencies-scope, exclusive: true }]
+      - id: limited-storekeeper-id-mages-bards
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_shopkeeper_id_mages, number: 2190 }
+        provides: [{ name: tweaks-storekeeper-id-scope, exclusive: true }]
+      - id: limited-storekeeper-id-by-lore
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_shopkeeper_id_lore, number: 2191 }
+        provides: [{ name: tweaks-storekeeper-id-scope, exclusive: true }]
+      - id: limited-storekeeper-id-hybrid
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_shopkeeper_id_hybrid, number: 2192 }
+        provides: [{ name: tweaks-storekeeper-id-scope, exclusive: true }]
+      - { id: multi-class-grand-mastery, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_multiclass_gm, number: 2200 } }
+      - id: true-grandmastery-bonuses
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_grandmastery_bonus_true, number: 2210 }
+        provides: [{ name: tweaks-grandmastery-bonuses-scope, exclusive: true }]
+      - id: bg2-grandmastery-bonuses
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_grandmastery_bonus_bg2, number: 2211 }
+        provides: [{ name: tweaks-grandmastery-bonuses-scope, exclusive: true }]
+      - { id: zero-weight-magically-created-weapons, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_0_weight_created_weapons, number: 2220 } }
+      - { id: alter-thac0-table, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_alter_thac0_table, number: 2240 } }
+      - { id: alter-sorcerer-spell-progression, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_sorc_spell_progression, number: 2250 } }
+      - id: mage-spell-progression-unnerfed
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_mage_spell_progression_unnerfed, number: 2260 }
+        provides: [{ name: tweaks-mage-spell-progression-scope, exclusive: true }]
+      - id: mage-spell-progression-pnp
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_mage_spell_progression_pnp, number: 2261 }
+        provides: [{ name: tweaks-mage-spell-progression-scope, exclusive: true }]
+      - id: bard-spell-progression-unnerfed
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_bard_spell_progression_unnerfed, number: 2270 }
+        provides: [{ name: tweaks-bard-spell-progression-scope, exclusive: true }]
+      - id: bard-spell-progression-pnp
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_bard_spell_progression_pnp, number: 2271 }
+        provides: [{ name: tweaks-bard-spell-progression-scope, exclusive: true }]
+      - id: cleric-spell-progression-unnerfed
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_cleric_spell_progression_unnerfed, number: 2280 }
+        provides: [{ name: tweaks-cleric-spell-progression-scope, exclusive: true }]
+      - id: cleric-spell-progression-pnp
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_cleric_spell_progression_pnp, number: 2281 }
+        provides: [{ name: tweaks-cleric-spell-progression-scope, exclusive: true }]
