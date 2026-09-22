@@ -21,6 +21,9 @@ releases:
       - claim: The mod's readme describes entering Black Pits from the BG1 campaign and warns that Baeloth cannot rejoin after that route; no such story behavior has been smoke-tested by IEPM.
         provenance: declared
         evidence: [https://github.com/UnearthedArcana/BP_in_BG]
+      - claim: The exact English component completed after DLC Merger in a clean BGEE 2.6.6 workspace and appeared in WeiDU.log, but the sealed game menu was not observed because the UI inspector could not restore the window. This route remains Untested.
+        provenance: verified
+        evidence: [evidence/pa4-bgee-black-pits-dark-horizons.json]
     installers:
       - tp2: BP_in_BG/bp_in_bg.tp2
         launcher: toolchain

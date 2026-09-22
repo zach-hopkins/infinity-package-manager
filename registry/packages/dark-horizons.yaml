@@ -22,6 +22,9 @@ releases:
       - claim: The optional nerfs component mechanically checks that Dark Horizons main component zero is installed. Its effects and coexistence with other item mods remain Untested.
         provenance: derived
         evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The exact English main quest component completed after DLC Merger and Black Pits in BG in a clean BGEE 2.6.6 workspace and appeared in WeiDU.log, but the sealed game menu was not observed because the UI inspector could not restore the window. This route remains Untested.
+        provenance: verified
+        evidence: [evidence/pa4-bgee-black-pits-dark-horizons.json]
     installers:
       - tp2: DarkHorizons/DarkHorizons.tp2
         launcher: toolchain
