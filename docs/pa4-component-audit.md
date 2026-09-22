@@ -15,7 +15,9 @@ release-drift findings:
 
 It reads TP2 text only. It does not execute WeiDU code, modify the registry, or
 infer compatibility. Indented WeiDU control-flow `BEGIN` blocks are excluded:
-only top-level component declarations count.
+only top-level component declarations count. Line and block comments are also
+excluded; this corrected Tweaks Anthology's initial count by four disabled
+declarations.
 
 ## First audit: SCS v35.21 local package tree
 
@@ -59,7 +61,7 @@ classification backlog.
 | Package/release | Observed TP2 declarations | Existing stable IDs matched | Still unmapped |
 | --- | ---: | ---: | ---: |
 | SCS v35.21 | 146 | 134 | 12 intentionally non-user-facing |
-| Tweaks Anthology v18 source | 450 | 129 | 321 |
+| Tweaks Anthology v18 source | 446 | 155 | 291 |
 | Hidden Gameplay Options v5.1 | 43 | 43 | 0 |
 | Ascension 2.1.0 | 19 | 19 | 0 |
 | Call of the Lost Goddess v3.1 | 3 | 3 | 0 |
@@ -71,7 +73,7 @@ classification backlog.
 | EE Fixpack Beta 2 | 7 | 3 | 4 internal-only |
 
 The higher Tweaks number reflects the source TP2's full structural surface,
-including choices/subcomponents; it does not mean 450 independent user-facing
+including choices/subcomponents; it does not mean 446 independent user-facing
 features. The existing Forge selections are represented, but that is not the
 same as a complete curated component catalog. This audit corrects an earlier
 over-broad impression: the registry has substantial **selected-route** support

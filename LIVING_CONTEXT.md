@@ -115,7 +115,9 @@ WeiDU packages remain experimentally installable where technical preflight
 succeeds.
 PA-4 now has a non-mutating component-inventory audit: `review-tp2` exposes
 every raw TP2 declaration not yet represented by a stable, curated component
-ID. The SCS v35.21 local-tree audit found 146 declarations; 134 now have
+ID. The inert TP2 reader excludes commented-out declarations; this corrected
+the Tweaks Anthology v18 source inventory from 450 to 446 live declarations.
+The SCS v35.21 local-tree audit found 146 declarations; 134 now have
 stable IDs, including every BGEE/BG2EE/EET-facing selector and every selector
 in the personal EET build. The 12 visible remaining declarations are IWD-only,
 legacy-only, or TP2 internal resource/test blocks—not hidden coverage debt.

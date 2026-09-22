@@ -301,8 +301,10 @@ pub fn inspect_tp2(source: &str) -> Tp2Observation {
     let mut awaiting_language_name = false;
     let mut control_flow_depth = 0_usize;
     let mut awaits_control_flow_begin = false;
+    let mut in_block_comment = false;
 
     for raw_line in source.trim_start_matches('\u{feff}').lines() {
+        let raw_line = strip_tp2_comments(raw_line, &mut in_block_comment);
         let line = raw_line.trim();
         if line.is_empty() || line.starts_with("//") {
             continue;
@@ -423,6 +425,49 @@ pub fn inspect_tp2(source: &str) -> Tp2Observation {
             .push("no BEGIN declarations observed".to_owned());
     }
     observation
+}
+
+// Keep spaces in place of comments so column-zero component declarations are
+// still distinguishable from indented action BEGIN blocks.
+fn strip_tp2_comments(line: &str, in_block_comment: &mut bool) -> String {
+    let mut output = String::with_capacity(line.len());
+    let mut chars = line.chars().peekable();
+    let mut quote = None;
+    while let Some(character) = chars.next() {
+        let next = chars.peek().copied();
+        if *in_block_comment {
+            if character == '*' && next == Some('/') {
+                output.push(' ');
+                output.push(' ');
+                chars.next();
+                *in_block_comment = false;
+            } else {
+                output.push(' ');
+            }
+            continue;
+        }
+        if let Some(delimiter) = quote {
+            output.push(character);
+            if character == delimiter {
+                quote = None;
+            }
+            continue;
+        }
+        if character == '~' || character == '"' {
+            quote = Some(character);
+            output.push(character);
+        } else if character == '/' && next == Some('*') {
+            output.push(' ');
+            output.push(' ');
+            chars.next();
+            *in_block_comment = true;
+        } else if character == '/' && next == Some('/') {
+            break;
+        } else {
+            output.push(character);
+        }
+    }
+    output
 }
 
 fn inspect_directory(path: &Path) -> Result<PackageObservation> {
@@ -994,6 +1039,28 @@ ACTION_DEFINE_ASSOCIATIVE_ARRAY ignored BEGIN LABEL
         );
         assert!(observation.game_predicates.is_empty());
         assert!(observation.component_predicates.is_empty());
+    }
+
+    #[test]
+    fn inspection_ignores_block_commented_components_and_predicates() {
+        let observation = inspect_tp2(
+            r#"
+VERSION ~1.0~
+/*
+BEGIN @10 DESIGNATED 10 LABEL ~DISABLED~
+REQUIRE_PREDICATE GAME_IS ~iwd~
+*/
+BEGIN @20 DESIGNATED 20 LABEL ~ACTIVE~ // /* no comment begins here
+PRINT ~literal /* text */~
+/* BEGIN @30 DESIGNATED 30 LABEL ~ALSO-DISABLED~ */
+BEGIN @40 DESIGNATED 40 LABEL ~SECOND~
+"#,
+        );
+
+        assert_eq!(observation.components.len(), 2);
+        assert_eq!(observation.components[0].label.as_deref(), Some("ACTIVE"));
+        assert_eq!(observation.components[1].label.as_deref(), Some("SECOND"));
+        assert!(observation.game_predicates.is_empty());
     }
 
     #[test]

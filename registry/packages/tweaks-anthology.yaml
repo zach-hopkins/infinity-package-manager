@@ -369,3 +369,72 @@ releases:
       - id: cleric-spell-progression-pnp
         weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_cleric_spell_progression_pnp, number: 2281 }
         provides: [{ name: tweaks-cleric-spell-progression-scope, exclusive: true }]
+      - id: druid-levels-with-cleric-spells
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_druid_spell_progression_cleric_druid_level, number: 2288 }
+        provides: [{ name: tweaks-druid-spell-progression-scope, exclusive: true }]
+      - id: druid-levels-with-unnerfed-cleric-spells
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_druid_spell_progression_cleric_unnerfed_druid_level, number: 2289 }
+        provides: [{ name: tweaks-druid-spell-progression-scope, exclusive: true }]
+      - id: druid-levels-with-unnerfed-druid-spells
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_druid_spell_progression_unnerfed_druid_level, number: 2290 }
+        provides: [{ name: tweaks-druid-spell-progression-scope, exclusive: true }]
+      - id: druid-levels-with-pnp-spells
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_druid_spell_progression_pnp_druid_level, number: 2291 }
+        provides: [{ name: tweaks-druid-spell-progression-scope, exclusive: true }]
+      - id: cleric-levels-with-normal-druid-spells
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_druid_spell_progression_unchanged_cleric_level, number: 2292 }
+        provides: [{ name: tweaks-druid-spell-progression-scope, exclusive: true }]
+      - id: cleric-levels-with-unnerfed-druid-spells
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_druid_spell_progression_unnerfed_cleric_level, number: 2293 }
+        provides: [{ name: tweaks-druid-spell-progression-scope, exclusive: true }]
+      - id: cleric-levels-with-pnp-druid-spells
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_druid_spell_progression_pnp_cleric_level, number: 2294 }
+        provides: [{ name: tweaks-druid-spell-progression-scope, exclusive: true }]
+      - id: cleric-levels-with-normal-cleric-spells
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_druid_spell_progression_cleric_normal_cleric_level, number: 2295 }
+        provides: [{ name: tweaks-druid-spell-progression-scope, exclusive: true }]
+      - id: cleric-levels-with-unnerfed-cleric-spells
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_druid_spell_progression_cleric_unnerfed_cleric_level, number: 2296 }
+        provides: [{ name: tweaks-druid-spell-progression-scope, exclusive: true }]
+      - id: iwd-druid-levels-with-normal-druid-spells
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_druid_spell_progression_unchanged_iwd_druid_level, number: 2730 }
+        provides: [{ name: tweaks-druid-spell-progression-scope, exclusive: true }]
+      - id: iwd-druid-levels-with-unnerfed-druid-spells
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_druid_spell_progression_unnerfed_iwd_druid_level, number: 2731 }
+        provides: [{ name: tweaks-druid-spell-progression-scope, exclusive: true }]
+      - id: iwd-druid-levels-with-pnp-spells
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_druid_spell_progression_pnp_iwd_druid_level, number: 2732 }
+        provides: [{ name: tweaks-druid-spell-progression-scope, exclusive: true }]
+      - id: iwd-druid-levels-with-normal-cleric-spells
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_druid_spell_progression_cleric_normal_iwd_druid_level, number: 2733 }
+        provides: [{ name: tweaks-druid-spell-progression-scope, exclusive: true }]
+      - id: iwd-druid-levels-with-unnerfed-cleric-spells
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_druid_spell_progression_cleric_unnerfed_iwd_druid_level, number: 2734 }
+        provides: [{ name: tweaks-druid-spell-progression-scope, exclusive: true }]
+      - id: wisdom-bonus-spells-pnp
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_alter_wisdom-based_divine_bonus_spell_table_pnp, number: 2580 }
+        provides: [{ name: tweaks-wisdom-bonus-spells-scope, exclusive: true }]
+      - id: wisdom-bonus-spells-bg-table
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_alter_wisdom-based_divine_bonus_spell_table_bg_bg2_iwd, number: 2581 }
+        provides: [{ name: tweaks-wisdom-bonus-spells-scope, exclusive: true }]
+      - id: triple-class-hla-tables
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_triple_class_hla_table, number: 2300 }
+        unsupported_games: [bgee]
+        requires: [remove-xp-cap]
+      - id: powerful-arcane-caster-save-penalties
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_arcane_save_penalties, number: 2310 }
+        provides: [{ name: tweaks-caster-save-penalties-scope, exclusive: true }]
+      - id: powerful-divine-caster-save-penalties
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_divine_save_penalties, number: 2311 }
+        provides: [{ name: tweaks-caster-save-penalties-scope, exclusive: true }]
+      - id: powerful-arcane-and-divine-caster-save-penalties
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_arcane_divine_save_penalties, number: 2312 }
+        provides: [{ name: tweaks-caster-save-penalties-scope, exclusive: true }]
+      - { id: remove-trap-limit, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_trap_cap_removal, number: 2320 } }
+      - { id: remove-magical-trap-delay, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_remove_magical_trap_delay, number: 2330 } }
+      - { id: remove-summoning-limit, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_summoning_cap_removal, number: 2339 } }
+      - id: remove-celestial-summoning-limit
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_celestial_cap_removal, number: 2340 }
+        unsupported_games: [bgee]
+      - { id: remove-single-class-race-restrictions, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_remove_class_racial_restrictions, number: 2360 } }
+      - { id: remove-kit-race-restrictions, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_remove_kit_racial_restrictions, number: 2380 } }
