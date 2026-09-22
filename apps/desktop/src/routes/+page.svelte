@@ -21,6 +21,7 @@
 	type BuildPreview = {
 		plan: string;
 		verification: string;
+		selectionAudit: string;
 		warnings: string[];
 		packageCount: number;
 		environments: string[];
@@ -160,7 +161,7 @@
 		try {
 			preview = await invoke<BuildPreview>('preview_build', { request: request() });
 		} catch (reason) {
-			error = String(reason);
+			error = `Plan blocked. IEPM did not edit your mod-list YAML.\n\n${String(reason)}`;
 			preview = null;
 		} finally {
 			busy = false;
@@ -273,7 +274,7 @@
 						<div class="flex items-center gap-3 pt-1"><button onclick={reviewPlan} disabled={busy || !manifest.trim() || (!bgeeDirectory.trim() && !bg2eeDirectory.trim())} class="rounded-lg border border-black/12 bg-white px-5 py-2.5 text-sm font-semibold text-ink-800 shadow-sm hover:bg-paper-50 disabled:opacity-50">Review plan</button><button onclick={installExperience} disabled={busy || !preview} class="rounded-lg bg-moss-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-moss-500 disabled:cursor-not-allowed disabled:opacity-40">{busy ? 'Building…' : 'Install experience'}</button></div>
 					</section>
 
-					<aside class="min-w-0 rounded-2xl border border-black/8 bg-white p-5 shadow-sm"><div class="flex items-center justify-between"><h3 class="text-sm font-semibold">Installation review</h3><span class="rounded-full bg-paper-100 px-2 py-1 text-[10px] font-semibold tracking-wide text-ink-800/55 uppercase">{preview ? 'Ready' : 'Not checked'}</span></div>{#if preview}<div class="mt-5 grid grid-cols-2 gap-3"><div class="rounded-xl bg-paper-100 p-3"><p class="text-2xl font-semibold">{preview.packageCount}</p><p class="mt-1 text-[11px] text-ink-800/50">packages</p></div><div class="rounded-xl bg-paper-100 p-3"><p class="text-2xl font-semibold">{preview.weiduVersion}</p><p class="mt-1 text-[11px] text-ink-800/50">WeiDU engine</p></div></div>{#if preview.warnings.length}<div class="mt-4 rounded-xl border border-amber-500/20 bg-amber-500/8 p-3"><p class="text-xs font-semibold text-amber-500">Allowed warnings</p><ul class="mt-2 space-y-1 text-[11px] leading-4 text-ink-800/65">{#each preview.warnings as warning}<li>• {warning}</li>{/each}</ul></div>{/if}<pre class="mt-4 max-h-[390px] overflow-auto whitespace-pre-wrap rounded-xl bg-ink-950 p-4 font-mono text-[10px] leading-4 text-white/70">{preview.plan}</pre>{:else}<div class="mt-16 text-center"><div class="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-paper-100 text-lg text-ink-800/40">✓</div><p class="mt-4 text-sm font-medium">Review before installing</p><p class="mx-auto mt-2 max-w-[230px] text-xs leading-5 text-ink-800/45">IEPM will prepare its verified installation engine, resolve exact releases, and show the full plan.</p></div>{/if}</aside>
+					<aside class="min-w-0 rounded-2xl border border-black/8 bg-white p-5 shadow-sm"><div class="flex items-center justify-between"><h3 class="text-sm font-semibold">Installation review</h3><span class="rounded-full bg-paper-100 px-2 py-1 text-[10px] font-semibold tracking-wide text-ink-800/55 uppercase">{preview ? 'Ready' : 'Not checked'}</span></div>{#if preview}<div class="mt-5 grid grid-cols-2 gap-3"><div class="rounded-xl bg-paper-100 p-3"><p class="text-2xl font-semibold">{preview.packageCount}</p><p class="mt-1 text-[11px] text-ink-800/50">packages</p></div><div class="rounded-xl bg-paper-100 p-3"><p class="text-2xl font-semibold">{preview.weiduVersion}</p><p class="mt-1 text-[11px] text-ink-800/50">WeiDU engine</p></div></div><div class="mt-4 rounded-xl border border-sky-500/20 bg-sky-500/8 p-3"><p class="text-xs font-semibold text-sky-700">Selection audit</p><p class="mt-1 text-[11px] leading-4 text-ink-800/65">{preview.selectionAudit}</p></div>{#if preview.warnings.length}<div class="mt-4 rounded-xl border border-amber-500/20 bg-amber-500/8 p-3"><p class="text-xs font-semibold text-amber-500">Allowed warnings</p><ul class="mt-2 space-y-1 text-[11px] leading-4 text-ink-800/65">{#each preview.warnings as warning}<li>• {warning}</li>{/each}</ul></div>{/if}<pre class="mt-4 max-h-[390px] overflow-auto whitespace-pre-wrap rounded-xl bg-ink-950 p-4 font-mono text-[10px] leading-4 text-white/70">{preview.plan}</pre>{:else}<div class="mt-16 text-center"><div class="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-paper-100 text-lg text-ink-800/40">✓</div><p class="mt-4 text-sm font-medium">Review before installing</p><p class="mx-auto mt-2 max-w-[230px] text-xs leading-5 text-ink-800/45">IEPM will prepare its verified installation engine, resolve exact releases, and show the full plan.</p></div>{/if}</aside>
 				</div>
 			</main>
 		</div>

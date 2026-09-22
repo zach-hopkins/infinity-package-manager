@@ -350,6 +350,20 @@ pub struct Component {
     pub id: String,
     #[serde(default)]
     pub default_selected: bool,
+    /// This stable intent remains addressable for historical manifests, but
+    /// the release's upstream installer has retired its selector.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub deprecated: Option<String>,
+    /// This stable intent is known not to be selectable from this release.
+    /// When `unsupported_games` is empty, this applies to every IEPM game
+    /// target; otherwise it applies only to those named targets.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub unavailable: Option<String>,
+    /// Game targets for which the upstream installer has been observed to
+    /// reject this component. Absence preserves the prior cross-target
+    /// meaning of `unavailable`.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub unsupported_games: Vec<String>,
     #[serde(default)]
     pub weidu: Option<WeiDUComponent>,
     #[serde(default)]
@@ -359,6 +373,11 @@ pub struct Component {
     /// on the release relationship that owns both package identities.
     #[serde(default)]
     pub requires: Vec<String>,
+    /// Stable component IDs in the same package that cannot be selected with
+    /// this component for the exact release. This is intentionally narrower
+    /// than a package relationship: unrelated package components can coexist.
+    #[serde(default)]
+    pub conflicts: Vec<String>,
     /// Selector and component-level evidence can differ from a release's
     /// overall provenance. This is particularly important for mechanically
     /// observed TP2 selectors combined with separately curated semantics.

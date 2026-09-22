@@ -20,13 +20,15 @@ only top-level component declarations count.
 ## First audit: SCS v35.21 local package tree
 
 The available local SCS tree reports TP2 `VERSION 35.21` and **146** structural
-component declarations. IEPM now maps **78** stable component IDs to that
+component declarations. IEPM now maps **85** stable component IDs to that
 installer: the initial evidence-backed batch route plus every selector from
-the supplied personal build. The newly mapped entries retain mechanically
-derived selector/prerequisite evidence only; they are not a compatibility
-badge for the whole large stack. The remaining **68** structural entries are
-explicitly visible in the review output rather than being invisible coverage
-debt.
+the supplied personal build, and the focused spell-tweak selectors. The newly
+mapped entries retain mechanically derived selector/prerequisite evidence only;
+they are not a compatibility badge for the whole large stack. The focused
+selectors each carry a narrow same-package conflict with SCS's all-spell-tweaks
+dispatcher, exactly as its TP2 declares; they do not falsely conflict with one
+another. The remaining **61** structural entries are explicitly visible in the
+review output rather than being invisible coverage debt.
 
 This confirms the correct next PA-4 task: name/classify the unmapped entries
 from SCS's author release text, attach release-specific selectors, and keep
@@ -55,7 +57,7 @@ classification backlog.
 
 | Package/release | Observed TP2 declarations | Existing stable IDs matched | Still unmapped |
 | --- | ---: | ---: | ---: |
-| SCS v35.21 | 146 | 78 | 68 |
+| SCS v35.21 | 146 | 85 | 61 |
 | Tweaks Anthology v18 source | 450 | 36 | 414 |
 | Hidden Gameplay Options v5.1 | 43 | 43 | 0 |
 | Ascension 2.1.0 | 19 | 19 | 0 |

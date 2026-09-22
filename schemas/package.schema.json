@@ -29,9 +29,12 @@
       "type": "object", "required": ["id"],
       "properties": {
         "id": { "type": "string" }, "default_selected": { "type": "boolean" },
+        "deprecated": { "type": "string" }, "unavailable": { "type": "string" },
+        "unsupported_games": { "type": "array", "items": { "enum": ["bgee", "bg2ee", "eet"] }, "uniqueItems": true },
         "weidu": { "type": "object", "required": ["tp2"], "properties": { "tp2": { "type": "string" }, "label": { "type": "string" }, "number": { "type": "integer", "minimum": 0 }, "subcomponent": { "type": "string" }, "non_recording": { "type": "boolean" } }, "additionalProperties": false },
         "provides": { "type": "array", "items": { "type": "object", "required": ["name"], "properties": { "name": { "type": "string" }, "exclusive": { "type": "boolean" } }, "additionalProperties": false } },
         "requires": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "conflicts": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
         "claims": { "type": "array", "items": { "type": "object", "required": ["claim", "provenance"], "properties": { "claim": { "type": "string" }, "provenance": { "$ref": "#/$defs/provenance" }, "evidence": { "type": "array", "items": { "type": "string", "format": "uri" } } }, "additionalProperties": false } }
       }, "additionalProperties": false
     },

@@ -38,6 +38,18 @@ pub enum ResolveError {
     InvalidReleaseVersion { package: String, version: String },
     #[error("package `{package}` requests unknown component `{component}`")]
     MissingComponent { package: String, component: String },
+    #[error("package `{package}` requests deprecated component `{component}`: {reason}")]
+    DeprecatedComponent {
+        package: String,
+        component: String,
+        reason: String,
+    },
+    #[error("package `{package}` cannot select component `{component}`: {reason}")]
+    UnavailableComponent {
+        package: String,
+        component: String,
+        reason: String,
+    },
     #[error("package `{package}` has conflicting values for installer input `{input}`")]
     ConflictingInstallerInput { package: String, input: String },
     #[error("package `{package}` requires installer input `{input}`")]
@@ -190,7 +202,8 @@ pub fn resolve(
 
     let solution = solve(&roots, BTreeMap::new(), registry, &environments, 0)?;
     validate_eet_transitions(&solution, registry, &environments)?;
-    validate_capabilities(&solution, registry)?;
+    validate_capabilities(&solution, registry, &environments)?;
+    validate_component_conflicts(&solution, registry, &environments)?;
     validate_conflicts(&solution, registry, &environments)?;
     let execution = order(&solution, registry, &environments)?;
     let mut warnings = BTreeSet::new();
@@ -210,7 +223,12 @@ pub fn resolve(
                 .language
                 .clone()
                 .or_else(|| environments[&key.environment].language.clone());
-            let selected_components = selected_components(&key.package, release, request)?;
+            let selected_components = selected_components(
+                &key.package,
+                release,
+                request,
+                environments[&key.environment].active_target(release.install.phase),
+            )?;
             let components = selected_components
                 .iter()
                 .map(|component| {
@@ -573,15 +591,20 @@ fn required_dependencies(
     environment: &GameEnvironment,
     request: &Request,
 ) -> Result<Vec<Dependency>, ResolveError> {
-    let component_requires = selected_components(package, release, request)?
-        .into_iter()
-        .flat_map(|component| component.requires.iter().cloned())
-        .map(|component| Dependency {
-            package: package.to_owned(),
-            environment: None,
-            version: None,
-            components: vec![component],
-        });
+    let component_requires = selected_components(
+        package,
+        release,
+        request,
+        environment.active_target(release.install.phase),
+    )?
+    .into_iter()
+    .flat_map(|component| component.requires.iter().cloned())
+    .map(|component| Dependency {
+        package: package.to_owned(),
+        environment: None,
+        version: None,
+        components: vec![component],
+    });
     Ok(release
         .dependencies
         .iter()
@@ -770,16 +793,37 @@ fn selected_components<'a>(
     package: &str,
     release: &'a Release,
     request: &Request,
+    game: &str,
 ) -> Result<Vec<&'a iepm_core::Component>, ResolveError> {
     for component in &request.components {
-        if !release
+        let selected = release
             .components
             .iter()
-            .any(|candidate| candidate.id == *component)
-        {
+            .find(|candidate| candidate.id == *component);
+        let Some(selected) = selected else {
             return Err(ResolveError::MissingComponent {
                 package: package.to_owned(),
                 component: component.clone(),
+            });
+        };
+        if let Some(reason) = &selected.deprecated {
+            return Err(ResolveError::DeprecatedComponent {
+                package: package.to_owned(),
+                component: component.clone(),
+                reason: reason.clone(),
+            });
+        }
+        if let Some(reason) = &selected.unavailable
+            && (selected.unsupported_games.is_empty()
+                || selected
+                    .unsupported_games
+                    .iter()
+                    .any(|target| target == game))
+        {
+            return Err(ResolveError::UnavailableComponent {
+                package: package.to_owned(),
+                component: component.clone(),
+                reason: reason.clone(),
             });
         }
     }
@@ -811,11 +855,20 @@ fn validate_installer_inputs(
     Ok(())
 }
 
-fn validate_capabilities(solution: &Solution, registry: &Registry) -> Result<(), ResolveError> {
+fn validate_capabilities(
+    solution: &Solution,
+    registry: &Registry,
+    environments: &BTreeMap<String, GameEnvironment>,
+) -> Result<(), ResolveError> {
     let mut exclusive = BTreeMap::<String, String>::new();
     for (key, index) in &solution.selected {
         let release = release(registry, key, *index);
-        for component in selected_components(&key.package, release, &solution.requests[key])? {
+        for component in selected_components(
+            &key.package,
+            release,
+            &solution.requests[key],
+            environments[&key.environment].active_target(release.install.phase),
+        )? {
             for Capability {
                 name,
                 exclusive: is_exclusive,
@@ -830,6 +883,36 @@ fn validate_capabilities(solution: &Solution, registry: &Registry) -> Result<(),
                             second: provider,
                         });
                     }
+                }
+            }
+        }
+    }
+    Ok(())
+}
+
+/// Reject one exact release's documented component-level conflicts without
+/// promoting them into a broad package conflict. This is used when sibling
+/// choices are mutually incompatible but other components still coexist.
+fn validate_component_conflicts(
+    solution: &Solution,
+    registry: &Registry,
+    environments: &BTreeMap<String, GameEnvironment>,
+) -> Result<(), ResolveError> {
+    for (key, index) in &solution.selected {
+        let release = release(registry, key, *index);
+        let selected = selected_components(
+            &key.package,
+            release,
+            &solution.requests[key],
+            environments[&key.environment].active_target(release.install.phase),
+        )?;
+        for component in &selected {
+            for conflict in &component.conflicts {
+                if selected.iter().any(|other| other.id == *conflict) {
+                    return Err(ResolveError::Conflict {
+                        first: format!("{}:{}", key.node_id(), component.id),
+                        second: format!("{}:{conflict}", key.node_id()),
+                    });
                 }
             }
         }
@@ -880,8 +963,12 @@ fn validate_conflicts(
                 continue;
             };
             let other = release(registry, &other_key, *other_index);
-            let other_components =
-                selected_components(&other_key.package, other, &solution.requests[&other_key])?;
+            let other_components = selected_components(
+                &other_key.package,
+                other,
+                &solution.requests[&other_key],
+                environments[&other_key.environment].active_target(other.install.phase),
+            )?;
             if relationship.components.is_empty()
                 || other_components
                     .iter()
@@ -1144,6 +1231,9 @@ mod tests {
         package.components.push(iepm_core::Component {
             id: "smart-mages".to_owned(),
             default_selected: false,
+            deprecated: None,
+            unavailable: None,
+            unsupported_games: vec![],
             weidu: Some(iepm_core::WeiDUComponent {
                 tp2: "mod/setup-mod.tp2".to_owned(),
                 label: Some("smart_mages".to_owned()),
@@ -1153,6 +1243,7 @@ mod tests {
             }),
             provides: vec![],
             requires: vec![],
+            conflicts: vec![],
             claims: vec![],
         });
         registry.insert("package".to_owned(), record("package", vec![package]));
@@ -1189,6 +1280,72 @@ mod tests {
                 .iter()
                 .any(|reason| reason.contains("no verified artifact"))
         );
+    }
+
+    #[test]
+    fn rejects_deprecated_and_unavailable_components_before_execution() {
+        let mut registry = Registry::new();
+        let mut package = release("1", Phase::Eet);
+        package.components.push(iepm_core::Component {
+            id: "retired-selector".to_owned(),
+            default_selected: false,
+            deprecated: Some("the upstream TP2 marks this selector DEPRECATED".to_owned()),
+            unavailable: None,
+            unsupported_games: vec![],
+            weidu: None,
+            provides: vec![],
+            requires: vec![],
+            conflicts: vec![],
+            claims: vec![],
+        });
+        package.components.push(iepm_core::Component {
+            id: "other-game-selector".to_owned(),
+            default_selected: false,
+            deprecated: None,
+            unavailable: Some(
+                "the upstream TP2 rejects this selector for supported targets".to_owned(),
+            ),
+            unsupported_games: vec!["eet".to_owned()],
+            weidu: None,
+            provides: vec![],
+            requires: vec![],
+            conflicts: vec![],
+            claims: vec![],
+        });
+        registry.insert("package".to_owned(), record("package", vec![package]));
+
+        assert!(matches!(
+            resolve(
+                &manifest(vec![RequestedMod::Selection {
+                    package: "package".to_owned(),
+                    version: None,
+                    components: vec!["retired-selector".to_owned()],
+                    environment: None,
+                    language: None,
+                    installer_inputs: BTreeMap::new(),
+                }]),
+                &registry,
+                "test",
+                toolchain(),
+            ),
+            Err(ResolveError::DeprecatedComponent { .. })
+        ));
+        assert!(matches!(
+            resolve(
+                &manifest(vec![RequestedMod::Selection {
+                    package: "package".to_owned(),
+                    version: None,
+                    components: vec!["other-game-selector".to_owned()],
+                    environment: None,
+                    language: None,
+                    installer_inputs: BTreeMap::new(),
+                }]),
+                &registry,
+                "test",
+                toolchain(),
+            ),
+            Err(ResolveError::UnavailableComponent { .. })
+        ));
     }
 
     #[test]
@@ -1285,6 +1442,9 @@ mod tests {
         package.components.push(iepm_core::Component {
             id: "main".to_owned(),
             default_selected: true,
+            deprecated: None,
+            unavailable: None,
+            unsupported_games: vec![],
             weidu: Some(iepm_core::WeiDUComponent {
                 tp2: "mod/setup-package.tp2".to_owned(),
                 label: Some("main".to_owned()),
@@ -1294,6 +1454,7 @@ mod tests {
             }),
             provides: vec![],
             requires: vec![],
+            conflicts: vec![],
             claims: vec![],
         });
         registry.insert("package".to_owned(), record("package", vec![package]));
@@ -1345,6 +1506,9 @@ mod tests {
         package.components.push(iepm_core::Component {
             id: "main".to_owned(),
             default_selected: true,
+            deprecated: None,
+            unavailable: None,
+            unsupported_games: vec![],
             weidu: Some(iepm_core::WeiDUComponent {
                 tp2: "mod/setup-package.tp2".to_owned(),
                 label: None,
@@ -1354,6 +1518,7 @@ mod tests {
             }),
             provides: vec![],
             requires: vec![],
+            conflicts: vec![],
             claims: vec![],
         });
         let mut sfx_package = package.clone();
@@ -1419,6 +1584,9 @@ mod tests {
         package.components.push(iepm_core::Component {
             id: "main".to_owned(),
             default_selected: true,
+            deprecated: None,
+            unavailable: None,
+            unsupported_games: vec![],
             weidu: Some(iepm_core::WeiDUComponent {
                 tp2: "mod/setup-package.tp2".to_owned(),
                 label: None,
@@ -1428,6 +1596,7 @@ mod tests {
             }),
             provides: vec![],
             requires: vec![],
+            conflicts: vec![],
             claims: vec![],
         });
         registry.insert("package".to_owned(), record("package", vec![package]));
@@ -1471,6 +1640,9 @@ mod tests {
         package.components.push(iepm_core::Component {
             id: "main".to_owned(),
             default_selected: true,
+            deprecated: None,
+            unavailable: None,
+            unsupported_games: vec![],
             weidu: Some(iepm_core::WeiDUComponent {
                 tp2: "mod/setup-package.tp2".to_owned(),
                 label: None,
@@ -1480,6 +1652,7 @@ mod tests {
             }),
             provides: vec![],
             requires: vec![],
+            conflicts: vec![],
             claims: vec![],
         });
         registry.insert("package".to_owned(), record("package", vec![package]));
@@ -1644,16 +1817,53 @@ mod tests {
         ));
     }
 
+    #[test]
+    fn rejects_documented_same_package_component_conflicts() {
+        let mut registry = Registry::new();
+        let mut package = release("1", Phase::Eet);
+        let mut batch = component("spell-tweaks-batch", "batch");
+        batch.default_selected = false;
+        let mut category = component("core-scs-spell-tweaks", "category");
+        category.default_selected = false;
+        category.conflicts = vec!["spell-tweaks-batch".to_owned()];
+        package.components = vec![batch, category];
+        registry.insert("stratagems".to_owned(), record("stratagems", vec![package]));
+
+        assert!(matches!(
+            resolve(
+                &manifest(vec![RequestedMod::Selection {
+                    package: "stratagems".to_owned(),
+                    version: None,
+                    components: vec![
+                        "spell-tweaks-batch".to_owned(),
+                        "core-scs-spell-tweaks".to_owned(),
+                    ],
+                    environment: Some("target".to_owned()),
+                    language: None,
+                    installer_inputs: BTreeMap::new(),
+                }]),
+                &registry,
+                "test",
+                toolchain(),
+            ),
+            Err(ResolveError::Conflict { .. })
+        ));
+    }
+
     fn component(id: &str, capability: &str) -> iepm_core::Component {
         iepm_core::Component {
             id: id.to_owned(),
             default_selected: true,
+            deprecated: None,
+            unavailable: None,
+            unsupported_games: vec![],
             weidu: None,
             provides: vec![Capability {
                 name: capability.to_owned(),
                 exclusive: true,
             }],
             requires: vec![],
+            conflicts: vec![],
             claims: vec![],
         }
     }

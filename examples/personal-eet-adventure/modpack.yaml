@@ -100,13 +100,11 @@ mods:
       - batch-mode
       - spell-tweaks-batch
       - reintroduce-extra-healing-potions
-      - bg2-elemental-arrows
       - dispelling-arrows-max-five-per-store
-      - add-bg2-scrolls-to-bg1
       - wider-random-scroll-selection
       - inquisitor-dispel-one-point-five-times-level
-      - improved-healing-random-amount
-      - cure-cause-wounds-three-e-maximum-damage
+      # Omitted after isolated v35.21 EET fixtures: 3017, 3501, and 3551 are
+      # rejected by SCS; 3550 is deprecated upstream.
       - revised-inn-rooms
       - hlas-as-innate-abilities
       - sequencers-contingencies-as-innate-abilities

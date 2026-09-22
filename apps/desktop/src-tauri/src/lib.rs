@@ -49,6 +49,7 @@ struct StartupState {
 struct BuildPreview {
     plan: String,
     verification: String,
+    selection_audit: String,
     warnings: Vec<String>,
     package_count: usize,
     environments: Vec<String>,
@@ -129,6 +130,7 @@ async fn preview_build(
         Ok(BuildPreview {
             plan: prepared.plan,
             verification: prepared.verification,
+            selection_audit: "IEPM did not remove, substitute, or rewrite any selections in the chosen mod-list YAML. If a selected component is unavailable for its active game target, planning stops before any game workspace is created.".to_owned(),
             warnings,
             package_count: prepared.lockfile.packages.len(),
             environments: prepared.lockfile.environments.keys().cloned().collect(),

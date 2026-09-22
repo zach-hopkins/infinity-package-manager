@@ -67,6 +67,12 @@ fixture for dispatcher 100 plus components 2000, 5900, 6030, and 6040. The
 dispatcher is explicitly non-recording; its selected nested WeiDU components
 remain the required receipt evidence. Other SCS components and broad EET
 interactions remain unverified.
+Two isolated fresh-copy EET fixture runs additionally established a narrow
+negative result: selectors 3501 (BG2 spell scrolls in BG1 stores) and 3551
+(maximum 3E Cure/Cause Wounds) both exit successfully but are skipped by SCS
+v35.21 as failing requirements, leaving neither a WeiDU receipt nor game
+resource changes. The registry blocks those selectors only for EET; it does
+not infer their status on other targets.
 One exact Forge-derived 14-action EET selection subsequently completed and
 sealed, including SCS 6510 (Improved Fiends and Celestials), 6840, and 6850
 (Ascension demons) after the registry resolved their same-package component
@@ -234,11 +240,14 @@ Relationships can be component-scoped and game-conditioned. A hard requirement
 enters the dependency graph; ordering is not a fake dependency; optional and
 recommendation data do not become implicit requirements.
 
-A component may also declare package-local `requires` by stable IEPM component
-ID. Those prerequisites extend the same package's single WeiDU action; they do
-not create a self-edge in the package graph. Cross-package requirements remain
-release relationships, where package identity and environment binding are
-explicit.
+A component may also declare package-local `requires` or `conflicts` by stable
+IEPM component ID. Prerequisites extend the same package's single WeiDU action;
+documented sibling conflicts reject only that incompatible selection pair, not
+the whole package. Neither creates a self-edge in the package graph. The first
+concrete conflict is SCS's focused spell-tweak selectors versus its all-spell-
+tweaks dispatcher; focused selectors may still coexist. Cross-package
+requirements remain release relationships, where package identity and
+environment binding are explicit.
 
 Capabilities express narrow semantic overlap, such as mutually exclusive mage
 AI components. They are registry-curated and must not become a giant ontology

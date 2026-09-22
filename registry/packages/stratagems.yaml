@@ -78,18 +78,53 @@ releases:
         claims:
           - claim: The exact v35.21 TP2 declares selector 6850 and requires SCS AI initialization (5900) plus Improved Fiends and Celestials (6510).
             provenance: derived
+      # SCS v35.21's exact TP2 mechanically forbids its all-spell-tweaks
+      # selector 2000 whenever one of these focused selectors is chosen. The
+      # focused selectors remain mutually compatible, so this is deliberately
+      # modeled as narrow sibling conflicts rather than a broad capability.
+      - id: core-scs-spell-tweaks
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 2010 }
+        conflicts: [spell-tweaks-batch]
+      - id: restoration-spell-changes
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 2030 }
+        conflicts: [spell-tweaks-batch]
+      - id: shapeshift-spell-changes
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 2040 }
+        conflicts: [spell-tweaks-batch]
+      - id: iwd-inspired-bg-spell-changes
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 2050 }
+        conflicts: [spell-tweaks-batch]
+      - id: rebalance-powerful-spells
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 2060 }
+        conflicts: [spell-tweaks-batch]
+      - id: spell-school-changes
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 2070 }
+        conflicts: [spell-tweaks-batch]
+      - id: boost-spell-power
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 2080 }
+        conflicts: [spell-tweaks-batch]
       # These selectors are the user's recorded SCS v35 configuration. Their
       # numeric identity and same-package prerequisites are mechanically read
       # from v35.21's TP2; the readable names are durable IEPM intent IDs, not
       # a claim that this large combined configuration is compatibility-verified.
       - { id: reintroduce-extra-healing-potions, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3015 } }
-      - { id: bg2-elemental-arrows, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3017 } }
+      - id: bg2-elemental-arrows
+        unavailable: "SCS v35.21's TP2 rejects selector 3017 on EET; it is only guarded for legacy Tutu/BGT-style games."
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3017 }
       - { id: dispelling-arrows-max-five-per-store, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3041 } }
-      - { id: add-bg2-scrolls-to-bg1, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3501 } }
+      - id: add-bg2-scrolls-to-bg1
+        unavailable: "SCS v35.21 skipped selector 3501 as failing requirements in an isolated EET fixture; it wrote no WeiDU receipt or game-resource changes."
+        unsupported_games: [eet]
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3501 }
       - { id: wider-random-scroll-selection, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3505 } }
       - { id: inquisitor-dispel-one-point-five-times-level, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3540 } }
-      - { id: improved-healing-random-amount, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3550 } }
-      - { id: cure-cause-wounds-three-e-maximum-damage, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3551 } }
+      - id: improved-healing-random-amount
+        deprecated: "SCS v35.21 marks selector 3550 DEPRECATED; invoking it makes WeiDU exit 6 in batch mode."
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3550 }
+      - id: cure-cause-wounds-three-e-maximum-damage
+        unavailable: "SCS v35.21 skipped selector 3551 as failing requirements in an isolated EET fixture; it wrote no WeiDU receipt or game-resource changes."
+        unsupported_games: [eet]
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3551 }
       - { id: revised-inn-rooms, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4140 } }
       - { id: hlas-as-innate-abilities, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4240 } }
       - { id: sequencers-contingencies-as-innate-abilities, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4250 } }
