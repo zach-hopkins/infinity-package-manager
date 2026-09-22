@@ -121,8 +121,12 @@ releases:
       - { id: disable-non-hostile-rest-spawns, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_rest_spawns_alter_nonhostile_disable, number: 3191 } }
       - { id: stores-buy-all-items, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_stores_buy_all_items, number: 3205 } }
       - { id: extra-ankheg-armor, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_taerom_makes_multiple_ankheg_armor, number: 3230 } }
-      - { id: ammo-recovery-75, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_recover_ammo_75, number: 3262 } }
-      - { id: throwing-recovery-75, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_recover_throwing_weapons_75, number: 3272 } }
+      - id: ammo-recovery-75
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_recover_ammo_75, number: 3262 }
+        provides: [{ name: tweaks-ammo-recovery-scope, exclusive: true }]
+      - id: throwing-recovery-75
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_recover_throwing_weapons_75, number: 3272 }
+        provides: [{ name: tweaks-throwing-recovery-scope, exclusive: true }]
       - { id: death-cam, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_death_cam, number: 3300 } }
       - { id: reduced-party-chunking, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_reduced_party_chunking, number: 3330 } }
       - { id: movement-casting-speed-100, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_noncombat_speed_casting_increase_100, number: 3344 } }
@@ -656,3 +660,94 @@ releases:
         weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_faster_ch1_cutscenes_nonsilly, number: 3141 }
         unsupported_games: [bgee]
         provides: [{ name: tweaks-opening-cutscene-scope, exclusive: true }]
+      - id: disable-malchor-harpell
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_disable_malchor, number: 3160 }
+        unsupported_games: [bgee]
+      - id: no-party-drow-avatars-in-underdark
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_no_drow_avatars_in_underdark, number: 3170 }
+        unsupported_games: [bgee]
+      - id: disable-romances
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_disable_romances, number: 3175 }
+        unsupported_games: [bgee]
+      - id: romance-cheats
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_romance_cheats, number: 3183 }
+        unsupported_games: [bgee]
+      - { id: rest-anywhere, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_rest_anywhere, number: 3190 } }
+      - id: disable-hostile-rest-spawns
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_rest_spawns_alter_hostile_disable, number: 3194 }
+        provides: [{ name: tweaks-hostile-rest-spawns-scope, exclusive: true }]
+      - id: hostile-rest-spawns-half-frequency
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_rest_spawns_alter_hostile_50, number: 3195 }
+        provides: [{ name: tweaks-hostile-rest-spawns-scope, exclusive: true }]
+      - id: hostile-rest-spawns-one-and-half-frequency
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_rest_spawns_alter_hostile_150, number: 3196 }
+        provides: [{ name: tweaks-hostile-rest-spawns-scope, exclusive: true }]
+      - id: hostile-rest-spawns-double-frequency
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_rest_spawns_alter_hostile_200, number: 3197 }
+        provides: [{ name: tweaks-hostile-rest-spawns-scope, exclusive: true }]
+      - id: hostile-rest-spawns-quadruple-frequency
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_rest_spawns_alter_hostile_400, number: 3198 }
+        provides: [{ name: tweaks-hostile-rest-spawns-scope, exclusive: true }]
+      - { id: sellable-items, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_sellable_items, number: 3200 } }
+      - { id: minimum-character-stats, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_minimum_stats, number: 3210 } }
+      - id: ammo-recovery-25
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_recover_ammo_25, number: 3260 }
+        provides: [{ name: tweaks-ammo-recovery-scope, exclusive: true }]
+      - id: ammo-recovery-50
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_recover_ammo_50, number: 3261 }
+        provides: [{ name: tweaks-ammo-recovery-scope, exclusive: true }]
+      - id: ammo-recovery-100
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_recover_ammo_100, number: 3263 }
+        provides: [{ name: tweaks-ammo-recovery-scope, exclusive: true }]
+      - id: ammo-recovery-enemies-only-25
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_recover_ammo_25_enemy_only, number: 3264 }
+        provides: [{ name: tweaks-ammo-recovery-scope, exclusive: true }]
+      - id: ammo-recovery-enemies-only-50
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_recover_ammo_50_enemy_only, number: 3265 }
+        provides: [{ name: tweaks-ammo-recovery-scope, exclusive: true }]
+      - id: ammo-recovery-enemies-only-75
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_recover_ammo_75_enemy_only, number: 3266 }
+        provides: [{ name: tweaks-ammo-recovery-scope, exclusive: true }]
+      - id: ammo-recovery-enemies-only-100
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_recover_ammo_100_enemy_only, number: 3267 }
+        provides: [{ name: tweaks-ammo-recovery-scope, exclusive: true }]
+      - id: throwing-recovery-25
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_recover_throwing_weapons_25, number: 3270 }
+        provides: [{ name: tweaks-throwing-recovery-scope, exclusive: true }]
+      - id: throwing-recovery-50
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_recover_throwing_weapons_50, number: 3271 }
+        provides: [{ name: tweaks-throwing-recovery-scope, exclusive: true }]
+      - id: throwing-recovery-100
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_recover_throwing_weapons_100, number: 3273 }
+        provides: [{ name: tweaks-throwing-recovery-scope, exclusive: true }]
+      - id: throwing-recovery-enemies-only-25
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_recover_throwing_weapons_25_enemy_only, number: 3274 }
+        provides: [{ name: tweaks-throwing-recovery-scope, exclusive: true }]
+      - id: throwing-recovery-enemies-only-50
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_recover_throwing_weapons_50_enemy_only, number: 3275 }
+        provides: [{ name: tweaks-throwing-recovery-scope, exclusive: true }]
+      - id: throwing-recovery-enemies-only-75
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_recover_throwing_weapons_75_enemy_only, number: 3276 }
+        provides: [{ name: tweaks-throwing-recovery-scope, exclusive: true }]
+      - id: throwing-recovery-enemies-only-100
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_recover_throwing_weapons_100_enemy_only, number: 3277 }
+        provides: [{ name: tweaks-throwing-recovery-scope, exclusive: true }]
+      - { id: four-weapon-slots-for-all, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_universal_four_weapon_slots, number: 3280 } }
+      - id: auto-save-name-protagonist-hyphen
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_personalize_savename_opt1, number: 3290 }
+        provides: [{ name: tweaks-auto-save-name-scope, exclusive: true }]
+      - id: auto-save-name-protagonist-space
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_personalize_savename_opt2, number: 3291 }
+        provides: [{ name: tweaks-auto-save-name-scope, exclusive: true }]
+      - id: auto-save-name-parenthesized-protagonist-hyphen
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_personalize_savename_opt3, number: 3292 }
+        provides: [{ name: tweaks-auto-save-name-scope, exclusive: true }]
+      - id: auto-save-name-parenthesized-protagonist-space
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_personalize_savename_opt4, number: 3293 }
+        provides: [{ name: tweaks-auto-save-name-scope, exclusive: true }]
+      - id: auto-save-name-bracketed-protagonist-hyphen
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_personalize_savename_opt5, number: 3294 }
+        provides: [{ name: tweaks-auto-save-name-scope, exclusive: true }]
+      - id: auto-save-name-bracketed-protagonist-space
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_personalize_savename_opt6, number: 3295 }
+        provides: [{ name: tweaks-auto-save-name-scope, exclusive: true }]
