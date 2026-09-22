@@ -44,12 +44,16 @@ release compatibility and execution remain unverified until they have stronger
 evidence. Fresh full-copy BG2EE 2.6.6 executions now cover a four-mod popular
 starter, an Ascension/Call/Throne content fixture, EEex bootstrap/main/LuaJIT,
 and separate EEex-dependent Bubb's Spell Menu and Infinity UI++ fixtures.
-Their exact selected components carry verified claims; untested components and
-the broad-order EET interactions remain unverified. A Forge-derived broad-order fixture resolves as intentionally
-`analysis-only`: the resolver exposes missing launcher, selector,
-materialization, and unsupported-EXE evidence rather than silently substituting
-package identities or mutating a workspace. The next work is broader registry
-and A5 route coverage, while keeping scope deliberately incremental. A6 now reads a selected local TP2 as inert
+Their exact selected components carry bounded execution claims; untested
+components and broader interactions remain explicit. The Forge-derived
+broad-order fixture initially exposed missing launcher, selector,
+materialization, and unsupported-EXE blockers as `analysis-only`. After those
+exact routes were supplied, one 14-action EET selection completed and sealed
+in a fresh managed workspace. Under the public status policy it remains
+Untested until component-level launch evidence is complete, and the exact
+configuration cannot become Verified until main-menu and gameplay smokes are
+recorded. The next work is those smokes plus broader registry/component
+coverage, while keeping scope deliberately incremental. A6 now reads a selected local TP2 as inert
 text and reviews its `VERSION`, language declaration order, and
 `BEGIN`/`DESIGNATED`/`LABEL` selectors against one curated release. It emits
 review JSON but never executes TP2 code, discovers behavior, or rewrites YAML.
@@ -168,6 +172,20 @@ do not attach provenance machinery to trivial display-only fields.
 Unknown compatibility means **unverified**, not incompatible. Safe structural
 facts may be re-derived per release. Do not silently inherit behavioral
 compatibility, ordering, artifact choice, prompt answers, or verified status.
+
+Player-facing support status is a deterministic projection, not a curator's
+free-form judgment. The fixed vocabulary is `Verified`, `Supported`,
+`Untested`, and `Incompatible`; its quantitative gates and maintainer workflow
+are normative in `docs/verification-policy.md`, represented portably by
+`schemas/verification-evidence.schema.json`, and evaluated by `iepm-core`.
+`Verified` is reserved for one exact locked configuration with a complete
+identity, successful clean disposable receipt, sealed output, main-menu smoke,
+and new-game or known-save smoke. `Supported` means every selected part and
+known rule is supported but the exact combination lacks one or more Verified
+run gates. Missing evidence is `Untested`. `Incompatible` requires concrete
+mechanical, exclusive-capability, applicable author, or repeated deterministic
+failure evidence. These labels cover install/startup confidence, not complete
+gameplay correctness.
 
 ### Relationships and capabilities
 

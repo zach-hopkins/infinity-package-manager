@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://iepm.dev/schemas/verification-evidence.schema.json",
+  "title": "IEPM verification evidence record",
+  "type": "object",
+  "required": ["schema", "scope", "subject", "identity"],
+  "properties": {
+    "schema": { "const": 1 },
+    "scope": { "enum": ["component", "release", "relationship", "configuration"] },
+    "subject": { "type": "string", "minLength": 1 },
+    "identity": { "$ref": "#/$defs/identity" },
+    "checks": { "$ref": "#/$defs/checks" },
+    "incompatibility": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/incompatibility" }
+    },
+    "evidence": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "fingerprint": {
+      "type": "object",
+      "required": ["profile", "value"],
+      "properties": {
+        "profile": { "type": "string", "minLength": 1 },
+        "value": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "environment": {
+      "type": "object",
+      "required": ["target", "fingerprint"],
+      "properties": {
+        "target": { "type": "string", "minLength": 1 },
+        "fingerprint": { "$ref": "#/$defs/fingerprint" }
+      },
+      "additionalProperties": false
+    },
+    "selection": {
+      "type": "object",
+      "required": ["package", "release_id", "environment", "artifact_sha256"],
+      "properties": {
+        "package": { "type": "string", "minLength": 1 },
+        "release_id": { "type": "string", "minLength": 1 },
+        "environment": { "type": "string", "minLength": 1 },
+        "artifact_sha256": { "$ref": "#/$defs/sha256" },
+        "components": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "identity": {
+      "type": "object",
+      "required": ["registry_revision", "platform", "weidu_version", "environments", "packages"],
+      "properties": {
+        "registry_revision": { "type": "string", "minLength": 1 },
+        "platform": { "type": "string", "minLength": 1 },
+        "weidu_version": { "type": "string", "minLength": 1 },
+        "lock_sha256": { "$ref": "#/$defs/sha256" },
+        "environments": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": { "$ref": "#/$defs/environment" }
+        },
+        "packages": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/selection" }
+        },
+        "execution_order": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        }
+      },
+      "additionalProperties": false
+    },
+    "checks": {
+      "type": "object",
+      "properties": {
+        "artifact_verified": { "type": "boolean" },
+        "selector_known": { "type": "boolean" },
+        "requirements_modeled": { "type": "boolean" },
+        "component_catalog_complete": { "type": "boolean" },
+        "all_components_classified": { "type": "boolean" },
+        "core_components_supported": { "type": "boolean" },
+        "relationship_evidence": { "enum": ["none", "mechanical", "author-declared", "automated-fixture"] },
+        "selected_components_supported": { "type": "boolean" },
+        "relationships_satisfied": { "type": "boolean" },
+        "no_opaque_selections": { "type": "boolean" },
+        "clean_disposable_install": { "type": "boolean" },
+        "all_actions_completed": { "type": "boolean" },
+        "requested_components_recorded": { "type": "boolean" },
+        "no_components_skipped": { "type": "boolean" },
+        "warnings_classified": { "type": "boolean" },
+        "sealed": { "type": "boolean" },
+        "eet_end_required": { "type": "boolean" },
+        "eet_end_completed": { "type": "boolean" },
+        "main_menu_smoke": { "type": "boolean" },
+        "gameplay_smoke": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "incompatibility": {
+      "type": "object",
+      "required": ["kind", "summary"],
+      "properties": {
+        "kind": {
+          "enum": ["mechanical-impossibility", "exclusive-capability", "author-declared", "deterministic-failure"]
+        },
+        "summary": { "type": "string", "minLength": 1 },
+        "deterministic_failures": { "type": "integer", "minimum": 0 },
+        "references": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

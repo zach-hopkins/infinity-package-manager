@@ -4,7 +4,7 @@ This note records the second real A5 execution route. It is scoped to one
 component in a fresh disposable Steam BG2EE 2.6.6 copy; it is not a general
 compatibility claim or an installation guide.
 
-## Verified route
+## Execution-proven route
 
 - The official Windows v5.1 release asset is
   `win-A7-HiddenGameplayOptions-v5.1.zip` from the project's GitHub release.

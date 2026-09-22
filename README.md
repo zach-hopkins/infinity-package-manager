@@ -28,6 +28,11 @@ contributors and coding agents: schema evolution must be evidence-led, EET
 remains multi-environment, lineage never silently substitutes a fork, and only
 an explicitly executable lockfile may reach A5 mutation.
 
+IEPM's measurable player-facing support vocabulary is defined by the
+[verification status policy](docs/verification-policy.md). `Verified`,
+`Supported`, `Untested`, and `Incompatible` are computed from portable evidence
+records rather than assigned by intuition.
+
 ## Current status
 
 The repository contains the Product A foundation and first CLI workflow:
@@ -163,6 +168,12 @@ To inspect a candidate workspace's fingerprint without mutating it:
 cargo run -p iepm -- fingerprint --workspace C:\\testing\\bgee-source --locale en_US
 ```
 
+To evaluate a portable evidence record against the fixed public status gates:
+
+```text
+cargo run -p iepm -- evidence-status --record evidence.json
+```
+
 The CLI workflow, including `search`, preview-first `add`, non-mutating
 `verify`, one-command `build`, and full-copy `snapshot`/`workspace`, `install`,
 and `seal`, is described
@@ -173,11 +184,12 @@ core-layout fingerprint.
 The managed lifecycle has completed a fresh-download, full-copy Hidden Gameplay
 Options v5.1 `install-all` execution and sealed-build evidence run; see [the
 bundled-launcher evidence](docs/a5-hidden-gameplay-options-evidence.md). A
-Forge-derived larger EET order also resolves as intentionally `analysis-only`:
-its exact registry coverage and causal execution blockers are documented in
-[the Forge coverage evidence](docs/forge-coverage-evidence.md). That boundary
-is deliberate—IEPM does not silently replace a requested package or run a
-partially described order.
+Forge-derived larger EET order has also completed all 14 planned actions in a
+fresh managed workspace and was sealed; its exact registry coverage, earlier
+blockers, and bounded result are documented in [the Forge coverage
+evidence](docs/forge-coverage-evidence.md). That install receipt does not become
+a `Verified` public configuration claim until the policy's launch-smoke gates
+are also recorded.
 
 The growing EE bootstrap registry is an evidence overlay rather than a central
 allow-list: exact package/artifact and mechanically derived TP2 facts are kept
@@ -187,8 +199,8 @@ local extracted packages or ZIP-family archives without executing them. See
 ingestion guide](docs/a6-tp2-ingestion.md).
 
 For a clean-copy personal trial of the currently tested starter stacks, see
-[personal-use.md](docs/personal-use.md). The full Forge fixture remains
-planning-only until its release-specific executable routes are proven.
+[personal-use.md](docs/personal-use.md). The Forge fixture is an executable
+reference stack; its public status still follows the measurable evidence gates.
 
 To prepare curator-review evidence from a known local TP2 without running it:
 

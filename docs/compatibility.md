@@ -6,6 +6,8 @@ the author” or “verified by this fixture.”
 
 Claims without evidence are not failures, but must be surfaced as unverified.
 The resolver should preserve that distinction rather than projecting certainty.
+The normative, machine-enforced thresholds for the four player-facing statuses
+are defined in the [verification status policy](verification-policy.md).
 
 ## Verification scope: prove claims, not universes
 

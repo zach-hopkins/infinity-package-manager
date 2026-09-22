@@ -65,4 +65,4 @@ Safe structural data may be regenerated. Compatibility, ordering, prompt,
 materialization, and verification claims must be reviewed anew or explicitly
 kept unverified. This is the path by which IEPM-maintained candidates can be
 adopted upstream without making modder participation a prerequisite for a
-release to become fully IEPM-verified.
+release to become `Supported`.

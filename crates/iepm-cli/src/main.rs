@@ -1,6 +1,6 @@
 use anyhow::{Context, Result};
 use clap::{Parser, Subcommand};
-use iepm_core::{ExecutionReadiness, Manifest, Registry, Toolchain};
+use iepm_core::{ExecutionReadiness, Manifest, Registry, Toolchain, VerificationRecord};
 use std::collections::BTreeMap;
 use std::path::PathBuf;
 
@@ -194,6 +194,14 @@ enum Command {
             help = "Registry-relative TP2 path; required only when the release has multiple installers"
         )]
         installer_tp2: Option<String>,
+    },
+    /// Assess one portable verification record against IEPM's fixed public
+    /// status gates. This reads evidence only and never touches a game tree.
+    EvidenceStatus {
+        #[arg(long)]
+        record: PathBuf,
+        #[arg(long, help = "Emit the complete machine-readable assessment")]
+        json: bool,
     },
     /// Materialize and execute an executable lockfile in explicitly bound,
     /// IEPM-managed disposable workspaces. This never accepts machine paths in a lockfile.
@@ -483,6 +491,32 @@ fn main() -> Result<()> {
             )?;
             println!("{}", serde_json::to_string_pretty(&review)?);
         }
+        Command::EvidenceStatus { record, json } => {
+            let source = std::fs::read_to_string(&record)
+                .with_context(|| format!("could not read {}", record.display()))?;
+            let record: VerificationRecord = serde_json::from_str(&source)
+                .with_context(|| format!("could not parse {}", record.display()))?;
+            let assessment = record.assess();
+            if json {
+                println!("{}", serde_json::to_string_pretty(&assessment)?);
+            } else {
+                println!("{}: {}", record.subject, assessment.status.display_name());
+                for reason in &assessment.incompatibility {
+                    println!("- incompatible: {reason}");
+                }
+                if !assessment.missing.is_empty() {
+                    let label = if assessment.status == iepm_core::PublicSupportStatus::Supported {
+                        "Needed for Verified"
+                    } else {
+                        "Missing support evidence"
+                    };
+                    println!("{label}:");
+                    for item in &assessment.missing {
+                        println!("- {item}");
+                    }
+                }
+            }
+        }
         Command::Execute {
             lockfile,
             cache,
@@ -594,4 +628,28 @@ fn render_search(registry: &Registry, query: Option<&str>, game: Option<&str>) -
         lines.push("No curated package releases matched.".to_owned());
     }
     format!("{}\n", lines.join("\n"))
+}
+
+#[cfg(test)]
+mod verification_cli_tests {
+    use super::*;
+
+    #[test]
+    fn checked_in_json_fixture_reaches_supported_boundary() {
+        let source =
+            include_str!("../../../tests/fixtures/verification/supported-configuration.json");
+        let record: VerificationRecord =
+            serde_json::from_str(source).expect("fixture should follow the evidence contract");
+
+        let assessment = record.assess();
+        assert_eq!(assessment.status, iepm_core::PublicSupportStatus::Supported);
+        assert!(
+            assessment
+                .missing
+                .contains(&"clean disposable install completed".to_owned())
+        );
+
+        let misspelled = source.replace("artifact_verified", "artifact_verifieed");
+        assert!(serde_json::from_str::<VerificationRecord>(&misspelled).is_err());
+    }
 }

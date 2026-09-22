@@ -19,8 +19,10 @@ Component selectors can carry claim-level provenance too. This lets a record
 say that a numeric/LABEL pair was mechanically observed while a capability,
 ordering relationship, or compatibility claim is separately author-declared or
 community-curated. Upstream integration is valuable maintenance information,
-but it is not required for a release to become IEPM-verified through exact
-artifacts and repeatable test evidence.
+but it is not required for a release to gain strong IEPM evidence through exact
+artifacts and repeatable tests. In the public status vocabulary a release may
+become `Supported` without upstream integration; `Verified` is reserved for an
+exact configuration receipt.
 
 Manifests contain intent. Lockfiles contain the resolver's exact choice:
 
