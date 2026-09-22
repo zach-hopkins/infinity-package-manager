@@ -333,7 +333,13 @@ pub fn inspect_tp2(source: &str) -> Tp2Observation {
             }
             continue;
         }
-        if starts_keyword(line, "BEGIN") {
+        // WeiDU uses indented `BEGIN` blocks for control flow inside a
+        // component. Only an unindented top-level BEGIN declares an install
+        // component. Treating every trimmed BEGIN as a component makes large
+        // TP2 inventories materially misleading.
+        if !raw_line.chars().next().is_some_and(char::is_whitespace)
+            && starts_keyword(line, "BEGIN")
+        {
             if let Some(component) = current.take() {
                 observation.components.push(component);
             }
@@ -992,6 +998,28 @@ DESIGNATED 20
                 .map(|component| component.number)
                 .collect::<Vec<_>>(),
             vec![Some(0), Some(1), Some(20)]
+        );
+    }
+
+    #[test]
+    fn inspection_ignores_indented_control_flow_begin_blocks() {
+        let observation = inspect_tp2(
+            r#"
+BEGIN @100
+  ACTION_IF TRUE BEGIN
+    PRINT ~nested action~
+  END
+BEGIN @200
+"#,
+        );
+
+        assert_eq!(
+            observation
+                .components
+                .iter()
+                .map(|component| component.begin.as_deref())
+                .collect::<Vec<_>>(),
+            vec![Some("@100"), Some("@200")]
         );
     }
 

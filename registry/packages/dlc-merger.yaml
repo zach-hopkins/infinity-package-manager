@@ -39,3 +39,13 @@ releases:
           tp2: DlcMerger/DlcMerger.tp2
           label: A7-DLCMERGER-MERGE_ALL_DLCS
           number: 3
+      - id: merge-custom-dlc
+        weidu:
+          tp2: DlcMerger/DlcMerger.tp2
+          label: A7-DLCMERGER-MERGE_CUSTOM_DLC
+          number: 2
+      - id: fix-language-selection
+        weidu:
+          tp2: DlcMerger/DlcMerger.tp2
+          label: A7-DLCMERGER-FIX_LANGUAGE_SELECTION
+          number: 10

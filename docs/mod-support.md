@@ -28,7 +28,7 @@ labels. This ledger must use those words only with those meanings.
 
 | Mod | Component coverage | Can IEPM run it? | Compatibility standing | Notes |
 | --- | --- | --- | --- | --- |
-| DLC Merger | Recorded release components | Yes, for the EET fixture | **Untested** — clean install evidence exists; policy launch smoke is not yet recorded | [registry](../registry/packages/dlc-merger.yaml) |
+| DLC Merger 2.1 | Complete 4-component structural catalog | Yes, for the EET fixture | **Untested** — clean install evidence exists; the two newly mapped optional paths have no execution evidence yet | [registry](../registry/packages/dlc-merger.yaml) |
 | EE Fixpack | Recorded release components | Yes, for the EET fixture | **Untested** — source/target install evidence exists; policy launch smoke is not yet recorded | [registry](../registry/packages/ee-fixpack.yaml) |
 | EET / EET_End | Recorded release components | Yes, for the narrow EET route | **Untested** — the controlled route installed; policy launch and gameplay smokes remain | [evidence](a5-eet-evidence.md) |
 | Hidden Gameplay Options | Recorded v5.1 components | Yes | **Untested** — components 0 and 10 have separate install receipts; policy launch smoke remains | [registry](../registry/packages/hidden-gameplay-options.yaml) |

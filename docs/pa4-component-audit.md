@@ -14,7 +14,8 @@ release-drift findings:
 - every remaining raw `BEGIN`/`DESIGNATED`/`LABEL` observation.
 
 It reads TP2 text only. It does not execute WeiDU code, modify the registry, or
-infer compatibility.
+infer compatibility. Indented WeiDU control-flow `BEGIN` blocks are excluded:
+only top-level component declarations count.
 
 ## First audit: SCS v35.21 local package tree
 
@@ -55,6 +56,7 @@ classification backlog.
 | SCS v35.21 | 146 | 8 | 138 |
 | Tweaks Anthology v18 source | 450 | 36 | 414 |
 | Ascension 2.1.0 | 19 | 19 | 0 |
+| DLC Merger 2.1 | 4 | 4 | 0 |
 
 The higher Tweaks number reflects the source TP2's full structural surface,
 including choices/subcomponents; it does not mean 450 independent user-facing
@@ -64,4 +66,6 @@ over-broad impression: the registry has substantial **selected-route** support
 for Tweaks and SCS, not complete component support yet. Ascension's six clear
 author-labeled optional components were then added as mechanically derived,
 explicitly Untested selectors, closing its structural catalog without claiming
-new compatibility or verification evidence.
+new compatibility or verification evidence. DLC Merger's two clear
+author-labeled optional entries were treated the same way, closing its small
+four-component catalog.
