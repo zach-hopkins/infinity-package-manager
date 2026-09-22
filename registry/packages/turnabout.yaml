@@ -16,7 +16,7 @@ releases:
         components: [rewritten-final-chapter]
         when:
           selected_components: [fallen-allies-in-final-battle]
-    provenance: unverified
+    provenance: verified
     claims:
       - claim: The exact author v1.8 tag ZIP was SHA-256 verified. Its TP2 declares VERSION v1.8, English and French, and two LABEL-bearing components numbered 0 and 1.
         provenance: derived
@@ -27,6 +27,9 @@ releases:
       - claim: The main TP2 accepts ToB, BGT, BG2EE, and EET game predicates. This IEPM release covers only current BG2EE and EET targets; EET placement and gameplay remain Untested.
         provenance: derived
         evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The main English component completed after IEPM automatically selected Ascension's rewritten final chapter in a clean BG2EE 2.6.6 build, appeared in WeiDU.log, and the sealed game reached the Throne of Bhaal menu. The optional portrait, EET, and endgame behavior remain Untested.
+        provenance: verified
+        evidence: [evidence/pa4-bg2ee-turnabout.json]
     installers:
       - tp2: turnabout/setup-turnabout.tp2
         launcher: toolchain

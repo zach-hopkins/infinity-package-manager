@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "Ascension 2.1.0 rewritten final chapter then Turnabout v1.8 English main on clean BG2EE 2.6.6",
+  "identity": {
+    "registry_revision": "ad701b9",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "567a42880d4eff8999f91f879b7434bf8ad54ce26e4c4678ea61b2ade61f690e",
+    "environments": {
+      "target": {
+        "target": "bg2ee",
+        "fingerprint": {
+          "profile": "iepm-core-layout-v1",
+          "value": "298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f"
+        }
+      }
+    },
+    "packages": [
+      { "package": "ascension", "release_id": "ascension-2.1.0", "environment": "target", "artifact_sha256": "bd0ee14b3770d56104eaa81287c88a8672afa889a35184fb308be12d6d707e77", "components": ["rewritten-final-chapter"] },
+      { "package": "turnabout", "release_id": "turnabout-v1.8-source", "environment": "target", "artifact_sha256": "2e637c93eb922bd14a8290dc1c521d196a6c2a2ad2b15afac3d95eb175de711e", "components": ["fallen-allies-in-final-battle"] }
+    ],
+    "execution_order": ["ascension", "turnabout"]
+  },
+  "checks": {
+    "artifact_verified": true,
+    "selector_known": true,
+    "requirements_modeled": true,
+    "component_catalog_complete": true,
+    "all_components_classified": true,
+    "core_components_supported": true,
+    "selected_components_supported": true,
+    "relationships_satisfied": true,
+    "no_opaque_selections": true,
+    "clean_disposable_install": true,
+    "all_actions_completed": true,
+    "requested_components_recorded": true,
+    "no_components_skipped": true,
+    "warnings_classified": true,
+    "sealed": true,
+    "eet_end_required": false,
+    "main_menu_smoke": true,
+    "gameplay_smoke": false
+  },
+  "evidence": ["examples/bg2ee-turnabout/modpack.yaml", "docs/pa4-bg2ee-turnabout-evidence.md"]
+}
