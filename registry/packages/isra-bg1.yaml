@@ -11,7 +11,7 @@ releases:
     materialization: { source_root: Isra_NPC-3.5, include: [isra] }
     compatibility: { games: [bgee, eet] }
     install: { phase: eet, after: [eet], before: [eet-end] }
-    provenance: unverified
+    provenance: verified
     claims:
       - claim: The exact v3.5 author-tag archive matched SHA-256. Its TP2 declares VERSION v3.5, three languages, and three LABEL-bearing components numbered 0, 1, and 2.
         provenance: derived
@@ -25,6 +25,9 @@ releases:
       - claim: Both optional crossmod components require Isra main. Valerie crossmod also requires Valerie's dialogue resource; Gavin crossmod requires Gavin's component zero. These optional interactions remain Untested and must not be selected without their partner mods.
         provenance: derived
         evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The exact English main component completed after DLC Merger on a clean BGEE 2.6.6 workspace, appeared in WeiDU.log, and the sealed game reached its main menu. The Valerie/Gavin crossmod choices, EET, and NPC story behavior remain Untested.
+        provenance: verified
+        evidence: [evidence/pa4-bgee-isra-bg1.json]
     installers:
       - tp2: isra/isra.tp2
         launcher: toolchain

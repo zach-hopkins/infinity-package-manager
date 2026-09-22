@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "DLC Merger 2.1 then Isra NPC for BG v3.5 English main on clean BGEE 2.6.6",
+  "identity": {
+    "registry_revision": "1fd3090",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "cfa74116d3f3e41769d3efa9a649d0a3bbad7b8a5e01c61228688a19f8e6fcc3",
+    "environments": {
+      "target": {
+        "target": "bgee",
+        "fingerprint": {
+          "profile": "iepm-core-layout-v1",
+          "value": "04fc6602150ff7788875573dbf0b7f4aeb7ca26aaf83b022c77d9fc417d848c3"
+        }
+      }
+    },
+    "packages": [
+      { "package": "dlc-merger", "release_id": "dlc-merger-2.1-win32", "environment": "target", "artifact_sha256": "16b57b32662c1ac1e6d345afaf8669e01cf26eeafc5461000757edf33447e2eb", "components": ["merge-sod"] },
+      { "package": "isra-bg1", "release_id": "isra-bg1-v3.5-source", "environment": "target", "artifact_sha256": "36c01fa48dd96b6aa4d04c19d4f81e4d519d66a6380bf0642c198fed8a2e129e", "components": ["isra-bg1-npc"] }
+    ],
+    "execution_order": ["dlc-merger", "isra-bg1"]
+  },
+  "checks": {
+    "artifact_verified": true,
+    "selector_known": true,
+    "requirements_modeled": true,
+    "component_catalog_complete": true,
+    "all_components_classified": true,
+    "core_components_supported": true,
+    "selected_components_supported": true,
+    "relationships_satisfied": true,
+    "no_opaque_selections": true,
+    "clean_disposable_install": true,
+    "all_actions_completed": true,
+    "requested_components_recorded": true,
+    "no_components_skipped": true,
+    "warnings_classified": true,
+    "sealed": true,
+    "eet_end_required": false,
+    "main_menu_smoke": true,
+    "gameplay_smoke": false
+  },
+  "evidence": ["examples/bgee-isra-bg1/modpack.yaml", "docs/pa4-bgee-isra-bg1-evidence.md"]
+}
