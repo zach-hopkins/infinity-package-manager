@@ -106,10 +106,18 @@ releases:
       - id: alternate-concentration-check
         weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_alternate_concentration_check_v1, number: 2690 }
         provides: [{ name: tweaks-concentration-check-scope, exclusive: true }]
-      - { id: learn-spells-100-percent, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_easy_spell_learning_capped, number: 3030 } }
-      - { id: potion-stacks-40, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_increase_potion_stacks_40, number: 3101 } }
-      - { id: scroll-stacks-40, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_increase_scroll_stacks_40, number: 3111 } }
-      - { id: angry-npcs-never-leave, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_happy_patch_angry_never_leave, number: 3121 } }
+      - id: learn-spells-100-percent
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_easy_spell_learning_capped, number: 3030 }
+        provides: [{ name: tweaks-spell-learning-scope, exclusive: true }]
+      - id: potion-stacks-40
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_increase_potion_stacks_40, number: 3101 }
+        provides: [{ name: tweaks-potion-stack-scope, exclusive: true }]
+      - id: scroll-stacks-40
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_increase_scroll_stacks_40, number: 3111 }
+        provides: [{ name: tweaks-scroll-stack-scope, exclusive: true }]
+      - id: angry-npcs-never-leave
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_happy_patch_angry_never_leave, number: 3121 }
+        provides: [{ name: tweaks-npc-happiness-scope, exclusive: true }]
       - { id: disable-non-hostile-rest-spawns, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_rest_spawns_alter_nonhostile_disable, number: 3191 } }
       - { id: stores-buy-all-items, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_stores_buy_all_items, number: 3205 } }
       - { id: extra-ankheg-armor, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_taerom_makes_multiple_ankheg_armor, number: 3230 } }
@@ -539,3 +547,112 @@ releases:
       - { id: revised-troll-regeneration, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_revised_troll_regeneration, number: 2700 } }
       - { id: nwn-style-summons, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nwn_summons, number: 2710 } }
       - { id: shapeshifter-armor, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_shapeshifter_armor, number: 2740 } }
+      - { id: maximum-hp-at-level-one, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_max_hp_at_l1, number: 2999 } }
+      - id: maximum-hp-on-level-up
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_higher_hp_at_levelup_max, number: 3000 }
+        provides: [{ name: tweaks-level-up-hp-scope, exclusive: true }]
+      - id: nwn-hp-on-level-up
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_higher_hp_at_levelup_nwn, number: 3001 }
+        provides: [{ name: tweaks-level-up-hp-scope, exclusive: true }]
+      - id: average-hp-on-level-up
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_higher_hp_at_levelup_average, number: 3002 }
+        provides: [{ name: tweaks-level-up-hp-scope, exclusive: true }]
+      - { id: extend-hp-rolls-to-level-twenty, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_extend_hp_rolls_to_l20, number: 3008 } }
+      - id: maximum-hp-all-npcs
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_maximum_hp_npcs_all, number: 3010 }
+        provides: [{ name: tweaks-npc-hp-scope, exclusive: true }]
+      - id: maximum-hp-nonjoinable-npcs
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_maximum_hp_npcs_nonjoinable, number: 3011 }
+        provides: [{ name: tweaks-npc-hp-scope, exclusive: true }]
+      - id: maximum-hp-joinable-npcs
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_maximum_hp_npcs_joinable, number: 3012 }
+        provides: [{ name: tweaks-npc-hp-scope, exclusive: true }]
+      - { id: identify-all-items, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_id_all_items, number: 3020 } }
+      - id: learn-spells-100-percent-no-cap
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_easy_spell_learning_no_cap, number: 3031 }
+        provides: [{ name: tweaks-spell-learning-scope, exclusive: true }]
+      - { id: bottomless-bags-of-holding, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_bottomless_bags, number: 3040 } }
+      - { id: restoration-does-not-fatigue, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_restoration_no_fatigue, number: 3050 } }
+      - { id: remove-party-gathering-prompt, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_remove_you_must_gather, number: 3060 } }
+      - id: low-reputation-store-discounts
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_store_rep_low_rep_discount, number: 3070 }
+        provides: [{ name: tweaks-store-reputation-scope, exclusive: true }]
+      - id: store-prices-ignore-reputation-full
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_store_rep_no_rep_effect_100, number: 3071 }
+        provides: [{ name: tweaks-store-reputation-scope, exclusive: true }]
+      - id: store-prices-ignore-reputation-eighty-percent
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_store_rep_no_rep_effect_80, number: 3072 }
+        provides: [{ name: tweaks-store-reputation-scope, exclusive: true }]
+      - id: store-prices-ignore-reputation-sixty-percent
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_store_rep_no_rep_effect_60, number: 3073 }
+        provides: [{ name: tweaks-store-reputation-scope, exclusive: true }]
+      - id: ammo-stacks-unlimited
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_increase_ammo_stacks_infinite, number: 3080 }
+        provides: [{ name: tweaks-ammo-stack-scope, exclusive: true }]
+      - id: ammo-stacks-40
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_increase_ammo_stacks_40, number: 3081 }
+        provides: [{ name: tweaks-ammo-stack-scope, exclusive: true }]
+      - id: ammo-stacks-80
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_increase_ammo_stacks_80, number: 3082 }
+        provides: [{ name: tweaks-ammo-stack-scope, exclusive: true }]
+      - id: ammo-stacks-120
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_increase_ammo_stacks_120, number: 3083 }
+        provides: [{ name: tweaks-ammo-stack-scope, exclusive: true }]
+      - id: gem-stacks-unlimited
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_increase_gem_stacks_infinite, number: 3090 }
+        provides: [{ name: tweaks-gem-stack-scope, exclusive: true }]
+      - id: gem-stacks-40
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_increase_gem_stacks_40, number: 3091 }
+        provides: [{ name: tweaks-gem-stack-scope, exclusive: true }]
+      - id: gem-stacks-80
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_increase_gem_stacks_80, number: 3092 }
+        provides: [{ name: tweaks-gem-stack-scope, exclusive: true }]
+      - id: gem-stacks-120
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_increase_gem_stacks_120, number: 3093 }
+        provides: [{ name: tweaks-gem-stack-scope, exclusive: true }]
+      - id: potion-stacks-unlimited
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_increase_potion_stacks_infinite, number: 3100 }
+        provides: [{ name: tweaks-potion-stack-scope, exclusive: true }]
+      - id: potion-stacks-80
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_increase_potion_stacks_80, number: 3102 }
+        provides: [{ name: tweaks-potion-stack-scope, exclusive: true }]
+      - id: potion-stacks-120
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_increase_potion_stacks_120, number: 3103 }
+        provides: [{ name: tweaks-potion-stack-scope, exclusive: true }]
+      - id: scroll-stacks-unlimited
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_increase_scroll_stacks_infinite, number: 3110 }
+        provides: [{ name: tweaks-scroll-stack-scope, exclusive: true }]
+      - id: scroll-stacks-80
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_increase_scroll_stacks_80, number: 3112 }
+        provides: [{ name: tweaks-scroll-stack-scope, exclusive: true }]
+      - id: scroll-stacks-120
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_increase_scroll_stacks_120, number: 3113 }
+        provides: [{ name: tweaks-scroll-stack-scope, exclusive: true }]
+      - id: npcs-never-angry
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_happy_patch_never_angry, number: 3120 }
+        provides: [{ name: tweaks-npc-happiness-scope, exclusive: true }]
+      - id: npcs-always-neutral
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_happy_patch_always_neutral, number: 3122 }
+        provides: [{ name: tweaks-npc-happiness-scope, exclusive: true }]
+      - { id: npcs-never-fight-each-other, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_npcs_never_fight, number: 3123 } }
+      - id: stop-haerdalis-aerie-romance
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_stop_hd_aerie_romance, number: 3124 }
+        unsupported_games: [bgee]
+      - { id: happy-neutral-npcs, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_happy_neutrals, number: 3125 } }
+      - id: remove-traps-and-locks
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_no_traps_or_locks, number: 3130 }
+        provides: [{ name: tweaks-traps-locks-scope, exclusive: true }]
+      - id: remove-trap-effects-and-locks
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_no_trap_effects_or_locks, number: 3131 }
+        provides: [{ name: tweaks-traps-locks-scope, exclusive: true }]
+      - id: remove-trap-effects-alarms-and-locks
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_no_trap_effects_alarms_or_locks, number: 3132 }
+        provides: [{ name: tweaks-traps-locks-scope, exclusive: true }]
+      - id: faster-opening-cutscenes-ease-of-use
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_faster_ch1_cutscenes_eou, number: 3140 }
+        unsupported_games: [bgee]
+        provides: [{ name: tweaks-opening-cutscene-scope, exclusive: true }]
+      - id: faster-opening-cutscenes-revised
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_faster_ch1_cutscenes_nonsilly, number: 3141 }
+        unsupported_games: [bgee]
+        provides: [{ name: tweaks-opening-cutscene-scope, exclusive: true }]
