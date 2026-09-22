@@ -11,7 +11,7 @@ releases:
     materialization: { source_root: Ajantis_BG1_Expansion-22, include: [ajantisbg1] }
     compatibility: { games: [bgee, eet] }
     install: { phase: eet, after: [eet, bg1npc], before: [eet-end] }
-    provenance: unverified
+    provenance: verified
     claims:
       - claim: The exact author v22 tag ZIP was SHA-256 verified; the main TP2 declares VERSION 22, four WeiDU languages, and three LABEL-bearing components numbered 0, 1, and 30.
         provenance: derived
@@ -28,6 +28,9 @@ releases:
       - claim: The TP2 refuses a BGEE game with an unmerged SoD DLC. The first disposable BGEE 2.6.6 fixture encountered that exact check, so the revised fixture explicitly runs DLC Merger first; a BGEE source without SoD would not need that action.
         provenance: verified
         evidence: [docs/pa4-bgee-ajantis-bg1-expansion-evidence.md]
+      - claim: The main English component completed after DLC Merger in a clean IEPM-managed BGEE 2.6.6 build, appeared in WeiDU.log, and the sealed game reached the main menu. Optional shield art, SoD crossmod content, EET, and actual dialogue behavior remain Untested.
+        provenance: verified
+        evidence: [evidence/pa4-bgee-ajantis-bg1-expansion.json]
     installers:
       - tp2: ajantisbg1/Setup-AjantisBG1.tp2
         launcher: toolchain

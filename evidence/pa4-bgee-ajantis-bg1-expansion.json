@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "DLC Merger 2.1 then Ajantis BG1 Expansion v22 English main on clean BGEE 2.6.6 with unmerged SoD",
+  "identity": {
+    "registry_revision": "b71498f",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "5ad6cc6636a4f81c371380b82efa49a282760a1d8710519eec665de94fccf0a5",
+    "environments": {
+      "target": {
+        "target": "bgee",
+        "fingerprint": {
+          "profile": "iepm-core-layout-v1",
+          "value": "04fc6602150ff7788875573dbf0b7f4aeb7ca26aaf83b022c77d9fc417d848c3"
+        }
+      }
+    },
+    "packages": [
+      { "package": "dlc-merger", "release_id": "dlc-merger-2.1-win32", "environment": "target", "artifact_sha256": "16b57b32662c1ac1e6d345afaf8669e01cf26eeafc5461000757edf33447e2eb", "components": ["merge-sod"] },
+      { "package": "ajantis-bg1-expansion", "release_id": "ajantis-bg1-expansion-v22-source", "environment": "target", "artifact_sha256": "7479c3b6d2ba8ab9acb509de3d6101ac862d8a3c7f6ec7a99e4e8defa7b60dbe", "components": ["friendship-and-romance-expansion"] }
+    ],
+    "execution_order": ["dlc-merger", "ajantis-bg1-expansion"]
+  },
+  "checks": {
+    "artifact_verified": true,
+    "selector_known": true,
+    "requirements_modeled": true,
+    "component_catalog_complete": true,
+    "all_components_classified": true,
+    "core_components_supported": true,
+    "selected_components_supported": true,
+    "relationships_satisfied": true,
+    "no_opaque_selections": true,
+    "clean_disposable_install": true,
+    "all_actions_completed": true,
+    "requested_components_recorded": true,
+    "no_components_skipped": true,
+    "warnings_classified": true,
+    "sealed": true,
+    "eet_end_required": false,
+    "main_menu_smoke": true,
+    "gameplay_smoke": false
+  },
+  "evidence": ["examples/bgee-ajantis-bg1-expansion/modpack.yaml", "docs/pa4-bgee-ajantis-bg1-expansion-evidence.md"]
+}
