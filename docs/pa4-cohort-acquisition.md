@@ -13,12 +13,14 @@ and raw component selectors. It does not promote the 56 to Supported or even
 to executable releases: source-tag archives can omit generated assets or have
 installer-specific behavior, and game targets/order still need review.
 
-Sirene, LeUI, ten single-component Spellhold Studios friendship mods, and four
-single-component Pocket Plane quest mods now have reviewed, executable
-registry routes. The friendship defaults have exact-scope BG2EE build and
-main-menu evidence; the four quest defaults also have exact-scope BG2EE build
-and main-menu evidence. EET routes remain Untested. Sirene and LeUI remain
-Untested pending execution evidence. The remaining 40
+Sirene, LeUI, ten single-component Spellhold Studios friendship mods, four
+single-component Pocket Plane quest mods, three further BG2EE friendships,
+and Korgan's Redemption now have reviewed, executable registry routes. The
+first ten friendship defaults and four quest defaults have exact-scope BG2EE
+build and main-menu evidence. The four newest routes have an initial clean
+disposable build and menu smoke; a revision-pinned evidence record is pending.
+EET routes remain Untested. Sirene and LeUI remain Untested pending execution
+evidence. The remaining 36
 tagged archives are exact-byte review inputs, not a promise that IEPM can
 install them. The seven branch
 routes and 17 manual routes remain separate acquisition work; a mutable branch

@@ -1,0 +1,29 @@
+schema: 2
+package: hexxat-friendship
+aliases: [hexxatfriendship]
+releases:
+  - release_id: hexxat-friendship-v1.2-source
+    version: "1.2"
+    artifacts:
+      - url: https://github.com/SpellholdStudios/Hexxat-Friendship/archive/refs/tags/v1.2.zip
+        sha256: 69639376973f49c675fb9f613401b28bcebccf6313b8192bff1dc30cb66fe49b
+        platforms: [windows]
+    materialization: { source_root: Hexxat-Friendship-1.2, include: [HexxatFriendship] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact v1.2 author tag ZIP was SHA-256 verified; its TP2 declares VERSION 1.2, two languages, and one numeric component 0 with an author LABEL.
+        provenance: derived
+        evidence: [https://github.com/Spellhold-Studios/Hexxat-Friendship/releases/tag/v1.2]
+      - claim: The author identifies BG2EE and EET as game targets. Neither route has yet passed an IEPM managed install or launch smoke.
+        provenance: declared
+        evidence: [https://github.com/Spellhold-Studios/Hexxat-Friendship]
+    installers:
+      - tp2: HexxatFriendship/HexxatFriendship.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: Russian (by Jarly) }
+    components:
+      - { id: friendship, default_selected: true, weidu: { tp2: HexxatFriendship/HexxatFriendship.tp2, label: hexxat_friendship, number: 0 } }

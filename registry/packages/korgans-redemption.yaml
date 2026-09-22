@@ -1,0 +1,32 @@
+schema: 2
+package: korgans-redemption
+aliases: [korgan]
+releases:
+  - release_id: korgans-redemption-v10.0.1-source
+    version: "v10.0.1"
+    artifacts:
+      - url: https://github.com/SpellholdStudios/KorgansRedemption/archive/refs/tags/v10.0.1.zip
+        sha256: e9fec975b435b16691cd43d1a13f8a1eb128b0903edea50aaf2b60d711b3538d
+        platforms: [windows]
+    materialization: { source_root: KorgansRedemption-10.0.1, include: [korgan] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact v10.0.1 author tag ZIP was SHA-256 verified; its TP2 declares VERSION v10.0.1, five languages, and one numeric component 0 with an author LABEL and GAME_INCLUDES tob predicate.
+        provenance: derived
+        evidence: [https://github.com/SpellholdStudios/KorgansRedemption/releases/tag/v10.0.1]
+      - claim: The author documents BG2EE and EET support. Neither route has yet passed an IEPM managed install or launch smoke.
+        provenance: declared
+        evidence: [https://github.com/SpellholdStudios/KorgansRedemption]
+    installers:
+      - tp2: korgan/korgan.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: Polski }
+          - { id: 1, name: English }
+          - { id: 2, name: Russian (translation by Austin) }
+          - { id: 3, name: "Francais (traduction : Le Marquis)" }
+          - { id: 4, name: Deutsch (Uebersetzung von the BiG World Textpack German team) }
+    components:
+      - { id: redemption, default_selected: true, weidu: { tp2: korgan/korgan.tp2, label: korgan_redemption, number: 0 } }

@@ -66,6 +66,7 @@ classification backlog.
 | Sirene v3.1 tag archive | 10 | 10 | 0 |
 | LeUI v4.9.1 tag archive | 3 | 3 | 0 |
 | Ten Spellhold Studios BG2 friendship tag archives | 10 total | 10 | 0 |
+| Dorn, Hexxat, and Jaheira Friendships; Korgan's Redemption tag archives | 4 total | 4 | 0 |
 | Hidden Gameplay Options v5.1 | 43 | 43 | 0 |
 | Ascension 2.1.0 | 19 | 19 | 0 |
 | Call of the Lost Goddess v3.1 | 3 | 3 | 0 |
@@ -131,3 +132,8 @@ labels. Their combined BG2EE 2.6.6 route completed all four actions, recorded
 all four in `WeiDU.log`, sealed, and reached the playable Shadows of Amn
 menu. See [`pa4-bg2ee-quests-evidence.md`](pa4-bg2ee-quests-evidence.md).
 EET and gameplay remain untested.
+The follow-up Dorn, Hexxat, and Jaheira Friendships and Korgan's Redemption
+also each have one exact author-tagged TP2 declaration and a `review-tp2`
+`match`. All four English defaults completed in one fresh disposable BG2EE
+2.6.6 build and reached the Shadows of Amn menu. The pinning/evidence pass
+for this result is recorded separately; EET and gameplay are not inferred.

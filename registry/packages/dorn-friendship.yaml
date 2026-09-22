@@ -1,0 +1,29 @@
+schema: 2
+package: dorn-friendship
+aliases: [dornfriendship]
+releases:
+  - release_id: dorn-friendship-v1.2-source
+    version: "1.2"
+    artifacts:
+      - url: https://github.com/SpellholdStudios/Dorn-Friendship/archive/refs/tags/v1.2.zip
+        sha256: f956a94d3aa24e425d1ba99a8d2755b5273fa7b0850968a90ce5e1736a47813c
+        platforms: [windows]
+    materialization: { source_root: Dorn-Friendship-1.2, include: [DornFriendship] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact v1.2 author tag ZIP was SHA-256 verified; its TP2 declares VERSION 1.2, two languages, and one numeric component 0 with an author LABEL.
+        provenance: derived
+        evidence: [https://github.com/Spellhold-Studios/Dorn-Friendship/releases/tag/v1.2]
+      - claim: The author identifies BG2EE and EET as game targets. Neither route has yet passed an IEPM managed install or launch smoke.
+        provenance: declared
+        evidence: [https://github.com/Spellhold-Studios/Dorn-Friendship]
+    installers:
+      - tp2: DornFriendship/DornFriendship.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: Russian (translation by Jarly) }
+    components:
+      - { id: friendship, default_selected: true, weidu: { tp2: DornFriendship/DornFriendship.tp2, label: Dorn_friendship, number: 0 } }
