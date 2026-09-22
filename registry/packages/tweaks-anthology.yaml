@@ -58,7 +58,12 @@ releases:
         package: eeex
         components: [bootstrap]
         when:
-          selected_components: [hide-invisible-enemy-vfx, make-grease-ignitable, bears-and-boars-fight-at-zero-hp, limit-resting, useful-infravision, alternate-concentration-check, concentration-check-constitution-fixed, concentration-check-luck-fixed, concentration-check-constitution-damage, revised-troll-regeneration, nwn-style-summons, dorns-sword, more-sensible-cowled-wizards, more-stoneskin-feedback, more-sensible-fireshield, more-sensible-blade-barrier, dynamic-fps-change, more-sensible-morentherene]
+          selected_components: [hide-invisible-enemy-vfx, make-grease-ignitable, bears-and-boars-fight-at-zero-hp, limit-resting, useful-infravision, alternate-concentration-check, concentration-check-constitution-fixed, concentration-check-constitution-damage, revised-troll-regeneration, nwn-style-summons, dorns-sword, more-sensible-cowled-wizards, more-stoneskin-feedback, more-sensible-fireshield, more-sensible-blade-barrier, dynamic-fps-change, more-sensible-morentherene, nwn-disarm, nwn-knockdown, nwn-spellcraft-counterspell, nwn-spontaneous-casting, nwn-weapon-finesse, nwn-dual-wield, nwn-armor-vs-dexterity, nwn-defensive-roll, nwn-divine-grace-dark-blessing, nwn-good-aim, nwn-cleave, nwn-blackguard-sneak-attack, nwn-fearless, nwn-poison-save, nwn-planar-turning, nwn-circle-kick, nwn-barbarian-rage, nwn-revised-archer, nwn-blind-fight, nwn-dirty-fighting, nwn-overwhelming-devastating-critical, nwn-self-concealment, nwn-parry, nwn-armored-caster, nwn-trackless-step, nwn-nature-sense, nwn-uncanny-dodge, nwn-rogue-sneak-attack, nwn-evasion, nwn-spell-penetration, nwn-smite-evil-good, nwn-woodland-stride, nwn-bane-of-enemies, nwn-cantrips, nwn-animal-companion, nwn-opportunist]
+      - kind: requires
+        package: eeex
+        components: [core]
+        when:
+          selected_components: [nwn-animal-companion]
     provenance: unverified
     claims:
       - claim: Release URL, archive hash, TP2 path, VERSION v18, and all listed component number/LABEL pairs were mechanically derived from the exact source-tagged v18 archive.
@@ -877,3 +882,39 @@ releases:
         weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_neera_delay_till_5k_xp, number: 4221 }
         provides: [{ name: tweaks-neera-delay-scope, exclusive: true }]
       - { id: yoshimo-better-trapsetting, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_yoshimo_better_trapsetting, number: 4230 } }
+      - { id: nwn-disarm, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nwn_disarm, number: 6000 } }
+      - { id: nwn-knockdown, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nwn_knockdown, number: 6010 } }
+      - { id: nwn-spellcraft-counterspell, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nwn_spellcraft_counterspell, number: 6020 } }
+      - { id: nwn-spontaneous-casting, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nwn_spontaneous_cast, number: 6030 } }
+      - { id: nwn-weapon-finesse, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_weapon_finesse, number: 6040 } }
+      - { id: nwn-dual-wield, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_dual_wield, number: 6050 } }
+      - { id: nwn-armor-vs-dexterity, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nwn-style_armor_vs_dex, number: 6060 } }
+      - { id: nwn-defensive-roll, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_defensive_roll, number: 6070 } }
+      - { id: nwn-divine-grace-dark-blessing, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_divine_grace_dark_blessing, number: 6080 } }
+      - { id: nwn-good-aim, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_good_aim, number: 6090 } }
+      - { id: nwn-cleave, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_cleave, number: 6100 } }
+      - { id: nwn-blackguard-sneak-attack, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_sneakatt_blackguard, number: 6110 } }
+      - { id: nwn-fearless, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_fearless, number: 6120 } }
+      - { id: nwn-poison-save, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_poison_save, number: 6130 } }
+      - { id: nwn-planar-turning, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_planar_turning, number: 6140 } }
+      - { id: nwn-circle-kick, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nwn_circle_kick, number: 6150 } }
+      - { id: nwn-barbarian-rage, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nwn_barbarian_rage, number: 6160 } }
+      - { id: nwn-revised-archer, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nwn_revised_archer, number: 6170 } }
+      - { id: nwn-blind-fight, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nwn_blind_fight, number: 6180 } }
+      - { id: nwn-dirty-fighting, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nwn_dirty_fighting, number: 6190 } }
+      - { id: nwn-overwhelming-devastating-critical, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nwn_overwhelming_devastating_critical, number: 6200 } }
+      - { id: nwn-self-concealment, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nwn_self_concealment, number: 6210 } }
+      - { id: nwn-parry, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nwn_parry, number: 6220 } }
+      - { id: nwn-armored-caster, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nwn_armored_caster, number: 6230 } }
+      - { id: nwn-trackless-step, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nwn_trackless_step, number: 6240 } }
+      - { id: nwn-nature-sense, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nwn_nature_sense, number: 6250 } }
+      - { id: nwn-uncanny-dodge, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nwn_uncanny_dodge, number: 6260 } }
+      - { id: nwn-rogue-sneak-attack, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nwn_sneakatt_rogue, number: 6270 } }
+      - { id: nwn-evasion, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nwn_evasion, number: 6280 } }
+      - { id: nwn-spell-penetration, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nwn_spell_penetration, number: 6290 } }
+      - { id: nwn-smite-evil-good, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nwn_smite_evil_good, number: 6300 } }
+      - { id: nwn-woodland-stride, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nwn_woodland_stride, number: 6310 } }
+      - { id: nwn-bane-of-enemies, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nwn_bane_of_enemies, number: 6320 } }
+      - { id: nwn-cantrips, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nwn_cantrips, number: 6330 } }
+      - { id: nwn-animal-companion, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nwn_animal_companion, number: 6340 } }
+      - { id: nwn-opportunist, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nwn_opportunist, number: 6350 } }
