@@ -134,6 +134,7 @@ menu. See [`pa4-bg2ee-quests-evidence.md`](pa4-bg2ee-quests-evidence.md).
 EET and gameplay remain untested.
 The follow-up Dorn, Hexxat, and Jaheira Friendships and Korgan's Redemption
 also each have one exact author-tagged TP2 declaration and a `review-tp2`
-`match`. All four English defaults completed in one fresh disposable BG2EE
-2.6.6 build and reached the Shadows of Amn menu. The pinning/evidence pass
-for this result is recorded separately; EET and gameplay are not inferred.
+`match`. All four English defaults completed in one revision-pinned fresh
+disposable BG2EE 2.6.6 build and reached the Shadows of Amn menu. See
+[`pa4-bg2ee-friendship-expansion-evidence.md`](pa4-bg2ee-friendship-expansion-evidence.md);
+EET and gameplay are not inferred.

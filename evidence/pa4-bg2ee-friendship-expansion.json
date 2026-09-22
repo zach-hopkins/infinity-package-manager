@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "Dorn, Hexxat, and Jaheira Friendships plus Korgan's Redemption on clean BG2EE 2.6.6",
+  "identity": {
+    "registry_revision": "af1ec05",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "bd0d03c2293ee9bdec4dc05b2ccd7acee8f56f366713de1664fad5201a9703b0",
+    "environments": {
+      "target": {
+        "target": "bg2ee",
+        "fingerprint": {
+          "profile": "iepm-core-layout-v1",
+          "value": "298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f"
+        }
+      }
+    },
+    "packages": [
+      { "package": "dorn-friendship", "release_id": "dorn-friendship-v1.2-source", "environment": "target", "artifact_sha256": "f956a94d3aa24e425d1ba99a8d2755b5273fa7b0850968a90ce5e1736a47813c", "components": ["friendship"] },
+      { "package": "hexxat-friendship", "release_id": "hexxat-friendship-v1.2-source", "environment": "target", "artifact_sha256": "69639376973f49c675fb9f613401b28bcebccf6313b8192bff1dc30cb66fe49b", "components": ["friendship"] },
+      { "package": "jaheira-friendship", "release_id": "jaheira-friendship-v1.3-source", "environment": "target", "artifact_sha256": "6e65bbb70096fdcba0c4a9727d9ab8ac63b635c3fcfd6ad7375815ab44f9fee4", "components": ["friendship"] },
+      { "package": "korgans-redemption", "release_id": "korgans-redemption-v10.0.1-source", "environment": "target", "artifact_sha256": "e9fec975b435b16691cd43d1a13f8a1eb128b0903edea50aaf2b60d711b3538d", "components": ["redemption"] }
+    ],
+    "execution_order": ["dorn-friendship", "hexxat-friendship", "jaheira-friendship", "korgans-redemption"]
+  },
+  "checks": {
+    "artifact_verified": true,
+    "selector_known": true,
+    "requirements_modeled": true,
+    "component_catalog_complete": true,
+    "all_components_classified": true,
+    "core_components_supported": true,
+    "selected_components_supported": true,
+    "relationships_satisfied": true,
+    "no_opaque_selections": true,
+    "clean_disposable_install": true,
+    "all_actions_completed": true,
+    "requested_components_recorded": true,
+    "no_components_skipped": true,
+    "warnings_classified": true,
+    "sealed": true,
+    "eet_end_required": false,
+    "main_menu_smoke": true,
+    "gameplay_smoke": false
+  },
+  "evidence": ["examples/bg2ee-friendship-expansion/modpack.yaml", "docs/pa4-bg2ee-friendship-expansion-evidence.md"]
+}
