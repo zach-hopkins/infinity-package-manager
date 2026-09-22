@@ -418,9 +418,18 @@ pub struct BuildOptions {
 }
 
 #[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct BuildProgress {
     pub stage: String,
     pub message: String,
+    /// Coarse overall build completion, intentionally bounded to observable
+    /// lifecycle milestones and individual WeiDU actions rather than pretending
+    /// that an external installer's internal work is measurable.
+    pub percent: u8,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub action: Option<usize>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub total_actions: Option<usize>,
 }
 
 #[derive(Debug, Clone, Serialize)]
@@ -538,6 +547,9 @@ where
     progress(BuildProgress {
         stage: "preflight".to_owned(),
         message: "Resolving and checking the requested build".to_owned(),
+        percent: 2,
+        action: None,
+        total_actions: None,
     });
     let prepared = prepare_build(options)?;
 
@@ -560,6 +572,9 @@ where
     progress(BuildProgress {
         stage: "snapshot".to_owned(),
         message: "Preparing immutable clean-game snapshots".to_owned(),
+        percent: 8,
+        action: None,
+        total_actions: None,
     });
     let mut snapshots = BTreeMap::new();
     for (name, environment) in &prepared.manifest.environments {
@@ -583,6 +598,9 @@ where
     progress(BuildProgress {
         stage: "workspace".to_owned(),
         message: "Creating fresh disposable workspaces".to_owned(),
+        percent: 15,
+        action: None,
+        total_actions: None,
     });
     let workspace_root = create_disposable_workspaces(&snapshots, &options.store, &options.build)?;
     let workspaces = prepared
@@ -609,11 +627,7 @@ where
         &prepared.verification,
     )?;
 
-    progress(BuildProgress {
-        stage: "install".to_owned(),
-        message: "Fetching verified artifacts and installing with WeiDU".to_owned(),
-    });
-    let execution = execute(
+    let execution = execute_with_progress(
         &prepared.lockfile,
         &ExecuteOptions {
             cache: options.store.join("cache"),
@@ -622,11 +636,15 @@ where
             log_dir: log_dir.clone(),
             confirm_disposable: true,
         },
+        &mut progress,
     )?;
 
     progress(BuildProgress {
         stage: "seal".to_owned(),
         message: "Sealing the completed build and its receipts".to_owned(),
+        percent: 94,
+        action: None,
+        total_actions: Some(execution.actions),
     });
     let sealed_build =
         seal_successful_build(&workspace_root, &options.store, &options.build, &log_dir)?;
@@ -641,6 +659,9 @@ where
     progress(BuildProgress {
         stage: "complete".to_owned(),
         message: format!("Build is ready at {}", report.sealed_build.display()),
+        percent: 100,
+        action: Some(report.actions),
+        total_actions: Some(report.actions),
     });
     Ok(report)
 }
@@ -1053,6 +1074,21 @@ pub fn parse_workspace_bindings(values: &[String]) -> Result<BTreeMap<String, Pa
 /// first A5 path: verified artifact preparation, safe materialization, and
 /// supervised WeiDU processes with retained stdout/stderr logs.
 pub fn execute(lockfile: &Lockfile, options: &ExecuteOptions) -> Result<ExecutionReport> {
+    execute_with_progress(lockfile, options, |_| {})
+}
+
+/// Execute a lockfile while reporting coarse build state and the exact WeiDU
+/// action about to run. The percentage is an honest progress estimate across
+/// IEPM-controlled work; WeiDU remains an external process with no reliable
+/// internal completion API.
+pub fn execute_with_progress<F>(
+    lockfile: &Lockfile,
+    options: &ExecuteOptions,
+    mut progress: F,
+) -> Result<ExecutionReport>
+where
+    F: FnMut(BuildProgress),
+{
     ensure_executable(lockfile)?;
     if !options.confirm_disposable {
         bail!(
@@ -1130,6 +1166,21 @@ pub fn execute(lockfile: &Lockfile, options: &ExecuteOptions) -> Result<Executio
         false,
     )?;
     let store = ArtifactStore::new(&options.cache)?;
+    progress(BuildProgress {
+        stage: "artifacts".to_owned(),
+        message: format!(
+            "Downloading and verifying {} mod package{}",
+            lockfile.packages.len(),
+            if lockfile.packages.len() == 1 {
+                ""
+            } else {
+                "s"
+            }
+        ),
+        percent: 20,
+        action: None,
+        total_actions: None,
+    });
     let prepared = store.prepare_lockfile(lockfile)?;
     let artifacts = prepared
         .into_iter()
@@ -1166,6 +1217,18 @@ pub fn execute(lockfile: &Lockfile, options: &ExecuteOptions) -> Result<Executio
     }
 
     let mut actions = 0_usize;
+    let total_actions = lockfile
+        .execution
+        .iter()
+        .map(|node| {
+            let package = packages
+                .get(&(node.environment.as_str(), node.package.as_str()))
+                .expect("execution node package was preflighted");
+            components_by_tp2(package).map(|groups| groups.len())
+        })
+        .collect::<Result<Vec<_>>>()?
+        .into_iter()
+        .sum::<usize>();
     let mut weidu_warnings = Vec::new();
     for node in &lockfile.execution {
         let package = packages
@@ -1219,6 +1282,17 @@ pub fn execute(lockfile: &Lockfile, options: &ExecuteOptions) -> Result<Executio
                 })
                 .collect::<Vec<_>>();
             actions += 1;
+            progress(BuildProgress {
+                stage: "install".to_owned(),
+                message: format!(
+                    "Installing {}: {}",
+                    package.package,
+                    progress_component_summary(package, tp2)
+                ),
+                percent: install_progress_percent(actions, total_actions),
+                action: Some(actions),
+                total_actions: Some(total_actions),
+            });
             run_weidu(
                 installer,
                 package,
@@ -1286,6 +1360,45 @@ pub fn execute(lockfile: &Lockfile, options: &ExecuteOptions) -> Result<Executio
         final_fingerprints,
         weidu_warnings,
     })
+}
+
+fn install_progress_percent(action: usize, total_actions: usize) -> u8 {
+    const INSTALL_START: usize = 20;
+    const INSTALL_END: usize = 90;
+    if total_actions == 0 {
+        return INSTALL_START as u8;
+    }
+    let completed_before_current = action.saturating_sub(1).min(total_actions);
+    (INSTALL_START + (INSTALL_END - INSTALL_START) * completed_before_current / total_actions) as u8
+}
+
+fn progress_component_summary(package: &LockedPackage, tp2: &str) -> String {
+    let components = package
+        .components
+        .iter()
+        .filter(|component| {
+            component
+                .weidu
+                .as_ref()
+                .is_some_and(|weidu| weidu.tp2 == tp2)
+        })
+        .map(|component| humanize_component_id(&component.id))
+        .collect::<Vec<_>>();
+    match components.as_slice() {
+        [] => "selected components".to_owned(),
+        [only] => only.clone(),
+        [first, second] => format!("{first} and {second}"),
+        [first, second, third] => format!("{first}, {second}, and {third}"),
+        [first, second, third, rest @ ..] => format!(
+            "{first}, {second}, {third}, and {} more component{}",
+            rest.len(),
+            if rest.len() == 1 { "" } else { "s" }
+        ),
+    }
+}
+
+fn humanize_component_id(id: &str) -> String {
+    id.replace('-', " ")
 }
 
 fn write_json_atomically(

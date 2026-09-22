@@ -150,6 +150,9 @@ async fn start_build(
             iepm::BuildProgress {
                 stage: "toolchain".to_owned(),
                 message: "Preparing the verified WeiDU installation engine".to_owned(),
+                percent: 1,
+                action: None,
+                total_actions: None,
             },
         );
         let (options, _, _) = desktop_build_options(&app, request)?;
