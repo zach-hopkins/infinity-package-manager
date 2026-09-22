@@ -104,5 +104,8 @@ LeUI v4.9.1 similarly has all three TP2 declarations mapped to stable user
 choices. Its author documents an EE 2.6 route and installation before UI
 patchers; IEPM has not run an install or launch fixture yet.
 The ten friendship releases each expose one mechanically matched component.
-Their author READMEs identify BG2EE and EET, and a combined non-mutating
-preflight is executable, but no game install or launch evidence has been added.
+Their author READMEs identify BG2EE and EET. A combined clean BG2EE 2.6.6
+managed build completed all ten, recorded them in `WeiDU.log`, sealed, and
+reached the Shadows of Amn menu. The exact-scope evidence is in
+[`pa4-friendships-evidence.md`](pa4-friendships-evidence.md); EET and gameplay
+remain untested.

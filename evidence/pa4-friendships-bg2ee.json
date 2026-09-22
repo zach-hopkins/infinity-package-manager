@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "Ten Spellhold Studios BG2 friendship defaults on clean BG2EE 2.6.6",
+  "identity": {
+    "registry_revision": "d8487e6",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "96a7f8c7d155f29e79a6992e53b23503f6e8353e0c2c04a62e3dfd6e046c781f",
+    "environments": {
+      "target": {
+        "target": "bg2ee",
+        "fingerprint": {
+          "profile": "iepm-core-layout-v1",
+          "value": "298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f"
+        }
+      }
+    },
+    "packages": [
+      { "package": "cernd-friendship", "release_id": "cernd-friendship-v1.4-source", "environment": "target", "artifact_sha256": "ffb0cbd029adb2642453953d05865552af5202d057cd276aabb5cfd1c6e4ea1e", "components": ["friendship"] },
+      { "package": "haerdalis-friendship", "release_id": "haerdalis-friendship-v1.2-source", "environment": "target", "artifact_sha256": "e4cae0eda59c9064bb9187c4bc617c12acca843430e8fe69deb61039be0ae5dd", "components": ["friendship"] },
+      { "package": "imoen-friendship", "release_id": "imoen-friendship-v3.6-source", "environment": "target", "artifact_sha256": "369c9f53e4e421caff63307ad43ececb6e4310a702b8dad32e341313a80227a8", "components": ["friendship"] },
+      { "package": "korgan-friendship", "release_id": "korgan-friendship-v1.6-source", "environment": "target", "artifact_sha256": "aba82785eaffcfdb7083a8dc55e90b6207037888df34bbf77e4c81b4567c737b", "components": ["friendship"] },
+      { "package": "mazzy-friendship", "release_id": "mazzy-friendship-v3.5-source", "environment": "target", "artifact_sha256": "31b4131b55a3090378fd18c0bc053503b55cfd0c1267b501c0555e6ecf404175", "components": ["friendship"] },
+      { "package": "minsc-friendship", "release_id": "minsc-friendship-v1.3-source", "environment": "target", "artifact_sha256": "b066024aca681139401855d2f1d5cd85337840113d121c1784859d65785133da", "components": ["friendship"] },
+      { "package": "sarevok-friendship", "release_id": "sarevok-friendship-v2.7-source", "environment": "target", "artifact_sha256": "e803df2d10c1ba0a40c19b1f2804b0249b95caa31031dd9e512ddd73d790b4d7", "components": ["friendship"] },
+      { "package": "valygar-friendship", "release_id": "valygar-friendship-v1.5-source", "environment": "target", "artifact_sha256": "cde7a4e747d9ba846b2809b180569f3334c37cf4cc23e976288cc8cd3df0eb59", "components": ["friendship"] },
+      { "package": "viconia-friendship", "release_id": "viconia-friendship-v4.5-source", "environment": "target", "artifact_sha256": "284987be5cc74f578bd90305eedd5a05ffa0aa40c491d92e426dd7c06959bd6a", "components": ["friendship"] },
+      { "package": "yoshimo-friendship", "release_id": "yoshimo-friendship-v5.0-source", "environment": "target", "artifact_sha256": "d64eb00f1300cbc653b9e57e6d13f993b32fd1ac139f103fe902e509f5f0c41c", "components": ["friendship"] }
+    ],
+    "execution_order": ["cernd-friendship", "haerdalis-friendship", "imoen-friendship", "korgan-friendship", "mazzy-friendship", "minsc-friendship", "sarevok-friendship", "valygar-friendship", "viconia-friendship", "yoshimo-friendship"]
+  },
+  "checks": {
+    "artifact_verified": true,
+    "selector_known": true,
+    "requirements_modeled": true,
+    "component_catalog_complete": true,
+    "all_components_classified": true,
+    "core_components_supported": true,
+    "selected_components_supported": true,
+    "relationships_satisfied": true,
+    "no_opaque_selections": true,
+    "clean_disposable_install": true,
+    "all_actions_completed": true,
+    "requested_components_recorded": true,
+    "no_components_skipped": true,
+    "warnings_classified": true,
+    "sealed": true,
+    "eet_end_required": false,
+    "main_menu_smoke": true,
+    "gameplay_smoke": false
+  },
+  "evidence": ["examples/bg2ee-friendships/modpack.yaml", "docs/pa4-friendships-evidence.md"]
+}

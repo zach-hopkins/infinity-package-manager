@@ -16,9 +16,12 @@ releases:
       - claim: The exact v2.7 author tag ZIP was SHA-256 verified; its TP2 declares VERSION v2.7, English language index 0, and one numeric component 0.
         provenance: derived
         evidence: [https://github.com/SpellholdStudios/SarevokFriendship/releases/tag/v2.7]
-      - claim: The author README identifies BG2EE and EET among the supported games; IEPM has not run an install or launch fixture.
+      - claim: The author README identifies BG2EE and EET among the supported games; EET remains untested by IEPM.
         provenance: declared
         evidence: [https://github.com/SpellholdStudios/SarevokFriendship]
+      - claim: The exact default component completed in a clean managed BG2EE 2.6.6 ten-friendship build, appeared in WeiDU.log, and the sealed game reached the Shadows of Amn main menu; this does not verify EET or gameplay.
+        provenance: verified
+        evidence: [evidence/pa4-friendships-bg2ee.json]
     installers:
       - tp2: sarevokfriendship/sarevokfriendship.tp2
         launcher: toolchain
