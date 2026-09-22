@@ -67,6 +67,7 @@ classification backlog.
 | LeUI v4.9.1 tag archive | 3 | 3 | 0 |
 | Banter Pack v18 tag archive | 4 | 4 | 0 |
 | BioWare NPC Flirt Packs v1.07 tag archive | 16 | 16 | 0 |
+| Drake v1.7a tag archive | 6 | 6 | 0 |
 | Ten Spellhold Studios BG2 friendship tag archives | 10 total | 10 | 0 |
 | Dorn, Hexxat, and Jaheira Friendships; Korgan's Redemption tag archives | 4 total | 4 | 0 |
 | Coran's BG Friendship and Xan's BG1 Friendship tag archives | 2 total | 2 | 0 |
@@ -167,3 +168,8 @@ exact artifact hash remains the identity. The eight base English choices
 completed a clean revision-pinned BG2EE build and reached the Shadows of Amn
 menu; see [`pa4-bg2ee-npcflirt-evidence.md`](pa4-bg2ee-npcflirt-evidence.md).
 The eight Solaufein choices and dialogue behavior remain Untested.
+Drake v1.7a maps all six TP2 declarations. The default fixture selects the
+NPC and a required portrait alternative. `review-tp2` flags display-version
+drift because the exact v1.7a tag's TP2 declares VERSION 1.7; these are
+distinct facts, not evidence of a mismatched artifact. Other portrait choices,
+crossbow proficiency, and the original soundset remain Untested.

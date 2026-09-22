@@ -1,0 +1,44 @@
+schema: 2
+package: drake
+releases:
+  - release_id: drake-v1.7a-source
+    version: "1.7a"
+    artifacts:
+      - url: https://github.com/ArtemiusI/Drake/archive/refs/tags/v1.7a.zip
+        sha256: 341fb5f032232754c86cce87ca27dc87f1b9fc992c97608de67f9b0f4c87c783
+        platforms: [windows]
+    materialization: { source_root: Drake-1.7a, include: [Drake] }
+    compatibility: { games: [bgee, eet] }
+    install: { phase: bgee, before: [eet] }
+    provenance: unverified
+    claims:
+      - claim: The SHA-256-pinned author v1.7a tag archive contains a TP2 declaring VERSION 1.7, one English language, six implicit-number components, and three mutually exclusive forced portrait choices.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The main component requires BGEE or EET and conditionally includes Siege of Dragonspear content when the game includes SoD. The portrait choices each mechanically require component zero.
+        provenance: derived
+        evidence: [https://github.com/TheArtisanBG/Drake]
+      - claim: Placing Drake in the BGEE source phase before EET follows its BGEE installer predicate but does not prove the EET transfer route.
+        provenance: derived
+        evidence: [https://github.com/TheArtisanBG/Drake]
+    installers:
+      - tp2: Drake/Setup-Drake.tp2
+        launcher: toolchain
+        languages: [{ id: 0, name: English }]
+    components:
+      - { id: npc, default_selected: true, weidu: { tp2: Drake/Setup-Drake.tp2, number: 0 } }
+      - id: portrait-default
+        default_selected: true
+        weidu: { tp2: Drake/Setup-Drake.tp2, number: 1 }
+        requires: [npc]
+        provides: [{ name: drake-portrait-scope, exclusive: true }]
+      - id: portrait-bg2-style
+        weidu: { tp2: Drake/Setup-Drake.tp2, number: 2 }
+        requires: [npc]
+        provides: [{ name: drake-portrait-scope, exclusive: true }]
+      - id: portrait-beta
+        weidu: { tp2: Drake/Setup-Drake.tp2, number: 3 }
+        requires: [npc]
+        provides: [{ name: drake-portrait-scope, exclusive: true }]
+      - { id: universal-crossbows, weidu: { tp2: Drake/Setup-Drake.tp2, number: 4 } }
+      - { id: original-soundset, weidu: { tp2: Drake/Setup-Drake.tp2, number: 5 } }

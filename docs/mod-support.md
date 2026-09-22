@@ -41,6 +41,7 @@ labels. This ledger must use those words only with those meanings.
 | High Quality Soundclips v1.3 | Complete one-component catalog, three WeiDU languages | BG2EE English default built and launched | **Supported** on tested BG2EE 2.6.6 fingerprint; EET and audio-quality behavior Untested | [evidence](pa4-bg2ee-hq-soundclips-evidence.md) |
 | Banter Pack v18 | Complete four-component catalog: SoA/ToB content and two independent accelerators | All four BG2EE English selectors built and launched | **Supported** for tested BG2EE 2.6.6 selection; EET and in-game banter behavior Untested | [evidence](pa4-bg2ee-banterpack-evidence.md) |
 | BioWare NPC Flirt Packs v1.07 | Complete 16-component structural catalog: four companions, SoA/ToB, with separate Solaufein interaction choices | Eight base BG2EE English choices built and launched | **Supported** for tested eight-choice BG2EE 2.6.6 selection; Solaufein choices, EET, and dialogue behavior Untested | [evidence](pa4-bg2ee-npcflirt-evidence.md) |
+| Drake v1.7a | Complete six-component structural catalog, including one required portrait choice | Executable BGEE source-tag route with NPC and default portrait selected | **Untested** — no managed build or launch evidence yet; release tag v1.7a and TP2 VERSION 1.7 are distinct | [registry](../registry/packages/drake.yaml) |
 | Cernd Friendship v1.4 | Complete one-component catalog | BG2EE default built and launched | **Supported** on tested BG2EE 2.6.6 fingerprint; EET Untested | [registry](../registry/packages/cernd-friendship.yaml) |
 | Haer'dalis Friendship v1.2 | Complete one-component catalog | BG2EE default built and launched | **Supported** on tested BG2EE 2.6.6 fingerprint; EET Untested | [registry](../registry/packages/haerdalis-friendship.yaml) |
 | Imoen Friendship v3.6 | Complete one-component catalog | BG2EE default built and launched | **Supported** on tested BG2EE 2.6.6 fingerprint; EET Untested | [registry](../registry/packages/imoen-friendship.yaml) |
@@ -86,10 +87,10 @@ selectors, curated relationships, and automated disposable-build evidence.
 ## Cohort work boundary
 
 The frozen cohort contains 19 packages that were already mapped when it was
-selected and 80 indexed candidates. Twenty-five of those candidates (Sirene,
+selected and 80 indexed candidates. Twenty-six of those candidates (Sirene,
 LeUI, thirteen BG2 friendship releases, four Pocket Plane quest mods,
 Korgan's Redemption, Coran's BG Friendship, Xan's BG1 Friendship, and High
-Quality Soundclips, Banter Pack, and BioWare NPC Flirt Packs) now have curated executable identities; 55 remain
+Quality Soundclips, Banter Pack, BioWare NPC Flirt Packs, and Drake) now have curated executable identities; 54 remain
 discovery-only. The remaining
 candidates are **not** silently
 excluded: they may proceed through IEPM's opaque local-package route once

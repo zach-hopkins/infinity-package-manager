@@ -1,0 +1,18 @@
+schema: 2
+
+# PA-4 exact Drake v1.7a BGEE fixture with required portrait choice.
+environments:
+  target:
+    target: bgee
+    version: "2.6.6"
+    platform: windows
+    language: English
+    locale: en_US
+    fingerprint:
+      profile: iepm-core-layout-v1
+      value: 04fc6602150ff7788875573dbf0b7f4aeb7ca26aaf83b022c77d9fc417d848c3
+
+mods:
+  - package: drake
+    environment: target
+    components: [npc, portrait-default]
