@@ -1,0 +1,31 @@
+schema: 2
+package: isra-bg2
+releases:
+  - release_id: isra-bg2-v3.1-source
+    version: "v3.1"
+    artifacts:
+      - url: https://github.com/SpellholdStudios/Isra_NPC_BG2/archive/refs/tags/v3.1.zip
+        sha256: 45bd7011bdb30ef2b4759ac9a8fa2a4a25711efa545efbfc2b0c20841180a8a8
+        platforms: [windows]
+    materialization: { source_root: Isra_NPC_BG2-3.1, include: [isra_bg2] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact author v3.1 tag ZIP was SHA-256 verified. Its TP2 declares VERSION v3.1, English, and two LABEL-bearing designated components numbered 0 and 1.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The author documents BG2EE and EET support. The main component's TP2 requires a ToB-capable game; the current IEPM mapping covers BG2EE and EET only.
+        provenance: declared
+        evidence: [https://github.com/SpellholdStudios/Isra_NPC_BG2]
+      - claim: The optional crossmod component mechanically requires Isra's main component. It detects other installed NPCs by their game resources, so an empty standalone crossmod install is not evidence that any interaction works.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+    installers:
+      - tp2: isra_bg2/isra_bg2.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+    components:
+      - { id: isra-bg2-npc, default_selected: true, weidu: { tp2: isra_bg2/isra_bg2.tp2, label: isra_npc_for_bg2, number: 0 } }
+      - { id: crossmod-banter, weidu: { tp2: isra_bg2/isra_bg2.tp2, label: isra_npc_for_bg2_crossmod_content, number: 1 }, requires: [isra-bg2-npc] }
