@@ -33,6 +33,9 @@ releases:
         provenance: derived
         evidence:
           - https://github.com/TheArtisanBG/Sirene-BG1/releases/tag/v3.1
+      - claim: The English NPC default completed in a revision-pinned clean disposable BGEE 2.6.6 build, was recorded in WeiDU.log, and the sealed game reached its main menu; optional components, EET, and gameplay were not tested.
+        provenance: verified
+        evidence: [docs/pa4-bgee-npc-friendships-evidence.md]
     installers:
       - tp2: Sirene/Setup-Sirene.tp2
         launcher: toolchain

@@ -19,6 +19,9 @@ releases:
       - claim: The author identifies BGEE and EET among the BG1 game targets. The EET source-phase placement is an IEPM inference and remains untested.
         provenance: declared
         evidence: [https://github.com/Pocket-Plane-Group/Xan_BG1_Friendship]
+      - claim: The English default component completed in a revision-pinned clean disposable BGEE 2.6.6 build, was recorded in WeiDU.log, and the sealed game reached its main menu; EET and gameplay were not tested.
+        provenance: verified
+        evidence: [docs/pa4-bgee-npc-friendships-evidence.md]
     installers:
       - tp2: XanBG1Friend/Setup-XanBG1Friend.tp2
         launcher: toolchain

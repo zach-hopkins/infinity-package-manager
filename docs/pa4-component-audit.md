@@ -139,3 +139,8 @@ also each have one exact author-tagged TP2 declaration and a `review-tp2`
 disposable BG2EE 2.6.6 build and reached the Shadows of Amn menu. See
 [`pa4-bg2ee-friendship-expansion-evidence.md`](pa4-bg2ee-friendship-expansion-evidence.md);
 EET and gameplay are not inferred.
+Coran's BG Friendship v5.2, Sirene v3.1, and Xan's BG1 Friendship v11 each
+had their English default selector recorded in one clean revision-pinned
+disposable BGEE 2.6.6 build, which sealed and reached the main menu. See
+[`pa4-bgee-npc-friendships-evidence.md`](pa4-bgee-npc-friendships-evidence.md).
+Sirene's nine optional selectors and all EET paths remain Untested.

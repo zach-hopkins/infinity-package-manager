@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "Coran BG Friendship, Sirene, and Xan BG1 Friendship on clean BGEE 2.6.6",
+  "identity": {
+    "registry_revision": "24aa3ce",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "135d2bd1b944b14d2d9768bdf68c67a4d89dc725e31e74c0ce649dd0b2544a4e",
+    "environments": {
+      "target": {
+        "target": "bgee",
+        "fingerprint": {
+          "profile": "iepm-core-layout-v1",
+          "value": "04fc6602150ff7788875573dbf0b7f4aeb7ca26aaf83b022c77d9fc417d848c3"
+        }
+      }
+    },
+    "packages": [
+      { "package": "coran-bg-friendship", "release_id": "coran-bg-friendship-v5.2-source", "environment": "target", "artifact_sha256": "b0a76e5299ed5275f7072dba5b21e94a9f099b748ebe7785cb34be1502365b4a", "components": ["friendship"] },
+      { "package": "sirene", "release_id": "sirene-v3.1", "environment": "target", "artifact_sha256": "88d5f65d324850ae3ea593d831030595f6869a9fe1dea57f5b1682d0aae642e5", "components": ["npc"] },
+      { "package": "xan-bg1-friendship", "release_id": "xan-bg1-friendship-v11-source", "environment": "target", "artifact_sha256": "17e128a3f8d98d434b70ce1708b846ca9429c6124e76c37a0778aab7630e78ae", "components": ["friendship"] }
+    ],
+    "execution_order": ["coran-bg-friendship", "sirene", "xan-bg1-friendship"]
+  },
+  "checks": {
+    "artifact_verified": true,
+    "selector_known": true,
+    "requirements_modeled": true,
+    "component_catalog_complete": true,
+    "all_components_classified": true,
+    "core_components_supported": true,
+    "selected_components_supported": true,
+    "relationships_satisfied": true,
+    "no_opaque_selections": true,
+    "clean_disposable_install": true,
+    "all_actions_completed": true,
+    "requested_components_recorded": true,
+    "no_components_skipped": true,
+    "warnings_classified": true,
+    "sealed": true,
+    "eet_end_required": false,
+    "main_menu_smoke": true,
+    "gameplay_smoke": false
+  },
+  "evidence": ["examples/bgee-npc-friendships/modpack.yaml", "docs/pa4-bgee-npc-friendships-evidence.md"]
+}

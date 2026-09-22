@@ -19,6 +19,9 @@ releases:
       - claim: The author identifies BGEE and EET targets and says the BG1 NPC Project affects when talks begin, but is not required. The EET source-phase placement is an IEPM inference and remains untested.
         provenance: declared
         evidence: [https://github.com/Gibberlings3/CoranBGFriend]
+      - claim: The English default component completed in a revision-pinned clean disposable BGEE 2.6.6 build, was recorded in WeiDU.log, and the sealed game reached its main menu; EET and gameplay were not tested.
+        provenance: verified
+        evidence: [docs/pa4-bgee-npc-friendships-evidence.md]
     installers:
       - tp2: coranbgfriend/coranbgfriend.tp2
         launcher: toolchain
