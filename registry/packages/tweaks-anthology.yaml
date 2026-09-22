@@ -140,3 +140,140 @@ releases:
       - id: unique-containers-full
         weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_unique_containers_full, number: 182 }
         provides: [{ name: tweaks-unique-containers-scope, exclusive: true }]
+      # These author-labelled selections are a second mechanically derived
+      # group.  SUBCOMPONENT variants share an exclusive capability so a
+      # manifest cannot request several answers to one WeiDU prompt.
+      - id: colorize-npc-names-normal-brightness
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_colorize_npc_names_brightness_normal, number: 250 }
+        provides: [{ name: tweaks-npc-name-brightness, exclusive: true }]
+      - id: colorize-npc-names-slightly-brighter
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_colorize_npc_names_brightness_increased_slightly, number: 251 }
+        provides: [{ name: tweaks-npc-name-brightness, exclusive: true }]
+      - id: colorize-npc-names-moderately-brighter
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_colorize_npc_names_brightness_increased_moderately, number: 252 }
+        provides: [{ name: tweaks-npc-name-brightness, exclusive: true }]
+      - id: colorize-npc-names-slightly-dimmer
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_colorize_npc_names_brightness_decreased_slightly, number: 253 }
+        provides: [{ name: tweaks-npc-name-brightness, exclusive: true }]
+      - id: colorize-npc-names-moderately-dimmer
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_colorize_npc_names_brightness_decreased_moderately, number: 254 }
+        provides: [{ name: tweaks-npc-name-brightness, exclusive: true }]
+      - id: colorize-npc-names-original-colors
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_colorize_npc_names_color_original, number: 255 }
+        provides: [{ name: tweaks-npc-name-brightness, exclusive: true }]
+      - { id: hide-invisible-enemy-vfx, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_hide_vfx_from_invisible_enemies, number: 260 } }
+      - id: improved-athkatla-city-guard
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_improved_athkatla_guard, number: 1040 }
+        unsupported_games: [bgee]
+      - id: gradual-drow-item-disintegration
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_gradual_drow_item_disintegration, number: 1050 }
+        unsupported_games: [bgee]
+      - id: breakable-armor-always
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_breakable_armor_bg, number: 1060 }
+        unsupported_games: [bg2ee]
+        provides: [{ name: tweaks-breakable-armor-scope, exclusive: true }]
+      - id: breakable-armor-degrades-once
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_breakable_armor_bg_degrade_once, number: 1061 }
+        unsupported_games: [bg2ee]
+        provides: [{ name: tweaks-breakable-armor-scope, exclusive: true }]
+      - id: breakable-armor-progressive-degradation
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_breakable_armor_bg_degrade_progressively, number: 1062 }
+        unsupported_games: [bg2ee]
+        provides: [{ name: tweaks-breakable-armor-scope, exclusive: true }]
+      - id: lore-for-gems-and-potions
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_lore_for_gems_potions, number: 1140 }
+        provides: [{ name: tweaks-lore-items-scope, exclusive: true }]
+      - id: lore-for-gems
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_lore_for_gems, number: 1141 }
+        provides: [{ name: tweaks-lore-items-scope, exclusive: true }]
+      - id: lore-for-potions
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_lore_for_potions, number: 1142 }
+        provides: [{ name: tweaks-lore-items-scope, exclusive: true }]
+      - { id: weimer-shapeshifter-rebalancing, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_weimer_shapeshifter_rebalancing, number: 1150 } }
+      - id: multiple-strongholds-no-class-restriction
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_multi_stronghold_no_restriction, number: 1160 }
+        unsupported_games: [bgee]
+        provides: [{ name: tweaks-multiple-strongholds-scope, exclusive: true }]
+      - id: multiple-strongholds-with-class-restrictions
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_multi_stronghold_class_restriction, number: 1161 }
+        unsupported_games: [bgee]
+        provides: [{ name: tweaks-multiple-strongholds-scope, exclusive: true }]
+      - id: sole-mage-stronghold
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_sole_stronghold_mage, number: 1340 }
+        unsupported_games: [bgee]
+        conflicts: [multiple-strongholds-no-class-restriction, multiple-strongholds-with-class-restrictions]
+      - id: sole-fighter-stronghold
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_sole_stronghold_fighter, number: 1341 }
+        unsupported_games: [bgee]
+        conflicts: [multiple-strongholds-no-class-restriction, multiple-strongholds-with-class-restrictions]
+      - id: sole-cleric-stronghold
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_sole_stronghold_cleric, number: 1342 }
+        unsupported_games: [bgee]
+        conflicts: [multiple-strongholds-no-class-restriction, multiple-strongholds-with-class-restrictions]
+      - id: sole-thief-stronghold
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_sole_stronghold_thief, number: 1343 }
+        unsupported_games: [bgee]
+        conflicts: [multiple-strongholds-no-class-restriction, multiple-strongholds-with-class-restrictions]
+      - id: sole-bard-stronghold
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_sole_stronghold_bard, number: 1344 }
+        unsupported_games: [bgee]
+        conflicts: [multiple-strongholds-no-class-restriction, multiple-strongholds-with-class-restrictions]
+      - id: sole-paladin-stronghold
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_sole_stronghold_paladin, number: 1345 }
+        unsupported_games: [bgee]
+        conflicts: [multiple-strongholds-no-class-restriction, multiple-strongholds-with-class-restrictions]
+      - id: sole-druid-stronghold
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_sole_stronghold_druid, number: 1346 }
+        unsupported_games: [bgee]
+        conflicts: [multiple-strongholds-no-class-restriction, multiple-strongholds-with-class-restrictions]
+      - id: sole-ranger-stronghold
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_sole_stronghold_ranger, number: 1347 }
+        unsupported_games: [bgee]
+        conflicts: [multiple-strongholds-no-class-restriction, multiple-strongholds-with-class-restrictions]
+      - id: edwina
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_edwina, number: 1180 }
+        unsupported_games: [bgee]
+      - { id: use-bg-walking-speeds, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_use_bg_walking_speeds, number: 1210 } }
+      - id: cromwell-upgrades-watchers-keep-items
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_cromwell_updates_wk_items, number: 1220 }
+        unsupported_games: [bgee]
+      - id: cromwell-forge-time-instant
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_cromwell_forge_time_0, number: 1225 }
+        unsupported_games: [bgee]
+        provides: [{ name: tweaks-cromwell-forge-time, exclusive: true }]
+      - id: cromwell-forge-time-eight-hours
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_cromwell_forge_time_8, number: 1226 }
+        unsupported_games: [bgee]
+        provides: [{ name: tweaks-cromwell-forge-time, exclusive: true }]
+      - id: cromwell-forge-time-twenty-four-hours
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_cromwell_forge_time_24, number: 1227 }
+        unsupported_games: [bgee]
+        provides: [{ name: tweaks-cromwell-forge-time, exclusive: true }]
+      - id: cespenar-gets-cromwell-recipes
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_cespenar_updates_soa_items, number: 1230 }
+        unsupported_games: [bgee]
+      - id: change-cloakwood-mines-chapter-trigger
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_change_cloakwood_trigger, number: 1270 }
+        unsupported_games: [bg2ee]
+      - { id: npcs-cannot-pass-doors, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_I_am_a_servant_of_the_Secret_Fire_wielder_of_the_flame_of_Anor_You_cannot_pass_The_dark_fire_will_not_avail_you_flame_of_Udun_Go_back_to_the_Shadow_You_cannot_pass, number: 1330 } }
+      - id: karoug-requires-plus-one-weapons
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_karoug_plus_one, number: 1350 }
+        unsupported_games: [bg2ee]
+        provides: [{ name: tweaks-karoug-scope, exclusive: true }]
+      - id: karoug-requires-plus-two-weapons
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_karoug_plus_two, number: 1351 }
+        unsupported_games: [bg2ee]
+        provides: [{ name: tweaks-karoug-scope, exclusive: true }]
+      - id: karoug-wolfsbane-silver-weapons
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_karoug_wolfsbane, number: 1352 }
+        unsupported_games: [bg2ee]
+        provides: [{ name: tweaks-karoug-scope, exclusive: true }]
+      - id: karoug-plus-one-and-wolfsbane
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_karoug_plus_one_and_wolfsbane, number: 1353 }
+        unsupported_games: [bg2ee]
+        provides: [{ name: tweaks-karoug-scope, exclusive: true }]
+      - id: karoug-plus-two-and-wolfsbane
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_karoug_plus_two_and_wolfsbane, number: 1354 }
+        unsupported_games: [bg2ee]
+        provides: [{ name: tweaks-karoug-scope, exclusive: true }]
+      - { id: monks-change-hand-weapon-damage-types, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_monk_weapons, number: 1370 } }
