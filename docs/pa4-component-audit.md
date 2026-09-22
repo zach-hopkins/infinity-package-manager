@@ -57,6 +57,7 @@ classification backlog.
 | Tweaks Anthology v18 source | 450 | 36 | 414 |
 | Ascension 2.1.0 | 19 | 19 | 0 |
 | DLC Merger 2.1 | 4 | 4 | 0 |
+| EE Fixpack Beta 2 | 7 | 3 | 4 internal-only |
 
 The higher Tweaks number reflects the source TP2's full structural surface,
 including choices/subcomponents; it does not mean 450 independent user-facing
@@ -68,4 +69,7 @@ author-labeled optional components were then added as mechanically derived,
 explicitly Untested selectors, closing its structural catalog without claiming
 new compatibility or verification evidence. DLC Merger's two clear
 author-labeled optional entries were treated the same way, closing its small
-four-component catalog.
+four-component catalog. EE Fixpack contributes three real user-facing
+selectors; its other four TP2 declarations are explicit internal generation or
+test paths, so they remain recorded by the audit but are intentionally not
+offered as user components.

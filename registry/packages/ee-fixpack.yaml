@@ -37,3 +37,13 @@ releases:
           tp2: eefixpack/setup-eefixpack.tp2
           label: cd_eefp_core_fixes
           number: 0
+      - id: beta-core-fixes
+        weidu:
+          tp2: eefixpack/setup-eefixpack.tp2
+          label: cd_eefp_beta_core_fixes
+          number: 1
+      - id: game-text-update
+        weidu:
+          tp2: eefixpack/setup-eefixpack.tp2
+          label: cd_eefp_game_text_update
+          number: 2
