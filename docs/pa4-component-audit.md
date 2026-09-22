@@ -118,7 +118,9 @@ the v3.1 release tag is retained separately. This is not install or gameplay
 verification.
 LeUI v4.9.1 similarly has all three TP2 declarations mapped to stable user
 choices. Its author documents an EE 2.6 route and installation before UI
-patchers; IEPM has not run an install or launch fixture yet.
+patchers. All three BG2EE choices completed in one clean revision-pinned
+disposable build, were recorded in `WeiDU.log`, and reached the Shadows of
+Amn menu. See [`pa4-bg2ee-leui-evidence.md`](pa4-bg2ee-leui-evidence.md).
 The ten friendship releases each expose one mechanically matched component.
 Their author READMEs identify BG2EE and EET. A combined clean BG2EE 2.6.6
 managed build completed all ten, recorded them in `WeiDU.log`, sealed, and

@@ -24,8 +24,10 @@ clean disposable build and main-menu evidence in
 The Coran, Sirene, and Xan English defaults also have a pinned clean BGEE
 build and main-menu smoke in
 [`pa4-bgee-npc-friendships-evidence.md`](pa4-bgee-npc-friendships-evidence.md).
-EET routes remain Untested, as do Sirene's optional selectors. LeUI remains
-Untested pending execution evidence. The remaining 34
+All three LeUI English choices also completed in a separate pinned BG2EE
+build and reached the Shadows of Amn menu, recorded in
+[`pa4-bg2ee-leui-evidence.md`](pa4-bg2ee-leui-evidence.md). EET routes and
+Sirene's optional selectors remain Untested. The remaining 34
 tagged archives are exact-byte review inputs, not a promise that IEPM can
 install them. The seven branch
 routes and 17 manual routes remain separate acquisition work; a mutable branch

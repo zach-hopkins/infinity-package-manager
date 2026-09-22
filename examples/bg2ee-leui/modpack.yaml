@@ -1,6 +1,7 @@
 schema: 2
 
-# PA-4 default-route preflight fixture; not install or launch evidence.
+# PA-4 exact LeUI v4.9.1 BG2EE fixture. Three declared TP2 components are
+# selected to probe both the core UI and the two optional BG2 visual choices.
 environments:
   target:
     target: bg2ee
@@ -15,4 +16,4 @@ environments:
 mods:
   - package: leui
     environment: target
-    components: [core-ui]
+    components: [core-ui, bg2-vanilla-spell-icons, bg2-vanilla-description-fonts]
