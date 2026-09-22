@@ -13,6 +13,13 @@ The frontend collects paths and displays plans, warnings, progress, and
 receipts. It does not select releases, resolve dependencies, interpret
 compatibility, calculate fingerprints, or install mods.
 
+This app is currently the Product A desktop foundation, not the completed
+Product B launcher. Product B will evolve it toward Play / Mods / Settings,
+profiles, pending changes, last-known-good builds, launch recipes, and external
+save awareness only after the Product A completion gate passes. Those concepts
+remain Rust-owned and GUI-independent. See
+[`docs/product-b-launcher.md`](../../docs/product-b-launcher.md).
+
 ## First use
 
 The desktop app asks once for an **IEPM library folder**. It keeps downloaded

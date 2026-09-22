@@ -12,7 +12,10 @@ wish list for a larger package manager.
 
 IEPM is a deterministic package-management layer above WeiDU. Its stable
 boundaries are: human manifest intent, curated registry facts, a canonical
-resolved lockfile, and a future semantic layer that Product A does not require.
+resolved lockfile, and evidence-backed execution. Product B will add external
+profiles/launch/save management over those boundaries; Products C and D add
+semantic understanding and composition later. Product A does not require any
+of those later layers.
 
 An EET build is an execution graph across named game environments. Package
 phases are useful ordering barriers within one environment, but are never a

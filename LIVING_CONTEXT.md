@@ -53,7 +53,10 @@ in a fresh managed workspace. Under the public status policy it remains
 Untested until component-level launch evidence is complete, and the exact
 configuration cannot become Verified until main-menu and gameplay smokes are
 recorded. The next work is those smokes plus broader registry/component
-coverage, while keeping scope deliberately incremental. A6 now reads a selected local TP2 as inert
+coverage, while keeping scope deliberately incremental. Product B's launcher
+and profile work is now the next major product phase, but it remains gated on
+this Product A supportability/verification work rather than competing with it.
+A6 now reads a selected local TP2 as inert
 text and reviews its `VERSION`, language declaration order, and
 `BEGIN`/`DESIGNATED`/`LABEL` selectors against one curated release. It emits
 review JSON but never executes TP2 code, discovers behavior, or rewrites YAML.
@@ -105,7 +108,7 @@ The project keeps four questions distinct:
 | Manifest | What does the user want? | Human intent |
 | Registry | What do we know about available releases? | Curated ecosystem facts |
 | Lockfile | What exact build did resolution choose? | Canonical resolved build |
-| Semantic model | What do components actually do? | Future Product B/C analysis |
+| Semantic model | What do components actually do? | Future Product C/D analysis |
 
 Product A must not depend on semantic analysis. Future semantic knowledge may
 improve conflicts and merging, but it must not replace manifest, registry, or
@@ -290,6 +293,20 @@ preferred over generic frameworks, trait pyramids, or speculative builders.
 
 ## Product progression
 
+The settled sequence is:
+
+```text
+Product A — Package Manager / Reproducible Build System
+Product B — Modded Game Launcher / Profile Platform
+Product C — Semantic Analyzer
+Product D — Semantic Merge / Compiler
+```
+
+Product A must pass the explicit completion gate in `ROADMAP.md` before
+Product B becomes the implementation focus. The existing desktop shell is an
+A7 usability surface and architectural foundation, not evidence that the gate
+has passed.
+
 Product A is a useful package manager even if later products never ship:
 
 ```text
@@ -353,10 +370,20 @@ manifest → registry → resolver → lockfile → verified artifacts
   to the existing Rust build API. A local v251 executable override exists only
   as an advanced recovery path when Windows Security blocks acquisition; it is
   version-checked but must never be represented as archive-hash verified.
-- **Product B:** semantic analyzer; controlled component installs plus useful
-  resource-level diffs.
-- **Product C:** optional semantic merge/compiler layer. Do not build it into
-  Product A.
+- **Product B:** external launcher and profile platform over Product A. Its
+  core concepts are Profile, Build, PendingChanges, LaunchRecipe, and
+  SaveAssociation. Rust owns them; Svelte/Tauri presents them. Mod checkboxes
+  edit desired manifest state and require Apply Changes; they are not runtime
+  plugin toggles. Failed rebuilds preserve the last known-good sealed build.
+  Save associations and mismatch warnings remain external, non-blocking, and
+  conservative. Prefix checkpoints are an optional optimization, not a first
+  milestone requirement. See `docs/product-b-launcher.md`.
+- **Product C:** semantic analyzer for structured resource/component effects,
+  overlap, explainable compatibility, and richer save-risk classification. It
+  enhances Product B but does not block its initial launcher experience.
+- **Product D:** optional semantic merge/compiler layer for safe composition,
+  semantic ordering, generators, and conflict synthesis. Do not build it into
+  Product A or B.
 
 Unknown legacy packages should degrade guarantees rather than become
 uninstallable by policy. WeiDU remains the escape hatch.

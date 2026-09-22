@@ -3,7 +3,9 @@
 IEPM is designed to survive without a heroic central maintainer. Prefer small,
 auditable changes to the static registry and preserve old lockfile behavior.
 Read [the living project context](LIVING_CONTEXT.md) before changing schemas,
-resolver behavior, registry vocabulary, artifact handling, or A5.
+resolver behavior, registry vocabulary, artifact handling, A5, or future
+profile/launcher state. The [roadmap](ROADMAP.md) keeps Product B gated on the
+remaining Product A supportability and verification work.
 
 ## Registry rules
 

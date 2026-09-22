@@ -22,6 +22,13 @@ Product A is deliberately limited to package management: stable IDs, releases,
 artifacts, compatibility, dependency resolution, capabilities, ordering, and
 reproducible lockfiles. It does not need to understand arbitrary WeiDU programs.
 
+The product sequence is deliberately incremental: Product A makes builds
+reproducible; Product B turns those builds into a polished profile/launcher
+experience; Product C adds semantic understanding; Product D may add semantic
+composition. The current priority remains Product A's popular-mod support and
+verification completion gate. See the [roadmap](ROADMAP.md) and [Product B
+architecture](docs/product-b-launcher.md).
+
 The repository's authoritative project memory is
 [LIVING_CONTEXT.md](LIVING_CONTEXT.md). It applies equally to human
 contributors and coding agents: schema evolution must be evidence-led, EET

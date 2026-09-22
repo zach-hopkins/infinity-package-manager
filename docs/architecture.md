@@ -8,6 +8,23 @@ explicit; phases are conventional hard barriers within one environment.
 manifest → registry → resolver → lockfile → verified artifacts → WeiDU execution
 ```
 
+That build pipeline is Product A. The long-term product sequence is:
+
+```text
+A: reproducible builds
+  → B: profiles, launcher, saves, and daily mod management
+  → C: semantic analysis
+  → D: semantic merge/compiler
+```
+
+Product B does not turn WeiDU packages into runtime plugins. Its mod controls
+edit desired manifest state; **Apply Changes** resolves and produces a new
+sealed build while preserving the previous known-good build. Profiles,
+pending changes, launch recipes, and save/build comparisons belong in reusable
+Rust APIs, with SvelteKit and thin Tauri commands as presentation. See the
+[Product B architecture](product-b-launcher.md). Product B implementation is
+gated on the Product A completion criteria in the [roadmap](../ROADMAP.md).
+
 The registry is static YAML in Git: versioned, forkable, and independent of a
 server. A client resolves against a named registry revision; old lockfiles stay
 reproducible even if future releases become unverified.

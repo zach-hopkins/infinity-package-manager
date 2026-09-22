@@ -1,5 +1,11 @@
 # Mod support ledger
 
+This ledger is also the working input to the future Product A coverage cohort.
+Before Product B implementation begins, maintainers must freeze and name that
+cohort here, include the intended popular BGEE/BG2EE/EET and infrastructure
+coverage, and evaluate every exposed component under the measurable
+verification policy. The current table is not yet that frozen cohort.
+
 This is the human-facing companion to the static registry. It answers two
 different questions which should never be collapsed into one badge:
 

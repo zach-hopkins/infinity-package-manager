@@ -26,6 +26,17 @@ code; favor small additions that preserve old lockfile meaning.
   and required portable inputs.
 - Lockfiles must not contain machine-specific absolute paths or secrets. Bind
   named environments to local filesystem paths outside the portable lockfile.
+- The product sequence is A reproducible package/build system, B external
+  launcher/profile platform, C semantic analyzer, and D semantic
+  merge/compiler. Do not begin Product B implementation until every Product A
+  completion gate in ROADMAP.md has linked evidence and is marked complete.
+- Product B mod controls edit desired manifests and create new builds; they do
+  not hot-load WeiDU mods. Preserve the last known-good sealed build across a
+  failed rebuild. Keep profiles, build state, launch recipes, pending changes,
+  and save/build comparisons authoritative in Rust with a thin Tauri UI.
+- Product B save awareness remains external and non-blocking. Do not add an
+  in-game IEPM menu, save-screen integration, mandatory runtime mod, or an
+  unsupported claim that a mismatched save is safe.
 
 ## Scope discipline
 
@@ -42,4 +53,5 @@ code; favor small additions that preserve old lockfile meaning.
   execute against a user's only game installation.
 
 Read [LIVING_CONTEXT.md](LIVING_CONTEXT.md) before changing schemas, resolver
-behavior, registry semantics, artifact handling, or the A5 execution boundary.
+behavior, registry semantics, artifact handling, the A5 execution boundary, or
+Product B profile/launcher state.
