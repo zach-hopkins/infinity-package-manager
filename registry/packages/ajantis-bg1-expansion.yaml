@@ -25,6 +25,9 @@ releases:
       - claim: The main TP2 forbids installation after EET_End. EET target placement after EET import and before EET_End is an IEPM interpretation of that guard and remains Untested.
         provenance: derived
         evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The TP2 refuses a BGEE game with an unmerged SoD DLC. The first disposable BGEE 2.6.6 fixture encountered that exact check, so the revised fixture explicitly runs DLC Merger first; a BGEE source without SoD would not need that action.
+        provenance: verified
+        evidence: [docs/pa4-bgee-ajantis-bg1-expansion-evidence.md]
     installers:
       - tp2: ajantisbg1/Setup-AjantisBG1.tp2
         launcher: toolchain

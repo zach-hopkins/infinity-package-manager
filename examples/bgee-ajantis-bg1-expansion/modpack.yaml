@@ -14,6 +14,11 @@ environments:
       value: 04fc6602150ff7788875573dbf0b7f4aeb7ca26aaf83b022c77d9fc417d848c3
 
 mods:
+  # This pinned BGEE source has an unmerged SoD DLC; Ajantis' TP2 refuses
+  # that layout until DLC Merger has prepared it.
+  - package: dlc-merger
+    environment: target
+    components: [merge-sod]
   - package: ajantis-bg1-expansion
     environment: target
     components: [friendship-and-romance-expansion]
