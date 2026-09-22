@@ -53,6 +53,12 @@ releases:
       phase: eet
       after: [eet]
       before: [eet-end]
+    relationships:
+      - kind: requires
+        package: eeex
+        components: [bootstrap]
+        when:
+          selected_components: [hide-invisible-enemy-vfx, make-grease-ignitable, bears-and-boars-fight-at-zero-hp, limit-resting, useful-infravision, alternate-concentration-check, concentration-check-constitution-fixed, concentration-check-luck-fixed, concentration-check-constitution-damage, revised-troll-regeneration, nwn-style-summons]
     provenance: unverified
     claims:
       - claim: Release URL, archive hash, TP2 path, VERSION v18, and all listed component number/LABEL pairs were mechanically derived from the exact source-tagged v18 archive.
@@ -64,6 +70,10 @@ releases:
         evidence:
           - https://github.com/Gibberlings3/Tweaks-Anthology/releases/tag/v18
       - claim: The source-tagged v18 archive exposes the same cdtweaks TP2, English language index, and component selectors mechanically observed in the SHA-verified v18 IEMOD artifact. IEPM may execute its declared toolchain route, but this does not make untested component combinations compatibility-verified.
+        provenance: derived
+        evidence:
+          - https://github.com/Gibberlings3/Tweaks-Anthology/releases/tag/v18
+      - claim: Source v18 TP2 declares EEex.tp2 component 0 as a prerequisite for the selected extension-powered visual and rules components listed in the conditional relationship. Their runtime behavior and wider compatibility remain untested.
         provenance: derived
         evidence:
           - https://github.com/Gibberlings3/Tweaks-Anthology/releases/tag/v18
@@ -93,7 +103,9 @@ releases:
       - { id: item-spells-at-character-level, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_item_spells_at_char_level, number: 2170 } }
       - { id: loosen-cleric-multiclass-equipment, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_cleric_multis_loosen_equipment_restrictions, number: 2420 } }
       - { id: improved-cure-cause-wounds, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nwn_cure_cause_wounds, number: 2630 } }
-      - { id: alternate-concentration-check, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_alternate_concentration_check_v1, number: 2690 } }
+      - id: alternate-concentration-check
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_alternate_concentration_check_v1, number: 2690 }
+        provides: [{ name: tweaks-concentration-check-scope, exclusive: true }]
       - { id: learn-spells-100-percent, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_easy_spell_learning_capped, number: 3030 } }
       - { id: potion-stacks-40, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_increase_potion_stacks_40, number: 3101 } }
       - { id: scroll-stacks-40, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_increase_scroll_stacks_40, number: 3111 } }
@@ -494,3 +506,36 @@ releases:
       - { id: pnp-dual-class-proficiency-restrictions, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_pnp_prof_restrictions_for_dualclasses, number: 2450 } }
       - { id: exceptional-strength-weight-limits, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_exceptional_strength_weight_limits, number: 2500 } }
       - { id: level-locked-spell-scrolls, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_level_locked_scrolls, number: 2510 } }
+      - { id: loosen-shield-restrictions, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_loosen_shield_restrictions, number: 2520 } }
+      - { id: lightning-bolts-do-not-bounce, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_lightning_bolts_pls_no_bouncerino, number: 2530 } }
+      - id: faster-dearnise-keep-quests
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_faster_dearnise_keep_timer, number: 2540 }
+        unsupported_games: [bgee]
+      - id: monks-wear-helmets
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_allow_monks_to_wear_helmets, number: 2560 }
+        provides: [{ name: tweaks-monk-equipment-scope, exclusive: true }]
+      - id: monks-use-staves
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_allow_monks_to_use_staves, number: 2561 }
+        provides: [{ name: tweaks-monk-equipment-scope, exclusive: true }]
+      - id: monks-wear-helmets-and-use-staves
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_allow_monks_to_use_helmets_and_staves, number: 2562 }
+        provides: [{ name: tweaks-monk-equipment-scope, exclusive: true }]
+      - { id: backstab-with-use-any-item-weapons, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_thieves_backstab_uai, number: 2590 } }
+      - { id: backstab-immunity-for-some-creatures, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_backstab_immunity, number: 2620 } }
+      - { id: pnp-potions, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_pnp_potions, number: 2640 } }
+      - { id: make-grease-ignitable, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_make_grease_ignitable, number: 2650 } }
+      - { id: bears-and-boars-fight-at-zero-hp, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_bears_and_boars, number: 2660 } }
+      - { id: limit-resting, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_limit_resting_mechanic, number: 2670 } }
+      - { id: useful-infravision, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_infravision, number: 2680 } }
+      - id: concentration-check-constitution-fixed
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_alternate_concentration_check_v2, number: 2691 }
+        provides: [{ name: tweaks-concentration-check-scope, exclusive: true }]
+      - id: concentration-check-luck-fixed
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_alternate_concentration_check_v3, number: 2692 }
+        provides: [{ name: tweaks-concentration-check-scope, exclusive: true }]
+      - id: concentration-check-constitution-damage
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_alternate_concentration_check_v4, number: 2693 }
+        provides: [{ name: tweaks-concentration-check-scope, exclusive: true }]
+      - { id: revised-troll-regeneration, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_revised_troll_regeneration, number: 2700 } }
+      - { id: nwn-style-summons, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_nwn_summons, number: 2710 } }
+      - { id: shapeshifter-armor, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_shapeshifter_armor, number: 2740 } }

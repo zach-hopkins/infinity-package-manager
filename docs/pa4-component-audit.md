@@ -61,7 +61,7 @@ classification backlog.
 | Package/release | Observed TP2 declarations | Existing stable IDs matched | Still unmapped |
 | --- | ---: | ---: | ---: |
 | SCS v35.21 | 146 | 134 | 12 intentionally non-user-facing |
-| Tweaks Anthology v18 source | 446 | 177 | 269 |
+| Tweaks Anthology v18 source | 446 | 196 | 250 |
 | Hidden Gameplay Options v5.1 | 43 | 43 | 0 |
 | Ascension 2.1.0 | 19 | 19 | 0 |
 | Call of the Lost Goddess v3.1 | 3 | 3 | 0 |

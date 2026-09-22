@@ -44,7 +44,7 @@
         "kind": { "enum": ["requires", "optional", "recommends", "conflicts", "before", "after"] },
         "package": { "$ref": "#/$defs/package-id" }, "environment": { "type": "string" }, "version": { "type": "string" },
         "components": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
-        "when": { "type": "object", "properties": { "games": { "type": "array", "items": { "enum": ["bgee", "bg2ee", "eet"] }, "uniqueItems": true } }, "additionalProperties": false }
+        "when": { "type": "object", "properties": { "games": { "type": "array", "items": { "enum": ["bgee", "bg2ee", "eet"] }, "uniqueItems": true }, "selected_components": { "type": "array", "items": { "type": "string" }, "uniqueItems": true } }, "additionalProperties": false }
       }, "additionalProperties": false
     },
     "release": {

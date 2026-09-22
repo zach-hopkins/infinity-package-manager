@@ -243,6 +243,11 @@ requires, optional, recommends, conflicts, before, after
 Relationships can be component-scoped and game-conditioned. A hard requirement
 enters the dependency graph; ordering is not a fake dependency; optional and
 recommendation data do not become implicit requirements.
+Release relationships can also name selected source-package components in
+`when.selected_components`: the rule applies if any named component is chosen.
+Tweaks Anthology v18's EEex-dependent optional selectors are the first real
+case. Empty preserves the original package-wide rule; the relationship's own
+`components` field still names components of the target package.
 
 A component may also declare package-local `requires` or `conflicts` by stable
 IEPM component ID. Prerequisites extend the same package's single WeiDU action;

@@ -591,20 +591,21 @@ fn required_dependencies(
     environment: &GameEnvironment,
     request: &Request,
 ) -> Result<Vec<Dependency>, ResolveError> {
-    let component_requires = selected_components(
+    let selected = selected_components(
         package,
         release,
         request,
         environment.active_target(release.install.phase),
-    )?
-    .into_iter()
-    .flat_map(|component| component.requires.iter().cloned())
-    .map(|component| Dependency {
-        package: package.to_owned(),
-        environment: None,
-        version: None,
-        components: vec![component],
-    });
+    )?;
+    let component_requires = selected
+        .iter()
+        .flat_map(|component| component.requires.iter().cloned())
+        .map(|component| Dependency {
+            package: package.to_owned(),
+            environment: None,
+            version: None,
+            components: vec![component],
+        });
     Ok(release
         .dependencies
         .iter()
@@ -617,7 +618,7 @@ fn required_dependencies(
                     relationship.kind == RelationshipKind::Requires
                         && relationship
                             .when
-                            .matches_game(environment.active_target(release.install.phase))
+                            .matches(environment.active_target(release.install.phase), &selected)
                 })
                 .map(|relationship| Dependency {
                     package: relationship.package.clone(),
@@ -947,10 +948,17 @@ fn validate_conflicts(
 ) -> Result<(), ResolveError> {
     for (key, index) in &solution.selected {
         let selected_release = release(registry, key, *index);
+        let selected = selected_components(
+            &key.package,
+            selected_release,
+            &solution.requests[key],
+            environments[&key.environment].active_target(selected_release.install.phase),
+        )?;
         for relationship in &selected_release.relationships {
             if relationship.kind != RelationshipKind::Conflicts
-                || !relationship.when.matches_game(
+                || !relationship.when.matches(
                     environments[&key.environment].active_target(selected_release.install.phase),
+                    &selected,
                 )
             {
                 continue;
@@ -1022,6 +1030,12 @@ fn order(
 
     for (key, index) in &solution.selected {
         let release = release(registry, key, *index);
+        let selected_components = selected_components(
+            &key.package,
+            release,
+            &solution.requests[key],
+            environments[&key.environment].active_target(release.install.phase),
+        )?;
         for dependency in required_dependencies(
             &key.package,
             release,
@@ -1061,10 +1075,10 @@ fn order(
             }
         }
         for relationship in &release.relationships {
-            if !relationship
-                .when
-                .matches_game(environments[&key.environment].active_target(release.install.phase))
-            {
+            if !relationship.when.matches(
+                environments[&key.environment].active_target(release.install.phase),
+                &selected_components,
+            ) {
                 continue;
             }
             let other = Key {
@@ -1911,6 +1925,60 @@ mod tests {
                 "initialize-ai",
             ])
         );
+    }
+
+    #[test]
+    fn cross_package_requirement_applies_only_to_selected_source_component() {
+        let mut registry = Registry::new();
+        let mut tweaks = release("1", Phase::Eet);
+        let mut ordinary = component("ordinary", "ordinary");
+        ordinary.default_selected = true;
+        let mut extension_feature = component("eeex-feature", "eeex-feature");
+        extension_feature.default_selected = false;
+        tweaks.components = vec![ordinary, extension_feature];
+        tweaks.relationships.push(Relationship {
+            kind: RelationshipKind::Requires,
+            package: "eeex".to_owned(),
+            environment: None,
+            components: vec!["bootstrap".to_owned()],
+            version: None,
+            when: RelationshipCondition {
+                games: vec![],
+                selected_components: vec!["eeex-feature".to_owned()],
+            },
+        });
+        registry.insert("tweaks".to_owned(), record("tweaks", vec![tweaks]));
+        let mut eeex = release("1", Phase::Eet);
+        eeex.components.push(component("bootstrap", "bootstrap"));
+        registry.insert("eeex".to_owned(), record("eeex", vec![eeex]));
+
+        let ordinary = resolve(
+            &manifest(vec![RequestedMod::Package("tweaks".to_owned())]),
+            &registry,
+            "test",
+            toolchain(),
+        )
+        .unwrap();
+        assert_eq!(ordinary.packages.len(), 1);
+
+        let selected = resolve(
+            &manifest(vec![RequestedMod::Selection {
+                package: "tweaks".to_owned(),
+                version: None,
+                components: vec!["eeex-feature".to_owned()],
+                environment: None,
+                language: None,
+                installer_inputs: BTreeMap::new(),
+            }]),
+            &registry,
+            "test",
+            toolchain(),
+        )
+        .unwrap();
+        assert_eq!(selected.packages.len(), 2);
+        assert_eq!(selected.execution[0].id, "target::eeex");
+        assert_eq!(selected.execution[1].id, "target::tweaks");
+        assert_eq!(selected.packages[0].components[0].id, "bootstrap");
     }
 
     #[test]

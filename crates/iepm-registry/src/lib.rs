@@ -1338,6 +1338,19 @@ fn validate_record(record: &PackageRecord) -> Result<()> {
                 );
             }
         }
+        for relationship in &release.relationships {
+            for selected_component in &relationship.when.selected_components {
+                if !components.contains(selected_component) {
+                    bail!(
+                        "{} {} relationship to {} names unknown selected component {}",
+                        record.package,
+                        release.id(),
+                        relationship.package,
+                        selected_component
+                    );
+                }
+            }
+        }
         for artifact in release.artifacts() {
             if !artifact.url.starts_with("https://")
                 || artifact.sha256.len() != 64

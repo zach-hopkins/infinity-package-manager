@@ -337,11 +337,20 @@ pub enum RelationshipKind {
 pub struct RelationshipCondition {
     #[serde(default)]
     pub games: Vec<String>,
+    /// Apply when any of these stable source-package component IDs is
+    /// selected. Empty retains the historical package-wide meaning.
+    #[serde(default)]
+    pub selected_components: Vec<String>,
 }
 
 impl RelationshipCondition {
-    pub fn matches_game(&self, game: &str) -> bool {
-        self.games.is_empty() || self.games.iter().any(|candidate| candidate == game)
+    pub fn matches(&self, game: &str, selected: &[&Component]) -> bool {
+        (self.games.is_empty() || self.games.iter().any(|candidate| candidate == game))
+            && (self.selected_components.is_empty()
+                || self
+                    .selected_components
+                    .iter()
+                    .any(|id| selected.iter().any(|component| component.id == *id)))
     }
 }
 
