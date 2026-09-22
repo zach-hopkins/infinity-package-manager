@@ -1,0 +1,38 @@
+schema: 2
+package: turnabout
+releases:
+  - release_id: turnabout-v1.8-source
+    version: "v1.8"
+    artifacts:
+      - url: https://github.com/Pocket-Plane-Group/Turnabout/archive/refs/tags/v1.8.zip
+        sha256: 2e637c93eb922bd14a8290dc1c521d196a6c2a2ad2b15afac3d95eb175de711e
+        platforms: [windows]
+    materialization: { source_root: Turnabout-1.8, include: [turnabout] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet, after: [eet, ascension], before: [eet-end] }
+    relationships:
+      - kind: requires
+        package: ascension
+        components: [rewritten-final-chapter]
+        when:
+          selected_components: [fallen-allies-in-final-battle]
+    provenance: unverified
+    claims:
+      - claim: The exact author v1.8 tag ZIP was SHA-256 verified. Its TP2 declares VERSION v1.8, English and French, and two LABEL-bearing components numbered 0 and 1.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The author readme says Ascension v2.0 or higher must precede Turnabout. The main component also requires the Ascension-provided bodhind.2da file; this relationship applies to the main component, not automatically to the independent portrait choice.
+        provenance: declared
+        evidence: [https://github.com/Pocket-Plane-Group/Turnabout]
+      - claim: The main TP2 accepts ToB, BGT, BG2EE, and EET game predicates. This IEPM release covers only current BG2EE and EET targets; EET placement and gameplay remain Untested.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+    installers:
+      - tp2: turnabout/setup-turnabout.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: French }
+    components:
+      - { id: fallen-allies-in-final-battle, default_selected: true, weidu: { tp2: turnabout/setup-turnabout.tp2, label: Turnabout-main, number: 0 } }
+      - { id: balthazar-portrait, weidu: { tp2: turnabout/setup-turnabout.tp2, label: Turnabout-BalthazarPortrait, number: 1 } }
