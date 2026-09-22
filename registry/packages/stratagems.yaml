@@ -111,20 +111,144 @@ releases:
       - id: bg2-elemental-arrows
         unavailable: "SCS v35.21's TP2 rejects selector 3017 on EET; it is only guarded for legacy Tutu/BGT-style games."
         weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3017 }
-      - { id: dispelling-arrows-max-five-per-store, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3041 } }
+      - id: dispelling-arrows-max-five-per-store
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3041 }
+        provides: [{ name: scs-dispelling-arrow-stock, exclusive: true }]
       - id: add-bg2-scrolls-to-bg1
         unavailable: "SCS v35.21 skipped selector 3501 as failing requirements in an isolated EET fixture; it wrote no WeiDU receipt or game-resource changes."
         unsupported_games: [eet]
         weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3501 }
       - { id: wider-random-scroll-selection, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3505 } }
-      - { id: inquisitor-dispel-one-point-five-times-level, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3540 } }
+      - id: inquisitor-dispel-one-point-five-times-level
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3540 }
+        provides: [{ name: scs-inquisitor-dispel-strength, exclusive: true }]
       - id: improved-healing-random-amount
         deprecated: "SCS v35.21 marks selector 3550 DEPRECATED; invoking it makes WeiDU exit 6 in batch mode."
         weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3550 }
+        provides: [{ name: scs-improved-healing-variant, exclusive: true }]
       - id: cure-cause-wounds-three-e-maximum-damage
         unavailable: "SCS v35.21 skipped selector 3551 as failing requirements in an isolated EET fixture; it wrote no WeiDU receipt or game-resource changes."
         unsupported_games: [eet]
         weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3551 }
+        provides: [{ name: scs-improved-healing-variant, exclusive: true }]
+      # Clear author comments in the exact v35.21 TP2 name these structural
+      # selectors. They remain Untested unless a separate execution claim says
+      # otherwise; the exclusive capabilities reflect only declared choices.
+      - { id: add-new-arcane-spells, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 2500 } }
+      - { id: add-new-divine-spells, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 2510 } }
+      - { id: revised-elementals, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 2520 } }
+      - { id: general-item-nerf, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 2900 } }
+      - { id: replace-plus-one-missiles-with-fine, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3010 } }
+      - id: replace-magic-weapons-with-fine
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3020 }
+        provides: [{ name: scs-fine-weapons-variant, exclusive: true }]
+      - id: replace-magic-weapons-with-fine-no-shatter
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3021 }
+        provides: [{ name: scs-fine-weapons-variant, exclusive: true }]
+      - id: replace-magic-weapons-with-fine-shatter
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3022 }
+        provides: [{ name: scs-fine-weapons-variant, exclusive: true }]
+      - id: dispelling-arrows-no-store-reduction
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3040 }
+        provides: [{ name: scs-dispelling-arrow-stock, exclusive: true }]
+      - id: remove-bg2-only-spells-from-bg1
+        unavailable: "SCS v35.21's TP2 limits selector 3500 to legacy Tutu/BGT-style games, not current BGEE/BG2EE/EET targets."
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3500 }
+      - id: inquisitor-dispel-two-times-level
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3541 }
+        provides: [{ name: scs-inquisitor-dispel-strength, exclusive: true }]
+      - id: cure-cause-wounds-three-e-random-maximum-damage
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3552 }
+        provides: [{ name: scs-improved-healing-variant, exclusive: true }]
+      - id: restoration-restores-ability-drain
+        deprecated: "SCS v35.21 marks selector 3580 DEPRECATED."
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 3580 }
+      - { id: faster-bears, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4000 } }
+      - { id: realistic-wolves-dogs, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4020 } }
+      - { id: improved-shapeshifting, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4030 } }
+      - id: reputation-decay-two-thirds-rate
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4050 }
+        provides: [{ name: scs-reputation-decay-rate, exclusive: true }]
+      - id: reputation-decay-half-rate
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4051 }
+        provides: [{ name: scs-reputation-decay-rate, exclusive: true }]
+      - id: reputation-decay-third-rate
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4052 }
+        provides: [{ name: scs-reputation-decay-rate, exclusive: true }]
+      - id: reputation-decay-quarter-rate
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4093 }
+        provides: [{ name: scs-reputation-decay-rate, exclusive: true }]
+      - id: level-zero-npcs-vanilla
+        unavailable: "SCS v35.21's TP2 limits selector 4099 to legacy BGT/Tutu-style games, not current BGEE/BG2EE/EET targets."
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4099 }
+        provides: [{ name: scs-level-zero-npcs-variant, exclusive: true }]
+      - id: level-zero-npcs-enhanced-edition
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4100 }
+        provides: [{ name: scs-level-zero-npcs-variant, exclusive: true }]
+      - { id: thief-skill-accelerator, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4115 } }
+      - { id: revise-permadeath, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4130 } }
+      - { id: revised-resting-rules, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4135 } }
+      - id: skip-candlekeep-no-tutors
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4145 }
+        provides: [{ name: scs-skip-candlekeep-variant, exclusive: true }]
+      - id: skip-candlekeep-classic
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4146 }
+        provides: [{ name: scs-skip-candlekeep-variant, exclusive: true }]
+      - { id: extend-mage-license-area, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4150 } }
+      - id: mage-license-cost-ten
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4160 }
+        provides: [{ name: scs-mage-license-cost, exclusive: true }]
+      - id: mage-license-cost-fifteen
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4161 }
+        provides: [{ name: scs-mage-license-cost, exclusive: true }]
+      - id: mage-license-cost-twenty
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4162 }
+        provides: [{ name: scs-mage-license-cost, exclusive: true }]
+      - id: mage-license-cost-thirty
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4163 }
+        provides: [{ name: scs-mage-license-cost, exclusive: true }]
+      - id: mage-license-cost-fifty
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4164 }
+        provides: [{ name: scs-mage-license-cost, exclusive: true }]
+      - id: spellhold-cost-forty-thousand
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4170 }
+        provides: [{ name: scs-spellhold-cost, exclusive: true }]
+      - id: spellhold-cost-sixty-thousand
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4171 }
+        provides: [{ name: scs-spellhold-cost, exclusive: true }]
+      - id: spellhold-cost-eighty-thousand
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4172 }
+        provides: [{ name: scs-spellhold-cost, exclusive: true }]
+      - id: spellhold-cost-one-hundred-thousand
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4173 }
+        provides: [{ name: scs-spellhold-cost, exclusive: true }]
+      - id: spellhold-cost-one-hundred-twenty-thousand
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4174 }
+        provides: [{ name: scs-spellhold-cost, exclusive: true }]
+      - { id: early-watchers-keep-access, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4190 } }
+      - { id: randomize-teleport-maze, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4210 } }
+      - { id: no-chimp, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4215 } }
+      - id: no-ammo-for-all
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4216 }
+        provides: [{ name: scs-no-ammo-variant, exclusive: true }]
+      - id: no-ammo-for-ranged-weapons
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4217 }
+        provides: [{ name: scs-no-ammo-variant, exclusive: true }]
+      - id: no-ammo-for-throwing-weapons
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4218 }
+        provides: [{ name: scs-no-ammo-variant, exclusive: true }]
+      - { id: delay-bonus-merchants, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4230 } }
+      - { id: invisible-stoneskin, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 5070 } }
+      - { id: improved-totsc-cutscenes, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 5080 } }
+      - id: improved-random-encounters
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 8050 }
+        requires: [initialize-ai]
+      - id: spellhold-items-stolen
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 8090 }
+        requires: [initialize-ai]
+      - id: catch-all-tactical-component
+        weidu: { tp2: stratagems/setup-stratagems.tp2, number: 8190 }
+        requires: [initialize-ai]
       - { id: revised-inn-rooms, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4140 } }
       - { id: hlas-as-innate-abilities, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4240 } }
       - { id: sequencers-contingencies-as-innate-abilities, weidu: { tp2: stratagems/setup-stratagems.tp2, number: 4250 } }

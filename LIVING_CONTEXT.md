@@ -115,14 +115,16 @@ WeiDU packages remain experimentally installable where technical preflight
 succeeds.
 PA-4 now has a non-mutating component-inventory audit: `review-tp2` exposes
 every raw TP2 declaration not yet represented by a stable, curated component
-ID. The SCS v35.21 local-tree audit found 146 declarations; 78 now have stable
-IDs, including every selector in the personal EET build, while 68 remain
-explicitly unmapped and Untested. Hidden Gameplay Options v5.1 is the first
-complete 43-component catalog: its clear author labels supported structural
-mapping of all selectors, but only components 0 and 10 have separate install
-receipts. The local SCS launcher hash differs from the pinned release artifact,
-so its audit remains structural evidence only rather than a release-verification
-claim.
+ID. The SCS v35.21 local-tree audit found 146 declarations; 134 now have
+stable IDs, including every BGEE/BG2EE/EET-facing selector and every selector
+in the personal EET build. The 12 visible remaining declarations are IWD-only,
+legacy-only, or TP2 internal resource/test blocks—not hidden coverage debt.
+They remain explicitly visible rather than becoming invented user intents.
+Hidden Gameplay Options v5.1 is the first complete 43-component catalog: its
+clear author labels supported structural mapping of all selectors, but only
+components 0 and 10 have separate install receipts. The local SCS launcher
+hash differs from the pinned release artifact, so its audit remains structural
+evidence only rather than a release-verification claim.
 The Supported coverage cohort is not an arbitrary “top 100.” It is the
 smallest cohort of at least 50 packages that covers at least 95% of weighted,
 deduplicated package selections in a dated public corpus, plus required
