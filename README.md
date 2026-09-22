@@ -28,6 +28,11 @@ experience; Product C adds semantic understanding; Product D may add semantic
 composition. The current priority remains Product A's popular-mod support and
 verification completion gate. See the [roadmap](ROADMAP.md) and [Product B
 architecture](docs/product-b-launcher.md).
+The evidence-based ecosystem indexing and 95%-coverage work is specified in the
+[Product A closeout plan](docs/product-a-closeout-plan.md); its initial source
+audit is recorded in the [Infinity Mod Forge assessment](docs/research/infinity-mod-forge-assessment.md).
+The paired acquisition/installer research is recorded in the
+[Infinity Mod Runner assessment](docs/research/infinity-mod-runner-assessment.md).
 
 The repository's authoritative project memory is
 [LIVING_CONTEXT.md](LIVING_CONTEXT.md). It applies equally to human

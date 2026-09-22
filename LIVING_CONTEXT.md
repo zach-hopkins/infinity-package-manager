@@ -92,6 +92,19 @@ migration convenience. Registry coverage is deliberately incomplete and largely
 unverified; that must remain explicit rather than silently blocking analysis or
 claiming installability.
 
+Product A closeout now has a frozen process in
+`docs/product-a-closeout-plan.md`. Broad ecosystem discovery and executable
+support are separate layers: IEPM will import a pinned Infinity Mod Forge
+snapshot into a generated discovery catalog, classify reachable landing pages
+separately from exact downloadable artifacts, and keep opaque/user-supplied
+WeiDU packages experimentally installable where technical preflight succeeds.
+The Supported coverage cohort is not an arbitrary “top 100.” It is the
+smallest cohort of at least 50 packages that covers at least 95% of weighted,
+deduplicated package selections in a dated public corpus, plus required
+infrastructure and current reference-profile packages. Only that cohort must
+complete Product A's release/component support work; the full catalog is not a
+claim that all indexed mods are verified.
+
 ## Core thesis
 
 > Infinity Engine modding does not primarily have an installation problem. It

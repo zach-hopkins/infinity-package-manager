@@ -36,7 +36,12 @@ Product B transition gate has passed.
 
 Product B implementation begins only after these measurable gates pass:
 
-- [ ] freeze and name the Product A popular-mod coverage cohort in the support ledger;
+The ordered implementation milestones, discovery/support layer definitions,
+95% cohort metric, and confirmation artifacts are normative in the
+[Product A closeout plan](docs/product-a-closeout-plan.md).
+
+- [ ] import the pinned ecosystem discovery catalog, account for every source record, and classify landing-page and exact-artifact health separately;
+- [ ] freeze and name the smallest Product A coverage cohort of at least 50 packages that reaches at least 95% of the documented selection corpus;
 - [ ] give every cohort release an exact artifact route and complete component catalog, with every exposed component explicitly Supported, Untested, or Incompatible for each intended target;
 - [ ] ensure every component advertised as Supported satisfies the quantitative evidence policy—nothing becomes green merely because it is present in the registry;
 - [ ] build one BGEE, one BG2EE, and one EET reference profile twice from clean snapshots, producing the same portable lock identity and complete action receipts on both runs;
