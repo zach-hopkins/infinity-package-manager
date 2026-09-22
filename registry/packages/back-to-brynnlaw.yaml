@@ -1,0 +1,33 @@
+schema: 2
+package: back-to-brynnlaw
+aliases: [backbrynnlaw]
+releases:
+  - release_id: back-to-brynnlaw-v9-source
+    version: "v9"
+    artifacts:
+      - url: https://github.com/Pocket-Plane-Group/Back_to_Brynnlaw/archive/refs/tags/v9.zip
+        sha256: fffb5ef9a0569db9423d74dfd396e8b0232d391fdaf9fdb6086246dbea90332a
+        platforms: [windows]
+    materialization: { source_root: Back_to_Brynnlaw-9, include: [BackBrynnlaw] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact v9 author tag ZIP was SHA-256 verified; its TP2 declares VERSION v9, six languages, and one numeric component 0.
+        provenance: derived
+        evidence: [https://github.com/Pocket-Plane-Group/Back_to_Brynnlaw/releases/tag/v9]
+      - claim: The author identifies BG2EE and EET as supported games; IEPM has not yet run an installation fixture for this release.
+        provenance: declared
+        evidence: [https://github.com/Pocket-Plane-Group/Back_to_Brynnlaw]
+    installers:
+      - tp2: BackBrynnlaw/backbrynnlaw.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: Russian }
+          - { id: 2, name: Deutsch }
+          - { id: 3, name: Chinese }
+          - { id: 4, name: French }
+          - { id: 5, name: Polish }
+    components:
+      - { id: brynnlaw-quest, default_selected: true, weidu: { tp2: BackBrynnlaw/backbrynnlaw.tp2, number: 0 } }

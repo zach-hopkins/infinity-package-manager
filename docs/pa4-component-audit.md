@@ -109,3 +109,9 @@ managed build completed all ten, recorded them in `WeiDU.log`, sealed, and
 reached the Shadows of Amn menu. The exact-scope evidence is in
 [`pa4-friendships-evidence.md`](pa4-friendships-evidence.md); EET and gameplay
 remain untested.
+
+Assassinations v19, Sellswords v9.1, Back to Brynnlaw v9, and Dungeon Crawl
+v13.1 each have one TP2 declaration matched to a stable IEPM component ID.
+`review-tp2` reports `match` for all four, including exact author language
+labels. The combined BG2EE route preflights executable; installation and
+launch evidence has not yet been gathered.

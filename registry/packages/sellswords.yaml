@@ -1,0 +1,32 @@
+schema: 2
+package: sellswords
+releases:
+  - release_id: sellswords-v9.1-source
+    version: "v9.1"
+    artifacts:
+      - url: https://github.com/Pocket-Plane-Group/Sellswords/archive/refs/tags/v9.1.zip
+        sha256: a5969376c1b63e2be1213882c5703afc60714772b93f906ccb53e76f990dfb2c
+        platforms: [windows]
+    materialization: { source_root: Sellswords-9.1, include: [Sellswords] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact v9.1 author tag ZIP was SHA-256 verified; its TP2 declares VERSION v9.1, six languages, one numeric component 0, and a Throne of Bhaal game predicate.
+        provenance: derived
+        evidence: [https://github.com/Pocket-Plane-Group/Sellswords/releases/tag/v9.1]
+      - claim: The author identifies BG2EE and EET as supported games and says Throne of Bhaal content is required; IEPM has not yet run an installation fixture for this release.
+        provenance: declared
+        evidence: [https://github.com/Pocket-Plane-Group/Sellswords]
+    installers:
+      - tp2: Sellswords/Sellswords.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: Russian }
+          - { id: 2, name: German (by Gerri) }
+          - { id: 3, name: Chinese (by Merzbau) }
+          - { id: 4, name: French }
+          - { id: 5, name: Polish (by Stars of Mystra) }
+    components:
+      - { id: sellswords-quest, default_selected: true, weidu: { tp2: Sellswords/Sellswords.tp2, number: 0 } }

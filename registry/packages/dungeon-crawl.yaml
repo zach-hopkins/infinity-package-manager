@@ -1,0 +1,34 @@
+schema: 2
+package: dungeon-crawl
+aliases: [dc]
+releases:
+  - release_id: dungeon-crawl-v13.1-source
+    version: "v13.1"
+    artifacts:
+      - url: https://github.com/Pocket-Plane-Group/Dungeon_Crawl/archive/refs/tags/v13.1.zip
+        sha256: c598c4495a863636a9b458e66c6a039c53e11cf103d691b30c7df7c2a55820e5
+        platforms: [windows]
+    materialization: { source_root: Dungeon_Crawl-13.1, include: [DC] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact v13.1 author tag ZIP was SHA-256 verified; its TP2 declares VERSION v13.1, seven languages, and one numeric component 0.
+        provenance: derived
+        evidence: [https://github.com/Pocket-Plane-Group/Dungeon_Crawl/releases/tag/v13.1]
+      - claim: The author identifies BG2EE and EET as supported games; IEPM has not yet run an installation fixture for this release.
+        provenance: declared
+        evidence: [https://github.com/Pocket-Plane-Group/Dungeon_Crawl]
+    installers:
+      - tp2: DC/DC.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: Russian }
+          - { id: 2, name: German (Translated by Gerri) }
+          - { id: 3, name: Italian (Translated by Ilot) }
+          - { id: 4, name: Polish (Translated by Aristo) }
+          - { id: 5, name: Chinese (Translated by Merzbau) }
+          - { id: 6, name: French (Translated by deratiseur) }
+    components:
+      - { id: dungeon-crawl-quest, default_selected: true, weidu: { tp2: DC/DC.tp2, number: 0 } }

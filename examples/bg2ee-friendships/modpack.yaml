@@ -1,7 +1,7 @@
 schema: 2
 
-# PA-4 executable-route preflight for ten exact author-tagged friendship
-# releases. This selection has not been installed or launch-tested as a stack.
+# PA-4 exact author-tagged friendship stack. The BG2EE route completed a
+# disposable install and main-menu smoke; see docs/pa4-friendships-evidence.md.
 environments:
   target:
     target: bg2ee

@@ -1,0 +1,34 @@
+schema: 2
+package: assassinations
+releases:
+  - release_id: assassinations-v19-source
+    version: "v19"
+    artifacts:
+      - url: https://github.com/Pocket-Plane-Group/Assassinations/archive/refs/tags/v19.zip
+        sha256: 69affd9c09b5dde9d8133a37483c0eca26d53926b351eef0cbe956254ecb8e04
+        platforms: [windows]
+    materialization: { source_root: Assassinations-19, include: [Assassinations] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact v19 author tag ZIP was SHA-256 verified; its TP2 declares VERSION v19, eight languages, and one numeric component 0.
+        provenance: derived
+        evidence: [https://github.com/Pocket-Plane-Group/Assassinations/releases/tag/v19]
+      - claim: The author identifies BG2EE and EET as supported games; IEPM has not yet run an installation fixture for this release.
+        provenance: declared
+        evidence: [https://github.com/Pocket-Plane-Group/Assassinations]
+    installers:
+      - tp2: Assassinations/Assassinations.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: Russian }
+          - { id: 2, name: Spanish (Translated by Memnoch) }
+          - { id: 3, name: German (Translated by Toran) }
+          - { id: 4, name: Italian (Translated by ilot) }
+          - { id: 5, name: Polish (Translated by Cuttooth) }
+          - { id: 6, name: French (Translated by Le Marquis) }
+          - { id: 7, name: Chinese (Translated by Merzbau) }
+    components:
+      - { id: assassinations-quest, default_selected: true, weidu: { tp2: Assassinations/Assassinations.tp2, number: 0 } }

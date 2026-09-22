@@ -45,6 +45,10 @@ labels. This ledger must use those words only with those meanings.
 | Valygar Friendship v1.5 | Complete one-component catalog | BG2EE default built and launched | **Supported** on tested BG2EE 2.6.6 fingerprint; EET Untested | [registry](../registry/packages/valygar-friendship.yaml) |
 | Viconia Friendship v4.5 | Complete one-component catalog | BG2EE default built and launched | **Supported** on tested BG2EE 2.6.6 fingerprint; EET Untested | [registry](../registry/packages/viconia-friendship.yaml) |
 | Yoshimo Friendship v5.0 | Complete one-component catalog | BG2EE default built and launched | **Supported** on tested BG2EE 2.6.6 fingerprint; EET Untested | [registry](../registry/packages/yoshimo-friendship.yaml) |
+| Assassinations v19 | Complete one-component catalog, eight languages | Exact BG2EE route resolves executable | **Untested** — no install or launch receipt yet | [registry](../registry/packages/assassinations.yaml) |
+| Sellswords v9.1 | Complete one-component catalog, six languages; TP2 requires ToB content | Exact BG2EE route resolves executable | **Untested** — no install or launch receipt yet | [registry](../registry/packages/sellswords.yaml) |
+| Back to Brynnlaw v9 | Complete one-component catalog, six languages | Exact BG2EE route resolves executable | **Untested** — no install or launch receipt yet | [registry](../registry/packages/back-to-brynnlaw.yaml) |
+| Dungeon Crawl v13.1 | Complete one-component catalog, seven languages | Exact BG2EE route resolves executable | **Untested** — no install or launch receipt yet | [registry](../registry/packages/dungeon-crawl.yaml) |
 | Sword Coast Stratagems v35.21 | 134 stable IDs mapped against 143 live local TP2 declarations: every BGEE/BG2EE/EET-facing selector and the personal EET build | Yes for mapped selectors; prerequisites and documented alternative choices are checked before execution | **Untested** — bounded selectors have install evidence, but policy launch smoke and gameplay evidence remain incomplete; the remaining 9 declarations are IWD-only or legacy-only | [registry](../registry/packages/stratagems.yaml) |
 | Ascension 2.1.0 | Complete 19-component structural catalog; all selectors matched against the local TP2 audit | Yes | **Untested** — the core route has install evidence, while the newly mapped optional components still require their own evidence | [registry](../registry/packages/ascension.yaml) |
 | Call of the Lost Goddess v3.1 | Complete 3-component structural catalog | Yes | **Untested** — the core route has fixture install evidence; optional portraits/voiceover and policy launch smoke remain untested | [registry](../registry/packages/call-of-the-lost-goddess.yaml) |
@@ -73,8 +77,9 @@ selectors, curated relationships, and automated disposable-build evidence.
 
 The frozen cohort contains 19 packages that were already mapped when it was
 selected and 80 indexed candidates. Twelve of those candidates (Sirene, LeUI,
-and the ten BG2 friendship releases) now have curated executable identities;
-68 remain discovery-only. The remaining candidates are **not** silently
+the ten BG2 friendship releases, and four Pocket Plane quest mods) now have
+curated executable identities; 64 remain discovery-only. The remaining
+candidates are **not** silently
 excluded: they may proceed through IEPM's opaque local-package route once
 their exact bytes are supplied and safely inspected. They simply do not yet
 have an executable release record or component-by-component support ledger.
