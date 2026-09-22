@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "BioWare NPC Flirt Packs v1.07 eight base English choices on clean BG2EE 2.6.6",
+  "identity": {
+    "registry_revision": "08e424e",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "1ee83cb9506779b4156123797c6ecbff129074ed1f279efe0e78d0678148b4ac",
+    "environments": {
+      "target": {
+        "target": "bg2ee",
+        "fingerprint": {
+          "profile": "iepm-core-layout-v1",
+          "value": "298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f"
+        }
+      }
+    },
+    "packages": [
+      { "package": "npcflirt", "release_id": "npcflirt-v1.07-source", "environment": "target", "artifact_sha256": "65b0a2b64134b0039062024e79d6b03a87b7df91eda4e9061d5d0c80ceead568", "components": ["aerie-soa", "aerie-tob", "jaheira-soa", "jaheira-tob", "viconia-soa", "viconia-tob", "anomen-soa", "anomen-tob"] }
+    ],
+    "execution_order": ["npcflirt"]
+  },
+  "checks": {
+    "artifact_verified": true,
+    "selector_known": true,
+    "requirements_modeled": true,
+    "component_catalog_complete": true,
+    "all_components_classified": true,
+    "core_components_supported": true,
+    "selected_components_supported": true,
+    "relationships_satisfied": true,
+    "no_opaque_selections": true,
+    "clean_disposable_install": true,
+    "all_actions_completed": true,
+    "requested_components_recorded": true,
+    "no_components_skipped": true,
+    "warnings_classified": true,
+    "sealed": true,
+    "eet_end_required": false,
+    "main_menu_smoke": true,
+    "gameplay_smoke": false
+  },
+  "evidence": ["examples/bg2ee-npcflirt/modpack.yaml", "docs/pa4-bg2ee-npcflirt-evidence.md"]
+}

@@ -10,7 +10,7 @@ releases:
     materialization: { source_root: NPC_Flirt_Packs-1.07, include: [npcflirt] }
     compatibility: { games: [bg2ee, eet] }
     install: { phase: eet }
-    provenance: unverified
+    provenance: verified
     claims:
       - claim: The exact author v1.07 tag archive was SHA-256 verified; its TP2 declares VERSION v1.07, five languages, and sixteen implicit-number components for four BG2 companions across SoA/ToB, each with an optional Solaufein conflict component.
         provenance: derived
@@ -21,6 +21,9 @@ releases:
       - claim: The author documents support for BG2EE and EET.
         provenance: declared
         evidence: [https://github.com/Pocket-Plane-Group/NPC_Flirt_Packs]
+      - claim: The eight English base SoA/ToB choices installed in a pinned clean BG2EE 2.6.6 build, appeared in WeiDU.log, and the sealed game reached the Shadows of Amn menu when launched from its game folder. Solaufein choices, EET, and dialogue behavior remain untested.
+        provenance: verified
+        evidence: [docs/pa4-bg2ee-npcflirt-evidence.md, evidence/pa4-bg2ee-npcflirt.json]
     installers:
       - tp2: npcflirt/setup-npcflirt.tp2
         launcher: toolchain

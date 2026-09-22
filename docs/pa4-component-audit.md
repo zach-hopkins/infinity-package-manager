@@ -163,6 +163,7 @@ BioWare NPC Flirt Packs v1.07 has all sixteen implicit-number selectors
 mapped to stable IDs: four companions, SoA and ToB content, and separate
 Solaufein interaction choices. Its archived TP2 is Windows-1252 rather than
 UTF-8, so `review-tp2` used a mechanically transcoded temporary copy; the
-exact artifact hash remains the identity. An executable eight-base-component
-fixture is ready for a clean BG2EE build, but no support claim follows from
-the structural match alone.
+exact artifact hash remains the identity. The eight base English choices
+completed a clean revision-pinned BG2EE build and reached the Shadows of Amn
+menu; see [`pa4-bg2ee-npcflirt-evidence.md`](pa4-bg2ee-npcflirt-evidence.md).
+The eight Solaufein choices and dialogue behavior remain Untested.
