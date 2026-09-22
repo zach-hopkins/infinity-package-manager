@@ -1,0 +1,61 @@
+schema: 2
+package: unfinished-business-bg2
+releases:
+  - release_id: unfinished-business-bg2-v28-source
+    version: "v28"
+    artifacts:
+      - url: https://github.com/Pocket-Plane-Group/UnfinishedBusiness/archive/refs/tags/v28.zip
+        sha256: 953b849329626a50e8de5927170c927b1ade0641f409aa83be2a6b63fd0b0203
+        platforms: [windows]
+    materialization: { source_root: UnfinishedBusiness-28, include: [ub] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet }
+    provenance: unverified
+    claims:
+      - claim: The exact author v28 source-tag archive was SHA-256 verified. Its active setup-ub.tp2 declares VERSION v28, nine WeiDU languages, and 26 structural components; two are explicitly deprecated for BG2EE and are not offered as current-game choices. The separate ub/kalah/kalah.tp2 is a legacy TP2, not the active main installer.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The author describes Unfinished Business as restoring BG2 cut content and documents EET compatibility fixes in release history.
+        provenance: declared
+        evidence: [https://github.com/Pocket-Plane-Group/UnfinishedBusiness]
+      - claim: The active TP2 explicitly deprecates Gorf the Squisher Fix and Corrected BAMs and Scripts for BG2EE, directing classic-BG2 users to G3 Fixpack; the late ToB choices require GAME_INCLUDES tob.
+        provenance: derived
+        evidence: [https://github.com/Pocket-Plane-Group/UnfinishedBusiness]
+    installers:
+      - tp2: ub/setup-ub.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: "French (graoumf and Les D'Oghmatiques)" }
+          - { id: 2, name: "Polski (Yarpen, Cahir)" }
+          - { id: 3, name: "Deutsch (Rosenranken.de)" }
+          - { id: 4, name: "Español (Clan DLAN)" }
+          - { id: 5, name: "Czech (yenn)" }
+          - { id: 6, name: "Russian (Alex&AERIE.RU, BigMF, Hawkmoon, Regharrr. Updated by Prowler)" }
+          - { id: 7, name: "Chinese (Scar_kun)" }
+          - { id: 8, name: "Italian (Giuseppe Cali, Ilot)" }
+    components:
+      - { id: kidnapping-of-boo, weidu: { tp2: ub/setup-ub.tp2, number: 0 } }
+      - { id: suna-seni-valygar, weidu: { tp2: ub/setup-ub.tp2, number: 1 } }
+      - { id: kalah-promise, weidu: { tp2: ub/setup-ub.tp2, number: 2 } }
+      - { id: bodhi-cat-and-mouse, weidu: { tp2: ub/setup-ub.tp2, number: 3 } }
+      - { id: gorje-hilldark-illithium, weidu: { tp2: ub/setup-ub.tp2, number: 4 } }
+      - { id: paina-spiders-bane, weidu: { tp2: ub/setup-ub.tp2, number: 5 } }
+      - { id: crooked-crane-inn, weidu: { tp2: ub/setup-ub.tp2, number: 6 } }
+      - { id: restored-encounters, weidu: { tp2: ub/setup-ub.tp2, number: 7 } }
+      - { id: artemis-entreri, weidu: { tp2: ub/setup-ub.tp2, number: 8 } }
+      - { id: xzar-creations, weidu: { tp2: ub/setup-ub.tp2, number: 9 } }
+      - { id: hell-minions, weidu: { tp2: ub/setup-ub.tp2, number: 10 } }
+      - { id: item-restorations, weidu: { tp2: ub/setup-ub.tp2, number: 12 } }
+      - { id: yoshimo-original-portrait, weidu: { tp2: ub/setup-ub.tp2, number: 13 } }
+      - { id: anomen-original-portrait, weidu: { tp2: ub/setup-ub.tp2, number: 14 } }
+      - { id: npc-portrait-restorations, weidu: { tp2: ub/setup-ub.tp2, number: 15 } }
+      - { id: character-names-biographies, weidu: { tp2: ub/setup-ub.tp2, number: 17 } }
+      - { id: minor-dialogs, weidu: { tp2: ub/setup-ub.tp2, number: 18 } }
+      - { id: bhaalspawn-powers, weidu: { tp2: ub/setup-ub.tp2, number: 19 } }
+      - { id: tob-item-descriptions, weidu: { tp2: ub/setup-ub.tp2, number: 20 } }
+      - { id: tob-minor-restorations, weidu: { tp2: ub/setup-ub.tp2, number: 21 } }
+      - { id: justifier-kit, weidu: { tp2: ub/setup-ub.tp2, number: 22 } }
+      - { id: feralan-kit, weidu: { tp2: ub/setup-ub.tp2, number: 23 } }
+      - { id: sarevok-remorse, weidu: { tp2: ub/setup-ub.tp2, number: 24 } }
+      - { id: murder-of-acton-balthis, weidu: { tp2: ub/setup-ub.tp2, number: 25 } }

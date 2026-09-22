@@ -68,6 +68,7 @@ classification backlog.
 | Banter Pack v18 tag archive | 4 | 4 | 0 |
 | BioWare NPC Flirt Packs v1.07 tag archive | 16 | 16 | 0 |
 | Drake v1.7a tag archive | 6 | 6 | 0 |
+| Unfinished Business v28 main TP2 | 26 | 24 | 2 explicitly deprecated for BG2EE |
 | Ten Spellhold Studios BG2 friendship tag archives | 10 total | 10 | 0 |
 | Dorn, Hexxat, and Jaheira Friendships; Korgan's Redemption tag archives | 4 total | 4 | 0 |
 | Coran's BG Friendship and Xan's BG1 Friendship tag archives | 2 total | 2 | 0 |
@@ -178,4 +179,13 @@ BGEE builds, but both sealed games faulted at the same `Baldur.exe` offset
 before the menu. See
 [`pa4-bgee-drake-evidence.md`](pa4-bgee-drake-evidence.md); this exact
 configuration is Incompatible under the policy, while other choices remain
+Untested.
+Unfinished Business v28's active `ub/setup-ub.tp2` has 26 structural
+declarations. Twenty-four current-game choices are mapped. Selectors 11 (Gorf
+the Squisher Fix) and 16 (Corrected BAMs and Scripts) are explicitly
+deprecated for BG2EE in the TP2, so they are observed but not user-facing.
+The separate `ub/kalah/kalah.tp2` is a legacy installer and is not the active
+UB component catalog. The source TP2 is Windows-1252; `review-tp2` used a
+mechanically transcoded temporary copy and reported `match`. The bounded
+three-component fixture is executable, but installation and EET remain
 Untested.
