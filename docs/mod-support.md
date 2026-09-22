@@ -38,6 +38,7 @@ labels. This ledger must use those words only with those meanings.
 | Coran's BG Friendship v5.2 | Complete one-component catalog, three languages | BGEE English default built and launched | **Supported** on tested BGEE 2.6.6 fingerprint; EET Untested | [evidence](pa4-bgee-npc-friendships-evidence.md) |
 | Xan's BG1 Friendship v11 | Complete one-component catalog, five languages | BGEE English default built and launched | **Supported** on tested BGEE 2.6.6 fingerprint; EET Untested | [evidence](pa4-bgee-npc-friendships-evidence.md) |
 | LeUI 4.9.1 | Complete three-component structural catalog from the SHA-pinned author tag archive; explicit before-SCS placement | All three BG2EE English selectors built and launched | **Supported** for tested BG2EE 2.6.6 selection; other games and UI-overhaul combinations Untested | [evidence](pa4-bg2ee-leui-evidence.md) |
+| High Quality Soundclips v1.3 | Complete one-component catalog, three WeiDU languages | BG2EE English default built and launched | **Supported** on tested BG2EE 2.6.6 fingerprint; EET and audio-quality behavior Untested | [evidence](pa4-bg2ee-hq-soundclips-evidence.md) |
 | Cernd Friendship v1.4 | Complete one-component catalog | BG2EE default built and launched | **Supported** on tested BG2EE 2.6.6 fingerprint; EET Untested | [registry](../registry/packages/cernd-friendship.yaml) |
 | Haer'dalis Friendship v1.2 | Complete one-component catalog | BG2EE default built and launched | **Supported** on tested BG2EE 2.6.6 fingerprint; EET Untested | [registry](../registry/packages/haerdalis-friendship.yaml) |
 | Imoen Friendship v3.6 | Complete one-component catalog | BG2EE default built and launched | **Supported** on tested BG2EE 2.6.6 fingerprint; EET Untested | [registry](../registry/packages/imoen-friendship.yaml) |
@@ -83,10 +84,11 @@ selectors, curated relationships, and automated disposable-build evidence.
 ## Cohort work boundary
 
 The frozen cohort contains 19 packages that were already mapped when it was
-selected and 80 indexed candidates. Twenty-two of those candidates (Sirene,
+selected and 80 indexed candidates. Twenty-three of those candidates (Sirene,
 LeUI, thirteen BG2 friendship releases, four Pocket Plane quest mods,
-Korgan's Redemption, Coran's BG Friendship, and Xan's BG1 Friendship) now
-have curated executable identities; 58 remain discovery-only. The remaining
+Korgan's Redemption, Coran's BG Friendship, Xan's BG1 Friendship, and High
+Quality Soundclips) now have curated executable identities; 57 remain
+discovery-only. The remaining
 candidates are **not** silently
 excluded: they may proceed through IEPM's opaque local-package route once
 their exact bytes are supplied and safely inspected. They simply do not yet

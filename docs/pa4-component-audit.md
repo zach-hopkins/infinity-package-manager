@@ -146,3 +146,8 @@ had their English default selector recorded in one clean revision-pinned
 disposable BGEE 2.6.6 build, which sealed and reached the main menu. See
 [`pa4-bgee-npc-friendships-evidence.md`](pa4-bgee-npc-friendships-evidence.md).
 Sirene's nine optional selectors and all EET paths remain Untested.
+High Quality Soundclips v1.3 has its one LABEL-bearing component structurally
+matched and completed in a clean revision-pinned disposable BG2EE 2.6.6
+build, followed by a Shadows of Amn menu smoke. See
+[`pa4-bg2ee-hq-soundclips-evidence.md`](pa4-bg2ee-hq-soundclips-evidence.md).
+EET and audible output remain Untested.

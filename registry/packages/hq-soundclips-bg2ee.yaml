@@ -18,6 +18,9 @@ releases:
       - claim: The author describes this package as restoring higher-quality English soundclips for BG2EE extended content and names BG2EE and EET as install targets.
         provenance: declared
         evidence: [https://github.com/Argent77/HQ-SoundClips-BG2EE]
+      - claim: The English component completed in a revision-pinned clean disposable BG2EE 2.6.6 build, appeared in WeiDU.log, and the sealed game reached the Shadows of Amn main menu; EET and audible output were not tested.
+        provenance: verified
+        evidence: [docs/pa4-bg2ee-hq-soundclips-evidence.md]
     installers:
       - tp2: HQ_SoundClips_BG2EE/HQ_SoundClips_BG2EE.tp2
         launcher: toolchain

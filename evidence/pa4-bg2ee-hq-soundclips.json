@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "High Quality Soundclips v1.3 English default on clean BG2EE 2.6.6",
+  "identity": {
+    "registry_revision": "2f765b6",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "f6c3ef774d3679a191f76b0c7d9c9ad8c5e35c89cf721a8ccae06d0960694d7a",
+    "environments": {
+      "target": {
+        "target": "bg2ee",
+        "fingerprint": {
+          "profile": "iepm-core-layout-v1",
+          "value": "298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f"
+        }
+      }
+    },
+    "packages": [
+      { "package": "hq-soundclips-bg2ee", "release_id": "hq-soundclips-bg2ee-v1.3-source", "environment": "target", "artifact_sha256": "2a969c472597baf8eb038ad3e0b42eec25c161e8fbbece3200b47de6b4fe942b", "components": ["high-quality-soundclips"] }
+    ],
+    "execution_order": ["hq-soundclips-bg2ee"]
+  },
+  "checks": {
+    "artifact_verified": true,
+    "selector_known": true,
+    "requirements_modeled": true,
+    "component_catalog_complete": true,
+    "all_components_classified": true,
+    "core_components_supported": true,
+    "selected_components_supported": true,
+    "relationships_satisfied": true,
+    "no_opaque_selections": true,
+    "clean_disposable_install": true,
+    "all_actions_completed": true,
+    "requested_components_recorded": true,
+    "no_components_skipped": true,
+    "warnings_classified": true,
+    "sealed": true,
+    "eet_end_required": false,
+    "main_menu_smoke": true,
+    "gameplay_smoke": false
+  },
+  "evidence": ["examples/bg2ee-hq-soundclips/modpack.yaml", "docs/pa4-bg2ee-hq-soundclips-evidence.md"]
+}
