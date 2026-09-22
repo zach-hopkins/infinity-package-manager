@@ -438,3 +438,59 @@ releases:
         unsupported_games: [bgee]
       - { id: remove-single-class-race-restrictions, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_remove_class_racial_restrictions, number: 2360 } }
       - { id: remove-kit-race-restrictions, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_remove_kit_racial_restrictions, number: 2380 } }
+      - id: dual-class-all-races
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_alter_dualclass_humans_yes_nonhumans_yes, number: 2371 }
+        provides: [{ name: tweaks-dual-class-race-scope, exclusive: true }]
+      - id: dual-class-disabled-for-all-races
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_alter_dualclass_humans_no_nonhumans_no, number: 2370 }
+        provides: [{ name: tweaks-dual-class-race-scope, exclusive: true }]
+      - id: dual-class-nonhumans-only
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_alter_dualclass_humans_no_nonhumans_yes, number: 2372 }
+        provides: [{ name: tweaks-dual-class-race-scope, exclusive: true }]
+      - id: multiclass-humans-allowed
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_multiclass_allow_humans, number: 2350 }
+        provides: [{ name: tweaks-multiclass-race-scope, exclusive: true }]
+      - id: multiclass-all-nonhuman-combinations
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_multiclass_allow_nonhumans_all, number: 2351 }
+        provides: [{ name: tweaks-multiclass-race-scope, exclusive: true }]
+      - id: multiclass-selected-nonhuman-combinations
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_multiclass_allow_nonhumans_limited, number: 2353 }
+        provides: [{ name: tweaks-multiclass-race-scope, exclusive: true }]
+      - id: multiclass-all-races-all-combinations
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_multiclass_allow_all_all, number: 2357 }
+        provides: [{ name: tweaks-multiclass-race-scope, exclusive: true }]
+      - id: multiclass-all-races-selected-combinations
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_multiclass_allow_all_limited, number: 2358 }
+        provides: [{ name: tweaks-multiclass-race-scope, exclusive: true }]
+      - id: gnome-illusionist-multiclass-all-mage-kits
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_gnome_multiclass_illusionist_kits_all, number: 2550 }
+        provides: [{ name: tweaks-gnome-mage-scope, exclusive: true }]
+      - id: gnome-generic-mage-multiclass-illusionist-kit
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_gnome_multiclass_mage_kits_illusionist, number: 2551 }
+        provides: [{ name: tweaks-gnome-mage-scope, exclusive: true }]
+      - id: gnome-generic-mage-multiclass-all-mage-kits
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_gnome_multiclass_mage_kits_all, number: 2552 }
+        provides: [{ name: tweaks-gnome-mage-scope, exclusive: true }]
+      - id: paladin-how-spell-progression
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_paladin_spell_progression_iwd, number: 2390 }
+        provides: [{ name: tweaks-paladin-spell-progression-scope, exclusive: true }]
+      - id: paladin-bg2-sixth-level-spells
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_paladin_spell_progression_alt, number: 2391 }
+        provides: [{ name: tweaks-paladin-spell-progression-scope, exclusive: true }]
+      - id: ranger-how-spell-progression
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_ranger_spell_progression_iwd, number: 2400 }
+        provides: [{ name: tweaks-ranger-spell-progression-scope, exclusive: true }]
+      - id: ranger-bg2-fifth-level-spells
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_ranger_spell_progression_alt, number: 2401 }
+        provides: [{ name: tweaks-ranger-spell-progression-scope, exclusive: true }]
+      - { id: druid-third-edition-alignment, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_druids_use_3e_alignment, number: 2410 } }
+      - id: loosen-druid-multiclass-equipment
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_druid_multis_loosen_equipment_restrictions, number: 2430 }
+        provides: [{ name: tweaks-druid-multiclass-equipment-scope, exclusive: true }]
+      - id: tighten-druid-multiclass-equipment
+        weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_druid_multis_tighten_equipment_restrictions, number: 2431 }
+        provides: [{ name: tweaks-druid-multiclass-equipment-scope, exclusive: true }]
+      - { id: specialization-attacks-for-all, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_specialization_apr_bonus_for_all, number: 2440 } }
+      - { id: pnp-dual-class-proficiency-restrictions, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_pnp_prof_restrictions_for_dualclasses, number: 2450 } }
+      - { id: exceptional-strength-weight-limits, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_exceptional_strength_weight_limits, number: 2500 } }
+      - { id: level-locked-spell-scrolls, weidu: { tp2: cdtweaks/setup-cdtweaks.tp2, label: cd_tweaks_level_locked_scrolls, number: 2510 } }
