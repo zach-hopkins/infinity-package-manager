@@ -15,13 +15,14 @@ installer-specific behavior, and game targets/order still need review.
 
 Sirene, LeUI, ten single-component Spellhold Studios friendship mods, four
 single-component Pocket Plane quest mods, three further BG2EE friendships,
-and Korgan's Redemption now have reviewed, executable registry routes. The
+Korgan's Redemption, Coran's BG Friendship, and Xan's BG1 Friendship now have
+reviewed, executable registry routes. The
 first ten friendship defaults and four quest defaults have exact-scope BG2EE
 build and main-menu evidence. The four newest routes also have revision-pinned
 clean disposable build and main-menu evidence in
 [`pa4-bg2ee-friendship-expansion-evidence.md`](pa4-bg2ee-friendship-expansion-evidence.md).
-EET routes remain Untested. Sirene and LeUI remain Untested pending execution
-evidence. The remaining 36
+EET routes remain Untested. Sirene, Coran, Xan, and LeUI remain Untested pending
+execution evidence. The remaining 34
 tagged archives are exact-byte review inputs, not a promise that IEPM can
 install them. The seven branch
 routes and 17 manual routes remain separate acquisition work; a mutable branch

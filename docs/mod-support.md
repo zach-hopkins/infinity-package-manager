@@ -35,6 +35,8 @@ labels. This ledger must use those words only with those meanings.
 | IWDification v11 | 22 current-game selectors mapped against 24 TP2 declarations; one deprecated and one classic-only entry omitted; two component-level Tweaks overlaps guarded | Yes for mapped selectors | **Untested** — bard songs has an exact BG2EE install receipt; the newly mapped choices and policy launch smoke remain | [registry](../registry/packages/iwdification.yaml) |
 | Tweaks Anthology v18 | 394 stable IDs mapped against 446 live TP2 declarations; three current-game residual selectors need custom values, while 49 are legacy/deprecated; selected EEex prerequisites and two IWDification overlaps are guarded | Yes for mapped source selectors | **Untested** — starter and Forge install receipts exist, but policy launch smoke and broad component verification remain | [registry](../registry/packages/tweaks-anthology.yaml) |
 | Sirene v3.1 | Complete ten-component structural catalog from the SHA-pinned official release-tag archive | Default BGEE route resolves as executable; artifact and game execution are not yet tested | **Untested** — no install or launch receipt; optional portrait/class choices are structurally mapped only | [registry](../registry/packages/sirene.yaml) |
+| Coran's BG Friendship v5.2 | Complete one-component catalog, three languages | Default BGEE route resolves as executable | **Untested** — no managed install or menu smoke; EET source-phase placement remains an inference | [registry](../registry/packages/coran-bg-friendship.yaml) |
+| Xan's BG1 Friendship v11 | Complete one-component catalog, five languages | Default BGEE route resolves as executable | **Untested** — no managed install or menu smoke; EET source-phase placement remains an inference | [registry](../registry/packages/xan-bg1-friendship.yaml) |
 | LeUI 4.9.1 | Complete three-component structural catalog from the SHA-pinned author tag archive; explicit before-SCS placement | Default BG2EE route resolves as executable; artifact and game execution are not yet tested | **Untested** — no install or launch receipt; other UI-overhaul relationships remain unverified | [registry](../registry/packages/leui.yaml) |
 | Cernd Friendship v1.4 | Complete one-component catalog | BG2EE default built and launched | **Supported** on tested BG2EE 2.6.6 fingerprint; EET Untested | [registry](../registry/packages/cernd-friendship.yaml) |
 | Haer'dalis Friendship v1.2 | Complete one-component catalog | BG2EE default built and launched | **Supported** on tested BG2EE 2.6.6 fingerprint; EET Untested | [registry](../registry/packages/haerdalis-friendship.yaml) |
@@ -81,9 +83,10 @@ selectors, curated relationships, and automated disposable-build evidence.
 ## Cohort work boundary
 
 The frozen cohort contains 19 packages that were already mapped when it was
-selected and 80 indexed candidates. Twenty of those candidates (Sirene, LeUI,
-thirteen BG2 friendship releases, four Pocket Plane quest mods, and Korgan's
-Redemption) now have curated executable identities; 60 remain discovery-only. The remaining
+selected and 80 indexed candidates. Twenty-two of those candidates (Sirene,
+LeUI, thirteen BG2 friendship releases, four Pocket Plane quest mods,
+Korgan's Redemption, Coran's BG Friendship, and Xan's BG1 Friendship) now
+have curated executable identities; 58 remain discovery-only. The remaining
 candidates are **not** silently
 excluded: they may proceed through IEPM's opaque local-package route once
 their exact bytes are supplied and safely inspected. They simply do not yet

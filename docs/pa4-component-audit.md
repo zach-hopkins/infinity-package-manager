@@ -67,6 +67,7 @@ classification backlog.
 | LeUI v4.9.1 tag archive | 3 | 3 | 0 |
 | Ten Spellhold Studios BG2 friendship tag archives | 10 total | 10 | 0 |
 | Dorn, Hexxat, and Jaheira Friendships; Korgan's Redemption tag archives | 4 total | 4 | 0 |
+| Coran's BG Friendship and Xan's BG1 Friendship tag archives | 2 total | 2 | 0 |
 | Hidden Gameplay Options v5.1 | 43 | 43 | 0 |
 | Ascension 2.1.0 | 19 | 19 | 0 |
 | Call of the Lost Goddess v3.1 | 3 | 3 | 0 |

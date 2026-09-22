@@ -1,0 +1,30 @@
+schema: 2
+package: coran-bg-friendship
+aliases: [coranbgfriend]
+releases:
+  - release_id: coran-bg-friendship-v5.2-source
+    version: "v5.2"
+    artifacts:
+      - url: https://github.com/Gibberlings3/CoranBGFriend/archive/refs/tags/v5.2.zip
+        sha256: b0a76e5299ed5275f7072dba5b21e94a9f099b748ebe7785cb34be1502365b4a
+        platforms: [windows]
+    materialization: { source_root: CoranBGFriend-5.2, include: [coranbgfriend] }
+    compatibility: { games: [bgee, eet] }
+    install: { phase: bgee, before: [eet] }
+    provenance: unverified
+    claims:
+      - claim: The exact v5.2 author tag ZIP was SHA-256 verified; its TP2 declares VERSION v5.2, three languages, and one numeric component 0 with an author LABEL.
+        provenance: derived
+        evidence: [https://github.com/Gibberlings3/CoranBGFriend/releases/tag/v5.2]
+      - claim: The author identifies BGEE and EET targets and says the BG1 NPC Project affects when talks begin, but is not required. The EET source-phase placement is an IEPM inference and remains untested.
+        provenance: declared
+        evidence: [https://github.com/Gibberlings3/CoranBGFriend]
+    installers:
+      - tp2: coranbgfriend/coranbgfriend.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: Deutsch }
+          - { id: 2, name: Russian }
+    components:
+      - { id: friendship, default_selected: true, weidu: { tp2: coranbgfriend/coranbgfriend.tp2, label: Domi-CoranBGFriend-Main, number: 0 } }

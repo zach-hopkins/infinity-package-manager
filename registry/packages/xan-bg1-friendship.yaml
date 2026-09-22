@@ -1,0 +1,32 @@
+schema: 2
+package: xan-bg1-friendship
+aliases: [xanbg1friend]
+releases:
+  - release_id: xan-bg1-friendship-v11-source
+    version: "v11"
+    artifacts:
+      - url: https://github.com/Pocket-Plane-Group/Xan_BG1_Friendship/archive/refs/tags/v11.zip
+        sha256: 17e128a3f8d98d434b70ce1708b846ca9429c6124e76c37a0778aab7630e78ae
+        platforms: [windows]
+    materialization: { source_root: Xan_BG1_Friendship-11, include: [XanBG1Friend] }
+    compatibility: { games: [bgee, eet] }
+    install: { phase: bgee, before: [eet] }
+    provenance: unverified
+    claims:
+      - claim: The exact v11 author tag ZIP was SHA-256 verified; its TP2 declares VERSION v11, five languages, and one implicit-number component 0 without LABEL.
+        provenance: derived
+        evidence: [https://github.com/Pocket-Plane-Group/Xan_BG1_Friendship/releases/tag/v11]
+      - claim: The author identifies BGEE and EET among the BG1 game targets. The EET source-phase placement is an IEPM inference and remains untested.
+        provenance: declared
+        evidence: [https://github.com/Pocket-Plane-Group/Xan_BG1_Friendship]
+    installers:
+      - tp2: XanBG1Friend/Setup-XanBG1Friend.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: Russian }
+          - { id: 2, name: German (Translated by Steffen) }
+          - { id: 3, name: French (Translated by Eleima) }
+          - { id: 4, name: Italian (Translated by totuccio5) }
+    components:
+      - { id: friendship, default_selected: true, weidu: { tp2: XanBG1Friend/Setup-XanBG1Friend.tp2, number: 0 } }
