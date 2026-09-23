@@ -1,0 +1,42 @@
+schema: 2
+package: extra-enhanced-encounters
+aliases: [extraexpandedenhancedencounters]
+releases:
+  - release_id: extra-enhanced-encounters-4.4-source
+    version: "4.4"
+    artifacts:
+      - url: https://github.com/GraionDilach/ExtraExpandedEnhancedEncounters/archive/refs/tags/4.4.zip
+        sha256: 967ef5ffad7b097d3d93812f94ffd8bd22f3ff9c55b485928a85f7eebbdac2d4
+        platforms: [windows]
+    materialization: { source_root: ExtraExpandedEnhancedEncounters-4.4, include: [ExtraExpandedEnhancedEncounters] }
+    compatibility: { games: [bgee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact 4.4 maintainer-tag ZIP matched SHA-256. Its TP2 declares eight independent LABEL-bearing components numbered 0 through 7.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The maintainer describes BGEE/EET support, and recommends placement after quest mods and Ascalon's Questpack when present, but before tweak mods. This is an ordering recommendation, not a hard dependency.
+        provenance: declared
+        evidence: [https://github.com/GraionDilach/ExtraExpandedEnhancedEncounters]
+      - claim: The Gnoll Stronghold cave component number 3 specifically requires SoD content; the other seven components accept BGEE or EET. The current BGEE fixture has merged SoD.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+    installers:
+      - tp2: ExtraExpandedEnhancedEncounters/ExtraExpandedEnhancedEncounters.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: "Russian (by yota13 & p_zombie)" }
+          - { id: 2, name: "Spanish (by alaisFcZ)" }
+          - { id: 3, name: "Simplified Chinese (translation: Lewis Liu)" }
+          - { id: 4, name: "Polish (by Aristo)" }
+    components:
+      - { id: melia-quicknight, default_selected: true, weidu: { tp2: ExtraExpandedEnhancedEncounters/ExtraExpandedEnhancedEncounters.tp2, label: OL-EEEE-COAST-WAY, number: 0 } }
+      - { id: bimmys-bandits, weidu: { tp2: ExtraExpandedEnhancedEncounters/ExtraExpandedEnhancedEncounters.tp2, label: OL-EEEE-LONELY-PEAKS, number: 1 } }
+      - { id: reinforced-gnoll-stronghold, weidu: { tp2: ExtraExpandedEnhancedEncounters/ExtraExpandedEnhancedEncounters.tp2, label: OL-EEEE-GNOLL-STRONGHOLD, number: 2 } }
+      - { id: gnoll-stronghold-cave-bears, weidu: { tp2: ExtraExpandedEnhancedEncounters/ExtraExpandedEnhancedEncounters.tp2, label: OL-EEEE-GNOLL-STRONGHOLD-CAVE, number: 3 } }
+      - { id: xans-new-grove, weidu: { tp2: ExtraExpandedEnhancedEncounters/ExtraExpandedEnhancedEncounters.tp2, label: OL-EEEE-XANS-NEW-GROVE, number: 4 } }
+      - { id: daennis-bridge-bandits, weidu: { tp2: ExtraExpandedEnhancedEncounters/ExtraExpandedEnhancedEncounters.tp2, label: OL-EEEE-CLOAKWOOD-BRIDGE, number: 5 } }
+      - { id: wyvern-cave-fire-drake, weidu: { tp2: ExtraExpandedEnhancedEncounters/ExtraExpandedEnhancedEncounters.tp2, label: OL-EEEE-WYVERN-CAVE, number: 6 } }
+      - { id: undercity-magma-bulwark, weidu: { tp2: ExtraExpandedEnhancedEncounters/ExtraExpandedEnhancedEncounters.tp2, label: OL-EEEE-UNDERCITY, number: 7 } }

@@ -1,0 +1,41 @@
+schema: 2
+package: boareskyr-bridge-scene
+aliases: [c-sodboabri]
+releases:
+  - release_id: boareskyr-bridge-scene-v8-source
+    version: "v8"
+    artifacts:
+      - url: https://github.com/Gibberlings3/The_Boareskyr_Bridge_Scene/archive/refs/tags/v8.zip
+        sha256: f6d5b37ed4e3cb08aaac13ec716c8320e71e3697d0fbd65166b0796e9949b164
+        platforms: [windows]
+    materialization: { source_root: The_Boareskyr_Bridge_Scene-8, include: ["c#sodboabri"] }
+    compatibility: { games: [bgee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact v8 author-tag ZIP matched SHA-256. Its TP2 declares VERSION v8 and four LABEL-bearing components numbered 0 through 3.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: Every component requires SoD content on BGEE or EET. The BGEE fixture merges its unmerged SoD DLC before installation; BGEE without SoD is not an applicable route.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The four components form a strict package-local chain 0 then 1 then 2 then 3, as expressed by TP2 REQUIRE_COMPONENT and FORBID_COMPONENT clauses. The last three are not standalone choices.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+    installers:
+      - tp2: "c#sodboabri/c#sodboabri.tp2"
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: Deutsch }
+          - { id: 2, name: Francais }
+          - { id: 3, name: Italiano }
+          - { id: 4, name: Russian }
+          - { id: 5, name: Polish }
+          - { id: 6, name: Spanish }
+          - { id: 7, name: Simplified Chinese }
+    components:
+      - { id: acknowledge-boareskyr-scene, default_selected: true, weidu: { tp2: "c#sodboabri/c#sodboabri.tp2", label: "c#sodboabri_AcknowledgeSceneBoareskyrBridge", number: 0 } }
+      - { id: add-scene-description, weidu: { tp2: "c#sodboabri/c#sodboabri.tp2", label: "c#sodboabri_TescriptionText", number: 1 }, requires: [acknowledge-boareskyr-scene] }
+      - { id: offer-different-choices, weidu: { tp2: "c#sodboabri/c#sodboabri.tp2", label: "c#sodboabri_DifferentChoices", number: 2 }, requires: [add-scene-description] }
+      - { id: add-choice-stat-changes, weidu: { tp2: "c#sodboabri/c#sodboabri.tp2", label: "c#sodboabri_StatChanges", number: 3 }, requires: [offer-different-choices] }

@@ -1,0 +1,26 @@
+schema: 2
+
+# PA-4 bounded SoD-on-BGEE fixture. The disposable BGEE source contains
+# unmerged SoD, so DLC Merger is installed first. This exercises every
+# component of both content packages; it is not a general recommendation.
+environments:
+  target:
+    target: bgee
+    version: "2.6.6"
+    platform: windows
+    language: English
+    locale: en_US
+    fingerprint:
+      profile: iepm-core-layout-v1
+      value: 04fc6602150ff7788875573dbf0b7f4aeb7ca26aaf83b022c77d9fc417d848c3
+
+mods:
+  - package: dlc-merger
+    environment: target
+    components: [merge-sod]
+  - package: extra-enhanced-encounters
+    environment: target
+    components: [melia-quicknight, bimmys-bandits, reinforced-gnoll-stronghold, gnoll-stronghold-cave-bears, xans-new-grove, daennis-bridge-bandits, wyvern-cave-fire-drake, undercity-magma-bulwark]
+  - package: boareskyr-bridge-scene
+    environment: target
+    components: [acknowledge-boareskyr-scene, add-scene-description, offer-different-choices, add-choice-stat-changes]
