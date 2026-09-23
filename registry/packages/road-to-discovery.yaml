@@ -25,6 +25,9 @@ releases:
       - claim: Component 20 must precede component 30, and component 50 must precede component 70 when both are selected; package-local prerequisites are modeled below.
         provenance: derived
         evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: All eight active English selectors installed after four compatible Reflections choices on a clean SoD-enabled BGEE 2.6.6 workspace and appeared in WeiDU.log. Game menu and story behavior were not observed.
+        provenance: verified
+        evidence: [evidence/pa4-bgee-sod-story-valid.json]
     installers:
       - tp2: sodrtd/sodrtd.tp2
         launcher: toolchain

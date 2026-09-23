@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "Four Reflections of Destiny 0.9.4 choices and all eight Road to Discovery 6.0 active choices on clean SoD-enabled BGEE 2.6.6",
+  "identity": {
+    "registry_revision": "b94a125",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "e13b060fe09da82e0ab0d6a7fd03fa376d13801affa4108ad8b4bcfd36de13e7",
+    "environments": {
+      "target": {
+        "target": "bgee",
+        "fingerprint": {
+          "profile": "iepm-core-layout-v1",
+          "value": "04fc6602150ff7788875573dbf0b7f4aeb7ca26aaf83b022c77d9fc417d848c3"
+        }
+      }
+    },
+    "packages": [
+      { "package": "dlc-merger", "release_id": "dlc-merger-2.1-win32", "environment": "target", "artifact_sha256": "16b57b32662c1ac1e6d345afaf8669e01cf26eeafc5461000757edf33447e2eb", "components": ["merge-sod"] },
+      { "package": "reflections-of-destiny", "release_id": "reflections-of-destiny-0.9.4-source", "environment": "target", "artifact_sha256": "4ef856cdd4733ad3a2ffb1f6d136b4d3536091fa6bb333d839ba9bbdc8b060a5", "components": ["future-is-now", "mirror-shard", "magical-realism", "precipice-of-death"] },
+      { "package": "road-to-discovery", "release_id": "road-to-discovery-v6-source", "environment": "target", "artifact_sha256": "f331c3d4da6d55dc741687cce0c03e806e36c3268295c4de29a84c3aae6fdcbf", "components": ["tracking-system", "consistency-dialogue", "aware-officers", "informed-pc-replies", "pc-tells-officers", "officers-reactions", "additional-information", "additional-officer-communication"] }
+    ],
+    "execution_order": ["dlc-merger", "reflections-of-destiny", "road-to-discovery"]
+  },
+  "checks": {
+    "artifact_verified": true,
+    "selector_known": true,
+    "requirements_modeled": true,
+    "component_catalog_complete": true,
+    "all_components_classified": true,
+    "core_components_supported": false,
+    "selected_components_supported": false,
+    "relationships_satisfied": true,
+    "no_opaque_selections": true,
+    "clean_disposable_install": true,
+    "all_actions_completed": true,
+    "requested_components_recorded": true,
+    "no_components_skipped": true,
+    "warnings_classified": true,
+    "sealed": true,
+    "eet_end_required": false,
+    "main_menu_smoke": false,
+    "gameplay_smoke": false
+  },
+  "evidence": ["examples/bgee-sod-story-comparison/modpack.yaml", "docs/pa4-bgee-sod-story-valid-evidence.md"]
+}

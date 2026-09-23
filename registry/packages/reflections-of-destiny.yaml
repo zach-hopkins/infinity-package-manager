@@ -33,6 +33,9 @@ releases:
       - claim: Component 230 contains an unquoted English sentence in comp_230.tpa line 113. Two independent clean SoD-enabled BGEE 2.6.6 builds failed with the same WeiDU Parsing.Parse_error at that line. The exact release selector is unavailable; the other components are not classified by this failure.
         provenance: verified
         evidence: [evidence/pa4-bgee-reflections-feyr-failure.json]
+      - claim: Components 100, 110, 220, and 240 installed into a clean SoD-enabled BGEE 2.6.6 workspace alongside Road to Discovery 6.0 and appeared in WeiDU.log. Four nonfatal patch-search warnings remain visible in the log; game menu and story behavior were not observed.
+        provenance: verified
+        evidence: [evidence/pa4-bgee-sod-story-valid.json]
     installers:
       - tp2: Reflections_of_Destiny/Reflections_of_Destiny.tp2
         launcher: toolchain
