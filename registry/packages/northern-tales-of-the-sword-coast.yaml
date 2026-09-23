@@ -1,0 +1,46 @@
+schema: 2
+package: northern-tales-of-the-sword-coast
+aliases: [ntotsc]
+releases:
+  - release_id: ntotsc-v5.0.0-source
+    version: "5.0.0"
+    artifacts:
+      - url: https://github.com/Spellhold-Studios/NTotSC/archive/refs/tags/v5.0.0.zip
+        sha256: 6df6f6b4e94f0d5b3d087502be7f042d62e6830eb3566f54c554af3451c63db1
+        platforms: [windows]
+    materialization: { source_root: NTotSC-5.0.0, include: [ntotsc] }
+    compatibility: { games: [bgee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The official v5.0.0 tag ZIP matched SHA-256 and its TP2 VERSION is 5.0.0. Its fifteen live numbered selectors all have LABELs.
+        provenance: derived
+        evidence: [https://github.com/Spellhold-Studios/NTotSC/releases/tag/v5.0.0]
+      - claim: The main selector requires BGEE, BGT, or EET and forbids an already-installed BP-BGT Worldmap main component. Optional selectors require the main component; Will's soundset requires Will, and the two Shaman Cloak options share a SUBCOMPONENT group.
+        provenance: derived
+        evidence: [https://github.com/Spellhold-Studios/NTotSC/releases/tag/v5.0.0]
+    installers:
+      - tp2: ntotsc/ntotsc.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: German (translation by Leonardo Watson) }
+          - { id: 2, name: Italian (translation by ilot) }
+          - { id: 3, name: Polish }
+          - { id: 4, name: Russian }
+    components:
+      - { id: northern-tales, default_selected: true, weidu: { tp2: ntotsc/ntotsc.tp2, label: NTotSC_MainComponent, number: 0 } }
+      - { id: fewer-monsters-by-difficulty, weidu: { tp2: ntotsc/ntotsc.tp2, label: NTotSC_LessMonsters, number: 1 }, requires: [northern-tales] }
+      - { id: keelor-the-dwarf, weidu: { tp2: ntotsc/ntotsc.tp2, label: NTotSC_KeelortheDwarf, number: 2 }, requires: [northern-tales] }
+      - { id: llindellyns-lucky-arrow, weidu: { tp2: ntotsc/ntotsc.tp2, label: NTotSC_LlindellynsLuckyArrow, number: 3 }, requires: [northern-tales] }
+      - { id: nim-furlwing, weidu: { tp2: ntotsc/ntotsc.tp2, label: NTotSC_NimFurlwing, number: 4 }, requires: [northern-tales] }
+      - { id: pilar-and-gheldehar, weidu: { tp2: ntotsc/ntotsc.tp2, label: NTotSC_PilarandGeldehar, number: 5 }, requires: [northern-tales] }
+      - { id: svlasts-torment, weidu: { tp2: ntotsc/ntotsc.tp2, label: NTotSC_SvlastsTorment, number: 6 }, requires: [northern-tales] }
+      - { id: will-ohara, weidu: { tp2: ntotsc/ntotsc.tp2, label: NTotSC_WillNPC, number: 7 }, requires: [northern-tales] }
+      - { id: will-soundset, weidu: { tp2: ntotsc/ntotsc.tp2, label: NTotSC_WillSoundset, number: 8 }, requires: [will-ohara] }
+      - { id: fighting-encounters, weidu: { tp2: ntotsc/ntotsc.tp2, label: NTotSC_FightingEncounters, number: 9 }, requires: [northern-tales] }
+      - { id: improved-lesser-fiends, weidu: { tp2: ntotsc/ntotsc.tp2, label: NTotSC_TacticalChallengesFiends, number: 10 }, requires: [northern-tales] }
+      - { id: improved-haeball, weidu: { tp2: ntotsc/ntotsc.tp2, label: NTotSC_TacticalChallengesHaeball, number: 11 }, requires: [northern-tales] }
+      - { id: improved-general-ghotal, weidu: { tp2: ntotsc/ntotsc.tp2, label: NTotSC_TacticalChallengesGhotal, number: 12 }, requires: [northern-tales] }
+      - { id: remove-shaman-cloaks, weidu: { tp2: ntotsc/ntotsc.tp2, label: NTotSC_RemoveShamanCloaks_Completely, number: 13 }, requires: [northern-tales], conflicts: [make-shaman-cloaks-undroppable] }
+      - { id: make-shaman-cloaks-undroppable, weidu: { tp2: ntotsc/ntotsc.tp2, label: NTotSC_RemoveShamanCloaks_Undroppable, number: 14 }, requires: [northern-tales], conflicts: [remove-shaman-cloaks] }
