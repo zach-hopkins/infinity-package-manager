@@ -1,0 +1,21 @@
+schema: 2
+
+# PA-4 SoD route: one choice from each alternative group, plus independent tweaks.
+environments:
+  target:
+    target: bgee
+    version: "2.6.6"
+    platform: windows
+    language: English
+    locale: en_US
+    fingerprint:
+      profile: iepm-core-layout-v1
+      value: 04fc6602150ff7788875573dbf0b7f4aeb7ca26aaf83b022c77d9fc417d848c3
+
+mods:
+  - package: dlc-merger
+    environment: target
+    components: [merge-sod]
+  - package: jasteys-sod-tweakpack
+    environment: target
+    components: [ending-independent-replies, dialogues-always, skip-korlasz-dungeon, more-dialogue-choices, restore-abduction-fight, sod-start-xp-90000, sod-ending-revised-full, close-dragonspear-portal, hephernaan-takes-vault-key]

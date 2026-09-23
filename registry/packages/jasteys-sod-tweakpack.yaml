@@ -1,16 +1,53 @@
 schema: 2
 package: jasteys-sod-tweakpack
+aliases: [c-sodtweaks]
 releases:
   - release_id: jasteys-sod-tweakpack-v13
     version: "v13"
-    compatibility:
-      games: [bgee, eet]
-    install:
-      phase: eet
+    artifacts:
+      - url: https://github.com/Gibberlings3/Jasteys_SoD_Tweakpack/archive/refs/tags/v13.zip
+        sha256: 069c1d06920fa992f7a6252a3d282df335c089a5fa81b7efede17b7bf2a04ef9
+        platforms: [windows]
+    materialization: { source_root: Jasteys_SoD_Tweakpack-13, include: ["c#sodtweaks"] }
+    compatibility: { games: [bgee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
     provenance: unverified
     claims:
-      - claim: The upstream v13 project describes this as a set of SoD-related tweaks for SoD, EET, and BGT. Artifact hash, component selectors, and installer behavior remain unverified.
+      - claim: The exact author-tag v13 ZIP matched SHA-256; TP2 VERSION v13 declares seventeen LABEL-bearing selectors. Two dialogue, four starting-XP, and four ending selections are alternative groups.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The author documents SoD, EET, and BGT use, but this IEPM record covers only SoD-enabled BGEE and EET. Portrait component 6 is EET/BGT-only; abduction component 7 is SoD-only.
         provenance: declared
-        evidence:
-          - https://github.com/Gibberlings3/Jasteys_SoD_Tweakpack
-          - https://github.com/Gibberlings3/Jasteys_SoD_Tweakpack/releases/tag/v13
+        evidence: [https://github.com/Gibberlings3/Jasteys_SoD_Tweakpack]
+      - claim: Several components explicitly forbid EET_End; install before that boundary. The author documents Skip Korlasz's Dungeon cross-mod handling for Endless BG1, Transitions, and Another Fine Hell; do not encode these as package-wide conflicts.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json, https://github.com/Gibberlings3/Jasteys_SoD_Tweakpack]
+    installers:
+      - tp2: "c#sodtweaks/setup-c#sodtweaks.tp2"
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: Deutsch }
+          - { id: 2, name: Russian }
+          - { id: 3, name: French }
+          - { id: 4, name: Polish }
+          - { id: 5, name: Spanish }
+          - { id: 6, name: Simplified Chinese }
+    components:
+      - { id: ending-independent-replies, weidu: { tp2: "c#sodtweaks/setup-c#sodtweaks.tp2", label: JasteySodTweaks-EndingIndependentReplies, number: 1 } }
+      - { id: dialogues-party-only, weidu: { tp2: "c#sodtweaks/setup-c#sodtweaks.tp2", label: JasteySodTweaks-DoNotMissDialogues_NPCInParty, number: 2 }, conflicts: [dialogues-always] }
+      - { id: dialogues-always, weidu: { tp2: "c#sodtweaks/setup-c#sodtweaks.tp2", label: JasteySodTweaks-DoNotMissDialogues_All, number: 3 }, conflicts: [dialogues-party-only] }
+      - { id: skip-korlasz-dungeon, weidu: { tp2: "c#sodtweaks/setup-c#sodtweaks.tp2", label: JasteySodTweaks-SkipKorlaszDungeon, number: 4 } }
+      - { id: more-dialogue-choices, weidu: { tp2: "c#sodtweaks/setup-c#sodtweaks.tp2", label: JasteySodTweaks-MoreDialogueChoices_PreventDeadEnds, number: 5 } }
+      - { id: imoen-sod-portrait-eet, unsupported_games: [bgee], weidu: { tp2: "c#sodtweaks/setup-c#sodtweaks.tp2", label: JasteySodTweaks-ImoensSoDPortrait, number: 6 } }
+      - { id: restore-abduction-fight, unsupported_games: [eet], weidu: { tp2: "c#sodtweaks/setup-c#sodtweaks.tp2", label: JasteySodTweaks-RestoreAbductionFight, number: 7 } }
+      - { id: sod-start-xp-65000, weidu: { tp2: "c#sodtweaks/setup-c#sodtweaks.tp2", label: JasteySodTweaks-AdjustStartingXP, number: 8 }, conflicts: [sod-start-xp-90000, sod-start-xp-125000, sod-start-xp-161000] }
+      - { id: sod-start-xp-90000, weidu: { tp2: "c#sodtweaks/setup-c#sodtweaks.tp2", label: JasteySodTweaks-AdjustStartingXP_90000, number: 9 }, conflicts: [sod-start-xp-65000, sod-start-xp-125000, sod-start-xp-161000] }
+      - { id: sod-start-xp-125000, weidu: { tp2: "c#sodtweaks/setup-c#sodtweaks.tp2", label: JasteySodTweaks-AdjustStartingXP_125000, number: 10 }, conflicts: [sod-start-xp-65000, sod-start-xp-90000, sod-start-xp-161000] }
+      - { id: sod-start-xp-161000, weidu: { tp2: "c#sodtweaks/setup-c#sodtweaks.tp2", label: JasteySodTweaks-AdjustStartingXP_161000, number: 11 }, conflicts: [sod-start-xp-65000, sod-start-xp-90000, sod-start-xp-125000] }
+      - { id: sod-ending-revised-full, weidu: { tp2: "c#sodtweaks/setup-c#sodtweaks.tp2", label: JasteySodTweaks-SoDEnding_RevisedFull, number: 12 }, conflicts: [sod-ending-revised-streamlined, sod-ending-original-streamlined, sod-ending-skip] }
+      - { id: sod-ending-revised-streamlined, weidu: { tp2: "c#sodtweaks/setup-c#sodtweaks.tp2", label: JasteySodTweaks-SoDEnding_RevisedStreamlined, number: 13 }, conflicts: [sod-ending-revised-full, sod-ending-original-streamlined, sod-ending-skip] }
+      - { id: sod-ending-original-streamlined, weidu: { tp2: "c#sodtweaks/setup-c#sodtweaks.tp2", label: JasteySodTweaks-SoDEnding_OriginalStreamlined, number: 14 }, conflicts: [sod-ending-revised-full, sod-ending-revised-streamlined, sod-ending-skip] }
+      - { id: sod-ending-skip, weidu: { tp2: "c#sodtweaks/setup-c#sodtweaks.tp2", label: JasteySodTweaks-SoDEnding_Skipit, number: 15 }, conflicts: [sod-ending-revised-full, sod-ending-revised-streamlined, sod-ending-original-streamlined] }
+      - { id: close-dragonspear-portal, weidu: { tp2: "c#sodtweaks/setup-c#sodtweaks.tp2", label: JasteySoDTweaks_PortalCloseToril, number: 20 } }
+      - { id: hephernaan-takes-vault-key, weidu: { tp2: "c#sodtweaks/setup-c#sodtweaks.tp2", label: JasteySoDTweaks_HephernaanTakesKey, number: 21 } }
