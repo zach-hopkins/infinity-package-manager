@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "I Shall Never Forget 6.5.6 on clean BG2EE 2.6.6",
+  "identity": {
+    "registry_revision": "eebd90c",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "487d1317acff11477ace0e26a6e674b76c6ccd756fbc83585129d088a3b4d12e",
+    "environments": { "target": { "target": "bg2ee", "fingerprint": { "profile": "iepm-core-layout-v1", "value": "298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f" } } },
+    "packages": [
+      { "package": "i-shall-never-forget", "release_id": "i-shall-never-forget-v6.5.6-weasel-20260923", "environment": "target", "artifact_sha256": "070b98733bf5a40730349c6d887da0e223c00fe623f84ef1bd245d70dabe2283", "components": ["i-shall-never-forget-quest"] }
+    ],
+    "execution_order": ["i-shall-never-forget"]
+  },
+  "checks": {
+    "artifact_verified": true, "selector_known": true, "requirements_modeled": true,
+    "component_catalog_complete": true, "all_components_classified": true,
+    "core_components_supported": false, "selected_components_supported": false,
+    "relationships_satisfied": true, "no_opaque_selections": true,
+    "clean_disposable_install": true, "all_actions_completed": true,
+    "requested_components_recorded": true, "no_components_skipped": true,
+    "warnings_classified": true, "sealed": true, "eet_end_required": false,
+    "main_menu_smoke": false, "gameplay_smoke": false
+  },
+  "evidence": ["examples/bg2ee-i-shall-never-forget/modpack.yaml", "docs/pa4-bg2ee-i-shall-never-forget-evidence.md"]
+}

@@ -18,6 +18,9 @@ releases:
       - claim: The author documents BG2EE and EET. To see its content in an existing save, the relevant city districts must not yet have been visited; this is gameplay context, not an installer prerequisite.
         provenance: declared
         evidence: [https://downloads.weaselmods.net/download/i-shall-never-forget/]
+      - claim: The sole selector installed in a fresh clean BG2EE 2.6.6 build, appeared in WeiDU.log, and sealed without WeiDU warning or skip markers. Menu, quest behavior, and EET remain unobserved.
+        provenance: verified
+        evidence: [evidence/pa4-bg2ee-i-shall-never-forget.json]
     installers:
       - tp2: ISNF/ISNF.tp2
         launcher: toolchain
