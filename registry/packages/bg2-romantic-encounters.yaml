@@ -1,0 +1,84 @@
+schema: 2
+package: bg2-romantic-encounters
+aliases: [re]
+releases:
+  - release_id: bg2-romantic-encounters-v15-source
+    version: "v15"
+    artifacts:
+      - url: https://github.com/Gibberlings3/Romantic_Encounters_BG2/archive/refs/tags/v15.zip
+        sha256: 66eb5761124da3253fe78344bbfc4545cda83ce46a70c3ee072eaa5909bfb5f3
+        platforms: [windows]
+    materialization: { source_root: Romantic_Encounters_BG2-15, include: [RE] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact official v15 tag ZIP matched SHA-256. TP2 VERSION is v15; fifty-five live numeric-only BEGIN selectors were mapped using the author's adjacent scenario comments. IDs express scenario intent, while positional numbers remain release-specific.
+        provenance: derived
+        evidence: [https://github.com/Gibberlings3/Romantic_Encounters_BG2/releases/tag/v15]
+      - claim: Cambion, Cyric, and Sendai scenarios have a TP2 FILE_EXISTS_IN_GAME mel01.cre predicate. This conditional eligibility is not evidence of a cross-package conflict; if the resource is absent, WeiDU may skip those choices.
+        provenance: derived
+        evidence: [https://github.com/Gibberlings3/Romantic_Encounters_BG2/releases/tag/v15]
+    installers:
+      - tp2: RE/Setup-RE.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: Russian (Translated by Aerie.ru) }
+          - { id: 2, name: "French (Translated by Les d'Oghmatiques)" }
+    components:
+      - { id: reactions, weidu: { tp2: RE/Setup-RE.tp2, number: 0 } }
+      - { id: ada, weidu: { tp2: RE/Setup-RE.tp2, number: 1 } }
+      - { id: aimi, weidu: { tp2: RE/Setup-RE.tp2, number: 2 } }
+      - { id: anishai, weidu: { tp2: RE/Setup-RE.tp2, number: 3 } }
+      - { id: aran, weidu: { tp2: RE/Setup-RE.tp2, number: 4 } }
+      - { id: bjornin, weidu: { tp2: RE/Setup-RE.tp2, number: 5 } }
+      - { id: bodhi, weidu: { tp2: RE/Setup-RE.tp2, number: 6 } }
+      - { id: busya, weidu: { tp2: RE/Setup-RE.tp2, number: 7 } }
+      - { id: cambion, weidu: { tp2: RE/Setup-RE.tp2, number: 8 } }
+      - { id: chanelle, weidu: { tp2: RE/Setup-RE.tp2, number: 9 } }
+      - { id: coran, weidu: { tp2: RE/Setup-RE.tp2, number: 10 } }
+      - { id: cyric, weidu: { tp2: RE/Setup-RE.tp2, number: 11 } }
+      - { id: desharik, weidu: { tp2: RE/Setup-RE.tp2, number: 12 } }
+      - { id: dryad, weidu: { tp2: RE/Setup-RE.tp2, number: 13 } }
+      - { id: edwin, weidu: { tp2: RE/Setup-RE.tp2, number: 14 } }
+      - { id: eldoth, weidu: { tp2: RE/Setup-RE.tp2, number: 15 } }
+      - { id: elhan, weidu: { tp2: RE/Setup-RE.tp2, number: 16 } }
+      - { id: firkraag, weidu: { tp2: RE/Setup-RE.tp2, number: 17 } }
+      - { id: gaelan-bayle, weidu: { tp2: RE/Setup-RE.tp2, number: 18 } }
+      - { id: garren, weidu: { tp2: RE/Setup-RE.tp2, number: 19 } }
+      - { id: haer-dalis, weidu: { tp2: RE/Setup-RE.tp2, number: 20 } }
+      - { id: hendak, weidu: { tp2: RE/Setup-RE.tp2, number: 21 } }
+      - { id: ilona, weidu: { tp2: RE/Setup-RE.tp2, number: 22 } }
+      - { id: jarlaxle, weidu: { tp2: RE/Setup-RE.tp2, number: 23 } }
+      - { id: lais, weidu: { tp2: RE/Setup-RE.tp2, number: 24 } }
+      - { id: laran, weidu: { tp2: RE/Setup-RE.tp2, number: 25 } }
+      - { id: logan, weidu: { tp2: RE/Setup-RE.tp2, number: 26 } }
+      - { id: mekrath, weidu: { tp2: RE/Setup-RE.tp2, number: 27 } }
+      - { id: mira, weidu: { tp2: RE/Setup-RE.tp2, number: 28 } }
+      - { id: noober, weidu: { tp2: RE/Setup-RE.tp2, number: 29 } }
+      - { id: rebecca, weidu: { tp2: RE/Setup-RE.tp2, number: 30 } }
+      - { id: renal, weidu: { tp2: RE/Setup-RE.tp2, number: 31 } }
+      - { id: ribald, weidu: { tp2: RE/Setup-RE.tp2, number: 32 } }
+      - { id: ryan-trawl, weidu: { tp2: RE/Setup-RE.tp2, number: 33 } }
+      - { id: saemon, weidu: { tp2: RE/Setup-RE.tp2, number: 34 } }
+      - { id: sendai, weidu: { tp2: RE/Setup-RE.tp2, number: 35 } }
+      - { id: sheri, weidu: { tp2: RE/Setup-RE.tp2, number: 36 } }
+      - { id: solaufein, weidu: { tp2: RE/Setup-RE.tp2, number: 37 } }
+      - { id: talak, weidu: { tp2: RE/Setup-RE.tp2, number: 38 } }
+      - { id: teos, weidu: { tp2: RE/Setup-RE.tp2, number: 39 } }
+      - { id: yoshimo, weidu: { tp2: RE/Setup-RE.tp2, number: 40 } }
+      - { id: isabelle, weidu: { tp2: RE/Setup-RE.tp2, number: 41 } }
+      - { id: anne, weidu: { tp2: RE/Setup-RE.tp2, number: 42 } }
+      - { id: ellesime, weidu: { tp2: RE/Setup-RE.tp2, number: 43 } }
+      - { id: valygar-soa, weidu: { tp2: RE/Setup-RE.tp2, number: 44 } }
+      - { id: chandra, weidu: { tp2: RE/Setup-RE.tp2, number: 45 } }
+      - { id: goldander, weidu: { tp2: RE/Setup-RE.tp2, number: 46 } }
+      - { id: viekang, weidu: { tp2: RE/Setup-RE.tp2, number: 47 } }
+      - { id: sarevok, weidu: { tp2: RE/Setup-RE.tp2, number: 48 } }
+      - { id: cernd, weidu: { tp2: RE/Setup-RE.tp2, number: 49 } }
+      - { id: cernick, weidu: { tp2: RE/Setup-RE.tp2, number: 50 } }
+      - { id: valygar-tob, weidu: { tp2: RE/Setup-RE.tp2, number: 51 } }
+      - { id: minsc, weidu: { tp2: RE/Setup-RE.tp2, number: 52 } }
+      - { id: black-dragon, weidu: { tp2: RE/Setup-RE.tp2, number: 53 } }
+      - { id: date-night, weidu: { tp2: RE/Setup-RE.tp2, number: 54 } }
