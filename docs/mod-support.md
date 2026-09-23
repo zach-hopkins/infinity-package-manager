@@ -123,11 +123,13 @@ Generalized Biffing, The Longer Road, Isra NPC for BGII, Isra NPC for BG,
 Black Pits in BG, Dark Horizons, CoM Encounters, Tower of Deception, Test
 Your Mettle!, The Boareskyr Bridge Scene, Extra Expanded Enhanced Encounters!,
 Reflections of Destiny, Road to Discovery, Almateria's Restoration Project,
-Hidden Adventures, Crossmod Banter Pack, Ascalon's Questpack, Endless BG1, and
-Imoen 4 Ever, Jastey's SoD Tweakpack, and BG Mini Quests and Encounters) now have curated executable identities; 29 remain
-discovery-only. The remaining
+Hidden Adventures, Crossmod Banter Pack, Ascalon's Questpack, Endless BG1,
+Imoen 4 Ever, Jastey's SoD Tweakpack, and BG Mini Quests and Encounters) now
+have curated executable identities; 29 remain discovery-only. The remaining
 candidates are **not** silently
-excluded: they may proceed through IEPM's opaque local-package route once
+excluded: the [remaining cohort triage](pa4-remaining-cohort-triage.md)
+names each acquisition state. They may proceed through IEPM's opaque
+local-package route once
 their exact bytes are supplied and safely inspected. They simply do not yet
 have an executable release record or component-by-component support ledger.
 
