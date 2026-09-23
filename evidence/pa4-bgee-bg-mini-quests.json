@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "BG Mini Quests and Encounters v31 all eighteen English selectors after DLC Merger on clean SoD-enabled BGEE 2.6.6",
+  "identity": {
+    "registry_revision": "ad92290",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "a2518d566d4068407ba44f0d1477c90afe223c87cb0adf92190d8fd4ba855dc0",
+    "environments": { "target": { "target": "bgee", "fingerprint": { "profile": "iepm-core-layout-v1", "value": "04fc6602150ff7788875573dbf0b7f4aeb7ca26aaf83b022c77d9fc417d848c3" } } },
+    "packages": [
+      { "package": "dlc-merger", "release_id": "dlc-merger-2.1-win32", "environment": "target", "artifact_sha256": "16b57b32662c1ac1e6d345afaf8669e01cf26eeafc5461000757edf33447e2eb", "components": ["merge-sod"] },
+      { "package": "bg-mini-quests-and-encounters", "release_id": "bg-mini-quests-and-encounters-v31-source", "environment": "target", "artifact_sha256": "275e82396aed28d944d80ea7ac05ca48c2705beff0621f85ba1caaa536216f6f", "components": ["slime-quest", "family-quest", "babysitting", "nashkel-monster", "fallen-paladin", "undying-love", "orc-lover", "unexpected-help", "many-paws", "drunk", "noober", "brages-sword", "legal-sea-charts", "water-queen-temples", "worried-farmer", "bodies-for-good-cause", "cordyr-without-killing-sil", "improved-borda"] }
+    ],
+    "execution_order": ["dlc-merger", "bg-mini-quests-and-encounters"]
+  },
+  "checks": {
+    "artifact_verified": true, "selector_known": true, "requirements_modeled": true,
+    "component_catalog_complete": true, "all_components_classified": true,
+    "core_components_supported": false, "selected_components_supported": false,
+    "relationships_satisfied": true, "no_opaque_selections": true,
+    "clean_disposable_install": true, "all_actions_completed": true,
+    "requested_components_recorded": true, "no_components_skipped": true,
+    "warnings_classified": true, "sealed": true, "eet_end_required": false,
+    "main_menu_smoke": false, "gameplay_smoke": false
+  },
+  "evidence": ["examples/bgee-bg-mini-quests/modpack.yaml", "docs/pa4-bgee-bg-mini-quests-evidence.md"]
+}

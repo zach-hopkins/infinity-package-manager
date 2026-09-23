@@ -25,6 +25,9 @@ releases:
       - claim: All eighteen components refused to install into the clean Steam BGEE source because it includes unmerged SoD. This is a source-preparation requirement, not evidence of a mod incompatibility; the fixture now runs DLC Merger first.
         provenance: verified
         evidence: [docs/pa4-bgee-bg-mini-quests-evidence.md]
+      - claim: All eighteen English selectors completed after DLC Merger on clean BGEE 2.6.6 and appeared in WeiDU.log. Menu, gameplay, and EET remain unobserved.
+        provenance: verified
+        evidence: [evidence/pa4-bgee-bg-mini-quests.json]
     installers:
       - tp2: bgqe/setup-bgqe.tp2
         launcher: toolchain
