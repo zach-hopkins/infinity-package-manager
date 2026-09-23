@@ -1,7 +1,7 @@
 # PA-4 remaining cohort triage (2026-09-23)
 
-The first 99-package Product A cohort has 51 curated executable identities
-and **29 discovery-only candidates** remaining beyond the 19 packages
+The first 99-package Product A cohort has 52 curated executable identities
+and **28 discovery-only candidates** remaining beyond the 19 packages
 already curated when the cohort was frozen. This page is an acquisition and
 review queue, not a support-status upgrade. The source snapshot is the
 [frozen cohort](../registry/cohorts/product-a-cohort.json), with acquisition
@@ -39,10 +39,10 @@ deriving selectors and updating the executable registry.
 | 470 | Infinity Sounds | Branch archive had ZIP signature; still mutable. |
 | 473 | Northern Tales of the Sword Coast | Branch archive probe returned HTTP error. |
 
-## Seventeen manual-browser acquisition leads
+## Sixteen manual-browser acquisition leads
 
 PA-2 did not establish a direct artifact route for source IDs **13** Revert
-Pathfinding, **46** Brage's Redemption, **55** BG1 Romantic Encounters,
+Pathfinding, **55** BG1 Romantic Encounters,
 **57** The Lure of the Sirine's Call, **64** Quest Pack, **87–91** the five
 Colours of Infinity entries (Tales of the Deep Gardens, Innershade, The
 White Queen, I Shall Never Forget, Eilistraee's Song), **92–96** the five

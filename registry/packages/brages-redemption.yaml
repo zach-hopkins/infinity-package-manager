@@ -1,0 +1,44 @@
+schema: 2
+package: brages-redemption
+aliases: [c-brage]
+releases:
+  - release_id: brages-redemption-v10.1-source
+    version: "10.1"
+    artifacts:
+      - url: https://github.com/Gitjas/Brages_Redemption/archive/refs/tags/v10.1.zip
+        sha256: a9ee0dfa8a2819190cbcdec34e12537294cbf31830baca6067f2dda9c72bd1da
+        platforms: [windows]
+    materialization: { source_root: Brages_Redemption-10.1, include: ["c#brage"] }
+    compatibility: { games: [bgee, bg2ee, eet] }
+    install: { phase: eet, after: [eet, bg-mini-quests-and-encounters], before: [eet-end] }
+    relationships:
+      - kind: requires
+        package: bg-mini-quests-and-encounters
+        components: [brages-sword]
+        when:
+          games: [bgee, eet]
+          selected_components: [brage-main]
+    provenance: unverified
+    claims:
+      - claim: The exact official v10.1 tag ZIP matched SHA-256; TP2 VERSION 10.1 declares four LABEL-bearing selectors numbered 0, 1, 5, and 10.
+        provenance: derived
+        evidence: [https://github.com/Gitjas/Brages_Redemption/releases/tag/v10.1]
+      - claim: On BGEE/EET, main requires the item installed by BGQE Brage's Sword; the TP2 exempts BG2EE. All three optional components require main. The crossmod component has author METADATA AFTER hints, but they are not hard dependencies.
+        provenance: derived
+        evidence: [https://github.com/Gitjas/Brages_Redemption/releases/tag/v10.1]
+      - claim: The author describes finished BG1 and SoD content but not finished BG2 content. BG2EE installability is not evidence of complete BG2 content.
+        provenance: declared
+        evidence: [https://github.com/Gitjas/Brages_Redemption]
+    installers:
+      - tp2: "c#brage/c#brage.tp2"
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: Deutsch }
+          - { id: 2, name: Italiano }
+          - { id: 3, name: "Simplified Chinese(by Lzw104522773)" }
+    components:
+      - { id: brage-main, default_selected: true, weidu: { tp2: "c#brage/c#brage.tp2", label: BragesRedemption-main, number: 0 } }
+      - { id: original-brage-portrait-and-sound, unsupported_games: [bg2ee], weidu: { tp2: "c#brage/c#brage.tp2", label: BragesRedemption-portrait_sound_original_Brage, number: 1 }, requires: [brage-main] }
+      - { id: unique-two-handed-sword, unsupported_games: [bg2ee], weidu: { tp2: "c#brage/c#brage.tp2", label: BragesRedemption-UniqueSword, number: 5 }, requires: [brage-main] }
+      - { id: crossmod-content, weidu: { tp2: "c#brage/c#brage.tp2", label: BragesRedemption-Crossmod, number: 10 }, requires: [brage-main] }

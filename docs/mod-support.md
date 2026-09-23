@@ -86,6 +86,7 @@ labels. This ledger must use those words only with those meanings.
 | Imoen 4 Ever v11.6 | Complete 16-component catalog spanning BG2 and SoD; BG2 prerequisites and four SoD camp prerequisites mapped, SoD portrait alternatives guarded; two SoD OR predicates remain WeiDU-enforced | BGEE/SoD and BG2EE configurations installed and sealed | **Untested** pending menu smokes, alternate portrait, and OR-predicate preflight coverage | [install evidence](pa4-imoen-4-ever-evidence.md) |
 | Jastey's SoD Tweakpack v13 | Complete 17-component catalog; dialogue, starting-XP, and ending alternatives guarded; EET-only portrait and SoD-only fight distinguished | Nine SoD selectors installed and sealed after DLC Merger | **Untested** pending observed menu/gameplay, other alternatives, and EET route | [install evidence](pa4-bgee-jastey-sod-evidence.md) |
 | BG Mini Quests and Encounters v31 | Complete 18-component catalog; all BGEE/EET eligible, mostly before EET_End; author recommends before BG1 NPC Project | All eighteen BGEE selectors installed and sealed after DLC Merger; unmerged-SoD source correctly rejected first | **Untested** pending observed menu/gameplay and EET route | [install evidence](pa4-bgee-bg-mini-quests-evidence.md) |
+| Brage's Redemption v10.1 | Exact official tag and four labeled selectors; BGEE/EET main requires BGQE Brage's Sword, unlike BG2EE | Combined SoD fixture resolves; installation pending | **Untested** pending disposable install/menu smoke; BG2 content incomplete per author | [registry](../registry/packages/brages-redemption.yaml) |
 | BP-BGT Worldmap v13.1.1 | Exact ZIP hashed, six selectors mechanically detected | **Not yet executable in IEPM**: main TP2 asks for map-size input but IEPM gives WeiDU null stdin | **Untested**; discovery-only pending explicit installer-answer support, not known incompatible | [blocker](pa4-worldmap-interactive-blocker.md) |
 | BG:EE Classic Movies V2.4.1 | Exact ZIP hashed, eight selectors mechanically detected | **Not yet executable in IEPM**: TP2 writes to `%USER_DIRECTORY%/Baldur.lua` or `Baldur.ini` outside disposable game root | **Untested**; discovery-only pending containment of installer side effects, not known incompatible | [blocker](pa4-classic-movies-external-write-blocker.md) |
 | Generalized Biffing v2.9 | Complete two-choice subcomponent catalog; final-phase placement reflects author's after-all-mods direction | Banter Pack then media-only Biffing built and launched from sealed BG2EE | **Supported** for this narrow English BG2EE 2.6.6 route; all-files choice, EET, large stacks, and performance Untested | [evidence](pa4-bg2ee-generalized-biffing-evidence.md) |
@@ -114,7 +115,7 @@ selectors, curated relationships, and automated disposable-build evidence.
 ## Cohort work boundary
 
 The frozen cohort contains 19 packages that were already mapped when it was
-selected and 80 indexed candidates. Fifty-one of those candidates (Sirene,
+selected and 80 indexed candidates. Fifty-two of those candidates (Sirene,
 LeUI, thirteen BG2 friendship releases, four Pocket Plane quest mods,
 Korgan's Redemption, Coran's BG Friendship, Xan's BG1 Friendship, and High
 Quality Soundclips, Banter Pack, BioWare NPC Flirt Packs, Drake, Unfinished
@@ -124,8 +125,9 @@ Black Pits in BG, Dark Horizons, CoM Encounters, Tower of Deception, Test
 Your Mettle!, The Boareskyr Bridge Scene, Extra Expanded Enhanced Encounters!,
 Reflections of Destiny, Road to Discovery, Almateria's Restoration Project,
 Hidden Adventures, Crossmod Banter Pack, Ascalon's Questpack, Endless BG1,
-Imoen 4 Ever, Jastey's SoD Tweakpack, and BG Mini Quests and Encounters) now
-have curated executable identities; 29 remain discovery-only. The remaining
+Imoen 4 Ever, Jastey's SoD Tweakpack, BG Mini Quests and Encounters, and
+Brage's Redemption) now have curated executable identities; 28 remain
+discovery-only. The remaining
 candidates are **not** silently
 excluded: the [remaining cohort triage](pa4-remaining-cohort-triage.md)
 names each acquisition state. They may proceed through IEPM's opaque
