@@ -1,7 +1,7 @@
 # PA-4 remaining cohort triage (2026-09-23)
 
-The first 99-package Product A cohort has 57 curated executable identities
-and **23 discovery-only candidates** remaining beyond the 19 packages
+The first 99-package Product A cohort has 58 curated executable identities
+and **22 discovery-only candidates** remaining beyond the 19 packages
 already curated when the cohort was frozen. This page is an acquisition and
 review queue, not a support-status upgrade. The source snapshot is the
 [frozen cohort](../registry/cohorts/product-a-cohort.json), with acquisition
@@ -23,7 +23,7 @@ The exact tagged ZIPs above were SHA-256 hashed; a PA-2 ZIP signature alone
 would not be sufficient. The Classic Movies and Worldmap blockers are IEPM
 execution-boundary gaps, **not** claims that those mods are incompatible.
 
-## Six branch-archive acquisition leads
+## Five branch-archive acquisition leads
 
 These are not release identities. A mutable branch URL can change without
 changing its spelling, so pin an exact commit or released asset before
@@ -34,7 +34,6 @@ deriving selectors and updating the executable registry.
 | 25 | Baldur's Gate Graphics Overhaul | Branch archive probe returned HTTP error. |
 | 29 | Made in Heaven: Fixes & Restorations | Branch archive had ZIP signature; still mutable. |
 | 134 | Recorder | Branch archive probe returned HTTP error. |
-| 175 | Sirene NPC (BG2) | Branch archive probe returned HTTP error. |
 | 470 | Infinity Sounds | Branch archive had ZIP signature; still mutable. |
 | 473 | Northern Tales of the Sword Coast | Branch archive probe returned HTTP error. |
 
@@ -67,6 +66,12 @@ Source ID **64**, Quest Pack, now has the exact author v35 tag (TP2 VERSION
 v3.5), all 23 live selectors mapped, and a clean four-choice BG2EE install
 receipt. Three nonfatal dialogue-state WEIGHT warnings require a future
 dialogue smoke before stronger support claims.
+
+Source ID **175**, Sirene NPC for BG2EE, now has an exact author v2.02 tag and
+all nine selectors classified. NPC plus True Paladin installed and sealed on
+BG2EE. All four portrait choices are blocked for this exact artifact because
+their TP2 COPY paths do not exist in the archive; the first portrait failed
+in a disposable build. Other class choices, EET, and gameplay remain untested.
 
 For each, locate an author or maintained release page, fetch exact bytes,
 hash and safely inspect the archive, and only then decide whether it can

@@ -24,6 +24,9 @@ releases:
       - claim: All four portrait choices copy from Sirene_BG2/portraits/alts, but the exact v2.02 source archive stores their files under Sirene_BG2/alts. Portrait selector 1 failed with ENOENT in a clean BG2EE build; all four portrait selectors are unavailable for this exact artifact without an upstream-corrected release.
         provenance: verified
         evidence: [docs/pa4-bg2ee-sirene-portrait-failure.md]
+      - claim: The NPC main and True Paladin class selectors installed together in a fresh clean BG2EE 2.6.6 build, appeared in WeiDU.log, and sealed. Other class choices, EET continuity, menu, and gameplay remain unobserved.
+        provenance: verified
+        evidence: [evidence/pa4-bg2ee-sirene-main-class.json]
     installers:
       - tp2: Sirene_BG2/Sirene_BG2.tp2
         launcher: toolchain

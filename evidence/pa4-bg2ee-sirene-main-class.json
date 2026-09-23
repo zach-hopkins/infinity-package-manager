@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "Sirene NPC for BG2EE v2.02 main and True Paladin on clean BG2EE 2.6.6",
+  "identity": {
+    "registry_revision": "7e01cd0",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "b05caf74edec161934d7b9fdf5098f70892d2df229f213b7c947ea309ca212e9",
+    "environments": { "target": { "target": "bg2ee", "fingerprint": { "profile": "iepm-core-layout-v1", "value": "298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f" } } },
+    "packages": [
+      { "package": "sirene-bg2", "release_id": "sirene-bg2-v2.02-source", "environment": "target", "artifact_sha256": "dc1151a4dadca34d192f6ce708c0ae677051e4f49544ef0952994cd741c6dfdf", "components": ["sirene-npc", "class-true-paladin"] }
+    ],
+    "execution_order": ["sirene-bg2"]
+  },
+  "checks": {
+    "artifact_verified": true, "selector_known": true, "requirements_modeled": true,
+    "component_catalog_complete": true, "all_components_classified": true,
+    "core_components_supported": false, "selected_components_supported": false,
+    "relationships_satisfied": true, "no_opaque_selections": true,
+    "clean_disposable_install": true, "all_actions_completed": true,
+    "requested_components_recorded": true, "no_components_skipped": true,
+    "warnings_classified": true, "sealed": true, "eet_end_required": false,
+    "main_menu_smoke": false, "gameplay_smoke": false
+  },
+  "evidence": ["examples/bg2ee-sirene-bg2/modpack.yaml", "docs/pa4-bg2ee-sirene-main-class-evidence.md"]
+}
