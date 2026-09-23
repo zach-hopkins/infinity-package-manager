@@ -1,0 +1,42 @@
+schema: 2
+package: bp-bgt-worldmap
+releases:
+  - release_id: bp-bgt-worldmap-v13.1.1-source
+    version: "v13.1.1"
+    artifacts:
+      - url: https://github.com/SpellholdStudios/BP-BGT-Worldmap/archive/refs/tags/v13.1.1.zip
+        sha256: 3890046ab83ae9316299087345cc7011c484fbd343db3958862004bc053314a7
+        platforms: [windows]
+    materialization: { source_root: BP-BGT-Worldmap-13.1.1, include: [bp-bgt-worldmap] }
+    compatibility: { games: [bgee, bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: Exact author-hosted v13.1.1 tag ZIP matched SHA-256 and has six LABEL-bearing selectors. Main Worldmap can request map size and travel-map answers through ACTION_READLN; IEPM has no portable typed prompt contract, so the main selector is unavailable for unattended execution.
+        provenance: derived
+        evidence: [https://github.com/SpellholdStudios/BP-BGT-Worldmap/releases/tag/v13.1.1]
+      - claim: The two larger worldmap UI layout choices are separate TP2 subcomponents without a declared requirement on main Worldmap. They modify UI.MENU through package-local UI scripts and have no ACTION_READLN or USER_DIRECTORY write in their own sections.
+        provenance: derived
+        evidence: [https://github.com/SpellholdStudios/BP-BGT-Worldmap/releases/tag/v13.1.1]
+      - claim: ToB-map choices require the marker produced by main Worldmap; they are unavailable while main is gated. The savegame updater is excluded on EE engines and would also mutate save directories on classic engines.
+        provenance: derived
+        evidence: [https://github.com/SpellholdStudios/BP-BGT-Worldmap/releases/tag/v13.1.1]
+    installers:
+      - tp2: bp-bgt-worldmap/setup-bp-bgt-worldmap.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: Deutsch }
+          - { id: 2, name: Italian }
+          - { id: 3, name: Polish }
+          - { id: 4, name: Spanish }
+          - { id: 5, name: French }
+          - { id: 6, name: Russian }
+          - { id: 7, name: Simplified Chinese }
+    components:
+      - { id: worldmap-main, unavailable: "ACTION_READLN map-size and travel-choice answers lack portable typed installer state.", weidu: { tp2: bp-bgt-worldmap/setup-bp-bgt-worldmap.tp2, label: worldmap-main, number: 0 } }
+      - { id: replace-tob-map, unavailable: "Requires main Worldmap marker, which is gated by interactive installer answers.", unsupported_games: [bgee, eet], weidu: { tp2: bp-bgt-worldmap/setup-bp-bgt-worldmap.tp2, label: worldmap-replace-tob-map, number: 1 }, requires: [worldmap-main], conflicts: [original-tob-map] }
+      - { id: original-tob-map, unavailable: "Requires main Worldmap marker, which is gated by interactive installer answers.", unsupported_games: [bgee, eet], weidu: { tp2: bp-bgt-worldmap/setup-bp-bgt-worldmap.tp2, label: worldmap-original-tob-map, number: 2 }, requires: [worldmap-main], conflicts: [replace-tob-map] }
+      - { id: update-existing-savegames, unavailable: "Not available on EE engines; on classic engines mutates save directories outside disposable build state.", weidu: { tp2: bp-bgt-worldmap/setup-bp-bgt-worldmap.tp2, label: worldmap-update-savegame, number: 3 } }
+      - { id: larger-worldmap-ui-bg2-style, weidu: { tp2: bp-bgt-worldmap/setup-bp-bgt-worldmap.tp2, label: worldmap-fullscreen-bg2ee, number: 4 }, conflicts: [larger-worldmap-ui-dragonspear-style] }
+      - { id: larger-worldmap-ui-dragonspear-style, weidu: { tp2: bp-bgt-worldmap/setup-bp-bgt-worldmap.tp2, label: worldmap-fullscreen-dragonspear-ui, number: 5 }, conflicts: [larger-worldmap-ui-bg2-style] }
