@@ -32,3 +32,14 @@ exercise the two distinct component families. Scoped assertions:
 Under [verification-policy.md](verification-policy.md), both configurations
 remain **Untested** until their game menus are observed. Raw logs and sealed
 games remain in the user's local IEPM store, not Git.
+
+The BG2EE fixture was independently rebuilt from the same clean snapshot
+on 2026-09-23 with registry revision `f8e5c46`, WeiDU 25100, and the same
+exact artifact. The second 1/1 action completed and sealed. Its portable
+lockfile SHA-256 matched the first build
+(`9e09c637cadcf7289948e4094cf25facb501f43a465b1ddd3b0abe9c4c0225db`),
+the final core fingerprint matched
+(`1c681e0796b5b4b45b548e44a1842f2918cb6a3853d33c2fbcd9b1d7dd3b35ec`),
+and WeiDU.log matched exactly. The repeat log had no warning/error markers.
+This is reproducibility evidence for the **bounded BG2EE fixture**, not the
+full Product A reference-profile repeat gate.

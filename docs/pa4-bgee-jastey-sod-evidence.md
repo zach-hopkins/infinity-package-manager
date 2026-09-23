@@ -21,4 +21,14 @@ behavior until an observed menu smoke.
   game behavior; or EET placement. The Windows UI helper was unavailable,
   so no game menu, new-game, or known-save smoke was performed.
 
-Raw logs and the sealed game remain in the user's local IEPM store, not Git.
+A second fresh build on 2026-09-23 used the same manifest, clean snapshot,
+WeiDU 25100, exact artifacts, and registry revision `ed6d214`. It completed
+2/2 actions and sealed independently. The portable lockfile SHA-256 was
+identical (`73bdc14f155dda0157413ea41fa6c3ccc406abc29042558bca3816e82ba37422`),
+the final core fingerprint was identical
+(`1bc9f19fd402bbae766398457fe26e3756c4ca26cb666af9f71497b8c0e00065`),
+and the WeiDU.log text matched exactly. No warning/error markers appeared
+in the second installer log. This is reproducibility evidence for this
+**bounded SoD fixture**, not the full Product A reference-profile repeat gate.
+
+Raw logs and both sealed games remain in the user's local IEPM store, not Git.
