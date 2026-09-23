@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "Isra BG2 v3.1 and Crossmod Banter Pack v30 all three English components on clean BG2EE 2.6.6",
+  "identity": {
+    "registry_revision": "d2b9923",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "dce106d0625702bc997cdc655371336949fc4c1915dc6e25dd64ba3145efe64d",
+    "environments": {
+      "target": {
+        "target": "bg2ee",
+        "fingerprint": {
+          "profile": "iepm-core-layout-v1",
+          "value": "298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f"
+        }
+      }
+    },
+    "packages": [
+      { "package": "isra-bg2", "release_id": "isra-bg2-v3.1-source", "environment": "target", "artifact_sha256": "45bd7011bdb30ef2b4759ac9a8fa2a4a25711efa545efbfc2b0c20841180a8a8", "components": ["isra-bg2-npc"] },
+      { "package": "crossmod-banter-pack", "release_id": "crossmod-banter-pack-v30-source", "environment": "target", "artifact_sha256": "aa8578bbfcba7fc82aed971a9eb667f952da6d7552b921debd5397bfdd63a824", "components": ["soa-crossmod-banter", "tob-crossmod-banter", "romance-conflicts"] }
+    ],
+    "execution_order": ["isra-bg2", "crossmod-banter-pack"]
+  },
+  "checks": {
+    "artifact_verified": true,
+    "selector_known": true,
+    "requirements_modeled": true,
+    "component_catalog_complete": true,
+    "all_components_classified": true,
+    "core_components_supported": false,
+    "selected_components_supported": false,
+    "relationships_satisfied": true,
+    "no_opaque_selections": true,
+    "clean_disposable_install": true,
+    "all_actions_completed": true,
+    "requested_components_recorded": true,
+    "no_components_skipped": true,
+    "warnings_classified": true,
+    "sealed": true,
+    "eet_end_required": false,
+    "main_menu_smoke": false,
+    "gameplay_smoke": false
+  },
+  "evidence": ["examples/bg2ee-isra-crossmod/modpack.yaml", "docs/pa4-bg2ee-isra-crossmod-evidence.md"]
+}

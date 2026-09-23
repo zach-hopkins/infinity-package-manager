@@ -22,6 +22,9 @@ releases:
       - claim: IEPM currently orders this after its mapped Isra BG2, Longer Road, and Haer'dalis Friendship partners when present. The upstream partner list is larger and this does not yet exhaustively model every covered mod; pairwise content remains Untested.
         provenance: community
         evidence: [https://github.com/Gibberlings3/Crossmod_Banter_Pack_for_Baldurs_Gate_II]
+      - claim: All three English selectors installed after Isra BG2 in a clean BG2EE 2.6.6 workspace and appeared in WeiDU.log. With only one covered partner, this does not demonstrate generated crossmod dialogue; menu and gameplay smoke were unperformed.
+        provenance: verified
+        evidence: [evidence/pa4-bg2ee-isra-crossmod.json]
     installers:
       - tp2: crossmodbg2/setup-crossmodbg2.tp2
         launcher: toolchain
