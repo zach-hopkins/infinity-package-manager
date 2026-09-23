@@ -22,4 +22,18 @@ behavior until an observed menu smoke.
   or EET. The Windows UI helper was unavailable, so no menu, new-game, or
   known-save smoke was performed.
 
-Raw logs and the sealed game remain in the user's local IEPM store, not Git.
+On 2026-09-23, a separate [BG2EE fixture](../examples/bg2ee-brages-redemption/modpack.yaml)
+tested the TP2's exception to the BGQE prerequisite. Registry revision
+`a0caf3d`, the same Brage artifact and WeiDU 25100, clean BG2EE fingerprint
+`298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f`.
+IEPM resolved **without** BGQE. Main `#0` and crossmod `#10` completed 1/1
+action, appeared in WeiDU.log, and sealed with fingerprint
+`bf3729453b1f863cd4f2fb66ebb90635d2fd05d16c02c22c3f6907e7cfb8665b`.
+The portable lock SHA-256 was
+`a2dec4ff82ff6dcfba2bfdd13d7c295a86f67cb47355a606137236a618f788ac`.
+Stderr was empty with no warning/error markers. The
+[BG2EE scoped assertion](../evidence/pa4-bg2ee-brage.json) remains Untested:
+the author says BG2 content is unfinished, and no menu/gameplay smoke was
+observed.
+
+Raw logs and both sealed games remain in the user's local IEPM store, not Git.

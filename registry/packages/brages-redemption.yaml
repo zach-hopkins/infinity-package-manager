@@ -29,9 +29,12 @@ releases:
       - claim: The author describes finished BG1 and SoD content but not finished BG2 content. BG2EE installability is not evidence of complete BG2 content.
         provenance: declared
         evidence: [https://github.com/Gitjas/Brages_Redemption]
-      - claim: All four English selectors completed after BGQE Brage's Sword and DLC Merger in a clean BGEE 2.6.6 disposable build and appeared in WeiDU.log. Menu, gameplay, BG2EE, and EET routes remain unobserved.
+      - claim: All four English selectors completed after BGQE Brage's Sword and DLC Merger in a clean BGEE 2.6.6 disposable build and appeared in WeiDU.log. Menu, gameplay, and EET routes remain unobserved.
         provenance: verified
         evidence: [evidence/pa4-bgee-brage.json]
+      - claim: Main and crossmod selectors completed without BGQE on a clean BG2EE 2.6.6 disposable build, confirming the TP2's BG2EE prerequisite exemption. This does not establish finished BG2 character content or gameplay compatibility.
+        provenance: verified
+        evidence: [evidence/pa4-bg2ee-brage.json]
     installers:
       - tp2: "c#brage/c#brage.tp2"
         launcher: toolchain
