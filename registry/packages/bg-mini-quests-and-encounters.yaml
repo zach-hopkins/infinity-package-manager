@@ -1,0 +1,56 @@
+schema: 2
+package: bg-mini-quests-and-encounters
+aliases: [bgqe]
+releases:
+  - release_id: bg-mini-quests-and-encounters-v31-source
+    version: "31"
+    artifacts:
+      - url: https://github.com/Gibberlings3/BG_Quests_And_Encounters/archive/refs/tags/v31.zip
+        sha256: 275e82396aed28d944d80ea7ac05ca48c2705beff0621f85ba1caaa536216f6f
+        platforms: [windows]
+    materialization: { source_root: BG_Quests_And_Encounters-31, include: [bgqe] }
+    compatibility: { games: [bgee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact v31 author-tag ZIP matched SHA-256 and TP2 VERSION 31. Eighteen distinct LABEL-bearing selectors numbered 0 through 17 were derived.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The author documents BGEE and EET support and asks that this mod install before BG1 NPC Project; otherwise some reply options disappear. This is an ordering recommendation, not a hard requirement.
+        provenance: declared
+        evidence: [https://github.com/Gibberlings3/BG_Quests_And_Encounters]
+      - claim: Every component accepts BGEE/EET; most forbid EET_End. Brage's Sword also has author-documented overlap with Brage's Redemption, which extends that quest. No broad conflict is inferred.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json, https://github.com/Gibberlings3/BG_Quests_And_Encounters]
+    installers:
+      - tp2: bgqe/setup-bgqe.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: Deutsch }
+          - { id: 2, name: Francais }
+          - { id: 3, name: Italiano }
+          - { id: 4, name: Russian }
+          - { id: 5, name: Polski }
+          - { id: 6, name: Espanol }
+          - { id: 7, name: Simplified Chinese }
+          - { id: 8, name: Turkce }
+    components:
+      - { id: slime-quest, weidu: { tp2: bgqe/setup-bgqe.tp2, label: bgqe_slimequest, number: 0 } }
+      - { id: family-quest, weidu: { tp2: bgqe/setup-bgqe.tp2, label: bgqe_familyquest, number: 1 } }
+      - { id: babysitting, weidu: { tp2: bgqe/setup-bgqe.tp2, label: bgqe_babysitting, number: 2 } }
+      - { id: nashkel-monster, weidu: { tp2: bgqe/setup-bgqe.tp2, label: bgqe_nashkelmonster, number: 3 } }
+      - { id: fallen-paladin, weidu: { tp2: bgqe/setup-bgqe.tp2, label: bgqe_fallenpaladin, number: 4 } }
+      - { id: undying-love, weidu: { tp2: bgqe/setup-bgqe.tp2, label: bgqe_undyinglove, number: 5 } }
+      - { id: orc-lover, weidu: { tp2: bgqe/setup-bgqe.tp2, label: bgqe_orclover, number: 6 } }
+      - { id: unexpected-help, weidu: { tp2: bgqe/setup-bgqe.tp2, label: bgqe_unexpectedhelp, number: 7 } }
+      - { id: many-paws, weidu: { tp2: bgqe/setup-bgqe.tp2, label: bgqe_manypaws, number: 8 } }
+      - { id: drunk, weidu: { tp2: bgqe/setup-bgqe.tp2, label: bgqe_drunk, number: 9 } }
+      - { id: noober, weidu: { tp2: bgqe/setup-bgqe.tp2, label: bgqe_noober, number: 10 } }
+      - { id: brages-sword, weidu: { tp2: bgqe/setup-bgqe.tp2, label: bgqe_bragesword, number: 11 } }
+      - { id: legal-sea-charts, weidu: { tp2: bgqe/setup-bgqe.tp2, label: bgqe_seacharts, number: 12 } }
+      - { id: water-queen-temples, weidu: { tp2: bgqe/setup-bgqe.tp2, label: bgqe_waterqueentemple, number: 13 } }
+      - { id: worried-farmer, weidu: { tp2: bgqe/setup-bgqe.tp2, label: bgqe_worriedfarmer, number: 14 } }
+      - { id: bodies-for-good-cause, weidu: { tp2: bgqe/setup-bgqe.tp2, label: bgqe_bodiesforgoodcause, number: 15 } }
+      - { id: cordyr-without-killing-sil, weidu: { tp2: bgqe/setup-bgqe.tp2, label: bgqe_cordyrnokillingsil, number: 16 } }
+      - { id: improved-borda, weidu: { tp2: bgqe/setup-bgqe.tp2, label: bgqe_improved_borda, number: 17 } }

@@ -85,6 +85,7 @@ labels. This ledger must use those words only with those meanings.
 | Endless BG1 20.2 | Complete 17-component catalog after excluding two embedded-dialogue BEGINs; all options require main, two Elminster variants conflict; known Reflections overlap guarded | Sixteen English selectors installed and sealed after DLC Merger on BGEE | **Untested** pending observed menu/gameplay; alternate Elminster and EET also Untested | [install evidence](pa4-bgee-endless-bg1-evidence.md) |
 | Imoen 4 Ever v11.6 | Complete 16-component catalog spanning BG2 and SoD; BG2 prerequisites and four SoD camp prerequisites mapped, SoD portrait alternatives guarded; two SoD OR predicates remain WeiDU-enforced | BGEE/SoD and BG2EE configurations installed and sealed | **Untested** pending menu smokes, alternate portrait, and OR-predicate preflight coverage | [install evidence](pa4-imoen-4-ever-evidence.md) |
 | Jastey's SoD Tweakpack v13 | Complete 17-component catalog; dialogue, starting-XP, and ending alternatives guarded; EET-only portrait and SoD-only fight distinguished | Nine SoD selectors installed and sealed after DLC Merger | **Untested** pending observed menu/gameplay, other alternatives, and EET route | [install evidence](pa4-bgee-jastey-sod-evidence.md) |
+| BG Mini Quests and Encounters v31 | Complete 18-component catalog; all BGEE/EET eligible, mostly before EET_End; author recommends before BG1 NPC Project | Exact release and selectors mapped; installation pending | **Untested** pending disposable install and menu smoke | [registry](../registry/packages/bg-mini-quests-and-encounters.yaml) |
 | Generalized Biffing v2.9 | Complete two-choice subcomponent catalog; final-phase placement reflects author's after-all-mods direction | Banter Pack then media-only Biffing built and launched from sealed BG2EE | **Supported** for this narrow English BG2EE 2.6.6 route; all-files choice, EET, large stacks, and performance Untested | [evidence](pa4-bg2ee-generalized-biffing-evidence.md) |
 | Call of the Lost Goddess v3.1 | Complete 3-component structural catalog | Yes | **Untested** — the core route has fixture install evidence; optional portraits/voiceover and policy launch smoke remain untested | [registry](../registry/packages/call-of-the-lost-goddess.yaml) |
 | Throne of the Mad God v2.3 | Complete 1-component structural catalog | Yes | **Untested** — fixture install evidence exists; policy launch smoke remains | [registry](../registry/packages/throne-of-the-mad-god.yaml) |
@@ -111,7 +112,7 @@ selectors, curated relationships, and automated disposable-build evidence.
 ## Cohort work boundary
 
 The frozen cohort contains 19 packages that were already mapped when it was
-selected and 80 indexed candidates. Fifty of those candidates (Sirene,
+selected and 80 indexed candidates. Fifty-one of those candidates (Sirene,
 LeUI, thirteen BG2 friendship releases, four Pocket Plane quest mods,
 Korgan's Redemption, Coran's BG Friendship, Xan's BG1 Friendship, and High
 Quality Soundclips, Banter Pack, BioWare NPC Flirt Packs, Drake, Unfinished
@@ -121,7 +122,7 @@ Black Pits in BG, Dark Horizons, CoM Encounters, Tower of Deception, Test
 Your Mettle!, The Boareskyr Bridge Scene, Extra Expanded Enhanced Encounters!,
 Reflections of Destiny, Road to Discovery, Almateria's Restoration Project,
 Hidden Adventures, Crossmod Banter Pack, Ascalon's Questpack, Endless BG1, and
-Imoen 4 Ever, and Jastey's SoD Tweakpack) now have curated executable identities; 30 remain
+Imoen 4 Ever, Jastey's SoD Tweakpack, and BG Mini Quests and Encounters) now have curated executable identities; 29 remain
 discovery-only. The remaining
 candidates are **not** silently
 excluded: they may proceed through IEPM's opaque local-package route once
