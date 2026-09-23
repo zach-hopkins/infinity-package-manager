@@ -1,0 +1,39 @@
+schema: 2
+package: lure-of-the-sirines-call
+aliases: [sirinescall]
+releases:
+  - release_id: lure-of-the-sirines-call-v16.5.2-source
+    version: "16.5.2"
+    artifacts:
+      - url: https://github.com/Pocket-Plane-Group/Lure_Of_Sirines_Call/archive/refs/tags/v16.5.2.zip
+        sha256: 1b41e6c8c240f22b5916c852e2817481cd4228b23771143e6fca0534d4464802
+        platforms: [windows]
+    materialization: { source_root: Lure_Of_Sirines_Call-16.5.2, include: [SirinesCall] }
+    compatibility: { games: [bgee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact official v16.5.2 tag ZIP matched SHA-256 and declares two LABEL-bearing selectors. The TP2 VERSION is still v16.5.1; the tag and TP2 version are distinct facts.
+        provenance: derived
+        evidence: [https://github.com/Pocket-Plane-Group/Lure_Of_Sirines_Call/releases/tag/v16.5.2]
+      - claim: The authors document BGEE and EET support. The TP2 requires the mod before EET_End and rejects an unmerged SoD archive.
+        provenance: declared
+        evidence: [https://github.com/Pocket-Plane-Group/Lure_Of_Sirines_Call]
+      - claim: The optional lighthouse selector declares a requirement on the misspelled SiriensCall/setup-sirinescall.tp2 path rather than its own SirinesCall/setup-SirinesCall.tp2. Its execution is unverified and may fail even when the main component is selected; do not promote the entire catalog based on a main-only install.
+        provenance: derived
+        evidence: [https://github.com/Pocket-Plane-Group/Lure_Of_Sirines_Call/releases/tag/v16.5.2]
+    installers:
+      - tp2: SirinesCall/setup-SirinesCall.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: Castellano (Castilian/Spanish) }
+          - { id: 2, name: Francais (French) }
+          - { id: 3, name: Deutsch (German) }
+          - { id: 4, name: Italiano (Italian) - by Ilot (rtt.altervista.org) }
+          - { id: 5, name: Polski (Polish) - by Regis }
+          - { id: 6, name: "D¢¤¤ˆŠ‚ (Russian) - Badgert, iopden & aerie.ru" }
+          - { id: 7, name: Simplified Chinese }
+    components:
+      - { id: sirines-call-quest, default_selected: true, weidu: { tp2: SirinesCall/setup-SirinesCall.tp2, label: SirinesCall-Main, number: 0 } }
+      - { id: extended-lighthouse-area, weidu: { tp2: SirinesCall/setup-SirinesCall.tp2, label: SirinesCall-ExtendedLighthouseArea, number: 1 }, requires: [sirines-call-quest] }
