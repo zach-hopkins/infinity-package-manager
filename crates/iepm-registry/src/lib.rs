@@ -1332,7 +1332,10 @@ LABEL bg1re_bardolans_briefing
         );
         assert_eq!(observation.components.len(), 2);
         assert_eq!(observation.components[0].number, Some(100));
-        assert_eq!(observation.components[1].label.as_deref(), Some("bg1re_bardolans_briefing"));
+        assert_eq!(
+            observation.components[1].label.as_deref(),
+            Some("bg1re_bardolans_briefing")
+        );
 
         let pending_branch = inspect_tp2(
             r#"
