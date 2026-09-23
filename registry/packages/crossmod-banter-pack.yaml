@@ -1,0 +1,37 @@
+schema: 2
+package: crossmod-banter-pack
+aliases: [crossmodbg2]
+releases:
+  - release_id: crossmod-banter-pack-v30-source
+    version: "v30"
+    artifacts:
+      - url: https://github.com/Gibberlings3/Crossmod_Banter_Pack_for_Baldurs_Gate_II/archive/refs/tags/v30.zip
+        sha256: aa8578bbfcba7fc82aed971a9eb667f952da6d7552b921debd5397bfdd63a824
+        platforms: [windows]
+    materialization: { source_root: Crossmod_Banter_Pack_for_Baldurs_Gate_II-30, include: [crossmodbg2] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet, after: [eet, isra-bg2, longerroad, haerdalis-friendship], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact v30 author-tag ZIP matched SHA-256. Its TP2 declares VERSION v30 and three independent LABEL-bearing selectors for SoA banters, ToB banters, and romance conflicts.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The author warns that crossmod content is generated only when two or more covered partner mods were already installed. A successful install with zero or one partner is not evidence that any new banter was generated. The package is intended to install after covered partners.
+        provenance: declared
+        evidence: [https://github.com/Gibberlings3/Crossmod_Banter_Pack_for_Baldurs_Gate_II]
+      - claim: IEPM currently orders this after its mapped Isra BG2, Longer Road, and Haer'dalis Friendship partners when present. The upstream partner list is larger and this does not yet exhaustively model every covered mod; pairwise content remains Untested.
+        provenance: community
+        evidence: [https://github.com/Gibberlings3/Crossmod_Banter_Pack_for_Baldurs_Gate_II]
+    installers:
+      - tp2: crossmodbg2/setup-crossmodbg2.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: German }
+          - { id: 2, name: Russian }
+          - { id: 3, name: Italian }
+          - { id: 4, name: Simplified Chinese }
+    components:
+      - { id: soa-crossmod-banter, default_selected: true, weidu: { tp2: crossmodbg2/setup-crossmodbg2.tp2, label: cd_crossmod_banter_pack_bg2_soa, number: 0 } }
+      - { id: tob-crossmod-banter, weidu: { tp2: crossmodbg2/setup-crossmodbg2.tp2, label: cd_crossmod_banter_pack_bg2_tob, number: 1 } }
+      - { id: romance-conflicts, weidu: { tp2: crossmodbg2/setup-crossmodbg2.tp2, label: cd_crossmod_banter_pack_bg2_romance_conflicts, number: 2 } }
