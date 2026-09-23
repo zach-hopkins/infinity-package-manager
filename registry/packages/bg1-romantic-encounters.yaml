@@ -25,6 +25,9 @@ releases:
       - claim: Encounter REQUIRE_FILE predicates depend on marker files produced by one or more of the six style choices. IEPM currently guards mutual exclusion but does not fully preflight those OR-style marker requirements; WeiDU remains authoritative for them.
         provenance: derived
         evidence: [docs/pa4-bg1-romantic-encounters-evidence.md]
+      - claim: The adult BG-style/show-warnings choice and all forty-four encounters completed after DLC Merger in a clean BGEE 2.6.6 disposable build and appeared in WeiDU.log. Other style choices, EET, menu, and gameplay remain unobserved.
+        provenance: verified
+        evidence: [evidence/pa4-bgee-bg1-romantic-encounters.json]
     installers:
       - tp2: bg1re/setup-bg1re.tp2
         launcher: toolchain
