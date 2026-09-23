@@ -2153,7 +2153,7 @@
       "tp2_files": [
         "Almateria-Restoration-Project-10.1/arestorationp/arestorationp.tp2"
       ],
-      "components_observed": 13.0,
+      "components_observed": 14.0,
       "tp2_observations": [
         {
           "path": "Almateria-Restoration-Project-10.1/arestorationp/arestorationp.tp2",
@@ -2255,27 +2255,32 @@
               "label": "Almaterias_Restoration_Project-Restored_Random_Encounters"
             },
             {
+              "begin": "@1000",
+              "number": 8,
+              "label": "Almaterias_Restoration_Project-Minor_Restorations"
+            },
+            {
               "begin": "",
-              "number": 8
+              "number": 9
             },
             {
               "begin": "@1200",
-              "number": 9,
+              "number": 10,
               "label": "Almaterias_Restoration_Project-Better_Item_Import"
             },
             {
               "begin": "@1300",
-              "number": 10,
+              "number": 11,
               "label": "Almaterias_Restoration_Project-Restored_Final_Slayer_Dream"
             },
             {
               "begin": "@1400",
-              "number": 11,
+              "number": 12,
               "label": "Almaterias_Restoration_Project-Alternate_Slayer_Change"
             },
             {
               "begin": "@1500",
-              "number": 12,
+              "number": 13,
               "label": "Almaterias_Restoration_Project-Restored_Waukeens_Promenade_Cutscene"
             }
           ],
@@ -5055,7 +5060,6 @@
           ],
           "game_predicates": [
             "~bgee bg2ee eet iwdee pstee~ ~Game not supported.~",
-            "~iwdee~ BEGIN",
             "~pstee~ BEGIN"
           ]
         }

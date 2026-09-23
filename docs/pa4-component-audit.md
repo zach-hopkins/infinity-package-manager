@@ -202,3 +202,13 @@ mechanically transcoded temporary copy and reported `match`. The bounded
 three-component fixture completed a clean BG2EE build and main-menu smoke;
 those exact choices are Supported. The other 21 choices and EET remain
 Untested. See [`pa4-bg2ee-unfinished-business-evidence.md`](pa4-bg2ee-unfinished-business-evidence.md).
+
+Almateria's Restoration Project v10.1 revealed another line-reader edge case:
+an `ACTION_IF` chain uses one-line `BEGIN OUTER_SPRINT ... END ELSE` branches.
+The earlier inventory left those branches open and lost the real Minor
+Restorations component, shifting every later implicit number. The reader now
+closes such one-line branches, excludes an unrelated inline `BEGIN SET` action
+from Romantic Encounters, and has regressions for both cases. The regenerated
+exact-byte cohort report records 14 ARP TP2 declarations: twelve live EE
+choices, one deprecated placeholder, and one classic-only choice. The mapped
+ARP release matches all fourteen structural declarations after this correction.

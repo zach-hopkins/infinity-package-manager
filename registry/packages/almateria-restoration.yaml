@@ -1,0 +1,61 @@
+schema: 2
+package: almateria-restoration
+aliases: [arestorationp]
+releases:
+  - release_id: almateria-restoration-v10.1-source
+    version: "v10.1"
+    artifacts:
+      - url: https://github.com/SpellholdStudios/Almaterias_Restoration_Project/archive/refs/tags/v10.1.zip
+        sha256: 97ca579bac66c807b4628938ba7b809c81d5513eb8432e10c6f4705ed6dbf842
+        platforms: [windows]
+    materialization: { source_root: Almateria-Restoration-Project-10.1, include: [arestorationp] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact v10.1 maintainer-tag ZIP matched SHA-256. Its TP2 declares VERSION v10.1, fourteen structural components, thirteen with LABELs; number 9 is a deprecated unlabeled placeholder.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: Minor Restorations is component 8. The original cohort parser lost it after one-line ACTION_IF branches and shifted all subsequent inferred numbers; the corrected inventory and regression test retain the real numbering.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: Better Item Import number 10 requires NOT GAME_IS bg2ee eet and is unavailable on IEPM's current BG2EE/EET routes. Alternate Slayer Change number 12 requires Final Slayer Dream number 11.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The maintainer documents BG2EE/EET support and recommends installing Quest Pack after this mod's relevant restoration component; that recommendation is not a package-wide requirement.
+        provenance: declared
+        evidence: [https://github.com/SpellholdStudios/Almaterias_Restoration_Project]
+    installers:
+      - tp2: arestorationp/arestorationp.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: Polski }
+          - { id: 1, name: English }
+          - { id: 2, name: "Italiano (by Sergio)" }
+          - { id: 3, name: "Nederlands (by Tzarnal)" }
+          - { id: 4, name: "lingua latina (by Sleep of Bronze)" }
+          - { id: 5, name: "Foeroyskr (BG2EE) (by inscrutable horse)" }
+          - { id: 6, name: "Simplified Chinese (by Sebastian C and Lzw104522773)" }
+          - { id: 7, name: "Francais (by Isaya and the d'Oghmatiques)" }
+          - { id: 8, name: "Deutsch (by Dachrisma)" }
+          - { id: 9, name: "Portugues brasileiro (by Felipe)" }
+          - { id: 10, name: "Russian (by Austin & ArcaneCoast.ru)" }
+          - { id: 11, name: 'Czech (by Radim "Edvin" Klimek)' }
+          - { id: 12, name: "Spanish (by Memnoch)" }
+    components:
+      - { id: restored-locations, default_selected: true, weidu: { tp2: arestorationp/arestorationp.tp2, label: Almaterias_Restoration_Project-Restored_Locations, number: 0 } }
+      - { id: restored-characters-dialogues, weidu: { tp2: arestorationp/arestorationp.tp2, label: Almaterias_Restoration_Project-Restored_Characters_and_Dialogs, number: 1 } }
+      - { id: restored-sounds, weidu: { tp2: arestorationp/arestorationp.tp2, label: Almaterias_Restoration_Project-Restored_Sounds, number: 2 } }
+      - { id: restored-items, weidu: { tp2: arestorationp/arestorationp.tp2, label: Almaterias_Restoration_Project-Restored_Items, number: 3 } }
+      - { id: restored-wish-options, weidu: { tp2: arestorationp/arestorationp.tp2, label: Almaterias_Restoration_Project-Restored_Wish_Options, number: 4 } }
+      - { id: restored-minor-xp, weidu: { tp2: arestorationp/arestorationp.tp2, label: Almaterias_Restoration_Project-Restored_XP_for_Minor_Things, number: 5 } }
+      - { id: lich-deril, weidu: { tp2: arestorationp/arestorationp.tp2, label: Almaterias_Restoration_Project-Lich_Deril, number: 6 } }
+      - { id: restored-random-encounters, weidu: { tp2: arestorationp/arestorationp.tp2, label: Almaterias_Restoration_Project-Restored_Random_Encounters, number: 7 } }
+      - { id: minor-restorations, weidu: { tp2: arestorationp/arestorationp.tp2, label: Almaterias_Restoration_Project-Minor_Restorations, number: 8 } }
+      - id: retired-placeholder
+        deprecated: "Unlabeled TP2 component 9 is explicitly DEPRECATED in this release."
+        weidu: { tp2: arestorationp/arestorationp.tp2, number: 9 }
+      - { id: better-item-import-classic, unsupported_games: [bg2ee, eet], weidu: { tp2: arestorationp/arestorationp.tp2, label: Almaterias_Restoration_Project-Better_Item_Import, number: 10 } }
+      - { id: final-slayer-dream, weidu: { tp2: arestorationp/arestorationp.tp2, label: Almaterias_Restoration_Project-Restored_Final_Slayer_Dream, number: 11 } }
+      - { id: alternate-slayer-change, weidu: { tp2: arestorationp/arestorationp.tp2, label: Almaterias_Restoration_Project-Alternate_Slayer_Change, number: 12 }, requires: [final-slayer-dream] }
+      - { id: extended-promenade-cutscene, weidu: { tp2: arestorationp/arestorationp.tp2, label: Almaterias_Restoration_Project-Restored_Waukeens_Promenade_Cutscene, number: 13 } }

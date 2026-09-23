@@ -378,12 +378,20 @@ pub fn inspect_tp2(source: &str) -> Tp2Observation {
             continue;
         }
         if awaits_control_flow_begin && starts_keyword(line, "BEGIN") {
-            control_flow_depth += 1;
-            awaits_control_flow_begin = false;
+            // Some real TP2s place the entire branch on one line:
+            // `BEGIN OUTER_SPRINT value ~x~ END ELSE`. Leaving that BEGIN
+            // open hides the next top-level component from this inventory.
+            if find_keyword(line, "END").is_none() {
+                control_flow_depth += 1;
+            }
+            awaits_control_flow_begin = line.trim_end().ends_with("ELSE");
             continue;
         }
         if control_flow_depth > 0 && starts_keyword(line, "END") {
             control_flow_depth -= 1;
+            if find_keyword(line, "BEGIN").is_some() {
+                control_flow_depth += 1;
+            }
             continue;
         }
         // Indentation does not distinguish a real WeiDU component from an
@@ -393,6 +401,11 @@ pub fn inspect_tp2(source: &str) -> Tp2Observation {
         // guard for controls whose expression precedes BEGIN on its line.
         if starts_keyword(line, "BEGIN") && control_flow_depth == 0 {
             let title_source = line["BEGIN".len()..].trim_start();
+            // An inline action branch such as `BEGIN SET value = 1 END`
+            // is not an unquoted component title.
+            if starts_keyword(title_source, "SET") && find_keyword(title_source, "END").is_some() {
+                continue;
+            }
             let pending_title = match title_source.chars().next() {
                 Some(delimiter @ ('~' | '"'))
                     if !title_source[delimiter.len_utf8()..].contains(delimiter) =>
@@ -1239,6 +1252,55 @@ BEGIN ~Inquisitor~
                 .collect::<Vec<_>>(),
             vec![Some("True Paladin"), Some("Cavalier"), Some("Inquisitor")]
         );
+    }
+
+    #[test]
+    fn inspection_keeps_components_after_single_line_if_branches() {
+        let observation = inspect_tp2(
+            r#"
+BEGIN @900
+LABEL ~RANDOM_ENCOUNTERS~
+ACTION_IF MOD_IS_INSTALLED ~other.tp2~ ~4~
+BEGIN OUTER_SPRINT path ~other.baf~ END ELSE
+ACTION_IF FILE_EXISTS ~dir.ids~
+BEGIN OUTER_SPRINT path ~ee.baf~ END ELSE
+BEGIN OUTER_SPRINT path ~classic.baf~ END
+BEGIN @1000
+LABEL ~MINOR_RESTORATIONS~
+BEGIN ~~
+DEPRECATED @1100
+BEGIN @1200
+LABEL ~BETTER_ITEM_IMPORT~
+"#,
+        );
+
+        assert_eq!(
+            observation
+                .components
+                .iter()
+                .map(|component| (component.number, component.label.as_deref()))
+                .collect::<Vec<_>>(),
+            vec![
+                (Some(0), Some("RANDOM_ENCOUNTERS")),
+                (Some(1), Some("MINOR_RESTORATIONS")),
+                (Some(2), None),
+                (Some(3), Some("BETTER_ITEM_IMPORT")),
+            ]
+        );
+    }
+
+    #[test]
+    fn inspection_does_not_count_inline_set_branch_as_component() {
+        let observation = inspect_tp2(
+            r#"
+BEGIN @1
+PATCH_IF TRUE
+BEGIN SET "RESULT" = 1 END
+BEGIN @2
+"#,
+        );
+        assert_eq!(observation.components.len(), 2);
+        assert_eq!(observation.components[1].begin.as_deref(), Some("@2"));
     }
 
     #[test]

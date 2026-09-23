@@ -78,6 +78,7 @@ labels. This ledger must use those words only with those meanings.
 | Extra Expanded Enhanced Encounters! 4.4 | Complete eight-component BGEE/EET catalog; cave bears require SoD content | All eight English choices installed and sealed on SoD-enabled BGEE | **Untested** pending observed menu and gameplay; EET also Untested | [install evidence](pa4-bgee-sod-bridge-encounters-evidence.md) |
 | Reflections of Destiny 0.9.4 | Seven TP2 selectors: five other SoD/BGEE choices, one EET-only, and selector 230 blocked after two parse-error failures; four commented-out blocks excluded | Four valid BGEE choices installed and sealed with Road to Discovery; Caelar rewrite guarded against it | **Incompatible** for exact selector 230; tested install route and other choices **Untested** pending menu/gameplay | [failure evidence](pa4-bgee-reflections-feyr-failure.md), [install evidence](pa4-bgee-sod-story-valid-evidence.md) |
 | Road to Discovery 6.0 | Eight active selectors with package-local requirements; selector 80 is deprecated and unavailable | All eight English choices installed and sealed on SoD-enabled BGEE | **Untested** pending menu/gameplay; EET also Untested | [install evidence](pa4-bgee-sod-story-valid-evidence.md) |
+| Almateria's Restoration Project v10.1 | All 14 TP2 declarations accounted for: 12 EE-facing, one deprecated, one classic-only; Alt Slayer requires Final Slayer Dream | Exact source route resolves executable for all 12 EE-facing English choices | **Untested** pending disposable install and menu smoke | [registry](../registry/packages/almateria-restoration.yaml) |
 | Generalized Biffing v2.9 | Complete two-choice subcomponent catalog; final-phase placement reflects author's after-all-mods direction | Banter Pack then media-only Biffing built and launched from sealed BG2EE | **Supported** for this narrow English BG2EE 2.6.6 route; all-files choice, EET, large stacks, and performance Untested | [evidence](pa4-bg2ee-generalized-biffing-evidence.md) |
 | Call of the Lost Goddess v3.1 | Complete 3-component structural catalog | Yes | **Untested** — the core route has fixture install evidence; optional portraits/voiceover and policy launch smoke remain untested | [registry](../registry/packages/call-of-the-lost-goddess.yaml) |
 | Throne of the Mad God v2.3 | Complete 1-component structural catalog | Yes | **Untested** — fixture install evidence exists; policy launch smoke remains | [registry](../registry/packages/throne-of-the-mad-god.yaml) |
@@ -104,7 +105,7 @@ selectors, curated relationships, and automated disposable-build evidence.
 ## Cohort work boundary
 
 The frozen cohort contains 19 packages that were already mapped when it was
-selected and 80 indexed candidates. Forty-three of those candidates (Sirene,
+selected and 80 indexed candidates. Forty-four of those candidates (Sirene,
 LeUI, thirteen BG2 friendship releases, four Pocket Plane quest mods,
 Korgan's Redemption, Coran's BG Friendship, Xan's BG1 Friendship, and High
 Quality Soundclips, Banter Pack, BioWare NPC Flirt Packs, Drake, Unfinished
@@ -112,7 +113,8 @@ Business, Reduce Save Compression, Ajantis BG1 Expansion, Turnabout,
 Generalized Biffing, The Longer Road, Isra NPC for BGII, Isra NPC for BG,
 Black Pits in BG, Dark Horizons, CoM Encounters, Tower of Deception, Test
 Your Mettle!, The Boareskyr Bridge Scene, Extra Expanded Enhanced Encounters!,
-Reflections of Destiny, and Road to Discovery) now have curated executable identities; 37 remain
+Reflections of Destiny, Road to Discovery, and Almateria's Restoration Project)
+now have curated executable identities; 36 remain
 discovery-only. The remaining
 candidates are **not** silently
 excluded: they may proceed through IEPM's opaque local-package route once
