@@ -1,0 +1,31 @@
+schema: 2
+package: bubb-revert-pathfinding
+aliases: [revert-pathfinding]
+releases:
+  - release_id: bubb-revert-pathfinding-v1.1-for-2.6.6
+    version: "1.1"
+    artifacts:
+      - url: https://forums.beamdog.com/uploads/editor/d9/wyui78e065z6.zip
+        sha256: d07da360f7b51dc51f0da77c68691d10e47b8af1a4ebba4308efac61b6a8e32b
+        platforms: [windows]
+    materialization: { include: [bubb_revert_pathfinding] }
+    compatibility: { games: [bgee, bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: Exact author-attached 1,266,668-byte ZIP matched SHA-256. TP2 VERSION 1.1 declares one implicit-number component, requires a 2.6 PATCH26.BIF game, and modifies Baldur.exe or SiegeOfDragonspear.exe in place. The archive's setup EXE is not executed; IEPM uses its pinned WeiDU toolchain.
+        provenance: derived
+        evidence: [https://forums.beamdog.com/discussion/72639/comments-on-new-v2-5-pathfinding-it-is-bad-news/p2]
+      - claim: The author describes this attached revision as updated for game v2.6.6.0 and as a temporary executable-patching workaround, not an engine-level fix.
+        provenance: declared
+        evidence: [https://forums.beamdog.com/discussion/72639/comments-on-new-v2-5-pathfinding-it-is-bad-news/p2]
+      - claim: The TP2 seeks an exact byte signature before patching, so other executable versions may fail safely in a disposable workspace. A successful installer receipt does not establish improved pathfinding behavior or compatibility with a future game patch.
+        provenance: derived
+        evidence: [https://forums.beamdog.com/discussion/72639/comments-on-new-v2-5-pathfinding-it-is-bad-news/p2]
+    installers:
+      - tp2: bubb_revert_pathfinding/bubb_revert_pathfinding.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+    components:
+      - { id: revert-pathfinding-for-2-6-6, default_selected: true, weidu: { tp2: bubb_revert_pathfinding/bubb_revert_pathfinding.tp2, number: 0 } }
