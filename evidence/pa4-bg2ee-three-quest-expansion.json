@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "CoM Encounters v1.22, Test Your Mettle! v1.6, and Tower of Deception v4.1.0 English defaults on clean BG2EE 2.6.6",
+  "identity": {
+    "registry_revision": "289dd78",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "a8a424edc395f7efc32212b328ac0c028756d068dca9b1edd70a5479f1a90d41",
+    "environments": {
+      "target": {
+        "target": "bg2ee",
+        "fingerprint": {
+          "profile": "iepm-core-layout-v1",
+          "value": "298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f"
+        }
+      }
+    },
+    "packages": [
+      { "package": "com-encounters", "release_id": "com-encounters-v1.22-source", "environment": "target", "artifact_sha256": "ce2f050867869d7776c5365289b160173b606830e6322e4993952812caf9d7dd", "components": ["new-encounters"] },
+      { "package": "test-your-mettle", "release_id": "test-your-mettle-v1.6-source", "environment": "target", "artifact_sha256": "ef982be26bea827ac1269a454b7e8019e21ea751de4cdbfd5dd2ca75c5e91559", "components": ["dungeon-adventure"] },
+      { "package": "tower-of-deception", "release_id": "tower-of-deception-v4.1.0-source", "environment": "target", "artifact_sha256": "2b89f6418d77e76ac58f352c7fa1bdd00111cd20bc2cced8c82ee1510efcc28d", "components": ["tower-adventure"] }
+    ],
+    "execution_order": ["com-encounters", "test-your-mettle", "tower-of-deception"]
+  },
+  "checks": {
+    "artifact_verified": true,
+    "selector_known": true,
+    "requirements_modeled": true,
+    "component_catalog_complete": true,
+    "all_components_classified": true,
+    "core_components_supported": false,
+    "selected_components_supported": false,
+    "relationships_satisfied": true,
+    "no_opaque_selections": true,
+    "clean_disposable_install": true,
+    "all_actions_completed": true,
+    "requested_components_recorded": true,
+    "no_components_skipped": true,
+    "warnings_classified": true,
+    "sealed": true,
+    "eet_end_required": false,
+    "main_menu_smoke": false,
+    "gameplay_smoke": false
+  },
+  "evidence": ["examples/bg2ee-three-quest-expansion/modpack.yaml", "docs/pa4-bg2ee-three-quest-expansion-evidence.md"]
+}

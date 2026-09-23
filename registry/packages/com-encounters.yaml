@@ -21,6 +21,9 @@ releases:
       - claim: The author describes the main encounters plus optional Improved Druids and Improved Shagbag components. The latter two are structurally separate selectors and remain Untested.
         provenance: declared
         evidence: [https://github.com/The-Gate-Project/Com_encounters]
+      - claim: The exact English main component completed in a clean BG2EE 2.6.6 three-mod quest build and appeared in WeiDU.log. The game menu was not observed because the Windows UI helper failed; this route remains Untested.
+        provenance: verified
+        evidence: [evidence/pa4-bg2ee-three-quest-expansion.json]
     installers:
       - tp2: com_encounters/SETUP-com_encounters.tp2
         launcher: toolchain

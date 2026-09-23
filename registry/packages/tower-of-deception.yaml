@@ -22,6 +22,9 @@ releases:
       - claim: Each of the three optional components requires a marker file created by the main Tower of Deception component. IEPM models that package-local requirement; optional behavior remains Untested.
         provenance: derived
         evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The exact English main component completed in a clean BG2EE 2.6.6 three-mod quest build and appeared in WeiDU.log. The game menu was not observed because the Windows UI helper failed; this route remains Untested.
+        provenance: verified
+        evidence: [evidence/pa4-bg2ee-three-quest-expansion.json]
     installers:
       - tp2: tod/tod.tp2
         launcher: toolchain
