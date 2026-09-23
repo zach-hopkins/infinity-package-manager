@@ -1,0 +1,38 @@
+schema: 2
+package: portraits-portraits-everywhere
+aliases: [ppe]
+releases:
+  - release_id: portraits-portraits-everywhere-54c94e7-source
+    version: "1.03"
+    artifacts:
+      - url: https://github.com/smeagolheart/Portraits-Portraits-Everywhere/archive/54c94e7abdf6879bac409e861aa9e3d6297ee420.zip
+        sha256: 1ff8c64453e0d956b41f93ddd5a1caae335026572889993f7af3e130e33389df
+        platforms: [windows]
+    materialization: { source_root: Portraits-Portraits-Everywhere-54c94e7abdf6879bac409e861aa9e3d6297ee420, include: [PPE] }
+    compatibility: { games: [bgee, bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: Exact upstream author commit archive matched SHA-256. The README calls this v1.03 while TP2 VERSION remains 1.01; eight live numeric selectors are mechanically present.
+        provenance: derived
+        evidence: [https://github.com/smeagolheart/Portraits-Portraits-Everywhere/tree/54c94e7abdf6879bac409e861aa9e3d6297ee420]
+      - claim: Category Portraits options 100 and 150 are mutually exclusive and require core 0. Edwin and Edwina option 25 forbids legacy BG2 Tweaks component 1180 in the TP2. Other menu or behavioral compatibility is not verified.
+        provenance: derived
+        evidence: [https://github.com/smeagolheart/Portraits-Portraits-Everywhere/tree/54c94e7abdf6879bac409e861aa9e3d6297ee420]
+      - claim: Core 0 plus sequenced Category Portraits 100 installed and sealed on clean BG2EE 2.6.6. No stderr, WeiDU warnings, or skip markers were observed. Other selectors, EET, BGEE, menu, and gameplay are untested.
+        provenance: verified
+        evidence: [evidence/pa4-bg2ee-ppe.json]
+    installers:
+      - tp2: PPE/setup-PPE.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+    components:
+      - { id: core, default_selected: true, weidu: { tp2: PPE/setup-PPE.tp2, number: 0 } }
+      - { id: category-portraits-sequenced, weidu: { tp2: PPE/setup-PPE.tp2, number: 100 }, requires: [core], conflicts: [category-portraits-random] }
+      - { id: category-portraits-random, weidu: { tp2: PPE/setup-PPE.tp2, number: 150 }, requires: [core], conflicts: [category-portraits-sequenced] }
+      - { id: isandir-charname-portraits, weidu: { tp2: PPE/setup-PPE.tp2, number: 10 } }
+      - { id: replace-low-quality-soa-tob-portraits, unsupported_games: [bgee], weidu: { tp2: PPE/setup-PPE.tp2, number: 20 } }
+      - { id: edwin-edwina-portraits, unsupported_games: [bgee], weidu: { tp2: PPE/setup-PPE.tp2, number: 25 } }
+      - { id: ust-natha-drow-portraits, unsupported_games: [bgee], weidu: { tp2: PPE/setup-PPE.tp2, number: 30 } }
+      - { id: vampire-npc-portraits, unsupported_games: [bgee], weidu: { tp2: PPE/setup-PPE.tp2, number: 35 } }

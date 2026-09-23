@@ -781,6 +781,15 @@ pub fn review_tp2(
     review_components(release, installer, observed, &mut findings);
     review_duplicates(observed, &mut findings);
     let component_catalog = audit_component_catalog(release, installer, observed);
+    if !component_catalog.unmapped_observed_components.is_empty() {
+        findings.push(Tp2Finding {
+            kind: "component-unmapped".to_owned(),
+            message: format!(
+                "{} observed TP2 component(s) have no registry mapping",
+                component_catalog.unmapped_observed_components.len()
+            ),
+        });
+    }
 
     Ok(Tp2Review {
         schema: 1,
@@ -1552,6 +1561,32 @@ BEGIN @101 DESIGNATED 11 LABEL ~SAMPLE-ENABLE~
         assert_eq!(
             review.component_catalog.unmapped_observed_components.len(),
             2
+        );
+    }
+
+    #[test]
+    fn review_tp2_marks_extra_observed_component_as_drift() {
+        let observed = inspect_tp2(
+            r#"
+VERSION ~1.2.3~
+LANGUAGE ~English~
+BEGIN @100 DESIGNATED 10 LABEL ~SAMPLE-ENABLE~
+BEGIN @101 DESIGNATED 11 LABEL ~SAMPLE-EXTRA~
+"#,
+        );
+        let review = review_tp2(&registry(), "sample-mod", "sample-release", None, &observed)
+            .expect("review succeeds");
+
+        assert_eq!(review.status, Tp2ReviewStatus::Drift);
+        assert_eq!(
+            review.component_catalog.unmapped_observed_components.len(),
+            1
+        );
+        assert!(
+            review
+                .findings
+                .iter()
+                .any(|finding| finding.kind == "component-unmapped")
         );
     }
 
