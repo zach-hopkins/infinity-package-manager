@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "Imoen 4 Ever v11.6 six English BG2EE selectors on clean BG2EE 2.6.6",
+  "identity": {
+    "registry_revision": "f8e5c46",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "9e09c637cadcf7289948e4094cf25facb501f43a465b1ddd3b0abe9c4c0225db",
+    "environments": { "target": { "target": "bg2ee", "fingerprint": { "profile": "iepm-core-layout-v1", "value": "298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f" } } },
+    "packages": [
+      { "package": "imoen-4-ever", "release_id": "imoen-4-ever-v11.6-source", "environment": "target", "artifact_sha256": "c57fee7058159ee681e77d4c2a80d5a100b6b4adece1d4fadada16fd878593d6", "components": ["imoen-returns-chapter-two", "bg2-imoen-dialogue", "yoshimo-in-brynnlaw", "imoen-protection-spell", "saerileth-alternatives-compatibility", "acifer-portrait"] }
+    ],
+    "execution_order": ["imoen-4-ever"]
+  },
+  "checks": {
+    "artifact_verified": true, "selector_known": true, "requirements_modeled": true,
+    "component_catalog_complete": true, "all_components_classified": true,
+    "core_components_supported": false, "selected_components_supported": false,
+    "relationships_satisfied": true, "no_opaque_selections": true,
+    "clean_disposable_install": true, "all_actions_completed": true,
+    "requested_components_recorded": true, "no_components_skipped": true,
+    "warnings_classified": true, "sealed": true, "eet_end_required": false,
+    "main_menu_smoke": false, "gameplay_smoke": false
+  },
+  "evidence": ["examples/bg2ee-imoen-4-ever/modpack.yaml", "docs/pa4-imoen-4-ever-evidence.md"]
+}
