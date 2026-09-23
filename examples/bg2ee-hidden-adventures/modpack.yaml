@@ -1,0 +1,19 @@
+schema: 2
+
+# PA-4 bounded BG2EE fixture for all ten selectors that this release permits
+# on BG2EE; the Silver Dagger import is BGT/EET-only.
+environments:
+  target:
+    target: bg2ee
+    version: "2.6.6"
+    platform: windows
+    language: English
+    locale: en_US
+    fingerprint:
+      profile: iepm-core-layout-v1
+      value: 298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f
+
+mods:
+  - package: hidden-adventures
+    environment: target
+    components: [lady-elgea-extended, anomen-advanced-plot, jerlia-ore-shop, lathander-holy-water, wave-blade-treasury, bard-stronghold-resting, bard-for-stronghold, silver-sword-bonus, saradush-tunnel, temple-of-mask-docks]

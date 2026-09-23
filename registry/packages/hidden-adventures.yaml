@@ -1,0 +1,45 @@
+schema: 2
+package: hidden-adventures
+aliases: [hiddenadventure]
+releases:
+  - release_id: hidden-adventures-beta-9-source
+    version: "Beta_9"
+    artifacts:
+      - url: https://github.com/Gitjas/hiddenadventure/archive/refs/tags/vBeta_9.zip
+        sha256: 006f878be9b89ffa3c2c8e0b6d2922c49de79a05c757306433c8a3f83b491613
+        platforms: [windows]
+    materialization: { source_root: hiddenadventure-vBeta_9, include: [hiddenadventure] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact vBeta_9 author-tag ZIP matched SHA-256. Its TP2 declares VERSION Beta_9, five languages, and eleven independent LABEL-bearing components numbered 0 through 10.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The author documents BG2EE and EET support and describes each optional quest or tweak independently. The Silver Dagger import is BGT/EET-only, not a BG2EE selector.
+        provenance: declared
+        evidence: [https://github.com/Gitjas/hiddenadventure]
+      - claim: TP2 selector 5 explicitly requires BGT or EET. The IEPM BG2EE route excludes it; the other ten selectors are offered on BG2EE.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+    installers:
+      - tp2: hiddenadventure/hiddenadventure.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: German }
+          - { id: 1, name: English }
+          - { id: 2, name: "Russian (by yota13)" }
+          - { id: 3, name: "Polish (by memory)" }
+          - { id: 4, name: "Spanish (by alaisFcZ)" }
+    components:
+      - { id: lady-elgea-extended, default_selected: true, weidu: { tp2: hiddenadventure/hiddenadventure.tp2, label: hidden_adventures-ladyelgea, number: 0 } }
+      - { id: anomen-advanced-plot, weidu: { tp2: hiddenadventure/hiddenadventure.tp2, label: hidden_adventures-anomenplot, number: 1 } }
+      - { id: jerlia-ore-shop, weidu: { tp2: hiddenadventure/hiddenadventure.tp2, label: hidden_adventures-jerliashop, number: 2 } }
+      - { id: lathander-holy-water, weidu: { tp2: hiddenadventure/hiddenadventure.tp2, label: hidden_adventures-holywater_lathandertemple, number: 3 } }
+      - { id: wave-blade-treasury, weidu: { tp2: hiddenadventure/hiddenadventure.tp2, label: hidden_adventures-waveblade_treasury, number: 4 } }
+      - { id: silver-dagger-import, unsupported_games: [bg2ee], weidu: { tp2: hiddenadventure/hiddenadventure.tp2, label: hidden_adventures-silverdagger_ID, number: 5 } }
+      - { id: bard-stronghold-resting, weidu: { tp2: hiddenadventure/hiddenadventure.tp2, label: hidden_adventures-bard_stronghold_resting, number: 6 } }
+      - { id: bard-for-stronghold, weidu: { tp2: hiddenadventure/hiddenadventure.tp2, label: hidden_adventures-bard_stronghold_bard, number: 7 } }
+      - { id: silver-sword-bonus, weidu: { tp2: hiddenadventure/hiddenadventure.tp2, label: hidden_adventures-silversword, number: 8 } }
+      - { id: saradush-tunnel, weidu: { tp2: hiddenadventure/hiddenadventure.tp2, label: hidden_adventures-tunnel_saradush, number: 9 } }
+      - { id: temple-of-mask-docks, weidu: { tp2: hiddenadventure/hiddenadventure.tp2, label: hidden_adventures-masktemple_docks, number: 10 } }
