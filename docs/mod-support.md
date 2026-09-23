@@ -105,6 +105,7 @@ labels. This ledger must use those words only with those meanings.
 | Recorder BG1 1.51 | Exact author commit and two numeric selectors mapped | Main NPC installed after DLC Merger and sealed on clean BGEE/SoD; three EXTEND_TOP warnings recorded | **Untested** pending dialogue, music, EET, menu, and gameplay checks | [install evidence](pa4-bgee-recorder-bg1-evidence.md) |
 | Made in Heaven: Fixes & Restorations v1 | Exact author commit and all 20 LABEL selectors mapped; P&P and Volo require EE Fixpack core | P&P Fixpack and Intelligence 19 Rule installed after EE Fixpack core and sealed on clean BG2EE | **Untested** pending other selectors, EET baseline, menu, and gameplay | [install evidence](pa4-bg2ee-made-in-heaven-fixes-restorations-evidence.md) |
 | Baldur's Gate Graphical Overhaul v3.6 | Exact official tag, four LABEL selectors; Windows core route mapped while Android-directory choices are unavailable in this archive | Core installed and sealed on clean BG2EE despite no TP2 LANGUAGE declaration | **Untested** pending alternate graphics, EET, menu, and visual smoke | [install evidence](pa4-bg2ee-baldurs-gate-graphical-overhaul-evidence.md) |
+| Romantic Encounters BG2 v15 | Exact official tag and all 55 numeric-only scenarios mapped from author TP2 comments | Reactions, Ada, Aimi, and Aran choices installed together and sealed on clean BG2EE | **Untested** pending other scenarios, EET, menu, and gameplay | [install evidence](pa4-bg2ee-romantic-encounters-evidence.md) |
 | Generalized Biffing v2.9 | Complete two-choice subcomponent catalog; final-phase placement reflects author's after-all-mods direction | Banter Pack then media-only Biffing built and launched from sealed BG2EE | **Supported** for this narrow English BG2EE 2.6.6 route; all-files choice, EET, large stacks, and performance Untested | [evidence](pa4-bg2ee-generalized-biffing-evidence.md) |
 | Call of the Lost Goddess v3.1 | Complete 3-component structural catalog | Yes | **Untested** — the core route has fixture install evidence; optional portraits/voiceover and policy launch smoke remain untested | [registry](../registry/packages/call-of-the-lost-goddess.yaml) |
 | Throne of the Mad God v2.3 | Complete 1-component structural catalog | Yes | **Untested** — fixture install evidence exists; policy launch smoke remains | [registry](../registry/packages/throne-of-the-mad-god.yaml) |
@@ -131,8 +132,8 @@ selectors, curated relationships, and automated disposable-build evidence.
 ## Cohort work boundary
 
 The frozen cohort contains 19 packages that were already mapped when it was
-selected and 80 indexed candidates. The current triage records 73 curated
-executable identities and 7 discovery-only candidates. The remaining
+selected and 80 indexed candidates. The current triage records 74 curated
+executable identities and 6 discovery-only candidates. The remaining
 candidates are **not** silently excluded: the
 [remaining cohort triage](pa4-remaining-cohort-triage.md)
 names each acquisition state. They may proceed through IEPM's opaque

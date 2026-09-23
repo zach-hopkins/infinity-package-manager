@@ -19,6 +19,9 @@ releases:
       - claim: Cambion, Cyric, and Sendai scenarios have a TP2 FILE_EXISTS_IN_GAME mel01.cre predicate. This conditional eligibility is not evidence of a cross-package conflict; if the resource is absent, WeiDU may skip those choices.
         provenance: derived
         evidence: [https://github.com/Gibberlings3/Romantic_Encounters_BG2/releases/tag/v15]
+      - claim: Reactions, Ada, Aimi, and Aran scenarios installed together in a fresh clean BG2EE 2.6.6 build, appeared in WeiDU.log, and sealed without WeiDU warning or skip markers. Other scenarios, EET, menu, and gameplay remain unobserved.
+        provenance: verified
+        evidence: [evidence/pa4-bg2ee-romantic-encounters.json]
     installers:
       - tp2: RE/Setup-RE.tp2
         launcher: toolchain

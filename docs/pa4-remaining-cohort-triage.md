@@ -1,7 +1,7 @@
 # PA-4 remaining cohort triage (2026-09-23)
 
-The first 99-package Product A cohort has 73 curated executable identities
-and **7 discovery-only candidates** remaining beyond the 19 packages
+The first 99-package Product A cohort has 74 curated executable identities
+and **6 discovery-only candidates** remaining beyond the 19 packages
 already curated when the cohort was frozen. This page is an acquisition and
 review queue, not a support-status upgrade. The source snapshot is the
 [frozen cohort](../registry/cohorts/product-a-cohort.json), with acquisition
@@ -9,13 +9,12 @@ leads in the [PA-2 health report](../registry/catalog/infinity-mod-forge-health.
 and exact tagged-ZIP observations in the
 [PA-4 artifact report](../registry/cohorts/pa4-tagged-artifacts.json).
 
-## Five exact tagged archives already acquired
+## Four exact tagged archives already acquired
 
 | Source ID | Candidate | Next concrete step |
 | ---: | --- | --- |
 | 18 | EE UI Tweaks | Review 67 TP2 selectors, UI framework interactions, and a bounded BG2EE install. |
 | 24 | BG:EE Classic Movies | [Contain writes outside the disposable game](pa4-classic-movies-external-write-blocker.md) before any install. Eight selectors are mechanically known. |
-| 86 | Romantic Encounters (BG2) | Review 55 numeric-only selectors and file predicates (notably `mel01.cre`) before stabilizing IDs or selecting a fixture. No LABELs were observed. |
 | 246 | EET Tweaks | Review 65 selectors and EET-specific placement; then test on a disposable EET target. |
 | 428 | BP-BGT Worldmap | [Model its interactive map-size choice](pa4-worldmap-interactive-blocker.md) before declaring the main component executable. Six selectors are mechanically known. |
 
@@ -102,6 +101,12 @@ v3.6 tag ZIP, four mapped selectors, and a clean BG2EE core install and seal.
 The two Android-directory-dependent platform selectors are unavailable in
 this Windows source route; the core auto-selects Windows graphics. Alternate
 Graphics, EET, menu, and actual visual behavior remain untested.
+
+Source ID **86**, Romantic Encounters BG2, now has an exact author v15 tag,
+all 55 numeric-only selectors mapped to adjacent author scenario comments,
+and a clean four-choice BG2EE install and seal. Three ToB-related scenarios
+still depend on the `mel01.cre` resource predicate. Other scenarios, EET,
+menu, and gameplay remain untested.
 
 For each, locate an author or maintained release page, fetch exact bytes,
 hash and safely inspect the archive, and only then decide whether it can
