@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "Hidden Adventures Beta_9 ten English BG2EE-facing components on clean BG2EE 2.6.6",
+  "identity": {
+    "registry_revision": "4041abe",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "dce2cc33c9124e8a2d70d0fd10f9abe1b30d8ba9b01a2dc7212dda9c0d778b6b",
+    "environments": {
+      "target": {
+        "target": "bg2ee",
+        "fingerprint": {
+          "profile": "iepm-core-layout-v1",
+          "value": "298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f"
+        }
+      }
+    },
+    "packages": [
+      { "package": "hidden-adventures", "release_id": "hidden-adventures-beta-9-source", "environment": "target", "artifact_sha256": "006f878be9b89ffa3c2c8e0b6d2922c49de79a05c757306433c8a3f83b491613", "components": ["lady-elgea-extended", "anomen-advanced-plot", "jerlia-ore-shop", "lathander-holy-water", "wave-blade-treasury", "bard-stronghold-resting", "bard-for-stronghold", "silver-sword-bonus", "saradush-tunnel", "temple-of-mask-docks"] }
+    ],
+    "execution_order": ["hidden-adventures"]
+  },
+  "checks": {
+    "artifact_verified": true,
+    "selector_known": true,
+    "requirements_modeled": true,
+    "component_catalog_complete": true,
+    "all_components_classified": true,
+    "core_components_supported": false,
+    "selected_components_supported": false,
+    "relationships_satisfied": true,
+    "no_opaque_selections": true,
+    "clean_disposable_install": true,
+    "all_actions_completed": true,
+    "requested_components_recorded": true,
+    "no_components_skipped": true,
+    "warnings_classified": true,
+    "sealed": true,
+    "eet_end_required": false,
+    "main_menu_smoke": false,
+    "gameplay_smoke": false
+  },
+  "evidence": ["examples/bg2ee-hidden-adventures/modpack.yaml", "docs/pa4-bg2ee-hidden-adventures-evidence.md"]
+}

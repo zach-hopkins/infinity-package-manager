@@ -22,6 +22,9 @@ releases:
       - claim: TP2 selector 5 explicitly requires BGT or EET. The IEPM BG2EE route excludes it; the other ten selectors are offered on BG2EE.
         provenance: derived
         evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: All ten English BG2EE-facing components completed in a clean BG2EE 2.6.6 build and appeared in WeiDU.log. One nonfatal EXTEND_TOP position warning was retained; menu and gameplay smoke remain unperformed.
+        provenance: verified
+        evidence: [evidence/pa4-bg2ee-hidden-adventures.json]
     installers:
       - tp2: hiddenadventure/hiddenadventure.tp2
         launcher: toolchain
