@@ -1,0 +1,40 @@
+schema: 2
+package: sir-ajantis-bg2
+aliases: [ajantisbg2]
+releases:
+  - release_id: sir-ajantis-bg2-v21-source
+    version: "21"
+    artifacts:
+      - url: https://github.com/Gibberlings3/Ajantis_BG2/archive/refs/tags/v21.zip
+        sha256: 8fb2393f84521697cf125f5628d41bc77e723de3c9c4e70a57ca9f6ae592e5b7
+        platforms: [windows]
+    materialization: { source_root: Ajantis_BG2-21, include: [ajantisbg2] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact official v21 tag ZIP matched SHA-256; TP2 VERSION 21 declares nine selectors numbered 0, 1, 3, 40, 41, 42, 43, 44, and 5. Eight have LABELs and the shield-BAM selector has only a numeric designation.
+        provenance: derived
+        evidence: [https://github.com/Gibberlings3/Ajantis_BG2/releases/tag/v21]
+      - claim: The author documents BG2EE and EET. In a continuous EET game Ajantis does not spawn for BGII if he never joined the BG1 party. BG1NPC romance continuity is content context, not a hard installer prerequisite.
+        provenance: declared
+        evidence: [https://github.com/Gibberlings3/Ajantis_BG2]
+      - claim: Eight optional selectors require main component 0. The five dialogue-speed selections share a WeiDU SUBCOMPONENT group and are mutually exclusive. Shield BAM is EE-only; the main TP2 forbids installation after EET_End.
+        provenance: derived
+        evidence: [https://github.com/Gibberlings3/Ajantis_BG2/releases/tag/v21]
+    installers:
+      - tp2: ajantisbg2/ajantisbg2.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: Deutsch }
+          - { id: 1, name: English }
+    components:
+      - { id: ajantis-npc, default_selected: true, weidu: { tp2: ajantisbg2/ajantisbg2.tp2, label: "c#ajantisbg2-main", number: 0 } }
+      - { id: unique-family-shield-bam, weidu: { tp2: ajantisbg2/ajantisbg2.tp2, number: 1 }, requires: [ajantis-npc] }
+      - { id: adult-romance-content, weidu: { tp2: ajantisbg2/ajantisbg2.tp2, label: "c#ajantisbg2-expliciteromance", number: 3 }, requires: [ajantis-npc] }
+      - { id: dialogue-speed-60-minutes, weidu: { tp2: ajantisbg2/ajantisbg2.tp2, label: "c#ajantisbg2-timer_60min", number: 40 }, requires: [ajantis-npc], conflicts: [dialogue-speed-45-minutes, dialogue-speed-30-minutes, dialogue-speed-15-minutes, dialogue-speed-90-minutes] }
+      - { id: dialogue-speed-45-minutes, weidu: { tp2: ajantisbg2/ajantisbg2.tp2, label: "c#ajantisbg2-timer_45min", number: 41 }, requires: [ajantis-npc], conflicts: [dialogue-speed-60-minutes, dialogue-speed-30-minutes, dialogue-speed-15-minutes, dialogue-speed-90-minutes] }
+      - { id: dialogue-speed-30-minutes, weidu: { tp2: ajantisbg2/ajantisbg2.tp2, label: "c#ajantisbg2-timer_30min", number: 42 }, requires: [ajantis-npc], conflicts: [dialogue-speed-60-minutes, dialogue-speed-45-minutes, dialogue-speed-15-minutes, dialogue-speed-90-minutes] }
+      - { id: dialogue-speed-15-minutes, weidu: { tp2: ajantisbg2/ajantisbg2.tp2, label: "c#ajantisbg2-timer_15min", number: 43 }, requires: [ajantis-npc], conflicts: [dialogue-speed-60-minutes, dialogue-speed-45-minutes, dialogue-speed-30-minutes, dialogue-speed-90-minutes] }
+      - { id: dialogue-speed-90-minutes, weidu: { tp2: ajantisbg2/ajantisbg2.tp2, label: "c#ajantisbg2-timer_90min", number: 44 }, requires: [ajantis-npc], conflicts: [dialogue-speed-60-minutes, dialogue-speed-45-minutes, dialogue-speed-30-minutes, dialogue-speed-15-minutes] }
+      - { id: cavalier-kit, weidu: { tp2: ajantisbg2/ajantisbg2.tp2, label: "c#ajantisbg2-cavalierkit", number: 5 }, requires: [ajantis-npc] }

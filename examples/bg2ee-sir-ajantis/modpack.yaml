@@ -1,0 +1,19 @@
+schema: 2
+
+# Representative BG2EE combination. The five dialogue-speed choices are
+# mutually exclusive; this fixture selects the author's standard 60 minutes.
+environments:
+  target:
+    target: bg2ee
+    version: "2.6.6"
+    platform: windows
+    language: English
+    locale: en_US
+    fingerprint:
+      profile: iepm-core-layout-v1
+      value: 298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f
+
+mods:
+  - package: sir-ajantis-bg2
+    environment: target
+    components: [ajantis-npc, unique-family-shield-bam, adult-romance-content, dialogue-speed-60-minutes, cavalier-kit]
