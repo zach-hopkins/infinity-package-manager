@@ -25,6 +25,9 @@ releases:
       - claim: TP2 selectors 0 and 12 require EE Fixpack component 0; selector 12 is BGEE/EET only. EET selection of those two is temporarily withheld because the current resolver cannot express the pre-import EE Fixpack baseline in the already-EET target. Other selectors retain their TP2-declared game predicates.
         provenance: derived
         evidence: [https://github.com/AngelGryph/MadeInHeaven_FixesAndRestorations/tree/0f18a5823cc7e90878ead896a763761b15f67a55]
+      - claim: P&P Fixpack and Intelligence 19 Rule selectors installed after EE Fixpack core in a fresh clean BG2EE 2.6.6 build, appeared in WeiDU.log, and sealed without WeiDU warnings or skips. Other selectors, EET, menu, and gameplay remain unobserved.
+        provenance: verified
+        evidence: [evidence/pa4-bg2ee-made-in-heaven-fixes-restorations.json]
     installers:
       - tp2: mih_fr/setup-mih_fr.tp2
         launcher: toolchain

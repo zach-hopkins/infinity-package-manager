@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "Made in Heaven v1 P&P and Intelligence fixes after EE Fixpack on clean BG2EE 2.6.6",
+  "identity": {
+    "registry_revision": "40a439f",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "a5b1abd781dcea4afa80c39e7e011fba3e88d3768c7b6a21d534e036660406d9",
+    "environments": { "target": { "target": "bg2ee", "fingerprint": { "profile": "iepm-core-layout-v1", "value": "298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f" } } },
+    "packages": [
+      { "package": "ee-fixpack", "release_id": "ee-fixpack-beta-2", "environment": "target", "artifact_sha256": "7a57e43bd6c30c7e36b7c2b7c5531c7a0834de164da186808da03d24474592bf", "components": ["core-fixes"] },
+      { "package": "made-in-heaven-fixes-restorations", "release_id": "mih-fr-0f18a582-source", "environment": "target", "artifact_sha256": "cb6f7eb44b07e0e4709a8992c61b42c5538ed7754315691f728b5aa4480231ae", "components": ["pnp-fixes", "intelligence-19-rule"] }
+    ],
+    "execution_order": ["ee-fixpack", "made-in-heaven-fixes-restorations"]
+  },
+  "checks": {
+    "artifact_verified": true, "selector_known": true, "requirements_modeled": true,
+    "component_catalog_complete": true, "all_components_classified": true,
+    "core_components_supported": false, "selected_components_supported": false,
+    "relationships_satisfied": true, "no_opaque_selections": true,
+    "clean_disposable_install": true, "all_actions_completed": true,
+    "requested_components_recorded": true, "no_components_skipped": true,
+    "warnings_classified": true, "sealed": true, "eet_end_required": false,
+    "main_menu_smoke": false, "gameplay_smoke": false
+  },
+  "evidence": ["examples/bg2ee-made-in-heaven-fixes-restorations/modpack.yaml", "docs/pa4-bg2ee-made-in-heaven-fixes-restorations-evidence.md"]
+}

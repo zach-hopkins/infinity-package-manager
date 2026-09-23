@@ -1,7 +1,7 @@
 # PA-4 remaining cohort triage (2026-09-23)
 
-The first 99-package Product A cohort has 71 curated executable identities
-and **9 discovery-only candidates** remaining beyond the 19 packages
+The first 99-package Product A cohort has 72 curated executable identities
+and **8 discovery-only candidates** remaining beyond the 19 packages
 already curated when the cohort was frozen. This page is an acquisition and
 review queue, not a support-status upgrade. The source snapshot is the
 [frozen cohort](../registry/cohorts/product-a-cohort.json), with acquisition
@@ -23,7 +23,7 @@ The exact tagged ZIPs above were SHA-256 hashed; a PA-2 ZIP signature alone
 would not be sufficient. The Classic Movies and Worldmap blockers are IEPM
 execution-boundary gaps, **not** claims that those mods are incompatible.
 
-## Two branch-archive acquisition leads
+## One branch-archive acquisition lead
 
 These are not release identities. A mutable branch URL can change without
 changing its spelling, so pin an exact commit or released asset before
@@ -32,7 +32,6 @@ deriving selectors and updating the executable registry.
 | Source ID | Candidate | PA-2 observation |
 | ---: | --- | --- |
 | 25 | Baldur's Gate Graphics Overhaul | Branch archive probe returned HTTP error. |
-| 29 | Made in Heaven: Fixes & Restorations | Branch archive had ZIP signature; still mutable. |
 
 ## Two manual-browser acquisition leads
 
@@ -100,6 +99,13 @@ Source ID **134**, Recorder BG1, now has an exact author commit archive,
 complete two-selector numeric mapping, and a BGEE/SoD main-NPC install and
 seal. Three nonfatal EXTEND_TOP warnings require dialogue smoke. The optional
 music choice, EET, menu, and gameplay remain untested.
+
+Source ID **29**, Made in Heaven: Fixes & Restorations, now has an exact
+author commit archive, all 20 selectors mapped, and a clean BG2EE EE Fixpack
+core plus P&P/Intelligence build. Its P&P and Volo selectors require EE
+Fixpack component 0; those selectors remain unavailable on EET until the
+pre-import baseline is modeled. Other selectors, EET, menu, and gameplay
+remain untested.
 
 For each, locate an author or maintained release page, fetch exact bytes,
 hash and safely inspect the archive, and only then decide whether it can
