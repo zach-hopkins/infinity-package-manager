@@ -1,0 +1,53 @@
+schema: 2
+package: made-in-heaven-fixes-restorations
+releases:
+  - release_id: mih-fr-0f18a582-source
+    version: "v1"
+    artifacts:
+      - url: https://github.com/AngelGryph/MadeInHeaven_FixesAndRestorations/archive/0f18a5823cc7e90878ead896a763761b15f67a55.zip
+        sha256: cb6f7eb44b07e0e4709a8992c61b42c5538ed7754315691f728b5aa4480231ae
+        platforms: [windows]
+    materialization: { source_root: MadeInHeaven_FixesAndRestorations-0f18a5823cc7e90878ead896a763761b15f67a55, include: [mih_fr] }
+    compatibility: { games: [bgee, bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    relationships:
+      - kind: requires
+        package: ee-fixpack
+        components: [core-fixes]
+        when:
+          games: [bgee, bg2ee]
+          selected_components: [pnp-fixes, volos-travels]
+    provenance: unverified
+    claims:
+      - claim: The exact author-repository commit archive matched SHA-256. TP2 VERSION is v1 and declares twenty live numbered LABEL selectors. No immutable release tag was found at this source.
+        provenance: derived
+        evidence: [https://github.com/AngelGryph/MadeInHeaven_FixesAndRestorations/tree/0f18a5823cc7e90878ead896a763761b15f67a55]
+      - claim: TP2 selectors 0 and 12 require EE Fixpack component 0; selector 12 is BGEE/EET only. EET selection of those two is temporarily withheld because the current resolver cannot express the pre-import EE Fixpack baseline in the already-EET target. Other selectors retain their TP2-declared game predicates.
+        provenance: derived
+        evidence: [https://github.com/AngelGryph/MadeInHeaven_FixesAndRestorations/tree/0f18a5823cc7e90878ead896a763761b15f67a55]
+    installers:
+      - tp2: mih_fr/setup-mih_fr.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+    components:
+      - { id: pnp-fixes, default_selected: true, unsupported_games: [eet], weidu: { tp2: mih_fr/setup-mih_fr.tp2, label: "MH#-MiH_FR-PandP_Fixes", number: 0 } }
+      - { id: intelligence-19-rule, weidu: { tp2: mih_fr/setup-mih_fr.tp2, label: "MH#-MiH_FR-Intelligence_19_Rule", number: 1 } }
+      - { id: sound-volume-fixes, unsupported_games: [bgee], weidu: { tp2: mih_fr/setup-mih_fr.tp2, label: "MH#-MiH_FR-Sound_Volume_Fixes", number: 2 } }
+      - { id: lore-friendly-spell-names, weidu: { tp2: mih_fr/setup-mih_fr.tp2, label: "MH#-MiH_FR-Lore_Friendly_Spell_Names", number: 3 } }
+      - { id: protection-scroll-fixes, weidu: { tp2: mih_fr/setup-mih_fr.tp2, label: "MH#-MiH_FR-Protection_Scroll_Fixes", number: 4 } }
+      - { id: move-shadow-armor-bg2, unsupported_games: [bgee], weidu: { tp2: mih_fr/setup-mih_fr.tp2, label: "MH#-MiH_FR-Move_Shadow_Armor_BG2", number: 5 } }
+      - { id: item-restorations, weidu: { tp2: mih_fr/setup-mih_fr.tp2, label: "MH#-MiH_FR-Item_Restorations", number: 6 } }
+      - { id: spell-restorations, weidu: { tp2: mih_fr/setup-mih_fr.tp2, label: "MH#-MiH_FR-Spell_Restorations", number: 7 } }
+      - { id: store-restorations-bg1, unsupported_games: [bg2ee], weidu: { tp2: mih_fr/setup-mih_fr.tp2, label: "MH#-MiH_FR-Store_Restorations_BG1", number: 8 } }
+      - { id: quest-restorations-bg1, unsupported_games: [bg2ee], weidu: { tp2: mih_fr/setup-mih_fr.tp2, label: "MH#-MiH_FR-Quest_Restorations_BG1", number: 9 } }
+      - { id: minor-restorations-bg1, unsupported_games: [bg2ee], weidu: { tp2: mih_fr/setup-mih_fr.tp2, label: "MH#-MiH_FR-Minor_Restorations_BG1", number: 10 } }
+      - { id: minor-restorations-bg2, unsupported_games: [bgee], weidu: { tp2: mih_fr/setup-mih_fr.tp2, label: "MH#-MiH_FR-Minor_Restorations_BG2", number: 11 } }
+      - { id: volos-travels, unsupported_games: [bg2ee, eet], weidu: { tp2: mih_fr/setup-mih_fr.tp2, label: "MH#-MiH_FR-Volos_Travels", number: 12 } }
+      - { id: keep-text-screens, unsupported_games: [bgee], weidu: { tp2: mih_fr/setup-mih_fr.tp2, label: "MH#-MiH_FR-Keep_Text_Screens", number: 13 } }
+      - { id: artemis-entreri-encounter, unsupported_games: [bgee], weidu: { tp2: mih_fr/setup-mih_fr.tp2, label: "MH#-MiH_FR-Artemis_Entreri_Encounter", number: 14 } }
+      - { id: restored-bhaalspawn-powers, unsupported_games: [bgee], weidu: { tp2: mih_fr/setup-mih_fr.tp2, label: "MH#-MiH_FR-Restored_Bhaalspawn_Powers", number: 15 } }
+      - { id: better-prepared-allies, weidu: { tp2: mih_fr/setup-mih_fr.tp2, label: "MH#-MiH_FR-Better_Prepared_Allies", number: 16 } }
+      - { id: obtain-obscure-items, weidu: { tp2: mih_fr/setup-mih_fr.tp2, label: "MH#-MiH_FR-Obtain_Obscure_Items", number: 17 } }
+      - { id: revised-spell-damage-caps, weidu: { tp2: mih_fr/setup-mih_fr.tp2, label: "MH#-MiH_FR-Revised_Spell_Damage_Caps", number: 18 } }
+      - { id: revert-harbinger, unsupported_games: [bgee], weidu: { tp2: mih_fr/setup-mih_fr.tp2, label: "MH#-MiH_FR-Revert_Harbinger", number: 19 } }
