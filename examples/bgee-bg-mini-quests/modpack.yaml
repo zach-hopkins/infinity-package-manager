@@ -1,6 +1,7 @@
 schema: 2
 
-# PA-4 all-selector BGEE fixture; no SoD content or DLC Merger required.
+# PA-4 all-selector BGEE fixture. The clean Steam BGEE source also contains
+# unmerged SoD; BGQE explicitly refuses to install until DLC Merger runs.
 environments:
   target:
     target: bgee
@@ -13,6 +14,9 @@ environments:
       value: 04fc6602150ff7788875573dbf0b7f4aeb7ca26aaf83b022c77d9fc417d848c3
 
 mods:
+  - package: dlc-merger
+    environment: target
+    components: [merge-sod]
   - package: bg-mini-quests-and-encounters
     environment: target
     components: [slime-quest, family-quest, babysitting, nashkel-monster, fallen-paladin, undying-love, orc-lover, unexpected-help, many-paws, drunk, noober, brages-sword, legal-sea-charts, water-queen-temples, worried-farmer, bodies-for-good-cause, cordyr-without-killing-sil, improved-borda]

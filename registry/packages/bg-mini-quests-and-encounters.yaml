@@ -22,6 +22,9 @@ releases:
       - claim: Every component accepts BGEE/EET; most forbid EET_End. Brage's Sword also has author-documented overlap with Brage's Redemption, which extends that quest. No broad conflict is inferred.
         provenance: derived
         evidence: [registry/cohorts/pa4-tagged-artifacts.json, https://github.com/Gibberlings3/BG_Quests_And_Encounters]
+      - claim: All eighteen components refused to install into the clean Steam BGEE source because it includes unmerged SoD. This is a source-preparation requirement, not evidence of a mod incompatibility; the fixture now runs DLC Merger first.
+        provenance: verified
+        evidence: [docs/pa4-bgee-bg-mini-quests-evidence.md]
     installers:
       - tp2: bgqe/setup-bgqe.tp2
         launcher: toolchain
