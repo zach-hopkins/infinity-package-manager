@@ -1,0 +1,58 @@
+schema: 2
+package: endless-bg1
+aliases: [c-endlessbg1]
+releases:
+  - release_id: endless-bg1-v20.2-source
+    version: "20.2"
+    artifacts:
+      - url: https://github.com/Gibberlings3/EndlessBG1/archive/refs/tags/v20.2.zip
+        sha256: 2623f4d43a5178acc315c3688cac721877fb8cced9d3fddddc9febd61a6233f4
+        platforms: [windows]
+    materialization: { source_root: EndlessBG1-20.2, include: ["c#endlessbg1"] }
+    compatibility: { games: [bgee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact v20.2 author-tag ZIP matched SHA-256. Its TP2 declares VERSION 20.2 and seventeen LABEL-bearing components numbered 0 through 16. Two extra BEGIN lines are embedded dialogue scripts, not TP2 selectors.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The author documents BGEE, SoD, and EET support. Main allows remaining in BG1 after Sarevok's defeat; optional components modify the post-finale world and transition.
+        provenance: declared
+        evidence: [https://github.com/Gibberlings3/EndlessBG1]
+      - claim: Every optional component requires the main component; Short Public Hero Tribute also requires More Flavor. Elminster appearances 8 and 9 are TP2 SUBCOMPONENT alternatives.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: Components 2, 10, 11, 14, 15, and 16 need SoD content or EET. An unmerged SoD BGEE source must run DLC Merger before them.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+    installers:
+      - tp2: "c#endlessbg1/c#endlessbg1.tp2"
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: Deutsch }
+          - { id: 2, name: "Russian (by Austin, Arkie & Arcanecoast.ru)" }
+          - { id: 3, name: Polski }
+          - { id: 4, name: Francais }
+          - { id: 5, name: Italiano }
+          - { id: 6, name: Spanish }
+          - { id: 7, name: Brazilian Portuguese }
+          - { id: 8, name: "Simplified Chinese (translation: Lzw104522773)" }
+    components:
+      - { id: remain-in-bg1, default_selected: true, weidu: { tp2: "c#endlessbg1/c#endlessbg1.tp2", label: EBG1_MainComponent, number: 0 } }
+      - { id: more-hero-flavor, weidu: { tp2: "c#endlessbg1/c#endlessbg1.tp2", label: EBG1_MoreFlavor, number: 1 }, requires: [remain-in-bg1] }
+      - { id: public-hero-tribute, weidu: { tp2: "c#endlessbg1/c#endlessbg1.tp2", label: EBG1_HeroCutscene, number: 2 }, requires: [remain-in-bg1, more-hero-flavor] }
+      - { id: sarevok-unique-items, weidu: { tp2: "c#endlessbg1/c#endlessbg1.tp2", label: EBG1_SarevokItems, number: 3 }, requires: [remain-in-bg1] }
+      - { id: sarevok-sword, weidu: { tp2: "c#endlessbg1/c#endlessbg1.tp2", label: EBG1_SarevokSword, number: 4 }, requires: [remain-in-bg1] }
+      - { id: imoen-duke-jannath, weidu: { tp2: "c#endlessbg1/c#endlessbg1.tp2", label: EBG1_ImoenJannath, number: 5 }, requires: [remain-in-bg1] }
+      - { id: duke-eltan-palace, weidu: { tp2: "c#endlessbg1/c#endlessbg1.tp2", label: EBG1_EltanInPalace, number: 6 }, requires: [remain-in-bg1] }
+      - { id: flaming-fist-after-fight, weidu: { tp2: "c#endlessbg1/c#endlessbg1.tp2", label: EBG1_FFHealerInBhaalTemple, number: 7 }, requires: [remain-in-bg1] }
+      - { id: elminster-jastey, weidu: { tp2: "c#endlessbg1/c#endlessbg1.tp2", label: EBG1_ElminsterAppearance_jastey, number: 8 }, requires: [remain-in-bg1], conflicts: [elminster-restored] }
+      - { id: elminster-restored, weidu: { tp2: "c#endlessbg1/c#endlessbg1.tp2", label: EBG1_ElminsterAppearance_restored, number: 9 }, requires: [remain-in-bg1], conflicts: [elminster-jastey] }
+      - { id: bg-city-refugees, weidu: { tp2: "c#endlessbg1/c#endlessbg1.tp2", label: EBG1_RefugeesInBGCity, number: 10 }, requires: [remain-in-bg1] }
+      - { id: palace-treasurer, weidu: { tp2: "c#endlessbg1/c#endlessbg1.tp2", label: EBG1_TreasurerInPalaceDungeon, number: 11 }, requires: [remain-in-bg1] }
+      - { id: denkod-comments, weidu: { tp2: "c#endlessbg1/c#endlessbg1.tp2", label: EBG1_DenkodCommentsOnSarevoksDeath, number: 12 }, requires: [remain-in-bg1] }
+      - { id: skip-thieves-maze-once, weidu: { tp2: "c#endlessbg1/c#endlessbg1.tp2", label: EBG1_SkipThievesMazeOnce, number: 13 }, requires: [remain-in-bg1] }
+      - { id: korlasz-dungeon-in-bg1, weidu: { tp2: "c#endlessbg1/c#endlessbg1.tp2", label: EBG1_KorlaszDungeonBG1, number: 14 }, requires: [remain-in-bg1] }
+      - { id: fenster-in-palace, weidu: { tp2: "c#endlessbg1/c#endlessbg1.tp2", label: EBG1_FensterInPalace, number: 15 }, requires: [remain-in-bg1] }
+      - { id: corwin-in-palace, weidu: { tp2: "c#endlessbg1/c#endlessbg1.tp2", label: EBG1_CorwinInPalace, number: 16 }, requires: [remain-in-bg1] }

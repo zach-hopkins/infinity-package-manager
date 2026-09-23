@@ -1,0 +1,22 @@
+schema: 2
+
+# PA-4 bounded BGEE/SoD route: all compatible Endless BG1 selectors except
+# the alternative Elminster text. This does not include Reflections.
+environments:
+  target:
+    target: bgee
+    version: "2.6.6"
+    platform: windows
+    language: English
+    locale: en_US
+    fingerprint:
+      profile: iepm-core-layout-v1
+      value: 04fc6602150ff7788875573dbf0b7f4aeb7ca26aaf83b022c77d9fc417d848c3
+
+mods:
+  - package: dlc-merger
+    environment: target
+    components: [merge-sod]
+  - package: endless-bg1
+    environment: target
+    components: [remain-in-bg1, more-hero-flavor, public-hero-tribute, sarevok-unique-items, sarevok-sword, imoen-duke-jannath, duke-eltan-palace, flaming-fist-after-fight, elminster-jastey, bg-city-refugees, palace-treasurer, denkod-comments, skip-thieves-maze-once, korlasz-dungeon-in-bg1, fenster-in-palace, corwin-in-palace]

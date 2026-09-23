@@ -10,12 +10,17 @@ releases:
         platforms: [windows]
     materialization: { source_root: Reflections-of-Destiny-0.9.4, include: [Reflections_of_Destiny] }
     compatibility: { games: [bgee, eet] }
-    install: { phase: eet, after: [eet], before: [eet-end] }
+    install: { phase: eet, after: [eet, endless-bg1], before: [eet-end] }
     relationships:
       - kind: conflicts
         package: road-to-discovery
         when:
           selected_components: [rewrite-caelar-history]
+      - kind: conflicts
+        package: endless-bg1
+        components: [imoen-duke-jannath, korlasz-dungeon-in-bg1]
+        when:
+          selected_components: [future-is-now]
     provenance: unverified
     claims:
       - claim: The exact 0.9.4 author-tag ZIP matched SHA-256. Its TP2 declares VERSION 0.9.3 and seven active LABEL-bearing components; tag and TP2 version are distinct facts, not a hash mismatch.

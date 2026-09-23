@@ -212,3 +212,13 @@ from Romantic Encounters, and has regressions for both cases. The regenerated
 exact-byte cohort report records 14 ARP TP2 declarations: twelve live EE
 choices, one deprecated placeholder, and one classic-only choice. The mapped
 ARP release matches all fourteen structural declarations after this correction.
+
+Endless BG1 v20.2 includes embedded dialogue scripts within `<<<<<<<<` and
+`>>>>>>>>` WeiDU inline-file delimiters. Those scripts contain two `BEGIN`
+dialogue names that the earlier inventory misread as install components.
+The reader now excludes inline-file bodies, with a regression test. The
+regenerated exact-byte report has seventeen real LABEL-bearing TP2 choices,
+all of which the mapped release covers. Reflections of Destiny's documented
+overlap applies only when its Future Is Now component is selected together
+with Endless BG1's Imoen-and-Jannath or Korlasz-dungeon choices; unrelated
+components are not package-wide conflicts.

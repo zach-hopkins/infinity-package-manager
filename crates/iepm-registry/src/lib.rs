@@ -302,9 +302,22 @@ pub fn inspect_tp2(source: &str) -> Tp2Observation {
     let mut control_flow_depth = 0_usize;
     let mut awaits_control_flow_begin = false;
     let mut in_block_comment = false;
+    let mut in_inlined_file = false;
     let mut multiline_component_title: Option<(char, String)> = None;
 
     for raw_line in source.trim_start_matches('\u{feff}').lines() {
+        // WeiDU can embed a complete BAF/D script between file delimiters.
+        // Its `BEGIN dialogue_name` is not a TP2 component declaration.
+        if raw_line.trim_start().starts_with("<<<<<<<<") {
+            in_inlined_file = true;
+            continue;
+        }
+        if in_inlined_file {
+            if raw_line.trim_start().starts_with(">>>>>>>>") {
+                in_inlined_file = false;
+            }
+            continue;
+        }
         // A quoted WeiDU component title may span lines. Until its closing
         // delimiter, declaration-looking words are title text, not TP2 code.
         if let Some((delimiter, title)) = multiline_component_title.as_mut() {
@@ -1301,6 +1314,25 @@ BEGIN @2
         );
         assert_eq!(observation.components.len(), 2);
         assert_eq!(observation.components[1].begin.as_deref(), Some("@2"));
+    }
+
+    #[test]
+    fn inspection_ignores_embedded_dialogue_begin_blocks() {
+        let observation = inspect_tp2(
+            r#"
+BEGIN @1 DESIGNATED 0 LABEL ~FIRST~
+<<<<<<<< .../npc-dialogue.d
+BEGIN C#NPC
+IF ~~ THEN greeting
+SAY ~Hello~
+END
+>>>>>>>>
+BEGIN @2 DESIGNATED 1 LABEL ~SECOND~
+"#,
+        );
+        assert_eq!(observation.components.len(), 2);
+        assert_eq!(observation.components[0].label.as_deref(), Some("FIRST"));
+        assert_eq!(observation.components[1].label.as_deref(), Some("SECOND"));
     }
 
     #[test]

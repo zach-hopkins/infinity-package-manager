@@ -624,7 +624,7 @@
       "tp2_files": [
         "EndlessBG1-20.2/c#endlessbg1/c#endlessbg1.tp2"
       ],
-      "components_observed": 19.0,
+      "components_observed": 17.0,
       "tp2_observations": [
         {
           "path": "EndlessBG1-20.2/c#endlessbg1/c#endlessbg1.tp2",
@@ -750,17 +750,9 @@
               "label": "EBG1_FensterInPalace"
             },
             {
-              "begin": "C#STFENS",
-              "number": 16
-            },
-            {
               "begin": "@5027",
               "number": 16,
               "label": "EBG1_CorwinInPalace"
-            },
-            {
-              "begin": "C#STCORW",
-              "number": 18
             }
           ],
           "game_predicates": [
