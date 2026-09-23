@@ -22,6 +22,9 @@ releases:
       - claim: Several components explicitly forbid EET_End; install before that boundary. The author documents Skip Korlasz's Dungeon cross-mod handling for Endless BG1, Transitions, and Another Fine Hell; do not encode these as package-wide conflicts.
         provenance: derived
         evidence: [registry/cohorts/pa4-tagged-artifacts.json, https://github.com/Gibberlings3/Jasteys_SoD_Tweakpack]
+      - claim: Nine English SoD selectors, choosing one from each alternative group, completed after DLC Merger on clean BGEE 2.6.6 and appeared in WeiDU.log. Menu, gameplay, other alternatives, and EET remain unobserved.
+        provenance: verified
+        evidence: [evidence/pa4-bgee-jastey-sod.json]
     installers:
       - tp2: "c#sodtweaks/setup-c#sodtweaks.tp2"
         launcher: toolchain

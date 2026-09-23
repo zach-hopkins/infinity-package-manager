@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "Jastey's SoD Tweakpack v13 nine English selectors on clean SoD-enabled BGEE 2.6.6",
+  "identity": {
+    "registry_revision": "ed6d214",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "73bdc14f155dda0157413ea41fa6c3ccc406abc29042558bca3816e82ba37422",
+    "environments": { "target": { "target": "bgee", "fingerprint": { "profile": "iepm-core-layout-v1", "value": "04fc6602150ff7788875573dbf0b7f4aeb7ca26aaf83b022c77d9fc417d848c3" } } },
+    "packages": [
+      { "package": "dlc-merger", "release_id": "dlc-merger-2.1-win32", "environment": "target", "artifact_sha256": "16b57b32662c1ac1e6d345afaf8669e01cf26eeafc5461000757edf33447e2eb", "components": ["merge-sod"] },
+      { "package": "jasteys-sod-tweakpack", "release_id": "jasteys-sod-tweakpack-v13", "environment": "target", "artifact_sha256": "069c1d06920fa992f7a6252a3d282df335c089a5fa81b7efede17b7bf2a04ef9", "components": ["ending-independent-replies", "dialogues-always", "skip-korlasz-dungeon", "more-dialogue-choices", "restore-abduction-fight", "sod-start-xp-90000", "sod-ending-revised-full", "close-dragonspear-portal", "hephernaan-takes-vault-key"] }
+    ],
+    "execution_order": ["dlc-merger", "jasteys-sod-tweakpack"]
+  },
+  "checks": {
+    "artifact_verified": true, "selector_known": true, "requirements_modeled": true,
+    "component_catalog_complete": true, "all_components_classified": true,
+    "core_components_supported": false, "selected_components_supported": false,
+    "relationships_satisfied": true, "no_opaque_selections": true,
+    "clean_disposable_install": true, "all_actions_completed": true,
+    "requested_components_recorded": true, "no_components_skipped": true,
+    "warnings_classified": true, "sealed": true, "eet_end_required": false,
+    "main_menu_smoke": false, "gameplay_smoke": false
+  },
+  "evidence": ["examples/bgee-jasteys-sod-tweakpack/modpack.yaml", "docs/pa4-bgee-jastey-sod-evidence.md"]
+}
