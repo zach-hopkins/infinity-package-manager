@@ -1,0 +1,29 @@
+schema: 2
+package: recorder-bg1
+aliases: [recorder]
+releases:
+  - release_id: recorder-bg1-7a3f347c-source
+    version: "1.51"
+    artifacts:
+      - url: https://github.com/Skitia/Recorder-BG1/archive/7a3f347c39088cc9d40ddac31676ce08fac22161.zip
+        sha256: 339b72a7003e88e6ba76fad97e573f3763706416fe7d73717e10f99b6c89d165
+        platforms: [windows]
+    materialization: { source_root: Recorder-BG1-7a3f347c39088cc9d40ddac31676ce08fac22161, include: [Recorder] }
+    compatibility: { games: [bgee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact author-repository commit archive matched SHA-256. TP2 VERSION is 1.51; it declares two live numeric-only selectors, while a later alternative is commented out. No immutable release tag was found for this repository.
+        provenance: derived
+        evidence: [https://github.com/Skitia/Recorder-BG1/tree/7a3f347c39088cc9d40ddac31676ce08fac22161]
+      - claim: Main TP2 branches explicitly for BGEE and EET and reads EET cpmvars only on an EET game. The optional music selector uses package-local audio tools; a BGEE install receipt is still needed before behavioral confidence.
+        provenance: derived
+        evidence: [https://github.com/Skitia/Recorder-BG1/tree/7a3f347c39088cc9d40ddac31676ce08fac22161]
+    installers:
+      - tp2: Recorder/Setup-Recorder.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+    components:
+      - { id: recorder-npc, default_selected: true, weidu: { tp2: Recorder/Setup-Recorder.tp2, number: 0 } }
+      - { id: recorder-music, weidu: { tp2: Recorder/Setup-Recorder.tp2, number: 1 }, requires: [recorder-npc] }
