@@ -1,0 +1,93 @@
+schema: 2
+package: eet-tweaks
+releases:
+  - release_id: eet-tweaks-v1.12-source
+    version: "1.12"
+    artifacts:
+      - url: https://github.com/K4thos/EET_Tweaks/archive/refs/tags/v1.12.zip
+        sha256: c43b8a070755a52ef8eff8c3865be203545a01b4a75e0e6474ea1d5aa975880c
+        platforms: [windows]
+    materialization: { source_root: EET_Tweaks-1.12, include: [EET_Tweaks] }
+    compatibility: { games: [bgee, bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact official v1.12 tag ZIP matched SHA-256 and declares 65 numeric selectors. EET-only appearance and chapter choices are game-gated; generic XP/gameplay choices also accept BGEE or BG2EE where their TP2 predicates allow it.
+        provenance: derived
+        evidence: [https://github.com/K4thos/EET_Tweaks/releases/tag/v1.12]
+      - claim: Seven custom-value selectors invoke ACTION_READLN and are unavailable until IEPM can record typed portable installer answers. Fixed-value alternatives in the same subcomponent groups remain selectable.
+        provenance: derived
+        evidence: [https://github.com/K4thos/EET_Tweaks/releases/tag/v1.12]
+    installers:
+      - tp2: EET_Tweaks/EET_Tweaks.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: Polski (Polish) }
+          - { id: 2, name: Czech }
+    components:
+      - { id: edwin-bg1-appearance, unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 1000 }, provides: [{ name: eet-edwin-appearance, exclusive: true }] }
+      - { id: edwin-bg2-appearance, unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 1001 }, provides: [{ name: eet-edwin-appearance, exclusive: true }] }
+      - { id: imoen-bg1-appearance, unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 1010 }, provides: [{ name: eet-imoen-appearance, exclusive: true }] }
+      - { id: imoen-bg2-appearance, unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 1011 }, provides: [{ name: eet-imoen-appearance, exclusive: true }] }
+      - { id: imoen-sod-appearance, unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 1012 }, provides: [{ name: eet-imoen-appearance, exclusive: true }] }
+      - { id: jaheira-bg1-appearance, unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 1020 }, provides: [{ name: eet-jaheira-appearance, exclusive: true }] }
+      - { id: jaheira-bg2-appearance, unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 1021 }, provides: [{ name: eet-jaheira-appearance, exclusive: true }] }
+      - { id: minsc-bg1-appearance, unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 1030 }, provides: [{ name: eet-minsc-appearance, exclusive: true }] }
+      - { id: minsc-bg2-appearance, unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 1031 }, provides: [{ name: eet-minsc-appearance, exclusive: true }] }
+      - { id: viconia-bg1-appearance, unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 1040 }, provides: [{ name: eet-viconia-appearance, exclusive: true }] }
+      - { id: viconia-bg2-appearance, unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 1041 }, provides: [{ name: eet-viconia-appearance, exclusive: true }] }
+      - { id: viconia-sod-appearance, unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 1042 }, provides: [{ name: eet-viconia-appearance, exclusive: true }] }
+      - { id: cameo-npc-appearance, unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 1050 } }
+      - { id: npc-voices, unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 1060 } }
+      - { id: total-xp-cap-2950000, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2000 }, provides: [{ name: eet-total-xp-cap, exclusive: true }] }
+      - { id: total-xp-cap-8000000, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2001 }, provides: [{ name: eet-total-xp-cap, exclusive: true }] }
+      - { id: total-xp-cap-disabled, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2002 }, provides: [{ name: eet-total-xp-cap, exclusive: true }] }
+      - { id: total-xp-cap-custom, unavailable: "ACTION_READLN custom XP-cap input is not represented as portable installer state.", weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2003 }, provides: [{ name: eet-total-xp-cap, exclusive: true }] }
+      - { id: bg1-xp-cap-89000, unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2010 }, provides: [{ name: eet-bg1-xp-cap, exclusive: true }] }
+      - { id: bg1-xp-cap-161000, unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2011 }, provides: [{ name: eet-bg1-xp-cap, exclusive: true }] }
+      - { id: bg1-xp-cap-500000, unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2012 }, provides: [{ name: eet-bg1-xp-cap, exclusive: true }] }
+      - { id: bg1-xp-cap-custom, unavailable: "ACTION_READLN custom XP-cap input is not represented as portable installer state.", unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2013 }, provides: [{ name: eet-bg1-xp-cap, exclusive: true }] }
+      - { id: sod-xp-cap-89000, unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2020 }, provides: [{ name: eet-sod-xp-cap, exclusive: true }] }
+      - { id: sod-xp-cap-161000, unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2021 }, provides: [{ name: eet-sod-xp-cap, exclusive: true }] }
+      - { id: sod-xp-cap-500000, unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2022 }, provides: [{ name: eet-sod-xp-cap, exclusive: true }] }
+      - { id: sod-xp-cap-custom, unavailable: "ACTION_READLN custom XP-cap input is not represented as portable installer state.", unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2023 }, provides: [{ name: eet-sod-xp-cap, exclusive: true }] }
+      - { id: soa-xp-cap-2500000, unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2030 }, provides: [{ name: eet-soa-xp-cap, exclusive: true }] }
+      - { id: soa-xp-cap-2950000, unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2031 }, provides: [{ name: eet-soa-xp-cap, exclusive: true }] }
+      - { id: soa-xp-cap-8000000, unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2032 }, provides: [{ name: eet-soa-xp-cap, exclusive: true }] }
+      - { id: soa-xp-cap-custom, unavailable: "ACTION_READLN custom XP-cap input is not represented as portable installer state.", unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2033 }, provides: [{ name: eet-soa-xp-cap, exclusive: true }] }
+      - { id: action-xp-bg1-default, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2040 }, provides: [{ name: eet-action-xp, exclusive: true }] }
+      - { id: action-xp-bg2, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2041 }, provides: [{ name: eet-action-xp, exclusive: true }] }
+      - { id: action-xp-progressive, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2042 }, provides: [{ name: eet-action-xp, exclusive: true }] }
+      - { id: action-xp-disabled, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2043 }, provides: [{ name: eet-action-xp, exclusive: true }] }
+      - { id: action-xp-custom, unavailable: "ACTION_READLN custom percentage input is not represented as portable installer state.", weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2044 }, provides: [{ name: eet-action-xp, exclusive: true }] }
+      - { id: creature-xp-150-percent, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2050 }, provides: [{ name: eet-creature-xp, exclusive: true }] }
+      - { id: creature-xp-75-percent, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2051 }, provides: [{ name: eet-creature-xp, exclusive: true }] }
+      - { id: creature-xp-50-percent, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2052 }, provides: [{ name: eet-creature-xp, exclusive: true }] }
+      - { id: creature-xp-25-percent, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2053 }, provides: [{ name: eet-creature-xp, exclusive: true }] }
+      - { id: creature-xp-10-percent, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2054 }, provides: [{ name: eet-creature-xp, exclusive: true }] }
+      - { id: creature-xp-disabled, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2055 }, provides: [{ name: eet-creature-xp, exclusive: true }] }
+      - { id: creature-xp-custom, unavailable: "ACTION_READLN custom percentage input is not represented as portable installer state.", weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2056 }, provides: [{ name: eet-creature-xp, exclusive: true }] }
+      - { id: quest-xp-150-percent, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2060 }, provides: [{ name: eet-quest-xp, exclusive: true }] }
+      - { id: quest-xp-75-percent, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2061 }, provides: [{ name: eet-quest-xp, exclusive: true }] }
+      - { id: quest-xp-50-percent, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2062 }, provides: [{ name: eet-quest-xp, exclusive: true }] }
+      - { id: quest-xp-25-percent, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2063 }, provides: [{ name: eet-quest-xp, exclusive: true }] }
+      - { id: quest-xp-10-percent, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2064 }, provides: [{ name: eet-quest-xp, exclusive: true }] }
+      - { id: quest-xp-disabled, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2065 }, provides: [{ name: eet-quest-xp, exclusive: true }] }
+      - { id: quest-xp-custom, unavailable: "ACTION_READLN custom percentage input is not represented as portable installer state.", weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2066 }, provides: [{ name: eet-quest-xp, exclusive: true }] }
+      - { id: distribute-quest-xp-individually, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2070 } }
+      - { id: distribute-kill-xp-individually, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2080 } }
+      - { id: no-hostile-reaction-after-charm, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 3000 } }
+      - { id: pnp-scroll-caster-levels, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 3010 } }
+      - { id: ironman-constitution-loss-and-summon-block, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 3020 }, provides: [{ name: eet-ironman-penalty, exclusive: true }] }
+      - { id: ironman-constitution-loss, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 3021 }, provides: [{ name: eet-ironman-penalty, exclusive: true }] }
+      - { id: ironman-penalty-disabled, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 3022 }, provides: [{ name: eet-ironman-penalty, exclusive: true }] }
+      - { id: ironman-mode, unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 3040 } }
+      - { id: one-time-area-spawns, unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 3050 } }
+      - { id: higher-framerates, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 4020 } }
+      - { id: import-party-items-to-soa, unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 4040 } }
+      - { id: categorize-books-scrolls, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 4050 } }
+      - { id: wand-case, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 4060 } }
+      - { id: key-ring, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 4070 } }
+      - { id: replace-classic-bg1-movies, unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 4080 }, provides: [{ name: eet-replace-bg1-movies, exclusive: true }] }
+      - { id: replace-and-disable-unmatched-bg1-movies, unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 4081 }, provides: [{ name: eet-replace-bg1-movies, exclusive: true }] }
