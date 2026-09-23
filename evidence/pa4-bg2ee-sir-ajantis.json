@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "Sir Ajantis NPC for BGII v21 main, shield, adult romance, standard dialogue speed, and Cavalier kit on clean BG2EE 2.6.6",
+  "identity": {
+    "registry_revision": "f048b97",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "5cf40630311b60082983f5611cc6c3da0df3963cd5a6d6aecf1464bb41ab98f7",
+    "environments": { "target": { "target": "bg2ee", "fingerprint": { "profile": "iepm-core-layout-v1", "value": "298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f" } } },
+    "packages": [
+      { "package": "sir-ajantis-bg2", "release_id": "sir-ajantis-bg2-v21-source", "environment": "target", "artifact_sha256": "8fb2393f84521697cf125f5628d41bc77e723de3c9c4e70a57ca9f6ae592e5b7", "components": ["ajantis-npc", "unique-family-shield-bam", "adult-romance-content", "dialogue-speed-60-minutes", "cavalier-kit"] }
+    ],
+    "execution_order": ["sir-ajantis-bg2"]
+  },
+  "checks": {
+    "artifact_verified": true, "selector_known": true, "requirements_modeled": true,
+    "component_catalog_complete": true, "all_components_classified": true,
+    "core_components_supported": false, "selected_components_supported": false,
+    "relationships_satisfied": true, "no_opaque_selections": true,
+    "clean_disposable_install": true, "all_actions_completed": true,
+    "requested_components_recorded": true, "no_components_skipped": true,
+    "warnings_classified": true, "sealed": true, "eet_end_required": false,
+    "main_menu_smoke": false, "gameplay_smoke": false
+  },
+  "evidence": ["examples/bg2ee-sir-ajantis/modpack.yaml", "docs/pa4-bg2ee-sir-ajantis-evidence.md"]
+}

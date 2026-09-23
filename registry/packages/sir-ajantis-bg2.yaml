@@ -22,6 +22,9 @@ releases:
       - claim: Eight optional selectors require main component 0. The five dialogue-speed selections share a WeiDU SUBCOMPONENT group and are mutually exclusive. Shield BAM is EE-only; the main TP2 forbids installation after EET_End.
         provenance: derived
         evidence: [https://github.com/Gibberlings3/Ajantis_BG2/releases/tag/v21]
+      - claim: Main, shield BAM, adult romance, standard 60-minute dialogue speed, and Cavalier kit completed in one clean BG2EE 2.6.6 build and all five appeared in WeiDU.log. Other speed choices, EET, menu, and story behavior remain unobserved.
+        provenance: verified
+        evidence: [evidence/pa4-bg2ee-sir-ajantis.json]
     installers:
       - tp2: ajantisbg2/ajantisbg2.tp2
         launcher: toolchain
