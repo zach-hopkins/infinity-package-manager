@@ -1,0 +1,34 @@
+schema: 2
+package: i-shall-never-forget
+releases:
+  - release_id: i-shall-never-forget-v6.5.6-weasel-20260923
+    version: "6.5.6"
+    artifacts:
+      - url: https://downloads.weaselmods.net/download/i-shall-never-forget/?wpdmdl=77
+        sha256: 070b98733bf5a40730349c6d887da0e223c00fe623f84ef1bd245d70dabe2283
+        platforms: [windows]
+    materialization: { include: [ISNF] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact 25,037,879-byte author-hosted archive matched SHA-256. Its TP2 VERSION is 6.5.6 and it declares one LABEL-bearing selector.
+        provenance: derived
+        evidence: [https://downloads.weaselmods.net/download/i-shall-never-forget/]
+      - claim: The author documents BG2EE and EET. To see its content in an existing save, the relevant city districts must not yet have been visited; this is gameplay context, not an installer prerequisite.
+        provenance: declared
+        evidence: [https://downloads.weaselmods.net/download/i-shall-never-forget/]
+    installers:
+      - tp2: ISNF/ISNF.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: Polish (by Aristo) }
+          - { id: 2, name: French (by Lothringen) }
+          - { id: 3, name: Deutsch (by Dachrisma) }
+          - { id: 4, name: "Italian (by ilot, improbabile)" }
+          - { id: 5, name: "Chinese (by merzbau, updated by Yoshimo0417)" }
+          - { id: 6, name: Russian (by AGKanevchev) }
+          - { id: 7, name: Korean (by Pinkpanther) }
+    components:
+      - { id: i-shall-never-forget-quest, default_selected: true, weidu: { tp2: ISNF/ISNF.tp2, label: "L#-ISNF", number: 0 } }
