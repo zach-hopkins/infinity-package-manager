@@ -18,6 +18,9 @@ releases:
       - claim: Seven custom-value selectors invoke ACTION_READLN and are unavailable until IEPM can record typed portable installer answers. Fixed-value alternatives in the same subcomponent groups remain selectable.
         provenance: derived
         evidence: [https://github.com/K4thos/EET_Tweaks/releases/tag/v1.12]
+      - claim: Generic total XP cap choice 2001 installed and sealed on clean BG2EE 2.6.6 without WeiDU warning or skipped component. EET-only choices and EET placement remain untested.
+        provenance: verified
+        evidence: [evidence/pa4-bg2ee-eet-tweaks.json]
     installers:
       - tp2: EET_Tweaks/EET_Tweaks.tp2
         launcher: toolchain
@@ -79,11 +82,11 @@ releases:
       - { id: distribute-kill-xp-individually, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 2080 } }
       - { id: no-hostile-reaction-after-charm, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 3000 } }
       - { id: pnp-scroll-caster-levels, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 3010 } }
-      - { id: ironman-constitution-loss-and-summon-block, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 3020 }, provides: [{ name: eet-ironman-penalty, exclusive: true }] }
-      - { id: ironman-constitution-loss, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 3021 }, provides: [{ name: eet-ironman-penalty, exclusive: true }] }
-      - { id: ironman-penalty-disabled, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 3022 }, provides: [{ name: eet-ironman-penalty, exclusive: true }] }
-      - { id: ironman-mode, unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 3040 } }
-      - { id: one-time-area-spawns, unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 3050 } }
+      - { id: ironman-constitution-loss-and-summon-block, unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 3020 }, provides: [{ name: eet-ironman-penalty, exclusive: true }] }
+      - { id: ironman-constitution-loss, unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 3021 }, provides: [{ name: eet-ironman-penalty, exclusive: true }] }
+      - { id: ironman-penalty-disabled, unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 3022 }, provides: [{ name: eet-ironman-penalty, exclusive: true }] }
+      - { id: ironman-mode, unsupported_games: [bgee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 3040 } }
+      - { id: one-time-area-spawns, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 3050 } }
       - { id: higher-framerates, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 4020 } }
       - { id: import-party-items-to-soa, unsupported_games: [bgee, bg2ee], weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 4040 } }
       - { id: categorize-books-scrolls, weidu: { tp2: EET_Tweaks/EET_Tweaks.tp2, number: 4050 } }

@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "Portraits Portraits Everywhere core and sequenced category portraits on clean BG2EE 2.6.6",
+  "identity": {
+    "registry_revision": "34eb4e9",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "af0e7dde54d89c8bb5b5ff5fc9db8f9b86413795d6fa03a252de61f68819a25d",
+    "environments": { "target": { "target": "bg2ee", "fingerprint": { "profile": "iepm-core-layout-v1", "value": "298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f" } } },
+    "packages": [
+      { "package": "portraits-portraits-everywhere", "release_id": "portraits-portraits-everywhere-54c94e7-source", "environment": "target", "artifact_sha256": "1ff8c64453e0d956b41f93ddd5a1caae335026572889993f7af3e130e33389df", "components": ["core", "category-portraits-sequenced"] }
+    ],
+    "execution_order": ["portraits-portraits-everywhere"]
+  },
+  "checks": {
+    "artifact_verified": true, "selector_known": true, "requirements_modeled": true,
+    "component_catalog_complete": true, "all_components_classified": true,
+    "core_components_supported": false, "selected_components_supported": false,
+    "relationships_satisfied": true, "no_opaque_selections": true,
+    "clean_disposable_install": true, "all_actions_completed": true,
+    "requested_components_recorded": true, "no_components_skipped": true,
+    "warnings_classified": true, "sealed": true, "eet_end_required": false,
+    "main_menu_smoke": false, "gameplay_smoke": false
+  },
+  "evidence": ["examples/bg2ee-portraits-portraits-everywhere/modpack.yaml", "docs/pa4-bg2ee-ppe-evidence.md"]
+}

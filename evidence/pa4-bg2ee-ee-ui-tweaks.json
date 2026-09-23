@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "EE UI Tweaks Mods Options and Hidden Game Options on clean BG2EE 2.6.6",
+  "identity": {
+    "registry_revision": "ecc6066",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "9c8ed30ad17484f8ad7c917047bfd04efb8984a80e03ef35b9544192992bae46",
+    "environments": { "target": { "target": "bg2ee", "fingerprint": { "profile": "iepm-core-layout-v1", "value": "298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f" } } },
+    "packages": [
+      { "package": "ee-ui-tweaks", "release_id": "ee-ui-tweaks-v4.0.7-source", "environment": "target", "artifact_sha256": "e09d451901e6b70d7dbc98750c9ec5317e92ceec63b6afd764361db6d29920cd", "components": ["mods-options", "hidden-game-options"] }
+    ],
+    "execution_order": ["ee-ui-tweaks"]
+  },
+  "checks": {
+    "artifact_verified": true, "selector_known": true, "requirements_modeled": true,
+    "component_catalog_complete": true, "all_components_classified": true,
+    "core_components_supported": false, "selected_components_supported": false,
+    "relationships_satisfied": true, "no_opaque_selections": true,
+    "clean_disposable_install": true, "all_actions_completed": true,
+    "requested_components_recorded": true, "no_components_skipped": true,
+    "warnings_classified": true, "sealed": true, "eet_end_required": false,
+    "main_menu_smoke": false, "gameplay_smoke": false
+  },
+  "evidence": ["examples/bg2ee-ee-ui-tweaks/modpack.yaml", "docs/pa4-bg2ee-ee-ui-tweaks-evidence.md"]
+}

@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "Bubb Pathfinding Revert 1.1 against exact BG2EE 2.6.6 executable",
+  "identity": {
+    "registry_revision": "c17ca5d",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "a8dd94fa64dcaa9ac31360f9ac6cb25bbe9a116ef598a039ed5656aa5252446a",
+    "environments": { "target": { "target": "bg2ee", "fingerprint": { "profile": "iepm-core-layout-v1", "value": "298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f" } } },
+    "packages": [
+      { "package": "bubb-revert-pathfinding", "release_id": "bubb-revert-pathfinding-v1.1-for-2.6.6", "environment": "target", "artifact_sha256": "d07da360f7b51dc51f0da77c68691d10e47b8af1a4ebba4308efac61b6a8e32b", "components": ["revert-pathfinding-for-2-6-6"] }
+    ],
+    "execution_order": ["bubb-revert-pathfinding"]
+  },
+  "checks": {
+    "artifact_verified": true, "selector_known": true, "requirements_modeled": true,
+    "component_catalog_complete": true, "all_components_classified": true,
+    "core_components_supported": false, "selected_components_supported": false,
+    "relationships_satisfied": true, "no_opaque_selections": true,
+    "clean_disposable_install": true, "all_actions_completed": true,
+    "requested_components_recorded": true, "no_components_skipped": true,
+    "warnings_classified": true, "sealed": true, "eet_end_required": false,
+    "main_menu_smoke": false, "gameplay_smoke": false
+  },
+  "evidence": ["examples/bg2ee-bubb-revert-pathfinding/modpack.yaml", "docs/pa4-bg2ee-pathfinding-evidence.md"]
+}

@@ -49,8 +49,11 @@ promote each cohort package only after it obtains those exact facts.
 
 ## PA-4 starting ledger
 
-Of the 99 cohort packages, 19 already map to a curated IEPM package identity.
-The remaining 80 are indexed candidates with no executable registry release.
+At the 2026-09-21 freeze, 19 of the 99 cohort packages already mapped to a
+curated IEPM package identity. The remaining 80 were indexed candidates with
+no executable registry release. As of the [2026-09-23 PA-4 triage](pa4-remaining-cohort-triage.md),
+all 80 have exact artifact routes and selector maps, but two have only safe
+subsets executable; this historical starting count is not the current count.
 Both groups remain useful to users: candidates can still follow the opaque
 local-package route once a user supplies exact bytes, but they are not green
 badges.

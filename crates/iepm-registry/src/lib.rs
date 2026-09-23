@@ -563,14 +563,14 @@ fn inspect_directory(path: &Path) -> Result<PackageObservation> {
             .expect("walk result is rooted in package")
             .to_string_lossy()
             .replace('\\', "/");
-        let source = std::fs::read_to_string(&file)
+        let source = std::fs::read(&file)
             .with_context(|| format!("could not read TP2 source {}", file.display()))?;
         if source.len() as u64 > MAX_INSPECTED_TP2_BYTES {
             bail!("TP2 source exceeds inspection limit: {}", file.display());
         }
         tp2_files.push(ObservedTp2File {
             path: relative,
-            observation: inspect_tp2(&source),
+            observation: inspect_tp2(&String::from_utf8_lossy(&source)),
         });
     }
     Ok(PackageObservation {

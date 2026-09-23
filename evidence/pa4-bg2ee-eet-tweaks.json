@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "EET Tweaks total XP cap 8,000,000 on clean BG2EE 2.6.6",
+  "identity": {
+    "registry_revision": "7c1d6ee",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "8941a8c5cbd35484030ac87da3ba5cdfcd11a1dd1cfe4e3375c06e20941d43db",
+    "environments": { "target": { "target": "bg2ee", "fingerprint": { "profile": "iepm-core-layout-v1", "value": "298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f" } } },
+    "packages": [
+      { "package": "eet-tweaks", "release_id": "eet-tweaks-v1.12-source", "environment": "target", "artifact_sha256": "c43b8a070755a52ef8eff8c3865be203545a01b4a75e0e6474ea1d5aa975880c", "components": ["total-xp-cap-8000000"] }
+    ],
+    "execution_order": ["eet-tweaks"]
+  },
+  "checks": {
+    "artifact_verified": true, "selector_known": true, "requirements_modeled": true,
+    "component_catalog_complete": true, "all_components_classified": true,
+    "core_components_supported": false, "selected_components_supported": false,
+    "relationships_satisfied": true, "no_opaque_selections": true,
+    "clean_disposable_install": true, "all_actions_completed": true,
+    "requested_components_recorded": true, "no_components_skipped": true,
+    "warnings_classified": true, "sealed": true, "eet_end_required": false,
+    "main_menu_smoke": false, "gameplay_smoke": false
+  },
+  "evidence": ["examples/bg2ee-eet-tweaks/modpack.yaml", "docs/pa4-bg2ee-eet-tweaks-evidence.md"]
+}

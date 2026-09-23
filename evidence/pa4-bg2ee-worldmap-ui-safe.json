@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "BP-BGT Worldmap larger BG2-style UI on clean BG2EE 2.6.6",
+  "identity": {
+    "registry_revision": "9c3b944",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "35b417e7ae57a237093bf875f74f58c9c0f338f79887849dada357bc62e88839",
+    "environments": { "target": { "target": "bg2ee", "fingerprint": { "profile": "iepm-core-layout-v1", "value": "298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f" } } },
+    "packages": [
+      { "package": "bp-bgt-worldmap", "release_id": "bp-bgt-worldmap-v13.1.1-source", "environment": "target", "artifact_sha256": "3890046ab83ae9316299087345cc7011c484fbd343db3958862004bc053314a7", "components": ["larger-worldmap-ui-bg2-style"] }
+    ],
+    "execution_order": ["bp-bgt-worldmap"]
+  },
+  "checks": {
+    "artifact_verified": true, "selector_known": true, "requirements_modeled": true,
+    "component_catalog_complete": true, "all_components_classified": true,
+    "core_components_supported": false, "selected_components_supported": false,
+    "relationships_satisfied": true, "no_opaque_selections": true,
+    "clean_disposable_install": true, "all_actions_completed": true,
+    "requested_components_recorded": true, "no_components_skipped": true,
+    "warnings_classified": true, "sealed": true, "eet_end_required": false,
+    "main_menu_smoke": false, "gameplay_smoke": false
+  },
+  "evidence": ["examples/bg2ee-worldmap-ui-safe/modpack.yaml", "docs/pa4-bg2ee-worldmap-ui-safe-evidence.md"]
+}

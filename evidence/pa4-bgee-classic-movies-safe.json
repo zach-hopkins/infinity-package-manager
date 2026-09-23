@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "Classic Movies chapter and dream screens after DLC Merger on clean BGEE 2.6.6",
+  "identity": {
+    "registry_revision": "5ea3c94",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "928d192f5aa86bc8b0313a10fec8c73d3fab2ed7acb36ca1a5d4604cc842a6bd",
+    "environments": { "target": { "target": "bgee", "fingerprint": { "profile": "iepm-core-layout-v1", "value": "04fc6602150ff7788875573dbf0b7f4aeb7ca26aaf83b022c77d9fc417d848c3" } } },
+    "packages": [
+      { "package": "dlc-merger", "release_id": "dlc-merger-2.1-win32", "environment": "target", "artifact_sha256": "16b57b32662c1ac1e6d345afaf8669e01cf26eeafc5461000757edf33447e2eb", "components": ["merge-sod"] },
+      { "package": "bgee-classic-movies", "release_id": "bgee-classic-movies-v2.4.1-source", "environment": "target", "artifact_sha256": "c740bce60ee33bed5652d51652015a2ad3ca5b199480a49f804dbee35f65cc58", "components": ["restore-chapter-and-dream-screens"] }
+    ],
+    "execution_order": ["dlc-merger", "bgee-classic-movies"]
+  },
+  "checks": {
+    "artifact_verified": true, "selector_known": true, "requirements_modeled": true,
+    "component_catalog_complete": true, "all_components_classified": true,
+    "core_components_supported": false, "selected_components_supported": false,
+    "relationships_satisfied": true, "no_opaque_selections": true,
+    "clean_disposable_install": true, "all_actions_completed": true,
+    "requested_components_recorded": true, "no_components_skipped": true,
+    "warnings_classified": true, "sealed": true, "eet_end_required": false,
+    "main_menu_smoke": false, "gameplay_smoke": false
+  },
+  "evidence": ["examples/bgee-classic-movies-safe/modpack.yaml", "docs/pa4-bgee-classic-movies-safe-evidence.md"]
+}

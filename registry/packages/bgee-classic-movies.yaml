@@ -18,6 +18,9 @@ releases:
       - claim: Restore Chapter and Dream Screens selector 3 has no USER_DIRECTORY write or installer prompt in its TP2 section and is a separately executable choice. It is not a substitute for the blocked movie choices.
         provenance: derived
         evidence: [https://github.com/Sampsca/BGEE-Classic-Movies/releases/tag/V2.4.1]
+      - claim: Restore Chapter and Dream Screens installed after DLC Merger and sealed on clean BGEE 2.6.6. The seven USER_DIRECTORY-writing choices remain unavailable, and actual movie/visual behavior is unobserved.
+        provenance: verified
+        evidence: [evidence/pa4-bgee-classic-movies-safe.json]
     installers:
       - tp2: BGEEClassicMovies/BGEEClassicMovies.tp2
         launcher: toolchain

@@ -1,34 +1,27 @@
 # PA-4 remaining cohort triage (2026-09-23)
 
-The first 99-package Product A cohort has 74 curated executable identities
-and **6 discovery-only candidates** remaining beyond the 19 packages
-already curated when the cohort was frozen. This page is an acquisition and
-review queue, not a support-status upgrade. The source snapshot is the
+The first 99-package Product A cohort now has 80 curated identities from
+the frozen 80-candidate expansion, in addition to the 19 packages already
+curated when the cohort was selected. **No cohort identity remains
+discovery-only**, but two packages have headline components gated by known
+execution-boundary gaps. This page is a scope and evidence ledger, not a
+support-status upgrade. The source snapshot is the
 [frozen cohort](../registry/cohorts/product-a-cohort.json), with acquisition
 leads in the [PA-2 health report](../registry/catalog/infinity-mod-forge-health.json)
 and exact tagged-ZIP observations in the
 [PA-4 artifact report](../registry/cohorts/pa4-tagged-artifacts.json).
 
-## Four exact tagged archives already acquired
+## Two partially executable packages
 
-| Source ID | Candidate | Next concrete step |
-| ---: | --- | --- |
-| 18 | EE UI Tweaks | Review 67 TP2 selectors, UI framework interactions, and a bounded BG2EE install. |
-| 24 | BG:EE Classic Movies | [Contain writes outside the disposable game](pa4-classic-movies-external-write-blocker.md) before any install. Eight selectors are mechanically known. |
-| 246 | EET Tweaks | Review 65 selectors and EET-specific placement; then test on a disposable EET target. |
-| 428 | BP-BGT Worldmap | [Model its interactive map-size choice](pa4-worldmap-interactive-blocker.md) before declaring the main component executable. Six selectors are mechanically known. |
+| Source ID | Candidate | Safe tested choice | Headline limitation |
+| ---: | --- | --- | --- |
+| 24 | BG:EE Classic Movies | Chapter/dream screens installed after DLC Merger and sealed | Seven movie choices remain gated until [writes outside the disposable game are contained](pa4-classic-movies-external-write-blocker.md). |
+| 428 | BP-BGT Worldmap | Independent BG2-style larger-map UI installed and sealed | Main Worldmap and dependent ToB-map choices remain gated until [interactive answers are portable build inputs](pa4-worldmap-interactive-blocker.md). |
 
-The exact tagged ZIPs above were SHA-256 hashed; a PA-2 ZIP signature alone
-would not be sufficient. The Classic Movies and Worldmap blockers are IEPM
-execution-boundary gaps, **not** claims that those mods are incompatible.
-
-## Two manual-browser acquisition leads
-
-PA-2 did not establish a direct artifact route for source IDs **13** Revert
-Pathfinding and **474** Portraits Portraits Everywhere. Revert Pathfinding
-patches the game executable and is version-specific; a community WeiDU.log
-mention alone is not an exact downloadable release. Portraits needs an
-author/maintainer release identity, not an arbitrary mutable clone.
+The exact tagged ZIPs above were SHA-256 hashed and all selectors mapped;
+a PA-2 ZIP signature alone would not be sufficient. The Classic Movies and
+Worldmap blockers are IEPM execution-boundary gaps, **not** claims that
+those mods are incompatible or that their gated main features were tested.
 
 Source ID **57**, The Lure of the Sirine's Call, now has an exact author-tagged
 v16.5.2 ZIP, complete two-selector mapping, and clean BGEE main-only and
@@ -108,8 +101,42 @@ and a clean four-choice BG2EE install and seal. Three ToB-related scenarios
 still depend on the `mel01.cre` resource predicate. Other scenarios, EET,
 menu, and gameplay remain untested.
 
-For each, locate an author or maintained release page, fetch exact bytes,
-hash and safely inspect the archive, and only then decide whether it can
-become a curated executable record. An unknown or unverified package may
-still follow the opaque local-package path when the user supplies bytes;
-absence from this registry is not a hard incompatibility.
+Source ID **474**, Portraits Portraits Everywhere, now has an immutable
+upstream author commit archive, all eight selectors mapped, and a clean
+BG2EE core-plus-sequenced-category install and seal. The author's README
+v1.03 and TP2 VERSION 1.01 differ, so they are recorded separately. Other
+selectors, BGEE/EET, menu, and actual portrait behavior remain untested.
+
+Source ID **18**, EE UI Tweaks, now has an exact official v4.0.7 tag ZIP,
+all 62 live selectors mapped and five deprecated dummy workarounds classified
+as unavailable. Mods Options plus Hidden Game Options installed and sealed on
+clean BG2EE. The TP2's UI-framework predicates remain WeiDU-enforced; other
+selectors, framework combinations, EET, and visual behavior remain untested.
+
+Source ID **246**, EET Tweaks, now has the exact v1.12 tag, all 65 selectors
+mapped, and seven interactive custom-value choices gated. A generic XP-cap
+choice installed cleanly on BG2EE; EET-only selectors still require an EET
+fixture and are not verified by this BG2EE run.
+
+Source ID **13**, Bubb Revert Pathfinding, now has exact v1.1 bytes from the
+author's 2.6.6 forum attachment. Its one component installed on a disposable
+BG2EE copy, and only one byte changed in the copied Baldur.exe. Actual
+movement behavior and other executable variants remain untested.
+
+Source ID **24**, BG:EE Classic Movies, now has exact official V2.4.1 bytes
+and all eight selectors classified. The chapter/dream-screen choice installed
+and sealed on BGEE after DLC Merger. Seven movie choices are explicitly
+unavailable until IEPM isolates their user-settings writes; the safe choice
+does not imply the main movie-restoration feature works unattended.
+
+Source ID **428**, BP-BGT Worldmap, now has exact official v13.1.1 bytes and
+all six selectors classified. Its independent BG2-style larger-map UI choice
+installed and sealed on BG2EE. Main Worldmap still requires portable typed
+answers for conditional installer prompts, and dependent ToB-map choices
+are unavailable until that is solved.
+
+Further work is stronger verification, EET-route tests, and the two scoped
+execution gaps above—not acquisition of another candidate from this frozen
+cohort. Unknown packages outside the cohort may still follow IEPM's opaque
+local-package path when the user supplies bytes; absence from this registry
+is not a hard incompatibility.

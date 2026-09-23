@@ -60,10 +60,10 @@ releases:
       - { id: improved-record-screen, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 2900 } }
       - { id: leveling-progress-bars, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 3000 } }
       - { id: leveling-progress-options, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 3010 }, requires: [mods-options, leveling-progress-bars] }
-      - { id: journal-fixes, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 3020 }, conflicts: [journal-expanded, journal-collapsed, simple-journal-fixes] }
+      - { id: journal-fixes, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 3020 }, conflicts: [journal-expanded, journal-collapsed] }
       - { id: journal-expanded, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 3023 }, conflicts: [journal-fixes, journal-collapsed, simple-journal-fixes] }
       - { id: journal-collapsed, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 3024 }, conflicts: [journal-fixes, journal-expanded, simple-journal-fixes] }
-      - { id: simple-journal-fixes, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 3070 }, conflicts: [journal-fixes, journal-expanded, journal-collapsed] }
+      - { id: simple-journal-fixes, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 3070 }, conflicts: [journal-expanded, journal-collapsed] }
       - { id: customize-screens, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 3028 } }
       - { id: customize-all-characters, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 3030 } }
       - { id: identify-free, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 3040 }, conflicts: [identify-10gp, identify-25gp, identify-50gp, identify-100gp, identify-200gp] }

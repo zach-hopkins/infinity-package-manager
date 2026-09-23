@@ -157,6 +157,13 @@ Confirmation:
 
 ### PA-4 — Make every cohort release executable and honestly classified
 
+**Progress 2026-09-23:** all 80 expansion candidates now have exact artifact
+routes and mapped selectors. This milestone is still open: BG:EE Classic
+Movies has seven external-settings-writing choices gated, and BP-BGT
+Worldmap's interactive main choice remains gated while its independent UI
+choice is executable. The [PA-4 ledger](pa4-remaining-cohort-triage.md)
+keeps these partial routes and their evidence distinct from a passed gate.
+
 Deliverables for each exact target release:
 
 - official/reputable artifact route, SHA-256, archive layout, materialization,

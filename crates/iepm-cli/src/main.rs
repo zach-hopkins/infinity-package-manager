@@ -671,11 +671,13 @@ fn main() -> Result<()> {
             println!("{}", serde_json::to_string_pretty(&fingerprint)?);
         }
         Command::InspectTp2 { tp2 } => {
-            let source = std::fs::read_to_string(&tp2)
-                .with_context(|| format!("could not read {}", tp2.display()))?;
+            let source =
+                std::fs::read(&tp2).with_context(|| format!("could not read {}", tp2.display()))?;
             println!(
                 "{}",
-                serde_json::to_string_pretty(&iepm_registry::inspect_tp2(&source))?
+                serde_json::to_string_pretty(&iepm_registry::inspect_tp2(
+                    &String::from_utf8_lossy(&source)
+                ))?
             );
         }
         Command::InspectPackage { path } => {
@@ -712,10 +714,10 @@ fn main() -> Result<()> {
             tp2,
             installer_tp2,
         } => {
-            let source = std::fs::read_to_string(&tp2)
-                .with_context(|| format!("could not read {}", tp2.display()))?;
+            let source =
+                std::fs::read(&tp2).with_context(|| format!("could not read {}", tp2.display()))?;
             let registry = iepm_registry::load(&registry)?;
-            let observed = iepm_registry::inspect_tp2(&source);
+            let observed = iepm_registry::inspect_tp2(&String::from_utf8_lossy(&source));
             let review = iepm_registry::review_tp2(
                 &registry,
                 &package,

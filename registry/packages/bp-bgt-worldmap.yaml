@@ -21,6 +21,9 @@ releases:
       - claim: ToB-map choices require the marker produced by main Worldmap; they are unavailable while main is gated. The savegame updater is excluded on EE engines and would also mutate save directories on classic engines.
         provenance: derived
         evidence: [https://github.com/SpellholdStudios/BP-BGT-Worldmap/releases/tag/v13.1.1]
+      - claim: Independent larger BG2-style worldmap UI selector 4 installed and sealed on clean BG2EE 2.6.6. The interactive main Worldmap was not run; actual map UI appearance remains unobserved.
+        provenance: verified
+        evidence: [evidence/pa4-bg2ee-worldmap-ui-safe.json]
     installers:
       - tp2: bp-bgt-worldmap/setup-bp-bgt-worldmap.tp2
         launcher: toolchain

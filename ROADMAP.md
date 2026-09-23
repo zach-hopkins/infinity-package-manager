@@ -50,10 +50,14 @@ The ordered implementation milestones, discovery/support layer definitions,
 - [ ] inject a failed replacement build and demonstrate that the previous sealed build remains playable while a fresh retry can succeed;
 - [ ] complete one clean-machine-style build through the ordinary CLI and desktop Product A paths without repository-only inputs.
 
-The 14-action Forge-derived EET build is important installation evidence, but
-the gate is not yet complete: the initial cohort is frozen, while its
-component catalog/support coverage remains incomplete, repeat builds are not
-yet recorded, and policy launch smokes remain.
+The 14-action Forge-derived EET build is important installation evidence.
+All 80 expansion identities in the frozen 99-package cohort now have exact
+artifact routes and mapped component catalogs; [PA-4 triage](docs/pa4-remaining-cohort-triage.md)
+records the narrow fixtures and two partially executable packages. This is
+not yet the completion gate: the Classic Movies movie choices need external
+write isolation, main BP-BGT Worldmap needs portable typed installer answers,
+per-target component standing is not fully evidenced, repeat reference
+builds are not yet recorded, and policy launch smokes remain.
 
 Success condition:
 

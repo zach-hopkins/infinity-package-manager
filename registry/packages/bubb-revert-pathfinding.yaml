@@ -22,6 +22,9 @@ releases:
       - claim: The TP2 seeks an exact byte signature before patching, so other executable versions may fail safely in a disposable workspace. A successful installer receipt does not establish improved pathfinding behavior or compatibility with a future game patch.
         provenance: derived
         evidence: [https://forums.beamdog.com/discussion/72639/comments-on-new-v2-5-pathfinding-it-is-bad-news/p2]
+      - claim: The sole selector installed and sealed in a fresh BG2EE 2.6.6 workspace. Its copied Baldur.exe differs from the source at exactly one byte; the original source remained unchanged. No in-game movement behavior was observed.
+        provenance: verified
+        evidence: [evidence/pa4-bg2ee-pathfinding.json]
     installers:
       - tp2: bubb_revert_pathfinding/bubb_revert_pathfinding.tp2
         launcher: toolchain
