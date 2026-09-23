@@ -25,6 +25,9 @@ releases:
       - claim: Rabbit-in-cave versus outside, Wolves-in-High-Hedge versus Beregost, and original versus tweaked Serpents are TP2 SUBCOMPONENT alternatives. Only one option from each pair can be selected.
         provenance: derived
         evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: Nine English BG1-facing selectors, including the original option in each variant group, completed after DLC Merger on clean BGEE 2.6.6; the BG2-only Halfling quest separately completed on clean BG2EE 2.6.6. Both routes were recorded and sealed, but neither game menu was observed.
+        provenance: verified
+        evidence: [evidence/pa4-bgee-ascalon.json, evidence/pa4-bg2ee-ascalon.json]
     installers:
       - tp2: AC_QUEST/ac_quest.TP2
         launcher: toolchain
