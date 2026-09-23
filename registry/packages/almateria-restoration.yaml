@@ -25,6 +25,9 @@ releases:
       - claim: The maintainer documents BG2EE/EET support and recommends installing Quest Pack after this mod's relevant restoration component; that recommendation is not a package-wide requirement.
         provenance: declared
         evidence: [https://github.com/SpellholdStudios/Almaterias_Restoration_Project]
+      - claim: All twelve active English BG2EE-facing components completed in a clean BG2EE 2.6.6 build, were recorded with language index 1 in WeiDU.log, and sealed. Menu, gameplay, and EET smoke remain unperformed.
+        provenance: verified
+        evidence: [evidence/pa4-bg2ee-almateria.json]
     installers:
       - tp2: arestorationp/arestorationp.tp2
         launcher: toolchain
