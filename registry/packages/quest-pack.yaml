@@ -1,0 +1,58 @@
+schema: 2
+package: quest-pack
+aliases: [d0questpack]
+releases:
+  - release_id: quest-pack-v35-source
+    version: "v3.5"
+    artifacts:
+      - url: https://github.com/Pocket-Plane-Group/QuestPack/archive/refs/tags/v35.zip
+        sha256: dca023b5b3a0feab6c6cbcc13602c2726520a47f78e00d46687b6c82ef0119cd
+        platforms: [windows]
+    materialization: { source_root: QuestPack-35, include: [questpack, setup-d0questpack.tp2] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact official v35 tag ZIP matched SHA-256. Main TP2 VERSION v3.5 declares 23 live numeric selectors; seven later BEGIN blocks are inside block comments and are not available components.
+        provenance: derived
+        evidence: [https://github.com/Pocket-Plane-Group/QuestPack/tree/v35]
+      - claim: Creature/area improvements have three alternatives, miscellaneous enhancements two, and Improved Oasis II two. These are WeiDU SUBCOMPONENT groups; package-wide conflicts would be too broad.
+        provenance: derived
+        evidence: [https://github.com/Pocket-Plane-Group/QuestPack/tree/v35]
+      - claim: This source TP2 permits BG2EE and EET. The installer contains legacy UNINSTALL references to historical separate components; they are part of WeiDU's official install route, not IEPM dependencies.
+        provenance: derived
+        evidence: [https://github.com/Pocket-Plane-Group/QuestPack/tree/v35]
+    installers:
+      - tp2: setup-d0questpack.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: Spanish }
+          - { id: 2, name: German }
+          - { id: 3, name: French }
+          - { id: 4, name: Italian }
+          - { id: 5, name: Russian }
+    components:
+      - { id: general-ai-improvements, weidu: { tp2: setup-d0questpack.tp2, number: 0 } }
+      - { id: all-creature-and-area-improvements, weidu: { tp2: setup-d0questpack.tp2, number: 1 }, conflicts: [all-creature-improvements, boss-improvements-only] }
+      - { id: all-creature-improvements, weidu: { tp2: setup-d0questpack.tp2, number: 2 }, conflicts: [all-creature-and-area-improvements, boss-improvements-only] }
+      - { id: boss-improvements-only, weidu: { tp2: setup-d0questpack.tp2, number: 3 }, conflicts: [all-creature-and-area-improvements, all-creature-improvements] }
+      - { id: miscellaneous-with-random-encounters, weidu: { tp2: setup-d0questpack.tp2, number: 4 }, conflicts: [miscellaneous-without-random-encounters] }
+      - { id: miscellaneous-without-random-encounters, weidu: { tp2: setup-d0questpack.tp2, number: 401 }, conflicts: [miscellaneous-with-random-encounters] }
+      - { id: additional-shadow-thieves-content, default_selected: true, weidu: { tp2: setup-d0questpack.tp2, number: 5 } }
+      - { id: alternative-harper-xzar-plot, weidu: { tp2: setup-d0questpack.tp2, number: 6 } }
+      - { id: extended-reynald-sequence, weidu: { tp2: setup-d0questpack.tp2, number: 7 } }
+      - { id: intrigue-in-copper-coronet, weidu: { tp2: setup-d0questpack.tp2, number: 8 } }
+      - { id: rahul-kanakias-potion-quest, weidu: { tp2: setup-d0questpack.tp2, number: 9 } }
+      - { id: revised-hell-trials, weidu: { tp2: setup-d0questpack.tp2, number: 10 } }
+      - { id: improved-oasis-dialogue-and-combat, weidu: { tp2: setup-d0questpack.tp2, number: 11 }, conflicts: [improved-oasis-dialogue-only] }
+      - { id: improved-oasis-dialogue-only, weidu: { tp2: setup-d0questpack.tp2, number: 12 }, conflicts: [improved-oasis-dialogue-and-combat] }
+      - { id: saving-sanik-in-brynnlaw, weidu: { tp2: setup-d0questpack.tp2, number: 13 } }
+      - { id: burglary-of-the-bookkeeper, weidu: { tp2: setup-d0questpack.tp2, number: 14 } }
+      - { id: new-fate-for-dryads-acorns, weidu: { tp2: setup-d0questpack.tp2, number: 15 } }
+      - { id: tragedy-of-besamen, weidu: { tp2: setup-d0questpack.tp2, number: 16 } }
+      - { id: further-slaver-involvement, weidu: { tp2: setup-d0questpack.tp2, number: 17 } }
+      - { id: sending-solamnic-knights-home, weidu: { tp2: setup-d0questpack.tp2, number: 18 } }
+      - { id: nazariel-the-lich, weidu: { tp2: setup-d0questpack.tp2, number: 19 } }
+      - { id: reward-negotiation, weidu: { tp2: setup-d0questpack.tp2, number: 20 } }
+      - { id: infernal-thievery, weidu: { tp2: setup-d0questpack.tp2, number: 21 } }
