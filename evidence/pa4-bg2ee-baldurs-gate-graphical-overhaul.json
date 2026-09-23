@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "Baldur's Gate Graphical Overhaul v3.6 core on clean BG2EE 2.6.6",
+  "identity": {
+    "registry_revision": "6f1778f",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "eb6b0d579c25ac21034e1d4a9baadaee5882ea9984513e0e729a2bd766bb232a",
+    "environments": { "target": { "target": "bg2ee", "fingerprint": { "profile": "iepm-core-layout-v1", "value": "298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f" } } },
+    "packages": [
+      { "package": "baldurs-gate-graphical-overhaul", "release_id": "bggo-v3.6-source", "environment": "target", "artifact_sha256": "4bb821d971336364548019cf8423c5476cc914934ec109f4003e5aab9a5870a2", "components": ["graphical-overhaul-core"] }
+    ],
+    "execution_order": ["baldurs-gate-graphical-overhaul"]
+  },
+  "checks": {
+    "artifact_verified": true, "selector_known": true, "requirements_modeled": true,
+    "component_catalog_complete": true, "all_components_classified": true,
+    "core_components_supported": false, "selected_components_supported": false,
+    "relationships_satisfied": true, "no_opaque_selections": true,
+    "clean_disposable_install": true, "all_actions_completed": true,
+    "requested_components_recorded": true, "no_components_skipped": true,
+    "warnings_classified": true, "sealed": true, "eet_end_required": false,
+    "main_menu_smoke": false, "gameplay_smoke": false
+  },
+  "evidence": ["examples/bg2ee-baldurs-gate-graphical-overhaul/modpack.yaml", "docs/pa4-bg2ee-baldurs-gate-graphical-overhaul-evidence.md"]
+}

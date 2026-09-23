@@ -19,6 +19,9 @@ releases:
       - claim: The Windows source archive contains bggo but not BGGO-Android. Both platform-choice selectors require BGGO-Android to exist and are unavailable from this Windows source route; the core chooses Windows files automatically when the Android component is absent. Alternate Graphics requires the core component.
         provenance: derived
         evidence: [https://github.com/Spellhold-Studios/Baldurs-Gate-Graphical-Overhaul/releases/tag/v3.6]
+      - claim: Core selector 0 installed and sealed on clean BG2EE 2.6.6 under WeiDU 251 with English index 0 despite no TP2 LANGUAGE declaration. It appeared in WeiDU.log without warning or skip markers. Alternate Graphics, EET, menu, and visual behavior remain unobserved.
+        provenance: verified
+        evidence: [evidence/pa4-bg2ee-baldurs-gate-graphical-overhaul.json]
     installers:
       - tp2: bggo/bggo.tp2
         launcher: toolchain
