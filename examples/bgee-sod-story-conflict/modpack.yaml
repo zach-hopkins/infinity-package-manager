@@ -1,0 +1,25 @@
+schema: 2
+
+# Negative PA-4 fixture: Reflections' Caelar rewrite contradicts Road to
+# Discovery's vanilla-SoD story tracker. `iepm resolve` must reject this pair.
+environments:
+  target:
+    target: bgee
+    version: "2.6.6"
+    platform: windows
+    language: English
+    locale: en_US
+    fingerprint:
+      profile: iepm-core-layout-v1
+      value: 04fc6602150ff7788875573dbf0b7f4aeb7ca26aaf83b022c77d9fc417d848c3
+
+mods:
+  - package: dlc-merger
+    environment: target
+    components: [merge-sod]
+  - package: reflections-of-destiny
+    environment: target
+    components: [rewrite-caelar-history]
+  - package: road-to-discovery
+    environment: target
+    components: [tracking-system]

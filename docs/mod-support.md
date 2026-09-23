@@ -76,6 +76,8 @@ labels. This ledger must use those words only with those meanings.
 | Test Your Mettle! 1.6 | Complete six-component catalog; four XP alternatives require main and conflict with each other, Spacewarp stores independent | Main component installed and sealed in clean BG2EE quest build; menu smoke unavailable | **Untested** pending observed menu; optional selectors and EET also Untested | [install evidence](pa4-bg2ee-three-quest-expansion-evidence.md) |
 | The Boareskyr Bridge Scene v8 | Complete four-component SoD/EET chain; each choice requires its predecessor | All four English choices installed and sealed on SoD-enabled BGEE | **Untested** pending observed menu and gameplay; EET also Untested | [install evidence](pa4-bgee-sod-bridge-encounters-evidence.md) |
 | Extra Expanded Enhanced Encounters! 4.4 | Complete eight-component BGEE/EET catalog; cave bears require SoD content | All eight English choices installed and sealed on SoD-enabled BGEE | **Untested** pending observed menu and gameplay; EET also Untested | [install evidence](pa4-bgee-sod-bridge-encounters-evidence.md) |
+| Reflections of Destiny 0.9.4 | Seven active selectors; six SoD/BGEE, one EET-only; four commented-out blocks excluded; TP2 VERSION is 0.9.3 | Exact source route resolves executable; Caelar rewrite is guarded against Road to Discovery | **Untested** pending disposable install and menu smoke | [registry](../registry/packages/reflections-of-destiny.yaml) |
+| Road to Discovery 6.0 | Eight active selectors with package-local requirements; selector 80 is deprecated and unavailable | Exact source route resolves executable on SoD-enabled BGEE/EET | **Untested** pending disposable install and menu smoke | [registry](../registry/packages/road-to-discovery.yaml) |
 | Generalized Biffing v2.9 | Complete two-choice subcomponent catalog; final-phase placement reflects author's after-all-mods direction | Banter Pack then media-only Biffing built and launched from sealed BG2EE | **Supported** for this narrow English BG2EE 2.6.6 route; all-files choice, EET, large stacks, and performance Untested | [evidence](pa4-bg2ee-generalized-biffing-evidence.md) |
 | Call of the Lost Goddess v3.1 | Complete 3-component structural catalog | Yes | **Untested** — the core route has fixture install evidence; optional portraits/voiceover and policy launch smoke remain untested | [registry](../registry/packages/call-of-the-lost-goddess.yaml) |
 | Throne of the Mad God v2.3 | Complete 1-component structural catalog | Yes | **Untested** — fixture install evidence exists; policy launch smoke remains | [registry](../registry/packages/throne-of-the-mad-god.yaml) |
@@ -102,14 +104,15 @@ selectors, curated relationships, and automated disposable-build evidence.
 ## Cohort work boundary
 
 The frozen cohort contains 19 packages that were already mapped when it was
-selected and 80 indexed candidates. Forty-one of those candidates (Sirene,
+selected and 80 indexed candidates. Forty-three of those candidates (Sirene,
 LeUI, thirteen BG2 friendship releases, four Pocket Plane quest mods,
 Korgan's Redemption, Coran's BG Friendship, Xan's BG1 Friendship, and High
 Quality Soundclips, Banter Pack, BioWare NPC Flirt Packs, Drake, Unfinished
 Business, Reduce Save Compression, Ajantis BG1 Expansion, Turnabout,
 Generalized Biffing, The Longer Road, Isra NPC for BGII, Isra NPC for BG,
 Black Pits in BG, Dark Horizons, CoM Encounters, Tower of Deception, Test
-Your Mettle!, The Boareskyr Bridge Scene, and Extra Expanded Enhanced Encounters!) now have curated executable identities; 39 remain
+Your Mettle!, The Boareskyr Bridge Scene, Extra Expanded Enhanced Encounters!,
+Reflections of Destiny, and Road to Discovery) now have curated executable identities; 37 remain
 discovery-only. The remaining
 candidates are **not** silently
 excluded: they may proceed through IEPM's opaque local-package route once

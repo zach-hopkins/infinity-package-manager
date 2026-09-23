@@ -1,0 +1,45 @@
+schema: 2
+package: reflections-of-destiny
+aliases: [reflections]
+releases:
+  - release_id: reflections-of-destiny-0.9.4-source
+    version: "0.9.4"
+    artifacts:
+      - url: https://github.com/subtledoctor/Reflections-of-Destiny/archive/refs/tags/0.9.4.zip
+        sha256: 4ef856cdd4733ad3a2ffb1f6d136b4d3536091fa6bb333d839ba9bbdc8b060a5
+        platforms: [windows]
+    materialization: { source_root: Reflections-of-Destiny-0.9.4, include: [Reflections_of_Destiny] }
+    compatibility: { games: [bgee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    relationships:
+      - kind: conflicts
+        package: road-to-discovery
+        when:
+          selected_components: [rewrite-caelar-history]
+    provenance: unverified
+    claims:
+      - claim: The exact 0.9.4 author-tag ZIP matched SHA-256. Its TP2 declares VERSION 0.9.3 and seven active LABEL-bearing components; tag and TP2 version are distinct facts, not a hash mismatch.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The author documents SoD-enabled BGEE and EET, recommends an early placement after EET, Endless BG1, and The Calling when present, and warns that Rewriting History conflicts conceptually with Road to Discovery's vanilla-SoD plot tracking. Only Rewriting History triggers the modeled cross-package conflict.
+        provenance: declared
+        evidence: [https://github.com/subtledoctor/Reflections-of-Destiny]
+      - claim: Component 100 forbids Endless BG1 selector 14 and Imoen 4 Ever selector 10. These package-specific overlaps remain under review until those exact release components are mapped.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: Component 330 is EET-only. Four additional component-looking blocks numbered 150, 260, 290, and 320 are commented out in this exact TP2 and are not selectable.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+    installers:
+      - tp2: Reflections_of_Destiny/Reflections_of_Destiny.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+    components:
+      - { id: future-is-now, default_selected: true, weidu: { tp2: Reflections_of_Destiny/Reflections_of_Destiny.tp2, label: D5_REFLECTIONS_BACK_FUTURE, number: 100 } }
+      - { id: mirror-shard, weidu: { tp2: Reflections_of_Destiny/Reflections_of_Destiny.tp2, label: D5_REFLECTIONS_MIRROR_SHARD, number: 110 } }
+      - { id: rewrite-caelar-history, weidu: { tp2: Reflections_of_Destiny/Reflections_of_Destiny.tp2, label: D5_REFLECTIONS_REWRITE_CAELAR, number: 200 } }
+      - { id: magical-realism, weidu: { tp2: Reflections_of_Destiny/Reflections_of_Destiny.tp2, label: D5_REFLECTIONS_MAGICAL_REALISM, number: 220 } }
+      - { id: fear-feyr, weidu: { tp2: Reflections_of_Destiny/Reflections_of_Destiny.tp2, label: D5_REFLECTIONS_FEYR_ITSELF, number: 230 } }
+      - { id: precipice-of-death, weidu: { tp2: Reflections_of_Destiny/Reflections_of_Destiny.tp2, label: D5_REFLECTIONS_PRECIPICE_OF_DEATH, number: 240 } }
+      - { id: sod-content-in-soa, unsupported_games: [bgee], weidu: { tp2: Reflections_of_Destiny/Reflections_of_Destiny.tp2, label: D5_REFLECTIONS_SOD_CONTENT_SOA, number: 330 } }

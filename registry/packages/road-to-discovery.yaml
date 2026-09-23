@@ -1,0 +1,50 @@
+schema: 2
+package: road-to-discovery
+aliases: [sodrtd]
+releases:
+  - release_id: road-to-discovery-v6-source
+    version: "6.0"
+    artifacts:
+      - url: https://github.com/Gibberlings3/Road_To_Discovery_for_SoD/archive/refs/tags/v6.zip
+        sha256: f331c3d4da6d55dc741687cce0c03e806e36c3268295c4de29a84c3aae6fdcbf
+        platforms: [windows]
+    materialization: { source_root: Road_To_Discovery_for_SoD-6, include: [sodrtd] }
+    compatibility: { games: [bgee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact v6 author-tag ZIP matched SHA-256. Its TP2 declares VERSION 6.0 and nine LABEL-bearing declarations; selector 80 is explicitly DEPRECATED, leaving eight active choices.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: All active choices require SoD content on BGEE or EET, and the TP2 refuses an unmerged SoD DLC. The BGEE fixture merges SoD first.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The author recommends installing late after other SoD dialogue/content mods and before EET_End. This is ordering guidance, not a hard dependency on those optional mods.
+        provenance: declared
+        evidence: [https://github.com/Gibberlings3/Road_To_Discovery_for_SoD]
+      - claim: Component 20 must precede component 30, and component 50 must precede component 70 when both are selected; package-local prerequisites are modeled below.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+    installers:
+      - tp2: sodrtd/sodrtd.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: Deutsch }
+          - { id: 2, name: French }
+          - { id: 3, name: Italian }
+          - { id: 4, name: Spanish }
+          - { id: 5, name: Russian }
+          - { id: 6, name: Simplified Chinese }
+    components:
+      - { id: tracking-system, default_selected: true, weidu: { tp2: sodrtd/sodrtd.tp2, label: SoDRoadToDiscovery-main, number: 0 } }
+      - { id: consistency-dialogue, weidu: { tp2: sodrtd/sodrtd.tp2, label: SoDRoadToDiscovery-consistency, number: 10 }, requires: [tracking-system] }
+      - { id: aware-officers, weidu: { tp2: sodrtd/sodrtd.tp2, label: SoDRoadToDiscovery-aware_officers, number: 20 }, requires: [tracking-system] }
+      - { id: informed-pc-replies, weidu: { tp2: sodrtd/sodrtd.tp2, label: SoDRoadToDiscovery-consistency_reply_options, number: 30 }, requires: [tracking-system, consistency-dialogue] }
+      - { id: pc-tells-officers, weidu: { tp2: sodrtd/sodrtd.tp2, label: SoDRoadToDiscovery-PC_tells_officers, number: 40 }, requires: [tracking-system] }
+      - { id: officers-reactions, weidu: { tp2: sodrtd/sodrtd.tp2, label: SoDRoadToDiscovery-officers_reactions, number: 50 }, requires: [tracking-system, aware-officers, pc-tells-officers] }
+      - { id: additional-information, weidu: { tp2: sodrtd/sodrtd.tp2, label: SoDRoadToDiscovery-additional_infopoints, number: 60 }, requires: [tracking-system] }
+      - { id: additional-officer-communication, weidu: { tp2: sodrtd/sodrtd.tp2, label: SoDRoadToDiscovery-additional_communication_officers, number: 70 }, requires: [tracking-system, aware-officers, pc-tells-officers] }
+      - id: retired-stat-based-observations
+        deprecated: "Road to Discovery 6.0 declares selector 80 DEPRECATED; use the separately maintained Themed Tweaks component if desired."
+        weidu: { tp2: sodrtd/sodrtd.tp2, label: "#L-SOD-STAT_BASED_OPTIONS", number: 80 }
