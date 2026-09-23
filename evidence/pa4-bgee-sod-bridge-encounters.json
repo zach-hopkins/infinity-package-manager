@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "Boareskyr Bridge Scene v8 and Extra Expanded Enhanced Encounters! 4.4 all-English components on clean SoD-enabled BGEE 2.6.6",
+  "identity": {
+    "registry_revision": "0e00c8f",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "0aa9fe0a3a1a901b3b5ffcc5697f0036a5b27b185652027fb6bdf34491ef0cd3",
+    "environments": {
+      "target": {
+        "target": "bgee",
+        "fingerprint": {
+          "profile": "iepm-core-layout-v1",
+          "value": "04fc6602150ff7788875573dbf0b7f4aeb7ca26aaf83b022c77d9fc417d848c3"
+        }
+      }
+    },
+    "packages": [
+      { "package": "dlc-merger", "release_id": "dlc-merger-2.1-win32", "environment": "target", "artifact_sha256": "16b57b32662c1ac1e6d345afaf8669e01cf26eeafc5461000757edf33447e2eb", "components": ["merge-sod"] },
+      { "package": "boareskyr-bridge-scene", "release_id": "boareskyr-bridge-scene-v8-source", "environment": "target", "artifact_sha256": "f6d5b37ed4e3cb08aaac13ec716c8320e71e3697d0fbd65166b0796e9949b164", "components": ["acknowledge-boareskyr-scene", "add-scene-description", "offer-different-choices", "add-choice-stat-changes"] },
+      { "package": "extra-enhanced-encounters", "release_id": "extra-enhanced-encounters-4.4-source", "environment": "target", "artifact_sha256": "967ef5ffad7b097d3d93812f94ffd8bd22f3ff9c55b485928a85f7eebbdac2d4", "components": ["melia-quicknight", "bimmys-bandits", "reinforced-gnoll-stronghold", "gnoll-stronghold-cave-bears", "xans-new-grove", "daennis-bridge-bandits", "wyvern-cave-fire-drake", "undercity-magma-bulwark"] }
+    ],
+    "execution_order": ["dlc-merger", "boareskyr-bridge-scene", "extra-enhanced-encounters"]
+  },
+  "checks": {
+    "artifact_verified": true,
+    "selector_known": true,
+    "requirements_modeled": true,
+    "component_catalog_complete": true,
+    "all_components_classified": true,
+    "core_components_supported": false,
+    "selected_components_supported": false,
+    "relationships_satisfied": true,
+    "no_opaque_selections": true,
+    "clean_disposable_install": true,
+    "all_actions_completed": true,
+    "requested_components_recorded": true,
+    "no_components_skipped": true,
+    "warnings_classified": true,
+    "sealed": true,
+    "eet_end_required": false,
+    "main_menu_smoke": false,
+    "gameplay_smoke": false
+  },
+  "evidence": ["examples/bgee-sod-bridge-encounters/modpack.yaml", "docs/pa4-bgee-sod-bridge-encounters-evidence.md"]
+}

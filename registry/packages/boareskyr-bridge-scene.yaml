@@ -22,6 +22,9 @@ releases:
       - claim: The four components form a strict package-local chain 0 then 1 then 2 then 3, as expressed by TP2 REQUIRE_COMPONENT and FORBID_COMPONENT clauses. The last three are not standalone choices.
         provenance: derived
         evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: All four English components completed in a clean SoD-enabled BGEE 2.6.6 disposable build and were recorded in WeiDU.log. Menu and gameplay smoke remain unperformed, so this route is still Untested.
+        provenance: verified
+        evidence: [evidence/pa4-bgee-sod-bridge-encounters.json]
     installers:
       - tp2: "c#sodboabri/c#sodboabri.tp2"
         launcher: toolchain

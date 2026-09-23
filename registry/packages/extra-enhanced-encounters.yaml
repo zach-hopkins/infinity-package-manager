@@ -22,6 +22,9 @@ releases:
       - claim: The Gnoll Stronghold cave component number 3 specifically requires SoD content; the other seven components accept BGEE or EET. The current BGEE fixture has merged SoD.
         provenance: derived
         evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: All eight English components completed in a clean SoD-enabled BGEE 2.6.6 disposable build and were recorded in WeiDU.log. Menu and gameplay smoke remain unperformed, so this route is still Untested.
+        provenance: verified
+        evidence: [evidence/pa4-bgee-sod-bridge-encounters.json]
     installers:
       - tp2: ExtraExpandedEnhancedEncounters/ExtraExpandedEnhancedEncounters.tp2
         launcher: toolchain
