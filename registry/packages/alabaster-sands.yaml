@@ -1,0 +1,29 @@
+schema: 2
+package: alabaster-sands
+aliases: [alabastersands]
+releases:
+  - release_id: alabaster-sands-v20-weasel-20260923
+    version: "v2.0"
+    artifacts:
+      - url: https://downloads.weaselmods.net/download/alabaster-sands/?wpdmdl=593
+        sha256: dd7d2d5b6d660f6bb392c7241270516c5f664b50fd478a96d03dda3a1edeafbc
+        platforms: [windows]
+    materialization: { include: [AlabasterSands] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact 16286597-byte author-hosted archive matched SHA-256. The TP2 VERSION is v2.0; two alternate live LABEL-bearing selectors were derived.
+        provenance: derived
+        evidence: [https://downloads.weaselmods.net/download/alabaster-sands/]
+      - claim: Selector 1 enables existing-save patching through the shared worldmap routine and is withheld until IEPM contains possible writes outside the disposable workspace; selector 0 disables that behavior.
+        provenance: derived
+        evidence: [https://downloads.weaselmods.net/download/alabaster-sands/]
+    installers:
+      - tp2: AlabasterSands/AlabasterSands.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+    components:
+      - { id: alabaster-sands-no-save-patching, default_selected: true, weidu: { tp2: AlabasterSands/AlabasterSands.tp2, label: "L#-ALSANDS-NOPATCH", number: 0 }, conflicts: [alabaster-sands-patch-saves] }
+      - { id: alabaster-sands-patch-saves, unavailable: "Existing-save patching has not been contained to IEPM's disposable workspace.", weidu: { tp2: AlabasterSands/AlabasterSands.tp2, label: "L#-ALSANDS-PATCH", number: 1 }, conflicts: [alabaster-sands-no-save-patching] }

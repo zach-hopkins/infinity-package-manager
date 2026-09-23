@@ -1,0 +1,29 @@
+schema: 2
+package: eilistraees-song
+aliases: [eilistraee]
+releases:
+  - release_id: eilistraees-song-v752-weasel-20260923
+    version: "v7.5.2"
+    artifacts:
+      - url: https://downloads.weaselmods.net/download/eilistraees-song/?wpdmdl=89
+        sha256: 63c4e6562c6db724c74057332f034e94344d3754839f1cd45b4da5ea6920609e
+        platforms: [windows]
+    materialization: { include: [Eilistraee] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact 19096015-byte author-hosted archive matched SHA-256. The TP2 VERSION is v7.5.2; two alternate live LABEL-bearing selectors were derived.
+        provenance: derived
+        evidence: [https://downloads.weaselmods.net/download/eilistraees-song/]
+      - claim: Selector 1 enables existing-save patching through the shared worldmap routine and is withheld until IEPM contains possible writes outside the disposable workspace; selector 0 disables that behavior.
+        provenance: derived
+        evidence: [https://downloads.weaselmods.net/download/eilistraees-song/]
+    installers:
+      - tp2: Eilistraee/Setup-Eilistraee.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+    components:
+      - { id: eilistraees-song-no-save-patching, default_selected: true, weidu: { tp2: Eilistraee/Setup-Eilistraee.tp2, label: "L#-ESONG-NOPATCH", number: 0 }, conflicts: [eilistraees-song-patch-saves] }
+      - { id: eilistraees-song-patch-saves, unavailable: "Existing-save patching has not been contained to IEPM's disposable workspace.", weidu: { tp2: Eilistraee/Setup-Eilistraee.tp2, label: "L#-ESONG-PATCH", number: 1 }, conflicts: [eilistraees-song-no-save-patching] }

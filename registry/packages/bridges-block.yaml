@@ -1,0 +1,25 @@
+schema: 2
+package: bridges-block
+aliases: [bridgesblock]
+releases:
+  - release_id: bridges-block-v202-weasel-20260923
+    version: "v2.02"
+    artifacts:
+      - url: https://downloads.weaselmods.net/download/bridges-block/?wpdmdl=478
+        sha256: 79d9a0fa619cf2bd5336272e349ca5ed5978d60ff7f0b4430cc0697f8543375f
+        platforms: [windows]
+    materialization: { include: [BridgesBlock] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact 4847433-byte author-hosted archive matched SHA-256. The TP2 VERSION is v2.02; one live numeric-only selector were derived.
+        provenance: derived
+        evidence: [https://downloads.weaselmods.net/download/bridges-block/]
+    installers:
+      - tp2: BridgesBlock/BridgesBlock.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+    components:
+      - { id: bridges-block, default_selected: true, weidu: { tp2: BridgesBlock/BridgesBlock.tp2, number: 0 } }

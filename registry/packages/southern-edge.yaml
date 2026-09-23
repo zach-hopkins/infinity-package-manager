@@ -1,0 +1,29 @@
+schema: 2
+package: southern-edge
+aliases: [southernedge]
+releases:
+  - release_id: southern-edge-v60-weasel-20260923
+    version: "v6.0"
+    artifacts:
+      - url: https://downloads.weaselmods.net/download/southern-edge/?wpdmdl=36
+        sha256: 9fe060abad6ccc92c004e1da7e2d8aab6170350f3441479a99079d8fbfab71a8
+        platforms: [windows]
+    materialization: { include: [SouthernEdge] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact 39934282-byte author-hosted archive matched SHA-256. The TP2 VERSION is v6.0; two alternate live LABEL-bearing selectors were derived.
+        provenance: derived
+        evidence: [https://downloads.weaselmods.net/download/southern-edge/]
+      - claim: Selector 1 enables existing-save patching through the shared worldmap routine and is withheld until IEPM contains possible writes outside the disposable workspace; selector 0 disables that behavior.
+        provenance: derived
+        evidence: [https://downloads.weaselmods.net/download/southern-edge/]
+    installers:
+      - tp2: SouthernEdge/SouthernEdge.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+    components:
+      - { id: southern-edge-no-save-patching, default_selected: true, weidu: { tp2: SouthernEdge/SouthernEdge.tp2, label: "L#-SEDGE-NOPATCH", number: 0 }, conflicts: [southern-edge-patch-saves] }
+      - { id: southern-edge-patch-saves, unavailable: "Existing-save patching has not been contained to IEPM's disposable workspace.", weidu: { tp2: SouthernEdge/SouthernEdge.tp2, label: "L#-SEDGE-PATCH", number: 1 }, conflicts: [southern-edge-no-save-patching] }

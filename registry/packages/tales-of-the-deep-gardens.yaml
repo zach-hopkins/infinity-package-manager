@@ -1,0 +1,29 @@
+schema: 2
+package: tales-of-the-deep-gardens
+aliases: [totdg]
+releases:
+  - release_id: tales-of-the-deep-gardens-1297-weasel-20260923
+    version: "12.97"
+    artifacts:
+      - url: https://downloads.weaselmods.net/download/tales-of-the-deep-gardens/?wpdmdl=68
+        sha256: a9f6c31efd7b134aff8f8a5a990a2d4363f04000b953395fbb702e7f5e23db5a
+        platforms: [windows]
+    materialization: { include: [TotDG] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact 29941297-byte author-hosted archive matched SHA-256. The TP2 VERSION is 12.97; two alternate live LABEL-bearing selectors were derived.
+        provenance: derived
+        evidence: [https://downloads.weaselmods.net/download/tales-of-the-deep-gardens/]
+      - claim: Selector 1 enables existing-save patching through the shared worldmap routine and is withheld until IEPM contains possible writes outside the disposable workspace; selector 0 disables that behavior.
+        provenance: derived
+        evidence: [https://downloads.weaselmods.net/download/tales-of-the-deep-gardens/]
+    installers:
+      - tp2: TotDG/TotDG.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+    components:
+      - { id: tales-of-the-deep-gardens-no-save-patching, default_selected: true, weidu: { tp2: TotDG/TotDG.tp2, label: "L#-TOTDG-NOPATCH", number: 0 }, conflicts: [tales-of-the-deep-gardens-patch-saves] }
+      - { id: tales-of-the-deep-gardens-patch-saves, unavailable: "Existing-save patching has not been contained to IEPM's disposable workspace.", weidu: { tp2: TotDG/TotDG.tp2, label: "L#-TOTDG-PATCH", number: 1 }, conflicts: [tales-of-the-deep-gardens-no-save-patching] }

@@ -1,0 +1,29 @@
+schema: 2
+package: the-white-queen
+aliases: [whitequeen]
+releases:
+  - release_id: the-white-queen-v742-weasel-20260923
+    version: "v7.4.2"
+    artifacts:
+      - url: https://downloads.weaselmods.net/download/the-white-queen/?wpdmdl=75
+        sha256: 4a846e0bfc15cfa714c325c7350faa64e4fd4b92b0a23c0037e109bf206fdd3f
+        platforms: [windows]
+    materialization: { include: [WhiteQueen] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact 31969615-byte author-hosted archive matched SHA-256. The TP2 VERSION is v7.4.2; two alternate live LABEL-bearing selectors were derived.
+        provenance: derived
+        evidence: [https://downloads.weaselmods.net/download/the-white-queen/]
+      - claim: Selector 1 enables existing-save patching through the shared worldmap routine and is withheld until IEPM contains possible writes outside the disposable workspace; selector 0 disables that behavior.
+        provenance: derived
+        evidence: [https://downloads.weaselmods.net/download/the-white-queen/]
+    installers:
+      - tp2: WhiteQueen/WhiteQueen.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+    components:
+      - { id: the-white-queen-no-save-patching, default_selected: true, weidu: { tp2: WhiteQueen/WhiteQueen.tp2, label: "L#-WHITEQUEEN-NOPATCH", number: 0 }, conflicts: [the-white-queen-patch-saves] }
+      - { id: the-white-queen-patch-saves, unavailable: "Existing-save patching has not been contained to IEPM's disposable workspace.", weidu: { tp2: WhiteQueen/WhiteQueen.tp2, label: "L#-WHITEQUEEN-PATCH", number: 1 }, conflicts: [the-white-queen-no-save-patching] }

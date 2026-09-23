@@ -1,0 +1,25 @@
+schema: 2
+package: oozes-lounge
+aliases: [ooze]
+releases:
+  - release_id: oozes-lounge-v31-weasel-20260923
+    version: "v3.1"
+    artifacts:
+      - url: https://downloads.weaselmods.net/download/oozes-lounge/?wpdmdl=59
+        sha256: 2ce6ed79010ae87a474a3f161d91f321dc359543ee6f26a420f287be0e5d0c65
+        platforms: [windows]
+    materialization: { include: [Ooze] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact 14700664-byte author-hosted archive matched SHA-256. The TP2 VERSION is v3.1; one live LABEL-bearing selector were derived.
+        provenance: derived
+        evidence: [https://downloads.weaselmods.net/download/oozes-lounge/]
+    installers:
+      - tp2: Ooze/ooze.TP2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+    components:
+      - { id: oozes-lounge, default_selected: true, weidu: { tp2: Ooze/ooze.TP2, label: "L#-OOZESLOUNGE", number: 0 } }

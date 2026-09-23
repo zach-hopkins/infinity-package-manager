@@ -1,0 +1,29 @@
+schema: 2
+package: tangled-oak-isle
+aliases: [tangledisle]
+releases:
+  - release_id: tangled-oak-isle-v47-weasel-20260923
+    version: "v4.7"
+    artifacts:
+      - url: https://downloads.weaselmods.net/download/tangled-oak-isle/?wpdmdl=317
+        sha256: e67587d0eb805a1b0eeaa0c25f5526a79f6fd737389db014f66ed8ca810aa7e8
+        platforms: [windows]
+    materialization: { include: [TangledIsle] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact 58229495-byte author-hosted archive matched SHA-256. The TP2 VERSION is v4.7; two alternate live numeric-only selectors were derived.
+        provenance: derived
+        evidence: [https://downloads.weaselmods.net/download/tangled-oak-isle/]
+      - claim: Selector 1 enables existing-save patching through the shared worldmap routine and is withheld until IEPM contains possible writes outside the disposable workspace; selector 0 disables that behavior.
+        provenance: derived
+        evidence: [https://downloads.weaselmods.net/download/tangled-oak-isle/]
+    installers:
+      - tp2: TangledIsle/TangledIsle.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+    components:
+      - { id: tangled-oak-isle-no-save-patching, default_selected: true, weidu: { tp2: TangledIsle/TangledIsle.tp2, number: 0 }, conflicts: [tangled-oak-isle-patch-saves] }
+      - { id: tangled-oak-isle-patch-saves, unavailable: "Existing-save patching has not been contained to IEPM's disposable workspace.", weidu: { tp2: TangledIsle/TangledIsle.tp2, number: 1 }, conflicts: [tangled-oak-isle-no-save-patching] }
