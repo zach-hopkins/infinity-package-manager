@@ -1,0 +1,40 @@
+schema: 2
+package: test-your-mettle
+aliases: [a7-testyourmettle]
+releases:
+  - release_id: test-your-mettle-v1.6-source
+    version: "1.6"
+    artifacts:
+      - url: https://github.com/Argent77/A7-TestYourMettle/archive/refs/tags/v1.6.zip
+        sha256: ef982be26bea827ac1269a454b7e8019e21ea751de4cdbfd5dd2ca75c5e91559
+        platforms: [windows]
+    materialization: { source_root: A7-TestYourMettle-1.6, include: [A7-TestYourMettle] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact v1.6 author-tag ZIP matched SHA-256. Its TP2 declares VERSION 1.6, five languages, and six LABEL-bearing components numbered 0, 11, 12, 13, 14, and 20.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: Main component 0 and independent Spacewarp-in-stores component 20 require BG2EE or EET 2.0 or higher. The four XP-reduction choices each require main and form one WeiDU SUBCOMPONENT group, so they are mutually exclusive.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The author documents the Planar Sphere as the adventure entrance and describes the XP choices and independent Spacewarp store option. IEPM has not tested these in-game behaviors.
+        provenance: declared
+        evidence: [https://github.com/Argent77/A7-TestYourMettle]
+    installers:
+      - tp2: A7-TestYourMettle/A7-TestYourMettle.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: German }
+          - { id: 2, name: "Russian (translation: tipun, stn)" }
+          - { id: 3, name: "French (translation: deratiseur)" }
+          - { id: 4, name: "Simplified Chinese (translation: yoshimo0417)" }
+    components:
+      - { id: dungeon-adventure, default_selected: true, weidu: { tp2: A7-TestYourMettle/A7-TestYourMettle.tp2, label: A7-TESTYOURMETTLE-MAIN, number: 0 } }
+      - { id: reduce-monster-xp-50-percent, weidu: { tp2: A7-TestYourMettle/A7-TestYourMettle.tp2, label: A7-TESTYOURMETTLE-REDUCE_XP_BY_50, number: 11 }, requires: [dungeon-adventure], conflicts: [reduce-monster-xp-75-percent, reduce-monster-xp-90-percent, remove-monster-xp] }
+      - { id: reduce-monster-xp-75-percent, weidu: { tp2: A7-TestYourMettle/A7-TestYourMettle.tp2, label: A7-TESTYOURMETTLE-REDUCE_XP_BY_75, number: 12 }, requires: [dungeon-adventure], conflicts: [reduce-monster-xp-50-percent, reduce-monster-xp-90-percent, remove-monster-xp] }
+      - { id: reduce-monster-xp-90-percent, weidu: { tp2: A7-TestYourMettle/A7-TestYourMettle.tp2, label: A7-TESTYOURMETTLE-REDUCE_XP_BY_90, number: 13 }, requires: [dungeon-adventure], conflicts: [reduce-monster-xp-50-percent, reduce-monster-xp-75-percent, remove-monster-xp] }
+      - { id: remove-monster-xp, weidu: { tp2: A7-TestYourMettle/A7-TestYourMettle.tp2, label: A7-TESTYOURMETTLE-REDUCE_XP_BY_100, number: 14 }, requires: [dungeon-adventure], conflicts: [reduce-monster-xp-50-percent, reduce-monster-xp-75-percent, reduce-monster-xp-90-percent] }
+      - { id: spacewarp-in-stores, weidu: { tp2: A7-TestYourMettle/A7-TestYourMettle.tp2, label: A7-TESTYOURMETTLE-SPACEWARP_IN_STORES, number: 20 } }

@@ -1,0 +1,39 @@
+schema: 2
+package: com-encounters
+releases:
+  - release_id: com-encounters-v1.22-source
+    version: "v1.22"
+    artifacts:
+      - url: https://github.com/The-Gate-Project/Com_encounters/archive/refs/tags/v1.22.zip
+        sha256: ce2f050867869d7776c5365289b160173b606830e6322e4993952812caf9d7dd
+        platforms: [windows]
+    materialization: { source_root: Com_encounters-1.22, include: [com_encounters] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact v1.22 author-tag ZIP matched SHA-256. Its TP2 declares VERSION v1.22, eight languages, and three LABEL-bearing components numbered 0, 1, and 2.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The TP2's main component requires a ToB, BGT, BG2EE, or EET target. IEPM's current route covers BG2EE and EET; the source readme's generic BGEE wording is not evidence of a supported BGEE installer route.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The author describes the main encounters plus optional Improved Druids and Improved Shagbag components. The latter two are structurally separate selectors and remain Untested.
+        provenance: declared
+        evidence: [https://github.com/The-Gate-Project/Com_encounters]
+    installers:
+      - tp2: com_encounters/SETUP-com_encounters.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: "Francais (Traduction de Thot des d'Oghmatiques)" }
+          - { id: 2, name: "German (Translation by Gerri)" }
+          - { id: 3, name: "Italian (Translation by ilot)" }
+          - { id: 4, name: "Russian (by aerie.ru & arcanecoast.ru)" }
+          - { id: 5, name: "Polish (by Aristo)" }
+          - { id: 6, name: "Spanish (by alaisFcZ)" }
+          - { id: 7, name: "Simplified Chinese (translation: Lewis Liu)" }
+    components:
+      - { id: new-encounters, default_selected: true, weidu: { tp2: com_encounters/SETUP-com_encounters.tp2, label: CoM_Solaufein-Com_encounters, number: 0 } }
+      - { id: improved-druids, weidu: { tp2: com_encounters/SETUP-com_encounters.tp2, label: CoM_Solaufein-improved_druids, number: 1 } }
+      - { id: improved-shagbag, weidu: { tp2: com_encounters/SETUP-com_encounters.tp2, label: CoM_Solaufein-improved_shagbag, number: 2 } }

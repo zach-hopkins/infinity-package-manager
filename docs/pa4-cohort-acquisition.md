@@ -19,7 +19,8 @@ Korgan's Redemption, Coran's BG Friendship, Xan's BG1 Friendship, High
 Quality Soundclips, Banter Pack, BioWare NPC Flirt Packs, Drake, Unfinished
 Business, Ajantis BG1 Expansion, Reduce Save Compression, Turnabout,
 Generalized Biffing, The Longer Road, Isra NPC for BGII, Isra NPC for BG,
-Black Pits in BG, and Dark Horizons now have
+Black Pits in BG, Dark Horizons, CoM Encounters, Tower of Deception, and Test
+Your Mettle! now have
 reviewed, executable registry routes. The first ten friendship defaults and
 four quest defaults have exact-scope BG2EE
 build and main-menu evidence. The four newest routes also have revision-pinned

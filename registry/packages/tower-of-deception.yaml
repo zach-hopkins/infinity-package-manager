@@ -1,0 +1,42 @@
+schema: 2
+package: tower-of-deception
+aliases: [tod]
+releases:
+  - release_id: tower-of-deception-v4.1.0-source
+    version: "v4.1.0"
+    artifacts:
+      - url: https://github.com/InfinityMods/TowerOfDeception/archive/refs/tags/v4.1.0.zip
+        sha256: 2b89f6418d77e76ac58f352c7fa1bdd00111cd20bc2cced8c82ee1510efcc28d
+        platforms: [windows]
+    materialization: { source_root: TowerOfDeception-4.1.0, include: [tod] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact v4.1.0 author-tag ZIP matched SHA-256. Its TP2 declares VERSION v4.1.0, nine languages, and four LABEL-bearing components numbered 0 through 3.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The main TP2 accepts ToB, BGT, BG2EE, and EET. This IEPM release currently maps only BG2EE and EET; the latter has not been installed by IEPM.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: Each of the three optional components requires a marker file created by the main Tower of Deception component. IEPM models that package-local requirement; optional behavior remains Untested.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+    installers:
+      - tp2: tod/tod.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: "Castellano (traducido por Clan REO y RPG-Bardo.com)" }
+          - { id: 2, name: "Czech (prelozil Vlasak a Jab, www.sigil.cz, Radim Klímek)" }
+          - { id: 3, name: "Russian (translation Austin&Tanger Soto&www.aerie.ru)" }
+          - { id: 4, name: "Italian (translated by ilot)" }
+          - { id: 5, name: "German (translated by Gerri)" }
+          - { id: 6, name: "Francais (traduit par Le Marquis)" }
+          - { id: 7, name: "Polish (translated by Grzebul and Cuttooth)" }
+          - { id: 8, name: Chinese }
+    components:
+      - { id: tower-adventure, default_selected: true, weidu: { tp2: tod/tod.tp2, label: TowerOfDeception-Main, number: 0 } }
+      - { id: improved-astral-shard-guardian, weidu: { tp2: tod/tod.tp2, label: TowerOfDeception-ImprovedAstralShardGuardian, number: 1 }, requires: [tower-adventure] }
+      - { id: ustrain-encounter, weidu: { tp2: tod/tod.tp2, label: TowerOfDeception-UstrainEncounter, number: 2 }, requires: [tower-adventure] }
+      - { id: warblade-twilight-fix, weidu: { tp2: tod/tod.tp2, label: TowerOfDeception-WarbladeTwilightFix, number: 3 }, requires: [tower-adventure] }
