@@ -1,0 +1,54 @@
+schema: 2
+package: infinity-sounds
+aliases: [infinitysounds]
+releases:
+  - release_id: infinity-sounds-v2.2-source
+    version: "v2.2"
+    artifacts:
+      - url: https://github.com/Spellhold-Studios/Infinity-Sounds/archive/refs/tags/v2.2.zip
+        sha256: f6a2b462a9f309fe2b12362696726d6a79f5395d1945ee9a40507a7200c6c953
+        platforms: [windows]
+    materialization: { source_root: Infinity-Sounds-2.2, include: [infinitysounds] }
+    compatibility: { games: [bgee, bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact author v2.2 tag ZIP matched SHA-256. Its TP2 VERSION is v2.2 and all twenty live components have numbered LABEL selectors; commented-out selector 260 is not live.
+        provenance: derived
+        evidence: [https://github.com/Spellhold-Studios/Infinity-Sounds/releases/tag/v2.2]
+      - claim: Selectors 189 and 221 may write to the active USER_DIRECTORY/Baldur.lua outside IEPM's disposable workspace, so they are unavailable until IEPM isolates that side effect. This is an IEPM execution-boundary gap, not a mod incompatibility.
+        provenance: derived
+        evidence: [https://github.com/Spellhold-Studios/Infinity-Sounds/releases/tag/v2.2]
+      - claim: Selector 150 and selector 220 require the original ToB engine and cannot run on the curated EE targets. Selector 160 is for BGEE, while selectors 265 and 270 require BG2EE or EET. The latter also requires English.
+        provenance: derived
+        evidence: [https://github.com/Spellhold-Studios/Infinity-Sounds/releases/tag/v2.2]
+    installers:
+      - tp2: infinitysounds/infinitysounds.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: French }
+          - { id: 2, name: German }
+          - { id: 3, name: Polish }
+          - { id: 4, name: Russian }
+    components:
+      - { id: restore-bg1-spell-voices, weidu: { tp2: infinitysounds/infinitysounds.tp2, label: "s@-IS-BG1-Spell-Voices", number: 100 } }
+      - { id: restore-bg1-spell-sounds, weidu: { tp2: infinitysounds/infinitysounds.tp2, label: "s@-IS-BG1-Spell-Sounds", number: 110 } }
+      - { id: restore-bg1-weapon-sounds, weidu: { tp2: infinitysounds/infinitysounds.tp2, label: "s@-IS-BG1-Weapon-Sounds", number: 120 } }
+      - { id: restore-bg1-armor-sounds, weidu: { tp2: infinitysounds/infinitysounds.tp2, label: "s@-IS-BG1-Armor-Sounds", number: 130 } }
+      - { id: restore-bg1-gui-sounds, weidu: { tp2: infinitysounds/infinitysounds.tp2, label: "s@-IS-BG1-GUI-Sounds", number: 140 } }
+      - { id: restore-bg1-pc-soundsets, unavailable: "Original ToB only; EE engines fail TP2 predicate.", weidu: { tp2: infinitysounds/infinitysounds.tp2, label: "s@-IS-BG1-PC-Soundsets", number: 150 } }
+      - { id: restore-gulp-sound, unsupported_games: [bg2ee, eet], weidu: { tp2: infinitysounds/infinitysounds.tp2, label: "s@-IS-Gulp-Sound", number: 160 } }
+      - { id: restore-chunked-death-sound, weidu: { tp2: infinitysounds/infinitysounds.tp2, label: "s@-IS-Chunked-Death-Sound", number: 170 } }
+      - { id: tweak-sound-volume, weidu: { tp2: infinitysounds/infinitysounds.tp2, label: "s@-IS-Tweak-Volume-Levels", number: 180 } }
+      - { id: footsteps-during-combat, unavailable: "TP2 may write to USER_DIRECTORY/Baldur.lua outside IEPM workspace; isolation pending.", weidu: { tp2: infinitysounds/infinitysounds.tp2, label: "s@-IS-Footsteps-Combat", number: 189 } }
+      - { id: mute-reputation-sounds, weidu: { tp2: infinitysounds/infinitysounds.tp2, label: "s@-IS-Mute-Rep-Sounds", number: 190 } }
+      - { id: mute-tooltip-paper-sound, weidu: { tp2: infinitysounds/infinitysounds.tp2, label: "s@-IS-Mute-Tooltip-Sound", number: 200 } }
+      - { id: restore-bg1-ambient-sounds, weidu: { tp2: infinitysounds/infinitysounds.tp2, label: "s@-IS-BG1-Ambient-Sounds", number: 210 } }
+      - { id: restore-environmental-audio, unavailable: "Original ToB only; EE engines fail TP2 predicate.", weidu: { tp2: infinitysounds/infinitysounds.tp2, label: "s@-IS-Restore-EAX", number: 220 } }
+      - { id: enhance-positional-audio, unavailable: "TP2 may write to USER_DIRECTORY/Baldur.lua outside IEPM workspace; isolation pending.", weidu: { tp2: infinitysounds/infinitysounds.tp2, label: "s@-IS-Enhance-Pos-Audio", number: 221 } }
+      - { id: restore-and-tweak-soundsets, weidu: { tp2: infinitysounds/infinitysounds.tp2, label: "s@-IS-Restore-Tweak-Soundsets", number: 230 } }
+      - { id: more-existence-sounds, weidu: { tp2: infinitysounds/infinitysounds.tp2, label: "s@-IS-More-Existence-Sounds", number: 240 }, requires: [restore-and-tweak-soundsets] }
+      - { id: tweak-existence-sound-delay, weidu: { tp2: infinitysounds/infinitysounds.tp2, label: "s@-IS-Tweak-Existence-Sound-Delay", number: 250 }, requires: [restore-and-tweak-soundsets] }
+      - { id: restore-npc-voiceovers, unsupported_games: [bgee], weidu: { tp2: infinitysounds/infinitysounds.tp2, label: "s@-IS-Restore-NPC-Voiceovers", number: 265 } }
+      - { id: additional-npc-voiceovers, unsupported_games: [bgee], weidu: { tp2: infinitysounds/infinitysounds.tp2, label: "s@-IS-Salk-NPC-Voiceovers", number: 270 } }
