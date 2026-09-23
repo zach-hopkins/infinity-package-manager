@@ -1,0 +1,37 @@
+schema: 2
+package: bgee-classic-movies
+releases:
+  - release_id: bgee-classic-movies-v2.4.1-source
+    version: "v2.4.1"
+    artifacts:
+      - url: https://github.com/Sampsca/BGEE-Classic-Movies/archive/refs/tags/V2.4.1.zip
+        sha256: c740bce60ee33bed5652d51652015a2ad3ca5b199480a49f804dbee35f65cc58
+        platforms: [windows]
+    materialization: { source_root: BGEE-Classic-Movies-2.4.1, include: [BGEEClassicMovies] }
+    compatibility: { games: [bgee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: Exact official V2.4.1 tag archive matched SHA-256; all eight LABEL-bearing selectors are mapped. Restore-movie, movie-menu, and startup-movie choices can write to USER_DIRECTORY/Baldur.lua or Baldur.ini outside IEPM's disposable workspace, so they remain unavailable until containment is demonstrated.
+        provenance: derived
+        evidence: [https://github.com/Sampsca/BGEE-Classic-Movies/releases/tag/V2.4.1]
+      - claim: Restore Chapter and Dream Screens selector 3 has no USER_DIRECTORY write or installer prompt in its TP2 section and is a separately executable choice. It is not a substitute for the blocked movie choices.
+        provenance: derived
+        evidence: [https://github.com/Sampsca/BGEE-Classic-Movies/releases/tag/V2.4.1]
+    installers:
+      - tp2: BGEEClassicMovies/BGEEClassicMovies.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: Polski (Polish) }
+          - { id: 2, name: Espanol (Spanish) }
+          - { id: 3, name: Deutsch (German) }
+    components:
+      - { id: replace-all-movies, unavailable: "Writes outside the disposable game to USER_DIRECTORY/Baldur.lua or Baldur.ini.", weidu: { tp2: BGEEClassicMovies/BGEEClassicMovies.tp2, label: PS_BGEEClassicMovies_ReplaceMovies, number: 0 }, conflicts: [add-missing-movies] }
+      - { id: add-missing-movies, unavailable: "Writes outside the disposable game to USER_DIRECTORY/Baldur.lua or Baldur.ini.", weidu: { tp2: BGEEClassicMovies/BGEEClassicMovies.tp2, label: PS_BGEEClassicMovies_AddMissingMovies, number: 1 }, conflicts: [replace-all-movies] }
+      - { id: show-all-movies-in-menu, unavailable: "Writes outside the disposable game to USER_DIRECTORY/Baldur.lua or Baldur.ini.", weidu: { tp2: BGEEClassicMovies/BGEEClassicMovies.tp2, label: PS_BGEEClassicMovies_AddMoviesToInGameMenu, number: 2 } }
+      - { id: restore-chapter-and-dream-screens, weidu: { tp2: BGEEClassicMovies/BGEEClassicMovies.tp2, label: PS_BGEEClassicMovies_RestoreChapterDreamScreens, number: 3 } }
+      - { id: disable-logo-and-intro, unavailable: "May write outside the disposable game to USER_DIRECTORY/Baldur.lua or Baldur.ini.", weidu: { tp2: BGEEClassicMovies/BGEEClassicMovies.tp2, label: PS_BGEEClassicMovies_DisableLogoAndIntroMovies, number: 4 }, provides: [{ name: bgee-startup-movie-choice, exclusive: true }] }
+      - { id: disable-logo, unavailable: "May write outside the disposable game to USER_DIRECTORY/Baldur.lua or Baldur.ini.", weidu: { tp2: BGEEClassicMovies/BGEEClassicMovies.tp2, label: PS_BGEEClassicMovies_DisableLogoMovie, number: 5 }, provides: [{ name: bgee-startup-movie-choice, exclusive: true }] }
+      - { id: replace-logo-with-classic, unavailable: "May write outside the disposable game to USER_DIRECTORY/Baldur.lua or Baldur.ini.", weidu: { tp2: BGEEClassicMovies/BGEEClassicMovies.tp2, label: PS_BGEEClassicMovies_ReplaceLogo, number: 6 }, provides: [{ name: bgee-startup-movie-choice, exclusive: true }] }
+      - { id: prepend-classic-logos, unavailable: "May write outside the disposable game to USER_DIRECTORY/Baldur.lua or Baldur.ini.", weidu: { tp2: BGEEClassicMovies/BGEEClassicMovies.tp2, label: PS_BGEEClassicMovies_PrependClassicLogos, number: 7 }, provides: [{ name: bgee-startup-movie-choice, exclusive: true }] }
