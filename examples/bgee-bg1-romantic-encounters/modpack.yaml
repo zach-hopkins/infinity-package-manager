@@ -1,0 +1,23 @@
+schema: 2
+
+# PA-4 comprehensive BGEE route: adult BG-style/show-warnings is one of six
+# mutually exclusive style choices and provides every marker required by
+# the encounter selectors. This is a test fixture, not a recommended preset.
+environments:
+  target:
+    target: bgee
+    version: "2.6.6"
+    platform: windows
+    language: English
+    locale: en_US
+    fingerprint:
+      profile: iepm-core-layout-v1
+      value: 04fc6602150ff7788875573dbf0b7f4aeb7ca26aaf83b022c77d9fc417d848c3
+
+mods:
+  - package: dlc-merger
+    environment: target
+    components: [merge-sod]
+  - package: bg1-romantic-encounters
+    environment: target
+    components: [adult-bg-style-show-warnings, bardolans-briefing, scars-spare-time, kims-preoccupation, extention-of-bjornin-encounter, no-starch-in-maypole, duke-eltans-spare-minute, husams-personal-preparation, laurels-post-hunting, bartus-seduction, linas-massage, bg1re-first-night-quentin, chatting-niklos-up, slythe-and-kristin, no-regrets, purchased-love, hull-heavy-duty, late-night-jaheira, sils-blessing, melicamp-poultry-boy, reading-with-rinnie, molly-husband-grabber, mourning-of-centeol, essential-end, harvestmen-lair, great-zudini, messenger, ender-sai-heros-reward, the-novellists, honest-lies-of-two-riversides, necromancers-trouble, dinner-with-thalantyr, gender-girdle-reactions, surgeons-dream, what-left-was, childhood-friend, arlene-working-girl, della-may-from-thay, dirty-guard-candlekeep, phoenix-flame, mikala-the-monk, the-messenger-2, camryn-and-tamah, minor-disclosures, cloakwood-lovers]

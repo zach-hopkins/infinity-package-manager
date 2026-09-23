@@ -1,22 +1,20 @@
 # PA-4 remaining cohort triage (2026-09-23)
 
-The first 99-package Product A cohort has 52 curated executable identities
-and **28 discovery-only candidates** remaining beyond the 19 packages
+The first 99-package Product A cohort has 53 curated executable identities
+and **27 discovery-only candidates** remaining beyond the 19 packages
 already curated when the cohort was frozen. This page is an acquisition and
 review queue, not a support-status upgrade. The source snapshot is the
 [frozen cohort](../registry/cohorts/product-a-cohort.json), with acquisition
 leads in the [PA-2 health report](../registry/catalog/infinity-mod-forge-health.json)
 and exact tagged-ZIP observations in the
-[PA-4 artifact report](../registry/cohorts/pa4-tagged-artifacts.json), plus
-the newer BG1 Romantic Encounters observation below.
+[PA-4 artifact report](../registry/cohorts/pa4-tagged-artifacts.json).
 
-## Six exact tagged archives already acquired
+## Five exact tagged archives already acquired
 
 | Source ID | Candidate | Next concrete step |
 | ---: | --- | --- |
 | 18 | EE UI Tweaks | Review 67 TP2 selectors, UI framework interactions, and a bounded BG2EE install. |
 | 24 | BG:EE Classic Movies | [Contain writes outside the disposable game](pa4-classic-movies-external-write-blocker.md) before any install. Eight selectors are mechanically known. |
-| 55 | BG1 Romantic Encounters | Official [v16 tag](https://github.com/Gibberlings3/BG1_Romantic_Encounters/releases/tag/v16) ZIP: SHA-256 `83ab63ca9521c6edd736b50ae3b704832b45036625c337e6754869962f7e493f`, 7,105,299 bytes. After an inert-parser correction, 50 labeled selectors are detected. Review six required content-style alternatives and other relationships before mapping. |
 | 86 | Romantic Encounters (BG2) | Review 55 numeric-only selectors and file predicates (notably `mel01.cre`) before stabilizing IDs or selecting a fixture. No LABELs were observed. |
 | 246 | EET Tweaks | Review 65 selectors and EET-specific placement; then test on a disposable EET target. |
 | 428 | BP-BGT Worldmap | [Model its interactive map-size choice](pa4-worldmap-interactive-blocker.md) before declaring the main component executable. Six selectors are mechanically known. |

@@ -89,7 +89,7 @@ labels. This ledger must use those words only with those meanings.
 | Brage's Redemption v10.1 | Exact official tag and four labeled selectors; BGEE/EET main requires BGQE Brage's Sword, unlike BG2EE | Four selectors sealed after BGQE on BGEE; main and crossmod sealed without BGQE on BG2EE | **Untested** pending observed menu/gameplay and EET route; BG2 content incomplete per author | [install evidence](pa4-bgee-brage-evidence.md) |
 | BP-BGT Worldmap v13.1.1 | Exact ZIP hashed, six selectors mechanically detected | **Not yet executable in IEPM**: main TP2 asks for map-size input but IEPM gives WeiDU null stdin | **Untested**; discovery-only pending explicit installer-answer support, not known incompatible | [blocker](pa4-worldmap-interactive-blocker.md) |
 | BG:EE Classic Movies V2.4.1 | Exact ZIP hashed, eight selectors mechanically detected | **Not yet executable in IEPM**: TP2 writes to `%USER_DIRECTORY%/Baldur.lua` or `Baldur.ini` outside disposable game root | **Untested**; discovery-only pending containment of installer side effects, not known incompatible | [blocker](pa4-classic-movies-external-write-blocker.md) |
-| BG1 Romantic Encounters v16 | Official tag ZIP SHA-256 verified; 50 labeled TP2 selectors detected after parser repair | Discovery-only; six content-style alternatives and remaining conditions need review before an executable release record | **Untested**; no install or menu smoke | [acquisition triage](pa4-remaining-cohort-triage.md) |
+| BG1 Romantic Encounters v16 | Exact official tag and complete 50-selector catalog; six style alternatives guarded; marker-file prerequisites are still WeiDU-enforced | Explicit 45-selector BGEE route resolves executable; installation pending | **Untested** pending disposable install, menu smoke, other style choices, and EET | [registry](../registry/packages/bg1-romantic-encounters.yaml) |
 | Generalized Biffing v2.9 | Complete two-choice subcomponent catalog; final-phase placement reflects author's after-all-mods direction | Banter Pack then media-only Biffing built and launched from sealed BG2EE | **Supported** for this narrow English BG2EE 2.6.6 route; all-files choice, EET, large stacks, and performance Untested | [evidence](pa4-bg2ee-generalized-biffing-evidence.md) |
 | Call of the Lost Goddess v3.1 | Complete 3-component structural catalog | Yes | **Untested** — the core route has fixture install evidence; optional portraits/voiceover and policy launch smoke remain untested | [registry](../registry/packages/call-of-the-lost-goddess.yaml) |
 | Throne of the Mad God v2.3 | Complete 1-component structural catalog | Yes | **Untested** — fixture install evidence exists; policy launch smoke remains | [registry](../registry/packages/throne-of-the-mad-god.yaml) |
@@ -116,7 +116,7 @@ selectors, curated relationships, and automated disposable-build evidence.
 ## Cohort work boundary
 
 The frozen cohort contains 19 packages that were already mapped when it was
-selected and 80 indexed candidates. Fifty-two of those candidates (Sirene,
+selected and 80 indexed candidates. Fifty-three of those candidates (Sirene,
 LeUI, thirteen BG2 friendship releases, four Pocket Plane quest mods,
 Korgan's Redemption, Coran's BG Friendship, Xan's BG1 Friendship, and High
 Quality Soundclips, Banter Pack, BioWare NPC Flirt Packs, Drake, Unfinished
@@ -127,7 +127,8 @@ Your Mettle!, The Boareskyr Bridge Scene, Extra Expanded Enhanced Encounters!,
 Reflections of Destiny, Road to Discovery, Almateria's Restoration Project,
 Hidden Adventures, Crossmod Banter Pack, Ascalon's Questpack, Endless BG1,
 Imoen 4 Ever, Jastey's SoD Tweakpack, BG Mini Quests and Encounters, and
-Brage's Redemption) now have curated executable identities; 28 remain
+Brage's Redemption, and BG1 Romantic Encounters) now have curated executable
+identities; 27 remain
 discovery-only. The remaining
 candidates are **not** silently
 excluded: the [remaining cohort triage](pa4-remaining-cohort-triage.md)

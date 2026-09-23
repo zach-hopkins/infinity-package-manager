@@ -1,0 +1,88 @@
+schema: 2
+package: bg1-romantic-encounters
+aliases: [bg1re]
+releases:
+  - release_id: bg1-romantic-encounters-v16-source
+    version: "16"
+    artifacts:
+      - url: https://github.com/Gibberlings3/BG1_Romantic_Encounters/archive/refs/tags/v16.zip
+        sha256: 83ab63ca9521c6edd736b50ae3b704832b45036625c337e6754869962f7e493f
+        platforms: [windows]
+    materialization: { source_root: BG1_Romantic_Encounters-16, include: [bg1re] }
+    compatibility: { games: [bgee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: >-
+          Exact v16 author-tag ZIP matched SHA-256 and TP2 VERSION 16. The
+          TP2 declares fifty LABEL-bearing selectors: six mutually exclusive
+          style choices numbered 100-105 and forty-four encounters numbered 1-44.
+        provenance: derived
+        evidence: [docs/pa4-bg1-romantic-encounters-evidence.md]
+      - claim: The author documents BGEE and EET use. Individual encounter content and cross-mod behavior remain unverified.
+        provenance: declared
+        evidence: [https://github.com/Gibberlings3/BG1_Romantic_Encounters]
+      - claim: Encounter REQUIRE_FILE predicates depend on marker files produced by one or more of the six style choices. IEPM currently guards mutual exclusion but does not fully preflight those OR-style marker requirements; WeiDU remains authoritative for them.
+        provenance: derived
+        evidence: [docs/pa4-bg1-romantic-encounters-evidence.md]
+    installers:
+      - tp2: bg1re/setup-bg1re.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: "Deutsch (Teildeutsche Version, der Rest ist in Englisch)" }
+          - { id: 2, name: "Francais (traduction par les d'Oghmatiques)" }
+          - { id: 3, name: "Russian (Staylos, Apxu & Arcanecoast Team)" }
+          - { id: 4, name: Italian }
+          - { id: 5, name: Chinese }
+    components:
+      - { id: teen-skip-warnings, default_selected: true, conflicts: [teen-show-warnings, adult-bg-style-skip-warnings, adult-bg-style-show-warnings, adult-descriptive-skip-warnings, adult-descriptive-show-warnings], weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re-required-teen_skip, number: 100 } }
+      - { id: teen-show-warnings, conflicts: [teen-skip-warnings, adult-bg-style-skip-warnings, adult-bg-style-show-warnings, adult-descriptive-skip-warnings, adult-descriptive-show-warnings], weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re-required-teen_all, number: 101 } }
+      - { id: adult-bg-style-skip-warnings, conflicts: [teen-skip-warnings, teen-show-warnings, adult-bg-style-show-warnings, adult-descriptive-skip-warnings, adult-descriptive-show-warnings], weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re-required-adult_bgstyle_skip, number: 102 } }
+      - { id: adult-bg-style-show-warnings, conflicts: [teen-skip-warnings, teen-show-warnings, adult-bg-style-skip-warnings, adult-descriptive-skip-warnings, adult-descriptive-show-warnings], weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re-required-adult_bgstyle_all, number: 103 } }
+      - { id: adult-descriptive-skip-warnings, conflicts: [teen-skip-warnings, teen-show-warnings, adult-bg-style-skip-warnings, adult-bg-style-show-warnings, adult-descriptive-show-warnings], weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re-required-adult_description_skip, number: 104 } }
+      - { id: adult-descriptive-show-warnings, conflicts: [teen-skip-warnings, teen-show-warnings, adult-bg-style-skip-warnings, adult-bg-style-show-warnings, adult-descriptive-skip-warnings], weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re-required-adult_description_all, number: 105 } }
+      - { id: bardolans-briefing, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_bardolans_briefing, number: 1 } }
+      - { id: scars-spare-time, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_scars_spare_time, number: 2 } }
+      - { id: kims-preoccupation, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_kims_preoccupation, number: 3 } }
+      - { id: extention-of-bjornin-encounter, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_extention_of_bjornin_encounter, number: 4 } }
+      - { id: no-starch-in-maypole, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_no_starch_in_maypole, number: 5 } }
+      - { id: duke-eltans-spare-minute, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_duke_eltans_spare_minute, number: 6 } }
+      - { id: husams-personal-preparation, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_husams_personal_preparation, number: 7 } }
+      - { id: laurels-post-hunting, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_laurels_post_hunting, number: 8 } }
+      - { id: bartus-seduction, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_bartus_seduction, number: 9 } }
+      - { id: linas-massage, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_linas_massage, number: 10 } }
+      - { id: bg1re-first-night-quentin, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_bg1re_first_night_quentin, number: 11 } }
+      - { id: chatting-niklos-up, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_chatting_niklos_up, number: 12 } }
+      - { id: slythe-and-kristin, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_slythe_and_kristin, number: 13 } }
+      - { id: no-regrets, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_no_regrets, number: 14 } }
+      - { id: purchased-love, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_purchased_love, number: 15 } }
+      - { id: hull-heavy-duty, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_hull_heavy_duty, number: 16 } }
+      - { id: late-night-jaheira, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_late_night_jaheira, number: 17 } }
+      - { id: sils-blessing, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_sils_blessing, number: 18 } }
+      - { id: melicamp-poultry-boy, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_melicamp_poultry_boy, number: 19 } }
+      - { id: reading-with-rinnie, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_reading_with_rinnie, number: 20 } }
+      - { id: molly-husband-grabber, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_molly_husband_grabber, number: 21 } }
+      - { id: mourning-of-centeol, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_mourning_of_centeol, number: 22 } }
+      - { id: essential-end, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_essential_end, number: 23 } }
+      - { id: harvestmen-lair, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_harvestmen_lair, number: 24 } }
+      - { id: great-zudini, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_great_zudini, number: 25 } }
+      - { id: messenger, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_messenger, number: 26 } }
+      - { id: ender-sai-heros-reward, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_ender_sai_heros_reward, number: 27 } }
+      - { id: the-novellists, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_the_novellists, number: 28 } }
+      - { id: honest-lies-of-two-riversides, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_honest_lies_of_two_riversides, number: 29 } }
+      - { id: necromancers-trouble, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_necromancers_trouble, number: 30 } }
+      - { id: dinner-with-thalantyr, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_dinner_with_thalantyr, number: 31 } }
+      - { id: gender-girdle-reactions, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_gender_girdle_reactions, number: 32 } }
+      - { id: surgeons-dream, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_surgeons_dream, number: 33 } }
+      - { id: what-left-was, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_what_left_was, number: 34 } }
+      - { id: childhood-friend, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_childhood_friend, number: 35 } }
+      - { id: arlene-working-girl, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_arlene_working_girl, number: 36 } }
+      - { id: della-may-from-thay, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_della_may_from_thay, number: 37 } }
+      - { id: dirty-guard-candlekeep, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_dirty_guard_candlekeep, number: 38 } }
+      - { id: phoenix-flame, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_phoenix_flame, number: 39 } }
+      - { id: mikala-the-monk, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_mikala_the_monk, number: 40 } }
+      - { id: the-messenger-2, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_the_messenger_2, number: 41 } }
+      - { id: camryn-and-tamah, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_camryn_and_tamah, number: 42 } }
+      - { id: minor-disclosures, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_minor_disclosures, number: 43 } }
+      - { id: cloakwood-lovers, weidu: { tp2: bg1re/setup-bg1re.tp2, label: bg1re_cloakwood_lovers, number: 44 } }
