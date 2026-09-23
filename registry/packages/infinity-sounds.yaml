@@ -22,6 +22,9 @@ releases:
       - claim: Selector 150 and selector 220 require the original ToB engine and cannot run on the curated EE targets. Selector 160 is for BGEE, while selectors 265 and 270 require BG2EE or EET. The latter also requires English.
         provenance: derived
         evidence: [https://github.com/Spellhold-Studios/Infinity-Sounds/releases/tag/v2.2]
+      - claim: Selectors 100 through 140 installed together and were recorded in WeiDU.log in a fresh clean BG2EE 2.6.6 build that sealed. Other choices, menu, gameplay, and EET remain unobserved.
+        provenance: verified
+        evidence: [evidence/pa4-bg2ee-infinity-sounds.json]
     installers:
       - tp2: infinitysounds/infinitysounds.tp2
         launcher: toolchain

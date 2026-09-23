@@ -1,7 +1,7 @@
 # PA-4 remaining cohort triage (2026-09-23)
 
-The first 99-package Product A cohort has 59 curated executable identities
-and **21 discovery-only candidates** remaining beyond the 19 packages
+The first 99-package Product A cohort has 60 curated executable identities
+and **20 discovery-only candidates** remaining beyond the 19 packages
 already curated when the cohort was frozen. This page is an acquisition and
 review queue, not a support-status upgrade. The source snapshot is the
 [frozen cohort](../registry/cohorts/product-a-cohort.json), with acquisition
@@ -23,7 +23,7 @@ The exact tagged ZIPs above were SHA-256 hashed; a PA-2 ZIP signature alone
 would not be sufficient. The Classic Movies and Worldmap blockers are IEPM
 execution-boundary gaps, **not** claims that those mods are incompatible.
 
-## Four branch-archive acquisition leads
+## Three branch-archive acquisition leads
 
 These are not release identities. A mutable branch URL can change without
 changing its spelling, so pin an exact commit or released asset before
@@ -34,7 +34,6 @@ deriving selectors and updating the executable registry.
 | 25 | Baldur's Gate Graphics Overhaul | Branch archive probe returned HTTP error. |
 | 29 | Made in Heaven: Fixes & Restorations | Branch archive had ZIP signature; still mutable. |
 | 134 | Recorder | Branch archive probe returned HTTP error. |
-| 470 | Infinity Sounds | Branch archive had ZIP signature; still mutable. |
 
 ## Twelve manual-browser acquisition leads
 
@@ -75,6 +74,12 @@ in a disposable build. Other class choices, EET, and gameplay remain untested.
 Source ID **473**, Northern Tales of the Sword Coast, now has an exact author
 v5.0.0 tag, all 15 selectors mapped, and a clean BGEE/SoD main-component
 install and seal. Optional selectors, EET, menu, and gameplay remain untested.
+
+Source ID **470**, Infinity Sounds, now has an exact author v2.2 tag, all 20
+selectors mapped, and a clean five-choice BG2EE install and seal. Two
+`Baldur.lua`-writing choices remain gated by IEPM's external-write boundary;
+two original-ToB-only choices are unavailable on EE games. Other choices,
+menu, EET, and audio behavior remain untested.
 
 For each, locate an author or maintained release page, fetch exact bytes,
 hash and safely inspect the archive, and only then decide whether it can
