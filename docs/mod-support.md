@@ -95,6 +95,7 @@ labels. This ledger must use those words only with those meanings.
 | SoD Dialog Banters v1.0 | Exact official tag and complete one-selector catalog; SoD required and already-EET target excluded by TP2 | Installed and sealed after DLC Merger on SoD-enabled BGEE | **Untested** pending observed menu/banter behavior and cross-mod interactions | [install evidence](pa4-bgee-sod-dialog-banters-evidence.md) |
 | Quest Pack v3.5 (tag v35) | Exact author tag and complete 23-selector catalog; three subcomponent groups guarded; seven commented-out choices excluded | Four BG2EE quest choices installed and sealed; three dialogue-state WEIGHT warnings recorded | **Untested** pending dialogue/menu smoke, other selectors, and EET | [install evidence](pa4-bg2ee-quest-pack-evidence.md) |
 | Sirene NPC for BG2EE v2.02 | Exact author tag and all nine numeric selectors classified; four portrait alternatives unavailable because TP2 paths do not match archive layout | Main NPC plus True Paladin class installed and sealed on BG2EE; portrait `#1` failed in separate disposable build | Main/class **Untested** pending menu/gameplay and EET; four portrait selectors **Incompatible** for this exact artifact | [install evidence](pa4-bg2ee-sirene-main-class-evidence.md), [portrait failure](pa4-bg2ee-sirene-portrait-failure.md) |
+| Northern Tales of the Sword Coast v5.0.0 | Exact author tag and complete 15-selector LABEL catalog; Worldmap and optional-component rules classified | Main component installed after DLC Merger and sealed on clean BGEE/SoD | **Untested** pending optional-selector, EET, menu, and gameplay evidence | [install evidence](pa4-bgee-northern-tales-evidence.md) |
 | Generalized Biffing v2.9 | Complete two-choice subcomponent catalog; final-phase placement reflects author's after-all-mods direction | Banter Pack then media-only Biffing built and launched from sealed BG2EE | **Supported** for this narrow English BG2EE 2.6.6 route; all-files choice, EET, large stacks, and performance Untested | [evidence](pa4-bg2ee-generalized-biffing-evidence.md) |
 | Call of the Lost Goddess v3.1 | Complete 3-component structural catalog | Yes | **Untested** — the core route has fixture install evidence; optional portraits/voiceover and policy launch smoke remain untested | [registry](../registry/packages/call-of-the-lost-goddess.yaml) |
 | Throne of the Mad God v2.3 | Complete 1-component structural catalog | Yes | **Untested** — fixture install evidence exists; policy launch smoke remains | [registry](../registry/packages/throne-of-the-mad-god.yaml) |
@@ -121,8 +122,8 @@ selectors, curated relationships, and automated disposable-build evidence.
 ## Cohort work boundary
 
 The frozen cohort contains 19 packages that were already mapped when it was
-selected and 80 indexed candidates. The current triage records 58 curated
-executable identities and 22 discovery-only candidates. The remaining
+selected and 80 indexed candidates. The current triage records 59 curated
+executable identities and 21 discovery-only candidates. The remaining
 candidates are **not** silently excluded: the
 [remaining cohort triage](pa4-remaining-cohort-triage.md)
 names each acquisition state. They may proceed through IEPM's opaque

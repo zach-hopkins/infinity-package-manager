@@ -1,7 +1,7 @@
 # PA-4 remaining cohort triage (2026-09-23)
 
-The first 99-package Product A cohort has 58 curated executable identities
-and **22 discovery-only candidates** remaining beyond the 19 packages
+The first 99-package Product A cohort has 59 curated executable identities
+and **21 discovery-only candidates** remaining beyond the 19 packages
 already curated when the cohort was frozen. This page is an acquisition and
 review queue, not a support-status upgrade. The source snapshot is the
 [frozen cohort](../registry/cohorts/product-a-cohort.json), with acquisition
@@ -23,7 +23,7 @@ The exact tagged ZIPs above were SHA-256 hashed; a PA-2 ZIP signature alone
 would not be sufficient. The Classic Movies and Worldmap blockers are IEPM
 execution-boundary gaps, **not** claims that those mods are incompatible.
 
-## Five branch-archive acquisition leads
+## Four branch-archive acquisition leads
 
 These are not release identities. A mutable branch URL can change without
 changing its spelling, so pin an exact commit or released asset before
@@ -35,7 +35,6 @@ deriving selectors and updating the executable registry.
 | 29 | Made in Heaven: Fixes & Restorations | Branch archive had ZIP signature; still mutable. |
 | 134 | Recorder | Branch archive probe returned HTTP error. |
 | 470 | Infinity Sounds | Branch archive had ZIP signature; still mutable. |
-| 473 | Northern Tales of the Sword Coast | Branch archive probe returned HTTP error. |
 
 ## Twelve manual-browser acquisition leads
 
@@ -72,6 +71,10 @@ all nine selectors classified. NPC plus True Paladin installed and sealed on
 BG2EE. All four portrait choices are blocked for this exact artifact because
 their TP2 COPY paths do not exist in the archive; the first portrait failed
 in a disposable build. Other class choices, EET, and gameplay remain untested.
+
+Source ID **473**, Northern Tales of the Sword Coast, now has an exact author
+v5.0.0 tag, all 15 selectors mapped, and a clean BGEE/SoD main-component
+install and seal. Optional selectors, EET, menu, and gameplay remain untested.
 
 For each, locate an author or maintained release page, fetch exact bytes,
 hash and safely inspect the archive, and only then decide whether it can

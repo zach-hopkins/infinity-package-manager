@@ -19,6 +19,9 @@ releases:
       - claim: The main selector requires BGEE, BGT, or EET and forbids an already-installed BP-BGT Worldmap main component. Optional selectors require the main component; Will's soundset requires Will, and the two Shaman Cloak options share a SUBCOMPONENT group.
         provenance: derived
         evidence: [https://github.com/Spellhold-Studios/NTotSC/releases/tag/v5.0.0]
+      - claim: The main component installed after DLC Merger in a fresh clean BGEE 2.6.6 build, appeared in WeiDU.log, and sealed. Optional selectors, EET, menu, and gameplay remain unobserved.
+        provenance: verified
+        evidence: [evidence/pa4-bgee-northern-tales.json]
     installers:
       - tp2: ntotsc/ntotsc.tp2
         launcher: toolchain
