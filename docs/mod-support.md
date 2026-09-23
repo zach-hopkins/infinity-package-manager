@@ -93,6 +93,7 @@ labels. This ledger must use those words only with those meanings.
 | The Lure of the Sirine's Call v16.5.2 | Exact official tag and complete two-selector catalog; TP2 reports v16.5.1 and contains a misspelled optional prerequisite path | Main-only and main-plus-lighthouse builds both installed and sealed after DLC Merger on BGEE | **Untested** pending observed menu/gameplay and EET; the optional prerequisite spelling did not block the tested build | [install evidence](pa4-bgee-sirines-call-evidence.md) |
 | Sir Ajantis NPC for BGII v21 | Exact official tag and complete nine-selector catalog; five dialogue-speed alternatives guarded | Main, shield BAM, adult romance, standard dialogue speed, and Cavalier kit installed and sealed on BG2EE | **Untested** pending observed menu/gameplay, alternate speeds, and EET continuity | [install evidence](pa4-bg2ee-sir-ajantis-evidence.md) |
 | SoD Dialog Banters v1.0 | Exact official tag and complete one-selector catalog; SoD required and already-EET target excluded by TP2 | Installed and sealed after DLC Merger on SoD-enabled BGEE | **Untested** pending observed menu/banter behavior and cross-mod interactions | [install evidence](pa4-bgee-sod-dialog-banters-evidence.md) |
+| Quest Pack v3.5 (tag v35) | Exact author tag and complete 23-selector catalog; three subcomponent groups guarded; seven commented-out choices excluded | Four BG2EE quest choices installed and sealed; three dialogue-state WEIGHT warnings recorded | **Untested** pending dialogue/menu smoke, other selectors, and EET | [install evidence](pa4-bg2ee-quest-pack-evidence.md) |
 | Generalized Biffing v2.9 | Complete two-choice subcomponent catalog; final-phase placement reflects author's after-all-mods direction | Banter Pack then media-only Biffing built and launched from sealed BG2EE | **Supported** for this narrow English BG2EE 2.6.6 route; all-files choice, EET, large stacks, and performance Untested | [evidence](pa4-bg2ee-generalized-biffing-evidence.md) |
 | Call of the Lost Goddess v3.1 | Complete 3-component structural catalog | Yes | **Untested** — the core route has fixture install evidence; optional portraits/voiceover and policy launch smoke remain untested | [registry](../registry/packages/call-of-the-lost-goddess.yaml) |
 | Throne of the Mad God v2.3 | Complete 1-component structural catalog | Yes | **Untested** — fixture install evidence exists; policy launch smoke remains | [registry](../registry/packages/throne-of-the-mad-god.yaml) |
@@ -132,7 +133,7 @@ Hidden Adventures, Crossmod Banter Pack, Ascalon's Questpack, Endless BG1,
 Imoen 4 Ever, Jastey's SoD Tweakpack, BG Mini Quests and Encounters, and
 Brage's Redemption, BG1 Romantic Encounters, and The Lure of the Sirine's
 Call, Sir Ajantis NPC for BGII, and SoD Dialog Banters) now have curated
-executable identities; 24 remain
+Quest Pack) now have curated executable identities; 23 remain
 discovery-only. The remaining
 candidates are **not** silently
 excluded: the [remaining cohort triage](pa4-remaining-cohort-triage.md)

@@ -22,6 +22,9 @@ releases:
       - claim: This source TP2 permits BG2EE and EET. The installer contains legacy UNINSTALL references to historical separate components; they are part of WeiDU's official install route, not IEPM dependencies.
         provenance: derived
         evidence: [https://github.com/Pocket-Plane-Group/QuestPack/tree/v35]
+      - claim: Four English BG2EE quest selectors 5 through 8 installed and sealed from a clean 2.6.6 source. WeiDU recorded all four, but emitted three dialogue-state WEIGHT warnings during Shadow Thieves content; the affected dialogue behavior, other components, and EET remain unobserved.
+        provenance: verified
+        evidence: [evidence/pa4-bg2ee-quest-pack.json]
     installers:
       - tp2: setup-d0questpack.tp2
         launcher: toolchain

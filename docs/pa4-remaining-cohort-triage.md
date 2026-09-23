@@ -1,7 +1,7 @@
 # PA-4 remaining cohort triage (2026-09-23)
 
-The first 99-package Product A cohort has 56 curated executable identities
-and **24 discovery-only candidates** remaining beyond the 19 packages
+The first 99-package Product A cohort has 57 curated executable identities
+and **23 discovery-only candidates** remaining beyond the 19 packages
 already curated when the cohort was frozen. This page is an acquisition and
 review queue, not a support-status upgrade. The source snapshot is the
 [frozen cohort](../registry/cohorts/product-a-cohort.json), with acquisition
@@ -38,10 +38,10 @@ deriving selectors and updating the executable registry.
 | 470 | Infinity Sounds | Branch archive had ZIP signature; still mutable. |
 | 473 | Northern Tales of the Sword Coast | Branch archive probe returned HTTP error. |
 
-## Thirteen manual-browser acquisition leads
+## Twelve manual-browser acquisition leads
 
 PA-2 did not establish a direct artifact route for source IDs **13** Revert
-Pathfinding, **64** Quest Pack, **87–91** the five
+Pathfinding, **87–91** the five
 Colours of Infinity entries (Tales of the Deep Gardens, Innershade, The
 White Queen, I Shall Never Forget, Eilistraee's Song), **92–96** the five
 Athkatlan Grounds entries (Southern Edge, The Ooze's Lounge, The Tangled
@@ -62,6 +62,11 @@ Source ID **234**, SoD Dialog Banters, now has an exact v1.0 author tag,
 complete one-selector mapping, and a clean BGEE/SoD install receipt. Its TP2
 explicitly rejects installation into an already-EET game. No menu or banter
 behavior smoke has been observed.
+
+Source ID **64**, Quest Pack, now has the exact author v35 tag (TP2 VERSION
+v3.5), all 23 live selectors mapped, and a clean four-choice BG2EE install
+receipt. Three nonfatal dialogue-state WEIGHT warnings require a future
+dialogue smoke before stronger support claims.
 
 For each, locate an author or maintained release page, fetch exact bytes,
 hash and safely inspect the archive, and only then decide whether it can

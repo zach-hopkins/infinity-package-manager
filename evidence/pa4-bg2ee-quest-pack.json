@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "Quest Pack v3.5 Shadow Thieves, Harper/Xzar, Reynald, and Copper Coronet English selections on clean BG2EE 2.6.6",
+  "identity": {
+    "registry_revision": "84a9238",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "8004f507235cba5457b4a45000b6d38d2fe3c03bfe2302bda5b5f45006965502",
+    "environments": { "target": { "target": "bg2ee", "fingerprint": { "profile": "iepm-core-layout-v1", "value": "298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f" } } },
+    "packages": [
+      { "package": "quest-pack", "release_id": "quest-pack-v35-source", "environment": "target", "artifact_sha256": "dca023b5b3a0feab6c6cbcc13602c2726520a47f78e00d46687b6c82ef0119cd", "components": ["additional-shadow-thieves-content", "alternative-harper-xzar-plot", "extended-reynald-sequence", "intrigue-in-copper-coronet"] }
+    ],
+    "execution_order": ["quest-pack"]
+  },
+  "checks": {
+    "artifact_verified": true, "selector_known": true, "requirements_modeled": true,
+    "component_catalog_complete": true, "all_components_classified": true,
+    "core_components_supported": false, "selected_components_supported": false,
+    "relationships_satisfied": true, "no_opaque_selections": true,
+    "clean_disposable_install": true, "all_actions_completed": true,
+    "requested_components_recorded": true, "no_components_skipped": true,
+    "warnings_classified": true, "sealed": true, "eet_end_required": false,
+    "main_menu_smoke": false, "gameplay_smoke": false
+  },
+  "evidence": ["examples/bg2ee-quest-pack/modpack.yaml", "docs/pa4-bg2ee-quest-pack-evidence.md"]
+}
