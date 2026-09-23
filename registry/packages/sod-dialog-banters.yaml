@@ -1,0 +1,28 @@
+schema: 2
+package: sod-dialog-banters
+aliases: [soddialogbanters]
+releases:
+  - release_id: sod-dialog-banters-v1.0-source
+    version: "v1.0"
+    artifacts:
+      - url: https://github.com/The-Gate-Project/SoD-Dialog-Banters/archive/refs/tags/v1.0.zip
+        sha256: 64a15214c6a195c5ca2e6abbffe03ed4339bd2c896c7e204f549a4f10c4ae819
+        platforms: [windows]
+    materialization: { source_root: SoD-Dialog-Banters-1.0, include: [SoDDialogBanters] }
+    compatibility: { games: [bgee] }
+    install: { phase: bgee, after: [dlc-merger], before: [eet] }
+    provenance: unverified
+    claims:
+      - claim: The exact author v1.0 tag ZIP matched SHA-256. TP2 VERSION v1.0 declares one English numeric selector; the later BEGIN percent-hoo-percent text is inside an inlined DLG block and is not a WeiDU component.
+        provenance: derived
+        evidence: [https://github.com/The-Gate-Project/SoD-Dialog-Banters/tree/v1.0]
+      - claim: The author describes converting SoD NPC banters from on-the-run strings to pausing BG-style dialogue. The TP2 requires SoD content and explicitly rejects an already-EET game; this record targets the SoD-enabled BGEE source, not an EET target.
+        provenance: declared
+        evidence: [https://github.com/The-Gate-Project/SoD-Dialog-Banters]
+    installers:
+      - tp2: SoDDialogBanters/setup-SoDDialogBanters.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+    components:
+      - { id: pausing-sod-npc-banters, default_selected: true, weidu: { tp2: SoDDialogBanters/setup-SoDDialogBanters.tp2, number: 0 } }
