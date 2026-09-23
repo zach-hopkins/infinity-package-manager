@@ -19,6 +19,9 @@ releases:
       - claim: The author describes converting SoD NPC banters from on-the-run strings to pausing BG-style dialogue. The TP2 requires SoD content and explicitly rejects an already-EET game; this record targets the SoD-enabled BGEE source, not an EET target.
         provenance: declared
         evidence: [https://github.com/The-Gate-Project/SoD-Dialog-Banters]
+      - claim: The sole English selector installed after DLC Merger in a clean SoD-enabled BGEE 2.6.6 workspace, appeared in WeiDU.log, and sealed. Menu, new-game, banter behavior, and cross-mod interactions remain unobserved.
+        provenance: verified
+        evidence: [evidence/pa4-bgee-sod-dialog-banters.json]
     installers:
       - tp2: SoDDialogBanters/setup-SoDDialogBanters.tp2
         launcher: toolchain

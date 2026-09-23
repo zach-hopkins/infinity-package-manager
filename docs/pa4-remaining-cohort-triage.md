@@ -1,7 +1,7 @@
 # PA-4 remaining cohort triage (2026-09-23)
 
-The first 99-package Product A cohort has 55 curated executable identities
-and **25 discovery-only candidates** remaining beyond the 19 packages
+The first 99-package Product A cohort has 56 curated executable identities
+and **24 discovery-only candidates** remaining beyond the 19 packages
 already curated when the cohort was frozen. This page is an acquisition and
 review queue, not a support-status upgrade. The source snapshot is the
 [frozen cohort](../registry/cohorts/product-a-cohort.json), with acquisition
@@ -23,7 +23,7 @@ The exact tagged ZIPs above were SHA-256 hashed; a PA-2 ZIP signature alone
 would not be sufficient. The Classic Movies and Worldmap blockers are IEPM
 execution-boundary gaps, **not** claims that those mods are incompatible.
 
-## Seven branch-archive acquisition leads
+## Six branch-archive acquisition leads
 
 These are not release identities. A mutable branch URL can change without
 changing its spelling, so pin an exact commit or released asset before
@@ -35,7 +35,6 @@ deriving selectors and updating the executable registry.
 | 29 | Made in Heaven: Fixes & Restorations | Branch archive had ZIP signature; still mutable. |
 | 134 | Recorder | Branch archive probe returned HTTP error. |
 | 175 | Sirene NPC (BG2) | Branch archive probe returned HTTP error. |
-| 234 | SoD Dialog Banters | Branch archive probe returned HTTP error. |
 | 470 | Infinity Sounds | Branch archive had ZIP signature; still mutable. |
 | 473 | Northern Tales of the Sword Coast | Branch archive probe returned HTTP error. |
 
@@ -58,6 +57,11 @@ Source ID **140**, Sir Ajantis NPC for BGII, now has an exact author-tagged v21
 ZIP, a complete nine-selector mapping, and a clean five-selection BG2EE
 receipt. The other dialogue-speed alternatives, EET, and in-game behavior
 remain untested.
+
+Source ID **234**, SoD Dialog Banters, now has an exact v1.0 author tag,
+complete one-selector mapping, and a clean BGEE/SoD install receipt. Its TP2
+explicitly rejects installation into an already-EET game. No menu or banter
+behavior smoke has been observed.
 
 For each, locate an author or maintained release page, fetch exact bytes,
 hash and safely inspect the archive, and only then decide whether it can

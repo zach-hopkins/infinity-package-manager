@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "SoD Dialog Banters v1.0 English selector after DLC Merger on clean SoD-enabled BGEE 2.6.6",
+  "identity": {
+    "registry_revision": "37a2f49",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "1d7453e91288d597bb323d13286ab6e74759412c51ffe619f8b563b2df2ccc43",
+    "environments": { "target": { "target": "bgee", "fingerprint": { "profile": "iepm-core-layout-v1", "value": "04fc6602150ff7788875573dbf0b7f4aeb7ca26aaf83b022c77d9fc417d848c3" } } },
+    "packages": [
+      { "package": "dlc-merger", "release_id": "dlc-merger-2.1-win32", "environment": "target", "artifact_sha256": "16b57b32662c1ac1e6d345afaf8669e01cf26eeafc5461000757edf33447e2eb", "components": ["merge-sod"] },
+      { "package": "sod-dialog-banters", "release_id": "sod-dialog-banters-v1.0-source", "environment": "target", "artifact_sha256": "64a15214c6a195c5ca2e6abbffe03ed4339bd2c896c7e204f549a4f10c4ae819", "components": ["pausing-sod-npc-banters"] }
+    ],
+    "execution_order": ["dlc-merger", "sod-dialog-banters"]
+  },
+  "checks": {
+    "artifact_verified": true, "selector_known": true, "requirements_modeled": true,
+    "component_catalog_complete": true, "all_components_classified": true,
+    "core_components_supported": false, "selected_components_supported": false,
+    "relationships_satisfied": true, "no_opaque_selections": true,
+    "clean_disposable_install": true, "all_actions_completed": true,
+    "requested_components_recorded": true, "no_components_skipped": true,
+    "warnings_classified": true, "sealed": true, "eet_end_required": false,
+    "main_menu_smoke": false, "gameplay_smoke": false
+  },
+  "evidence": ["examples/bgee-sod-dialog-banters/modpack.yaml", "docs/pa4-bgee-sod-dialog-banters-evidence.md"]
+}
