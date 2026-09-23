@@ -1,0 +1,94 @@
+schema: 2
+package: ee-ui-tweaks
+aliases: [eeuitweaks]
+releases:
+  - release_id: ee-ui-tweaks-v4.0.7-source
+    version: "4.0.7"
+    artifacts:
+      - url: https://github.com/r-e-d/EEUITweaks/archive/refs/tags/v4.0.7.zip
+        sha256: e09d451901e6b70d7dbc98750c9ec5317e92ceec63b6afd764361db6d29920cd
+        platforms: [windows]
+    materialization: { source_root: EEUITweaks-4.0.7, include: [EEUITweaks] }
+    compatibility: { games: [bgee, bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: Exact official v4.0.7 tag archive matched SHA-256. TP2 declares 62 live designated UI choices and five deprecated dummy GROUP workarounds; all 67 observed BEGIN entries are classified, with dummy entries unavailable.
+        provenance: derived
+        evidence: [https://github.com/r-e-d/EEUITweaks/releases/tag/v4.0.7]
+      - claim: Many choices contain conditional predicates for LeUI, Dragonspear UI++, EET GUI, existing UI.MENU, engine version, and other local components. These are retained as WeiDU-enforced source predicates, not converted into broad package-level conflicts or verified cross-mod claims.
+        provenance: derived
+        evidence: [https://github.com/r-e-d/EEUITweaks/releases/tag/v4.0.7]
+    installers:
+      - tp2: EEUITweaks/EEUITweaks.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+    components:
+      - { id: mods-options, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 1000 } }
+      - { id: hidden-game-options, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 1010 }, requires: [mods-options] }
+      - { id: chargen-button-default, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 1090 }, conflicts: [chargen-button-reversed] }
+      - { id: chargen-button-reversed, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 1091 }, conflicts: [chargen-button-default] }
+      - { id: random-pc-generator, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 1020 } }
+      - { id: multi-portrait, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 1030 } }
+      - { id: portrait-picker-scalable, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 1040 }, conflicts: [portrait-picker-nonscalable, portrait-picker-lefreut] }
+      - { id: portrait-picker-nonscalable, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 1041 }, conflicts: [portrait-picker-scalable, portrait-picker-lefreut] }
+      - { id: portrait-picker-lefreut, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 1080 }, conflicts: [portrait-picker-scalable, portrait-picker-nonscalable] }
+      - { id: backup-m-bg-lua, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 1042 } }
+      - { id: update-portraits, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 1044 } }
+      - { id: unhide-chargen-options, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 1050 } }
+      - { id: abilities-auto-roller, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 1070 } }
+      - { id: roll-first, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 1060 } }
+      - { id: display-max-proficiency-limits, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 1100 } }
+      - { id: transparent-sidebars, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 2000 } }
+      - { id: sculpted-transparent-sidebars, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 2090 } }
+      - { id: message-box-buttons-hack, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 2010 }, conflicts: [message-box-resize-button] }
+      - { id: message-box-resize-button, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 2020 }, conflicts: [message-box-buttons-hack] }
+      - { id: better-quick-loot, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 2030 } }
+      - { id: level-up-glow-no-click, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 2040 }, conflicts: [level-up-glow-click, level-up-buttons] }
+      - { id: level-up-glow-click, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 2042 }, conflicts: [level-up-glow-no-click, level-up-buttons] }
+      - { id: level-up-buttons, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 2044 }, conflicts: [level-up-glow-no-click, level-up-glow-click] }
+      - { id: classic-dialog-box, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 2060 } }
+      - { id: centered-dialog, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 2050 } }
+      - { id: permanent-thieving-button, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 2070 } }
+      - { id: easier-area-cheats, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 2080 } }
+      - { id: red-healthbar, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 2100 } }
+      - { id: keep-dialog-after-death, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 2110 } }
+      - { id: mobile-console, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 2120 } }
+      - { id: clickable-dialog-box, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 2130 } }
+      - { id: replace-dragon-button, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 2140 } }
+      - { id: improved-record-screen, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 2900 } }
+      - { id: leveling-progress-bars, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 3000 } }
+      - { id: leveling-progress-options, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 3010 }, requires: [mods-options, leveling-progress-bars] }
+      - { id: journal-fixes, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 3020 }, conflicts: [journal-expanded, journal-collapsed, simple-journal-fixes] }
+      - { id: journal-expanded, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 3023 }, conflicts: [journal-fixes, journal-collapsed, simple-journal-fixes] }
+      - { id: journal-collapsed, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 3024 }, conflicts: [journal-fixes, journal-expanded, simple-journal-fixes] }
+      - { id: simple-journal-fixes, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 3070 }, conflicts: [journal-fixes, journal-expanded, journal-collapsed] }
+      - { id: customize-screens, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 3028 } }
+      - { id: customize-all-characters, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 3030 } }
+      - { id: identify-free, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 3040 }, conflicts: [identify-10gp, identify-25gp, identify-50gp, identify-100gp, identify-200gp] }
+      - { id: identify-10gp, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 3041 }, conflicts: [identify-free, identify-25gp, identify-50gp, identify-100gp, identify-200gp] }
+      - { id: identify-25gp, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 3042 }, conflicts: [identify-free, identify-10gp, identify-50gp, identify-100gp, identify-200gp] }
+      - { id: identify-50gp, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 3043 }, conflicts: [identify-free, identify-10gp, identify-25gp, identify-100gp, identify-200gp] }
+      - { id: identify-100gp, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 3044 }, conflicts: [identify-free, identify-10gp, identify-25gp, identify-50gp, identify-200gp] }
+      - { id: identify-200gp, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 3045 }, conflicts: [identify-free, identify-10gp, identify-25gp, identify-50gp, identify-100gp] }
+      - { id: item-comparison, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 3050 }, conflicts: [no-item-comparison] }
+      - { id: no-item-comparison, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 3051 }, conflicts: [item-comparison] }
+      - { id: store-button-default, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 4005 }, conflicts: [store-button-reversed] }
+      - { id: store-button-reversed, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 4006 }, conflicts: [store-button-default] }
+      - { id: joined-store-panels, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 4000 } }
+      - { id: steal-multiple-items, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 4010 } }
+      - { id: smooth-selling, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 4020 } }
+      - { id: store-extension, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 4025 } }
+      - { id: inscribed-arcana, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 4030 } }
+      - { id: classic-spellbooks, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 4040 } }
+      - { id: tooltip-scroll, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 5000 } }
+      - { id: dialog-box-override, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 5020 } }
+      - { id: scrollbar-override, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 5030 } }
+      - { id: description-font-nonitalic, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 5040 }, conflicts: [description-font-vanilla] }
+      - { id: description-font-vanilla, weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 5041 }, conflicts: [description-font-nonitalic] }
+      - { id: deprecated-group-one-dummy, unavailable: "Deprecated WeiDU GROUP workaround, not a user mod choice.", weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 62 } }
+      - { id: deprecated-group-two-dummy, unavailable: "Deprecated WeiDU GROUP workaround, not a user mod choice.", weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 63 } }
+      - { id: deprecated-group-three-dummy, unavailable: "Deprecated WeiDU GROUP workaround, not a user mod choice.", weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 64 } }
+      - { id: deprecated-group-four-dummy, unavailable: "Deprecated WeiDU GROUP workaround, not a user mod choice.", weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 65 } }
+      - { id: deprecated-group-five-dummy, unavailable: "Deprecated WeiDU GROUP workaround, not a user mod choice.", weidu: { tp2: EEUITweaks/EEUITweaks.tp2, number: 66 } }
