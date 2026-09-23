@@ -90,6 +90,7 @@ labels. This ledger must use those words only with those meanings.
 | BP-BGT Worldmap v13.1.1 | Exact ZIP hashed, six selectors mechanically detected | **Not yet executable in IEPM**: main TP2 asks for map-size input but IEPM gives WeiDU null stdin | **Untested**; discovery-only pending explicit installer-answer support, not known incompatible | [blocker](pa4-worldmap-interactive-blocker.md) |
 | BG:EE Classic Movies V2.4.1 | Exact ZIP hashed, eight selectors mechanically detected | **Not yet executable in IEPM**: TP2 writes to `%USER_DIRECTORY%/Baldur.lua` or `Baldur.ini` outside disposable game root | **Untested**; discovery-only pending containment of installer side effects, not known incompatible | [blocker](pa4-classic-movies-external-write-blocker.md) |
 | BG1 Romantic Encounters v16 | Exact official tag and complete 50-selector catalog; six style alternatives guarded; marker-file prerequisites are still WeiDU-enforced | Selected style plus all 44 encounters installed and sealed after DLC Merger on BGEE | **Untested** pending observed menu/gameplay, five alternate styles, and EET | [install evidence](pa4-bg1-romantic-encounters-evidence.md) |
+| The Lure of the Sirine's Call v16.5.2 | Exact official tag and complete two-selector catalog; TP2 reports v16.5.1 and contains a misspelled optional prerequisite path | Main-only and main-plus-lighthouse builds both installed and sealed after DLC Merger on BGEE | **Untested** pending observed menu/gameplay and EET; the optional prerequisite spelling did not block the tested build | [install evidence](pa4-bgee-sirines-call-evidence.md) |
 | Generalized Biffing v2.9 | Complete two-choice subcomponent catalog; final-phase placement reflects author's after-all-mods direction | Banter Pack then media-only Biffing built and launched from sealed BG2EE | **Supported** for this narrow English BG2EE 2.6.6 route; all-files choice, EET, large stacks, and performance Untested | [evidence](pa4-bg2ee-generalized-biffing-evidence.md) |
 | Call of the Lost Goddess v3.1 | Complete 3-component structural catalog | Yes | **Untested** — the core route has fixture install evidence; optional portraits/voiceover and policy launch smoke remain untested | [registry](../registry/packages/call-of-the-lost-goddess.yaml) |
 | Throne of the Mad God v2.3 | Complete 1-component structural catalog | Yes | **Untested** — fixture install evidence exists; policy launch smoke remains | [registry](../registry/packages/throne-of-the-mad-god.yaml) |
@@ -127,8 +128,8 @@ Your Mettle!, The Boareskyr Bridge Scene, Extra Expanded Enhanced Encounters!,
 Reflections of Destiny, Road to Discovery, Almateria's Restoration Project,
 Hidden Adventures, Crossmod Banter Pack, Ascalon's Questpack, Endless BG1,
 Imoen 4 Ever, Jastey's SoD Tweakpack, BG Mini Quests and Encounters, and
-Brage's Redemption, and BG1 Romantic Encounters) now have curated executable
-identities; 27 remain
+Brage's Redemption, BG1 Romantic Encounters, and The Lure of the Sirine's
+Call) now have curated executable identities; 26 remain
 discovery-only. The remaining
 candidates are **not** silently
 excluded: the [remaining cohort triage](pa4-remaining-cohort-triage.md)

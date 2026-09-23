@@ -19,9 +19,12 @@ releases:
       - claim: The authors document BGEE and EET support. The TP2 requires the mod before EET_End and rejects an unmerged SoD archive.
         provenance: declared
         evidence: [https://github.com/Pocket-Plane-Group/Lure_Of_Sirines_Call]
-      - claim: The optional lighthouse selector declares a requirement on the misspelled SiriensCall/setup-sirinescall.tp2 path rather than its own SirinesCall/setup-SirinesCall.tp2. Its execution is unverified and may fail even when the main component is selected; do not promote the entire catalog based on a main-only install.
+      - claim: The optional lighthouse selector declares a requirement on the misspelled SiriensCall/setup-sirinescall.tp2 path rather than its own SirinesCall/setup-SirinesCall.tp2; preserve this source discrepancy for release-drift review.
         provenance: derived
         evidence: [https://github.com/Pocket-Plane-Group/Lure_Of_Sirines_Call/releases/tag/v16.5.2]
+      - claim: Both English selectors installed together after DLC Merger on clean SoD-enabled BGEE 2.6.6 and appeared in WeiDU.log despite the optional prerequisite spelling. A separate main-only build also sealed. Menu, quest behavior, and EET remain unobserved.
+        provenance: verified
+        evidence: [evidence/pa4-bgee-sirines-call.json]
     installers:
       - tp2: SirinesCall/setup-SirinesCall.tp2
         launcher: toolchain

@@ -1,7 +1,7 @@
 schema: 2
 
-# Main-quest-only control fixture. The optional lighthouse selector is
-# exercised separately in optional-lighthouse.yaml.
+# Diagnostic fixture: test whether the official v16.5.2 optional component's
+# REQUIRE_COMPONENT spelling accepts the correctly installed main component.
 environments:
   target:
     target: bgee
@@ -19,4 +19,4 @@ mods:
     components: [merge-sod]
   - package: lure-of-the-sirines-call
     environment: target
-    components: [sirines-call-quest]
+    components: [sirines-call-quest, extended-lighthouse-area]

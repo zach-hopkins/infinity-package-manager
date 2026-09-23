@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "The Lure of the Sirine's Call v16.5.2 main and Extended Lighthouse Area English selectors on clean SoD-enabled BGEE 2.6.6",
+  "identity": {
+    "registry_revision": "108226b",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "9438ebb6bcb31c66538560ffcf572e0d55151ce4d53b161a3fb62ede7cb0d7db",
+    "environments": { "target": { "target": "bgee", "fingerprint": { "profile": "iepm-core-layout-v1", "value": "04fc6602150ff7788875573dbf0b7f4aeb7ca26aaf83b022c77d9fc417d848c3" } } },
+    "packages": [
+      { "package": "dlc-merger", "release_id": "dlc-merger-2.1-win32", "environment": "target", "artifact_sha256": "16b57b32662c1ac1e6d345afaf8669e01cf26eeafc5461000757edf33447e2eb", "components": ["merge-sod"] },
+      { "package": "lure-of-the-sirines-call", "release_id": "lure-of-the-sirines-call-v16.5.2-source", "environment": "target", "artifact_sha256": "1b41e6c8c240f22b5916c852e2817481cd4228b23771143e6fca0534d4464802", "components": ["sirines-call-quest", "extended-lighthouse-area"] }
+    ],
+    "execution_order": ["dlc-merger", "lure-of-the-sirines-call"]
+  },
+  "checks": {
+    "artifact_verified": true, "selector_known": true, "requirements_modeled": true,
+    "component_catalog_complete": true, "all_components_classified": true,
+    "core_components_supported": false, "selected_components_supported": false,
+    "relationships_satisfied": true, "no_opaque_selections": true,
+    "clean_disposable_install": true, "all_actions_completed": true,
+    "requested_components_recorded": true, "no_components_skipped": true,
+    "warnings_classified": true, "sealed": true, "eet_end_required": false,
+    "main_menu_smoke": false, "gameplay_smoke": false
+  },
+  "evidence": ["examples/bgee-lure-of-the-sirines-call/optional-lighthouse.yaml", "docs/pa4-bgee-sirines-call-evidence.md"]
+}

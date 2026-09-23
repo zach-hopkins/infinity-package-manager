@@ -1,7 +1,7 @@
 # PA-4 remaining cohort triage (2026-09-23)
 
-The first 99-package Product A cohort has 53 curated executable identities
-and **27 discovery-only candidates** remaining beyond the 19 packages
+The first 99-package Product A cohort has 54 curated executable identities
+and **26 discovery-only candidates** remaining beyond the 19 packages
 already curated when the cohort was frozen. This page is an acquisition and
 review queue, not a support-status upgrade. The source snapshot is the
 [frozen cohort](../registry/cohorts/product-a-cohort.json), with acquisition
@@ -39,15 +39,20 @@ deriving selectors and updating the executable registry.
 | 470 | Infinity Sounds | Branch archive had ZIP signature; still mutable. |
 | 473 | Northern Tales of the Sword Coast | Branch archive probe returned HTTP error. |
 
-## Fifteen manual-browser acquisition leads
+## Fourteen manual-browser acquisition leads
 
 PA-2 did not establish a direct artifact route for source IDs **13** Revert
-Pathfinding, **57** The Lure of the Sirine's Call, **64** Quest Pack, **87–91** the five
+Pathfinding, **64** Quest Pack, **87–91** the five
 Colours of Infinity entries (Tales of the Deep Gardens, Innershade, The
 White Queen, I Shall Never Forget, Eilistraee's Song), **92–96** the five
 Athkatlan Grounds entries (Southern Edge, The Ooze's Lounge, The Tangled
 Oak Isle, Bridge's Block, Alabaster Sands), **140** Sir Ajantis NPC, and
 **474** Portraits Portraits Everywhere.
+
+Source ID **57**, The Lure of the Sirine's Call, now has an exact author-tagged
+v16.5.2 ZIP, complete two-selector mapping, and clean BGEE main-only and
+main-plus-lighthouse install receipts. Its menu/gameplay and EET routes are
+still untested; the TP2 VERSION lags the release tag.
 
 For each, locate an author or maintained release page, fetch exact bytes,
 hash and safely inspect the archive, and only then decide whether it can
