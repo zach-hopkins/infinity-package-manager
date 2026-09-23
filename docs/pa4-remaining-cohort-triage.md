@@ -1,7 +1,7 @@
 # PA-4 remaining cohort triage (2026-09-23)
 
-The first 99-package Product A cohort has 60 curated executable identities
-and **20 discovery-only candidates** remaining beyond the 19 packages
+The first 99-package Product A cohort has 61 curated executable identities
+and **19 discovery-only candidates** remaining beyond the 19 packages
 already curated when the cohort was frozen. This page is an acquisition and
 review queue, not a support-status upgrade. The source snapshot is the
 [frozen cohort](../registry/cohorts/product-a-cohort.json), with acquisition
@@ -35,12 +35,12 @@ deriving selectors and updating the executable registry.
 | 29 | Made in Heaven: Fixes & Restorations | Branch archive had ZIP signature; still mutable. |
 | 134 | Recorder | Branch archive probe returned HTTP error. |
 
-## Twelve manual-browser acquisition leads
+## Eleven manual-browser acquisition leads
 
 PA-2 did not establish a direct artifact route for source IDs **13** Revert
-Pathfinding, **87–91** the five
-Colours of Infinity entries (Tales of the Deep Gardens, Innershade, The
-White Queen, I Shall Never Forget, Eilistraee's Song), **92–96** the five
+Pathfinding, **87** and **89–91** the remaining four
+Colours of Infinity entries (Tales of the Deep Gardens, The White Queen,
+I Shall Never Forget, Eilistraee's Song), **92–96** the five
 Athkatlan Grounds entries (Southern Edge, The Ooze's Lounge, The Tangled
 Oak Isle, Bridge's Block, Alabaster Sands), and **474** Portraits Portraits
 Everywhere.
@@ -80,6 +80,11 @@ selectors mapped, and a clean five-choice BG2EE install and seal. Two
 `Baldur.lua`-writing choices remain gated by IEPM's external-write boundary;
 two original-ToB-only choices are unavailable on EE games. Other choices,
 menu, EET, and audio behavior remain untested.
+
+Source ID **88**, Innershade, now has exact author-hosted v11.16 bytes and a
+complete two-alternative selector map. The no-save-patching choice installed
+and sealed on BG2EE with one nonfatal EXTEND_BOTTOM warning; the save-patching
+choice is withheld pending containment of its possible external save writes.
 
 For each, locate an author or maintained release page, fetch exact bytes,
 hash and safely inspect the archive, and only then decide whether it can

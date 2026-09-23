@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "Innershade v11.16 no-save-patching choice on clean BG2EE 2.6.6",
+  "identity": {
+    "registry_revision": "f43a188",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "7080352b36eb410345cc098f9589a68b2bf82f1fd3e42cce8e967e5d1d24f683",
+    "environments": { "target": { "target": "bg2ee", "fingerprint": { "profile": "iepm-core-layout-v1", "value": "298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f" } } },
+    "packages": [
+      { "package": "innershade", "release_id": "innershade-v11.16-weasel-20260923", "environment": "target", "artifact_sha256": "ee1ce60e6167387230a685149dec9094084bcdb1cb807e3b3dcb30e90be4973f", "components": ["innershade-no-save-patching"] }
+    ],
+    "execution_order": ["innershade"]
+  },
+  "checks": {
+    "artifact_verified": true, "selector_known": true, "requirements_modeled": true,
+    "component_catalog_complete": true, "all_components_classified": true,
+    "core_components_supported": false, "selected_components_supported": false,
+    "relationships_satisfied": true, "no_opaque_selections": true,
+    "clean_disposable_install": true, "all_actions_completed": true,
+    "requested_components_recorded": true, "no_components_skipped": true,
+    "warnings_classified": true, "sealed": true, "eet_end_required": false,
+    "main_menu_smoke": false, "gameplay_smoke": false
+  },
+  "evidence": ["examples/bg2ee-innershade/modpack.yaml", "docs/pa4-bg2ee-innershade-evidence.md"]
+}

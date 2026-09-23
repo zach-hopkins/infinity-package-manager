@@ -21,6 +21,9 @@ releases:
       - claim: Selector 1 requests patching existing saves through ADD_WORLDMAP_TBL; it is withheld until IEPM proves that side effect stays inside the disposable workspace. Selector 0 disables save patching.
         provenance: derived
         evidence: [https://downloads.weaselmods.net/download/innershade/]
+      - claim: No-save-patching selector 0 installed in a fresh clean BG2EE 2.6.6 build, appeared in WeiDU.log, and sealed. One nonfatal EXTEND_BOTTOM position warning requires behavioral review; menu, quest behavior, and EET remain unobserved.
+        provenance: verified
+        evidence: [evidence/pa4-bg2ee-innershade.json]
     installers:
       - tp2: Innershade/Setup-Innershade.tp2
         launcher: toolchain
