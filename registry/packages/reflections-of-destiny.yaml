@@ -21,6 +21,11 @@ releases:
         components: [imoen-duke-jannath, korlasz-dungeon-in-bg1]
         when:
           selected_components: [future-is-now]
+      - kind: conflicts
+        package: imoen-4-ever
+        components: [imoen-in-korlasz]
+        when:
+          selected_components: [future-is-now]
     provenance: unverified
     claims:
       - claim: The exact 0.9.4 author-tag ZIP matched SHA-256. Its TP2 declares VERSION 0.9.3 and seven active LABEL-bearing components; tag and TP2 version are distinct facts, not a hash mismatch.

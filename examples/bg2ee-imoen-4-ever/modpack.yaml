@@ -1,0 +1,18 @@
+schema: 2
+
+# PA-4 bounded BG2EE route: main and four BG2 options plus optional portrait.
+environments:
+  target:
+    target: bg2ee
+    version: "2.6.6"
+    platform: windows
+    language: English
+    locale: en_US
+    fingerprint:
+      profile: iepm-core-layout-v1
+      value: 298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f
+
+mods:
+  - package: imoen-4-ever
+    environment: target
+    components: [imoen-returns-chapter-two, bg2-imoen-dialogue, yoshimo-in-brynnlaw, imoen-protection-spell, saerileth-alternatives-compatibility, acifer-portrait]

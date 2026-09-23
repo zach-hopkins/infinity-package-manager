@@ -1,0 +1,59 @@
+schema: 2
+package: imoen-4-ever
+aliases: [imoen-forever]
+releases:
+  - release_id: imoen-4-ever-v11.6-source
+    version: "v11.6"
+    artifacts:
+      - url: https://github.com/Gibberlings3/Imoen4Ever/archive/refs/tags/v11.6.zip
+        sha256: c57fee7058159ee681e77d4c2a80d5a100b6b4adece1d4fadada16fd878593d6
+        platforms: [windows]
+    materialization: { source_root: Imoen4Ever-11.6, include: [imoen_forever] }
+    compatibility: { games: [bgee, bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    relationships:
+      - kind: conflicts
+        package: endless-bg1
+        components: [korlasz-dungeon-in-bg1]
+        when:
+          selected_components: [imoen-in-korlasz]
+    provenance: unverified
+    claims:
+      - claim: The exact v11.6 author-tag ZIP matched SHA-256. Its TP2 declares sixteen LABEL-bearing components with stable numbers 0, 1, 2, 3, 9, 10 through 17, 20, 25, and 30.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The author documents BG2EE and SoD/EET routes separately; BG2 chapter-two Imoen returns as the base for the four related BG2 options, while SoD options concern Korlasz and camp return.
+        provenance: declared
+        evidence: [https://github.com/Gibberlings3/Imoen4Ever]
+      - claim: BG2 components 1, 2, 3, and 9 require component 0. SoD components 13, 14, 20, and 25 require component 11. Some other SoD choices accept component 10 OR 11 in the TP2; IEPM does not yet narrow that OR in preflight and leaves those selections unverified unless the user chooses a known-working set.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: SoD portrait choices 16 and 17 are alternatives. Component 10 forbids Endless BG1 Korlasz-dungeon component 14; that narrow cross-package conflict is modeled.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+    installers:
+      - tp2: imoen_forever/imoen_forever.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: Deutsch }
+          - { id: 2, name: Polski }
+          - { id: 3, name: Russian }
+          - { id: 4, name: "Simplified Chinese (translation: Lewis Liu)" }
+    components:
+      - { id: imoen-returns-chapter-two, default_selected: true, unsupported_games: [bgee], weidu: { tp2: imoen_forever/imoen_forever.tp2, label: Imoen4Ever-BGII-ImoenReturnsChapter2, number: 0 } }
+      - { id: bg2-imoen-dialogue, unsupported_games: [bgee], weidu: { tp2: imoen_forever/imoen_forever.tp2, label: Imoen4Ever-BGII-DialoguesContentSoA, number: 1 }, requires: [imoen-returns-chapter-two] }
+      - { id: yoshimo-in-brynnlaw, unsupported_games: [bgee], weidu: { tp2: imoen_forever/imoen_forever.tp2, label: Imoen4Ever-BGII-YoshimoBrynnlaw, number: 2 }, requires: [imoen-returns-chapter-two] }
+      - { id: imoen-protection-spell, unsupported_games: [bgee], weidu: { tp2: imoen_forever/imoen_forever.tp2, label: "Imoen4Ever-BGII-ImoenProtectionSpellChapter2&3", number: 3 }, requires: [imoen-returns-chapter-two] }
+      - { id: saerileth-alternatives-compatibility, unsupported_games: [bgee], weidu: { tp2: imoen_forever/imoen_forever.tp2, label: Imoen4Ever-BGII-Compatibility_Saerileth_Alternatives, number: 9 }, requires: [imoen-returns-chapter-two] }
+      - { id: imoen-in-korlasz, unsupported_games: [bg2ee], weidu: { tp2: imoen_forever/imoen_forever.tp2, label: Imoen4Ever-SoD-ImoeninGroupKorlaszDungeon, number: 10 } }
+      - { id: imoen-returns-camp, unsupported_games: [bg2ee], weidu: { tp2: imoen_forever/imoen_forever.tp2, label: Imoen4Ever-SoD-ImoenReturnsCamp, number: 11 } }
+      - { id: better-palace-reason, unsupported_games: [bg2ee], weidu: { tp2: imoen_forever/imoen_forever.tp2, label: Imoen4Ever-SoD-BetterReasonPalace, number: 12 } }
+      - { id: imoen-duke-jannath-cutscene, unsupported_games: [bg2ee], weidu: { tp2: imoen_forever/imoen_forever.tp2, label: Imoen4Ever-SoD-CutesceneImoenDukeJannath, number: 13 }, requires: [imoen-returns-camp] }
+      - { id: sod-imoen-dialogue, unsupported_games: [bg2ee], weidu: { tp2: imoen_forever/imoen_forever.tp2, label: Imoen4Ever-SoD-DialoguesContentChapters8to12, number: 14 }, requires: [imoen-returns-camp] }
+      - { id: same-imoen-at-end, unsupported_games: [bg2ee, eet], weidu: { tp2: imoen_forever/imoen_forever.tp2, label: Imoen4Ever-SoD-ImoenSameAtEnd, number: 15 } }
+      - { id: use-sod-portrait, unsupported_games: [bg2ee], weidu: { tp2: imoen_forever/imoen_forever.tp2, label: Imoen4Ever-SoD-UnifyPortrait_SoDPortrait, number: 16 }, conflicts: [use-bg1-portrait] }
+      - { id: use-bg1-portrait, unsupported_games: [bg2ee], weidu: { tp2: imoen_forever/imoen_forever.tp2, label: Imoen4Ever-SoD-UnifyPortrait_BG1Portrait, number: 17 }, conflicts: [use-sod-portrait] }
+      - { id: move-imoens-chest, unsupported_games: [bg2ee], weidu: { tp2: imoen_forever/imoen_forever.tp2, label: Imoen4Ever-SoD-MoveImoensChest, number: 20 }, requires: [imoen-returns-camp] }
+      - { id: sod-imoen-pid, unsupported_games: [bg2ee], weidu: { tp2: imoen_forever/imoen_forever.tp2, label: Imoen4Ever-SoD-PIDChapters8to12, number: 25 }, requires: [imoen-returns-camp] }
+      - { id: acifer-portrait, weidu: { tp2: imoen_forever/imoen_forever.tp2, label: Imoen4Ever-Imoen_Alternate_Portrait_Acifer, number: 30 } }
