@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "The Tangled Oak Isle v4.7 English no-save-patching on clean BG2EE 2.6.6",
+  "identity": {
+    "registry_revision": "3019d45",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "5a94d1777ba55e5ee07455ce8aaffdb7417f524e5afe65636082e9a03428b11f",
+    "environments": {
+      "target": {
+        "target": "bg2ee",
+        "fingerprint": {
+          "profile": "iepm-core-layout-v1",
+          "value": "298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f"
+        }
+      }
+    },
+    "packages": [
+      {
+        "package": "tangled-oak-isle",
+        "release_id": "tangled-oak-isle-v47-weasel-20260923",
+        "environment": "target",
+        "artifact_sha256": "e67587d0eb805a1b0eeaa0c25f5526a79f6fd737389db014f66ed8ca810aa7e8",
+        "components": [
+          "tangled-oak-isle-no-save-patching"
+        ]
+      }
+    ],
+    "execution_order": [
+      "tangled-oak-isle"
+    ]
+  },
+  "checks": {
+    "artifact_verified": true,
+    "selector_known": true,
+    "requirements_modeled": true,
+    "component_catalog_complete": true,
+    "all_components_classified": true,
+    "core_components_supported": false,
+    "selected_components_supported": false,
+    "relationships_satisfied": true,
+    "no_opaque_selections": true,
+    "clean_disposable_install": true,
+    "all_actions_completed": true,
+    "requested_components_recorded": true,
+    "no_components_skipped": true,
+    "warnings_classified": true,
+    "sealed": true,
+    "eet_end_required": false,
+    "main_menu_smoke": false,
+    "gameplay_smoke": false
+  },
+  "evidence": [
+    "examples/bg2ee-tangled-oak-isle/modpack.yaml",
+    "docs/pa4-bg2ee-weasel-quest-batch-evidence.md"
+  ]
+}

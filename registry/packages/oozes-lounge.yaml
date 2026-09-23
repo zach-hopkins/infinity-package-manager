@@ -16,6 +16,9 @@ releases:
       - claim: The exact 14700664-byte author-hosted archive matched SHA-256. The TP2 VERSION is v3.1; one live LABEL-bearing selector were derived.
         provenance: derived
         evidence: [https://downloads.weaselmods.net/download/oozes-lounge/]
+      - claim: The sole main choice installed in a fresh clean BG2EE 2.6.6 build, appeared in WeiDU.log, and sealed without WeiDU warning or skip markers. Menu, gameplay, and EET remain unobserved.
+        provenance: verified
+        evidence: [evidence/pa4-bg2ee-oozes-lounge.json]
     installers:
       - tp2: Ooze/ooze.TP2
         launcher: toolchain

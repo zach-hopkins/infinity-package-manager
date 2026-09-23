@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "Tales of the Deep Gardens 12.97 English no-save-patching on clean BG2EE 2.6.6",
+  "identity": {
+    "registry_revision": "3019d45",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "d5d903ed6bdecc3c763396245aa5583e29cc2104ed1f83eec6e102c640179188",
+    "environments": {
+      "target": {
+        "target": "bg2ee",
+        "fingerprint": {
+          "profile": "iepm-core-layout-v1",
+          "value": "298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f"
+        }
+      }
+    },
+    "packages": [
+      {
+        "package": "tales-of-the-deep-gardens",
+        "release_id": "tales-of-the-deep-gardens-1297-weasel-20260923",
+        "environment": "target",
+        "artifact_sha256": "a9f6c31efd7b134aff8f8a5a990a2d4363f04000b953395fbb702e7f5e23db5a",
+        "components": [
+          "tales-of-the-deep-gardens-no-save-patching"
+        ]
+      }
+    ],
+    "execution_order": [
+      "tales-of-the-deep-gardens"
+    ]
+  },
+  "checks": {
+    "artifact_verified": true,
+    "selector_known": true,
+    "requirements_modeled": true,
+    "component_catalog_complete": true,
+    "all_components_classified": true,
+    "core_components_supported": false,
+    "selected_components_supported": false,
+    "relationships_satisfied": true,
+    "no_opaque_selections": true,
+    "clean_disposable_install": true,
+    "all_actions_completed": true,
+    "requested_components_recorded": true,
+    "no_components_skipped": true,
+    "warnings_classified": true,
+    "sealed": true,
+    "eet_end_required": false,
+    "main_menu_smoke": false,
+    "gameplay_smoke": false
+  },
+  "evidence": [
+    "examples/bg2ee-tales-of-the-deep-gardens/modpack.yaml",
+    "docs/pa4-bg2ee-weasel-quest-batch-evidence.md"
+  ]
+}

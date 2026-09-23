@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "Southern Edge v6.0 English no-save-patching on clean BG2EE 2.6.6",
+  "identity": {
+    "registry_revision": "3019d45",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "f6d134c8a5e25b505d783208c02b2fadbed82620c0cd6d99b6173399f1ac3644",
+    "environments": {
+      "target": {
+        "target": "bg2ee",
+        "fingerprint": {
+          "profile": "iepm-core-layout-v1",
+          "value": "298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f"
+        }
+      }
+    },
+    "packages": [
+      {
+        "package": "southern-edge",
+        "release_id": "southern-edge-v60-weasel-20260923",
+        "environment": "target",
+        "artifact_sha256": "9fe060abad6ccc92c004e1da7e2d8aab6170350f3441479a99079d8fbfab71a8",
+        "components": [
+          "southern-edge-no-save-patching"
+        ]
+      }
+    ],
+    "execution_order": [
+      "southern-edge"
+    ]
+  },
+  "checks": {
+    "artifact_verified": true,
+    "selector_known": true,
+    "requirements_modeled": true,
+    "component_catalog_complete": true,
+    "all_components_classified": true,
+    "core_components_supported": false,
+    "selected_components_supported": false,
+    "relationships_satisfied": true,
+    "no_opaque_selections": true,
+    "clean_disposable_install": true,
+    "all_actions_completed": true,
+    "requested_components_recorded": true,
+    "no_components_skipped": true,
+    "warnings_classified": true,
+    "sealed": true,
+    "eet_end_required": false,
+    "main_menu_smoke": false,
+    "gameplay_smoke": false
+  },
+  "evidence": [
+    "examples/bg2ee-southern-edge/modpack.yaml",
+    "docs/pa4-bg2ee-weasel-quest-batch-evidence.md"
+  ]
+}

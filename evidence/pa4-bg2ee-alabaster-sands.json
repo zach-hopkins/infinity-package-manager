@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "Alabaster Sands v2.0 English no-save-patching on clean BG2EE 2.6.6",
+  "identity": {
+    "registry_revision": "3019d45",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "dc49de0a125dcb2d6c317613f242f04a079eae1b497705208c8b98297e9e1878",
+    "environments": {
+      "target": {
+        "target": "bg2ee",
+        "fingerprint": {
+          "profile": "iepm-core-layout-v1",
+          "value": "298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f"
+        }
+      }
+    },
+    "packages": [
+      {
+        "package": "alabaster-sands",
+        "release_id": "alabaster-sands-v20-weasel-20260923",
+        "environment": "target",
+        "artifact_sha256": "dd7d2d5b6d660f6bb392c7241270516c5f664b50fd478a96d03dda3a1edeafbc",
+        "components": [
+          "alabaster-sands-no-save-patching"
+        ]
+      }
+    ],
+    "execution_order": [
+      "alabaster-sands"
+    ]
+  },
+  "checks": {
+    "artifact_verified": true,
+    "selector_known": true,
+    "requirements_modeled": true,
+    "component_catalog_complete": true,
+    "all_components_classified": true,
+    "core_components_supported": false,
+    "selected_components_supported": false,
+    "relationships_satisfied": true,
+    "no_opaque_selections": true,
+    "clean_disposable_install": true,
+    "all_actions_completed": true,
+    "requested_components_recorded": true,
+    "no_components_skipped": true,
+    "warnings_classified": true,
+    "sealed": true,
+    "eet_end_required": false,
+    "main_menu_smoke": false,
+    "gameplay_smoke": false
+  },
+  "evidence": [
+    "examples/bg2ee-alabaster-sands/modpack.yaml",
+    "docs/pa4-bg2ee-weasel-quest-batch-evidence.md"
+  ]
+}

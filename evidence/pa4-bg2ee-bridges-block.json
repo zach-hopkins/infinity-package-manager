@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "Bridge's Block v2.02 English main on clean BG2EE 2.6.6",
+  "identity": {
+    "registry_revision": "3019d45",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "559d5d21102e49fe9e4169436d377605f0434ddecb64630068f6f7b901004189",
+    "environments": {
+      "target": {
+        "target": "bg2ee",
+        "fingerprint": {
+          "profile": "iepm-core-layout-v1",
+          "value": "298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f"
+        }
+      }
+    },
+    "packages": [
+      {
+        "package": "bridges-block",
+        "release_id": "bridges-block-v202-weasel-20260923",
+        "environment": "target",
+        "artifact_sha256": "79d9a0fa619cf2bd5336272e349ca5ed5978d60ff7f0b4430cc0697f8543375f",
+        "components": [
+          "bridges-block"
+        ]
+      }
+    ],
+    "execution_order": [
+      "bridges-block"
+    ]
+  },
+  "checks": {
+    "artifact_verified": true,
+    "selector_known": true,
+    "requirements_modeled": true,
+    "component_catalog_complete": true,
+    "all_components_classified": true,
+    "core_components_supported": false,
+    "selected_components_supported": false,
+    "relationships_satisfied": true,
+    "no_opaque_selections": true,
+    "clean_disposable_install": true,
+    "all_actions_completed": true,
+    "requested_components_recorded": true,
+    "no_components_skipped": true,
+    "warnings_classified": true,
+    "sealed": true,
+    "eet_end_required": false,
+    "main_menu_smoke": false,
+    "gameplay_smoke": false
+  },
+  "evidence": [
+    "examples/bg2ee-bridges-block/modpack.yaml",
+    "docs/pa4-bg2ee-weasel-quest-batch-evidence.md"
+  ]
+}

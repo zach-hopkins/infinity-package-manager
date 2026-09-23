@@ -1,7 +1,7 @@
 # PA-4 remaining cohort triage (2026-09-23)
 
-The first 99-package Product A cohort has 62 curated executable identities
-and **18 discovery-only candidates** remaining beyond the 19 packages
+The first 99-package Product A cohort has 70 curated executable identities
+and **10 discovery-only candidates** remaining beyond the 19 packages
 already curated when the cohort was frozen. This page is an acquisition and
 review queue, not a support-status upgrade. The source snapshot is the
 [frozen cohort](../registry/cohorts/product-a-cohort.json), with acquisition
@@ -35,15 +35,13 @@ deriving selectors and updating the executable registry.
 | 29 | Made in Heaven: Fixes & Restorations | Branch archive had ZIP signature; still mutable. |
 | 134 | Recorder | Branch archive probe returned HTTP error. |
 
-## Ten manual-browser acquisition leads
+## Two manual-browser acquisition leads
 
 PA-2 did not establish a direct artifact route for source IDs **13** Revert
-Pathfinding, **87**, **89**, and **91** the remaining three
-Colours of Infinity entries (Tales of the Deep Gardens, The White Queen,
-Eilistraee's Song), **92–96** the five
-Athkatlan Grounds entries (Southern Edge, The Ooze's Lounge, The Tangled
-Oak Isle, Bridge's Block, Alabaster Sands), and **474** Portraits Portraits
-Everywhere.
+Pathfinding and **474** Portraits Portraits Everywhere. Revert Pathfinding
+patches the game executable and is version-specific; a community WeiDU.log
+mention alone is not an exact downloadable release. Portraits needs an
+author/maintainer release identity, not an arbitrary mutable clone.
 
 Source ID **57**, The Lure of the Sirine's Call, now has an exact author-tagged
 v16.5.2 ZIP, complete two-selector mapping, and clean BGEE main-only and
@@ -89,6 +87,15 @@ choice is withheld pending containment of its possible external save writes.
 Source ID **90**, I Shall Never Forget, now has exact author-hosted 6.5.6
 bytes, its sole selector mapped, and a clean BG2EE install and seal. Menu,
 quest behavior, and EET remain untested.
+
+Source IDs **87**, **89**, **91–96** now have exact author-hosted archive
+hashes and complete live component mappings. Eight separate clean BG2EE
+fixtures installed and sealed their English main/no-save-patching choices
+without WeiDU warning or skip markers. Their exact receipts are in the
+[batch evidence](pa4-bg2ee-weasel-quest-batch-evidence.md). Existing-save
+patching alternatives are withheld pending containment of possible writes
+outside the disposable workspace. Menu, quest behavior, and EET remain
+untested.
 
 For each, locate an author or maintained release page, fetch exact bytes,
 hash and safely inspect the archive, and only then decide whether it can

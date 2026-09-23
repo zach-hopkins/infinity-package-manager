@@ -16,6 +16,9 @@ releases:
       - claim: The exact 4847433-byte author-hosted archive matched SHA-256. The TP2 VERSION is v2.02; one live numeric-only selector were derived.
         provenance: derived
         evidence: [https://downloads.weaselmods.net/download/bridges-block/]
+      - claim: The sole main choice installed in a fresh clean BG2EE 2.6.6 build, appeared in WeiDU.log, and sealed without WeiDU warning or skip markers. Menu, gameplay, and EET remain unobserved.
+        provenance: verified
+        evidence: [evidence/pa4-bg2ee-bridges-block.json]
     installers:
       - tp2: BridgesBlock/BridgesBlock.tp2
         launcher: toolchain

@@ -19,6 +19,9 @@ releases:
       - claim: Selector 1 enables existing-save patching through the shared worldmap routine and is withheld until IEPM contains possible writes outside the disposable workspace; selector 0 disables that behavior.
         provenance: derived
         evidence: [https://downloads.weaselmods.net/download/alabaster-sands/]
+      - claim: The two-selector no-save-patching choice installed in a fresh clean BG2EE 2.6.6 build, appeared in WeiDU.log, and sealed without WeiDU warning or skip markers. Menu, gameplay, and EET remain unobserved.
+        provenance: verified
+        evidence: [evidence/pa4-bg2ee-alabaster-sands.json]
     installers:
       - tp2: AlabasterSands/AlabasterSands.tp2
         launcher: toolchain
