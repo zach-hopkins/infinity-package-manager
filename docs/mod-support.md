@@ -102,6 +102,7 @@ labels. This ledger must use those words only with those meanings.
 | Tales of the Deep Gardens 12.97; The White Queen v7.4.2; Eilistraee's Song v7.5.2 | Exact author-hosted artifacts and both save-patching alternatives mapped for each | Each no-save-patching choice installed and sealed separately on clean BG2EE | **Untested** pending quest smoke and EET; save-patching choices withheld | [batch evidence](pa4-bg2ee-weasel-quest-batch-evidence.md) |
 | Southern Edge v6.0; Tangled Oak Isle v4.7; Alabaster Sands v2.0 | Exact author-hosted artifacts and both save-patching alternatives mapped for each | Each no-save-patching choice installed and sealed separately on clean BG2EE | **Untested** pending quest smoke and EET; save-patching choices withheld | [batch evidence](pa4-bg2ee-weasel-quest-batch-evidence.md) |
 | The Ooze's Lounge v3.1; Bridge's Block v2.02 | Exact author-hosted artifacts and one live selector mapped for each | Each main choice installed and sealed separately on clean BG2EE | **Untested** pending quest smoke and EET | [batch evidence](pa4-bg2ee-weasel-quest-batch-evidence.md) |
+| Recorder BG1 1.51 | Exact author commit and two numeric selectors mapped | Main NPC installed after DLC Merger and sealed on clean BGEE/SoD; three EXTEND_TOP warnings recorded | **Untested** pending dialogue, music, EET, menu, and gameplay checks | [install evidence](pa4-bgee-recorder-bg1-evidence.md) |
 | Generalized Biffing v2.9 | Complete two-choice subcomponent catalog; final-phase placement reflects author's after-all-mods direction | Banter Pack then media-only Biffing built and launched from sealed BG2EE | **Supported** for this narrow English BG2EE 2.6.6 route; all-files choice, EET, large stacks, and performance Untested | [evidence](pa4-bg2ee-generalized-biffing-evidence.md) |
 | Call of the Lost Goddess v3.1 | Complete 3-component structural catalog | Yes | **Untested** — the core route has fixture install evidence; optional portraits/voiceover and policy launch smoke remain untested | [registry](../registry/packages/call-of-the-lost-goddess.yaml) |
 | Throne of the Mad God v2.3 | Complete 1-component structural catalog | Yes | **Untested** — fixture install evidence exists; policy launch smoke remains | [registry](../registry/packages/throne-of-the-mad-god.yaml) |
@@ -128,8 +129,8 @@ selectors, curated relationships, and automated disposable-build evidence.
 ## Cohort work boundary
 
 The frozen cohort contains 19 packages that were already mapped when it was
-selected and 80 indexed candidates. The current triage records 70 curated
-executable identities and 10 discovery-only candidates. The remaining
+selected and 80 indexed candidates. The current triage records 71 curated
+executable identities and 9 discovery-only candidates. The remaining
 candidates are **not** silently excluded: the
 [remaining cohort triage](pa4-remaining-cohort-triage.md)
 names each acquisition state. They may proceed through IEPM's opaque

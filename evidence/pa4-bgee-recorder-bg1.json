@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "Recorder BG1 1.51 main after DLC Merger on clean SoD-enabled BGEE 2.6.6",
+  "identity": {
+    "registry_revision": "3e874bf",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "14f843b2567dc637e303da8a8b49886f471f3aef7929a52e8c023d7a5f738f16",
+    "environments": { "target": { "target": "bgee", "fingerprint": { "profile": "iepm-core-layout-v1", "value": "04fc6602150ff7788875573dbf0b7f4aeb7ca26aaf83b022c77d9fc417d848c3" } } },
+    "packages": [
+      { "package": "dlc-merger", "release_id": "dlc-merger-2.1-win32", "environment": "target", "artifact_sha256": "16b57b32662c1ac1e6d345afaf8669e01cf26eeafc5461000757edf33447e2eb", "components": ["merge-sod"] },
+      { "package": "recorder-bg1", "release_id": "recorder-bg1-7a3f347c-source", "environment": "target", "artifact_sha256": "339b72a7003e88e6ba76fad97e573f3763706416fe7d73717e10f99b6c89d165", "components": ["recorder-npc"] }
+    ],
+    "execution_order": ["dlc-merger", "recorder-bg1"]
+  },
+  "checks": {
+    "artifact_verified": true, "selector_known": true, "requirements_modeled": true,
+    "component_catalog_complete": true, "all_components_classified": true,
+    "core_components_supported": false, "selected_components_supported": false,
+    "relationships_satisfied": true, "no_opaque_selections": true,
+    "clean_disposable_install": true, "all_actions_completed": true,
+    "requested_components_recorded": true, "no_components_skipped": true,
+    "warnings_classified": true, "sealed": true, "eet_end_required": false,
+    "main_menu_smoke": false, "gameplay_smoke": false
+  },
+  "evidence": ["examples/bgee-recorder-bg1/modpack.yaml", "docs/pa4-bgee-recorder-bg1-evidence.md"]
+}

@@ -1,7 +1,7 @@
 # PA-4 remaining cohort triage (2026-09-23)
 
-The first 99-package Product A cohort has 70 curated executable identities
-and **10 discovery-only candidates** remaining beyond the 19 packages
+The first 99-package Product A cohort has 71 curated executable identities
+and **9 discovery-only candidates** remaining beyond the 19 packages
 already curated when the cohort was frozen. This page is an acquisition and
 review queue, not a support-status upgrade. The source snapshot is the
 [frozen cohort](../registry/cohorts/product-a-cohort.json), with acquisition
@@ -23,7 +23,7 @@ The exact tagged ZIPs above were SHA-256 hashed; a PA-2 ZIP signature alone
 would not be sufficient. The Classic Movies and Worldmap blockers are IEPM
 execution-boundary gaps, **not** claims that those mods are incompatible.
 
-## Three branch-archive acquisition leads
+## Two branch-archive acquisition leads
 
 These are not release identities. A mutable branch URL can change without
 changing its spelling, so pin an exact commit or released asset before
@@ -33,7 +33,6 @@ deriving selectors and updating the executable registry.
 | ---: | --- | --- |
 | 25 | Baldur's Gate Graphics Overhaul | Branch archive probe returned HTTP error. |
 | 29 | Made in Heaven: Fixes & Restorations | Branch archive had ZIP signature; still mutable. |
-| 134 | Recorder | Branch archive probe returned HTTP error. |
 
 ## Two manual-browser acquisition leads
 
@@ -96,6 +95,11 @@ without WeiDU warning or skip markers. Their exact receipts are in the
 patching alternatives are withheld pending containment of possible writes
 outside the disposable workspace. Menu, quest behavior, and EET remain
 untested.
+
+Source ID **134**, Recorder BG1, now has an exact author commit archive,
+complete two-selector numeric mapping, and a BGEE/SoD main-NPC install and
+seal. Three nonfatal EXTEND_TOP warnings require dialogue smoke. The optional
+music choice, EET, menu, and gameplay remain untested.
 
 For each, locate an author or maintained release page, fetch exact bytes,
 hash and safely inspect the archive, and only then decide whether it can

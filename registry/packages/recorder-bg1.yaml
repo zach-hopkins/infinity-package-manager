@@ -19,6 +19,9 @@ releases:
       - claim: Main TP2 branches explicitly for BGEE and EET and reads EET cpmvars only on an EET game. The optional music selector uses package-local audio tools; a BGEE install receipt is still needed before behavioral confidence.
         provenance: derived
         evidence: [https://github.com/Skitia/Recorder-BG1/tree/7a3f347c39088cc9d40ddac31676ce08fac22161]
+      - claim: Main NPC selector 0 installed after DLC Merger in a fresh clean BGEE 2.6.6 build, appeared in WeiDU.log, and sealed. Three nonfatal EXTEND_TOP position warnings require dialogue behavior review; music, EET, menu, and gameplay remain unobserved.
+        provenance: verified
+        evidence: [evidence/pa4-bgee-recorder-bg1.json]
     installers:
       - tp2: Recorder/Setup-Recorder.tp2
         launcher: toolchain
