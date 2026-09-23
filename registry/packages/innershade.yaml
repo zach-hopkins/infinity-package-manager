@@ -1,0 +1,38 @@
+schema: 2
+package: innershade
+releases:
+  - release_id: innershade-v11.16-weasel-20260923
+    version: "v11.16"
+    artifacts:
+      - url: https://downloads.weaselmods.net/download/innershade/?wpdmdl=73
+        sha256: ee1ce60e6167387230a685149dec9094084bcdb1cb807e3b3dcb30e90be4973f
+        platforms: [windows]
+    materialization: { include: [Innershade] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact 43,789,721-byte author-hosted archive matched SHA-256 and declares TP2 VERSION v11.16 with two LABEL-bearing alternatives in one SUBCOMPONENT group.
+        provenance: derived
+        evidence: [https://downloads.weaselmods.net/download/innershade/]
+      - claim: The author documents BG2EE and EET and directs BP-BGT Worldmap, if used, to install after Innershade.
+        provenance: declared
+        evidence: [https://downloads.weaselmods.net/download/innershade/]
+      - claim: Selector 1 requests patching existing saves through ADD_WORLDMAP_TBL; it is withheld until IEPM proves that side effect stays inside the disposable workspace. Selector 0 disables save patching.
+        provenance: derived
+        evidence: [https://downloads.weaselmods.net/download/innershade/]
+    installers:
+      - tp2: Innershade/Setup-Innershade.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+          - { id: 1, name: French by Lothringen of the d'Oghmatiques }
+          - { id: 2, name: Polish by Cuttooth of Children of Bhaal }
+          - { id: 3, name: Italian by Ilot and Improbabile }
+          - { id: 4, name: Russian by Aldark, Andreas, Austin, bro and Silent }
+          - { id: 5, name: German by Dachrisma }
+          - { id: 6, name: Chinese by merzbau, updated by Yoshimo0417 }
+          - { id: 7, name: Korean by Pinkpanther }
+    components:
+      - { id: innershade-no-save-patching, default_selected: true, weidu: { tp2: Innershade/Setup-Innershade.tp2, label: "L#-INNERSHADE-NOPATCH", number: 0 }, conflicts: [innershade-patch-saves] }
+      - { id: innershade-patch-saves, unavailable: "Existing-save patching through ADD_WORLDMAP_TBL has not been contained to IEPM's disposable workspace.", weidu: { tp2: Innershade/Setup-Innershade.tp2, label: "L#-INNERSHADE-PATCH", number: 1 }, conflicts: [innershade-no-save-patching] }
