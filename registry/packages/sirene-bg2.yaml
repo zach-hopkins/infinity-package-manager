@@ -21,6 +21,9 @@ releases:
       - claim: The author describes this as Sirene's BG2EE section with romance and NPC content. The TP2 contains an EET chapter branch, but a BG2EE install cannot verify EET continuity.
         provenance: declared
         evidence: [https://github.com/TheArtisanBG/Sirene-NPC-for-BG2-EE]
+      - claim: All four portrait choices copy from Sirene_BG2/portraits/alts, but the exact v2.02 source archive stores their files under Sirene_BG2/alts. Portrait selector 1 failed with ENOENT in a clean BG2EE build; all four portrait selectors are unavailable for this exact artifact without an upstream-corrected release.
+        provenance: verified
+        evidence: [docs/pa4-bg2ee-sirene-portrait-failure.md]
     installers:
       - tp2: Sirene_BG2/Sirene_BG2.tp2
         launcher: toolchain
@@ -28,10 +31,10 @@ releases:
           - { id: 0, name: English }
     components:
       - { id: sirene-npc, default_selected: true, weidu: { tp2: Sirene_BG2/Sirene_BG2.tp2, number: 0 } }
-      - { id: portrait-bg1-default, weidu: { tp2: Sirene_BG2/Sirene_BG2.tp2, number: 1 }, requires: [sirene-npc], conflicts: [portrait-sirick-light, portrait-sirick-lava-heavy, portrait-lodaligae] }
-      - { id: portrait-sirick-light, weidu: { tp2: Sirene_BG2/Sirene_BG2.tp2, number: 2 }, requires: [sirene-npc], conflicts: [portrait-bg1-default, portrait-sirick-lava-heavy, portrait-lodaligae] }
-      - { id: portrait-sirick-lava-heavy, weidu: { tp2: Sirene_BG2/Sirene_BG2.tp2, number: 3 }, requires: [sirene-npc], conflicts: [portrait-bg1-default, portrait-sirick-light, portrait-lodaligae] }
-      - { id: portrait-lodaligae, weidu: { tp2: Sirene_BG2/Sirene_BG2.tp2, number: 4 }, requires: [sirene-npc], conflicts: [portrait-bg1-default, portrait-sirick-light, portrait-sirick-lava-heavy] }
+      - { id: portrait-bg1-default, unavailable: "Exact v2.02 archive stores Sirene2*.bmp in Sirene_BG2/alts, but TP2 copies from missing Sirene_BG2/portraits/alts.", weidu: { tp2: Sirene_BG2/Sirene_BG2.tp2, number: 1 }, requires: [sirene-npc], conflicts: [portrait-sirick-light, portrait-sirick-lava-heavy, portrait-lodaligae] }
+      - { id: portrait-sirick-light, unavailable: "Exact v2.02 archive stores Sirene3*.bmp in Sirene_BG2/alts, but TP2 copies from missing Sirene_BG2/portraits/alts.", weidu: { tp2: Sirene_BG2/Sirene_BG2.tp2, number: 2 }, requires: [sirene-npc], conflicts: [portrait-bg1-default, portrait-sirick-lava-heavy, portrait-lodaligae] }
+      - { id: portrait-sirick-lava-heavy, unavailable: "Exact v2.02 archive stores Sirene4*.bmp in Sirene_BG2/alts, but TP2 copies from missing Sirene_BG2/portraits/alts.", weidu: { tp2: Sirene_BG2/Sirene_BG2.tp2, number: 3 }, requires: [sirene-npc], conflicts: [portrait-bg1-default, portrait-sirick-light, portrait-lodaligae] }
+      - { id: portrait-lodaligae, unavailable: "Exact v2.02 archive stores Sirene5.bmp in Sirene_BG2/alts, but TP2 copies from missing Sirene_BG2/portraits/alts.", weidu: { tp2: Sirene_BG2/Sirene_BG2.tp2, number: 4 }, requires: [sirene-npc], conflicts: [portrait-bg1-default, portrait-sirick-light, portrait-sirick-lava-heavy] }
       - { id: class-true-paladin, weidu: { tp2: Sirene_BG2/Sirene_BG2.tp2, number: 5 }, requires: [sirene-npc], conflicts: [class-cavalier, class-inquisitor, class-undead-hunter] }
       - { id: class-cavalier, weidu: { tp2: Sirene_BG2/Sirene_BG2.tp2, number: 6 }, requires: [sirene-npc], conflicts: [class-true-paladin, class-inquisitor, class-undead-hunter] }
       - { id: class-inquisitor, weidu: { tp2: Sirene_BG2/Sirene_BG2.tp2, number: 7 }, requires: [sirene-npc], conflicts: [class-true-paladin, class-cavalier, class-undead-hunter] }

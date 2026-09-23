@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "Sirene BG2 v2.02 BG1 default portrait selector on clean BG2EE 2.6.6",
+  "identity": {
+    "registry_revision": "aec93a1",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "e98b44cab9d26aa8cef5e566d0844c7f33a7430b00bdfc8dc343b16f2056e67d",
+    "environments": { "target": { "target": "bg2ee", "fingerprint": { "profile": "iepm-core-layout-v1", "value": "298c1d1eb13f7d5f934aaa25f868679a03fd8bfd7f13028b2646e29a4a10ff2f" } } },
+    "packages": [
+      { "package": "sirene-bg2", "release_id": "sirene-bg2-v2.02-source", "environment": "target", "artifact_sha256": "dc1151a4dadca34d192f6ce708c0ae677051e4f49544ef0952994cd741c6dfdf", "components": ["sirene-npc", "portrait-bg1-default", "class-true-paladin"] }
+    ],
+    "execution_order": ["sirene-bg2"]
+  },
+  "checks": {
+    "artifact_verified": true, "selector_known": true, "requirements_modeled": true,
+    "component_catalog_complete": true, "all_components_classified": true,
+    "core_components_supported": false, "selected_components_supported": false,
+    "relationships_satisfied": true, "no_opaque_selections": true,
+    "clean_disposable_install": false, "all_actions_completed": false,
+    "requested_components_recorded": false, "no_components_skipped": false,
+    "warnings_classified": true, "sealed": false, "eet_end_required": false,
+    "main_menu_smoke": false, "gameplay_smoke": false
+  },
+  "incompatibility": [
+    {
+      "kind": "mechanical-impossibility",
+      "summary": "The exact v2.02 source archive lacks Sirene_BG2/portraits/alts/Sirene2L.bmp required by the selected TP2 COPY; the source stores it under Sirene_BG2/alts instead.",
+      "references": ["docs/pa4-bg2ee-sirene-portrait-failure.md"]
+    }
+  ],
+  "evidence": ["examples/bg2ee-sirene-bg2/portrait-repro.yaml", "docs/pa4-bg2ee-sirene-portrait-failure.md"]
+}

@@ -1,7 +1,7 @@
 schema: 2
 
-# NPC plus one class. The portrait alternatives are unavailable in the exact
-# v2.02 source artifact because TP2 paths do not match packaged file paths.
+# Historical diagnostic fixture. This selection failed on the v2.02 source
+# artifact before the portrait choices were marked unavailable.
 environments:
   target:
     target: bg2ee
@@ -16,4 +16,4 @@ environments:
 mods:
   - package: sirene-bg2
     environment: target
-    components: [sirene-npc, class-true-paladin]
+    components: [sirene-npc, portrait-bg1-default, class-true-paladin]
