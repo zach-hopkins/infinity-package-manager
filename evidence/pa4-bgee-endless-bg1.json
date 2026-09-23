@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "Endless BG1 20.2 sixteen English selectors on clean SoD-enabled BGEE 2.6.6",
+  "identity": {
+    "registry_revision": "1739280",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "dc454c43d937f652eacba96eb332b3e944cbcb2bee991b2ce9ca724223aff4ec",
+    "environments": {
+      "target": {
+        "target": "bgee",
+        "fingerprint": {
+          "profile": "iepm-core-layout-v1",
+          "value": "04fc6602150ff7788875573dbf0b7f4aeb7ca26aaf83b022c77d9fc417d848c3"
+        }
+      }
+    },
+    "packages": [
+      { "package": "dlc-merger", "release_id": "dlc-merger-2.1-win32", "environment": "target", "artifact_sha256": "16b57b32662c1ac1e6d345afaf8669e01cf26eeafc5461000757edf33447e2eb", "components": ["merge-sod"] },
+      { "package": "endless-bg1", "release_id": "endless-bg1-v20.2-source", "environment": "target", "artifact_sha256": "2623f4d43a5178acc315c3688cac721877fb8cced9d3fddddc9febd61a6233f4", "components": ["remain-in-bg1", "more-hero-flavor", "public-hero-tribute", "sarevok-unique-items", "sarevok-sword", "imoen-duke-jannath", "duke-eltan-palace", "flaming-fist-after-fight", "elminster-jastey", "bg-city-refugees", "palace-treasurer", "denkod-comments", "skip-thieves-maze-once", "korlasz-dungeon-in-bg1", "fenster-in-palace", "corwin-in-palace"] }
+    ],
+    "execution_order": ["dlc-merger", "endless-bg1"]
+  },
+  "checks": {
+    "artifact_verified": true,
+    "selector_known": true,
+    "requirements_modeled": true,
+    "component_catalog_complete": true,
+    "all_components_classified": true,
+    "core_components_supported": false,
+    "selected_components_supported": false,
+    "relationships_satisfied": true,
+    "no_opaque_selections": true,
+    "clean_disposable_install": true,
+    "all_actions_completed": true,
+    "requested_components_recorded": true,
+    "no_components_skipped": true,
+    "warnings_classified": true,
+    "sealed": true,
+    "eet_end_required": false,
+    "main_menu_smoke": false,
+    "gameplay_smoke": false
+  },
+  "evidence": ["examples/bgee-endless-bg1/modpack.yaml", "docs/pa4-bgee-endless-bg1-evidence.md"]
+}

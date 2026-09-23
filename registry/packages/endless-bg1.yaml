@@ -25,6 +25,9 @@ releases:
       - claim: Components 2, 10, 11, 14, 15, and 16 need SoD content or EET. An unmerged SoD BGEE source must run DLC Merger before them.
         provenance: derived
         evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: Sixteen English selectors, choosing the jastey Elminster variant, completed after DLC Merger in a clean BGEE 2.6.6 workspace and appeared in WeiDU.log. Menu, gameplay, alternative Elminster, and EET routes remain unobserved.
+        provenance: verified
+        evidence: [evidence/pa4-bgee-endless-bg1.json]
     installers:
       - tp2: "c#endlessbg1/c#endlessbg1.tp2"
         launcher: toolchain
