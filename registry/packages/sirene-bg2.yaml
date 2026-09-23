@@ -1,0 +1,38 @@
+schema: 2
+package: sirene-bg2
+releases:
+  - release_id: sirene-bg2-v2.02-source
+    version: "v2.02"
+    artifacts:
+      - url: https://github.com/TheArtisanBG/Sirene-NPC-for-BG2-EE/archive/refs/tags/v2.02.zip
+        sha256: dc1151a4dadca34d192f6ce708c0ae677051e4f49544ef0952994cd741c6dfdf
+        platforms: [windows]
+    materialization: { source_root: Sirene-NPC-for-BG2-EE-2.02, include: [Sirene_BG2] }
+    compatibility: { games: [bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact author v2.02 tag ZIP matched SHA-256. The TP2 has no VERSION declaration and exposes nine numeric selectors by declaration order; release tag and TP2 version are separate facts.
+        provenance: derived
+        evidence: [https://github.com/TheArtisanBG/Sirene-NPC-for-BG2-EE/tree/v2.02]
+      - claim: Four portrait and four class choices form separate WeiDU SUBCOMPONENT groups. Every optional choice requires the NPC main selector. The TP2 spells portrait and class prerequisite TP2 paths differently; execution evidence, not spelling alone, decides whether selected combinations work.
+        provenance: derived
+        evidence: [https://github.com/TheArtisanBG/Sirene-NPC-for-BG2-EE/tree/v2.02]
+      - claim: The author describes this as Sirene's BG2EE section with romance and NPC content. The TP2 contains an EET chapter branch, but a BG2EE install cannot verify EET continuity.
+        provenance: declared
+        evidence: [https://github.com/TheArtisanBG/Sirene-NPC-for-BG2-EE]
+    installers:
+      - tp2: Sirene_BG2/Sirene_BG2.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+    components:
+      - { id: sirene-npc, default_selected: true, weidu: { tp2: Sirene_BG2/Sirene_BG2.tp2, number: 0 } }
+      - { id: portrait-bg1-default, weidu: { tp2: Sirene_BG2/Sirene_BG2.tp2, number: 1 }, requires: [sirene-npc], conflicts: [portrait-sirick-light, portrait-sirick-lava-heavy, portrait-lodaligae] }
+      - { id: portrait-sirick-light, weidu: { tp2: Sirene_BG2/Sirene_BG2.tp2, number: 2 }, requires: [sirene-npc], conflicts: [portrait-bg1-default, portrait-sirick-lava-heavy, portrait-lodaligae] }
+      - { id: portrait-sirick-lava-heavy, weidu: { tp2: Sirene_BG2/Sirene_BG2.tp2, number: 3 }, requires: [sirene-npc], conflicts: [portrait-bg1-default, portrait-sirick-light, portrait-lodaligae] }
+      - { id: portrait-lodaligae, weidu: { tp2: Sirene_BG2/Sirene_BG2.tp2, number: 4 }, requires: [sirene-npc], conflicts: [portrait-bg1-default, portrait-sirick-light, portrait-sirick-lava-heavy] }
+      - { id: class-true-paladin, weidu: { tp2: Sirene_BG2/Sirene_BG2.tp2, number: 5 }, requires: [sirene-npc], conflicts: [class-cavalier, class-inquisitor, class-undead-hunter] }
+      - { id: class-cavalier, weidu: { tp2: Sirene_BG2/Sirene_BG2.tp2, number: 6 }, requires: [sirene-npc], conflicts: [class-true-paladin, class-inquisitor, class-undead-hunter] }
+      - { id: class-inquisitor, weidu: { tp2: Sirene_BG2/Sirene_BG2.tp2, number: 7 }, requires: [sirene-npc], conflicts: [class-true-paladin, class-cavalier, class-undead-hunter] }
+      - { id: class-undead-hunter, weidu: { tp2: Sirene_BG2/Sirene_BG2.tp2, number: 8 }, requires: [sirene-npc], conflicts: [class-true-paladin, class-cavalier, class-inquisitor] }
