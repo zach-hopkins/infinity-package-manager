@@ -10,7 +10,7 @@ releases:
         platforms: [windows]
     materialization: { source_root: ExtraExpandedEnhancedEncounters-4.4, include: [ExtraExpandedEnhancedEncounters] }
     compatibility: { games: [bgee, eet] }
-    install: { phase: eet, after: [eet], before: [eet-end] }
+    install: { phase: eet, after: [eet, ascalon-questpack], before: [eet-end] }
     provenance: unverified
     claims:
       - claim: The exact 4.4 maintainer-tag ZIP matched SHA-256. Its TP2 declares eight independent LABEL-bearing components numbered 0 through 7.

@@ -1,0 +1,53 @@
+schema: 2
+package: ascalon-questpack
+aliases: [ac-quest]
+releases:
+  - release_id: ascalon-questpack-v7.0-source
+    version: "7.0"
+    artifacts:
+      - url: https://github.com/Gitjas/Ascalons_Questpack/archive/refs/tags/v7.0.zip
+        sha256: b6b0ca11925f782afd8db8f7207b63a4160db4a649e245bf606e301cd93af118
+        platforms: [windows]
+    materialization: { source_root: Ascalons_Questpack-7.0, include: [AC_QUEST] }
+    compatibility: { games: [bgee, bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end, isra-bg1, ajantis-bg1-expansion] }
+    provenance: unverified
+    claims:
+      - claim: The exact v7.0 maintainer-tag ZIP matched SHA-256. Its TP2 declares thirteen LABEL-bearing selectors, including three mutually exclusive pairs of location or story variants.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: The maintainer documents BGEE, BG2EE, and EET support; the TP2 limits components 0 through 11 to BG1 targets or EET and component 12 to BG2 targets or EET.
+        provenance: declared
+        evidence: [https://github.com/Gitjas/Ascalons_Questpack]
+      - claim: The author recommends installation before NPC mods. This release is ordered before the already mapped Isra BG1 and Ajantis BG1 Expansion when present; the recommendation is not a hard dependency on either NPC.
+        provenance: declared
+        evidence: [https://github.com/Gitjas/Ascalons_Questpack]
+      - claim: Rabbit-in-cave versus outside, Wolves-in-High-Hedge versus Beregost, and original versus tweaked Serpents are TP2 SUBCOMPONENT alternatives. Only one option from each pair can be selected.
+        provenance: derived
+        evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+    installers:
+      - tp2: AC_QUEST/ac_quest.TP2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: "Deutsch (German)" }
+          - { id: 1, name: English }
+          - { id: 2, name: Russian }
+          - { id: 3, name: Italian }
+          - { id: 4, name: French }
+          - { id: 5, name: Spanish }
+          - { id: 6, name: Simplified Chinese }
+          - { id: 7, name: "Polish (by my_summertime, SoM Membress, part of CoB Clan)" }
+    components:
+      - { id: job-well-paid, default_selected: true, unsupported_games: [bg2ee], weidu: { tp2: AC_QUEST/ac_quest.TP2, label: AscalonsQuestpack-JobWellPaid, number: 0 } }
+      - { id: feast-for-gnolls, unsupported_games: [bg2ee], weidu: { tp2: AC_QUEST/ac_quest.TP2, label: AscalonsQuestpack-FeastforGnolls, number: 1 } }
+      - { id: jumper-cave, unsupported_games: [bg2ee], weidu: { tp2: AC_QUEST/ac_quest.TP2, label: AscalonsQuestpack-Rabbit, number: 2 }, conflicts: [jumper-outside] }
+      - { id: jumper-outside, unsupported_games: [bg2ee], weidu: { tp2: AC_QUEST/ac_quest.TP2, label: AscalonsQuestpack-Rabbit_alternative, number: 3 }, conflicts: [jumper-cave] }
+      - { id: lost-son, unsupported_games: [bg2ee], weidu: { tp2: AC_QUEST/ac_quest.TP2, label: AscalonsQuestpack-LostSon, number: 4 } }
+      - { id: wolves-high-hedge, unsupported_games: [bg2ee], weidu: { tp2: AC_QUEST/ac_quest.TP2, label: AscalonsQuestpack-WolvesMen_Highhedge, number: 5 }, conflicts: [wolves-beregost] }
+      - { id: wolves-beregost, unsupported_games: [bg2ee], weidu: { tp2: AC_QUEST/ac_quest.TP2, label: AscalonsQuestpack-WolvesMen_Beregost, number: 6 }, conflicts: [wolves-high-hedge] }
+      - { id: great-carlini, unsupported_games: [bg2ee], weidu: { tp2: AC_QUEST/ac_quest.TP2, label: AscalonsQuestpack-GreatKarlini, number: 7 } }
+      - { id: home-for-gibberlings, unsupported_games: [bg2ee], weidu: { tp2: AC_QUEST/ac_quest.TP2, label: AscalonsQuestpack-Gibberlings, number: 8 } }
+      - { id: fangirls, unsupported_games: [bg2ee], weidu: { tp2: AC_QUEST/ac_quest.TP2, label: AscalonsQuestpack-Fans, number: 9 } }
+      - { id: serpents-original, unsupported_games: [bg2ee], weidu: { tp2: AC_QUEST/ac_quest.TP2, label: AscalonsQuestpack-SerpentsAbbathor, number: 10 }, conflicts: [serpents-tweaked] }
+      - { id: serpents-tweaked, unsupported_games: [bg2ee], weidu: { tp2: AC_QUEST/ac_quest.TP2, label: AscalonsQuestpack-SerpentsAbbathor_Tweak, number: 11 }, conflicts: [serpents-original] }
+      - { id: halfling-among-eyeless, unsupported_games: [bgee], weidu: { tp2: AC_QUEST/ac_quest.TP2, label: AscalonsQuestpack-HalflingEyeless, number: 12 } }

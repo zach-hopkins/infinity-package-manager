@@ -81,6 +81,7 @@ labels. This ledger must use those words only with those meanings.
 | Almateria's Restoration Project v10.1 | All 14 TP2 declarations accounted for: 12 EE-facing, one deprecated, one classic-only; Alt Slayer requires Final Slayer Dream | All 12 EE-facing English choices installed and sealed on clean BG2EE | **Untested** pending observed menu and gameplay; EET also Untested | [install evidence](pa4-bg2ee-almateria-evidence.md) |
 | Hidden Adventures Beta_9 | Complete eleven-component catalog; Silver Dagger import EET-only, ten others BG2EE-facing | All ten English BG2EE choices installed and sealed | **Untested** pending observed menu/gameplay; EET and Silver Dagger also Untested | [install evidence](pa4-bg2ee-hidden-adventures-evidence.md) |
 | Crossmod Banter Pack v30 | Complete three-component catalog; actual content depends on already-installed covered NPC mods | All three English selectors installed and sealed after Isra BG2 | **Untested** pending menu and two-partner content test; one-partner receipt proves only the installer route | [install evidence](pa4-bg2ee-isra-crossmod-evidence.md) |
+| Ascalon's Questpack 7.0 | All thirteen TP2 choices mapped: nine BG1-facing choices with three mutually exclusive variant pairs, one BG2-facing quest, three alternatives | Exact SHA-pinned BGEE and BG2EE routes resolve executable | **Untested** pending disposable installations and menu smokes | [registry](../registry/packages/ascalon-questpack.yaml) |
 | Generalized Biffing v2.9 | Complete two-choice subcomponent catalog; final-phase placement reflects author's after-all-mods direction | Banter Pack then media-only Biffing built and launched from sealed BG2EE | **Supported** for this narrow English BG2EE 2.6.6 route; all-files choice, EET, large stacks, and performance Untested | [evidence](pa4-bg2ee-generalized-biffing-evidence.md) |
 | Call of the Lost Goddess v3.1 | Complete 3-component structural catalog | Yes | **Untested** — the core route has fixture install evidence; optional portraits/voiceover and policy launch smoke remain untested | [registry](../registry/packages/call-of-the-lost-goddess.yaml) |
 | Throne of the Mad God v2.3 | Complete 1-component structural catalog | Yes | **Untested** — fixture install evidence exists; policy launch smoke remains | [registry](../registry/packages/throne-of-the-mad-god.yaml) |
@@ -107,7 +108,7 @@ selectors, curated relationships, and automated disposable-build evidence.
 ## Cohort work boundary
 
 The frozen cohort contains 19 packages that were already mapped when it was
-selected and 80 indexed candidates. Forty-six of those candidates (Sirene,
+selected and 80 indexed candidates. Forty-seven of those candidates (Sirene,
 LeUI, thirteen BG2 friendship releases, four Pocket Plane quest mods,
 Korgan's Redemption, Coran's BG Friendship, Xan's BG1 Friendship, and High
 Quality Soundclips, Banter Pack, BioWare NPC Flirt Packs, Drake, Unfinished
@@ -116,8 +117,8 @@ Generalized Biffing, The Longer Road, Isra NPC for BGII, Isra NPC for BG,
 Black Pits in BG, Dark Horizons, CoM Encounters, Tower of Deception, Test
 Your Mettle!, The Boareskyr Bridge Scene, Extra Expanded Enhanced Encounters!,
 Reflections of Destiny, Road to Discovery, Almateria's Restoration Project,
-Hidden Adventures, and Crossmod Banter Pack) now have curated executable
-identities; 34 remain
+Hidden Adventures, Crossmod Banter Pack, and Ascalon's Questpack) now have
+curated executable identities; 33 remain
 discovery-only. The remaining
 candidates are **not** silently
 excluded: they may proceed through IEPM's opaque local-package route once
