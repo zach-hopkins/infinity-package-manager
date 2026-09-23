@@ -7,14 +7,16 @@ review queue, not a support-status upgrade. The source snapshot is the
 [frozen cohort](../registry/cohorts/product-a-cohort.json), with acquisition
 leads in the [PA-2 health report](../registry/catalog/infinity-mod-forge-health.json)
 and exact tagged-ZIP observations in the
-[PA-4 artifact report](../registry/cohorts/pa4-tagged-artifacts.json).
+[PA-4 artifact report](../registry/cohorts/pa4-tagged-artifacts.json), plus
+the newer BG1 Romantic Encounters observation below.
 
-## Five exact tagged archives already acquired
+## Six exact tagged archives already acquired
 
 | Source ID | Candidate | Next concrete step |
 | ---: | --- | --- |
 | 18 | EE UI Tweaks | Review 67 TP2 selectors, UI framework interactions, and a bounded BG2EE install. |
 | 24 | BG:EE Classic Movies | [Contain writes outside the disposable game](pa4-classic-movies-external-write-blocker.md) before any install. Eight selectors are mechanically known. |
+| 55 | BG1 Romantic Encounters | Official [v16 tag](https://github.com/Gibberlings3/BG1_Romantic_Encounters/releases/tag/v16) ZIP: SHA-256 `83ab63ca9521c6edd736b50ae3b704832b45036625c337e6754869962f7e493f`, 7,105,299 bytes. After an inert-parser correction, 50 labeled selectors are detected. Review six required content-style alternatives and other relationships before mapping. |
 | 86 | Romantic Encounters (BG2) | Review 55 numeric-only selectors and file predicates (notably `mel01.cre`) before stabilizing IDs or selecting a fixture. No LABELs were observed. |
 | 246 | EET Tweaks | Review 65 selectors and EET-specific placement; then test on a disposable EET target. |
 | 428 | BP-BGT Worldmap | [Model its interactive map-size choice](pa4-worldmap-interactive-blocker.md) before declaring the main component executable. Six selectors are mechanically known. |
@@ -39,11 +41,10 @@ deriving selectors and updating the executable registry.
 | 470 | Infinity Sounds | Branch archive had ZIP signature; still mutable. |
 | 473 | Northern Tales of the Sword Coast | Branch archive probe returned HTTP error. |
 
-## Sixteen manual-browser acquisition leads
+## Fifteen manual-browser acquisition leads
 
 PA-2 did not establish a direct artifact route for source IDs **13** Revert
-Pathfinding, **55** BG1 Romantic Encounters,
-**57** The Lure of the Sirine's Call, **64** Quest Pack, **87–91** the five
+Pathfinding, **57** The Lure of the Sirine's Call, **64** Quest Pack, **87–91** the five
 Colours of Infinity entries (Tales of the Deep Gardens, Innershade, The
 White Queen, I Shall Never Forget, Eilistraee's Song), **92–96** the five
 Athkatlan Grounds entries (Southern Edge, The Ooze's Lounge, The Tangled

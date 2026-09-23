@@ -390,7 +390,10 @@ pub fn inspect_tp2(source: &str) -> Tp2Observation {
             awaits_control_flow_begin = false;
             continue;
         }
-        if awaits_control_flow_begin && starts_keyword(line, "BEGIN") {
+        if awaits_control_flow_begin
+            && starts_keyword(line, "BEGIN")
+            && !line["BEGIN".len()..].trim_start().starts_with('@')
+        {
             // Some real TP2s place the entire branch on one line:
             // `BEGIN OUTER_SPRINT value ~x~ END ELSE`. Leaving that BEGIN
             // open hides the next top-level component from this inventory.
@@ -399,6 +402,18 @@ pub fn inspect_tp2(source: &str) -> Tp2Observation {
             }
             awaits_control_flow_begin = line.trim_end().ends_with("ELSE");
             continue;
+        }
+        // A labeled, explicitly numbered WeiDU component begins with
+        // `BEGIN @...`. This is never the bare BEGIN of an action block.
+        // Recover top-level scope here when a preceding complex ACTION_IF
+        // made this intentionally shallow scanner overcount control depth.
+        // BG1 Romantic Encounters v16 otherwise loses its first 24 selectors.
+        if starts_keyword(line, "BEGIN")
+            && line["BEGIN".len()..].trim_start().starts_with('@')
+            && control_flow_depth > 0
+        {
+            control_flow_depth = 0;
+            awaits_control_flow_begin = false;
         }
         if control_flow_depth > 0 && starts_keyword(line, "END") {
             control_flow_depth -= 1;
@@ -1300,6 +1315,35 @@ LABEL ~BETTER_ITEM_IMPORT~
                 (Some(3), Some("BETTER_ITEM_IMPORT")),
             ]
         );
+    }
+
+    #[test]
+    fn inspection_recovers_explicit_components_after_complex_action_scope() {
+        let observation = inspect_tp2(
+            r#"
+ACTION_IF GAME_IS ~eet~ THEN BEGIN
+  OUTER_SPRINT path ~eet~
+BEGIN @99181
+DESIGNATED 100
+LABEL bg1re-required-teen_skip
+BEGIN @11 DESIGNATED 1
+LABEL bg1re_bardolans_briefing
+"#,
+        );
+        assert_eq!(observation.components.len(), 2);
+        assert_eq!(observation.components[0].number, Some(100));
+        assert_eq!(observation.components[1].label.as_deref(), Some("bg1re_bardolans_briefing"));
+
+        let pending_branch = inspect_tp2(
+            r#"
+ACTION_IF GAME_IS ~bgee~
+BEGIN @99181
+DESIGNATED 100
+LABEL bg1re-required-teen_skip
+"#,
+        );
+        assert_eq!(pending_branch.components.len(), 1);
+        assert_eq!(pending_branch.components[0].number, Some(100));
     }
 
     #[test]
