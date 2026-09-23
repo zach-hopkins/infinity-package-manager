@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "scope": "configuration",
+  "subject": "Reflections of Destiny 0.9.4 Nothing to Fear but Feyr Itself on clean SoD-enabled BGEE 2.6.6",
+  "identity": {
+    "registry_revision": "0f77cc1",
+    "platform": "windows",
+    "weidu_version": "25100",
+    "lock_sha256": "1e7cda815ac5e0d6bd1c5c35832bc35008e953d0948b8a2aaffcd1dddba5ad73",
+    "environments": {
+      "target": {
+        "target": "bgee",
+        "fingerprint": {
+          "profile": "iepm-core-layout-v1",
+          "value": "04fc6602150ff7788875573dbf0b7f4aeb7ca26aaf83b022c77d9fc417d848c3"
+        }
+      }
+    },
+    "packages": [
+      { "package": "dlc-merger", "release_id": "dlc-merger-2.1-win32", "environment": "target", "artifact_sha256": "16b57b32662c1ac1e6d345afaf8669e01cf26eeafc5461000757edf33447e2eb", "components": ["merge-sod"] },
+      { "package": "reflections-of-destiny", "release_id": "reflections-of-destiny-0.9.4-source", "environment": "target", "artifact_sha256": "4ef856cdd4733ad3a2ffb1f6d136b4d3536091fa6bb333d839ba9bbdc8b060a5", "components": ["fear-feyr"] }
+    ],
+    "execution_order": ["dlc-merger", "reflections-of-destiny"]
+  },
+  "checks": {
+    "artifact_verified": true,
+    "selector_known": true,
+    "requirements_modeled": true,
+    "component_catalog_complete": true,
+    "all_components_classified": true,
+    "core_components_supported": false,
+    "selected_components_supported": false,
+    "relationships_satisfied": true,
+    "no_opaque_selections": true,
+    "clean_disposable_install": false,
+    "all_actions_completed": false,
+    "requested_components_recorded": false,
+    "no_components_skipped": false,
+    "warnings_classified": true,
+    "sealed": false,
+    "eet_end_required": false,
+    "main_menu_smoke": false,
+    "gameplay_smoke": false
+  },
+  "incompatibility": [
+    {
+      "kind": "deterministic-failure",
+      "summary": "Two independent clean SoD-enabled BGEE 2.6.6 workspaces failed on Reflections 0.9.4 selector 230 with the same WeiDU parse error at comp_230.tpa line 113. The exact source contains an unquoted English sentence at that line.",
+      "deterministic_failures": 2,
+      "references": ["docs/pa4-bgee-reflections-feyr-failure.md"]
+    }
+  ],
+  "evidence": ["examples/bgee-reflections-feyr-repro/modpack.yaml", "docs/pa4-bgee-reflections-feyr-failure.md"]
+}

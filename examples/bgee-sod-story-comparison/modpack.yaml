@@ -20,7 +20,7 @@ mods:
     components: [merge-sod]
   - package: reflections-of-destiny
     environment: target
-    components: [future-is-now, mirror-shard, magical-realism, fear-feyr, precipice-of-death]
+    components: [future-is-now, mirror-shard, magical-realism, precipice-of-death]
   - package: road-to-discovery
     environment: target
     components: [tracking-system, consistency-dialogue, aware-officers, informed-pc-replies, pc-tells-officers, officers-reactions, additional-information, additional-officer-communication]

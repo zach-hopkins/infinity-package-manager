@@ -30,6 +30,9 @@ releases:
       - claim: Component 330 is EET-only. Four additional component-looking blocks numbered 150, 260, 290, and 320 are commented out in this exact TP2 and are not selectable.
         provenance: derived
         evidence: [registry/cohorts/pa4-tagged-artifacts.json]
+      - claim: Component 230 contains an unquoted English sentence in comp_230.tpa line 113. Two independent clean SoD-enabled BGEE 2.6.6 builds failed with the same WeiDU Parsing.Parse_error at that line. The exact release selector is unavailable; the other components are not classified by this failure.
+        provenance: verified
+        evidence: [evidence/pa4-bgee-reflections-feyr-failure.json]
     installers:
       - tp2: Reflections_of_Destiny/Reflections_of_Destiny.tp2
         launcher: toolchain
@@ -40,6 +43,8 @@ releases:
       - { id: mirror-shard, weidu: { tp2: Reflections_of_Destiny/Reflections_of_Destiny.tp2, label: D5_REFLECTIONS_MIRROR_SHARD, number: 110 } }
       - { id: rewrite-caelar-history, weidu: { tp2: Reflections_of_Destiny/Reflections_of_Destiny.tp2, label: D5_REFLECTIONS_REWRITE_CAELAR, number: 200 } }
       - { id: magical-realism, weidu: { tp2: Reflections_of_Destiny/Reflections_of_Destiny.tp2, label: D5_REFLECTIONS_MAGICAL_REALISM, number: 220 } }
-      - { id: fear-feyr, weidu: { tp2: Reflections_of_Destiny/Reflections_of_Destiny.tp2, label: D5_REFLECTIONS_FEYR_ITSELF, number: 230 } }
+      - id: fear-feyr
+        unavailable: "Exact 0.9.4 release's comp_230.tpa line 113 causes a deterministic WeiDU parse error before this component can install."
+        weidu: { tp2: Reflections_of_Destiny/Reflections_of_Destiny.tp2, label: D5_REFLECTIONS_FEYR_ITSELF, number: 230 }
       - { id: precipice-of-death, weidu: { tp2: Reflections_of_Destiny/Reflections_of_Destiny.tp2, label: D5_REFLECTIONS_PRECIPICE_OF_DEATH, number: 240 } }
       - { id: sod-content-in-soa, unsupported_games: [bgee], weidu: { tp2: Reflections_of_Destiny/Reflections_of_Destiny.tp2, label: D5_REFLECTIONS_SOD_CONTENT_SOA, number: 330 } }
