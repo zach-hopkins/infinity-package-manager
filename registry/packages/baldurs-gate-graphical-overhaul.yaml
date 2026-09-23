@@ -1,0 +1,31 @@
+schema: 2
+package: baldurs-gate-graphical-overhaul
+aliases: [bggo]
+releases:
+  - release_id: bggo-v3.6-source
+    version: "v3.6"
+    artifacts:
+      - url: https://github.com/Spellhold-Studios/Baldurs-Gate-Graphical-Overhaul/archive/refs/tags/v3.6.zip
+        sha256: 4bb821d971336364548019cf8423c5476cc914934ec109f4003e5aab9a5870a2
+        platforms: [windows]
+    materialization: { source_root: Baldurs-Gate-Graphical-Overhaul-3.6, include: [bggo] }
+    compatibility: { games: [bgee, bg2ee, eet] }
+    install: { phase: eet, after: [eet], before: [eet-end] }
+    provenance: unverified
+    claims:
+      - claim: The exact official v3.6 tag ZIP matched SHA-256 and TP2 VERSION v3.6 declares four numbered LABEL selectors. The TP2 has no LANGUAGE declaration; English index 0 is an executor input convention to test, not a TP2-derived language fact.
+        provenance: derived
+        evidence: [https://github.com/Spellhold-Studios/Baldurs-Gate-Graphical-Overhaul/releases/tag/v3.6]
+      - claim: The Windows source archive contains bggo but not BGGO-Android. Both platform-choice selectors require BGGO-Android to exist and are unavailable from this Windows source route; the core chooses Windows files automatically when the Android component is absent. Alternate Graphics requires the core component.
+        provenance: derived
+        evidence: [https://github.com/Spellhold-Studios/Baldurs-Gate-Graphical-Overhaul/releases/tag/v3.6]
+    installers:
+      - tp2: bggo/bggo.tp2
+        launcher: toolchain
+        languages:
+          - { id: 0, name: English }
+    components:
+      - { id: windows-platform-choice, unavailable: "The exact Windows source archive has no BGGO-Android directory required by this platform-choice selector; core auto-selects Windows files.", weidu: { tp2: bggo/bggo.tp2, label: baldurs_gate_graphical_overhaul_windows, number: 1 }, conflicts: [android-platform-choice] }
+      - { id: android-platform-choice, unavailable: "Android pack is absent from this Windows source archive and is not a supported Windows install choice.", weidu: { tp2: bggo/bggo.tp2, label: baldurs_gate_graphical_overhaul_android, number: 2 }, conflicts: [windows-platform-choice] }
+      - { id: graphical-overhaul-core, default_selected: true, weidu: { tp2: bggo/bggo.tp2, label: baldurs_gate_graphical_overhaul, number: 0 } }
+      - { id: alternate-graphics, weidu: { tp2: bggo/bggo.tp2, label: baldurs_gate_graphical_overhaul_alternate, number: 4 }, requires: [graphical-overhaul-core] }
